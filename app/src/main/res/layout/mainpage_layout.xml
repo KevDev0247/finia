@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="protect.FinanceLord.MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/MainPageTitleTheme">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimaryDark"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@id/toolbar">
+
+            <ImageView
+                android:id="@+id/front_page_image"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:contentDescription="@string/image_of_assets"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/startpage"
+                app:layout_collapseMode="parallax"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:title="Finance Lord"
+                app:layout_collapseMode="pin"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/MainMenuOptions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/TransactionOption"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:background="#0a7d80">
+
+                <ImageView
+                    android:id="@+id/transactionButtonImage"
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/transaction"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="40dp">
+                    <TextView
+                        android:id="@+id/TransTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"
+                        android:text="Transaction"
+                        android:textColor="#000000"
+                        android:textFontWeight="600"/>
+                    <TextView
+                        android:id="@+id/TransDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Mange your transaction"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/BudgetOption"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:background="#f05424">
+
+                <ImageView
+                    android:id="@+id/BudgetButtonImage"
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/budget"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="40dp">
+                    <TextView
+                        android:id="@+id/BudgetTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"
+                        android:text="Budget"
+                        android:textColor="#000000"/>
+                    <TextView
+                        android:id="@+id/BudgetDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Create your budget"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/SpendingOption"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:background="#1a76ff">
+
+                <ImageView
+                    android:id="@+id/SpendingButtonImage"
+                    android:layout_width="190dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/spending"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="30dp">
+                    <TextView
+                        android:id="@+id/SpendTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"
+                        android:text="Spending"
+                        android:textColor="#000000"/>
+                    <TextView
+                        android:id="@+id/SpendDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="View your monthly spending report"/>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/NetWorthOption"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:background="#fdaf17">
+
+                <ImageView
+                    android:id="@+id/networthButtonImage"
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/networth"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="40dp">
+                    <TextView
+                        android:id="@+id/networthTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Net Worth"
+                        android:textSize="25sp"
+                        android:textColor="#000000"/>
+                    <TextView
+                        android:id="@+id/networthDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Calculate your net worth"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

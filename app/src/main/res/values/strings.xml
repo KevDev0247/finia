@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">FinanceLord</string>
+    <string name="transactionTitle">Transaction</string>
+    <string name="transactionDescription">Mange your transaction</string>
+    <string name="budgetTitle">Budget</string>
+    <string name="budgetDescription">Create your budget</string>
+    <string name="spendingTitle">Spending</string>
+    <string name="spendingDescription">View your monthly spending report</string>
+    <string name="net_worthTitle">Net Worth</string>
+    <string name="net_worthDescription">Calculate your net worth</string>
+    <string name="image_of_assets">Image of assets</string>
+    <string name="title_activity_net_worth_edit_reports">NetWorthEditReportsActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+</resources>
