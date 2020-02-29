@@ -28,27 +28,12 @@ public class NetWorthEditReportsActivity extends AppCompatActivity {
     }
 
     private void resetView(String search){
-
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
         final ViewPager viewPager = findViewById(R.id.view_pager);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(sectionsPagerAdapter);
 
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        tabLayout.setupWithViewPager(viewPager);
+        
     }
 }
