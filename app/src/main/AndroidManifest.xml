@@ -12,7 +12,7 @@
         <activity
             android:name=".NetWorthEditReportsActivity"
             android:label="@string/title_activity_net_worth_edit_reports"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TransactionActivity" />
         <activity android:name=".BudgetActivity" />
         <activity android:name=".SpendingActivity" />

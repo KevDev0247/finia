@@ -12,4 +12,5 @@
     <string name="title_activity_net_worth_edit_reports">NetWorthEditReportsActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_net_worth2">NetWorthActivity2</string>
 </resources>
