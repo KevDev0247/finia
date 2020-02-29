@@ -1,5 +1,6 @@
 package protect.FinanceLord;
 
+import android.app.SearchManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,11 +22,21 @@ public class NetWorthEditReportsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth_edit_reports);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+
+        String search = getIntent().getStringExtra(SearchManager.QUERY);
+        resetView(search);
+    }
+
+    private void resetView(String search){
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.removeAllTabs();
+        tabLayout.addTab(tabLayout.newTab().setText("Assets"));
+        tabLayout.addTab(tabLayout.newTab().setText("Liabilities"));
+
         ViewPager viewPager = findViewById(R.id.view_pager);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(sectionsPagerAdapter);
-        //TabLayout tabs = findViewById(R.id.tabs);
-        //tabs.setupWithViewPager(viewPager);
+
 
     }
 }

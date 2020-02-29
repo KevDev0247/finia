@@ -50,7 +50,6 @@
                 android:layout_weight="1"
                 android:text="Past Reports"/>
 
-
         </LinearLayout>
 
     </LinearLayout>
