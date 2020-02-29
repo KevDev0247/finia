@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, NetWorthActivity.class);
+                intent.setClass(MainActivity.this, NetWorthEditReportsActivity.class);
                 startActivity(intent);
             }
         });
