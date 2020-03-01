@@ -29,11 +29,11 @@ public class NetWorthEditReportsActivity extends AppCompatActivity {
 
     private void resetView(String search){
         TabLayout tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.removeAllTabs();
         final ViewPager viewPager = findViewById(R.id.view_pager);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(sectionsPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
+        
     }
 }
