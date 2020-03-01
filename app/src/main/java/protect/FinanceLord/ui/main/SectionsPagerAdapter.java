@@ -30,7 +30,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         String title = getPageTitle(position).toString();
-        NetworthFragment networthFragment = new NetworthFragment(title);
+        NetWorthFragment networthFragment = new NetWorthFragment(title);
 
         return networthFragment;
 //        return PlaceholderFragment.newInstance(position + 1);

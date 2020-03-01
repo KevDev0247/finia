@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toolbar;
 
 import protect.FinanceLord.ui.main.SectionsPagerAdapter;
 
@@ -32,6 +33,7 @@ public class NetWorthEditReportsActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.view_pager);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(sectionsPagerAdapter);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
         tabLayout.setupWithViewPager(viewPager);
         

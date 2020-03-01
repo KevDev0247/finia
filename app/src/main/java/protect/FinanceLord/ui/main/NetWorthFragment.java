@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 import protect.FinanceLord.R;
 
-public class NetworthFragment extends Fragment {
+public class NetWorthFragment extends Fragment {
     String title;
-    NetworthFragment(String title) {
+        NetWorthFragment(String title) {
         this.title = title;
     }
     @Override
