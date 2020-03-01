@@ -10,8 +10,8 @@
     <string name="net_worthDescription">Calculate your net worth</string>
     <string name="image_of_assets">Image of assets</string>
     <string name="title_activity_net_worth_edit_reports">NetWorthEditReportsActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">Assets</string>
+    <string name="tab_text_2">Liabilities</string>
     <string name="title_activity_net_worth2">NetWorthActivity2</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>

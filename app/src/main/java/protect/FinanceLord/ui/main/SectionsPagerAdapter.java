@@ -33,7 +33,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         NetWorthFragment networthFragment = new NetWorthFragment(title);
 
         return networthFragment;
-//        return PlaceholderFragment.newInstance(position + 1);
     }
 
     @Nullable
