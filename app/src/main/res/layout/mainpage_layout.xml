@@ -17,7 +17,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="@color/colorPrimaryDark"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -26,7 +26,7 @@
             <ImageView
                 android:id="@+id/front_page_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="300dp"
                 android:contentDescription="@string/image_of_assets"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
@@ -49,19 +49,17 @@
         android:id="@+id/MainMenuOptions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".MainActivity">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="10dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/TransactionOption"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="173dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:background="#0a7d80">
@@ -98,7 +96,7 @@
             <LinearLayout
                 android:id="@+id/BudgetOption"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="173dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:background="#f05424">
@@ -134,7 +132,7 @@
             <LinearLayout
                 android:id="@+id/SpendingOption"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="173dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:background="#1a76ff">
@@ -165,14 +163,12 @@
                         android:text="View your monthly spending report"/>
                 </LinearLayout>
 
-
-
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/NetWorthOption"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="173dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:background="#fdaf17">
