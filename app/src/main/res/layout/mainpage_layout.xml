@@ -53,13 +53,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/TransactionOption"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="173dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:background="#0a7d80">
@@ -97,7 +97,7 @@
             <LinearLayout
                 android:id="@+id/BudgetOption"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="173dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:background="#f05424">
@@ -134,7 +134,7 @@
             <LinearLayout
                 android:id="@+id/SpendingOption"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="173dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:background="#1a76ff">
@@ -166,14 +166,12 @@
                         android:text="View your monthly spending report"/>
                 </LinearLayout>
 
-
-
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/NetWorthOption"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="173dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:background="#fdaf17">
