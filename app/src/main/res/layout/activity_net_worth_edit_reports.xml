@@ -33,7 +33,10 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary"
+            app:tabSelectedTextColor="#ffffff"
+            app:tabTextColor="#ff0000"
+            app:tabIndicatorColor="#00ff00">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
@@ -42,7 +45,8 @@
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:text="Tab 2"/>
 
         </com.google.android.material.tabs.TabLayout>
 
