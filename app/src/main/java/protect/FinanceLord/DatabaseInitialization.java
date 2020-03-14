@@ -3,21 +3,16 @@ package protect.FinanceLord;
 import android.app.Activity;
 
 import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import protect.FinanceLord.Database.AssetsType;
-import protect.FinanceLord.Database.AssetsTypeDao;
-import protect.FinanceLord.Database.AssetsValue;
-import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.Database.Assets;
+import protect.FinanceLord.Database.AssetsDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.Database.LiabilitiesType;
-import protect.FinanceLord.Database.LiabilitiesTypeDao;
-import protect.FinanceLord.Database.LiabilitiesValue;
-import protect.FinanceLord.Database.LiabilitiesValueDao;
+import protect.FinanceLord.Database.Liabilities;
+import protect.FinanceLord.Database.LiabilitiesDao;
 
 public class DatabaseInitialization{
     WeakReference<Activity> context;
@@ -26,23 +21,23 @@ public class DatabaseInitialization{
     }
 
     public void initAssetTypeDb(){
-        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class,"AssetTypeDb").build();
-        AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
+        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class,"AssetDb").build();
+        AssetsDao assetsDao = database.assetsDao();
 
-        List<AssetsType> allAssetsType = assetsTypeDao.queryAllAssets();
-        if (allAssetsType.size() > 0){
+        List<Assets> allAssets = assetsDao.queryAllAssets();
+        if (allAssets.size() > 0){
             return;
         }
 
-        List<AssetsType> assetsTypes = new ArrayList<>();
+        List<Assets> assets = new ArrayList<>();
 
         //Level 3 objects
-        AssetsType type1 = new AssetsType();
-        AssetsType type2 = new AssetsType();
-        AssetsType type3 = new AssetsType();
-        AssetsType type4 = new AssetsType();
-        AssetsType type5 = new AssetsType();
-        AssetsType type6 = new AssetsType();
+        Assets type1 = new Assets();
+        Assets type2 = new Assets();
+        Assets type3 = new Assets();
+        Assets type4 = new Assets();
+        Assets type5 = new Assets();
+        Assets type6 = new Assets();
 
         type1.setAssetsName("Checking accounts");
         type2.setAssetsName("Savings accounts");
@@ -58,23 +53,23 @@ public class DatabaseInitialization{
         type5.setAssetsParentType("Liquid assets");
         type6.setAssetsParentType("Liquid assets");
 
-        AssetsType type7 = new AssetsType();
-        AssetsType type8 = new AssetsType();
+        Assets type7 = new Assets();
+        Assets type8 = new Assets();
 
-        AssetsType type9 = new AssetsType();
-        AssetsType type10 = new AssetsType();
-        AssetsType type11 = new AssetsType();
-        AssetsType type12 = new AssetsType();
-        AssetsType type13 = new AssetsType();
-        AssetsType type14 = new AssetsType();
-        AssetsType type15 = new AssetsType();
+        Assets type9 = new Assets();
+        Assets type10 = new Assets();
+        Assets type11 = new Assets();
+        Assets type12 = new Assets();
+        Assets type13 = new Assets();
+        Assets type14 = new Assets();
+        Assets type15 = new Assets();
 
-        AssetsType type16 = new AssetsType();
-        AssetsType type17 = new AssetsType();
-        AssetsType type18 = new AssetsType();
-        AssetsType type19 = new AssetsType();
-        AssetsType type20 = new AssetsType();
-        AssetsType type21 = new AssetsType();
+        Assets type16 = new Assets();
+        Assets type17 = new Assets();
+        Assets type18 = new Assets();
+        Assets type19 = new Assets();
+        Assets type20 = new Assets();
+        Assets type21 = new Assets();
 
 
         type7.setAssetsName("Brokerage");
@@ -116,13 +111,13 @@ public class DatabaseInitialization{
         type21.setAssetsParentType("Business ownership interest");
 
 
-        AssetsType type22 = new AssetsType();
-        AssetsType type23 = new AssetsType();
-        AssetsType type24 = new AssetsType();
-        AssetsType type25 = new AssetsType();
-        AssetsType type26 = new AssetsType();
-        AssetsType type27 = new AssetsType();
-        AssetsType type28 = new AssetsType();
+        Assets type22 = new Assets();
+        Assets type23 = new Assets();
+        Assets type24 = new Assets();
+        Assets type25 = new Assets();
+        Assets type26 = new Assets();
+        Assets type27 = new Assets();
+        Assets type28 = new Assets();
 
         type22.setAssetsName("Principal home");
         type23.setAssetsName("Vacation home");
@@ -141,9 +136,9 @@ public class DatabaseInitialization{
         type28.setAssetsParentType("Personal assets");
 
         //Level 2 objects
-        AssetsType type29 = new AssetsType();
-        AssetsType type30 = new AssetsType();
-        AssetsType type31 = new AssetsType();
+        Assets type29 = new Assets();
+        Assets type30 = new Assets();
+        Assets type31 = new Assets();
 
         type29.setAssetsName("Taxable accounts");
         type30.setAssetsName("Retirement accounts");
@@ -154,9 +149,9 @@ public class DatabaseInitialization{
         type31.setAssetsParentType("Invested assets");
 
         //Level 1 objects
-        AssetsType type32 = new AssetsType();
-        AssetsType type33 = new AssetsType();
-        AssetsType type34 = new AssetsType();
+        Assets type32 = new Assets();
+        Assets type33 = new Assets();
+        Assets type34 = new Assets();
 
         type32.setAssetsName("Liquid asset");
         type33.setAssetsName("Invested asset");
@@ -167,157 +162,62 @@ public class DatabaseInitialization{
         type34.setAssetsParentType("Total Asset");
 
         //Level 0 object
-        AssetsType type35 = new AssetsType();
+        Assets type35 = new Assets();
 
         type35.setAssetsName("Total Asset");
 
-        assetsTypes.add(type1);
-        assetsTypes.add(type2);
-        assetsTypes.add(type3);
-        assetsTypes.add(type4);
-        assetsTypes.add(type5);
-        assetsTypes.add(type6);
-        assetsTypes.add(type7);
-        assetsTypes.add(type8);
-        assetsTypes.add(type9);
-        assetsTypes.add(type10);
-        assetsTypes.add(type11);
-        assetsTypes.add(type12);
-        assetsTypes.add(type13);
-        assetsTypes.add(type14);
-        assetsTypes.add(type15);
-        assetsTypes.add(type16);
-        assetsTypes.add(type17);
-        assetsTypes.add(type18);
-        assetsTypes.add(type19);
-        assetsTypes.add(type20);
-        assetsTypes.add(type21);
-        assetsTypes.add(type22);
-        assetsTypes.add(type23);
-        assetsTypes.add(type24);
-        assetsTypes.add(type25);
-        assetsTypes.add(type26);
-        assetsTypes.add(type27);
-        assetsTypes.add(type28);
-        assetsTypes.add(type29);
-        assetsTypes.add(type30);
-        assetsTypes.add(type31);
-        assetsTypes.add(type32);
-        assetsTypes.add(type33);
-        assetsTypes.add(type34);
-        assetsTypes.add(type35);
-    }
-
-    public void initAssetValueDb(){
-        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "AssetValueDb").build();
-        AssetsValueDao assetsValueDao = database.assetsValueDao();
-
-        List<AssetsValue> allAssetsValue = assetsValueDao.queryAllAssets();
-        if (allAssetsValue.size() > 0){
-            return;
-        }
-
-        List<AssetsValue> assetsValues = new ArrayList<>();
-
-        //level 3 objects
-        AssetsValue Value1 = new AssetsValue();
-        AssetsValue Value2 = new AssetsValue();
-        AssetsValue Value3 = new AssetsValue();
-        AssetsValue Value4 = new AssetsValue();
-        AssetsValue Value5 = new AssetsValue();
-        AssetsValue Value6 = new AssetsValue();
-
-        AssetsValue Value7 = new AssetsValue();
-        AssetsValue Value8 = new AssetsValue();
-
-        AssetsValue Value9 = new AssetsValue();
-        AssetsValue Value10 = new AssetsValue();
-        AssetsValue Value11 = new AssetsValue();
-        AssetsValue Value12 = new AssetsValue();
-        AssetsValue Value13 = new AssetsValue();
-        AssetsValue Value14 = new AssetsValue();
-        AssetsValue Value15 = new AssetsValue();
-
-        AssetsValue Value16 = new AssetsValue();
-        AssetsValue Value17 = new AssetsValue();
-        AssetsValue Value18 = new AssetsValue();
-        AssetsValue Value19 = new AssetsValue();
-        AssetsValue Value20 = new AssetsValue();
-        AssetsValue Value21 = new AssetsValue();
-
-        AssetsValue Value22 = new AssetsValue();
-        AssetsValue Value23 = new AssetsValue();
-        AssetsValue Value24 = new AssetsValue();
-        AssetsValue Value25 = new AssetsValue();
-        AssetsValue Value26 = new AssetsValue();
-        AssetsValue Value27 = new AssetsValue();
-        AssetsValue Value28 = new AssetsValue();
-
-        //Level 2 objects
-        AssetsValue Value29 = new AssetsValue();
-        AssetsValue Value30 = new AssetsValue();
-        AssetsValue Value31 = new AssetsValue();
-
-        //Level 1 objects
-        AssetsValue Value32 = new AssetsValue();
-        AssetsValue Value33 = new AssetsValue();
-        AssetsValue Value34 = new AssetsValue();
-
-        //Level 0 objects
-        AssetsValue Value35 = new AssetsValue();
-
-        assetsValues.add(Value1);
-        assetsValues.add(Value2);
-        assetsValues.add(Value3);
-        assetsValues.add(Value4);
-        assetsValues.add(Value5);
-        assetsValues.add(Value6);
-        assetsValues.add(Value7);
-        assetsValues.add(Value8);
-        assetsValues.add(Value9);
-        assetsValues.add(Value10);
-        assetsValues.add(Value11);
-        assetsValues.add(Value12);
-        assetsValues.add(Value13);
-        assetsValues.add(Value14);
-        assetsValues.add(Value15);
-        assetsValues.add(Value16);
-        assetsValues.add(Value17);
-        assetsValues.add(Value18);
-        assetsValues.add(Value19);
-        assetsValues.add(Value20);
-        assetsValues.add(Value21);
-        assetsValues.add(Value22);
-        assetsValues.add(Value23);
-        assetsValues.add(Value24);
-        assetsValues.add(Value25);
-        assetsValues.add(Value26);
-        assetsValues.add(Value27);
-        assetsValues.add(Value28);
-        assetsValues.add(Value29);
-        assetsValues.add(Value30);
-        assetsValues.add(Value31);
-        assetsValues.add(Value32);
-        assetsValues.add(Value33);
-        assetsValues.add(Value34);
-        assetsValues.add(Value35);
+        assets.add(type1);
+        assets.add(type2);
+        assets.add(type3);
+        assets.add(type4);
+        assets.add(type5);
+        assets.add(type6);
+        assets.add(type7);
+        assets.add(type8);
+        assets.add(type9);
+        assets.add(type10);
+        assets.add(type11);
+        assets.add(type12);
+        assets.add(type13);
+        assets.add(type14);
+        assets.add(type15);
+        assets.add(type16);
+        assets.add(type17);
+        assets.add(type18);
+        assets.add(type19);
+        assets.add(type20);
+        assets.add(type21);
+        assets.add(type22);
+        assets.add(type23);
+        assets.add(type24);
+        assets.add(type25);
+        assets.add(type26);
+        assets.add(type27);
+        assets.add(type28);
+        assets.add(type29);
+        assets.add(type30);
+        assets.add(type31);
+        assets.add(type32);
+        assets.add(type33);
+        assets.add(type34);
+        assets.add(type35);
     }
 
     public void initLiabilityTypeDb(){
-        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "LiabilityTypeDb").build();
-        LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
+        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "LiabilityDb").build();
+        LiabilitiesDao liabilitiesTypeDao = database.liabilitiesTypeDao();
 
-        List<LiabilitiesType> allLiabilitiesType = liabilitiesTypeDao.queryAllLiabilities();
+        List<Liabilities> allLiabilitiesType = liabilitiesTypeDao.queryAllLiabilities();
         if (allLiabilitiesType.size() > 0){
             return;
         }
 
-        List<LiabilitiesType> liabilitiesTypes = new ArrayList<>();
+        List<Liabilities> liabilities = new ArrayList<>();
 
         //Level 2 objects
-        LiabilitiesType type_1 = new LiabilitiesType();
-        LiabilitiesType type_2 = new LiabilitiesType();
-        LiabilitiesType type_3 = new LiabilitiesType();
+        Liabilities type_1 = new Liabilities();
+        Liabilities type_2 = new Liabilities();
+        Liabilities type_3 = new Liabilities();
 
         type_1.setLiabilitiesName("Credit card balances");
         type_2.setLiabilitiesName("Estimated income tax owed");
@@ -327,14 +227,14 @@ public class DatabaseInitialization{
         type_2.setLiabilitiesParentType("Current liabilities");
         type_3.setLiabilitiesParentType("Current liabilities");
 
-        LiabilitiesType type_4 = new LiabilitiesType();
-        LiabilitiesType type_5 = new LiabilitiesType();
-        LiabilitiesType type_6 = new LiabilitiesType();
-        LiabilitiesType type_7 = new LiabilitiesType();
-        LiabilitiesType type_8 = new LiabilitiesType();
-        LiabilitiesType type_9 = new LiabilitiesType();
-        LiabilitiesType type_10 = new LiabilitiesType();
-        LiabilitiesType type_11 = new LiabilitiesType();
+        Liabilities type_4 = new Liabilities();
+        Liabilities type_5 = new Liabilities();
+        Liabilities type_6 = new Liabilities();
+        Liabilities type_7 = new Liabilities();
+        Liabilities type_8 = new Liabilities();
+        Liabilities type_9 = new Liabilities();
+        Liabilities type_10 = new Liabilities();
+        Liabilities type_11 = new Liabilities();
 
         type_4.setLiabilitiesName("Home mortgage");
         type_5.setLiabilitiesName("Home equity loan");
@@ -354,8 +254,8 @@ public class DatabaseInitialization{
         type_11.setLiabilitiesParentType("Long term liabilities");
 
         //Level 1 objects
-        LiabilitiesType type_12 = new LiabilitiesType();
-        LiabilitiesType type_13 = new LiabilitiesType();
+        Liabilities type_12 = new Liabilities();
+        Liabilities type_13 = new Liabilities();
 
         type_12.setLiabilitiesName("Current liabilities");
         type_13.setLiabilitiesName("Long term liabilities");
@@ -364,71 +264,23 @@ public class DatabaseInitialization{
         type_13.setLiabilitiesParentType("Liabilities");
 
         //Level 0 objects
-        LiabilitiesType type_14 = new LiabilitiesType();
+        Liabilities type_14 = new Liabilities();
 
         type_14.setLiabilitiesName("Liabilities");
 
-        liabilitiesTypes.add(type_1);
-        liabilitiesTypes.add(type_2);
-        liabilitiesTypes.add(type_3);
-        liabilitiesTypes.add(type_4);
-        liabilitiesTypes.add(type_5);
-        liabilitiesTypes.add(type_6);
-        liabilitiesTypes.add(type_7);
-        liabilitiesTypes.add(type_8);
-        liabilitiesTypes.add(type_9);
-        liabilitiesTypes.add(type_10);
-        liabilitiesTypes.add(type_11);
-        liabilitiesTypes.add(type_12);
-        liabilitiesTypes.add(type_13);
-        liabilitiesTypes.add(type_14);
-    }
-
-    public void initLiabilityValueDb(){
-        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "liabilityValueDb").build();
-        LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
-
-        List<LiabilitiesValue> allLiabilitiesValue = liabilitiesValueDao.queryAllLiabilities();
-        if (allLiabilitiesValue.size() > 0){
-            return;
-        }
-
-        List<LiabilitiesValue> liabilitiesValues = new ArrayList<>();
-
-        //Level 2 objects
-        LiabilitiesValue Value_1 = new LiabilitiesValue();
-        LiabilitiesValue Value_2 = new LiabilitiesValue();
-        LiabilitiesValue Value_3 = new LiabilitiesValue();
-
-        LiabilitiesValue Value_4 = new LiabilitiesValue();
-        LiabilitiesValue Value_5 = new LiabilitiesValue();
-        LiabilitiesValue Value_6 = new LiabilitiesValue();
-        LiabilitiesValue Value_7 = new LiabilitiesValue();
-        LiabilitiesValue Value_8 = new LiabilitiesValue();
-        LiabilitiesValue Value_9 = new LiabilitiesValue();
-        LiabilitiesValue Value_10 = new LiabilitiesValue();
-        LiabilitiesValue Value_11 = new LiabilitiesValue();
-
-        //Level 1 objects
-        LiabilitiesValue Value_12 = new LiabilitiesValue();
-        LiabilitiesValue Value_13 = new LiabilitiesValue();
-
-        //Level 0 objects
-        LiabilitiesValue Value_14 = new LiabilitiesValue();
-
-        liabilitiesValues.add(Value_1);
-        liabilitiesValues.add(Value_2);
-        liabilitiesValues.add(Value_3);
-        liabilitiesValues.add(Value_4);
-        liabilitiesValues.add(Value_5);
-        liabilitiesValues.add(Value_6);
-        liabilitiesValues.add(Value_7);
-        liabilitiesValues.add(Value_8);
-        liabilitiesValues.add(Value_9);
-        liabilitiesValues.add(Value_10);
-        liabilitiesValues.add(Value_11);
-        liabilitiesValues.add(Value_12);
-        liabilitiesValues.add(Value_13);
-        liabilitiesValues.add(Value_14);
+        liabilities.add(type_1);
+        liabilities.add(type_2);
+        liabilities.add(type_3);
+        liabilities.add(type_4);
+        liabilities.add(type_5);
+        liabilities.add(type_6);
+        liabilities.add(type_7);
+        liabilities.add(type_8);
+        liabilities.add(type_9);
+        liabilities.add(type_10);
+        liabilities.add(type_11);
+        liabilities.add(type_12);
+        liabilities.add(type_13);
+        liabilities.add(type_14);
     }
 }
