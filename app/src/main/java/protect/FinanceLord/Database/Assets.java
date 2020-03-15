@@ -35,9 +35,9 @@ public class Assets {
     public String getAssetsName()   {return this.assetsName;}
     public String getAssetsParentType()     {return this.assetsParentType;}
     public float getAssetsValue()       {return  this.assetsValue;}
+
     public void setAssetsId(int assetsId)   {this.assetsId = assetsId;}
     public void setAssetsValue (float assetsValue)      {this.assetsValue = assetsValue;}
     public void setAssetsName(String assetsName)    {this.assetsName = assetsName;}
     public void setAssetsParentType(String assetsParentType)   {this.assetsParentType = assetsParentType;}
-
 }
