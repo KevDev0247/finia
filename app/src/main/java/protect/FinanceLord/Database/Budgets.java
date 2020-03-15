@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import protect.FinanceLord.Converters;
 
 import java.util.Date;
 
@@ -18,18 +19,18 @@ public class Budgets {
     @ColumnInfo(name = "budgetCategoryId")
     private int budgetsCategoryId;
 
-    @ColumnInfo(name = "DateStart")
-    private Date dateStart;
+    @ColumnInfo(name = "dateStart")
+    private Long dateStart;
 
-    @ColumnInfo(name = "DateEnd")
-    private Date dateEnd;
+    @ColumnInfo(name = "dateEnd")
+    private Long dateEnd;
 
     @Ignore
     public Budgets(){
 
     }
 
-    public Budgets(int budgetsId,float budgetsValue,int budgetsCategoryId,Date dateStart,Date dateEnd){
+    public Budgets(int budgetsId,float budgetsValue,int budgetsCategoryId,Long dateStart,Long dateEnd){
         this.budgetsId = budgetsId;
         this.budgetsValue = budgetsValue;
         this.budgetsCategoryId = budgetsCategoryId;
@@ -40,12 +41,12 @@ public class Budgets {
     public int getBudgetsId()       {return budgetsId;}
     public float getBudgetsValue()      {return budgetsValue;}
     public int getBudgetsCategoryId()       {return budgetsCategoryId;}
-    public Date getDateStart()      {return dateStart;}
-    public Date getDateEnd()        {return dateEnd;}
+    public Long getDateStart()      {return dateStart;}
+    public Long getDateEnd()        {return dateEnd;}
 
     public void setBudgetsId(int budgetsId)     {this.budgetsId = budgetsId;}
     public void setBudgetsValue(float budgetsValue)     {this.budgetsValue = budgetsValue;}
     public void setBudgetsCategoryId(int budgetsCategoryId)     {this.budgetsCategoryId = budgetsCategoryId;}
-    public void setDateStart(Date dateStart)    {this.dateStart = dateStart;}
-    public void setDateEnd(Date dateEnd)    {this.dateEnd = dateEnd;}
+    public void setDateStart(Long dateStart)    {this.dateStart = dateStart;}
+    public void setDateEnd(Long dateEnd)    {this.dateEnd = dateEnd;}
 }

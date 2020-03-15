@@ -2,16 +2,22 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "2cbe3cf1160f860d1bac549352bea8fd",
+    "identityHash": "44101eaa7983795c46803110139523e4",
     "entities": [
       {
-        "tableName": "AssetsType",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`assetsId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `assetsName` TEXT, `assetsParentType` TEXT)",
+        "tableName": "Assets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`assetsId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `assetsValue` REAL NOT NULL, `assetsName` TEXT, `assetsParentType` TEXT)",
         "fields": [
           {
             "fieldPath": "assetsId",
             "columnName": "assetsId",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "assetsValue",
+            "columnName": "assetsValue",
+            "affinity": "REAL",
             "notNull": true
           },
           {
@@ -37,39 +43,19 @@
         "foreignKeys": []
       },
       {
-        "tableName": "AssetsValue",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`assetsId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `assetsValue` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "assetsId",
-            "columnName": "assetsId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "assetsValue",
-            "columnName": "assetsValue",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "assetsId"
-          ],
-          "autoGenerate": true
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "LiabilitiesType",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`liabilitiesId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `liabilitiesName` TEXT, `liabilitiesParentType` TEXT)",
+        "tableName": "Liabilities",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`liabilitiesId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `liabilitiesValue` REAL NOT NULL, `liabilitiesName` TEXT, `liabilitiesParentType` TEXT)",
         "fields": [
           {
             "fieldPath": "liabilitiesId",
             "columnName": "liabilitiesId",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "liabilitiesValue",
+            "columnName": "liabilitiesValue",
+            "affinity": "REAL",
             "notNull": true
           },
           {
@@ -95,25 +81,43 @@
         "foreignKeys": []
       },
       {
-        "tableName": "LiabilitiesValue",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`liabilitiesId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `liabilitiesValue` INTEGER NOT NULL)",
+        "tableName": "Budgets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`budgetsId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `budgetValue` REAL NOT NULL, `budgetCategoryId` INTEGER NOT NULL, `dateStart` INTEGER, `dateEnd` INTEGER)",
         "fields": [
           {
-            "fieldPath": "liabilitiesId",
-            "columnName": "liabilitiesId",
+            "fieldPath": "budgetsId",
+            "columnName": "budgetsId",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "liabilitiesValue",
-            "columnName": "liabilitiesValue",
+            "fieldPath": "budgetsValue",
+            "columnName": "budgetValue",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "budgetsCategoryId",
+            "columnName": "budgetCategoryId",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "dateStart",
+            "columnName": "dateStart",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateEnd",
+            "columnName": "dateEnd",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "liabilitiesId"
+            "budgetsId"
           ],
           "autoGenerate": true
         },
@@ -123,7 +127,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"2cbe3cf1160f860d1bac549352bea8fd\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"44101eaa7983795c46803110139523e4\")"
     ]
   }
 }

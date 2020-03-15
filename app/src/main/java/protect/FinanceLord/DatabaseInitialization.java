@@ -10,6 +10,8 @@ import java.util.List;
 
 import protect.FinanceLord.Database.Assets;
 import protect.FinanceLord.Database.AssetsDao;
+import protect.FinanceLord.Database.Budgets;
+import protect.FinanceLord.Database.BudgetsDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.Liabilities;
 import protect.FinanceLord.Database.LiabilitiesDao;
@@ -20,7 +22,7 @@ public class DatabaseInitialization{
         this.context = new WeakReference<>(context);
     }
 
-    public void initAssetTypeDb(){
+    public void initAssetDb(){
         FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class,"AssetDb").build();
         AssetsDao assetsDao = database.assetsDao();
 
@@ -203,12 +205,12 @@ public class DatabaseInitialization{
         assets.add(type35);
     }
 
-    public void initLiabilityTypeDb(){
+    public void initLiabilityDb(){
         FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "LiabilityDb").build();
-        LiabilitiesDao liabilitiesTypeDao = database.liabilitiesTypeDao();
+        LiabilitiesDao liabilitiesDao = database.liabilitiesDao();
 
-        List<Liabilities> allLiabilitiesType = liabilitiesTypeDao.queryAllLiabilities();
-        if (allLiabilitiesType.size() > 0){
+        List<Liabilities> allLiabilities = liabilitiesDao.queryAllLiabilities();
+        if (allLiabilities.size() > 0){
             return;
         }
 
@@ -282,5 +284,15 @@ public class DatabaseInitialization{
         liabilities.add(type_12);
         liabilities.add(type_13);
         liabilities.add(type_14);
+    }
+
+    public void initBudgetDb(){
+        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "BudgetDb").build();
+        BudgetsDao budgetsDao = database.budgetsDao();
+
+        List<Budgets> allBudgets = budgetsDao.queryAllBudgets();
+        if (allBudgets.size() > 0){
+            return;
+        }
     }
 }

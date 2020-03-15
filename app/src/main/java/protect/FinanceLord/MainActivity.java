@@ -71,28 +71,21 @@ public class MainActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                new DatabaseInitialization(MainActivity.this).initAssetTypeDb();
+                new DatabaseInitialization(MainActivity.this).initAssetDb();
             }
         });
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                new DatabaseInitialization(MainActivity.this).initAssetValueDb();
+                new DatabaseInitialization(MainActivity.this).initLiabilityDb();
             }
         });
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                new DatabaseInitialization(MainActivity.this).initLiabilityTypeDb();
-            }
-        });
-
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                new DatabaseInitialization(MainActivity.this).initLiabilityValueDb();
+                new DatabaseInitialization(MainActivity.this).initBudgetDb();
             }
         });
     }
