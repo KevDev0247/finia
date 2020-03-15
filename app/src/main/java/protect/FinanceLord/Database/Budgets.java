@@ -47,5 +47,5 @@ public class Budgets {
     public void setBudgetsValue(float budgetsValue)     {this.budgetsValue = budgetsValue;}
     public void setBudgetsCategoryId(int budgetsCategoryId)     {this.budgetsCategoryId = budgetsCategoryId;}
     public void setDateStart(Date dateStart)    {this.dateStart = dateStart;}
-    public void setDateEnd(Date dateEnd) {this.dateEnd = dateEnd;}
+    public void setDateEnd(Date dateEnd)    {this.dateEnd = dateEnd;}
 }
