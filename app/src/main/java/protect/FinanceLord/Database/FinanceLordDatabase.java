@@ -6,10 +6,11 @@ import androidx.room.TypeConverters;
 
 import protect.FinanceLord.Converters;
 
-@Database(entities = {Assets.class, Liabilities.class, Budgets.class}, version = 3)
+@Database(entities = {AssetsType.class, AssetsValue.class, LiabilitiesType.class, Budgets.class}, version = 3)
 @TypeConverters({Converters.class})
 public abstract class FinanceLordDatabase extends RoomDatabase {
-    public abstract AssetsDao assetsDao();
-    public abstract LiabilitiesDao liabilitiesDao();
+    public abstract AssetsTypeDao assetsTypeDao();
+    public abstract AssetsValueDao assetsValueDao();
+    public abstract LiabilitiesTypeDao liabilitiesDao();
     public abstract BudgetsDao budgetsDao();
 }

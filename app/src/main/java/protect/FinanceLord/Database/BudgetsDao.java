@@ -29,10 +29,10 @@ public interface BudgetsDao {
     void updateDataEnd(Budgets ... budgetDateEnd);
 
     @Query("SELECT * FROM Budgets WHERE budgetsId LIKE :budgetsId")
-    List<Budgets> queryBudgetsById (String budgetsId);
+    List<Budgets> queryBudgetsById (int budgetsId);
 
     @Query("SELECT * FROM Budgets WHERE budgetCategoryId LIKE :budgetsCategoryId")
-    List<Budgets> queryBudgetsByCategoryId (String budgetsCategoryId);
+    List<Budgets> queryBudgetsByCategoryId (int budgetsCategoryId);
 
     @Query("SELECT * FROM Budgets WHERE dateStart Like :dateStart")
     List<Budgets> queryBudgetsByDateStart (Long dateStart);

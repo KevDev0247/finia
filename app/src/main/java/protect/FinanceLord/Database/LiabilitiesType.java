@@ -5,8 +5,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Liabilities")
-public class Liabilities {
+@Entity(tableName = "LiabilitiesType")
+public class LiabilitiesType {
     @PrimaryKey(autoGenerate = true)
     private int liabilitiesId;
 
@@ -20,11 +20,11 @@ public class Liabilities {
     private String liabilitiesParentType;
 
     @Ignore
-    public Liabilities(){
+    public LiabilitiesType(){
 
     }
 
-    public Liabilities(int liabilitiesId,float liabilitiesValue, String liabilitiesName,String liabilitiesParentType){
+    public LiabilitiesType(int liabilitiesId, float liabilitiesValue, String liabilitiesName, String liabilitiesParentType){
         this.liabilitiesId = liabilitiesId;
         this.liabilitiesValue = liabilitiesValue;
         this.liabilitiesName = liabilitiesName;
@@ -35,6 +35,7 @@ public class Liabilities {
     public String getLiabilitiesName()   {return liabilitiesName;}
     public String getLiabilitiesParentType()    {return liabilitiesParentType;}
     public float getLiabilitiesValue()      {return liabilitiesValue;}
+
     public void setLiabilitiesId(int liabilitiesId)   {this.liabilitiesId = liabilitiesId;}
     public void setLiabilitiesName(String liabilitiesName)   {this.liabilitiesName = liabilitiesName;}
     public void setLiabilitiesParentType(String liabilitiesParentType)    {this.liabilitiesParentType = liabilitiesParentType;}

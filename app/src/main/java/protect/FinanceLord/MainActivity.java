@@ -3,8 +3,6 @@ package protect.FinanceLord;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -71,7 +69,14 @@ public class MainActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                new DatabaseInitialization(MainActivity.this).initAssetDb();
+                new DatabaseInitialization(MainActivity.this).initAssetTypeDb();
+            }
+        });
+
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                new DatabaseInitialization(MainActivity.this).initAssetValueDb();
             }
         });
 
