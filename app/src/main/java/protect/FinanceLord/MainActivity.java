@@ -83,7 +83,14 @@ public class MainActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                new DatabaseInitialization(MainActivity.this).initLiabilityDb();
+                new DatabaseInitialization(MainActivity.this).initLiabilityTypeDb();
+            }
+        });
+
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                new DatabaseInitialization(MainActivity.this).initLiabilityValueDb();
             }
         });
 

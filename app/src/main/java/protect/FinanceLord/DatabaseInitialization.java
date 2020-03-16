@@ -17,6 +17,8 @@ import protect.FinanceLord.Database.BudgetsDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesType;
 import protect.FinanceLord.Database.LiabilitiesTypeDao;
+import protect.FinanceLord.Database.LiabilitiesValue;
+import protect.FinanceLord.Database.LiabilitiesValueDao;
 
 public class DatabaseInitialization{
     WeakReference<Activity> context;
@@ -217,9 +219,9 @@ public class DatabaseInitialization{
         }
     }
 
-    public void initLiabilityDb(){
+    public void initLiabilityTypeDb(){
         FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "LiabilityDb").build();
-        LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesDao();
+        LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
 
         List<LiabilitiesType> allLiabilities = liabilitiesTypeDao.queryAllLiabilities();
         if (allLiabilities.size() > 0){
@@ -296,6 +298,16 @@ public class DatabaseInitialization{
         liabilities.add(type_12);
         liabilities.add(type_13);
         liabilities.add(type_14);
+    }
+
+    public void initLiabilityValueDb(){
+        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "LiabilityValueDb").build();
+        LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
+
+        List<LiabilitiesValue> allLiabilitiesValue = liabilitiesValueDao.queryAllLiabilities();
+        if (allLiabilitiesValue.size() > 0){
+            return;
+        }
     }
 
     public void initBudgetDb(){
