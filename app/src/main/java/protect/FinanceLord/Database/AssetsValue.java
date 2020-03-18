@@ -3,9 +3,11 @@ package protect.FinanceLord.Database;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 @Entity(tableName = "AssetsValue")
 public class AssetsValue {
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "assetsId")
     private int assetsId;
 
