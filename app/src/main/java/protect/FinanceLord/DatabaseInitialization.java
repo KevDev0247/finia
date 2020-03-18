@@ -3,6 +3,7 @@ package protect.FinanceLord;
 import android.app.Activity;
 
 import androidx.room.Room;
+import androidx.room.Transaction;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import protect.FinanceLord.Database.LiabilitiesType;
 import protect.FinanceLord.Database.LiabilitiesTypeDao;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
+import protect.FinanceLord.Database.Transactions;
+import protect.FinanceLord.Database.TransactionsDao;
 
 public class DatabaseInitialization{
     WeakReference<Activity> context;
@@ -316,6 +319,16 @@ public class DatabaseInitialization{
 
         List<Budgets> allBudgets = budgetsDao.queryAllBudgets();
         if (allBudgets.size() > 0){
+            return;
+        }
+    }
+
+    public void initTransactionDb(){
+        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "TransactionDb").build();
+        TransactionsDao transactionsDao = database.transactionsDao();
+
+        List<Transactions> allTransactions = transactionsDao.queryAllTransaction();
+        if (allTransactions.size() > 0){
             return;
         }
     }

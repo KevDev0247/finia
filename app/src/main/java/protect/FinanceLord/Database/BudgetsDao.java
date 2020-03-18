@@ -31,6 +31,9 @@ public interface BudgetsDao {
     @Query("SELECT * FROM Budgets WHERE budgetsId LIKE :budgetsId")
     List<Budgets> queryBudgetsById (int budgetsId);
 
+    @Query("SELECT * FROM Budgets WHERE budgetValue LIKE :budgetsValue")
+    List<Budgets> queryBudgetsByValue (float budgetsValue);
+
     @Query("SELECT * FROM Budgets WHERE budgetCategoryId LIKE :budgetsCategoryId")
     List<Budgets> queryBudgetsByCategoryId (int budgetsCategoryId);
 

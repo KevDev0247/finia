@@ -100,5 +100,12 @@ public class MainActivity extends AppCompatActivity {
                 new DatabaseInitialization(MainActivity.this).initBudgetDb();
             }
         });
+
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                new DatabaseInitialization(MainActivity.this).initTransactionDb();
+            }
+        });
     }
 }
