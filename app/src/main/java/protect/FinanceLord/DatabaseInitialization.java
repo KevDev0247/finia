@@ -1,6 +1,7 @@
 package protect.FinanceLord;
 
 import android.app.Activity;
+import android.util.Log;
 
 import androidx.room.Room;
 import androidx.room.Transaction;
@@ -30,10 +31,13 @@ public class DatabaseInitialization{
     }
 
     public void initAssetTypeDb(){
-        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class,"AssetTypeDb").build();
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
         AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
 
         List<AssetsType> allAssetsType = assetsTypeDao.queryAllAssetsType();
+
+        Log.d("DatabaseInitialization", "initialize assets type Db, types: " + allAssetsType);
+
         if (allAssetsType.size() > 0){
             return;
         }
@@ -210,10 +214,14 @@ public class DatabaseInitialization{
         assets.add(type33);
         assets.add(type34);
         assets.add(type35);
+
+        assetsTypeDao.insertAssetsTypes(assets);
+
+        Log.d("DatabaseInitialization", "initialize assets type Db finished");
     }
 
     public void initAssetValueDb(){
-        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "AssetValueDb").build();
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
         AssetsValueDao assetsValueDao = database.assetsValueDao();
 
         List<AssetsValue> allAssetsValue = assetsValueDao.queryAllAssetsValue();
@@ -223,7 +231,7 @@ public class DatabaseInitialization{
     }
 
     public void initLiabilityTypeDb(){
-        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "LiabilityDb").build();
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
         LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
 
         List<LiabilitiesType> allLiabilities = liabilitiesTypeDao.queryAllLiabilities();
@@ -301,10 +309,12 @@ public class DatabaseInitialization{
         liabilities.add(type_12);
         liabilities.add(type_13);
         liabilities.add(type_14);
+
+        liabilitiesTypeDao.insertLiabilitiesTypes(liabilities);
     }
 
     public void initLiabilityValueDb(){
-        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "LiabilityValueDb").build();
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
         LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
         List<LiabilitiesValue> allLiabilitiesValue = liabilitiesValueDao.queryAllLiabilities();
@@ -314,7 +324,7 @@ public class DatabaseInitialization{
     }
 
     public void initBudgetDb(){
-        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "BudgetDb").build();
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
         BudgetsDao budgetsDao = database.budgetsDao();
 
         List<Budgets> allBudgets = budgetsDao.queryAllBudgets();
@@ -324,7 +334,7 @@ public class DatabaseInitialization{
     }
 
     public void initTransactionDb(){
-        FinanceLordDatabase database = Room.databaseBuilder(context.get(), FinanceLordDatabase.class, "TransactionDb").build();
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
         TransactionsDao transactionsDao = database.transactionsDao();
 
         List<Transactions> allTransactions = transactionsDao.queryAllTransaction();

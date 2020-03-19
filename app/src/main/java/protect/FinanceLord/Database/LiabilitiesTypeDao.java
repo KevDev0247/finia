@@ -18,6 +18,9 @@ public interface LiabilitiesTypeDao {
     @Insert
     void insertLiabilitiesTypes(LiabilitiesType... liabilitiesTypeTypes);
 
+    @Insert
+    void insertLiabilitiesTypes(List<LiabilitiesType> liabilitiesTypes);
+
     @Update
     void updatesLiabilityType(LiabilitiesType... liabilitiesTypeTypes);
 
