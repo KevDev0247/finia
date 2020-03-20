@@ -8,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 
+import java.util.ArrayList;
+
+import protect.FinanceLord.ui.main.AssetsFragment;
+import protect.FinanceLord.ui.main.LiabilitiesFragment;
 import protect.FinanceLord.ui.main.SectionsPagerAdapter;
 
 public class NetWorthEditReportsActivity extends AppCompatActivity {
@@ -32,7 +37,14 @@ public class NetWorthEditReportsActivity extends AppCompatActivity {
     private void resetView(String search){
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         final ViewPager viewPager = findViewById(R.id.view_pager);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+
+        ArrayList<Fragment> fragments = null;
+        AssetsFragment assetsFragment = new AssetsFragment("Assets");
+        LiabilitiesFragment liabilitiesFragment = new LiabilitiesFragment("Liabilities");
+        fragments.add(assetsFragment);
+        fragments.add(liabilitiesFragment);
+
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
         Toolbar toolbar = findViewById(R.id.toolbar);
 

@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import protect.FinanceLord.R;
 
 /**
@@ -19,20 +22,17 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
     private final Context mContext;
+    private ArrayList<Fragment> fragments;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    public SectionsPagerAdapter(Context context, FragmentManager fm, ArrayList<Fragment> fragments) {
         super(fm);
         mContext = context;
+        this.fragments = fragments;
     }
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        String title = getPageTitle(position).toString();
-        NetWorthFragment networthFragment = new NetWorthFragment(title);
-
-        return networthFragment;
+        return fragments.get(position);
     }
 
     @Nullable

@@ -27,6 +27,5 @@ public abstract class FinanceLordDatabase extends RoomDatabase {
             return database;
         }
         return database;
-
     }
 }
