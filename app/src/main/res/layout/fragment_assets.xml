@@ -5,6 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <ExpandableListView
+        android:id="@+id/assets_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ExpandableListView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

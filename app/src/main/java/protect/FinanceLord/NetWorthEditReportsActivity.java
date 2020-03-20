@@ -38,7 +38,7 @@ public class NetWorthEditReportsActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         final ViewPager viewPager = findViewById(R.id.view_pager);
 
-        ArrayList<Fragment> fragments = null;
+        ArrayList<Fragment> fragments = new ArrayList<>();
         AssetsFragment assetsFragment = new AssetsFragment("Assets");
         LiabilitiesFragment liabilitiesFragment = new LiabilitiesFragment("Liabilities");
         fragments.add(assetsFragment);

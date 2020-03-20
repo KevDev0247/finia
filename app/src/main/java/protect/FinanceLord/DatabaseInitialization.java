@@ -116,12 +116,12 @@ public class DatabaseInitialization{
         type20.setAssetsName("S corporation");
         type21.setAssetsName("Limited liability company");
 
-        type16.setAssetsParentType("Business ownership interest");
-        type17.setAssetsParentType("Business ownership interest");
-        type18.setAssetsParentType("Business ownership interest");
-        type19.setAssetsParentType("Business ownership interest");
-        type20.setAssetsParentType("Business ownership interest");
-        type21.setAssetsParentType("Business ownership interest");
+        type16.setAssetsParentType("Ownership interest");
+        type17.setAssetsParentType("Ownership interest");
+        type18.setAssetsParentType("Ownership interest");
+        type19.setAssetsParentType("Ownership interest");
+        type20.setAssetsParentType("Ownership interest");
+        type21.setAssetsParentType("Ownership interest");
 
 
         AssetsType type22 = new AssetsType();
@@ -134,7 +134,7 @@ public class DatabaseInitialization{
 
         type22.setAssetsName("Principal home");
         type23.setAssetsName("Vacation home");
-        type24.setAssetsName("Transportation");
+        type24.setAssetsName("Vehicles");
         type25.setAssetsName("Home furnishings");
         type26.setAssetsName("Collections");
         type27.setAssetsName("Luxury goods");
