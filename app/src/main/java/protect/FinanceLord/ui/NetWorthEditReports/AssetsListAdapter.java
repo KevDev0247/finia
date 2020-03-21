@@ -75,7 +75,7 @@ class AssetsListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        String child = (String) getChild(groupPosition,childPosition);
+        String child = String.valueOf(getChild(groupPosition,childPosition));
         if (convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
