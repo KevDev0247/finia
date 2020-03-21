@@ -9,37 +9,46 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 class ThreeLevelListAdapter extends BaseExpandableListAdapter {
-    public ThreeLevelListAdapter(Context context, List<String> parents, List<String> secondLevelItems, List<LinkedHashMap<String, List<String>>> assetsList){
 
+    private Context context;
+    List<String> parents;
+    List<String> secondLevelItems;
+    List<LinkedHashMap<String, List<String>>> assetsList;
+
+    public ThreeLevelListAdapter(Context context, List<String> parents, List<String> secondLevelItems, List<LinkedHashMap<String, List<String>>> assetsList){
+        this.context = context;
+        this.parents = parents;
+        this.secondLevelItems = secondLevelItems;
+        this.assetsList = assetsList;
     }
 
     @Override
     public int getGroupCount() {
+        return parents.size();
+    }
+
+    @Override
+    public int getChildrenCount(int groupPosition) {
         return 0;
     }
 
     @Override
-    public int getChildrenCount(int i) {
-        return 0;
-    }
-
-    @Override
-    public Object getGroup(int i) {
+    public Object getGroup(int groupPosition) {
         return null;
     }
 
     @Override
-    public Object getChild(int i, int i1) {
+    public Object getChild(int group, int child) {
         return null;
     }
 
     @Override
-    public long getGroupId(int i) {
+    public long getGroupId(int groupPosition) {
         return 0;
     }
 
     @Override
-    public long getChildId(int i, int i1) {
+    public long getChildId(int groupPosition, int childPosition) {
         return 0;
     }
 
@@ -49,17 +58,17 @@ class ThreeLevelListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         return null;
     }
 
     @Override
-    public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+    public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         return null;
     }
 
     @Override
-    public boolean isChildSelectable(int i, int i1) {
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
     }
 }
