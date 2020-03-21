@@ -35,6 +35,31 @@
         <item>Ownership Interest</item>
     </string-array>
 
+    <string-array name="taxable_accounts">
+        <item>Brokerage</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="retirement_accounts">
+        <item>IRA</item>
+        <item>Roth IRA</item>
+        <item>401k</item>
+        <item>SEP_IRA</item>
+        <item>Pension</item>
+        <item>Annuity</item>
+        <item>Keogh or Other Plan</item>
+    </string-array>
+
+    <string-array name="ownership_interests">
+        <item>Real Estate</item>
+        <item>Sole Proprietorship</item>
+        <item>Partnership</item>
+        <item>C Corporation</item>
+        <item>S Corporation</item>
+        <item>Limited Liability Company</item>
+        <item>Other</item>
+    </string-array>
+
     <string-array name="personal_assets">
         <item>Principal Home</item>
         <item>Vacation Home</item>

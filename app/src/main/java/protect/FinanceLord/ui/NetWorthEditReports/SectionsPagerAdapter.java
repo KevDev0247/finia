@@ -1,4 +1,4 @@
-package protect.FinanceLord.ui.main;
+package protect.FinanceLord.ui.NetWorthEditReports;
 
 import android.content.Context;
 
@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import protect.FinanceLord.R;
 

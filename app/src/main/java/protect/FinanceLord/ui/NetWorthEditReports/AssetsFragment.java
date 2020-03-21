@@ -1,5 +1,6 @@
-package protect.FinanceLord.ui.main;
+package protect.FinanceLord.ui.NetWorthEditReports;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,8 @@ public class AssetsFragment extends Fragment {
     ExpandableListView expandableListView;
     List<String> assetsCategory;
     HashMap<String, List<String>> assetsList;
+    AssetsListAdapter adapter;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class AssetsFragment extends Fragment {
         expandableListView = assetsView.findViewById(R.id.assets_list_view);
         assetsCategory = new ArrayList<>();
         assetsList = new HashMap<>();
+        adapter = new AssetsListAdapter(getContext(), assetsCategory, assetsList);
+        expandableListView.setAdapter(adapter);
         initAssetCategory();
 
         return assetsView;
@@ -52,10 +57,39 @@ public class AssetsFragment extends Fragment {
             liquidAssetsList.add(item);
         }
 
+        List<String> investedAssetsList = new ArrayList<>();
+        array = getResources().getStringArray(R.array.invested_assets);
+        for (String item: array){
+            investedAssetsList.add(item);
+        }
+
+        List<String> taxableAccountsList = new ArrayList<>();
+        array = getResources().getStringArray(R.array.taxable_accounts);
+        for (String item: array){
+            taxableAccountsList.add(item);
+        }
+
+        List<String> retirementAccountsList = new ArrayList<>();
+        array = getResources().getStringArray(R.array.retirement_accounts);
+        for (String item: array){
+            retirementAccountsList.add(item);
+        }
+
+        List<String> ownershipInterestsList = new ArrayList<>();
+        array = getResources().getStringArray(R.array.ownership_interests);
+        for (String item: array){
+            ownershipInterestsList.add(item);
+        }
+
         List<String> personalAssetsList = new ArrayList<>();
         array = getResources().getStringArray(R.array.personal_assets);
         for (String item: array){
             personalAssetsList.add(item);
         }
+
+        assetsList.put(assetsCategory.get(0),liquidAssetsList);
+        assetsList.put(assetsCategory.get(1),investedAssetsList);
+        assetsList.put(assetsCategory.get(2),personalAssetsList);
+        adapter.notifyDataSetChanged();
     }
 }

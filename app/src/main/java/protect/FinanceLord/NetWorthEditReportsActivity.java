@@ -3,8 +3,6 @@ package protect.FinanceLord;
 import android.app.SearchManager;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.widget.Toolbar;
@@ -12,16 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-
 
 import java.util.ArrayList;
 
-import protect.FinanceLord.ui.main.AssetsFragment;
-import protect.FinanceLord.ui.main.LiabilitiesFragment;
-import protect.FinanceLord.ui.main.SectionsPagerAdapter;
+import protect.FinanceLord.ui.NetWorthEditReports.AssetsFragment;
+import protect.FinanceLord.ui.NetWorthEditReports.LiabilitiesFragment;
+import protect.FinanceLord.ui.NetWorthEditReports.SectionsPagerAdapter;
 
 public class NetWorthEditReportsActivity extends AppCompatActivity {
 
