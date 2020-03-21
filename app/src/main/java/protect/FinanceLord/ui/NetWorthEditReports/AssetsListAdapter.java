@@ -18,10 +18,10 @@ class AssetsListAdapter extends BaseExpandableListAdapter {
     List<String> assetsCategory;
     HashMap<String,List<String>> assetsList;
 
-    public AssetsListAdapter (Context context, List<String> assetsCategory, HashMap<String,List<String>> assetslist){
+    public AssetsListAdapter (Context context, List<String> assetsCategory, HashMap<String,List<String>> assetsList){
         this.context = context;
         this.assetsCategory = assetsCategory;
-        this.assetsList = assetslist;
+        this.assetsList = assetsList;
     }
 
     @Override
@@ -41,7 +41,7 @@ class AssetsListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this.assetsList.get(this.assetsCategory.get(groupPosition));
+        return this.assetsList.get(this.assetsCategory.get(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -92,3 +92,4 @@ class AssetsListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 }
+
