@@ -41,7 +41,7 @@ class AssetsListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this.assetsList.get(this.assetsCategory.get(groupPosition));
+        return this.assetsList.get(this.assetsCategory.get(groupPosition)).get(childPosition);
     }
 
     @Override
