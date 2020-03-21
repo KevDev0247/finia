@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -85,7 +86,21 @@ class ThreeLevelListAdapter extends BaseExpandableListAdapter {
             childData.add(secondLevelData.get(key));
         }
 
-        secondLevelExpandableListView.setAdapter(new SecondLevelAdapter());
+        secondLevelExpandableListView.setAdapter(new SecondLevelAdapter(context, childData, headers));
+        secondLevelExpandableListView.setGroupIndicator(null);
+        secondLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+            int previousGroup = -1;
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (groupPosition != previousGroup){
+                    secondLevelExpandableListView.collapseGroup(previousGroup);
+                }
+                previousGroup = groupPosition;
+            }
+        });
+
+        return secondLevelExpandableListView;
     }
 
     @Override
