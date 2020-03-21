@@ -1,12 +1,16 @@
 package protect.FinanceLord.ui.NetWorthEditReports;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.TextView;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+
+import protect.FinanceLord.R;
 
 class ThreeLevelListAdapter extends BaseExpandableListAdapter {
 
@@ -15,7 +19,7 @@ class ThreeLevelListAdapter extends BaseExpandableListAdapter {
     List<String> secondLevelItems;
     List<LinkedHashMap<String, List<String>>> assetsList;
 
-    public ThreeLevelListAdapter(Context context, List<String> parents, List<String> secondLevelItems, List<LinkedHashMap<String, List<String>>> assetsList){
+        public ThreeLevelListAdapter(Context context, List<String> parents, String[] secondLevelItems, List<LinkedHashMap<String, List<String>>> assetsList){
         this.context = context;
         this.parents = parents;
         this.secondLevelItems = secondLevelItems;
@@ -29,46 +33,54 @@ class ThreeLevelListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return 0;
+        return 1;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return null;
+        return groupPosition;
     }
 
     @Override
     public Object getChild(int group, int child) {
-        return null;
+        return child;
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-        return 0;
+        return groupPosition;
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return 0;
+        return childPosition;
     }
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        return null;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = inflater.inflate(R.layout.assets_list_row_second, null);
+        TextView textView = (TextView) convertView.findViewById(R.id.rowParentText);
+        textView.setText(this.parents.get(groupPosition));
+
+        return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        return null;
+        final SecondLevelExpandableListView secondLevelExpandableListView = new SecondLevelExpandableListView(context);
+
+            String[] headers = secondLevelItems.get(groupPosition);
+
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
+        return true;
     }
 }

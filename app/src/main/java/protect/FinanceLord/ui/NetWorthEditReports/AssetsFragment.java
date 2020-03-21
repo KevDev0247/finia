@@ -29,7 +29,7 @@ public class AssetsFragment extends Fragment {
     LinkedHashMap<String, List<String>> assetsThirdLevelCategory2 = new LinkedHashMap<>();
     LinkedHashMap<String, List<String>> assetsThirdLevelCategory3 = new LinkedHashMap<>();
 
-    List<String> secondLevelItems = new ArrayList<String>();
+    List<String[]> secondLevelItems = new ArrayList<String[]>();
 
     List<LinkedHashMap<String, List<String>>> assetsList = new ArrayList<>();
 
@@ -58,10 +58,10 @@ public class AssetsFragment extends Fragment {
             liquidAssetsList.add(item);
         }
 
-        List<String> investedAssetsList = new ArrayList<>();
+        String[] investedAssetsList = new String[]{null};
         array = getResources().getStringArray(R.array.invested_assets);
-        for (String item: array){
-            investedAssetsList.add(item);
+        for (int i = 0; i < array.length; i++){
+            investedAssetsList[i] = array[i];
         }
 
         List<String> taxableAccountsList = new ArrayList<>();
@@ -88,14 +88,12 @@ public class AssetsFragment extends Fragment {
             personalAssetsList.add(item);
         }
 
-        secondLevelItems.add(investedAssetsList.get(0));
-        secondLevelItems.add(investedAssetsList.get(1));
-        secondLevelItems.add(investedAssetsList.get(2));
+        secondLevelItems.add(investedAssetsList);
 
         assetsThirdLevelCategory1.put(parents.get(1), liquidAssetsList);
-        assetsThirdLevelCategory2.put(investedAssetsList.get(0), taxableAccountsList);
-        assetsThirdLevelCategory2.put(investedAssetsList.get(1), retirementAccountsList);
-        assetsThirdLevelCategory2.put(investedAssetsList.get(2), ownershipInterestsList);
+        assetsThirdLevelCategory2.put(investedAssetsList[0], taxableAccountsList);
+        assetsThirdLevelCategory2.put(investedAssetsList[1], retirementAccountsList);
+        assetsThirdLevelCategory2.put(investedAssetsList[2], ownershipInterestsList);
         assetsThirdLevelCategory3.put(parents.get(3), personalAssetsList);
 
         assetsList.add(assetsThirdLevelCategory1);
