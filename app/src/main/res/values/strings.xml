@@ -19,6 +19,15 @@
     <string name="liquid_assets">Liquid Assets</string>
     <string name="invested_assets">Invested Assets</string>
     <string name="personal_assets">Personal Assets</string>
+    <string name="taxable_accounts">Taxable Accounts</string>
+    <string name="retirement_accounts">Retirement Accounts</string>
+    <string name="ownership_interest">Ownership Interest</string>
+
+    <string-array name="parents">
+        <item>Liquid Assets</item>
+        <item>Invested Assets</item>
+        <item>Personal Assets</item>
+    </string-array>
 
     <string-array name="liquid_assets">
         <item>Checking Accounts</item>
