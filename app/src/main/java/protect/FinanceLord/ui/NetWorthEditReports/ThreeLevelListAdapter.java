@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -16,10 +17,10 @@ class ThreeLevelListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     List<String> parents;
-    List<String> secondLevelItems;
+    List<String[]> secondLevelItems;
     List<LinkedHashMap<String, List<String>>> assetsList;
 
-        public ThreeLevelListAdapter(Context context, List<String> parents, String[] secondLevelItems, List<LinkedHashMap<String, List<String>>> assetsList){
+        public ThreeLevelListAdapter(Context context, List<String> parents, List<String[]> secondLevelItems, List<LinkedHashMap<String, List<String>>> assetsList){
         this.context = context;
         this.parents = parents;
         this.secondLevelItems = secondLevelItems;
@@ -75,8 +76,16 @@ class ThreeLevelListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         final SecondLevelExpandableListView secondLevelExpandableListView = new SecondLevelExpandableListView(context);
 
-            String[] headers = secondLevelItems.get(groupPosition);
+        String[] headers = secondLevelItems.get(groupPosition);
 
+        List<List<String>> childData = new ArrayList<>();
+        LinkedHashMap<String, List<String>> secondLevelData = assetsList.get(groupPosition);
+
+        for (String key : secondLevelData.keySet()){
+            childData.add(secondLevelData.get(key));
+        }
+
+        secondLevelExpandableListView.setAdapter(new SecondLevelAdapter());
     }
 
     @Override
