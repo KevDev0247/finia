@@ -61,7 +61,7 @@ class SecondLevelAdapter extends BaseExpandableListAdapter {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.assets_list_row_second, null);
-        TextView textView = (TextView) convertView.findViewById(R.id.rowSecondText);
+        TextView textView = convertView.findViewById(R.id.rowSecondText);
         String groupText = getGroup(groupPosition).toString();
         textView.setText(groupText);
         return convertView;
@@ -72,7 +72,7 @@ class SecondLevelAdapter extends BaseExpandableListAdapter {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.assets_list_row_third, null);
-        TextView textView = (TextView)convertView.findViewById(R.id.rowThirdText);
+        TextView textView = convertView.findViewById(R.id.rowThirdText);
         String[] childArray = AssetsList.get(groupPosition).toArray(new String[0]);
         String text = childArray[childPosition];
         textView.setText(text);

@@ -58,11 +58,14 @@ public class AssetsFragment extends Fragment {
             liquidAssetsList.add(item);
         }
 
-        String[] investedAssetsList = new String[5];
+        String[] investedAssetsList = new String[3];
         array = getResources().getStringArray(R.array.invested_assets);
         for (int i = 0; i < array.length; i++){
             investedAssetsList[i] = array[i];
         }
+
+        String[] liquidAssets = new String[]{"All Assets"};
+        String[] personalAssets = new String[]{"All Assets"};
 
         List<String> taxableAccountsList = new ArrayList<>();
         array = getResources().getStringArray(R.array.taxable_accounts);
@@ -88,13 +91,15 @@ public class AssetsFragment extends Fragment {
             personalAssetsList.add(item);
         }
 
+        secondLevelItems.add(liquidAssets);
         secondLevelItems.add(investedAssetsList);
+        secondLevelItems.add(personalAssets);
 
-        assetsThirdLevelCategory1.put(parents.get(0), liquidAssetsList);
+        assetsThirdLevelCategory1.put(getString(R.string.liquid_assets), liquidAssetsList);
         assetsThirdLevelCategory2.put(investedAssetsList[0], taxableAccountsList);
         assetsThirdLevelCategory2.put(investedAssetsList[1], retirementAccountsList);
         assetsThirdLevelCategory2.put(investedAssetsList[2], ownershipInterestsList);
-        assetsThirdLevelCategory3.put(parents.get(2), personalAssetsList);
+        assetsThirdLevelCategory3.put(getString(R.string.personal_assets), personalAssetsList);
 
         assetsList.add(assetsThirdLevelCategory1);
         assetsList.add(assetsThirdLevelCategory2);
