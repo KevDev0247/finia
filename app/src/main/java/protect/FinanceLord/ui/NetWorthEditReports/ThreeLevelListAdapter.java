@@ -65,8 +65,9 @@ class ThreeLevelListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(R.layout.assets_list_row_second, null);
+        convertView = inflater.inflate(R.layout.assets_list_row_first, null);
         TextView textView = (TextView) convertView.findViewById(R.id.rowParentText);
         textView.setText(this.parents.get(groupPosition));
 
@@ -75,6 +76,7 @@ class ThreeLevelListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+
         final SecondLevelExpandableListView secondLevelExpandableListView = new SecondLevelExpandableListView(context);
 
         String[] headers = secondLevelItems.get(groupPosition);

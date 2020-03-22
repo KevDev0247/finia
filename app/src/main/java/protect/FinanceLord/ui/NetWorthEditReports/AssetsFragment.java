@@ -29,7 +29,7 @@ public class AssetsFragment extends Fragment {
     LinkedHashMap<String, List<String>> assetsThirdLevelCategory2 = new LinkedHashMap<>();
     LinkedHashMap<String, List<String>> assetsThirdLevelCategory3 = new LinkedHashMap<>();
 
-    List<String[]> secondLevelItems = new ArrayList<String[]>();
+    List<String[]> secondLevelItems = new ArrayList<>();
 
     List<LinkedHashMap<String, List<String>>> assetsList = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class AssetsFragment extends Fragment {
             liquidAssetsList.add(item);
         }
 
-        String[] investedAssetsList = new String[]{null};
+        String[] investedAssetsList = new String[5];
         array = getResources().getStringArray(R.array.invested_assets);
         for (int i = 0; i < array.length; i++){
             investedAssetsList[i] = array[i];
@@ -90,11 +90,11 @@ public class AssetsFragment extends Fragment {
 
         secondLevelItems.add(investedAssetsList);
 
-        assetsThirdLevelCategory1.put(parents.get(1), liquidAssetsList);
+        assetsThirdLevelCategory1.put(parents.get(0), liquidAssetsList);
         assetsThirdLevelCategory2.put(investedAssetsList[0], taxableAccountsList);
         assetsThirdLevelCategory2.put(investedAssetsList[1], retirementAccountsList);
         assetsThirdLevelCategory2.put(investedAssetsList[2], ownershipInterestsList);
-        assetsThirdLevelCategory3.put(parents.get(3), personalAssetsList);
+        assetsThirdLevelCategory3.put(parents.get(2), personalAssetsList);
 
         assetsList.add(assetsThirdLevelCategory1);
         assetsList.add(assetsThirdLevelCategory2);

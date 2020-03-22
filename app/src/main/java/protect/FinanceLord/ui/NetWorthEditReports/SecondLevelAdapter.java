@@ -5,11 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -62,6 +58,7 @@ class SecondLevelAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.assets_list_row_second, null);
         TextView textView = (TextView) convertView.findViewById(R.id.rowSecondText);
@@ -72,8 +69,9 @@ class SecondLevelAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(R.layout.row_third, null);
+        convertView = inflater.inflate(R.layout.assets_list_row_third, null);
         TextView textView = (TextView)convertView.findViewById(R.id.rowThirdText);
         String[] childArray = AssetsList.get(groupPosition).toArray(new String[0]);
         String text = childArray[childPosition];
