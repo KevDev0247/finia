@@ -58,15 +58,6 @@ public class AssetsFragment extends Fragment {
             liquidAssetsList.add(item);
         }
 
-        String[] investedAssetsList = new String[3];
-        array = getResources().getStringArray(R.array.invested_assets);
-        for (int i = 0; i < array.length; i++){
-            investedAssetsList[i] = array[i];
-        }
-
-        String[] liquidAssets = new String[]{"All Assets"};
-        String[] personalAssets = new String[]{"All Assets"};
-
         List<String> taxableAccountsList = new ArrayList<>();
         array = getResources().getStringArray(R.array.taxable_accounts);
         for (String item: array){
@@ -90,6 +81,16 @@ public class AssetsFragment extends Fragment {
         for (String item: array){
             personalAssetsList.add(item);
         }
+
+
+        String[] investedAssetsList = new String[3];
+        array = getResources().getStringArray(R.array.invested_assets);
+        for (int i = 0; i < array.length; i++){
+            investedAssetsList[i] = array[i];
+        }
+
+        String[] liquidAssets = new String[]{"All Assets"};
+        String[] personalAssets = new String[]{"All Assets"};
 
         secondLevelItems.add(liquidAssets);
         secondLevelItems.add(investedAssetsList);
