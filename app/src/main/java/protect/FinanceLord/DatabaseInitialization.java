@@ -272,6 +272,7 @@ public class DatabaseInitialization{
         type_10.setLiabilitiesName("Life insurance policy loans");
         type_11.setLiabilitiesName("Other long time debt");
 
+        type_4.setLiabilitiesParentType("Long term liabilities");
         type_5.setLiabilitiesParentType("Long term liabilities");
         type_6.setLiabilitiesParentType("Long term liabilities");
         type_7.setLiabilitiesParentType("Long term liabilities");
