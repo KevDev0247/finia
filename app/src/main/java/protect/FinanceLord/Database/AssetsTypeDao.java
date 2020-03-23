@@ -33,7 +33,6 @@ public interface AssetsTypeDao {
     @Query("SELECT * FROM AssetsType")
     List<AssetsType> queryAllAssetsType();
 
-
     @Query("select secondLevel.secondLevelId, \n" +
             "secondLevel.assetsCategory, \n" +
             "secondLevel.assetsSubType, \n" +
@@ -50,4 +49,3 @@ public interface AssetsTypeDao {
             "\tleft join AssetsType as thirdLevel on secondLevel.assetsSubType = thirdLevel.assetsParentType ")
     List<AssetsTypeQuery> queryGroupedAssetsType();
 }
-

@@ -53,8 +53,8 @@ public class AssetsFragment extends Fragment {
             @Override
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragment.this.getContext());
-            AssetsTypeDao dao = database.assetsTypeDao();
-            List<AssetsTypeQuery> assetsTypeQueries = dao.queryGroupedAssetsType();
+                AssetsTypeDao dao = database.assetsTypeDao();
+                List<AssetsTypeQuery> assetsTypeQueries = dao.queryGroupedAssetsType();
                 Log.d("AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
             }
         });
