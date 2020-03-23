@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,11 @@ import android.widget.ExpandableListView;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.concurrent.Executors;
 
+import protect.FinanceLord.Database.AssetsTypeDao;
+import protect.FinanceLord.Database.AssetsTypeQuery;
+import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
 
 public class AssetsFragment extends Fragment {
@@ -44,6 +49,17 @@ public class AssetsFragment extends Fragment {
     }
 
     private void initAssetCategory() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragment.this.getContext());
+            AssetsTypeDao dao = database.assetsTypeDao();
+            List<AssetsTypeQuery> assetsTypeQueries = dao.queryGroupedAssetsType();
+                Log.d("AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
+            }
+        });
+
+
         String[] array;
 
         List<String> parents = new ArrayList<>();
