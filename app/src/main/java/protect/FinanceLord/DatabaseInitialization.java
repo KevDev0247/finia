@@ -3,9 +3,6 @@ package protect.FinanceLord;
 import android.app.Activity;
 import android.util.Log;
 
-import androidx.room.Room;
-import androidx.room.Transaction;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,13 +97,13 @@ public class DatabaseInitialization{
         type14.setAssetsName("Annuity");
         type15.setAssetsName("Keogh or other plan");
 
-        type9.setAssetsParentType("Retirement account");
-        type10.setAssetsParentType("Retirement account");
-        type11.setAssetsParentType("Retirement account");
-        type12.setAssetsParentType("Retirement account");
-        type13.setAssetsParentType("Retirement account");
-        type14.setAssetsParentType("Retirement account");
-        type15.setAssetsParentType("Retirement account");
+        type9.setAssetsParentType("Retirement accounts");
+        type10.setAssetsParentType("Retirement accounts");
+        type11.setAssetsParentType("Retirement accounts");
+        type12.setAssetsParentType("Retirement accounts");
+        type13.setAssetsParentType("Retirement accounts");
+        type14.setAssetsParentType("Retirement accounts");
+        type15.setAssetsParentType("Retirement accounts");
 
 
         type16.setAssetsName("Real estate");
@@ -116,12 +113,12 @@ public class DatabaseInitialization{
         type20.setAssetsName("S corporation");
         type21.setAssetsName("Limited liability company");
 
-        type16.setAssetsParentType("Ownership interest");
-        type17.setAssetsParentType("Ownership interest");
-        type18.setAssetsParentType("Ownership interest");
-        type19.setAssetsParentType("Ownership interest");
-        type20.setAssetsParentType("Ownership interest");
-        type21.setAssetsParentType("Ownership interest");
+        type16.setAssetsParentType("Ownership interests");
+        type17.setAssetsParentType("Ownership interests");
+        type18.setAssetsParentType("Ownership interests");
+        type19.setAssetsParentType("Ownership interests");
+        type20.setAssetsParentType("Ownership interests");
+        type21.setAssetsParentType("Ownership interests");
 
 
         AssetsType type22 = new AssetsType();
@@ -166,18 +163,18 @@ public class DatabaseInitialization{
         AssetsType type33 = new AssetsType();
         AssetsType type34 = new AssetsType();
 
-        type32.setAssetsName("Liquid asset");
-        type33.setAssetsName("Invested asset");
-        type34.setAssetsName("Personal asset");
+        type32.setAssetsName("Liquid assets");
+        type33.setAssetsName("Invested assets");
+        type34.setAssetsName("Personal assets");
 
-        type32.setAssetsParentType("Total Asset");
-        type33.setAssetsParentType("Total Asset");
-        type34.setAssetsParentType("Total Asset");
+        type32.setAssetsParentType("Total Assets");
+        type33.setAssetsParentType("Total Assets");
+        type34.setAssetsParentType("Total Assets");
 
         //Level 0 object
         AssetsType type35 = new AssetsType();
 
-        type35.setAssetsName("Total Asset");
+        type35.setAssetsName("Total Assets");
 
         assets.add(type1);
         assets.add(type2);
