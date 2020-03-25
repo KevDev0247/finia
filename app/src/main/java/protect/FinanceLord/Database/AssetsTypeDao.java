@@ -35,28 +35,28 @@ public interface AssetsTypeDao {
 
     @Query("SELECT \n" +
             "assetsThirdLevelComposed.*, \n" +
-            "assetsFourthLevel.assetsId as assetsFourthLevelId, \n" +
-            "assetsFourthLevel.assetsName as assetsFourthLevelName \n" +
-            "from ( \n" +
-            "select \n" +
+            "assetsFourthLevel.assetsId AS assetsFourthLevelId, \n" +
+            "assetsFourthLevel.assetsName AS assetsFourthLevelName \n" +
+            "FROM ( \n" +
+            "SELECT \n" +
             "assetsSecondLevelComposed.assetsFirstLevelId, \n" +
             "assetsSecondLevelComposed.assetsFirstLevelName, \n" +
             "assetsSecondLevelComposed.assetsSecondLevelId, \n" +
             "assetsSecondLevelComposed.assetsSecondLevelName, \n" +
-            "assetsThirdLevel.assetsId as assetsThirdLevelId, \n" +
-            "assetsThirdLevel.assetsName as assetsThirdLevelName \n" +
+            "assetsThirdLevel.assetsId AS assetsThirdLevelId, \n" +
+            "assetsThirdLevel.assetsName AS assetsThirdLevelName \n" +
             "FROM( \n" +
-            "select \n" +
-            "assetsFirstLevel.assetsId as assetsFirstLevelId, \n" +
-            "assetsFirstLevel.assetsName as assetsFirstLevelName, \n" +
-            "assetsSecondLevel.assetsId as assetsSecondLevelId, \n" +
-            "assetsSecondLevel.assetsName as assetsSecondLevelName \n" +
-            "from AssetsType as assetsFirstLevel \n" +
-            "join AssetsType as assetsSecondLevel on assetsFirstLevel.assetsParentType is NULL \n" +
-            "and assetsFirstLevel.assetsName = assetsSecondLevel.assetsParentType \n" +
-            ") as assetsSecondLevelComposed \n" +
-            "left join AssetsType as assetsThirdLevel on assetsSecondLevelComposed.assetsSecondLevelName = assetsThirdLevel.assetsParentType \n" +
-            ") as assetsThirdLevelComposed left join AssetsType as assetsFourthLevel on assetsThirdLevelComposed.assetsThirdLevelName = assetsFourthLevel.assetsParentType"
+            "SELECT \n" +
+            "assetsFirstLevel.assetsId AS assetsFirstLevelId, \n" +
+            "assetsFirstLevel.assetsName AS assetsFirstLevelName, \n" +
+            "assetsSecondLevel.assetsId AS assetsSecondLevelId, \n" +
+            "assetsSecondLevel.assetsName AS assetsSecondLevelName \n" +
+            "FROM AssetsType AS assetsFirstLevel \n" +
+            "JOIN AssetsType AS assetsSecondLevel ON assetsFirstLevel.assetsParentType IS NULL \n" +
+            "AND assetsFirstLevel.assetsName = assetsSecondLevel.assetsParentType \n" +
+            ") AS assetsSecondLevelComposed \n" +
+            "LEFT JOIN AssetsType AS assetsThirdLevel ON assetsSecondLevelComposed.assetsSecondLevelName = assetsThirdLevel.assetsParentType \n" +
+            ") AS assetsThirdLevelComposed LEFT JOIN AssetsType AS assetsFourthLevel ON assetsThirdLevelComposed.assetsThirdLevelName = assetsFourthLevel.assetsParentType"
             )
     List<AssetsTypeQuery> queryGroupedAssetsType();
 }
