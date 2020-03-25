@@ -152,7 +152,7 @@ public class DatabaseInitialization{
 
         type29.setAssetsName("Taxable accounts");
         type30.setAssetsName("Retirement accounts");
-        type31.setAssetsName("Business ownership interests");
+        type31.setAssetsName("Ownership interests");
 
         type29.setAssetsParentType("Invested assets");
         type30.setAssetsParentType("Invested assets");
