@@ -14,14 +14,14 @@ import java.util.List;
 
 import protect.FinanceLord.R;
 
-class ThreeLevelListAdapter extends BaseExpandableListAdapter {
+class AssetsThreeLevelListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     List<String> parents;
     List<String[]> secondLevelItems;
     List<LinkedHashMap<String, List<String>>> assetsList;
 
-        public ThreeLevelListAdapter(Context context, List<String> parents, List<String[]> secondLevelItems, List<LinkedHashMap<String, List<String>>> assetsList){
+        public AssetsThreeLevelListAdapter(Context context, List<String> parents, List<String[]> secondLevelItems, List<LinkedHashMap<String, List<String>>> assetsList){
         this.context = context;
         this.parents = parents;
         this.secondLevelItems = secondLevelItems;
@@ -77,7 +77,7 @@ class ThreeLevelListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
-        final SecondLevelExpandableListView secondLevelExpandableListView = new SecondLevelExpandableListView(context);
+        final AssetsSecondLevelExpandableListView secondLevelExpandableListView = new AssetsSecondLevelExpandableListView(context);
 
         String[] headers = secondLevelItems.get(groupPosition);
 
@@ -88,7 +88,7 @@ class ThreeLevelListAdapter extends BaseExpandableListAdapter {
             childData.add(secondLevelData.get(key));
         }
 
-        secondLevelExpandableListView.setAdapter(new SecondLevelAdapter(context, childData, headers));
+        secondLevelExpandableListView.setAdapter(new AssetsSecondLevelAdapter(context, childData, headers));
         secondLevelExpandableListView.setGroupIndicator(null);
         secondLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 

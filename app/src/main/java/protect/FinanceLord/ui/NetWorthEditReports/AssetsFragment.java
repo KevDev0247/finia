@@ -122,7 +122,7 @@ public class AssetsFragment extends Fragment {
         assetsList.add(assetsThirdLevelCategory2);
         assetsList.add(assetsThirdLevelCategory3);
 
-        ThreeLevelListAdapter threeLevelListAdapter = new ThreeLevelListAdapter(getContext(), parents, secondLevelItems, assetsList);
+        AssetsThreeLevelListAdapter threeLevelListAdapter = new AssetsThreeLevelListAdapter(getContext(), parents, secondLevelItems, assetsList);
         expandableListView.setAdapter(threeLevelListAdapter);
 
         threeLevelListAdapter.notifyDataSetChanged();

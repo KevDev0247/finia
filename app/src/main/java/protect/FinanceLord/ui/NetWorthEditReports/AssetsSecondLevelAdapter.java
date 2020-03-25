@@ -11,13 +11,13 @@ import java.util.List;
 
 import protect.FinanceLord.R;
 
-class SecondLevelAdapter extends BaseExpandableListAdapter {
+class AssetsSecondLevelAdapter extends BaseExpandableListAdapter {
     private Context context;
 
     List<List<String>> AssetsList;
     String[] headers;
 
-    public SecondLevelAdapter(Context context, List<List<String>> AssetsList, String[] headers){
+    public AssetsSecondLevelAdapter(Context context, List<List<String>> AssetsList, String[] headers){
         this.context = context;
         this.AssetsList = AssetsList;
         this.headers = headers;

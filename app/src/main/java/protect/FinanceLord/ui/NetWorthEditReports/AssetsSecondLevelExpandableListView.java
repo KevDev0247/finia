@@ -5,8 +5,8 @@ import android.widget.ExpandableListView;
 
 import protect.FinanceLord.MainActivity;
 
-public class SecondLevelExpandableListView extends ExpandableListView {
-    public SecondLevelExpandableListView(Context context){
+public class AssetsSecondLevelExpandableListView extends ExpandableListView {
+    public AssetsSecondLevelExpandableListView(Context context){
         super(context);
     }
 
