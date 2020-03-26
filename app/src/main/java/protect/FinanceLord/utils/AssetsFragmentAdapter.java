@@ -15,6 +15,7 @@ import protect.FinanceLord.R;
 import protect.FinanceLord.ui.NetWorthEditReports.AssetsSecondLevelExpandableListView;
 
 public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
+
     private AssetsFragmentDataProcessor dataProcessor;
     private List<AssetsFragmentDataCarrier> sectionDataSet;
     private int level;
@@ -24,16 +25,17 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         this.context = context;
         this.dataProcessor = dataProcessor;
         this.level = level;
-
         this.sectionDataSet = dataProcessor.getSubSet(parentSection, level);
     }
 
     public int getSectionGroupCount() {
         return sectionDataSet.size();
     }
+
     public String getAssetsName(int position) {
         return this.sectionDataSet.get(position).assetsTypeName;
     }
+
     public int getAssetsId(int position) {
         return this.sectionDataSet.get(position).assetsId;
     }
@@ -45,9 +47,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        String assetsTypeName = getAssetsName(i);
-        List<AssetsFragmentDataCarrier> carriers = dataProcessor.getSubSet(assetsTypeName, level + 1);
-        return carriers.size();
+        return 1;
     }
 
     @Override
@@ -80,9 +80,19 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int position, boolean b, View convertView, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(R.layout.assets_list_row_first, null);
-        TextView textView = (TextView) convertView.findViewById(R.id.rowParentText);
-        textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+        if (level == 0){
+            convertView = inflater.inflate(R.layout.assets_list_row_first, null);
+            TextView textView = convertView.findViewById(R.id.rowParentText);
+            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+        } else if (level == 1){
+            convertView = inflater.inflate(R.layout.assets_list_row_second, null);
+            TextView textView = convertView.findViewById(R.id.rowSecondText);
+            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+        } else if (level == 2){
+            convertView = inflater.inflate(R.layout.assets_list_row_third, null);
+            TextView textView = convertView.findViewById(R.id.rowThirdText);
+            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+        }
 
         return convertView;
     }
@@ -94,10 +104,9 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         List<AssetsFragmentDataCarrier> children = dataProcessor.getSubSet(sectionData.assetsTypeName, level + 1);
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.assets_list_row_first, null);
-            TextView textView = (TextView) convertView.findViewById(R.id.rowParentText);
+            convertView = inflater.inflate(R.layout.assets_list_row_second, null);
+            TextView textView = (TextView) convertView.findViewById(R.id.rowSecondText);
             textView.setText(this.sectionDataSet.get(childPosition).assetsTypeName);
-
             return convertView;
         } else {
             final AssetsSecondLevelExpandableListView secondLevelExpandableListView = new AssetsSecondLevelExpandableListView(context);
@@ -117,7 +126,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                 }
             });
             return secondLevelExpandableListView;
-
         }
     }
 
