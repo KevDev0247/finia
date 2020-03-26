@@ -30,14 +30,6 @@ public class AssetsFragment extends Fragment {
 
     ExpandableListView expandableListView;
 
-    LinkedHashMap<String, List<String>> assetsThirdLevelCategory1 = new LinkedHashMap<>();
-    LinkedHashMap<String, List<String>> assetsThirdLevelCategory2 = new LinkedHashMap<>();
-    LinkedHashMap<String, List<String>> assetsThirdLevelCategory3 = new LinkedHashMap<>();
-
-    List<String[]> secondLevelItems = new ArrayList<>();
-
-    List<LinkedHashMap<String, List<String>>> assetsList = new ArrayList<>();
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View assetsView = inflater.inflate(R.layout.fragment_assets, null);
@@ -56,6 +48,21 @@ public class AssetsFragment extends Fragment {
                 AssetsTypeDao dao = database.assetsTypeDao();
                 List<AssetsTypeQuery> assetsTypeQueries = dao.queryGroupedAssetsType();
                 Log.d("AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
+<<<<<<< Updated upstream
+=======
+
+                AssetsFragmentDataProcessor dataProcessor = new AssetsFragmentDataProcessor(assetsTypeQueries);
+                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(AssetsFragment.this.getContext(), dataProcessor, 0,null);
+                final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
+
+                AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        expandableListView.setAdapter(adapter);
+                        expandableListView.setOnChildClickListener(listener);
+                    }
+                });
+>>>>>>> Stashed changes
             }
         });
 
