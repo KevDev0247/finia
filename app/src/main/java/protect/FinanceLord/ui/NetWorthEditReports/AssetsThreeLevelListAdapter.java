@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.R;
 
 class AssetsThreeLevelListAdapter extends BaseExpandableListAdapter {
@@ -21,7 +22,7 @@ class AssetsThreeLevelListAdapter extends BaseExpandableListAdapter {
     List<String[]> secondLevelItems;
     List<LinkedHashMap<String, List<String>>> assetsList;
 
-        public AssetsThreeLevelListAdapter(Context context, List<String> parents, List<String[]> secondLevelItems, List<LinkedHashMap<String, List<String>>> assetsList){
+    public AssetsThreeLevelListAdapter(Context context, List<String> parents, List<String[]> secondLevelItems, List<LinkedHashMap<String, List<String>>> assetsList){
         this.context = context;
         this.parents = parents;
         this.secondLevelItems = secondLevelItems;
@@ -68,9 +69,8 @@ class AssetsThreeLevelListAdapter extends BaseExpandableListAdapter {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.assets_list_row_first, null);
-        TextView textView = (TextView) convertView.findViewById(R.id.rowParentText);
+        TextView textView = convertView.findViewById(R.id.rowParentText);
         textView.setText(this.parents.get(groupPosition));
-
         return convertView;
     }
 

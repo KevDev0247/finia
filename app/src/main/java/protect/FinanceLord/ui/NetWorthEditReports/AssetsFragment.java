@@ -59,7 +59,6 @@ public class AssetsFragment extends Fragment {
             }
         });
 
-
         String[] array;
 
         List<String> parents = new ArrayList<>();
@@ -124,7 +123,6 @@ public class AssetsFragment extends Fragment {
 
         AssetsThreeLevelListAdapter threeLevelListAdapter = new AssetsThreeLevelListAdapter(getContext(), parents, secondLevelItems, assetsList);
         expandableListView.setAdapter(threeLevelListAdapter);
-
         threeLevelListAdapter.notifyDataSetChanged();
     }
 }
