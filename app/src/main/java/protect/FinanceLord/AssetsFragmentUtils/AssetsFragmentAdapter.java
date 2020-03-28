@@ -56,6 +56,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int i, int i1) {
+
         String assetsTypeName = getAssetsName(i);
         List<AssetsFragmentDataCarrier> carriers = dataProcessor.getSubSet(assetsTypeName, level + 1);
         return carriers.get(i1);
@@ -73,11 +74,12 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     @Override
     public View getGroupView(int position, boolean b, View convertView, ViewGroup viewGroup) {
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (level == 0){
             convertView = inflater.inflate(R.layout.assets_list_row_first, null);
@@ -112,11 +114,11 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         List<AssetsFragmentDataCarrier> children = dataProcessor.getSubSet(sectionData.assetsTypeName, level + 1);
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.assets_list_row_second, null);
-            TextView textView = convertView.findViewById(R.id.rowSecondText);
+            convertView = inflater.inflate(R.layout.assets_list_row_first, null);
+            TextView textView = convertView.findViewById(R.id.rowParentText);
             textView.setText(this.sectionDataSet.get(childPosition).assetsTypeName);
             return convertView;
-        }else{
+        } else{
             final AssetsSecondLevelExpandableListView secondLevelExpandableListView = new AssetsSecondLevelExpandableListView(context);
             AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, dataProcessor, level + 1);
             secondLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor, level + 1, sectionData.assetsTypeName));
@@ -133,6 +135,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                     previousGroup = groupPosition;
                 }
             });
+
             return secondLevelExpandableListView;
         }
     }

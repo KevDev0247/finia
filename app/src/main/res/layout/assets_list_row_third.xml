@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="46dp"
-        android:textSize="25sp"/>
+        android:textSize="18sp"/>
 
     <EditText
         android:id="@+id/assetsValueInput"

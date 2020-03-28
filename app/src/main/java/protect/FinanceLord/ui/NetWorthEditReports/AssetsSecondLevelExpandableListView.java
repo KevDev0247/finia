@@ -3,7 +3,6 @@ package protect.FinanceLord.ui.NetWorthEditReports;
 import android.content.Context;
 import android.widget.ExpandableListView;
 
-import protect.FinanceLord.MainActivity;
 
 public class AssetsSecondLevelExpandableListView extends ExpandableListView {
     public AssetsSecondLevelExpandableListView(Context context){
