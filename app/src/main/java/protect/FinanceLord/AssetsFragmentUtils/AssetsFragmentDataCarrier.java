@@ -1,4 +1,4 @@
-package protect.FinanceLord.utils;
+package protect.FinanceLord.AssetsFragmentUtils;
 
 public class AssetsFragmentDataCarrier {
     String assetsTypeName;

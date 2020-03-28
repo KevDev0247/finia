@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:elevation="0dp"
-        android:background="#56d0e8">
+        android:background="#ffffff">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -29,13 +29,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:background="#56d0e8">
+        android:background="#ffffff">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="450dp"
-            android:src="@drawable/networthdirectpage"/>
+            android:layout_marginBottom="400dp"
+            android:src="@drawable/net_worth_direct_page1"/>
 
     </LinearLayout>
 
@@ -50,8 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginBottom="300dp"
-        android:layout_marginTop="380dp"
+        android:layout_marginBottom="280dp"
+        android:layout_marginTop="400dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
         android:background="@drawable/ic_cards_background">
@@ -61,7 +61,7 @@
             android:layout_height="match_parent"
             android:text="Your current net worth is"
             android:textSize="20sp"
-            android:textColor="#000"
+            android:textColor="#ffffff"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="20dp"/>
 
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Past Reports"
-                    android:textColor="#000"
+                    android:textColor="#ffffff"
                     android:textSize="25sp"
                     android:layout_marginLeft="125dp"
                     android:layout_marginTop="10dp"/>

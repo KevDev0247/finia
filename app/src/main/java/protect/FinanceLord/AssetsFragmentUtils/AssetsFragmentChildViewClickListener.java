@@ -1,9 +1,8 @@
-package protect.FinanceLord.utils;
+package protect.FinanceLord.AssetsFragmentUtils;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 
 import java.util.List;
 

@@ -21,10 +21,9 @@ import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
-import protect.FinanceLord.utils.AssetsFragmentAdapter;
-import protect.FinanceLord.utils.AssetsFragmentChildViewClickListener;
-import protect.FinanceLord.utils.AssetsFragmentDataCarrier;
-import protect.FinanceLord.utils.AssetsFragmentDataProcessor;
+import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentAdapter;
+import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentChildViewClickListener;
+import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentDataProcessor;
 
 public class AssetsFragment extends Fragment {
     String title;
@@ -33,14 +32,6 @@ public class AssetsFragment extends Fragment {
     }
 
     ExpandableListView expandableListView;
-
-    LinkedHashMap<String, List<String>> assetsThirdLevelCategory1 = new LinkedHashMap<>();
-    LinkedHashMap<String, List<String>> assetsThirdLevelCategory2 = new LinkedHashMap<>();
-    LinkedHashMap<String, List<String>> assetsThirdLevelCategory3 = new LinkedHashMap<>();
-
-    List<String[]> secondLevelItems = new ArrayList<>();
-
-    List<LinkedHashMap<String, List<String>>> assetsList = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

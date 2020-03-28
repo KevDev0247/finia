@@ -1,7 +1,6 @@
-package protect.FinanceLord.utils;
+package protect.FinanceLord.AssetsFragmentUtils;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,12 +87,21 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.assets_list_row_second, null);
             TextView textView = convertView.findViewById(R.id.rowSecondText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
-        } else if (level == 2){
+        } else if (level == 2 && sectionDataSet.get(position).assetsId != 29
+                              && sectionDataSet.get(position).assetsId != 30
+                              && sectionDataSet.get(position).assetsId != 31){
+            convertView = inflater.inflate(R.layout.assets_list_row_third, null);
+            TextView textView = convertView.findViewById(R.id.rowThirdText);
+            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+        } else if (level == 2) {
+            convertView = inflater.inflate(R.layout.assets_list_row_second_category, null);
+            TextView textView = convertView.findViewById(R.id.rowSecondCategoryText);
+            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+        } else if (level == 3){
             convertView = inflater.inflate(R.layout.assets_list_row_third, null);
             TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
         }
-
         return convertView;
     }
 
@@ -105,10 +113,10 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.assets_list_row_second, null);
-            TextView textView = (TextView) convertView.findViewById(R.id.rowSecondText);
+            TextView textView = convertView.findViewById(R.id.rowSecondText);
             textView.setText(this.sectionDataSet.get(childPosition).assetsTypeName);
             return convertView;
-        } else {
+        }else{
             final AssetsSecondLevelExpandableListView secondLevelExpandableListView = new AssetsSecondLevelExpandableListView(context);
             AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, dataProcessor, level + 1);
             secondLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor, level + 1, sectionData.assetsTypeName));

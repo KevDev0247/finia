@@ -35,4 +35,6 @@ public interface LiabilitiesTypeDao {
 
     @Query("SELECT * FROM LiabilitiesType")
     List<LiabilitiesType> queryAllLiabilities();
+
+
 }

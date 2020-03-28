@@ -1,10 +1,8 @@
-package protect.FinanceLord.utils;
+package protect.FinanceLord.AssetsFragmentUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import protect.FinanceLord.Database.AssetsType;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 
 public class AssetsFragmentDataProcessor {
