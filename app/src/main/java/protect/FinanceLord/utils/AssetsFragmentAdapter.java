@@ -42,17 +42,23 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
+        Log.d("AssetsFragmentAdapter", "getGroupCount: " + getSectionGroupCount() + ", Level: " + level);
         return getSectionGroupCount();
     }
 
     @Override
     public int getChildrenCount(int i) {
-        return 1;
+        String assetsName = getAssetsName(i);
+        List<AssetsFragmentDataCarrier> childList = dataProcessor.getSubSet(assetsName, level + 1);
+
+        Log.d("AssetsFragmentAdapter", "Child count at " + i + ": " + childList.size() + ", Level: " + level);
+        return childList.size();
     }
 
     @Override
     public Object getGroup(int i) {
-        return sectionDataSet.get(i);
+        return i;
+//        return sectionDataSet.get(i);
     }
 
     @Override
@@ -79,33 +85,50 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int position, boolean b, View convertView, ViewGroup viewGroup) {
+        Log.d("AssetsFragmentAdapter", "get group at : " + position + ", Level: " + level);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (level == 0){
-            convertView = inflater.inflate(R.layout.assets_list_row_first, null);
-            TextView textView = convertView.findViewById(R.id.rowParentText);
-            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
-        } else if (level == 1){
-            convertView = inflater.inflate(R.layout.assets_list_row_second, null);
-            TextView textView = convertView.findViewById(R.id.rowSecondText);
-            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
-        } else if (level == 2){
-            convertView = inflater.inflate(R.layout.assets_list_row_third, null);
-            TextView textView = convertView.findViewById(R.id.rowThirdText);
-            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
-        }
+        int childrenCount = getChildrenCount(position);
+//        if (childrenCount == 0) {
+//            convertView = inflater.inflate(R.layout.assets_list_row_item, null);
+//            TextView textView = convertView.findViewById(R.id.rowItemText);
+//            textView.setText(this.getAssetsName(position));
+//        } else {
+//            if (level == 0){
+                convertView = inflater.inflate(R.layout.assets_list_row_first, null);
+                TextView textView = convertView.findViewById(R.id.rowParentText);
+                textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+//            } else if (level == 1){
+//                convertView = inflater.inflate(R.layout.assets_list_row_second, null);
+//                TextView textView = convertView.findViewById(R.id.rowSecondText);
+//                textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+//            } else if (level == 2){
+//                convertView = inflater.inflate(R.layout.assets_list_row_third, null);
+//                TextView textView = convertView.findViewById(R.id.rowThirdText);
+//                textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+//            } else {
+//                convertView = inflater.inflate(R.layout.assets_list_row_second, null);
+//                TextView textView = convertView.findViewById(R.id.rowSecondText);
+//                textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+//            }
+//        }
 
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-
+        Log.d("AssetsFragmentAdapter", "Get Child at group: " + groupPosition + "child position: " + childPosition + ", Level: " + level);
         final AssetsFragmentDataCarrier sectionData = sectionDataSet.get(groupPosition);
         List<AssetsFragmentDataCarrier> children = dataProcessor.getSubSet(sectionData.assetsTypeName, level + 1);
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.assets_list_row_second, null);
-            TextView textView = (TextView) convertView.findViewById(R.id.rowSecondText);
+//            convertView = inflater.inflate(R.layout.assets_list_row_second, null);
+//            TextView textView = (TextView) convertView.findViewById(R.id.rowSecondText);
+//            textView.setText(this.sectionDataSet.get(childPosition).assetsTypeName);
+//            return convertView;
+
+            convertView = inflater.inflate(R.layout.assets_list_row_third, null);
+            TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(childPosition).assetsTypeName);
             return convertView;
         } else {
@@ -114,17 +137,17 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             secondLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor, level + 1, sectionData.assetsTypeName));
             secondLevelExpandableListView.setOnChildClickListener(listener);
             secondLevelExpandableListView.setGroupIndicator(null);
-            secondLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-                int previousGroup = -1;
-                @Override
-                public void onGroupExpand(int groupPosition) {
-
-                    if (groupPosition != previousGroup){
-                        secondLevelExpandableListView.collapseGroup(previousGroup);
-                    }
-                    previousGroup = groupPosition;
-                }
-            });
+//            secondLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+//                int previousGroup = -1;
+//                @Override
+//                public void onGroupExpand(int groupPosition) {
+//
+//                    if (groupPosition != previousGroup){
+//                        secondLevelExpandableListView.collapseGroup(previousGroup);
+//                    }
+//                    previousGroup = groupPosition;
+//                }
+//            });
             return secondLevelExpandableListView;
         }
     }
