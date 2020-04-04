@@ -17,6 +17,9 @@ public interface AssetsValueDao {
     @Update
     void updateAssetValue(AssetsValue ... assetsValue);
 
+    @Query("SELECT * FROM AssetsValue WHERE assetsId LIKE :assetId")
+    List<AssetsValue> queryAssetsById  (int assetId);
+
     @Query("SELECT * FROM ASSETSVALUE WHERE date >= :date")
     List<AssetsValue> queryAssetsSinceDate(Long date);
 

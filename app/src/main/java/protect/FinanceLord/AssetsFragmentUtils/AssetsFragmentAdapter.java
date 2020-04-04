@@ -1,15 +1,23 @@
 package protect.FinanceLord.AssetsFragmentUtils;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
 
+import protect.FinanceLord.Database.AssetsValue;
+import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
 import protect.FinanceLord.ui.NetWorthEditReports.AssetsSecondLevelExpandableListView;
 
@@ -17,12 +25,14 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     private AssetsFragmentDataProcessor dataProcessor;
     private List<AssetsFragmentDataCarrier> sectionDataSet;
+    private List<AssetsValue> assetsValues;
     private int level;
     private Context context;
 
-    public AssetsFragmentAdapter(Context context, AssetsFragmentDataProcessor dataProcessor, int level, String parentSection) {
+    public AssetsFragmentAdapter(Context context, AssetsFragmentDataProcessor dataProcessor, List<AssetsValue> assetsValues, int level, String parentSection) {
         this.context = context;
         this.dataProcessor = dataProcessor;
+        this.assetsValues = assetsValues;
         this.level = level;
         this.sectionDataSet = dataProcessor.getSubSet(parentSection, level);
     }
@@ -39,13 +49,22 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         return this.sectionDataSet.get(position).assetsId;
     }
 
+    public CharSequence getAssetsValue(int assetsId){
+        for (AssetsValue assetsValue: this.assetsValues){
+            if (assetsValue.getAssetsId() == assetsId){
+                return String.valueOf(assetsValue.getAssetsValue()) ;
+            }
+        }
+        return null;
+    }
+
     @Override
     public int getGroupCount() {
         return getSectionGroupCount();
     }
 
     @Override
-    public int getChildrenCount(int i) {
+    public int getChildrenCount(int position) {
         return 1;
     }
 
@@ -103,6 +122,39 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.assets_list_row_third, null);
             TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+
+            final AssetsFragmentDataCarrier dataCarrier = this.sectionDataSet.get(position);
+            EditText editText = convertView.findViewById(R.id.assetsValueInput);
+            editText.setText(getAssetsValue(dataCarrier.assetsId));
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    final float assetValue = Float.valueOf(charSequence.toString());
+                    Executors.newSingleThreadExecutor().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+                            AssetsValueDao assetsValueDao = database.assetsValueDao();
+                            AssetsValue assetsValue = new AssetsValue();
+                            if (getAssetsValue(dataCarrier.assetsId) == null){
+                                assetsValue.setAssetsId(dataCarrier.assetsId);
+                                assetsValue.setAssetsValue(assetValue);
+                                assetsValue.setDate(new Date().getTime());
+                                assetsValueDao.insertAssetValue(assetsValue);
+                            } else {
+                                assetsValue.setAssetsValue(assetValue);
+                                assetsValueDao.updateAssetValue(assetsValue);
+                            }
+                        }
+                    });
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) { }
+            });
         }
         return convertView;
     }
@@ -121,7 +173,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         } else{
             final AssetsSecondLevelExpandableListView secondLevelExpandableListView = new AssetsSecondLevelExpandableListView(context);
             AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, dataProcessor, level + 1);
-            secondLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor, level + 1, sectionData.assetsTypeName));
+            secondLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor, this.assetsValues,level + 1, sectionData.assetsTypeName));
             secondLevelExpandableListView.setOnChildClickListener(listener);
             secondLevelExpandableListView.setGroupIndicator(null);
             secondLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
