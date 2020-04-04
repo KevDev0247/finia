@@ -131,6 +131,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             AssetsFragmentDataCarrier dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
+
             AssetsValue assetsValue = dataProcessor.findAssetsValue(dataCarrier.assetsId);
             if (assetsValue != null) {
                 editText.setText(String.valueOf(assetsValue.getAssetsValue()));
