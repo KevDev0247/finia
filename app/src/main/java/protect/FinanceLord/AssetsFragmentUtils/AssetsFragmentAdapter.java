@@ -1,28 +1,42 @@
 package protect.FinanceLord.AssetsFragmentUtils;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
 
+import protect.FinanceLord.Database.AssetsTypeDao;
+import protect.FinanceLord.Database.AssetsTypeQuery;
+import protect.FinanceLord.Database.AssetsValue;
+import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
+import protect.FinanceLord.ui.NetWorthEditReports.AssetsFragment;
 import protect.FinanceLord.ui.NetWorthEditReports.AssetsSecondLevelExpandableListView;
 
 public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     private AssetsFragmentDataProcessor dataProcessor;
     private List<AssetsFragmentDataCarrier> sectionDataSet;
+    private List<AssetsValue> assetsValues;
+
     private int level;
     private Context context;
 
-    public AssetsFragmentAdapter(Context context, AssetsFragmentDataProcessor dataProcessor, int level, String parentSection) {
+    public AssetsFragmentAdapter(Context context, AssetsFragmentDataProcessor dataProcessor, List<AssetsValue> assetsValues, int level, String parentSection) {
         this.context = context;
         this.dataProcessor = dataProcessor;
+        this.assetsValues = assetsValues;
         this.level = level;
         this.sectionDataSet = dataProcessor.getSubSet(parentSection, level);
     }
@@ -100,11 +114,52 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.rowSecondCategoryText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
         } else if (level == 3){
+            final AssetsFragmentDataCarrier dataCarrier = this.sectionDataSet.get(position);
             convertView = inflater.inflate(R.layout.assets_list_row_third, null);
             TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+            EditText editText = convertView.findViewById(R.id.assetsValueInput);
+            editText.setText(this.getAssetsId(dataCarrier.assetsId));
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    final float assetsValue = Float.valueOf(s.toString());
+                    Executors.newSingleThreadExecutor().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragmentAdapter.this.context);
+                            AssetsValueDao assetsValueDao = database.assetsValueDao();
+                            AssetsValue value = new AssetsValue();
+                            value.setAssetsId(dataCarrier.assetsId);
+                            value.setAssetsValue(assetsValue);
+                            value.setDate(new Date().getTime());
+                            assetsValueDao.insertAssetValue(value);
+                        }
+                    });
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
         }
         return convertView;
+    }
+
+    float getAssetsValue(int assetsId) {
+        for (AssetsValue assetsValue: this.assetsValues) {
+            if (assetsValue.getAssetsId() == assetsId) {
+                return assetsValue.getAssetsValue();
+            }
+        }
+        return 0;
     }
 
     @Override
@@ -121,7 +176,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         } else{
             final AssetsSecondLevelExpandableListView secondLevelExpandableListView = new AssetsSecondLevelExpandableListView(context);
             AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, dataProcessor, level + 1);
-            secondLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor, level + 1, sectionData.assetsTypeName));
+            secondLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor, this.assetsValues, level + 1, sectionData.assetsTypeName));
             secondLevelExpandableListView.setOnChildClickListener(listener);
             secondLevelExpandableListView.setGroupIndicator(null);
             secondLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {

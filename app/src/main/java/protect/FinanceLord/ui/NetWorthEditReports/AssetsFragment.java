@@ -13,12 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
+import protect.FinanceLord.Database.AssetsValue;
+import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
 import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentAdapter;
@@ -49,11 +52,17 @@ public class AssetsFragment extends Fragment {
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragment.this.getContext());
                 AssetsTypeDao dao = database.assetsTypeDao();
+                AssetsValueDao assetsValueDao = database.assetsValueDao();
                 List<AssetsTypeQuery> assetsTypeQueries = dao.queryGroupedAssetsType();
+
+                Date starOfMonth = DateUtils.firstDayOfThisMonth();
+                Long milliseconds = starOfMonth.getTime();
+                List<AssetsValue> assetsValues = assetsValueDao.queryAssetsSinceDate(milliseconds);
                 Log.d("AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
+                Log.d("AssetsFragment", "Query assets Values: " + assetsValues.toString());
 
                 AssetsFragmentDataProcessor dataProcessor = new AssetsFragmentDataProcessor(assetsTypeQueries);
-                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(AssetsFragment.this.getContext(), dataProcessor, 0,null);
+                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(AssetsFragment.this.getContext(), dataProcessor, assetsValues, 1,"Total Assets");
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
                 AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
