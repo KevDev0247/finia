@@ -132,9 +132,12 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
                 @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if (TextUtils.isEmpty(charSequence)){
-                        final float assetValue = Float.valueOf(charSequence.toString());
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if (!TextUtils.isEmpty(editable)){
+                        final float assetValue = Float.valueOf(editable.toString());
 
                         Executors.newSingleThreadExecutor().execute(new Runnable() {
                             @Override
@@ -155,9 +158,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                         });
                     }
                 }
-
-                @Override
-                public void afterTextChanged(Editable editable) { }
             });
         }
         return convertView;
