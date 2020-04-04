@@ -107,22 +107,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             final AssetsFragmentDataCarrier dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
             editText.setText(this.getAssetsId(dataCarrier.assetsId));
-            editText.addTextChangedListener(new AssetsTextChangeListener() {
-                AssetsValue assetsValue = new AssetsValue();
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
-                    AssetsValueDao assetsValueDao = database.assetsValueDao();
-                    assetsValue.setAssetsValue(Float.valueOf(charSequence.toString()));
-                    assetsValueDao.insertAssetValue(assetsValue);
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) { }
-            });
+            
         } else if (level == 2) {
             convertView = inflater.inflate(R.layout.assets_list_row_second_category, null);
             TextView textView = convertView.findViewById(R.id.rowSecondCategoryText);
