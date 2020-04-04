@@ -13,6 +13,7 @@ import java.util.List;
 
 import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentChildViewClickListener;
 import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentDataCarrier;
+import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentDataProcessor;
 import protect.FinanceLord.R;
 import protect.FinanceLord.ui.NetWorthEditReports.AssetsSecondLevelExpandableListView;
 
