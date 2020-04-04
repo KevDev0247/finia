@@ -53,7 +53,7 @@ public class AssetsFragment extends Fragment {
                 Log.d("AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
 
                 AssetsFragmentDataProcessor dataProcessor = new AssetsFragmentDataProcessor(assetsTypeQueries);
-                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(AssetsFragment.this.getContext(), dataProcessor, 0,null);
+                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
                 AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override

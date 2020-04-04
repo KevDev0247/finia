@@ -9,6 +9,7 @@ public class AssetsTypeQuery {
     public String assetsThirdLevelName;
     public int assetsFourthLevelId;
     public String assetsFourthLevelName;
+    //public float assetValue;
 
     public String toString() {
         return  "FirstLevelId:" + assetsFirstLevelId + "\n" + "assetsFirstLevelName: " + assetsFirstLevelName + "\n"
@@ -16,4 +17,5 @@ public class AssetsTypeQuery {
                 + "assetsThirdLevelId:" + assetsThirdLevelId + "\n"  + "assetsThirdLevelType: " + assetsThirdLevelName + "\n"
                 + "assetsFourthLevelId:" + assetsFourthLevelId + "\n" + "assetsFourthLevelName: " + assetsFourthLevelName;
     }
+
 }

@@ -1,15 +1,22 @@
 package protect.FinanceLord.AssetsFragmentUtils;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.util.List;
 
+import protect.FinanceLord.AssetsTextChangeListener;
+import protect.FinanceLord.Database.AssetsValue;
+import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
 import protect.FinanceLord.ui.NetWorthEditReports.AssetsSecondLevelExpandableListView;
 
@@ -21,6 +28,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     private Context context;
 
     public AssetsFragmentAdapter(Context context, AssetsFragmentDataProcessor dataProcessor, int level, String parentSection) {
+
         this.context = context;
         this.dataProcessor = dataProcessor;
         this.level = level;
@@ -45,7 +53,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public int getChildrenCount(int i) {
+    public int getChildrenCount(int position) {
         return 1;
     }
 
@@ -95,6 +103,26 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.assets_list_row_third, null);
             TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+
+            final AssetsFragmentDataCarrier dataCarrier = this.sectionDataSet.get(position);
+            EditText editText = convertView.findViewById(R.id.assetsValueInput);
+            editText.setText(this.getAssetsId(dataCarrier.assetsId));
+            editText.addTextChangedListener(new AssetsTextChangeListener() {
+                AssetsValue assetsValue = new AssetsValue();
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+                    AssetsValueDao assetsValueDao = database.assetsValueDao();
+                    assetsValue.setAssetsValue(Float.valueOf(charSequence.toString()));
+                    assetsValueDao.insertAssetValue(assetsValue);
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) { }
+            });
         } else if (level == 2) {
             convertView = inflater.inflate(R.layout.assets_list_row_second_category, null);
             TextView textView = convertView.findViewById(R.id.rowSecondCategoryText);
@@ -103,6 +131,9 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.assets_list_row_third, null);
             TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+
+            EditText editText = convertView.findViewById(R.id.assetsValueInput);
+
         }
         return convertView;
     }
