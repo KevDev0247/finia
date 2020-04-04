@@ -2,6 +2,7 @@ package protect.FinanceLord.AssetsFragmentUtils;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -132,7 +133,9 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    final float assetValue = Float.valueOf(charSequence.toString());
+                    if (TextUtils.isEmpty(charSequence)){
+                        final float assetValue = Float.valueOf(charSequence.toString());
+                    }
                     Executors.newSingleThreadExecutor().execute(new Runnable() {
                         @Override
                         public void run() {
