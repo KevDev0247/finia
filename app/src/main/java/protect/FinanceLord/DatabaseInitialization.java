@@ -285,13 +285,13 @@ public class DatabaseInitialization{
         type_12.setLiabilitiesName("Current liabilities");
         type_13.setLiabilitiesName("Long term liabilities");
 
-        type_12.setLiabilitiesParentType("LiabilitiesType");
-        type_13.setLiabilitiesParentType("LiabilitiesType");
+        type_12.setLiabilitiesParentType("Total liabilities");
+        type_13.setLiabilitiesParentType("Total liabilities");
 
         //Level 0 objects
         LiabilitiesType type_14 = new LiabilitiesType();
 
-        type_14.setLiabilitiesName("LiabilitiesType");
+        type_14.setLiabilitiesName("Total liabilities");
 
         liabilities.add(type_1);
         liabilities.add(type_2);

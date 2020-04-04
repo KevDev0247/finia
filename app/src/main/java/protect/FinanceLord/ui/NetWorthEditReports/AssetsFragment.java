@@ -10,20 +10,30 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
+import protect.FinanceLord.Database.AssetsValue;
+import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
+import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentAdapter;
+import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentChildViewClickListener;
+import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentDataProcessor;
 
 public class AssetsFragment extends Fragment {
     String title;
+    private Button btnCommit;
+    private AssetsFragmentDataProcessor dataProcessor;
+
     public AssetsFragment(String title) {
         this.title = title;
     }
@@ -34,27 +44,61 @@ public class AssetsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View assetsView = inflater.inflate(R.layout.fragment_assets, null);
         expandableListView = assetsView.findViewById(R.id.assets_list_view);
+        this.btnCommit = assetsView.findViewById(R.id.btnCommit);
+        this.btnCommit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Executors.newSingleThreadExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragment.this.getContext());
+                        AssetsValueDao dao = database.assetsValueDao();
+                        for(AssetsValue assetsValue: AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
+                            List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsId(), assetsValue.getDate());
+                            if(assetsValues.isEmpty()) {
+                                dao.insertAssetValue(assetsValue);
+
+                                // 注意，这里有点小细节，我们在插入新数据的时候，数据库会给我们生成一个id （primarykey),这个是在插入数据后才会生成的，所以我们这时候缓存里
+                                // 是不知道这个id的，这样有可能我们下次再次点击提交按钮的时候，由于没有primary key，所以更新会失败，变成插入新数据了，这里我们需要重新query
+                                // 一下，刷新缓存，其实我们应该也可以用liveData，不过我没用过，你如果有兴趣可以试试看
+                                Date startDate = DateUtils.firstDayOfThisMonth();
+                                AssetsFragment.this.dataProcessor.setAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
+                            } else {
+                                dao.updateAssetValue(assetsValue);
+                            }
+                        }
+                        Log.d("AssetsFragment", "Assets committed!");
+                    }
+                });
+            }
+        });
 
         initAssetCategory();
 
         return assetsView;
     }
 
+    private void updateOrInsertAssetsValues(List<AssetsValue> assetsValues) {
+
+    }
     private void initAssetCategory() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragment.this.getContext());
                 AssetsTypeDao dao = database.assetsTypeDao();
+                AssetsValueDao assetsValueDao = database.assetsValueDao();
                 List<AssetsTypeQuery> assetsTypeQueries = dao.queryGroupedAssetsType();
+
+                Date starOfMonth = DateUtils.firstDayOfThisMonth();
+                Long milliseconds = starOfMonth.getTime();
+                List<AssetsValue> assetsValues = assetsValueDao.queryAssetsSinceDate(milliseconds);
                 Log.d("AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
-<<<<<<< Updated upstream
-=======
+                Log.d("AssetsFragment", "Query assets Values: " + assetsValues.toString());
 
-                AssetsFragmentDataProcessor dataProcessor = new AssetsFragmentDataProcessor(assetsTypeQueries);
-                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(AssetsFragment.this.getContext(), dataProcessor, 0,null);
+                AssetsFragment.this.dataProcessor = new AssetsFragmentDataProcessor(assetsTypeQueries, assetsValues);
+                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
-
                 AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -62,74 +106,7 @@ public class AssetsFragment extends Fragment {
                         expandableListView.setOnChildClickListener(listener);
                     }
                 });
->>>>>>> Stashed changes
             }
         });
-
-        String[] array;
-
-        List<String> parents = new ArrayList<>();
-        array = getResources().getStringArray(R.array.parents);
-        for (String item: array){
-            parents.add(item);
-        }
-
-        List<String> liquidAssetsList = new ArrayList<>();
-        array = getResources().getStringArray(R.array.liquid_assets);
-        for (String item: array){
-            liquidAssetsList.add(item);
-        }
-
-        List<String> taxableAccountsList = new ArrayList<>();
-        array = getResources().getStringArray(R.array.taxable_accounts);
-        for (String item: array){
-            taxableAccountsList.add(item);
-        }
-
-        List<String> retirementAccountsList = new ArrayList<>();
-        array = getResources().getStringArray(R.array.retirement_accounts);
-        for (String item: array){
-            retirementAccountsList.add(item);
-        }
-
-        List<String> ownershipInterestsList = new ArrayList<>();
-        array = getResources().getStringArray(R.array.ownership_interests);
-        for (String item: array){
-            ownershipInterestsList.add(item);
-        }
-
-        List<String> personalAssetsList = new ArrayList<>();
-        array = getResources().getStringArray(R.array.personal_assets);
-        for (String item: array){
-            personalAssetsList.add(item);
-        }
-
-
-        String[] investedAssetsList = new String[3];
-        array = getResources().getStringArray(R.array.invested_assets);
-        for (int i = 0; i < array.length; i++){
-            investedAssetsList[i] = array[i];
-        }
-
-        String[] liquidAssets = new String[]{"All Assets"};
-        String[] personalAssets = new String[]{"All Assets"};
-
-        secondLevelItems.add(liquidAssets);
-        secondLevelItems.add(investedAssetsList);
-        secondLevelItems.add(personalAssets);
-
-        assetsThirdLevelCategory1.put(getString(R.string.liquid_assets), liquidAssetsList);
-        assetsThirdLevelCategory2.put(investedAssetsList[0], taxableAccountsList);
-        assetsThirdLevelCategory2.put(investedAssetsList[1], retirementAccountsList);
-        assetsThirdLevelCategory2.put(investedAssetsList[2], ownershipInterestsList);
-        assetsThirdLevelCategory3.put(getString(R.string.personal_assets), personalAssetsList);
-
-        assetsList.add(assetsThirdLevelCategory1);
-        assetsList.add(assetsThirdLevelCategory2);
-        assetsList.add(assetsThirdLevelCategory3);
-
-        AssetsThreeLevelListAdapter threeLevelListAdapter = new AssetsThreeLevelListAdapter(getContext(), parents, secondLevelItems, assetsList);
-        expandableListView.setAdapter(threeLevelListAdapter);
-        threeLevelListAdapter.notifyDataSetChanged();
     }
 }

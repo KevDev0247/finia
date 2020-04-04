@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:elevation="0dp"
-        android:background="#56d0e8">
+        android:background="#ffffff">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -29,13 +29,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:background="#56d0e8">
+        android:background="#ffffff">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="450dp"
-            android:src="@drawable/networthdirectpage"/>
+            android:layout_marginBottom="400dp"
+            android:src="@drawable/net_worth_direct_page1"/>
 
     </LinearLayout>
 
@@ -43,28 +43,46 @@
         android:id="@+id/CompleteReport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="560dp"
+        android:layout_marginTop="600dp"
         android:layout_marginLeft="160dp"/>
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/netWorthSwipeViewPager"
+        android:layout_centerInParent="true"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:foregroundGravity="center">
+
+    </androidx.viewpager.widget.ViewPager>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginBottom="300dp"
-        android:layout_marginTop="380dp"
+        android:layout_marginBottom="200dp"
+        android:layout_marginTop="400dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
         android:background="@drawable/ic_cards_background">
 
-        <TextView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Your current net worth is"
-            android:textSize="20sp"
-            android:textColor="#000"
-            android:layout_marginLeft="35dp"
+            android:src="@drawable/display_card_vector1"
+            android:layout_marginBottom="110dp"
             android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="-90dp"
+            android:layout_marginBottom="70dp"
+            android:text="Your current net worth is"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -94,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Past Reports"
-                    android:textColor="#000"
+                    android:textColor="#ffffff"
                     android:textSize="25sp"
                     android:layout_marginLeft="125dp"
                     android:layout_marginTop="10dp"/>

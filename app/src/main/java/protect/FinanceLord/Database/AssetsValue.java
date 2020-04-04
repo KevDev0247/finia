@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "AssetsValue")
 public class AssetsValue {
     @PrimaryKey(autoGenerate = true)
+    private int assetsPrimaryId;
+
     @ColumnInfo(name = "assetsId")
     private int assetsId;
 
@@ -22,16 +24,19 @@ public class AssetsValue {
 
     }
 
-    public AssetsValue(int assetsId, float assetsValue, Long date){
+    public AssetsValue(int assetsPrimaryId, int assetsId, float assetsValue, Long date){
+        this.assetsPrimaryId = assetsPrimaryId;
         this.assetsId = assetsId;
         this.assetsValue = assetsValue;
         this.date = date;
     }
 
+    public int getAssetsPrimaryId()       {return this.assetsPrimaryId;}
     public int getAssetsId()        {return this.assetsId;}
     public float getAssetsValue()       {return  this.assetsValue;}
     public Long getDate()       {return date;}
 
+    public void setAssetsPrimaryId (int assetsPrimaryId)       {this.assetsPrimaryId = assetsPrimaryId;}
     public void setAssetsId (int assetsId)      {this.assetsId = assetsId;}
     public void setAssetsValue (float assetsValue)      {this.assetsValue = assetsValue;}
     public void setDate (Long date)     {this.date = date;}
