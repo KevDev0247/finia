@@ -135,24 +135,25 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     if (TextUtils.isEmpty(charSequence)){
                         final float assetValue = Float.valueOf(charSequence.toString());
-                    }
-                    Executors.newSingleThreadExecutor().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
-                            AssetsValueDao assetsValueDao = database.assetsValueDao();
-                            AssetsValue assetsValue = new AssetsValue();
-                            if (getAssetsValue(dataCarrier.assetsId) == null){
-                                assetsValue.setAssetsId(dataCarrier.assetsId);
-                                assetsValue.setAssetsValue(assetValue);
-                                assetsValue.setDate(new Date().getTime());
-                                assetsValueDao.insertAssetValue(assetsValue);
-                            } else {
-                                assetsValue.setAssetsValue(assetValue);
-                                assetsValueDao.updateAssetValue(assetsValue);
+
+                        Executors.newSingleThreadExecutor().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+                                AssetsValueDao assetsValueDao = database.assetsValueDao();
+                                AssetsValue assetsValue = new AssetsValue();
+                                if (getAssetsValue(dataCarrier.assetsId) == null){
+                                    assetsValue.setAssetsId(dataCarrier.assetsId);
+                                    assetsValue.setAssetsValue(assetValue);
+                                    assetsValue.setDate(new Date().getTime());
+                                    assetsValueDao.insertAssetValue(assetsValue);
+                                } else {
+                                    assetsValue.setAssetsValue(assetValue);
+                                    assetsValueDao.updateAssetValue(assetsValue);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
 
                 @Override
