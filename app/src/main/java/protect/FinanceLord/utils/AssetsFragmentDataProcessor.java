@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentDataCarrier;
 import protect.FinanceLord.Database.AssetsType;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 

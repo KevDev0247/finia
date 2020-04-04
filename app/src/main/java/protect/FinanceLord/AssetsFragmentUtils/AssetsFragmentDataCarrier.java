@@ -1,12 +1,12 @@
 package protect.FinanceLord.AssetsFragmentUtils;
 
 public class AssetsFragmentDataCarrier {
-    String assetsTypeName;
+    public String assetsTypeName;
     //float assetsValue;
-    int assetsId;
-    int level;
+    public int assetsId;
+    public int level;
 
-    AssetsFragmentDataCarrier(String assetsTypeName, int assetsId, int level) {
+    public AssetsFragmentDataCarrier(String assetsTypeName, int assetsId, int level) {
         this.assetsTypeName = assetsTypeName;
         //this.assetsValue = assetsValue;
         this.assetsId = assetsId;

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentChildViewClickListener;
+import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentDataCarrier;
 import protect.FinanceLord.R;
 import protect.FinanceLord.ui.NetWorthEditReports.AssetsSecondLevelExpandableListView;
 
