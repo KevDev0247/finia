@@ -137,6 +137,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                 @Override
                 public void afterTextChanged(Editable editable) {
                     if (!TextUtils.isEmpty(editable)){
+
                         final float assetValue = Float.valueOf(editable.toString());
 
                         Executors.newSingleThreadExecutor().execute(new Runnable() {
@@ -151,6 +152,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                                     assetsValue.setDate(new Date().getTime());
                                     assetsValueDao.insertAssetValue(assetsValue);
                                 } else {
+                                    assetsValues.get(dataCarrier.assetsId).setAssetsValue(assetValue);
                                     assetsValue.setAssetsValue(assetValue);
                                     assetsValueDao.updateAssetValue(assetsValue);
                                 }

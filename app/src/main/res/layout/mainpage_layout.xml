@@ -30,7 +30,7 @@
                 android:contentDescription="@string/image_of_assets"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/startpage"
+                android:src="@drawable/start_page"
                 app:layout_collapseMode="parallax"/>
 
             <androidx.appcompat.widget.Toolbar
