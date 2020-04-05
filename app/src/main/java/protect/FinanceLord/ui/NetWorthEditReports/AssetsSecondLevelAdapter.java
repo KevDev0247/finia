@@ -1,10 +1,12 @@
 package protect.FinanceLord.ui.NetWorthEditReports;
 
 import android.content.Context;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
@@ -12,8 +14,8 @@ import java.util.List;
 import protect.FinanceLord.R;
 
 class AssetsSecondLevelAdapter extends BaseExpandableListAdapter {
-    private Context context;
 
+    private Context context;
     List<List<String>> AssetsList;
     String[] headers;
 
@@ -68,14 +70,21 @@ class AssetsSecondLevelAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.assets_list_row_third, null);
         TextView textView = convertView.findViewById(R.id.rowThirdText);
+        final EditText editText = convertView.findViewById(R.id.assetsValueInput);
         String[] childArray = AssetsList.get(groupPosition).toArray(new String[0]);
         String text = childArray[childPosition];
         textView.setText(text);
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         return convertView;
     }
 
