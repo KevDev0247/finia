@@ -55,7 +55,7 @@ public class AssetsFragment extends Fragment {
                             List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsId(), assetsValue.getDate());
                             Log.d("Assets Value Check", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
                             if(assetsValues.isEmpty()) {
-                                dao.updateAssetValue(assetsValue);
+                                dao.insertAssetValue(assetsValue);
                                 Date startDate = DateUtils.firstDayOfThisMonth();
                                 AssetsFragment.this.dataProcessor.setAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
                             } else {
