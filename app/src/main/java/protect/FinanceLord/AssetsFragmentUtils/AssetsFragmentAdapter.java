@@ -143,7 +143,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             @Override
             public void afterTextChanged(Editable editable) {
                 String text = editable.toString();
-                if(TextUtils.isEmpty(text)){
+                if(!TextUtils.isEmpty(text)){
                     final float assetValue = Float.valueOf(text);
                     dataProcessor.setAssetValue(dataCarrier.assetsId, assetValue);
                     Log.d("AssetsFragmentAdapter", "Value changed: " + text);
