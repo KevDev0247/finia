@@ -57,10 +57,6 @@ public class AssetsFragment extends Fragment {
                             List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsId(), assetsValue.getDate());
                             if(assetsValues.isEmpty()) {
                                 dao.insertAssetValue(assetsValue);
-
-                                // 注意，这里有点小细节，我们在插入新数据的时候，数据库会给我们生成一个id （primarykey),这个是在插入数据后才会生成的，所以我们这时候缓存里
-                                // 是不知道这个id的，这样有可能我们下次再次点击提交按钮的时候，由于没有primary key，所以更新会失败，变成插入新数据了，这里我们需要重新query
-                                // 一下，刷新缓存，其实我们应该也可以用liveData，不过我没用过，你如果有兴趣可以试试看
                                 Date startDate = DateUtils.firstDayOfThisMonth();
                                 AssetsFragment.this.dataProcessor.setAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
                             } else {
