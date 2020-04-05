@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -55,9 +53,9 @@ public class AssetsFragment extends Fragment {
                         AssetsValueDao dao = database.assetsValueDao();
                         for(AssetsValue assetsValue: AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
                             List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsId(), assetsValue.getDate());
-                            Log.d("AssetsValues", "print assetsValues status " + assetsValues.isEmpty() + " " + assetsValue.getAssetsValue());
-                            if(!assetsValues.isEmpty()) {
-                                dao.insertAssetValue(assetsValue);
+                            Log.d("Assets Value Check", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
+                            if(assetsValues.isEmpty()) {
+                                dao.updateAssetValue(assetsValue);
                                 Date startDate = DateUtils.firstDayOfThisMonth();
                                 AssetsFragment.this.dataProcessor.setAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
                             } else {
