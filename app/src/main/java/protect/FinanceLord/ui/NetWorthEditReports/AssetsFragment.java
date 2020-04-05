@@ -52,16 +52,20 @@ public class AssetsFragment extends Fragment {
                         FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragment.this.getContext());
                         AssetsValueDao dao = database.assetsValueDao();
                         for(AssetsValue assetsValue: AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
-                            List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsId(), assetsValue.getDate());
-                            Log.d("Assets Value Check", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
-                            if(assetsValues.isEmpty()) {
-                                dao.updateAssetValue(assetsValue);
-                                Date startDate = DateUtils.firstDayOfThisMonth();
-                                AssetsFragment.this.dataProcessor.setAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
+                            if(assetsValue.getAssetsPrimaryId() != 0) {
+                                List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsPrimaryId());
+                                Log.d("Assets Value Check", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
+                                if(!assetsValues.isEmpty()) {
+                                    dao.updateAssetValue(assetsValue);
+                                } else {
+                                    Log.w("AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
+                                }
                             } else {
-                                dao.updateAssetValue(assetsValue);
+                                dao.insertAssetValue(assetsValue);
                             }
                         }
+                        Date startDate = DateUtils.firstDayOfThisMonth();
+                        AssetsFragment.this.dataProcessor.setAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
                         Log.d("AssetsFragment", "Assets committed!");
                     }
                 });
