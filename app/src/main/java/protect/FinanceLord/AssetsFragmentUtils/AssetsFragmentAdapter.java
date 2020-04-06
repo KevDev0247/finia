@@ -94,11 +94,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int position, boolean b, View convertView, ViewGroup viewGroup) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (level == 0){
-            convertView = inflater.inflate(R.layout.assets_list_row_first, null);
-            TextView textView = convertView.findViewById(R.id.rowParentText);
-            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
-        } else if (level == 1){
+        if (level == 1){
             convertView = inflater.inflate(R.layout.assets_list_row_second, null);
             TextView textView = convertView.findViewById(R.id.rowSecondText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);

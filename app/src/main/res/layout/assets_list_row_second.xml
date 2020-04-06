@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="45dp"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@drawable/ic_report_filling_sheet">
 
     <TextView
         android:id="@+id/rowSecondText"
@@ -11,7 +12,7 @@
         android:layout_marginLeft="28dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textColor="@android:color/black"
+        android:textColor="#ffffff"
         android:text="Second Level"
         android:textSize="20sp"/>
 
