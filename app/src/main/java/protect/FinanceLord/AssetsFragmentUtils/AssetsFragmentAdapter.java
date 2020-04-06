@@ -52,8 +52,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         return this.sectionDataSet.get(position).assetsId;
     }
 
-
-
     @Override
     public int getGroupCount() {
         return getSectionGroupCount();
