@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="45dp"
     android:padding="10dp"
-    android:background="@drawable/ic_report_filling_sheet">
+    android:background="@drawable/ic_report_sheet_header"
+    android:alpha="0.7">
 
     <TextView
         android:id="@+id/rowSecondText"
@@ -12,7 +13,7 @@
         android:layout_marginLeft="28dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:text="Second Level"
         android:textSize="20sp"/>
 

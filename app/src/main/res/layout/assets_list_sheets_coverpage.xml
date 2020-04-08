@@ -7,20 +7,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="400dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
-            android:background="@drawable/ic_report_filling_sheet">
+            android:background="@drawable/ic_report_sheet_header">
 
         </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/net_worth_briefcase"/>
+            android:layout_height="275dp"
+            android:src="@drawable/net_worth_briefcase" />
 
     </LinearLayout>
 

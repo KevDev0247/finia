@@ -3,7 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="45dp"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@drawable/ic_report_sheet_items"
+    android:alpha="0.4">
 
     <TextView
         android:id="@+id/rowSecondCategoryText"

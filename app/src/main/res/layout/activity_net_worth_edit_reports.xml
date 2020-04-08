@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="#00004d"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
         </androidx.appcompat.widget.Toolbar>
@@ -33,10 +33,10 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="#00004d"
             app:tabSelectedTextColor="#ffffff"
             app:tabTextColor="#ff0000"
-            app:tabIndicatorColor="#00ff00">
+            app:tabIndicatorColor="#ffffff">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"

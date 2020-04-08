@@ -23,59 +23,5 @@
     <string name="retirement_accounts">Retirement Accounts</string>
     <string name="ownership_interest">Ownership Interest</string>
 
-    <string-array name="parents">
-        <item>Liquid Assets</item>
-        <item>Invested Assets</item>
-        <item>Personal Assets</item>
-    </string-array>
 
-    <string-array name="liquid_assets">
-        <item>Checking Accounts</item>
-        <item>Savings Accounts</item>
-        <item>Money Market Accounts</item>
-        <item>Savings Bonds</item>
-        <item>CD</item>
-        <item>Cash Value of Life Insurance</item>
-    </string-array>
-
-    <string-array name="invested_assets">
-        <item>Taxable Accounts</item>
-        <item>Retirement Accounts</item>
-        <item>Ownership Interest</item>
-    </string-array>
-
-    <string-array name="taxable_accounts">
-        <item>Brokerage</item>
-        <item>Other</item>
-    </string-array>
-
-    <string-array name="retirement_accounts">
-        <item>IRA</item>
-        <item>Roth IRA</item>
-        <item>401k</item>
-        <item>SEP_IRA</item>
-        <item>Pension</item>
-        <item>Annuity</item>
-        <item>Keogh or Other Plan</item>
-    </string-array>
-
-    <string-array name="ownership_interests">
-        <item>Real Estate</item>
-        <item>Sole Proprietorship</item>
-        <item>Partnership</item>
-        <item>C Corporation</item>
-        <item>S Corporation</item>
-        <item>Limited Liability Company</item>
-        <item>Other</item>
-    </string-array>
-
-    <string-array name="personal_assets">
-        <item>Principal Home</item>
-        <item>Vacation Home</item>
-        <item>Vehicles</item>
-        <item>Home Furnishings</item>
-        <item>Collections</item>
-        <item>Luxury Goods</item>
-        <item>Others</item>
-    </string-array>
 </resources>
