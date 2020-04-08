@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -110,7 +111,10 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
             AssetsValue assetsValue = dataProcessor.findAssetsValue(dataCarrier.assetsId);
             if (assetsValue != null) {
-                editText.setText(String.valueOf(assetsValue.getAssetsValue()));
+//                editText.setText(String.valueOf(assetsValue.getAssetsValue()));
+                DecimalFormat decimalFormat = new DecimalFormat();
+                String strValue = decimalFormat.format(assetsValue.getAssetsValue());
+                editText.setText(strValue);
             }
             this.addTextListener(editText, dataCarrier);
         } else if (level == 2) {
@@ -128,7 +132,9 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
             AssetsValue assetsValue = dataProcessor.findAssetsValue(dataCarrier.assetsId);
             if (assetsValue != null) {
-                editText.setText(String.valueOf(assetsValue.getAssetsValue()));
+                DecimalFormat decimalFormat = new DecimalFormat();
+                String strValue = decimalFormat.format(assetsValue.getAssetsValue());
+                editText.setText(strValue);
             }
             this.addTextListener(editText, dataCarrier);
         }
@@ -148,9 +154,11 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             public void afterTextChanged(Editable editable) {
                 String text = editable.toString();
                 if (!TextUtils.isEmpty(text)){
-                    final float assetValue = Float.valueOf(text);
+                    String numberStr = text.replace(",", ""); // 移除逗号
+                    final float assetValue = Float.parseFloat(numberStr);
+
                     dataProcessor.setAssetValue(dataCarrier.assetsId, assetValue);
-                    Log.d("AssetsFragmentAdapter", "Value changed: " + text);
+                    Log.d("AssetsFragmentAdapter", "Value changed: " + text + ", float value: " + assetValue);
                 }
             }
         });
