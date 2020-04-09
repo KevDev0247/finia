@@ -18,6 +18,8 @@ android {
                         "room.expandProjection": "true"]
             }
         }
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {

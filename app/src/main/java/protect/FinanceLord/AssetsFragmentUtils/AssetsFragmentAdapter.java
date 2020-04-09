@@ -111,7 +111,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
             AssetsValue assetsValue = dataProcessor.findAssetsValue(dataCarrier.assetsId);
             if (assetsValue != null) {
-//                editText.setText(String.valueOf(assetsValue.getAssetsValue()));
                 DecimalFormat decimalFormat = new DecimalFormat();
                 String strValue = decimalFormat.format(assetsValue.getAssetsValue());
                 editText.setText(strValue);
@@ -128,7 +127,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
             AssetsFragmentDataCarrier dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
-
 
             AssetsValue assetsValue = dataProcessor.findAssetsValue(dataCarrier.assetsId);
             if (assetsValue != null) {
