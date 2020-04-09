@@ -8,4 +8,5 @@
     <dimen name="foreground_radius">10dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="rounded_corner">8dp</dimen>
 </resources>

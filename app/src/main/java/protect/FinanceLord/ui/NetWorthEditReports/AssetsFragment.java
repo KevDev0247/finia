@@ -77,9 +77,6 @@ public class AssetsFragment extends Fragment {
         return assetsView;
     }
 
-    private void updateOrInsertAssetsValues(List<AssetsValue> assetsValues) {
-
-    }
     private void initAssetCategory() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
