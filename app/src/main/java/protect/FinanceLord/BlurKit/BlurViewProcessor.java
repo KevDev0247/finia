@@ -27,8 +27,6 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import protect.FinanceLord.R;
 
-import static androidx.core.graphics.drawable.IconCompat.getResources;
-
 public class BlurViewProcessor {
     Bitmap mBlurredBitmap = null;
     Context context;
