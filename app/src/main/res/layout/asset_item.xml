@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@android:color/white">
+    android:background="@drawable/ic_report_sheet_items">
 
     <TextView
         android:id="@+id/assets_child"
@@ -12,5 +12,4 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="30dp"/>
-
 </LinearLayout>
