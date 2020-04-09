@@ -5,13 +5,14 @@
     android:layout_height="45dp"
     android:padding="10dp"
     android:background="@drawable/ic_report_sheet_items"
-    android:alpha="0.4">
+    >
 
     <TextView
         android:id="@+id/rowThirdText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="46dp"
+        android:textColor="#f6f7fa"
         android:textSize="18sp"/>
 
     <EditText
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
+        android:textColor="@android:color/white"
         android:textSize="15sp"/>
 
 </LinearLayout>
