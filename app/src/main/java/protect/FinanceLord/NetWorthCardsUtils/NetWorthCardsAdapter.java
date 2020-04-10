@@ -1,6 +1,8 @@
 package protect.FinanceLord.NetWorthCardsUtils;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,10 @@ public class NetWorthCardsAdapter extends PagerAdapter {
     }
 
     @Override
-    public int getCount() { return dataModels.size();}
+    public int getCount() {
+        Log.d("NetworhCardsAdapter", "getCount()" + dataModels.size());
+        return dataModels.size();
+    }
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
@@ -51,6 +56,8 @@ public class NetWorthCardsAdapter extends PagerAdapter {
         details.setText(dataModels.get(position).getDetails());
 
         container.addView(view, 0);
+
+        Log.d("NetworhCardsAdapter", "getView: " + view);
         return view;
     }
 
