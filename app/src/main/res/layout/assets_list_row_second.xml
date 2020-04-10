@@ -3,10 +3,9 @@
     android:id="@+id/assets_item_background"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
+    android:layout_height="100dp"
     android:padding="10dp"
-    android:background="@drawable/ic_report_sheet_items"
-    >
+    android:background="@drawable/ic_report_sheet_items">
 
     <TextView
         android:id="@+id/rowSecondText"
@@ -16,6 +15,6 @@
         android:layout_height="match_parent"
         android:textColor="#000000"
         android:text="Second Level"
-        android:textSize="20sp"/>
+        android:textSize="25sp"/>
 
 </LinearLayout>
