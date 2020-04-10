@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthCardsUtils;
+package protect.FinanceLord.NetWorthSwipeCardsUtils;
 
 import android.content.Context;
 import android.view.LayoutInflater;

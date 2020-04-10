@@ -11,8 +11,8 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-import protect.FinanceLord.NetWorthCardsUtils.AssetsCardsDataModel;
-import protect.FinanceLord.NetWorthCardsUtils.NetWorthCardsAdapter;
+import protect.FinanceLord.NetWorthSwipeCardsUtils.AssetsCardsDataModel;
+import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
 import protect.FinanceLord.ui.NetWorthEditReports.PastReportsAdapter;
 
 public class NetWorthActivity extends AppCompatActivity {
@@ -44,12 +44,12 @@ public class NetWorthActivity extends AppCompatActivity {
         List<AssetsCardsDataModel> dataModels = new ArrayList<>();
 
         dataModels.add(new AssetsCardsDataModel(R.drawable.net_worth, "Net Worth", "Your current net worth is" + "$"));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_liquid, "Liquid Assets", ""));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_invested, "Invested Assets", ""));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_liquid, "Liquid Assets", "0"));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_invested, "Invested Assets", "0"));
         dataModels.add(new AssetsCardsDataModel(R.drawable.assets_personal, "Personal Assets", ""));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_taxable_accounts, "Taxable Accounts", ""));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_retirement, "Retirement Accounts", ""));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_ownership,"Ownership Interests", ""));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_taxable_accounts, "Taxable Accounts", "0"));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_retirement, "Retirement Accounts", "0"));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_ownership,"Ownership Interests", "0"));
 
         adapter = new NetWorthCardsAdapter(dataModels,this);
 

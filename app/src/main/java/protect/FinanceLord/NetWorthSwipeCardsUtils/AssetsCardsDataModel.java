@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthCardsUtils;
+package protect.FinanceLord.NetWorthSwipeCardsUtils;
 
 public class AssetsCardsDataModel {
 
