@@ -19,6 +19,7 @@ public class NetWorthActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth);
 
@@ -55,6 +56,6 @@ public class NetWorthActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.assets_cards_view_pager);
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(130, 1500, 130, 500);
+        viewPager.setPadding(130, 0, 130, 0);
     }
 }
