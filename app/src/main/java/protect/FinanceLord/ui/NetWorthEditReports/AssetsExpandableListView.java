@@ -4,8 +4,8 @@ import android.content.Context;
 import android.widget.ExpandableListView;
 
 
-public class AssetsSecondLevelExpandableListView extends ExpandableListView {
-    public AssetsSecondLevelExpandableListView(Context context){
+public class AssetsExpandableListView extends ExpandableListView {
+    public AssetsExpandableListView(Context context){
         super(context);
     }
 
