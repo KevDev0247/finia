@@ -26,6 +26,6 @@ public interface AssetsValueDao {
     @Query("SELECT * FROM AssetsValue")
     List<AssetsValue> queryAllAssetsValue();
 
-    @Query("SELECT * FROM ASSETSVALUE WHERE assetsPrimaryId = :assetPrimaryId")
+    @Query("SELECT * FROM AssetsValue WHERE assetsPrimaryId = :assetPrimaryId")
     List<AssetsValue> queryAsset(int assetPrimaryId);
 }
