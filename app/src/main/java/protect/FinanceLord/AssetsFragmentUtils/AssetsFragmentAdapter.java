@@ -160,6 +160,12 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
                     dataProcessor.setAssetValue(dataCarrier.assetsId, assetValue);
                     Log.d("AssetsFragmentAdapter", "Value changed: " + text + ", float value: " + assetValue);
+                } else{
+                    String numberStr = "0.00";
+                    final float assetsValue = Float.parseFloat(numberStr);
+
+                    dataProcessor.setAssetValue(dataCarrier.assetsId, assetsValue);
+                    Log.d("AssetsFragmentAdapter","Value empty, set to 0: " + ", float value: " + assetsValue);
                 }
             }
         });
