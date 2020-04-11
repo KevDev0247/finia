@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import protect.FinanceLord.BlurKit.BlurViewProcessor;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
