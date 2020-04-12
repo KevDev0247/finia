@@ -2,6 +2,7 @@ package protect.FinanceLord;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -24,15 +25,10 @@ public class AssetsValueExtractor {
         this.context = context;
         this.date = date;
 
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                database = FinanceLordDatabase.getInstance(context);
-                assetsValueDao = database.assetsValueDao();
-                assetsValues = assetsValueDao.queryAssetsBeforeDate(date);
-                assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
-            }
-        });
+        database = FinanceLordDatabase.getInstance(context);
+        assetsValueDao = database.assetsValueDao();
+        assetsValues = assetsValueDao.queryAssetsBeforeDate(date);
+        assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
     }
 
     public List<AssetsTypeQuery> getAssetsTypeQueries() {

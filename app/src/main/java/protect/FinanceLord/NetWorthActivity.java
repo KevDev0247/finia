@@ -11,6 +11,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import protect.FinanceLord.NetWorthSwipeCardsUtils.AssetsCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
@@ -44,35 +45,41 @@ public class NetWorthActivity extends AppCompatActivity {
 
         final NetWorthCardsAdapter adapter;
         final ViewPager viewPager;
-        List<AssetsCardsDataModel> dataModels = new ArrayList<>();
-        NetWorthCalculator netWorthCalculator;
-
-        Date startOfMinute = DateUtils.firstSecondOfThisMinute();
-        Long MilliSeconds = startOfMinute.getTime();
-
-        AssetsValueExtractor assetsValueExtractor = new AssetsValueExtractor(NetWorthActivity.this, MilliSeconds);
-        netWorthCalculator = new NetWorthCalculator(assetsValueExtractor);
-
-        float totalAssets = netWorthCalculator.calculateTotalAssets();
-        float totalLiquidAssets = netWorthCalculator.calculateTotalLiquidAssets();
-        float totalInvestedAssets = netWorthCalculator.calculateTotalInvestedAssets();
-        float totalPersonalAssets = netWorthCalculator.calculateTotalPersonalAssets();
-        float totalTaxableAccounts = netWorthCalculator.calculateTotalTaxableAccounts();
-        float totalRetirementAccounts = netWorthCalculator.calculateTotalRetirementAccounts();
-        float totalOwnershipInterests = netWorthCalculator.calculateTotalOwnershipInterests();
-
-        dataModels.add(new AssetsCardsDataModel(R.drawable.net_worth, "Total Assets", String.valueOf(totalAssets)));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_liquid, "Liquid Assets", String.valueOf(totalLiquidAssets)));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_invested, "Invested Assets", String.valueOf(totalInvestedAssets)));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_personal, "Personal Assets", String.valueOf(totalPersonalAssets)));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_taxable_accounts, "Taxable Accounts", String.valueOf(totalTaxableAccounts)));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_retirement, "Retirement Accounts", String.valueOf(totalRetirementAccounts)));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_ownership,"Ownership Interests", String.valueOf(totalOwnershipInterests)));
+        final List<AssetsCardsDataModel> dataModels = new ArrayList<>();
 
         adapter = new NetWorthCardsAdapter(dataModels,this);
 
         viewPager = findViewById(R.id.assets_cards_view_pager);
         viewPager.setAdapter(adapter);
         viewPager.setPadding(130, 0, 130, 0);
+
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                Date startOfMinute = DateUtils.firstSecondOfThisMinute();
+                Long MilliSeconds = startOfMinute.getTime();
+
+                AssetsValueExtractor assetsValueExtractor = new AssetsValueExtractor(NetWorthActivity.this, MilliSeconds);
+                NetWorthCalculator netWorthCalculator = new NetWorthCalculator(assetsValueExtractor);
+
+                float totalAssets = netWorthCalculator.calculateTotalAssets();
+                float totalLiquidAssets = netWorthCalculator.calculateTotalLiquidAssets();
+                float totalInvestedAssets = netWorthCalculator.calculateTotalInvestedAssets();
+                float totalPersonalAssets = netWorthCalculator.calculateTotalPersonalAssets();
+                float totalTaxableAccounts = netWorthCalculator.calculateTotalTaxableAccounts();
+                float totalRetirementAccounts = netWorthCalculator.calculateTotalRetirementAccounts();
+                float totalOwnershipInterests = netWorthCalculator.calculateTotalOwnershipInterests();
+
+                dataModels.add(new AssetsCardsDataModel(R.drawable.net_worth, "Total Assets", String.valueOf(totalAssets)));
+                dataModels.add(new AssetsCardsDataModel(R.drawable.assets_liquid, "Liquid Assets", String.valueOf(totalLiquidAssets)));
+                dataModels.add(new AssetsCardsDataModel(R.drawable.assets_invested, "Invested Assets", String.valueOf(totalInvestedAssets)));
+                dataModels.add(new AssetsCardsDataModel(R.drawable.assets_personal, "Personal Assets", String.valueOf(totalPersonalAssets)));
+                dataModels.add(new AssetsCardsDataModel(R.drawable.invested_taxable_accounts, "Taxable Accounts", String.valueOf(totalTaxableAccounts)));
+                dataModels.add(new AssetsCardsDataModel(R.drawable.invested_retirement, "Retirement Accounts", String.valueOf(totalRetirementAccounts)));
+                dataModels.add(new AssetsCardsDataModel(R.drawable.invested_ownership,"Ownership Interests", String.valueOf(totalOwnershipInterests)));
+
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }
