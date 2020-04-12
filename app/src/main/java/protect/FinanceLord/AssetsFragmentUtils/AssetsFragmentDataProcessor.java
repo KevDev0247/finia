@@ -8,6 +8,7 @@ import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 
 public class AssetsFragmentDataProcessor {
+
     private List<AssetsTypeQuery> dataList;
     private List<AssetsValue> assetsValues;
 
@@ -50,6 +51,7 @@ public class AssetsFragmentDataProcessor {
     public List<AssetsValue> getAllAssetsValues() {
         return this.assetsValues;
     }
+
     public void setAssetsValues(List<AssetsValue> assetsValues) {
         this.assetsValues = assetsValues;
     }

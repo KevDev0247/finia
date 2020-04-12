@@ -64,7 +64,7 @@ public class AssetsFragment extends Fragment {
                                 dao.insertAssetValue(assetsValue);
                             }
                         }
-                        Date startDate = DateUtils.firstDayOfThisMonth();
+                        Date startDate = DateUtils.firstSecondOfThisMinute();
                         AssetsFragment.this.dataProcessor.setAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
                         Log.d("AssetsFragment", "Assets committed!");
                     }
@@ -86,7 +86,7 @@ public class AssetsFragment extends Fragment {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
                 List<AssetsTypeQuery> assetsTypeQueries = dao.queryGroupedAssetsType();
 
-                Date starOfMonth = DateUtils.firstDayOfThisMonth();
+                Date starOfMonth = DateUtils.firstSecondOfThisMinute();
                 Long milliseconds = starOfMonth.getTime();
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsSinceDate(milliseconds);
                 Log.d("AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());

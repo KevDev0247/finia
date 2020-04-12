@@ -1,52 +1,140 @@
 package protect.FinanceLord;
 
-import android.app.Activity;
 import android.content.Context;
 
-import java.lang.ref.WeakReference;
+import java.util.List;
 
+import protect.FinanceLord.Database.AssetsTypeDao;
+import protect.FinanceLord.Database.AssetsTypeQuery;
+import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 
 public class NetWorthCalculator {
     Context context;
+    FinanceLordDatabase database;
+    AssetsValueDao assetsValueDao;
+    AssetsTypeDao assetsTypeDao;
+    Long date;
+    List<AssetsValue> assetsValues = assetsValueDao.queryAssetsBeforeDate(date);
+    List<AssetsTypeQuery> assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
 
-    public NetWorthCalculator(Context context){
+    public NetWorthCalculator(Context context, Long date){
         this.context = context;
+        this.date = date;
+
+        database = FinanceLordDatabase.getInstance(context);
+        assetsValueDao = database.assetsValueDao();
     }
 
-    FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
-    AssetsValueDao assetsValueDao = database.assetsValueDao();
+    public float calculateTotalAssets(){
 
-    public void calculateTotal(){
+        float totalInvestedAssets = calculateTotalInvestedAssets();
+        float totalLiquidAssets = calculateTotalLiquidAssets();
+        float totalPersonalAssets = calculateTotalPersonalAssets();
+        float totalAssets = totalInvestedAssets + totalLiquidAssets + totalPersonalAssets;
+
+        return totalAssets;
+    }
+
+
+    public float calculateTotalInvestedAssets(){
+
+        float totalOwnershipInterests = calculateTotalOwnershipInterests();
+        float totalRetirementAccounts = calculateTotalRetirementAccounts();
+        float totalTaxableAccounts = calculateTotalTaxableAccounts();
+        float totalInvestedAssets = totalOwnershipInterests + totalRetirementAccounts + totalTaxableAccounts;
+
+        return totalInvestedAssets;
+    }
+
+    public float calculateTotalLiquidAssets(){
+
+        float totalLiquidAssets = 0;
+        for (AssetsTypeQuery assetsTypeQuery: assetsTypeQueries){
+            if (assetsTypeQuery.assetsSecondLevelId == 32){
+                for (AssetsValue assetsValue: assetsValues){
+                    if (assetsValue.getAssetsId() == assetsTypeQuery.assetsThirdLevelId){
+                        totalLiquidAssets += assetsValue.getAssetsValue();
+                    } else {
+                        continue;
+                    }
+                }
+            }
+        }
+
+        return totalLiquidAssets;
+    }
+
+    public float calculateTotalPersonalAssets(){
+
+        float totalPersonalAssets = 0;
+        for (AssetsTypeQuery assetsTypeQuery: assetsTypeQueries){
+            if (assetsTypeQuery.assetsSecondLevelId == 34){
+                for (AssetsValue assetsValue: assetsValues){
+                    if (assetsValue.getAssetsId() == assetsTypeQuery.assetsThirdLevelId){
+                        totalPersonalAssets += assetsValue.getAssetsValue();
+                    } else {
+                        continue;
+                    }
+                }
+            }
+        }
+
+        return totalPersonalAssets;
     }
 
     public float calculateTotalOwnershipInterests(){
 
-        return 0;
+        float totalOwnershipInterest = 0;
+        for (AssetsTypeQuery assetsTypeQuery: assetsTypeQueries){
+            if (assetsTypeQuery.assetsThirdLevelId == 31){
+                for (AssetsValue assetsValue: assetsValues){
+                    if (assetsValue.getAssetsId() == assetsTypeQuery.assetsFourthLevelId){
+                        totalOwnershipInterest += assetsValue.getAssetsValue();
+                    }
+                }
+            } else {
+                continue;
+            }
+        }
+
+        return totalOwnershipInterest;
     }
 
-    public float calculateTotalRetirementAccountsAssets(){
-        return 0;
+    public float calculateTotalRetirementAccounts(){
+
+        float totalRetirementAccounts = 0;
+        for (AssetsTypeQuery assetsTypeQuery: assetsTypeQueries){
+            if (assetsTypeQuery.assetsThirdLevelId == 30){
+                for (AssetsValue assetsValue: assetsValues){
+                    if(assetsValue.getAssetsId() == assetsTypeQuery.assetsFourthLevelId){
+                        totalRetirementAccounts += assetsValue.getAssetsValue();
+                    }
+                }
+            } else {
+                continue;
+            }
+        }
+
+        return totalRetirementAccounts;
     }
 
-    public float calculateTotalTaxableAccountsAssets(){
-        return 0;
-    }
+    public float calculateTotalTaxableAccounts(){
 
-    public float calculateTotalInvestedAssets(){
-        return 0;
-    }
+        float totalTotalTaxableAccounts = 0;
+        for (AssetsTypeQuery assetsTypeQuery: assetsTypeQueries){
+            if(assetsTypeQuery.assetsThirdLevelId == 29){
+                for (AssetsValue assetsValue: assetsValues){
+                    if (assetsValue.getAssetsId() == assetsTypeQuery.assetsThirdLevelId){
+                        totalTotalTaxableAccounts += assetsValue.getAssetsValue();
+                    } else {
+                         continue;
+                    }
+                }
+            }
+        }
 
-    public float calculateTotalLiquidAssets(){
-        return 0;
-    }
-
-    public float calculateTotalPersonalAssets(){
-        return 0;
-    }
-
-    public float calculateTotalAssets(){
-        return 0;
+        return totalTotalTaxableAccounts;
     }
 }

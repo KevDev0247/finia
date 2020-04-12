@@ -18,7 +18,7 @@ import java.util.List;
 
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.R;
-import protect.FinanceLord.ui.NetWorthEditReports.AssetsExpandableListView;
+import protect.FinanceLord.ui.NetWorthEditReports.NetWorthExpandableListView;
 
 public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
@@ -138,8 +138,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -173,7 +172,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             textView.setText(this.sectionDataSet.get(childPosition).assetsTypeName);
             return convertView;
         } else{
-            final AssetsExpandableListView secondLevelExpandableListView = new AssetsExpandableListView(context);
+            final NetWorthExpandableListView secondLevelExpandableListView = new NetWorthExpandableListView(context);
             AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, dataProcessor, level + 1);
             secondLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor,level + 1, sectionData.assetsTypeName));
             secondLevelExpandableListView.setOnChildClickListener(listener);

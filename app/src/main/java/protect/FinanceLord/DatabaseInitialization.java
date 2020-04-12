@@ -22,6 +22,7 @@ import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
 
 public class DatabaseInitialization{
+
     WeakReference<Activity> context;
     public DatabaseInitialization(Activity context) {
         this.context = new WeakReference<>(context);
