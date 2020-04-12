@@ -50,7 +50,8 @@ public class NetWorthActivity extends AppCompatActivity {
         Date startOfMinute = DateUtils.firstSecondOfThisMinute();
         Long MilliSeconds = startOfMinute.getTime();
 
-        netWorthCalculator = new NetWorthCalculator(NetWorthActivity.this, MilliSeconds);
+        AssetsValueExtractor assetsValueExtractor = new AssetsValueExtractor(NetWorthActivity.this, MilliSeconds);
+        netWorthCalculator = new NetWorthCalculator(assetsValueExtractor);
 
         float totalAssets = netWorthCalculator.calculateTotalAssets();
         float totalLiquidAssets = netWorthCalculator.calculateTotalLiquidAssets();
