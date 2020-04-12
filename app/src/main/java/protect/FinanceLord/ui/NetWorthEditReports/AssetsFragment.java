@@ -86,8 +86,8 @@ public class AssetsFragment extends Fragment {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
                 List<AssetsTypeQuery> assetsTypeQueries = dao.queryGroupedAssetsType();
 
-                Date starOfMonth = DateUtils.firstSecondOfThisMinute();
-                Long milliseconds = starOfMonth.getTime();
+                Date startOfMinute = DateUtils.firstSecondOfThisMinute();
+                Long milliseconds = startOfMinute.getTime();
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsSinceDate(milliseconds);
                 Log.d("AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
                 Log.d("AssetsFragment", "Query assets Values: " + assetsValues.toString());

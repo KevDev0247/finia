@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import protect.FinanceLord.NetWorthSwipeCardsUtils.AssetsCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
+import protect.FinanceLord.ui.NetWorthEditReports.DateUtils;
 import protect.FinanceLord.ui.NetWorthEditReports.PastReportsAdapter;
 
 public class NetWorthActivity extends AppCompatActivity {
@@ -43,8 +45,22 @@ public class NetWorthActivity extends AppCompatActivity {
         final NetWorthCardsAdapter adapter;
         final ViewPager viewPager;
         List<AssetsCardsDataModel> dataModels = new ArrayList<>();
+        NetWorthCalculator netWorthCalculator;
 
-        dataModels.add(new AssetsCardsDataModel(R.drawable.net_worth, "Net Worth", "Your current net worth is" + "$"));
+        Date startOfMinute = DateUtils.firstSecondOfThisMinute();
+        Long MilliSeconds = startOfMinute.getTime();
+
+        netWorthCalculator = new NetWorthCalculator(NetWorthActivity.this, MilliSeconds);
+
+        float totalAssets = netWorthCalculator.calculateTotalAssets();
+        float totalLiquidAssets = netWorthCalculator.calculateTotalLiquidAssets();
+        float totalInvestedAssets = netWorthCalculator.calculateTotalInvestedAssets();
+        float totalPersonalAssets = netWorthCalculator.calculateTotalPersonalAssets();
+        float totalTaxableAccounts = netWorthCalculator.calculateTotalTaxableAccounts();
+        float totalRetirementAccounts = netWorthCalculator.calculateTotalRetirementAccounts();
+        float totalOwnershipInterests = netWorthCalculator.calculateTotalOwnershipInterests();
+
+        dataModels.add(new AssetsCardsDataModel(R.drawable.net_worth, "Total Assets", "0"));
         dataModels.add(new AssetsCardsDataModel(R.drawable.assets_liquid, "Liquid Assets", "0"));
         dataModels.add(new AssetsCardsDataModel(R.drawable.assets_invested, "Invested Assets", "0"));
         dataModels.add(new AssetsCardsDataModel(R.drawable.assets_personal, "Personal Assets", ""));

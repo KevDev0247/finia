@@ -3,6 +3,7 @@ package protect.FinanceLord;
 import android.content.Context;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
@@ -16,15 +17,26 @@ public class NetWorthCalculator {
     AssetsValueDao assetsValueDao;
     AssetsTypeDao assetsTypeDao;
     Long date;
-    List<AssetsValue> assetsValues = assetsValueDao.queryAssetsBeforeDate(date);
-    List<AssetsTypeQuery> assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
+    List<AssetsValue> assetsValues;
+    List<AssetsTypeQuery> assetsTypeQueries;
 
     public NetWorthCalculator(Context context, Long date){
         this.context = context;
         this.date = date;
 
-        database = FinanceLordDatabase.getInstance(context);
-        assetsValueDao = database.assetsValueDao();
+        initAssetsValues();
+    }
+
+    public void initAssetsValues(){
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                database = FinanceLordDatabase.getInstance(context);
+                assetsValueDao = database.assetsValueDao();
+                assetsValues = assetsValueDao.queryAssetsBeforeDate(date);
+                assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
+            }
+        });
     }
 
     public float calculateTotalAssets(){
