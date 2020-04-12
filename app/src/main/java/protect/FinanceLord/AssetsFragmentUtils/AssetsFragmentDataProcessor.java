@@ -1,11 +1,17 @@
 package protect.FinanceLord.AssetsFragmentUtils;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
+import protect.FinanceLord.NetWorthActivity;
+import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
+import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
+import protect.FinanceLord.ui.NetWorthEditReports.DateUtils;
 
 public class AssetsFragmentDataProcessor {
 
@@ -48,7 +54,7 @@ public class AssetsFragmentDataProcessor {
         }
     }
 
-    public List<AssetsValue> getAllAssetsValues() {
+    public List<AssetsValue> getAllAssetsValues(Context context) {
         return this.assetsValues;
     }
 

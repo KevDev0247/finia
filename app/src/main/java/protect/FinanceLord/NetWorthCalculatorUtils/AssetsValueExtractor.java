@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.NetWorthCalculatorUtils;
 
 import android.content.Context;
 
@@ -13,6 +13,7 @@ import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 
 public class AssetsValueExtractor {
+
     Context context;
     Long date;
     FinanceLordDatabase database;

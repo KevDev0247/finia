@@ -1,5 +1,6 @@
 package protect.FinanceLord.ui.NetWorthEditReports;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
 import protect.FinanceLord.R;
 import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentChildViewClickListener;
@@ -51,7 +53,8 @@ public class AssetsFragment extends Fragment {
                     public void run() {
                         FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragment.this.getContext());
                         AssetsValueDao dao = database.assetsValueDao();
-                        for(AssetsValue assetsValue: AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
+                        Context context = getContext();
+                        for(AssetsValue assetsValue: AssetsFragment.this.dataProcessor.getAllAssetsValues(context)) {
                             if(assetsValue.getAssetsPrimaryId() != 0) {
                                 List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsPrimaryId());
                                 Log.d("Assets Value Check", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
@@ -64,6 +67,7 @@ public class AssetsFragment extends Fragment {
                                 dao.insertAssetValue(assetsValue);
                             }
                         }
+
                         Date startDate = DateUtils.firstSecondOfThisMinute();
                         AssetsFragment.this.dataProcessor.setAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
                         Log.d("AssetsFragment", "Assets committed!");

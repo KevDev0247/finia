@@ -1,12 +1,12 @@
 package protect.FinanceLord.NetWorthSwipeCardsUtils;
 
-public class AssetsCardsDataModel {
+public class NetWorthCardsDataModel {
 
     private int imageId;
     private String title;
     private String details;
 
-    public AssetsCardsDataModel(int imageId, String title, String details){
+    public NetWorthCardsDataModel(int imageId, String title, String details){
         this.imageId = imageId;
         this.title = title;
         this.details = details;

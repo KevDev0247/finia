@@ -1,6 +1,4 @@
-package protect.FinanceLord;
-
-import android.util.Log;
+package protect.FinanceLord.NetWorthCalculatorUtils;
 
 import java.util.List;
 
@@ -43,7 +41,6 @@ public class NetWorthCalculator {
                 }
             }
         }
-        Log.d("Print liquid assets",String.valueOf(totalLiquidAssets));
 
         return totalLiquidAssets;
     }
@@ -62,7 +59,6 @@ public class NetWorthCalculator {
                 }
             }
         }
-        Log.d("Print personal assets",String.valueOf(totalPersonalAssets));
 
         return totalPersonalAssets;
     }

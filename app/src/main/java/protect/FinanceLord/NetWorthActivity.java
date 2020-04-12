@@ -13,7 +13,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import protect.FinanceLord.NetWorthSwipeCardsUtils.AssetsCardsDataModel;
+import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
+import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueInjector;
+import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
+import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
 import protect.FinanceLord.ui.NetWorthEditReports.DateUtils;
 import protect.FinanceLord.ui.NetWorthEditReports.PastReportsAdapter;
@@ -43,9 +46,9 @@ public class NetWorthActivity extends AppCompatActivity {
 
     protected void createAssetsCardsView(){
 
-        final NetWorthCardsAdapter adapter;
-        final ViewPager viewPager;
-        final List<AssetsCardsDataModel> dataModels = new ArrayList<>();
+        NetWorthCardsAdapter adapter;
+        ViewPager viewPager;
+        List<NetWorthCardsDataModel> dataModels = new ArrayList<>();
 
         adapter = new NetWorthCardsAdapter(dataModels,this);
 
@@ -53,14 +56,21 @@ public class NetWorthActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         viewPager.setPadding(130, 0, 130, 0);
 
+        loadData(dataModels, adapter);
+    }
+
+    protected void loadData(final List<NetWorthCardsDataModel> dataModels, final NetWorthCardsAdapter adapter){
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
+
                 Date startOfMinute = DateUtils.firstSecondOfThisMinute();
                 Long MilliSeconds = startOfMinute.getTime();
-
+                List<Float> parentAssets = new ArrayList<>();
+                AssetsValueInjector assetsValueInjector = new AssetsValueInjector(NetWorthActivity.this, MilliSeconds);
                 AssetsValueExtractor assetsValueExtractor = new AssetsValueExtractor(NetWorthActivity.this, MilliSeconds);
                 NetWorthCalculator netWorthCalculator = new NetWorthCalculator(assetsValueExtractor);
+
 
                 float totalAssets = netWorthCalculator.calculateTotalAssets();
                 float totalLiquidAssets = netWorthCalculator.calculateTotalLiquidAssets();
@@ -70,15 +80,30 @@ public class NetWorthActivity extends AppCompatActivity {
                 float totalRetirementAccounts = netWorthCalculator.calculateTotalRetirementAccounts();
                 float totalOwnershipInterests = netWorthCalculator.calculateTotalOwnershipInterests();
 
-                dataModels.add(new AssetsCardsDataModel(R.drawable.net_worth, "Total Assets", String.valueOf(totalAssets)));
-                dataModels.add(new AssetsCardsDataModel(R.drawable.assets_liquid, "Liquid Assets", String.valueOf(totalLiquidAssets)));
-                dataModels.add(new AssetsCardsDataModel(R.drawable.assets_invested, "Invested Assets", String.valueOf(totalInvestedAssets)));
-                dataModels.add(new AssetsCardsDataModel(R.drawable.assets_personal, "Personal Assets", String.valueOf(totalPersonalAssets)));
-                dataModels.add(new AssetsCardsDataModel(R.drawable.invested_taxable_accounts, "Taxable Accounts", String.valueOf(totalTaxableAccounts)));
-                dataModels.add(new AssetsCardsDataModel(R.drawable.invested_retirement, "Retirement Accounts", String.valueOf(totalRetirementAccounts)));
-                dataModels.add(new AssetsCardsDataModel(R.drawable.invested_ownership,"Ownership Interests", String.valueOf(totalOwnershipInterests)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, "Net Worth","0"));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, "Total Assets", String.valueOf(totalAssets)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, "Total Liabilities","0"));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, "Short Term Liabilities","0"));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term,"Short Term Liabilities", "0"));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, "Liquid Assets", String.valueOf(totalLiquidAssets)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, "Invested Assets", String.valueOf(totalInvestedAssets)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, "Personal Assets", String.valueOf(totalPersonalAssets)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, "Taxable Accounts", String.valueOf(totalTaxableAccounts)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, "Retirement Accounts", String.valueOf(totalRetirementAccounts)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,"Ownership Interests", String.valueOf(totalOwnershipInterests)));
 
                 adapter.notifyDataSetChanged();
+
+
+                parentAssets.add(totalAssets);
+                parentAssets.add(totalLiquidAssets);
+                parentAssets.add(totalInvestedAssets);
+                parentAssets.add(totalPersonalAssets);
+                parentAssets.add(totalTaxableAccounts);
+                parentAssets.add(totalRetirementAccounts);
+                parentAssets.add(totalOwnershipInterests);
+
+                assetsValueInjector.insertParentAssetsValue(parentAssets);
             }
         });
     }
