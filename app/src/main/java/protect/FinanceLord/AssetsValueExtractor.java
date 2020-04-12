@@ -27,6 +27,7 @@ public class AssetsValueExtractor {
 
         database = FinanceLordDatabase.getInstance(context);
         assetsValueDao = database.assetsValueDao();
+        assetsTypeDao = database.assetsTypeDao();
         assetsValues = assetsValueDao.queryAssetsBeforeDate(date);
         assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
     }
