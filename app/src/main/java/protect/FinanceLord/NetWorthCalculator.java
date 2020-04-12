@@ -1,6 +1,7 @@
 package protect.FinanceLord;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -63,6 +64,7 @@ public class NetWorthCalculator {
                 }
             }
         }
+        Log.d("Print liquid assets",String.valueOf(totalLiquidAssets));
 
         return totalLiquidAssets;
     }
@@ -81,6 +83,7 @@ public class NetWorthCalculator {
                 }
             }
         }
+        Log.d("Print personal assets",String.valueOf(totalPersonalAssets));
 
         return totalPersonalAssets;
     }
