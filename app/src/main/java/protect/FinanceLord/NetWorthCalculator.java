@@ -49,17 +49,6 @@ public class NetWorthCalculator {
         return totalAssets;
     }
 
-
-    public float calculateTotalInvestedAssets(){
-
-        float totalOwnershipInterests = calculateTotalOwnershipInterests();
-        float totalRetirementAccounts = calculateTotalRetirementAccounts();
-        float totalTaxableAccounts = calculateTotalTaxableAccounts();
-        float totalInvestedAssets = totalOwnershipInterests + totalRetirementAccounts + totalTaxableAccounts;
-
-        return totalInvestedAssets;
-    }
-
     public float calculateTotalLiquidAssets(){
 
         float totalLiquidAssets = 0;
@@ -94,6 +83,16 @@ public class NetWorthCalculator {
         }
 
         return totalPersonalAssets;
+    }
+
+    public float calculateTotalInvestedAssets(){
+
+        float totalOwnershipInterests = calculateTotalOwnershipInterests();
+        float totalRetirementAccounts = calculateTotalRetirementAccounts();
+        float totalTaxableAccounts = calculateTotalTaxableAccounts();
+        float totalInvestedAssets = totalOwnershipInterests + totalRetirementAccounts + totalTaxableAccounts;
+
+        return totalInvestedAssets;
     }
 
     public float calculateTotalOwnershipInterests(){
@@ -141,7 +140,7 @@ public class NetWorthCalculator {
                     if (assetsValue.getAssetsId() == assetsTypeQuery.assetsThirdLevelId){
                         totalTotalTaxableAccounts += assetsValue.getAssetsValue();
                     } else {
-                         continue;
+                        continue;
                     }
                 }
             }

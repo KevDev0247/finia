@@ -60,13 +60,13 @@ public class NetWorthActivity extends AppCompatActivity {
         float totalRetirementAccounts = netWorthCalculator.calculateTotalRetirementAccounts();
         float totalOwnershipInterests = netWorthCalculator.calculateTotalOwnershipInterests();
 
-        dataModels.add(new AssetsCardsDataModel(R.drawable.net_worth, "Total Assets", "0"));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_liquid, "Liquid Assets", "0"));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_invested, "Invested Assets", "0"));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_personal, "Personal Assets", ""));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_taxable_accounts, "Taxable Accounts", "0"));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_retirement, "Retirement Accounts", "0"));
-        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_ownership,"Ownership Interests", "0"));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.net_worth, "Total Assets", String.valueOf(totalAssets)));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_liquid, "Liquid Assets", String.valueOf(totalLiquidAssets)));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_invested, "Invested Assets", String.valueOf(totalInvestedAssets)));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.assets_personal, "Personal Assets", String.valueOf(totalPersonalAssets)));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_taxable_accounts, "Taxable Accounts", String.valueOf(totalTaxableAccounts)));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_retirement, "Retirement Accounts", String.valueOf(totalRetirementAccounts)));
+        dataModels.add(new AssetsCardsDataModel(R.drawable.invested_ownership,"Ownership Interests", String.valueOf(totalOwnershipInterests)));
 
         adapter = new NetWorthCardsAdapter(dataModels,this);
 
