@@ -6,6 +6,7 @@ import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 
 public class NetWorthCalculator {
+
     List<AssetsValue> assetsValues;
     List<AssetsTypeQuery> assetsTypeQueries;
     AssetsValueExtractor assetsValueExtractor;
