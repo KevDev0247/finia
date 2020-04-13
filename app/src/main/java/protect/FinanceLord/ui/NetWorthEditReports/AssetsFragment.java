@@ -24,14 +24,13 @@ import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.NetWorthActivity;
 import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
 import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueInjector;
 import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
 import protect.FinanceLord.R;
-import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentAdapter;
-import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentChildViewClickListener;
-import protect.FinanceLord.AssetsFragmentUtils.AssetsFragmentDataProcessor;
+import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentAdapter;
+import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentChildViewClickListener;
+import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentDataProcessor;
 
 public class AssetsFragment extends Fragment {
     String title;

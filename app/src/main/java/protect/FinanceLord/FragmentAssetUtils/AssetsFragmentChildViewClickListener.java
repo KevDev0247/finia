@@ -1,4 +1,4 @@
-package protect.FinanceLord.AssetsFragmentUtils;
+package protect.FinanceLord.FragmentAssetUtils;
 
 import android.util.Log;
 import android.view.View;

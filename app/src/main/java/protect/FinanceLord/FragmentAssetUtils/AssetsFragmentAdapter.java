@@ -1,4 +1,4 @@
-package protect.FinanceLord.AssetsFragmentUtils;
+package protect.FinanceLord.FragmentAssetUtils;
 
 import android.content.Context;
 import android.text.Editable;

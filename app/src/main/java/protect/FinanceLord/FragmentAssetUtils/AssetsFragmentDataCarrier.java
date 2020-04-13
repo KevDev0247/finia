@@ -1,6 +1,7 @@
-package protect.FinanceLord.AssetsFragmentUtils;
+package protect.FinanceLord.FragmentAssetUtils;
 
 public class AssetsFragmentDataCarrier {
+
     public String assetsTypeName;
     public int assetsId;
     public int level;

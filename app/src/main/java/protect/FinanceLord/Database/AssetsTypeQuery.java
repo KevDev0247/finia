@@ -16,5 +16,4 @@ public class AssetsTypeQuery {
                 + "assetsThirdLevelId:" + assetsThirdLevelId + "\n"  + "assetsThirdLevelType: " + assetsThirdLevelName + "\n"
                 + "assetsFourthLevelId:" + assetsFourthLevelId + "\n" + "assetsFourthLevelName: " + assetsFourthLevelName;
     }
-
 }
