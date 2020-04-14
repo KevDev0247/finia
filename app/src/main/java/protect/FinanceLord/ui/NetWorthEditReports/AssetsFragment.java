@@ -56,8 +56,7 @@ public class AssetsFragment extends Fragment {
                     public void run() {
                         FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragment.this.getContext());
                         AssetsValueDao dao = database.assetsValueDao();
-                        Context context = getContext();
-                        for(AssetsValue assetsValue: AssetsFragment.this.dataProcessor.getAllAssetsValues(context)) {
+                        for(AssetsValue assetsValue: AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
                             if(assetsValue.getAssetsPrimaryId() != 0) {
                                 List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsPrimaryId());
                                 Log.d("Assets Value Check", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
