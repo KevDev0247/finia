@@ -34,25 +34,17 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         this.sectionDataSet = dataProcessor.getSubSet(parentSection, level);
     }
 
-    public int getSectionGroupCount() {
-        return sectionDataSet.size();
-    }
-
     public String getAssetsName(int position) {
         return this.sectionDataSet.get(position).assetsTypeName;
     }
 
-    public int getAssetsId(int position) {
-        return this.sectionDataSet.get(position).assetsId;
-    }
-
     @Override
     public int getGroupCount() {
-        return getSectionGroupCount();
+        return sectionDataSet.size();
     }
 
     @Override
-    public int getChildrenCount(int position) {
+    public int getChildrenCount(int i1) {
         return 1;
     }
 
