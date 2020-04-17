@@ -7,6 +7,7 @@ import android.widget.ExpandableListView;
 import java.util.List;
 
 public class AssetsFragmentChildViewClickListener implements ExpandableListView.OnChildClickListener {
+
     private AssetsFragmentDataProcessor dataProcessor;
     private List<AssetsFragmentDataCarrier> sectionDataSet;
     private int level;
@@ -16,6 +17,7 @@ public class AssetsFragmentChildViewClickListener implements ExpandableListView.
         this.dataProcessor = dataProcessor;
         this.level = level;
     }
+
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
         AssetsFragmentDataCarrier sectionItem = sectionDataSet.get(i);
