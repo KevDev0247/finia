@@ -6,11 +6,6 @@ import java.util.List;
 
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
-import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
-import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueInjector;
-import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
-import protect.FinanceLord.ui.NetWorthEditReports.AssetsFragment;
-import protect.FinanceLord.ui.NetWorthEditReports.DateUtils;
 
 public class AssetsFragmentDataProcessor {
 
@@ -20,14 +15,6 @@ public class AssetsFragmentDataProcessor {
     public AssetsFragmentDataProcessor(List<AssetsTypeQuery> dataList, List<AssetsValue> assetsValues) {
         this.dataList = dataList;
         this.assetsValues = assetsValues;
-    }
-
-    public float getAssetsValue(int assetsId){
-        AssetsValue assetsValue = this.findAssetsValue(assetsId);
-        if(assetsValue != null) {
-            return assetsValue.getAssetsValue();
-        }
-        return 0;
     }
 
     public AssetsValue findAssetsValue(int assetsId) {
@@ -57,7 +44,7 @@ public class AssetsFragmentDataProcessor {
         return this.assetsValues;
     }
 
-    public void setAssetsValues(List<AssetsValue> assetsValues) {
+    public void setAllAssetsValues(List<AssetsValue> assetsValues) {
         this.assetsValues = assetsValues;
     }
 
@@ -67,6 +54,7 @@ public class AssetsFragmentDataProcessor {
         if (level == 0) {
             for(AssetsTypeQuery assetsTypeQuery : dataList) {
                 if (assetsTypeQuery.assetsFirstLevelName != null) {
+
                     AssetsFragmentDataCarrier dataCarrier = new AssetsFragmentDataCarrier(assetsTypeQuery.assetsFirstLevelName, assetsTypeQuery.assetsFirstLevelId, 0);
                     addCarrierIfNotExists(dataCarrier, subGroupAssets);
                 }
@@ -76,6 +64,7 @@ public class AssetsFragmentDataProcessor {
                 if (assetsTypeQuery.assetsFirstLevelName != null
                         && assetsTypeQuery.assetsFirstLevelName.equals(parentGroupLabel)
                         && assetsTypeQuery.assetsSecondLevelName != null) {
+
                     AssetsFragmentDataCarrier dataCarrier = new AssetsFragmentDataCarrier(assetsTypeQuery.assetsSecondLevelName, assetsTypeQuery.assetsSecondLevelId, 1);
                     addCarrierIfNotExists(dataCarrier, subGroupAssets);
                 }
@@ -95,6 +84,7 @@ public class AssetsFragmentDataProcessor {
                 if(assetsTypeQuery.assetsThirdLevelName != null
                         && assetsTypeQuery.assetsThirdLevelName.equals(parentGroupLabel)
                         && assetsTypeQuery.assetsFourthLevelName != null) {
+
                     AssetsFragmentDataCarrier dataCarrier = new AssetsFragmentDataCarrier(assetsTypeQuery.assetsFourthLevelName, assetsTypeQuery.assetsFourthLevelId, 3);
                     addCarrierIfNotExists(dataCarrier, subGroupAssets);
                 }

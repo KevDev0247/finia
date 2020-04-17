@@ -1,6 +1,5 @@
 package protect.FinanceLord.ui.NetWorthEditReports;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -71,7 +70,7 @@ public class AssetsFragment extends Fragment {
                         }
 
                         Date startDate = DateUtils.firstSecondOfThisMinute();
-                        AssetsFragment.this.dataProcessor.setAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
+                        AssetsFragment.this.dataProcessor.setAllAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
 
                         calculateParentAssets();
 

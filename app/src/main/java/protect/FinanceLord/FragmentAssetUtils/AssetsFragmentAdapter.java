@@ -144,7 +144,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             public void afterTextChanged(Editable editable) {
                 String text = editable.toString();
                 if (!TextUtils.isEmpty(text)){
-                    String numberStr = text.replace(",", ""); // 移除逗号
+                    String numberStr = text.replace(",", "");
                     final float assetValue = Float.parseFloat(numberStr);
 
                     dataProcessor.setAssetValue(dataCarrier.assetsId, assetValue);
