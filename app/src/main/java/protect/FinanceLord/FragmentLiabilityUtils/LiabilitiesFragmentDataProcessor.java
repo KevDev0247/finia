@@ -51,7 +51,39 @@ public class LiabilitiesFragmentDataProcessor {
     public List<LiabilitiesFragmentDataCarrier> getGroupSet(String parentGroupLabel, int level){
         List<LiabilitiesFragmentDataCarrier> subGroupLiabilities = new ArrayList<>();
 
+        if (level == 0){
+            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList){
+                if (liabilitiesTypeQuery.liabilitiesFirstLevelName != null){
 
+                    LiabilitiesFragmentDataCarrier dataCarrier = new LiabilitiesFragmentDataCarrier(liabilitiesTypeQuery.liabilitiesFirstLevelName, liabilitiesTypeQuery.liabilitiesFirstLevelId, 0);
+                    addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
+                }
+            }
+        }
+
+        if (level == 1){
+            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList){
+                if (liabilitiesTypeQuery.liabilitiesFirstLevelName != null
+                        && liabilitiesTypeQuery.liabilitiesFirstLevelName == parentGroupLabel
+                        && liabilitiesTypeQuery.liabilitiesSecondLevelName != null){
+
+                    LiabilitiesFragmentDataCarrier dataCarrier = new LiabilitiesFragmentDataCarrier(liabilitiesTypeQuery.liabilitiesSecondLevelName, liabilitiesTypeQuery.liabilitiesSecondLevelId, 1);
+                    addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
+                }
+            }
+        }
+
+        if (level == 2){
+            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList){
+                if (liabilitiesTypeQuery.liabilitiesSecondLevelName != null
+                        && liabilitiesTypeQuery.liabilitiesSecondLevelName == parentGroupLabel
+                        && liabilitiesTypeQuery.liabilitiesThirdLevelName != null){
+
+                    LiabilitiesFragmentDataCarrier dataCarrier = new LiabilitiesFragmentDataCarrier(liabilitiesTypeQuery.liabilitiesThirdLevelName, liabilitiesTypeQuery.liabilitiesThirdLevelId, 2);
+                    addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
+                }
+            }
+        }
 
         return subGroupLiabilities;
     }
@@ -61,6 +93,7 @@ public class LiabilitiesFragmentDataProcessor {
             if (dataCarrier.liabilitiesId == liabilitiesFragmentDataCarrier.liabilitiesId && dataCarrier.liabilitiesId != 0){
                 return;
             }
+
             subGroupLiabilities.add(liabilitiesFragmentDataCarrier);
         }
     }
