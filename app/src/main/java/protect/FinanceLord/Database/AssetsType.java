@@ -35,4 +35,5 @@ public class AssetsType {
     public void setAssetsId(int assetsId)   {this.assetsId = assetsId;}
     public void setAssetsName(String assetsName)    {this.assetsName = assetsName;}
     public void setAssetsParentType(String assetsParentType)   {this.assetsParentType = assetsParentType;}
+
 }
