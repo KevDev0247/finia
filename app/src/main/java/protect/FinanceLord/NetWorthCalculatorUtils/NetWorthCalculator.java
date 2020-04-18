@@ -36,8 +36,6 @@ public class NetWorthCalculator {
                 for (AssetsValue assetsValue: assetsValues){
                     if (assetsValue.getAssetsId() == assetsTypeQuery.assetsThirdLevelId){
                         totalLiquidAssets += assetsValue.getAssetsValue();
-                    } else {
-                        continue;
                     }
                 }
             }
@@ -54,8 +52,6 @@ public class NetWorthCalculator {
                 for (AssetsValue assetsValue: assetsValues){
                     if (assetsValue.getAssetsId() == assetsTypeQuery.assetsThirdLevelId){
                         totalPersonalAssets += assetsValue.getAssetsValue();
-                    } else {
-                        continue;
                     }
                 }
             }
@@ -84,8 +80,6 @@ public class NetWorthCalculator {
                         totalOwnershipInterest += assetsValue.getAssetsValue();
                     }
                 }
-            } else {
-                continue;
             }
         }
 
@@ -102,8 +96,6 @@ public class NetWorthCalculator {
                         totalRetirementAccounts += assetsValue.getAssetsValue();
                     }
                 }
-            } else {
-                continue;
             }
         }
 
@@ -118,8 +110,6 @@ public class NetWorthCalculator {
                 for (AssetsValue assetsValue: assetsValues){
                     if (assetsValue.getAssetsId() == assetsTypeQuery.assetsThirdLevelId){
                         totalTotalTaxableAccounts += assetsValue.getAssetsValue();
-                    } else {
-                        continue;
                     }
                 }
             }
