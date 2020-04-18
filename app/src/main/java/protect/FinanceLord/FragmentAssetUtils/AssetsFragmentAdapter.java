@@ -81,13 +81,13 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (level == 1){
-            convertView = inflater.inflate(R.layout.assets_list_row_second, null);
+            convertView = inflater.inflate(R.layout.assets_list_row_second_items, null);
             TextView textView = convertView.findViewById(R.id.rowSecondText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
         } else if (level == 2 && sectionDataSet.get(position).assetsId != 29
                               && sectionDataSet.get(position).assetsId != 30
                               && sectionDataSet.get(position).assetsId != 31){
-            convertView = inflater.inflate(R.layout.assets_list_row_third, null);
+            convertView = inflater.inflate(R.layout.assets_list_row_third_items, null);
             TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
 
@@ -106,7 +106,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.rowSecondCategoryText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
         } else if (level == 3){
-            convertView = inflater.inflate(R.layout.assets_list_row_third, null);
+            convertView = inflater.inflate(R.layout.assets_list_row_third_items, null);
             TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
 
