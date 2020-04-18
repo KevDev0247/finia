@@ -50,6 +50,7 @@ public class NetWorthActivity extends AppCompatActivity {
         ViewPager viewPager;
         List<NetWorthCardsDataModel> dataModels = new ArrayList<>();
 
+
         adapter = new NetWorthCardsAdapter(dataModels,this);
 
         viewPager = findViewById(R.id.assets_cards_view_pager);

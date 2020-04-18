@@ -13,7 +13,6 @@ public class NetWorthCalculator {
 
     public NetWorthCalculator(AssetsValueExtractor assetsValueExtractor){
         this.assetsValueExtractor = assetsValueExtractor;
-
         assetsTypeQueries = assetsValueExtractor.getAssetsTypeQueries();
         assetsValues = assetsValueExtractor.getAssetsValues();
     }
@@ -108,7 +107,7 @@ public class NetWorthCalculator {
         for (AssetsTypeQuery assetsTypeQuery: assetsTypeQueries){
             if(assetsTypeQuery.assetsThirdLevelId == 29){
                 for (AssetsValue assetsValue: assetsValues){
-                    if (assetsValue.getAssetsId() == assetsTypeQuery.assetsThirdLevelId){
+                    if (assetsValue.getAssetsId() == assetsTypeQuery.assetsFourthLevelId){
                         totalTotalTaxableAccounts += assetsValue.getAssetsValue();
                     }
                 }
