@@ -72,7 +72,8 @@ public class AssetsFragment extends Fragment {
                         Date startDate = DateUtils.firstSecondOfThisMinute();
                         AssetsFragment.this.dataProcessor.setAllAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
 
-                        calculateParentAssets();
+                        dataProcessor.calculateParentAssets(dao);
+//                        calculateParentAssets();
 
                         Log.d("AssetsFragment", "Assets committed!");
                     }
