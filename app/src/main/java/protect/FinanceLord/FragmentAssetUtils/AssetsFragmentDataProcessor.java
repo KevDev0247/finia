@@ -9,11 +9,6 @@ import java.util.List;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
-import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
-import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueInjector;
-import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
-import protect.FinanceLord.ui.NetWorthEditReports.AssetsFragment;
-import protect.FinanceLord.ui.NetWorthEditReports.DateUtils;
 
 public class AssetsFragmentDataProcessor {
 
@@ -128,7 +123,7 @@ public class AssetsFragmentDataProcessor {
         return 0;
     }
 
-    private List<Long> getAssetsIDsBelongsTo(String assetsName) {
+    private List<Long> getAssetsIdsBelongsTo(String assetsName) {
         if (TextUtils.isEmpty(assetsName)) {
             return new ArrayList<>();
         }
@@ -175,6 +170,7 @@ public class AssetsFragmentDataProcessor {
         }
         return null;
     }
+
     public float calculateTotalAssets() {
         float totalInvestedAssets = calculateTotalInvestedAssets();
         float totalLiquidAssets = calculateTotalLiquidAssets();
@@ -185,7 +181,7 @@ public class AssetsFragmentDataProcessor {
     }
 
     public float calculateTotalLiquidAssets() {
-        List<Long> assetsIDs = this.getAssetsIDsBelongsTo("Liquid assets");
+        List<Long> assetsIDs = this.getAssetsIdsBelongsTo("Liquid assets");
         float totalLiquidAssets = 0;
         for (Long assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
@@ -199,7 +195,7 @@ public class AssetsFragmentDataProcessor {
 
     public float calculateTotalPersonalAssets(){
 
-        List<Long> assetsIDs = this.getAssetsIDsBelongsTo("Personal assets");
+        List<Long> assetsIDs = this.getAssetsIdsBelongsTo("Personal assets");
         float totalPersonalAssets = 0;
 
         for (Long assetsId : assetsIDs) {
@@ -224,7 +220,7 @@ public class AssetsFragmentDataProcessor {
 
     public float calculateTotalOwnershipInterests() {
 
-        List<Long> assetsIDs = this.getAssetsIDsBelongsTo("Ownership interests");
+        List<Long> assetsIDs = this.getAssetsIdsBelongsTo("Ownership interests");
         float totalOwnershipInterest = 0;
 
         for (Long assetsId : assetsIDs) {
@@ -238,7 +234,7 @@ public class AssetsFragmentDataProcessor {
     }
 
     public float calculateTotalRetirementAccounts() {
-        List<Long> assetsIDs = this.getAssetsIDsBelongsTo("Retirement accounts");
+        List<Long> assetsIDs = this.getAssetsIdsBelongsTo("Retirement accounts");
         float totalRetirementAccounts = 0;
 
         for (Long assetId : assetsIDs) {
@@ -252,7 +248,7 @@ public class AssetsFragmentDataProcessor {
     }
 
     public float calculateTotalTaxableAccounts(){
-        List<Long> assetsIDs = this.getAssetsIDsBelongsTo("Taxable accounts");
+        List<Long> assetsIDs = this.getAssetsIdsBelongsTo("Taxable accounts");
         float totalTotalTaxableAccounts = 0;
         for (Long assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
@@ -266,6 +262,7 @@ public class AssetsFragmentDataProcessor {
 
 
     public void calculateParentAssets(AssetsValueDao assetsValueDao) {
+
         float totalAssets = this.calculateTotalAssets();
         float totalLiquidAssets = this.calculateTotalLiquidAssets();
         float totalInvestedAssets = this.calculateTotalInvestedAssets();
@@ -296,6 +293,7 @@ public class AssetsFragmentDataProcessor {
 
             assetsValueDao.insertAssetValue(totalAssetsValue);
         }
+
         AssetsValue liquidAssetsValue = this.findAssetsValue(liquidAssetsId);
         if (liquidAssetsValue != null) {
             liquidAssetsValue.setAssetsValue(totalLiquidAssets);

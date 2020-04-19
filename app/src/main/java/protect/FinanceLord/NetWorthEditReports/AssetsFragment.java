@@ -1,4 +1,4 @@
-package protect.FinanceLord.ui.NetWorthEditReports;
+package protect.FinanceLord.NetWorthEditReports;
 
 import android.os.Bundle;
 
@@ -26,6 +26,7 @@ import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
 import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueInjector;
 import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
+import protect.FinanceLord.NetWorthEditReports.DateUtils;
 import protect.FinanceLord.R;
 import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentChildViewClickListener;
@@ -73,7 +74,6 @@ public class AssetsFragment extends Fragment {
                         AssetsFragment.this.dataProcessor.setAllAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
 
                         dataProcessor.calculateParentAssets(dao);
-//                        calculateParentAssets();
 
                         Log.d("AssetsFragment", "Assets committed!");
                     }
@@ -113,34 +113,5 @@ public class AssetsFragment extends Fragment {
                 });
             }
         });
-    }
-
-    private void calculateParentAssets(){
-
-        Date startOfMinute = DateUtils.firstSecondOfThisMinute();
-        Long MilliSeconds = startOfMinute.getTime();
-        List<Float> parentAssets = new ArrayList<>();
-        AssetsValueInjector assetsValueInjector = new AssetsValueInjector(AssetsFragment.this.getContext(), MilliSeconds);
-        AssetsValueExtractor assetsValueExtractor = new AssetsValueExtractor(AssetsFragment.this.getContext(), MilliSeconds);
-        NetWorthCalculator netWorthCalculator = new NetWorthCalculator(assetsValueExtractor);
-
-
-        float totalAssets = netWorthCalculator.calculateTotalAssets();
-        float totalLiquidAssets = netWorthCalculator.calculateTotalLiquidAssets();
-        float totalInvestedAssets = netWorthCalculator.calculateTotalInvestedAssets();
-        float totalPersonalAssets = netWorthCalculator.calculateTotalPersonalAssets();
-        float totalTaxableAccounts = netWorthCalculator.calculateTotalTaxableAccounts();
-        float totalRetirementAccounts = netWorthCalculator.calculateTotalRetirementAccounts();
-        float totalOwnershipInterests = netWorthCalculator.calculateTotalOwnershipInterests();
-
-        parentAssets.add(totalAssets);
-        parentAssets.add(totalLiquidAssets);
-        parentAssets.add(totalInvestedAssets);
-        parentAssets.add(totalPersonalAssets);
-        parentAssets.add(totalTaxableAccounts);
-        parentAssets.add(totalRetirementAccounts);
-        parentAssets.add(totalOwnershipInterests);
-
-        assetsValueInjector.insertParentAssetsValue(parentAssets);
     }
 }
