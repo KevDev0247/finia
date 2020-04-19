@@ -27,7 +27,7 @@ public class NetWorthCalculator {
         return totalAssets;
     }
 
-    public float calculateTotalLiquidAssets(){
+    public float calculateTotalLiquidAssets() {
 
         float totalLiquidAssets = 0;
         for (AssetsTypeQuery assetsTypeQuery: assetsTypeQueries){
