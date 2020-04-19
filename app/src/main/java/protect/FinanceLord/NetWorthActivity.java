@@ -14,12 +14,11 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
-import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueInjector;
 import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
-import protect.FinanceLord.ui.NetWorthEditReports.DateUtils;
-import protect.FinanceLord.ui.NetWorthEditReports.PastReportsAdapter;
+import protect.FinanceLord.NetWorthEditReports.DateUtils;
+import protect.FinanceLord.NetWorthEditReports.PastReportsAdapter;
 
 public class NetWorthActivity extends AppCompatActivity {
 
@@ -67,8 +66,6 @@ public class NetWorthActivity extends AppCompatActivity {
 
                 Date startOfMinute = DateUtils.firstSecondOfThisMinute();
                 Long MilliSeconds = startOfMinute.getTime();
-                List<Float> parentAssets = new ArrayList<>();
-                AssetsValueInjector assetsValueInjector = new AssetsValueInjector(NetWorthActivity.this, MilliSeconds);
                 AssetsValueExtractor assetsValueExtractor = new AssetsValueExtractor(NetWorthActivity.this, MilliSeconds);
                 NetWorthCalculator netWorthCalculator = new NetWorthCalculator(assetsValueExtractor);
 
@@ -94,16 +91,6 @@ public class NetWorthActivity extends AppCompatActivity {
                 dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,"Ownership Interests", String.valueOf(totalOwnershipInterests)));
 
                 adapter.notifyDataSetChanged();
-
-                parentAssets.add(totalAssets);
-                parentAssets.add(totalLiquidAssets);
-                parentAssets.add(totalInvestedAssets);
-                parentAssets.add(totalPersonalAssets);
-                parentAssets.add(totalTaxableAccounts);
-                parentAssets.add(totalRetirementAccounts);
-                parentAssets.add(totalOwnershipInterests);
-
-                assetsValueInjector.insertParentAssetsValue(parentAssets);
             }
         });
     }

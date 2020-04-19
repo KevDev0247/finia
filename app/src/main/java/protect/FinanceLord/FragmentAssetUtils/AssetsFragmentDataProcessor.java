@@ -99,7 +99,6 @@ public class AssetsFragmentDataProcessor {
                 return;
             }
         }
-
         subGroupAssets.add(assetsFragmentDataCarrier);
     }
 }

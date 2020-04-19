@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-import protect.FinanceLord.ui.NetWorthEditReports.AssetsFragment;
-import protect.FinanceLord.ui.NetWorthEditReports.LiabilitiesFragment;
-import protect.FinanceLord.ui.NetWorthEditReports.SectionsPagerAdapter;
+import protect.FinanceLord.NetWorthEditReports.AssetsFragment;
+import protect.FinanceLord.NetWorthEditReports.LiabilitiesFragment;
+import protect.FinanceLord.NetWorthEditReports.SectionsPagerAdapter;
 
 public class NetWorthEditReportsActivity extends AppCompatActivity {
 
@@ -40,7 +40,6 @@ public class NetWorthEditReportsActivity extends AppCompatActivity {
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
-        Toolbar toolbar = findViewById(R.id.toolbar);
 
         tabLayout.setupWithViewPager(viewPager);
         

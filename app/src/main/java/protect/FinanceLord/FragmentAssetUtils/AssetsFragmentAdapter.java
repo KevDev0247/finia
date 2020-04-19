@@ -18,7 +18,7 @@ import java.util.List;
 
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.R;
-import protect.FinanceLord.ui.NetWorthEditReports.NetWorthExpandableListView;
+import protect.FinanceLord.NetWorthEditReports.NetWorthExpandableListView;
 
 public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 

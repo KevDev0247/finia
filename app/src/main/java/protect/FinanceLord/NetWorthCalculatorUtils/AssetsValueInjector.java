@@ -6,21 +6,17 @@ import java.util.List;
 
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
-import protect.FinanceLord.Database.FinanceLordDatabase;
 
 public class AssetsValueInjector {
 
     Context context;
     Long date;
-    FinanceLordDatabase database;
     AssetsValueDao assetsValueDao;
 
-    public AssetsValueInjector(Context context, Long date){
+    public AssetsValueInjector(Context context, Long date, AssetsValueDao assetsValueDao){
         this.context = context;
         this.date = date;
-
-        database = FinanceLordDatabase.getInstance(context);
-        assetsValueDao = database.assetsValueDao();
+        this.assetsValueDao = assetsValueDao;
     }
 
     public void insertParentAssetsValue(List<Float> parentAssets){

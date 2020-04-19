@@ -23,6 +23,7 @@
     <string name="taxable_accounts">Taxable Accounts</string>
     <string name="retirement_accounts">Retirement Accounts</string>
     <string name="ownership_interest">Ownership Interest</string>
+    <string name="title_activity_net_worth_report_template">NetWorthReportTemplate</string>
 
 
 </resources>

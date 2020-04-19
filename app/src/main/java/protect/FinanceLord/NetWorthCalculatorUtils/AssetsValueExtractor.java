@@ -2,9 +2,7 @@ package protect.FinanceLord.NetWorthCalculatorUtils;
 
 import android.content.Context;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;

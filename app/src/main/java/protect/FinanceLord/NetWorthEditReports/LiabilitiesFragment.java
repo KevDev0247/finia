@@ -1,4 +1,4 @@
-package protect.FinanceLord.ui.NetWorthEditReports;
+package protect.FinanceLord.NetWorthEditReports;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
