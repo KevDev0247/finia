@@ -106,9 +106,8 @@ public class AssetsFragmentDataProcessor {
     }
 
 
-    // calculators
 
-    private long getAssetsId(String assetsName) {
+    private int getAssetsId(String assetsName) {
         for(AssetsTypeQuery query : dataList) {
             if (query.assetsFirstLevelName != null && query.assetsFirstLevelName.equals(assetsName)) {
                 return query.assetsFirstLevelId;
@@ -123,38 +122,50 @@ public class AssetsFragmentDataProcessor {
         return 0;
     }
 
-    private List<Long> getAssetsIdsBelongsTo(String assetsName) {
+    private List<Integer> getAssetsIdsBelongsTo(String assetsName) {
+
         if (TextUtils.isEmpty(assetsName)) {
             return new ArrayList<>();
         }
+
         List assetsIDs = new ArrayList();
         if ("Ownership interests".equals(assetsName)) {
             for (AssetsTypeQuery query : dataList) {
-                if (query.assetsThirdLevelName != null && query.assetsThirdLevelName.equals(assetsName) && query.assetsFourthLevelName != null) {
+                if (query.assetsThirdLevelName != null
+                        && query.assetsThirdLevelName.equals(assetsName)
+                        && query.assetsFourthLevelName != null) {
                     assetsIDs.add(query.assetsFourthLevelId);
                 }
             }
         } else if ("Retirement accounts".equals(assetsName)) {
             for (AssetsTypeQuery query : dataList) {
-                if (query.assetsThirdLevelName != null && query.assetsThirdLevelName.equals(assetsName) && query.assetsFourthLevelName != null) {
+                if (query.assetsThirdLevelName != null
+                        && query.assetsThirdLevelName.equals(assetsName)
+                        && query.assetsFourthLevelName != null) {
                     assetsIDs.add(query.assetsFourthLevelId);
                 }
             }
         } else if ("Taxable accounts".equals(assetsName)) {
             for (AssetsTypeQuery query : dataList) {
-                if (query.assetsThirdLevelName != null && query.assetsThirdLevelName.equals(assetsName) && query.assetsFourthLevelName != null) {
+                if (query.assetsThirdLevelName != null
+                        && query.assetsThirdLevelName.equals(assetsName)
+                        && query.assetsFourthLevelName != null) {
                     assetsIDs.add(query.assetsFourthLevelId);
                 }
             }
         } else if ("Liquid assets".equals(assetsName)) {
             for (AssetsTypeQuery query : dataList) {
-                if (query.assetsSecondLevelName != null && query.assetsSecondLevelName.equals(assetsName) && query.assetsThirdLevelName != null) {
+                if (query.assetsSecondLevelName != null
+                        && query.assetsSecondLevelName.equals(assetsName)
+                        && query.assetsThirdLevelName != null) {
                     assetsIDs.add(query.assetsThirdLevelId);
                 }
             }
         } else if ("Personal assets".equals(assetsName)) {
             for (AssetsTypeQuery query : dataList) {
-                if (query.assetsSecondLevelName != null && query.assetsSecondLevelName.equals(assetsName) && query.assetsThirdLevelName != null) {
+                if (query.assetsSecondLevelName != null
+                        && query.assetsSecondLevelName.equals(assetsName)
+                        && query.assetsThirdLevelName != null) {
                     assetsIDs.add(query.assetsThirdLevelId);
                 }
             }
@@ -181,9 +192,9 @@ public class AssetsFragmentDataProcessor {
     }
 
     public float calculateTotalLiquidAssets() {
-        List<Long> assetsIDs = this.getAssetsIdsBelongsTo("Liquid assets");
+        List<Integer> assetsIDs = this.getAssetsIdsBelongsTo("Liquid assets");
         float totalLiquidAssets = 0;
-        for (Long assetsId : assetsIDs) {
+        for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
             if (assetsValue != null) {
                 totalLiquidAssets += assetsValue.getAssetsValue();
@@ -195,10 +206,10 @@ public class AssetsFragmentDataProcessor {
 
     public float calculateTotalPersonalAssets(){
 
-        List<Long> assetsIDs = this.getAssetsIdsBelongsTo("Personal assets");
+        List<Integer> assetsIDs = this.getAssetsIdsBelongsTo("Personal assets");
         float totalPersonalAssets = 0;
 
-        for (Long assetsId : assetsIDs) {
+        for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
             if (assetsValue != null) {
                 totalPersonalAssets += assetsValue.getAssetsValue();
@@ -220,10 +231,10 @@ public class AssetsFragmentDataProcessor {
 
     public float calculateTotalOwnershipInterests() {
 
-        List<Long> assetsIDs = this.getAssetsIdsBelongsTo("Ownership interests");
+        List<Integer> assetsIDs = this.getAssetsIdsBelongsTo("Ownership interests");
         float totalOwnershipInterest = 0;
 
-        for (Long assetsId : assetsIDs) {
+        for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
             if (assetsValue != null) {
                 totalOwnershipInterest += assetsValue.getAssetsValue();
@@ -234,10 +245,10 @@ public class AssetsFragmentDataProcessor {
     }
 
     public float calculateTotalRetirementAccounts() {
-        List<Long> assetsIDs = this.getAssetsIdsBelongsTo("Retirement accounts");
+        List<Integer> assetsIDs = this.getAssetsIdsBelongsTo("Retirement accounts");
         float totalRetirementAccounts = 0;
 
-        for (Long assetId : assetsIDs) {
+        for (int assetId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetId);
             if (assetsValue != null) {
                 totalRetirementAccounts += assetsValue.getAssetsValue();
@@ -248,9 +259,9 @@ public class AssetsFragmentDataProcessor {
     }
 
     public float calculateTotalTaxableAccounts(){
-        List<Long> assetsIDs = this.getAssetsIdsBelongsTo("Taxable accounts");
+        List<Integer> assetsIDs = this.getAssetsIdsBelongsTo("Taxable accounts");
         float totalTotalTaxableAccounts = 0;
-        for (Long assetsId : assetsIDs) {
+        for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
             if (assetsValue != null) {
                 totalTotalTaxableAccounts += assetsValue.getAssetsValue();
