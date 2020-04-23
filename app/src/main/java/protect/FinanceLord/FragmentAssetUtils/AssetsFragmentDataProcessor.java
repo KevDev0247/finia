@@ -1,6 +1,7 @@
 package protect.FinanceLord.FragmentAssetUtils;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -122,7 +123,7 @@ public class AssetsFragmentDataProcessor {
         return 0;
     }
 
-    private List<Integer> getAssetsIdsBelongsTo(String assetsName) {
+    private List<Integer> getAssetsIDsBelongsTo(String assetsName) {
 
         if (TextUtils.isEmpty(assetsName)) {
             return new ArrayList<>();
@@ -192,12 +193,18 @@ public class AssetsFragmentDataProcessor {
     }
 
     public float calculateTotalLiquidAssets() {
-        List<Integer> assetsIDs = this.getAssetsIdsBelongsTo("Liquid assets");
+        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Liquid assets");
         float totalLiquidAssets = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
             if (assetsValue != null) {
+
+                Log.d("Liquid assets id", String.valueOf(assetsValue.getAssetsId()));
+                Log.d("Liquid assets value", String.valueOf(assetsValue.getAssetsValue()));
+
                 totalLiquidAssets += assetsValue.getAssetsValue();
+            } else {
+                Log.d("Liquid assets null", "null");
             }
         }
 
@@ -206,13 +213,18 @@ public class AssetsFragmentDataProcessor {
 
     public float calculateTotalPersonalAssets(){
 
-        List<Integer> assetsIDs = this.getAssetsIdsBelongsTo("Personal assets");
+        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Personal assets");
         float totalPersonalAssets = 0;
-
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
             if (assetsValue != null) {
+
+                Log.d("Personal assets id", String.valueOf(assetsValue.getAssetsId()));
+                Log.d("Personal assets value", String.valueOf(assetsValue.getAssetsValue()));
+
                 totalPersonalAssets += assetsValue.getAssetsValue();
+            } else {
+                Log.d("Personal null", "null");
             }
         }
 
@@ -231,13 +243,18 @@ public class AssetsFragmentDataProcessor {
 
     public float calculateTotalOwnershipInterests() {
 
-        List<Integer> assetsIDs = this.getAssetsIdsBelongsTo("Ownership interests");
+        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Ownership interests");
         float totalOwnershipInterest = 0;
-
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
             if (assetsValue != null) {
+
+                Log.d("Ownership id", String.valueOf(assetsValue.getAssetsId()));
+                Log.d("Ownership value", String.valueOf(assetsValue.getAssetsValue()));
+
                 totalOwnershipInterest += assetsValue.getAssetsValue();
+            } else {
+                Log.d("Ownership null", "null");
             }
         }
 
@@ -245,13 +262,18 @@ public class AssetsFragmentDataProcessor {
     }
 
     public float calculateTotalRetirementAccounts() {
-        List<Integer> assetsIDs = this.getAssetsIdsBelongsTo("Retirement accounts");
+        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Retirement accounts");
         float totalRetirementAccounts = 0;
-
         for (int assetId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetId);
             if (assetsValue != null) {
+
+                Log.d("Retirement id", String.valueOf(assetsValue.getAssetsId()));
+                Log.d("Retirement value", String.valueOf(assetsValue.getAssetsValue()));
+
                 totalRetirementAccounts += assetsValue.getAssetsValue();
+            } else {
+                Log.d("Retirement null", "null");
             }
         }
 
@@ -259,12 +281,18 @@ public class AssetsFragmentDataProcessor {
     }
 
     public float calculateTotalTaxableAccounts(){
-        List<Integer> assetsIDs = this.getAssetsIdsBelongsTo("Taxable accounts");
+        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Taxable accounts");
         float totalTotalTaxableAccounts = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
             if (assetsValue != null) {
+
+                Log.d("Taxable id", String.valueOf(assetsValue.getAssetsId()));
+                Log.d("Taxable value", String.valueOf(assetsValue.getAssetsValue()));
+
                 totalTotalTaxableAccounts += assetsValue.getAssetsValue();
+            } else {
+                Log.d("Taxable null", "null");
             }
         }
 
@@ -281,6 +309,14 @@ public class AssetsFragmentDataProcessor {
         float totalTaxableAccounts = this.calculateTotalTaxableAccounts();
         float totalRetirementAccounts = this.calculateTotalRetirementAccounts();
         float totalOwnershipInterests = this.calculateTotalOwnershipInterests();
+
+        Log.d("Total Assets", " value is " + totalAssets);
+        Log.d("Liquid Assets", " value is " + totalLiquidAssets);
+        Log.d("Invested Assets", " value is " + totalInvestedAssets);
+        Log.d("Personal Assets", " value is " + totalPersonalAssets);
+        Log.d("Taxable Accounts", " value is " + totalTaxableAccounts);
+        Log.d("Retirement Accounts", " value is " + totalRetirementAccounts);
+        Log.d("Ownership Interests", " value is " + totalOwnershipInterests);
 
         long totalAssetsId = this.getAssetsId("Total Assets");
         long liquidAssetsId = this.getAssetsId("Liquid assets");
