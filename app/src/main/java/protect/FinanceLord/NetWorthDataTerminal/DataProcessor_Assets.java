@@ -338,9 +338,6 @@ public class DataProcessor_Assets {
             totalAssetsValue.setDate(new Date().getTime());
             this.assetsValues.add(totalAssetsValue);
 
-            if (totalAssetsValue.getAssetsId() == 0) {
-                Log.d("DataProcessor_Assets", "assetsId == 0");
-            }
             assetsValueDao.insertAssetValue(totalAssetsValue);
         }
 
@@ -354,10 +351,6 @@ public class DataProcessor_Assets {
             liquidAssetsValue.setAssetsId((int)liquidAssetsId);
             liquidAssetsValue.setAssetsValue(totalLiquidAssets);
             liquidAssetsValue.setDate(new Date().getTime());
-
-            if (liquidAssetsValue.getAssetsId() == 0) {
-                Log.d("DataProcessor_Assets", "assetsId == 0");
-            }
 
             assetsValueDao.insertAssetValue(liquidAssetsValue);
         }
@@ -374,10 +367,6 @@ public class DataProcessor_Assets {
             totalInvestedAssetsValue.setAssetsValue(totalInvestedAssets);
             totalInvestedAssetsValue.setDate(new Date().getTime());
 
-            if (totalInvestedAssetsValue.getAssetsId() == 0) {
-                Log.d("DataProcessor_Assets", "assetsId == 0");
-            }
-
             assetsValueDao.insertAssetValue(totalInvestedAssetsValue);
         }
 
@@ -392,10 +381,6 @@ public class DataProcessor_Assets {
             personalAssetsValue.setAssetsValue(totalPersonalAssets);
             personalAssetsValue.setDate(new Date().getTime());
 
-
-            if (personalAssetsValue.getAssetsId() == 0) {
-                Log.d("DataProcessor_Assets", "assetsId == 0");
-            }
             assetsValueDao.insertAssetValue(personalAssetsValue);
         }
 
@@ -410,10 +395,6 @@ public class DataProcessor_Assets {
             taxableAssetsValue.setAssetsId((int)taxableAccountAssetsId);;
             taxableAssetsValue.setAssetsValue(totalTaxableAccounts);
             taxableAssetsValue.setDate(new Date().getTime());
-
-            if (taxableAssetsValue.getAssetsId() == 0) {
-                Log.d("DataProcessor_Assets", "assetsId == 0");
-            }
 
             assetsValueDao.insertAssetValue(taxableAssetsValue);
         }
@@ -430,9 +411,6 @@ public class DataProcessor_Assets {
             retirementAccountAssetsValue.setAssetsValue(totalRetirementAccounts);
             retirementAccountAssetsValue.setDate(new Date().getTime());
 
-            if (retirementAccountAssetsValue.getAssetsId() == 0) {
-                Log.d("DataProcessor_Assets", "assetsId == 0");
-            }
 
             assetsValueDao.insertAssetValue(retirementAccountAssetsValue);
         }
@@ -449,9 +427,6 @@ public class DataProcessor_Assets {
             ownershipInterestsAssetsValue.setAssetsValue(totalOwnershipInterests);
             ownershipInterestsAssetsValue.setDate(new Date().getTime());
 
-            if (ownershipInterestsAssetsValue.getAssetsId() == 0) {
-                Log.d("DataProcessor_Assets", "assetsId == 0");
-            }
             assetsValueDao.insertAssetValue(ownershipInterestsAssetsValue);
         }
     }
