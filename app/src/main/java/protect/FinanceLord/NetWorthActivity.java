@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +16,8 @@ import java.util.concurrent.Executors;
 
 import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
 import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
+import protect.FinanceLord.NetWorthPastReportsListUtils.PastReportsAdapter;
+import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
 import protect.FinanceLord.NetWorthEditReportsUtils.DateUtils;
@@ -27,10 +30,13 @@ public class NetWorthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth);
 
-//        PastReportsAdapter pastReportsAdapter = new PastReportsAdapter(this, );
+        createPastReportsListView();
 
-        Button completeReportButton = findViewById(R.id.CompleteReport);
-        completeReportButton.setOnClickListener(new View.OnClickListener() {
+        createAssetsCardsView();
+
+        Button editReportButton = findViewById(R.id.editReport);
+        editReportButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -38,8 +44,15 @@ public class NetWorthActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
-        createAssetsCardsView();
+    protected void createPastReportsListView(){
+        ArrayList<ReportItemsDataModel> dataSources = new ArrayList<>();
+        PastReportsAdapter adapter;
+        ListView pastReportsListView = findViewById(R.id.past_report_list);
+
+        adapter = new PastReportsAdapter(this, dataSources);
+        pastReportsListView.setAdapter(adapter);
     }
 
     protected void createAssetsCardsView(){

@@ -21,7 +21,7 @@
             android:background="@drawable/ic_toolbar_background">
 
             <Button
-                android:id="@+id/CompleteReport"
+                android:id="@+id/editReport"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
@@ -96,6 +96,7 @@
             </LinearLayout>
 
             <ListView
+                android:id="@+id/past_report_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

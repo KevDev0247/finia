@@ -21,11 +21,11 @@ public class Report_AssetsFragment extends Fragment {
 
     String title;
     DataProcessor_Assets dataProcessor;
-    private ArrayList<ReportItemsDataModel> liquidAssetsDataSource = new ArrayList<>();
-    private ArrayList<ReportItemsDataModel> personalAssetsDataSource = new ArrayList<>();
-    private ArrayList<ReportItemsDataModel> taxableAccountsDataSource = new ArrayList<>();
-    private ArrayList<ReportItemsDataModel> retirementAccountsDataSource = new ArrayList<>();
-    private ArrayList<ReportItemsDataModel> ownershipInterestsDataSource = new ArrayList<>();
+    private ArrayList<NetWorthItemsDataModel> liquidAssetsDataSource = new ArrayList<>();
+    private ArrayList<NetWorthItemsDataModel> personalAssetsDataSource = new ArrayList<>();
+    private ArrayList<NetWorthItemsDataModel> taxableAccountsDataSource = new ArrayList<>();
+    private ArrayList<NetWorthItemsDataModel> retirementAccountsDataSource = new ArrayList<>();
+    private ArrayList<NetWorthItemsDataModel> ownershipInterestsDataSource = new ArrayList<>();
 
     ListView liquidAssetsListView;
     ListView personalAssetsListView;
@@ -74,27 +74,27 @@ public class Report_AssetsFragment extends Fragment {
         List<DataCarrier_Assets> ownershipInterests = dataProcessor.getSubSet("Ownership interests", 3);
 
         for (DataCarrier_Assets dataCarrier : liquidAssets){
-            ReportItemsDataModel dataModel = new ReportItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
             liquidAssetsDataSource.add(dataModel);
         }
 
         for (DataCarrier_Assets dataCarrier : personalAssets){
-            ReportItemsDataModel dataModel = new ReportItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
             personalAssetsDataSource.add(dataModel);
         }
 
         for (DataCarrier_Assets dataCarrier : taxableAccounts){
-            ReportItemsDataModel dataModel = new ReportItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
             taxableAccountsDataSource.add(dataModel);
         }
 
         for (DataCarrier_Assets dataCarrier : retirementAccounts){
-            ReportItemsDataModel dataModel = new ReportItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
             retirementAccountsDataSource.add(dataModel);
         }
 
         for (DataCarrier_Assets dataCarrier : ownershipInterests){
-            ReportItemsDataModel dataModel = new ReportItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
             ownershipInterestsDataSource.add(dataModel);
         }
     }
