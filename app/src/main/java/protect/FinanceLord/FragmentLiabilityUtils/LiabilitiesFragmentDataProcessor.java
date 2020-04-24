@@ -6,6 +6,7 @@ import java.util.List;
 
 import protect.FinanceLord.Database.LiabilitiesTypeQuery;
 import protect.FinanceLord.Database.LiabilitiesValue;
+import protect.FinanceLord.FragmentLiabilityUtils.LiabilitiesFragmentDataCarrier;
 
 public class LiabilitiesFragmentDataProcessor {
 

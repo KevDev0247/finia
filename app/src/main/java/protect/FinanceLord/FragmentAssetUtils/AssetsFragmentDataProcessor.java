@@ -10,6 +10,7 @@ import java.util.List;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentDataCarrier;
 
 public class AssetsFragmentDataProcessor {
 

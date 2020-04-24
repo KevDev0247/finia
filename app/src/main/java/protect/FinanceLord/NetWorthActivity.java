@@ -17,8 +17,8 @@ import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
 import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
-import protect.FinanceLord.NetWorthEditReports.DateUtils;
-import protect.FinanceLord.NetWorthEditReports.PastReportsAdapter;
+import protect.FinanceLord.NetWorthEditReportsUtils.DateUtils;
+import protect.FinanceLord.NetWorthEditReportsUtils.PastReportsAdapter;
 
 public class NetWorthActivity extends AppCompatActivity {
 
@@ -28,7 +28,7 @@ public class NetWorthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth);
 
-        PastReportsAdapter pastReportsAdapter = new PastReportsAdapter(this);
+//        PastReportsAdapter pastReportsAdapter = new PastReportsAdapter(this, );
 
         Button completeReportButton = findViewById(R.id.CompleteReport);
         completeReportButton.setOnClickListener(new View.OnClickListener() {

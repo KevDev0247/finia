@@ -23,7 +23,7 @@ public class AssetsFragmentChildViewClickListener implements ExpandableListView.
         AssetsFragmentDataCarrier sectionItem = sectionDataSet.get(i);
         List<AssetsFragmentDataCarrier> childSection = dataProcessor.getSubSet(sectionItem.assetsTypeName, level + 1);
 
-        Log.d("AssetsFragment", "child Clicked: " + childSection.get(i1).assetsTypeName + ", id in DB: " + childSection.get(i1).assetsId);
+        Log.d("EditAssetsFragment", "child Clicked: " + childSection.get(i1).assetsTypeName + ", id in DB: " + childSection.get(i1).assetsId);
         return true;
     }
 }

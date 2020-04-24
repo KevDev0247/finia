@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReports;
+package protect.FinanceLord.NetWorthEditReportsUtils;
 
 import android.os.Bundle;
 
@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -23,25 +22,22 @@ import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
-import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueInjector;
-import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
-import protect.FinanceLord.NetWorthEditReports.DateUtils;
 import protect.FinanceLord.R;
 import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentChildViewClickListener;
 import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentDataProcessor;
 
-public class AssetsFragment extends Fragment {
+public class EditAssetsFragment extends Fragment {
+
     String title;
     private Button btnCommit;
     private AssetsFragmentDataProcessor dataProcessor;
 
-    public AssetsFragment(String title) {
+    ExpandableListView expandableListView;
+
+    public EditAssetsFragment(String title) {
         this.title = title;
     }
-
-    ExpandableListView expandableListView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,16 +50,16 @@ public class AssetsFragment extends Fragment {
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
-                        FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragment.this.getContext());
+                        FinanceLordDatabase database = FinanceLordDatabase.getInstance(EditAssetsFragment.this.getContext());
                         AssetsValueDao dao = database.assetsValueDao();
-                        for(AssetsValue assetsValue: AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
+                        for(AssetsValue assetsValue: EditAssetsFragment.this.dataProcessor.getAllAssetsValues()) {
                             if(assetsValue.getAssetsPrimaryId() != 0) {
                                 List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsPrimaryId());
                                 Log.d("Assets Value Check", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
                                 if(!assetsValues.isEmpty()) {
                                     dao.updateAssetValue(assetsValue);
                                 } else {
-                                    Log.w("AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
+                                    Log.w("EditAssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
                             } else {
                                 dao.insertAssetValue(assetsValue);
@@ -71,11 +67,11 @@ public class AssetsFragment extends Fragment {
                         }
 
                         Date startDate = DateUtils.firstSecondOfThisMinute();
-                        AssetsFragment.this.dataProcessor.setAllAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
+                        EditAssetsFragment.this.dataProcessor.setAllAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
 
                         dataProcessor.calculateParentAssets(dao);
 
-                        Log.d("AssetsFragment", "Assets committed!");
+                        Log.d("EditAssetsFragment", "Assets committed!");
                     }
                 });
             }
@@ -90,21 +86,21 @@ public class AssetsFragment extends Fragment {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(AssetsFragment.this.getContext());
-                AssetsTypeDao dao = database.assetsTypeDao();
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(EditAssetsFragment.this.getContext());
+                AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
-                List<AssetsTypeQuery> assetsTypeQueries = dao.queryGroupedAssetsType();
+                List<AssetsTypeQuery> assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
 
                 Date startOfMinute = DateUtils.firstSecondOfThisMinute();
                 Long milliseconds = startOfMinute.getTime();
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsSinceDate(milliseconds);
-                Log.d("AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
-                Log.d("AssetsFragment", "Query assets Values: " + assetsValues.toString());
+                Log.d("EditAssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
+                Log.d("EditAssetsFragment", "Query assets Values: " + assetsValues.toString());
 
-                AssetsFragment.this.dataProcessor = new AssetsFragmentDataProcessor(assetsTypeQueries, assetsValues);
-                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
+                EditAssetsFragment.this.dataProcessor = new AssetsFragmentDataProcessor(assetsTypeQueries, assetsValues);
+                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(EditAssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
-                AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
+                EditAssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         expandableListView.setAdapter(adapter);

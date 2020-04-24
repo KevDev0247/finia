@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReports;
+package protect.FinanceLord.NetWorthEditReportsUtils;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,9 +16,10 @@ import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesTypeDao;
 import protect.FinanceLord.R;
 
-public class LiabilitiesFragment extends Fragment {
+public class EditLiabilitiesFragment extends Fragment {
+
     String title;
-    public LiabilitiesFragment(String title) {
+    public EditLiabilitiesFragment(String title) {
         this.title = title;
     }
 
@@ -37,8 +38,8 @@ public class LiabilitiesFragment extends Fragment {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(LiabilitiesFragment.this.getContext());
-                LiabilitiesTypeDao dao = database.liabilitiesTypeDao();
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(EditLiabilitiesFragment.this.getContext());
+                LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
             }
         });
     }

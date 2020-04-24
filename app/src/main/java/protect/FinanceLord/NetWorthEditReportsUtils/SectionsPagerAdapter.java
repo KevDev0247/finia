@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReports;
+package protect.FinanceLord.NetWorthEditReportsUtils;
 
 import android.content.Context;
 
@@ -42,7 +42,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 2 total pages.
         return 2;
     }
 }

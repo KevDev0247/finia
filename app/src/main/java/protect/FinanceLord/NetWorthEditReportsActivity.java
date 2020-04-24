@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-import protect.FinanceLord.NetWorthEditReports.AssetsFragment;
-import protect.FinanceLord.NetWorthEditReports.LiabilitiesFragment;
-import protect.FinanceLord.NetWorthEditReports.SectionsPagerAdapter;
+import protect.FinanceLord.NetWorthEditReportsUtils.EditAssetsFragment;
+import protect.FinanceLord.NetWorthEditReportsUtils.EditLiabilitiesFragment;
+import protect.FinanceLord.NetWorthEditReportsUtils.SectionsPagerAdapter;
 
 public class NetWorthEditReportsActivity extends AppCompatActivity {
 
@@ -33,8 +32,8 @@ public class NetWorthEditReportsActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        AssetsFragment assetsFragment = new AssetsFragment("Assets");
-        LiabilitiesFragment liabilitiesFragment = new LiabilitiesFragment("Liabilities");
+        EditAssetsFragment assetsFragment = new EditAssetsFragment("Assets");
+        EditLiabilitiesFragment liabilitiesFragment = new EditLiabilitiesFragment("Liabilities");
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 

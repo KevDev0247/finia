@@ -23,7 +23,7 @@ public class LiabilitiesFragmentChildViewClickListener implements ExpandableList
         LiabilitiesFragmentDataCarrier sectionItem = sectionDataSet.get(i);
         List<LiabilitiesFragmentDataCarrier> childSection = dataProcessor.getGroupSet(sectionItem.liabilitiesTypeName, level + 1);
 
-        Log.d("LiabilitiesFragment", "child clicked: " + childSection.get(i1).liabilitiesTypeName + ", id in DB" + childSection.get(i1).liabilitiesId);
+        Log.d("EditLiabilitiesFragment", "child clicked: " + childSection.get(i1).liabilitiesTypeName + ", id in DB" + childSection.get(i1).liabilitiesId);
         return false;
     }
 }
