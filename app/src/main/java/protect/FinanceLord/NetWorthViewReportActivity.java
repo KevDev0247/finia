@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import protect.FinanceLord.NetWorthReportTemplateUtils.SectionsPagerAdapter;
 
-public class NetWorthReportTemplate extends AppCompatActivity {
+public class NetWorthViewReportActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

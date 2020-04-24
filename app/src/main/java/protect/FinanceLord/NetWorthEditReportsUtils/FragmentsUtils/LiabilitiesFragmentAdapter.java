@@ -1,4 +1,4 @@
-package protect.FinanceLord.FragmentLiabilityUtils;
+package protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils;
 
 import android.content.Context;
 import android.view.View;

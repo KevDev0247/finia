@@ -16,7 +16,7 @@ import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
 import protect.FinanceLord.NetWorthEditReportsUtils.Edit_LiabilitiesFragment;
 import protect.FinanceLord.NetWorthEditReportsUtils.SectionsPagerAdapter;
 
-public class NetWorthEditReportsActivity extends AppCompatActivity {
+public class NetWorthEditReportActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

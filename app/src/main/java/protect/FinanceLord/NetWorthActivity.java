@@ -18,7 +18,6 @@ import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
 import protect.FinanceLord.NetWorthEditReportsUtils.DateUtils;
-import protect.FinanceLord.NetWorthEditReportsUtils.PastReportsAdapter;
 
 public class NetWorthActivity extends AppCompatActivity {
 
@@ -35,7 +34,7 @@ public class NetWorthActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(NetWorthActivity.this, NetWorthEditReportsActivity.class);
+                intent.setClass(NetWorthActivity.this, NetWorthEditReportActivity.class);
                 startActivity(intent);
             }
         });

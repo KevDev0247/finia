@@ -23,8 +23,8 @@ import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
-import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentAdapter;
-import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentChildViewClickListener;
+import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentAdapter;
+import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 
 public class Edit_AssetsFragment extends Fragment {

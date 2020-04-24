@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Database;
 
 import android.app.Activity;
 import android.util.Log;

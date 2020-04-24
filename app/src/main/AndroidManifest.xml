@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".NetWorthReportTemplate"
+            android:name=".NetWorthViewReportActivity"
             android:label="@string/title_activity_net_worth_report_template"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".NetWorthEditReportsActivity"
+            android:name=".NetWorthEditReportActivity"
             android:label="@string/title_activity_net_worth_edit_reports"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TransactionActivity" />
