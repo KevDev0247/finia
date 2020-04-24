@@ -26,7 +26,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
     ExpandableListView expandableListView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View liabilitiesView = inflater.inflate(R.layout.fragment_liabilities, null);
+        View liabilitiesView = inflater.inflate(R.layout.fragment_edit_liabilities, null);
         expandableListView = liabilitiesView.findViewById(R.id.liabilities_list_view);
 
         initLiabilitiesCategory();

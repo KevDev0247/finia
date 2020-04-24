@@ -21,15 +21,15 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_net_worth_edit_reports);
+        setContentView(R.layout.activity_net_worth_edit_report);
 
         String search = getIntent().getStringExtra(SearchManager.QUERY);
         resetView(search);
     }
 
     private void resetView(String search){
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        final ViewPager viewPager = findViewById(R.id.view_pager);
+        TabLayout tabLayout = findViewById(R.id.edit_tab_layout);
+        final ViewPager viewPager = findViewById(R.id.edit_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets");
@@ -39,8 +39,6 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
-
         tabLayout.setupWithViewPager(viewPager);
-        
     }
 }

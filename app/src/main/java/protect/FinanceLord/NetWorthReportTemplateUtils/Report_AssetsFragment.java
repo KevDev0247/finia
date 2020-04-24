@@ -40,7 +40,7 @@ public class Report_AssetsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View assetsView = inflater.inflate(R.layout.report_assets_layout, null);
+        View assetsView = inflater.inflate(R.layout.fragment_report_assets, null);
 
         initDataModels();
 

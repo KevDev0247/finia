@@ -41,7 +41,7 @@ public class Edit_AssetsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View assetsView = inflater.inflate(R.layout.fragment_assets, null);
+        View assetsView = inflater.inflate(R.layout.fragment_edit_assets, null);
         expandableListView = assetsView.findViewById(R.id.assets_list_view);
         this.btnCommit = assetsView.findViewById(R.id.btnCommit);
         this.btnCommit.setOnClickListener(new View.OnClickListener() {

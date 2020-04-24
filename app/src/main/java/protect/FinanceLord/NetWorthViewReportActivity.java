@@ -1,12 +1,18 @@
 package protect.FinanceLord;
 
+import android.app.SearchManager;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
 
+import protect.FinanceLord.NetWorthReportTemplateUtils.Report_AssetsFragment;
+import protect.FinanceLord.NetWorthReportTemplateUtils.Report_LiabilitiesFragment;
 import protect.FinanceLord.NetWorthReportTemplateUtils.SectionsPagerAdapter;
 
 public class NetWorthViewReportActivity extends AppCompatActivity {
@@ -14,12 +20,24 @@ public class NetWorthViewReportActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_net_worth_report_template);
-//        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-//        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
+        setContentView(R.layout.activity_net_worth_view_report);
 
+        String search = getIntent().getStringExtra(SearchManager.QUERY);
+        resetView(search);
+    }
+
+    public void resetView(String search){
+        TabLayout tabLayout = findViewById(R.id.report_tab_layout);
+        final ViewPager viewPager = findViewById(R.id.report_view_pager);
+
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        Report_AssetsFragment assetsFragment = new Report_AssetsFragment("Assets");
+        Report_LiabilitiesFragment liabilitiesFragment = new Report_LiabilitiesFragment("Liabilities");
+        fragments.add(assetsFragment);
+        fragments.add(liabilitiesFragment);
+
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
+        viewPager.setAdapter(sectionsPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 }

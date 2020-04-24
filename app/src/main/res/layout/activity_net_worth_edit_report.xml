@@ -30,7 +30,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+            android:id="@+id/edit_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#673AB7"
@@ -51,10 +51,10 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/view_pager"
+            android:id="@+id/edit_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/tabLayout"
+            android:layout_below="@+id/edit_tab_layout"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </LinearLayout>
