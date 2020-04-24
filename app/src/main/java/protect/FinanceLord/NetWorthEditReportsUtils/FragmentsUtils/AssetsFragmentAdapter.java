@@ -57,7 +57,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int i, int i1) {
-
         String assetsTypeName = getAssetsName(i);
         List<DataCarrier_Assets> carriers = dataProcessor.getSubSet(assetsTypeName, level + 1);
         return carriers.get(i1);

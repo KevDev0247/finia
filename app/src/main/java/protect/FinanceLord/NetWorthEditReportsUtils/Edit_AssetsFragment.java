@@ -34,6 +34,7 @@ public class Edit_AssetsFragment extends Fragment {
     private DataProcessor_Assets dataProcessor;
 
     ExpandableListView expandableListView;
+    private AssetsFragmentAdapter adapter;
 
     public Edit_AssetsFragment(String title) {
         this.title = title;
@@ -71,6 +72,12 @@ public class Edit_AssetsFragment extends Fragment {
 
                         dataProcessor.calculateParentAssets(dao);
 
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
                         Log.d("Edit_AssetsFragment", "Assets committed!");
                     }
                 });
@@ -98,7 +105,7 @@ public class Edit_AssetsFragment extends Fragment {
                 Log.d("Edit_AssetsFragment", "Query assets Values: " + assetsValues.toString());
 
                 Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypeQueries, assetsValues);
-                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
+                adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
