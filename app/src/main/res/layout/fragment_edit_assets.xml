@@ -7,6 +7,13 @@
     android:weightSum="1"
     android:background="@drawable/assets_sheets_background_gradient">
 
+    <Button
+        android:id="@+id/btnCalendar"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Date"/>
+
     <ExpandableListView
         android:id="@+id/assets_list_view"
         android:layout_width="match_parent"

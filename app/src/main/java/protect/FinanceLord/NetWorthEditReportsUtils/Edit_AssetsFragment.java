@@ -1,10 +1,12 @@
 package protect.FinanceLord.NetWorthEditReportsUtils;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import protect.FinanceLord.CalendarDialog;
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
@@ -31,9 +34,11 @@ public class Edit_AssetsFragment extends Fragment {
 
     String title;
     private Button btnCommit;
+    private Button btnCalendar;
     private DataProcessor_Assets dataProcessor;
 
     ExpandableListView expandableListView;
+    private AssetsFragmentAdapter adapter;
 
     public Edit_AssetsFragment(String title) {
         this.title = title;
@@ -43,10 +48,21 @@ public class Edit_AssetsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View assetsView = inflater.inflate(R.layout.fragment_edit_assets, null);
         expandableListView = assetsView.findViewById(R.id.assets_list_view);
+
+        this.btnCalendar = assetsView.findViewById(R.id.btnCalendar);
+        this.btnCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getFragmentManager();
+                CalendarDialog calendarDialog = new CalendarDialog();
+                calendarDialog.show(manager, "Calendar Dialog");
+            }
+        });
+
         this.btnCommit = assetsView.findViewById(R.id.btnCommit);
         this.btnCommit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
@@ -73,6 +89,13 @@ public class Edit_AssetsFragment extends Fragment {
 
                         dataProcessor.calculateParentAssets(assetsValueDao);
 
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                        
                         Log.d("Edit_AssetsFragment", "Assets committed!");
                     }
                 });
@@ -95,12 +118,13 @@ public class Edit_AssetsFragment extends Fragment {
 
                 Date startOfMinute = DateUtils.firstSecondOfThisMinute();
                 Long milliseconds = startOfMinute.getTime();
+
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsSinceDate(milliseconds);
                 Log.d("Edit_AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
                 Log.d("Edit_AssetsFragment", "Query assets Values: " + assetsValues.toString());
 
                 Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypeQueries, assetsValues);
-                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
+                adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
