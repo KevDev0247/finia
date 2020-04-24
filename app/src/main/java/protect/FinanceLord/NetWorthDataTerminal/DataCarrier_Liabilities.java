@@ -1,12 +1,12 @@
-package protect.FinanceLord.FragmentLiabilityUtils;
+package protect.FinanceLord.NetWorthDataTerminal;
 
-public class LiabilitiesFragmentDataCarrier {
+public class DataCarrier_Liabilities {
 
     public String liabilitiesTypeName;
     public int liabilitiesId;
     public int level;
 
-    public LiabilitiesFragmentDataCarrier(String liabilitiesTypeName, int liabilitiesId, int level){
+    public DataCarrier_Liabilities(String liabilitiesTypeName, int liabilitiesId, int level){
         this.liabilitiesTypeName = liabilitiesTypeName;
         this.liabilitiesId = liabilitiesId;
         this.level = level;

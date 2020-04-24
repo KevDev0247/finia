@@ -7,14 +7,17 @@ import android.widget.BaseExpandableListAdapter;
 
 import java.util.List;
 
+import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Liabilities;
+
 public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
-    private LiabilitiesFragmentDataProcessor dataProcessor;
-    private List<LiabilitiesFragmentDataCarrier> sectionDataSet;
+    private DataProcessor_Liabilities dataProcessor;
+    private List<DataCarrier_Liabilities> sectionDataSet;
     private int level;
     private Context context;
 
-    public LiabilitiesFragmentAdapter(LiabilitiesFragmentDataProcessor dataProcessor, List<LiabilitiesFragmentDataCarrier> sectionDataSet, int level, Context context){
+    public LiabilitiesFragmentAdapter(DataProcessor_Liabilities dataProcessor, List<DataCarrier_Liabilities> sectionDataSet, int level, Context context){
         this.dataProcessor = dataProcessor;
         this.sectionDataSet = sectionDataSet;
         this.level = level;
@@ -44,7 +47,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     public Object getChild(int i, int i1) {
 
         String liabilitiesTypeName = getLiabilitiesName(i);
-        List<LiabilitiesFragmentDataCarrier> carriers = dataProcessor.getGroupSet(liabilitiesTypeName, level + 1);
+        List<DataCarrier_Liabilities> carriers = dataProcessor.getGroupSet(liabilitiesTypeName, level + 1);
         return carriers.get(i1);
     }
 

@@ -16,18 +16,20 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
+import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.R;
 import protect.FinanceLord.NetWorthEditReportsUtils.NetWorthExpandableListView;
 
 public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
-    private AssetsFragmentDataProcessor dataProcessor;
-    private List<AssetsFragmentDataCarrier> sectionDataSet;
+    private DataProcessor_Assets dataProcessor;
+    private List<DataCarrier_Assets> sectionDataSet;
     private int level;
     private Context context;
 
-    public AssetsFragmentAdapter(Context context, AssetsFragmentDataProcessor dataProcessor, int level, String parentSection) {
+    public AssetsFragmentAdapter(Context context, DataProcessor_Assets dataProcessor, int level, String parentSection) {
         this.context = context;
         this.dataProcessor = dataProcessor;
         this.level = level;
@@ -57,7 +59,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     public Object getChild(int i, int i1) {
 
         String assetsTypeName = getAssetsName(i);
-        List<AssetsFragmentDataCarrier> carriers = dataProcessor.getSubSet(assetsTypeName, level + 1);
+        List<DataCarrier_Assets> carriers = dataProcessor.getSubSet(assetsTypeName, level + 1);
         return carriers.get(i1);
     }
 
@@ -91,7 +93,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
 
-            AssetsFragmentDataCarrier dataCarrier = this.sectionDataSet.get(position);
+            DataCarrier_Assets dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
             AssetsValue assetsValue = dataProcessor.findAssetsValue(dataCarrier.assetsId);
@@ -110,7 +112,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
 
-            AssetsFragmentDataCarrier dataCarrier = this.sectionDataSet.get(position);
+            DataCarrier_Assets dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
             AssetsValue assetsValue = dataProcessor.findAssetsValue(dataCarrier.assetsId);
@@ -124,7 +126,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    void addTextListener(EditText editText, final AssetsFragmentDataCarrier dataCarrier) {
+    void addTextListener(EditText editText, final DataCarrier_Assets dataCarrier) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -155,8 +157,8 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
-        final AssetsFragmentDataCarrier sectionData = sectionDataSet.get(groupPosition);
-        List<AssetsFragmentDataCarrier> children = dataProcessor.getSubSet(sectionData.assetsTypeName, level + 1);
+        final DataCarrier_Assets sectionData = sectionDataSet.get(groupPosition);
+        List<DataCarrier_Assets> children = dataProcessor.getSubSet(sectionData.assetsTypeName, level + 1);
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.assets_list_row_first, null);

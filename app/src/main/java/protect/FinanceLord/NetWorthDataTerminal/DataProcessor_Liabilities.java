@@ -1,4 +1,4 @@
-package protect.FinanceLord.FragmentLiabilityUtils;
+package protect.FinanceLord.NetWorthDataTerminal;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,14 +6,13 @@ import java.util.List;
 
 import protect.FinanceLord.Database.LiabilitiesTypeQuery;
 import protect.FinanceLord.Database.LiabilitiesValue;
-import protect.FinanceLord.FragmentLiabilityUtils.LiabilitiesFragmentDataCarrier;
 
-public class LiabilitiesFragmentDataProcessor {
+public class DataProcessor_Liabilities {
 
     private List<LiabilitiesTypeQuery> dataList;
     private List<LiabilitiesValue> liabilitiesValues;
 
-    public LiabilitiesFragmentDataProcessor(List<LiabilitiesTypeQuery> dataList, List<LiabilitiesValue> liabilitiesValues){
+    public DataProcessor_Liabilities(List<LiabilitiesTypeQuery> dataList, List<LiabilitiesValue> liabilitiesValues){
         this.dataList = dataList;
         this.liabilitiesValues = liabilitiesValues;
     }
@@ -49,14 +48,14 @@ public class LiabilitiesFragmentDataProcessor {
         this.liabilitiesValues = liabilitiesValues;
     }
 
-    public List<LiabilitiesFragmentDataCarrier> getGroupSet(String parentGroupLabel, int level){
-        List<LiabilitiesFragmentDataCarrier> subGroupLiabilities = new ArrayList<>();
+    public List<DataCarrier_Liabilities> getGroupSet(String parentGroupLabel, int level){
+        List<DataCarrier_Liabilities> subGroupLiabilities = new ArrayList<>();
 
         if (level == 0){
             for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList){
                 if (liabilitiesTypeQuery.liabilitiesFirstLevelName != null){
 
-                    LiabilitiesFragmentDataCarrier dataCarrier = new LiabilitiesFragmentDataCarrier(liabilitiesTypeQuery.liabilitiesFirstLevelName, liabilitiesTypeQuery.liabilitiesFirstLevelId, 0);
+                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesFirstLevelName, liabilitiesTypeQuery.liabilitiesFirstLevelId, 0);
                     addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
                 }
             }
@@ -68,7 +67,7 @@ public class LiabilitiesFragmentDataProcessor {
                         && liabilitiesTypeQuery.liabilitiesFirstLevelName == parentGroupLabel
                         && liabilitiesTypeQuery.liabilitiesSecondLevelName != null){
 
-                    LiabilitiesFragmentDataCarrier dataCarrier = new LiabilitiesFragmentDataCarrier(liabilitiesTypeQuery.liabilitiesSecondLevelName, liabilitiesTypeQuery.liabilitiesSecondLevelId, 1);
+                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesSecondLevelName, liabilitiesTypeQuery.liabilitiesSecondLevelId, 1);
                     addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
                 }
             }
@@ -80,7 +79,7 @@ public class LiabilitiesFragmentDataProcessor {
                         && liabilitiesTypeQuery.liabilitiesSecondLevelName == parentGroupLabel
                         && liabilitiesTypeQuery.liabilitiesThirdLevelName != null){
 
-                    LiabilitiesFragmentDataCarrier dataCarrier = new LiabilitiesFragmentDataCarrier(liabilitiesTypeQuery.liabilitiesThirdLevelName, liabilitiesTypeQuery.liabilitiesThirdLevelId, 2);
+                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesThirdLevelName, liabilitiesTypeQuery.liabilitiesThirdLevelId, 2);
                     addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
                 }
             }
@@ -89,8 +88,8 @@ public class LiabilitiesFragmentDataProcessor {
         return subGroupLiabilities;
     }
 
-    void addCarrierIfNotExists(LiabilitiesFragmentDataCarrier liabilitiesFragmentDataCarrier, List<LiabilitiesFragmentDataCarrier> subGroupLiabilities){
-        for (LiabilitiesFragmentDataCarrier dataCarrier: subGroupLiabilities){
+    void addCarrierIfNotExists(DataCarrier_Liabilities liabilitiesFragmentDataCarrier, List<DataCarrier_Liabilities> subGroupLiabilities){
+        for (DataCarrier_Liabilities dataCarrier: subGroupLiabilities){
             if (dataCarrier.liabilitiesId == liabilitiesFragmentDataCarrier.liabilitiesId && dataCarrier.liabilitiesId != 0){
                 return;
             }

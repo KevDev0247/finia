@@ -1,4 +1,4 @@
-package protect.FinanceLord.FragmentAssetUtils;
+package protect.FinanceLord.NetWorthDataTerminal;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,14 +10,13 @@ import java.util.List;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
-import protect.FinanceLord.FragmentAssetUtils.AssetsFragmentDataCarrier;
 
-public class AssetsFragmentDataProcessor {
+public class DataProcessor_Assets {
 
     private List<AssetsTypeQuery> dataList;
     private List<AssetsValue> assetsValues;
 
-    public AssetsFragmentDataProcessor(List<AssetsTypeQuery> dataList, List<AssetsValue> assetsValues) {
+    public DataProcessor_Assets(List<AssetsTypeQuery> dataList, List<AssetsValue> assetsValues) {
         this.dataList = dataList;
         this.assetsValues = assetsValues;
     }
@@ -53,14 +52,14 @@ public class AssetsFragmentDataProcessor {
         this.assetsValues = assetsValues;
     }
 
-    public List<AssetsFragmentDataCarrier> getSubSet(String parentGroupLabel, int level) {
-        List<AssetsFragmentDataCarrier> subGroupAssets = new ArrayList<>();
+    public List<DataCarrier_Assets> getSubSet(String parentGroupLabel, int level) {
+        List<DataCarrier_Assets> subGroupAssets = new ArrayList<>();
 
         if (level == 0) {
             for(AssetsTypeQuery assetsTypeQuery : dataList) {
                 if (assetsTypeQuery.assetsFirstLevelName != null) {
 
-                    AssetsFragmentDataCarrier dataCarrier = new AssetsFragmentDataCarrier(assetsTypeQuery.assetsFirstLevelName, assetsTypeQuery.assetsFirstLevelId, 0);
+                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsFirstLevelName, assetsTypeQuery.assetsFirstLevelId, 0);
                     addCarrierIfNotExists(dataCarrier, subGroupAssets);
                 }
             }
@@ -70,7 +69,7 @@ public class AssetsFragmentDataProcessor {
                         && assetsTypeQuery.assetsFirstLevelName.equals(parentGroupLabel)
                         && assetsTypeQuery.assetsSecondLevelName != null) {
 
-                    AssetsFragmentDataCarrier dataCarrier = new AssetsFragmentDataCarrier(assetsTypeQuery.assetsSecondLevelName, assetsTypeQuery.assetsSecondLevelId, 1);
+                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsSecondLevelName, assetsTypeQuery.assetsSecondLevelId, 1);
                     addCarrierIfNotExists(dataCarrier, subGroupAssets);
                 }
             }
@@ -80,7 +79,7 @@ public class AssetsFragmentDataProcessor {
                         && assetsTypeQuery.assetsSecondLevelName.equals(parentGroupLabel)
                         && assetsTypeQuery.assetsThirdLevelName != null) {
 
-                    AssetsFragmentDataCarrier dataCarrier = new AssetsFragmentDataCarrier(assetsTypeQuery.assetsThirdLevelName, assetsTypeQuery.assetsThirdLevelId, 2);
+                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsThirdLevelName, assetsTypeQuery.assetsThirdLevelId, 2);
                     addCarrierIfNotExists(dataCarrier, subGroupAssets);
                 }
             }
@@ -90,7 +89,7 @@ public class AssetsFragmentDataProcessor {
                         && assetsTypeQuery.assetsThirdLevelName.equals(parentGroupLabel)
                         && assetsTypeQuery.assetsFourthLevelName != null) {
 
-                    AssetsFragmentDataCarrier dataCarrier = new AssetsFragmentDataCarrier(assetsTypeQuery.assetsFourthLevelName, assetsTypeQuery.assetsFourthLevelId, 3);
+                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsFourthLevelName, assetsTypeQuery.assetsFourthLevelId, 3);
                     addCarrierIfNotExists(dataCarrier, subGroupAssets);
                 }
             }
@@ -98,8 +97,8 @@ public class AssetsFragmentDataProcessor {
         return subGroupAssets;
     }
 
-    void addCarrierIfNotExists(AssetsFragmentDataCarrier assetsFragmentDataCarrier, List<AssetsFragmentDataCarrier> subGroupAssets) {
-        for(AssetsFragmentDataCarrier dataCarrier : subGroupAssets) {
+    void addCarrierIfNotExists(DataCarrier_Assets assetsFragmentDataCarrier, List<DataCarrier_Assets> subGroupAssets) {
+        for(DataCarrier_Assets dataCarrier : subGroupAssets) {
             if(dataCarrier.assetsId == assetsFragmentDataCarrier.assetsId && dataCarrier.assetsId != 0) {
                 return;
             }

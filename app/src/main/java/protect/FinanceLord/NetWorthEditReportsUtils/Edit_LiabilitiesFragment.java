@@ -16,10 +16,10 @@ import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesTypeDao;
 import protect.FinanceLord.R;
 
-public class EditLiabilitiesFragment extends Fragment {
+public class Edit_LiabilitiesFragment extends Fragment {
 
     String title;
-    public EditLiabilitiesFragment(String title) {
+    public Edit_LiabilitiesFragment(String title) {
         this.title = title;
     }
 
@@ -38,7 +38,7 @@ public class EditLiabilitiesFragment extends Fragment {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(EditLiabilitiesFragment.this.getContext());
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_LiabilitiesFragment.this.getContext());
                 LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
             }
         });

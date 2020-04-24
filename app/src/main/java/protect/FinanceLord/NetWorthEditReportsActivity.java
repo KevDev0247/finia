@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-import protect.FinanceLord.NetWorthEditReportsUtils.EditAssetsFragment;
-import protect.FinanceLord.NetWorthEditReportsUtils.EditLiabilitiesFragment;
+import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
+import protect.FinanceLord.NetWorthEditReportsUtils.Edit_LiabilitiesFragment;
 import protect.FinanceLord.NetWorthEditReportsUtils.SectionsPagerAdapter;
 
 public class NetWorthEditReportsActivity extends AppCompatActivity {
@@ -32,8 +32,8 @@ public class NetWorthEditReportsActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        EditAssetsFragment assetsFragment = new EditAssetsFragment("Assets");
-        EditLiabilitiesFragment liabilitiesFragment = new EditLiabilitiesFragment("Liabilities");
+        Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets");
+        Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment("Liabilities");
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 
