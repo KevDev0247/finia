@@ -20,8 +20,11 @@ public interface AssetsValueDao {
     @Query("SELECT * FROM AssetsValue WHERE assetsId LIKE :assetId")
     List<AssetsValue> queryAssetsById  (int assetId);
 
-    @Query("SELECT * FROM ASSETSVALUE WHERE date >= :date")
+    @Query("SELECT * FROM AssetsValue WHERE date >= :date")
     List<AssetsValue> queryAssetsSinceDate(Long date);
+
+    @Query("SELECT * FROM AssetsValue WHERE date <= :date")
+    List<AssetsValue> queryAssetsBeforeDate(Long date);
 
     @Query("SELECT * FROM AssetsValue")
     List<AssetsValue> queryAllAssetsValue();

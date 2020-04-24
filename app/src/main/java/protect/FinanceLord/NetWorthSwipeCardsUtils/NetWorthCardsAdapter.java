@@ -17,11 +17,11 @@ import protect.FinanceLord.R;
 
 public class NetWorthCardsAdapter extends PagerAdapter {
 
-    private List<AssetsCardsDataModel> dataModels;
+    private List<NetWorthCardsDataModel> dataModels;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public NetWorthCardsAdapter(List<AssetsCardsDataModel> dataModels, Context context){
+    public NetWorthCardsAdapter(List<NetWorthCardsDataModel> dataModels, Context context){
         this.dataModels = dataModels;
         this.context = context;
     }

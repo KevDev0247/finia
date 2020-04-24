@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 
 import java.util.concurrent.Executors;
 
+import protect.FinanceLord.Database.DatabaseInitialization;
+
 
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = "FinanceLord";
