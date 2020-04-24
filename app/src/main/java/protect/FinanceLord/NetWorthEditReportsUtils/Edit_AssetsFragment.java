@@ -78,6 +78,7 @@ public class Edit_AssetsFragment extends Fragment {
                                 adapter.notifyDataSetChanged();
                             }
                         });
+                        
                         Log.d("Edit_AssetsFragment", "Assets committed!");
                     }
                 });
