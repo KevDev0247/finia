@@ -197,6 +197,7 @@ public class DataProcessor_Assets {
         float totalLiquidAssets = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
+
             if (assetsValue != null) {
 
                 Log.d("Liquid assets id", String.valueOf(assetsValue.getAssetsId()));
@@ -217,6 +218,7 @@ public class DataProcessor_Assets {
         float totalPersonalAssets = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
+
             if (assetsValue != null) {
 
                 Log.d("Personal assets id", String.valueOf(assetsValue.getAssetsId()));
@@ -247,6 +249,7 @@ public class DataProcessor_Assets {
         float totalOwnershipInterest = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
+
             if (assetsValue != null) {
 
                 Log.d("Ownership id", String.valueOf(assetsValue.getAssetsId()));
@@ -262,10 +265,12 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalRetirementAccounts() {
+
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Retirement accounts");
         float totalRetirementAccounts = 0;
         for (int assetId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetId);
+
             if (assetsValue != null) {
 
                 Log.d("Retirement id", String.valueOf(assetsValue.getAssetsId()));
@@ -281,10 +286,12 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalTaxableAccounts(){
+
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Taxable accounts");
         float totalTotalTaxableAccounts = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
+
             if (assetsValue != null) {
 
                 Log.d("Taxable id", String.valueOf(assetsValue.getAssetsId()));
@@ -410,7 +417,6 @@ public class DataProcessor_Assets {
             retirementAccountAssetsValue.setAssetsId((int)retirementAccountAssetsId);
             retirementAccountAssetsValue.setAssetsValue(totalRetirementAccounts);
             retirementAccountAssetsValue.setDate(new Date().getTime());
-
 
             assetsValueDao.insertAssetValue(retirementAccountAssetsValue);
         }

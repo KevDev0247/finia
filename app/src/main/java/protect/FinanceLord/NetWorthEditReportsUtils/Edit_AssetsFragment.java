@@ -51,25 +51,27 @@ public class Edit_AssetsFragment extends Fragment {
                     @Override
                     public void run() {
                         FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
-                        AssetsValueDao dao = database.assetsValueDao();
+                        AssetsValueDao assetsValueDao = database.assetsValueDao();
                         for(AssetsValue assetsValue: Edit_AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
                             if(assetsValue.getAssetsPrimaryId() != 0) {
-                                List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsPrimaryId());
+                                List<AssetsValue> assetsValues = assetsValueDao.queryAsset(assetsValue.getAssetsPrimaryId());
                                 Log.d("Assets Value Check", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
                                 if(!assetsValues.isEmpty()) {
-                                    dao.updateAssetValue(assetsValue);
+                                    assetsValueDao.updateAssetValue(assetsValue);
                                 } else {
                                     Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
                             } else {
-                                dao.insertAssetValue(assetsValue);
+                                assetsValueDao.insertAssetValue(assetsValue);
                             }
                         }
 
                         Date startDate = DateUtils.firstSecondOfThisMinute();
-                        Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
+                        Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValueDao.queryAssetsSinceDate(startDate.getTime()));
 
-                        dataProcessor.calculateParentAssets(dao);
+                        Log.d("Edit_AssetsFragment", "time is " + startDate);
+
+                        dataProcessor.calculateParentAssets(assetsValueDao);
 
                         Log.d("Edit_AssetsFragment", "Assets committed!");
                     }
