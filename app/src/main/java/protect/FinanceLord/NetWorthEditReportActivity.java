@@ -7,7 +7,9 @@ import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,6 +52,8 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
             public void onClick(View view) {
                 CalendarDialog calendarDialog = new CalendarDialog(communicator);
                 calendarDialog.loadData();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                calendarDialog.show(fragmentManager, "DateTimePicker");
             }
         });
 
