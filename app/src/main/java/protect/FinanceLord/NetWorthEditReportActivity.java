@@ -48,8 +48,8 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         this.btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                
                 CalendarDialog calendarDialog = new CalendarDialog(communicator);
-                calendarDialog.loadData();
             }
         });
 

@@ -36,10 +36,6 @@ public class CalendarDialog extends DialogFragment {
         timePicker = calendarView.findViewById(R.id.time_picker);
         setCancelable(true);
 
-        return calendarView;
-    }
-
-    public void loadData(){
         this.timeButton = calendarView.findViewById(R.id.time_setting_button);
         this.timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,5 +50,7 @@ public class CalendarDialog extends DialogFragment {
                 communicator.onDialogMessage(currentTime);
             }
         });
+
+        return calendarView;
     }
 }
