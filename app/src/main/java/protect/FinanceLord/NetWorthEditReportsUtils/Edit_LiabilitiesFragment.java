@@ -22,9 +22,8 @@ public class Edit_LiabilitiesFragment extends Fragment {
     String title;
     Date currentTime;
 
-    public Edit_LiabilitiesFragment(String title, Date currentTime) {
+    public Edit_LiabilitiesFragment(String title) {
         this.title = title;
-        this.currentTime = currentTime;
     }
 
     ExpandableListView expandableListView;

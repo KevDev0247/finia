@@ -24,41 +24,30 @@ import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.NetWorthEditReportActivity;
 import protect.FinanceLord.R;
 import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 
-public class Edit_AssetsFragment extends Fragment{
+public class Edit_AssetsFragment extends Fragment {
 
     String title;
     Date currentTime;
     private Button btnCommit;
-    private Button btnCalendar;
     private DataProcessor_Assets dataProcessor;
 
     ExpandableListView expandableListView;
     private AssetsFragmentAdapter adapter;
 
-    public Edit_AssetsFragment(String title, Date currentTime) {
+    public Edit_AssetsFragment(String title) {
         this.title = title;
-        this.currentTime = currentTime;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View assetsView = inflater.inflate(R.layout.fragment_edit_assets, null);
         expandableListView = assetsView.findViewById(R.id.assets_list_view);
-
-        this.btnCalendar = assetsView.findViewById(R.id.btnCalendar);
-        this.btnCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager manager = getFragmentManager();
-                CalendarDialog calendarDialog = new CalendarDialog();
-                calendarDialog.show(manager, "Calendar Dialog");
-            }
-        });
 
         this.btnCommit = assetsView.findViewById(R.id.btnCommit);
         this.btnCommit.setOnClickListener(new View.OnClickListener() {

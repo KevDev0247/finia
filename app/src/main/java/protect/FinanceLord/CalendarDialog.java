@@ -17,21 +17,34 @@ import protect.FinanceLord.NetWorthEditReportsUtils.TimeUtils;
 
 public class CalendarDialog extends DialogFragment {
 
-    Communicator communicator;
+    View calendarView;
     DatePicker datePicker;
     TimePicker timePicker;
-    Button dateButton;
-    TimeUtils timeUtils;
+    Button timeButton;
+    NetWorthEditReportActivity.Communicator communicator;
+    TimeUtils timeUtils = new TimeUtils();
+
+    public CalendarDialog(NetWorthEditReportActivity.Communicator communicator){
+        this.communicator = communicator;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.calendar_layout, null);
+        calendarView = inflater.inflate(R.layout.time_setting_layout, null);
+        datePicker = calendarView.findViewById(R.id.date_picker);
+        timePicker = calendarView.findViewById(R.id.time_picker);
         setCancelable(true);
 
-        dateButton.setOnClickListener(new View.OnClickListener() {
+        return calendarView;
+    }
+
+    public void loadData(){
+        this.timeButton = calendarView.findViewById(R.id.time_setting_button);
+        this.timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Date currentTime = timeUtils.setTime(
                         datePicker.getYear(),
                         datePicker.getMonth(),
@@ -42,11 +55,5 @@ public class CalendarDialog extends DialogFragment {
                 communicator.onDialogMessage(currentTime);
             }
         });
-
-        return view;
-    }
-
-    interface Communicator {
-        void onDialogMessage(Date date);
     }
 }

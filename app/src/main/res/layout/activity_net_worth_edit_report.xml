@@ -19,6 +19,14 @@
             android:background="#673AB7"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
+            <Button
+                android:id="@+id/btnCalendar"
+                android:layout_marginLeft="300dp"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Date"/>
+
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

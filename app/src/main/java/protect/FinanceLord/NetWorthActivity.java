@@ -1,8 +1,7 @@
 package protect.FinanceLord;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -18,17 +17,14 @@ import java.util.concurrent.Executors;
 
 import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
 import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
-import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
-import protect.FinanceLord.NetWorthEditReportsUtils.Edit_LiabilitiesFragment;
 import protect.FinanceLord.NetWorthPastReportsListUtils.PastReportsAdapter;
 import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
-import protect.FinanceLord.NetWorthEditReportsUtils.TimeUtils;
 
-public class NetWorthActivity extends AppCompatActivity implements CalendarDialog.Communicator {
+public class NetWorthActivity extends AppCompatActivity implements NetWorthEditReportActivity.Communicator {
 
-    Date currentTime;
+    Date currentTime = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
