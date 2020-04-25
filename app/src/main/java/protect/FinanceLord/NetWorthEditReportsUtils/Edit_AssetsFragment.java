@@ -54,7 +54,7 @@ public class Edit_AssetsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager manager = getFragmentManager();
-                CalendarDialog calendarDialog = new CalendarDialog();
+                CalendarDialog calendarDialog = new CalendarDialog(getContext());
                 calendarDialog.show(manager, "Calendar Dialog");
             }
         });
