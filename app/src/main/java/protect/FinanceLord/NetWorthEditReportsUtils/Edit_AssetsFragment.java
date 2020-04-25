@@ -1,6 +1,5 @@
 package protect.FinanceLord.NetWorthEditReportsUtils;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,9 +29,10 @@ import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmen
 import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 
-public class Edit_AssetsFragment extends Fragment {
+public class Edit_AssetsFragment extends Fragment{
 
     String title;
+    Date currentTime;
     private Button btnCommit;
     private Button btnCalendar;
     private DataProcessor_Assets dataProcessor;
@@ -40,8 +40,9 @@ public class Edit_AssetsFragment extends Fragment {
     ExpandableListView expandableListView;
     private AssetsFragmentAdapter adapter;
 
-    public Edit_AssetsFragment(String title) {
+    public Edit_AssetsFragment(String title, Date currentTime) {
         this.title = title;
+        this.currentTime = currentTime;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class Edit_AssetsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager manager = getFragmentManager();
-                CalendarDialog calendarDialog = new CalendarDialog(getContext());
+                CalendarDialog calendarDialog = new CalendarDialog();
                 calendarDialog.show(manager, "Calendar Dialog");
             }
         });
@@ -82,10 +83,9 @@ public class Edit_AssetsFragment extends Fragment {
                             }
                         }
 
-                        Date startDate = DateUtils.firstSecondOfThisMinute();
-                        Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValueDao.queryAssetsSinceDate(startDate.getTime()));
+                        Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValueDao.queryAssetsSinceDate(currentTime.getTime()));
 
-                        Log.d("Edit_AssetsFragment", "time is " + startDate);
+                        Log.d("Edit_AssetsFragment", "time is " + currentTime);
 
                         dataProcessor.calculateParentAssets(assetsValueDao);
 
@@ -116,8 +116,7 @@ public class Edit_AssetsFragment extends Fragment {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
                 List<AssetsTypeQuery> assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
 
-                Date startOfMinute = DateUtils.firstSecondOfThisMinute();
-                Long milliseconds = startOfMinute.getTime();
+                Long milliseconds = currentTime.getTime();
 
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsSinceDate(milliseconds);
                 Log.d("Edit_AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());

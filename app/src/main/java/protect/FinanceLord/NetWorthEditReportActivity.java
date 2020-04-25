@@ -11,12 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
 import protect.FinanceLord.NetWorthEditReportsUtils.Edit_LiabilitiesFragment;
 import protect.FinanceLord.NetWorthEditReportsUtils.SectionsPagerAdapter;
 
-public class NetWorthEditReportActivity extends AppCompatActivity {
+public class NetWorthEditReportActivity extends AppCompatActivity implements CalendarDialog.Communicator {
+
+    Date currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.edit_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets");
+        Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets", currentTime);
         Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment("Liabilities");
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
@@ -40,5 +43,10 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void onDialogMessage(Date date) {
+        currentTime = date;
     }
 }

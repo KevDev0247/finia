@@ -1,6 +1,8 @@
 package protect.FinanceLord;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -16,13 +18,17 @@ import java.util.concurrent.Executors;
 
 import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
 import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
+import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
+import protect.FinanceLord.NetWorthEditReportsUtils.Edit_LiabilitiesFragment;
 import protect.FinanceLord.NetWorthPastReportsListUtils.PastReportsAdapter;
 import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
-import protect.FinanceLord.NetWorthEditReportsUtils.DateUtils;
+import protect.FinanceLord.NetWorthEditReportsUtils.TimeUtils;
 
-public class NetWorthActivity extends AppCompatActivity {
+public class NetWorthActivity extends AppCompatActivity implements CalendarDialog.Communicator {
+
+    Date currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +81,9 @@ public class NetWorthActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Date startOfMinute = DateUtils.firstSecondOfThisMinute();
-                Long MilliSeconds = startOfMinute.getTime();
+                Long MilliSeconds = currentTime.getTime();
                 AssetsValueExtractor assetsValueExtractor = new AssetsValueExtractor(NetWorthActivity.this, MilliSeconds);
                 NetWorthCalculator netWorthCalculator = new NetWorthCalculator(assetsValueExtractor);
-
 
                 float totalAssets = netWorthCalculator.calculateTotalAssets();
                 float totalLiquidAssets = netWorthCalculator.calculateTotalLiquidAssets();
@@ -104,5 +108,10 @@ public class NetWorthActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void onDialogMessage(Date date) {
+        currentTime = date;
     }
 }
