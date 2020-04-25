@@ -54,7 +54,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         });
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets");
+        Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets", currentTime);
         Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment("Liabilities");
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
@@ -64,7 +64,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    interface Communicator {
+    interface Communicator{
         void onDialogMessage(Date date);
     }
 }

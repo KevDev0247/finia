@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,13 +17,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import protect.FinanceLord.CalendarDialog;
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.NetWorthEditReportActivity;
 import protect.FinanceLord.R;
 import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
@@ -40,8 +37,9 @@ public class Edit_AssetsFragment extends Fragment {
     ExpandableListView expandableListView;
     private AssetsFragmentAdapter adapter;
 
-    public Edit_AssetsFragment(String title) {
+    public Edit_AssetsFragment(String title, Date currentTime) {
         this.title = title;
+        this.currentTime = currentTime;
     }
 
     @Override

@@ -44,7 +44,6 @@ public class CalendarDialog extends DialogFragment {
         this.timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Date currentTime = timeUtils.setTime(
                         datePicker.getYear(),
                         datePicker.getMonth(),
