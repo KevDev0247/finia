@@ -1,5 +1,8 @@
 package protect.FinanceLord;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,32 +12,42 @@ import android.widget.DatePicker;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import java.sql.Date;
-import java.util.Calendar;
+public class CalendarDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-public class CalendarDialog extends DialogFragment {
+    Context context;
+    DatePicker datePicker;
+    private int year;
+    private int month;
+    private int day;
+
+    int DATE_DIALOG_ID = 999;
+
+    public CalendarDialog(Context context){
+        this.context = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.calendar_layout, null);
-        DatePicker datePicker = new DatePicker(getContext());
-
-        getDateFromDatePicker(datePicker);
-
         setCancelable(false);
 
         return view;
     }
 
-    public static Date getDateFromDatePicker(DatePicker datePicker){
-        int day = datePicker.getDayOfMonth();
-        int month = datePicker.getMonth();
-        int year =  datePicker.getYear();
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int selectedYear,
+                              int selectedMonth, int selectedDay) {
+            year = selectedYear;
+            month = selectedMonth;
+            day = selectedDay;
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
+            datePicker.init(year,month,day, null);
+        }
+    };
 
-        return (Date) calendar.getTime();
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
     }
 }
