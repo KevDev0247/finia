@@ -63,6 +63,7 @@ public class Edit_AssetsFragment extends Fragment {
                                 Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValueInProcessor.getAssetsValue());
                                 if(!assetsValues.isEmpty()) {
                                     assetsValueDao.updateAssetValue(assetsValueInProcessor);
+                                    Log.d("Edit_AssetsFragment", "time is " + currentTime);
                                 } else {
                                     Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }

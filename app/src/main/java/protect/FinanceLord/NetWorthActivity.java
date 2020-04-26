@@ -22,7 +22,7 @@ import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
 
-public class NetWorthActivity extends AppCompatActivity implements NetWorthEditReportActivity.Communicator {
+public class NetWorthActivity extends AppCompatActivity implements NetWorthEditReportActivity.CalendarDialogCommunicator {
 
     Date currentTime = new Date();
 

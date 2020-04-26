@@ -1,6 +1,7 @@
 package protect.FinanceLord;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,10 @@ public class CalendarDialog extends DialogFragment {
     DatePicker datePicker;
     Button confirmTimeButton;
     Button cancelTimeButton;
-    NetWorthEditReportActivity.Communicator communicator;
-    TimeUtils timeUtils = new TimeUtils();
+    NetWorthEditReportActivity.CalendarDialogCommunicator communicator;
+    NetWorthTimeUtils timeUtils = new NetWorthTimeUtils();
 
-    public CalendarDialog(NetWorthEditReportActivity.Communicator communicator){
+    public CalendarDialog(NetWorthEditReportActivity.CalendarDialogCommunicator communicator){
         this.communicator = communicator;
     }
 
@@ -42,6 +43,7 @@ public class CalendarDialog extends DialogFragment {
                         datePicker.getMonth(),
                         datePicker.getDayOfMonth());
 
+                Log.d("CalendarDialog", "date picked is " + currentTime);
                 communicator.onDialogMessage(currentTime);
                 dismiss();
             }

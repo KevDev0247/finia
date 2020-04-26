@@ -2,6 +2,7 @@ package protect.FinanceLord;
 
 import android.app.SearchManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -26,6 +27,14 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
     Date currentTime;
     Button btnCalendar;
 
+    CalendarDialogCommunicator calendarDialogCommunicator = new CalendarDialogCommunicator() {
+        @Override
+        public void onDialogMessage(Date date) {
+            currentTime = date;
+            Log.d("EditReportCommunicator", "time is " + currentTime);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,16 +52,20 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         resetView(search);
     }
 
-    Communicator communicator = new Communicator() {
-        @Override
-        public void onDialogMessage(Date date) {
-            currentTime = date;
-        }
-    };
-
     private void resetView(String search){
         TabLayout tabLayout = findViewById(R.id.edit_tab_layout);
         final ViewPager viewPager = findViewById(R.id.edit_view_pager);
+
+        this.btnCalendar = findViewById(R.id.btnCalendar);
+        this.btnCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CalendarDialog calendarDialog = new CalendarDialog(calendarDialogCommunicator);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                Log.d("EditReportPassing", "time is " + currentTime);
+                calendarDialog.show(fragmentManager, "DateTimePicker");
+            }
+        });
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         final Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets", currentTime);
@@ -60,22 +73,12 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 
-        this.btnCalendar = findViewById(R.id.btnCalendar);
-        this.btnCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CalendarDialog calendarDialog = new CalendarDialog(communicator);
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                calendarDialog.show(fragmentManager, "DateTimePicker");
-            }
-        });
-
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    interface Communicator{
+    interface CalendarDialogCommunicator {
         void onDialogMessage(Date date);
     }
 }
