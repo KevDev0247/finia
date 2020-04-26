@@ -22,6 +22,7 @@ public class CalendarDialog extends DialogFragment {
     NetWorthEditReportActivity.CalendarDialogCommunicator communicator;
     NetWorthTimeUtils timeUtils = new NetWorthTimeUtils();
 
+
     public CalendarDialog(NetWorthEditReportActivity.CalendarDialogCommunicator communicator){
         this.communicator = communicator;
     }
@@ -45,6 +46,7 @@ public class CalendarDialog extends DialogFragment {
 
                 Log.d("CalendarDialog", "date picked is " + currentTime);
                 communicator.onDialogMessage(currentTime);
+
                 dismiss();
             }
         });

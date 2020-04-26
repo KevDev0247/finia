@@ -26,14 +26,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
 
     Date currentTime;
     Button btnCalendar;
-
-    CalendarDialogCommunicator calendarDialogCommunicator = new CalendarDialogCommunicator() {
-        @Override
-        public void onDialogMessage(Date date) {
-            currentTime = date;
-            Log.d("EditReportCommunicator", "time is " + currentTime);
-        }
-    };
+    public ParentActivityCommunicator parentActivityCommunicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +49,12 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.edit_tab_layout);
         final ViewPager viewPager = findViewById(R.id.edit_view_pager);
 
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        final Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets", currentTime);
+        final Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment("Liabilities");
+        fragments.add(assetsFragment);
+        fragments.add(liabilitiesFragment);
+
         this.btnCalendar = findViewById(R.id.btnCalendar);
         this.btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,16 +66,18 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        final Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets", currentTime);
-        final Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment("Liabilities");
-        fragments.add(assetsFragment);
-        fragments.add(liabilitiesFragment);
-
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
+
+    CalendarDialogCommunicator calendarDialogCommunicator = new CalendarDialogCommunicator() {
+        @Override
+        public void onDialogMessage(Date date) {
+            Log.d("EditReportCommunicator", "time is " + currentTime);
+            parentActivityCommunicator.onActivityMessage(date);
+        }
+    };
 
     interface CalendarDialogCommunicator {
         void onDialogMessage(Date date);
