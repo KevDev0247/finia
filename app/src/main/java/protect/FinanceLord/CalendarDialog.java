@@ -19,8 +19,8 @@ public class CalendarDialog extends DialogFragment {
 
     View calendarView;
     DatePicker datePicker;
-    TimePicker timePicker;
-    Button timeButton;
+    Button confirmTimeButton;
+    Button cancelTimeButton;
     NetWorthEditReportActivity.Communicator communicator;
     TimeUtils timeUtils = new TimeUtils();
 
@@ -33,27 +33,30 @@ public class CalendarDialog extends DialogFragment {
 
         calendarView = inflater.inflate(R.layout.time_setting_layout, null);
         datePicker = calendarView.findViewById(R.id.date_picker);
-        timePicker = calendarView.findViewById(R.id.time_picker);
-        this.timeButton = calendarView.findViewById(R.id.time_setting_button);
+        this.confirmTimeButton = calendarView.findViewById(R.id.confirm_time_button);
+        this.cancelTimeButton = calendarView.findViewById(R.id.cancel_time_button);
         setCancelable(true);
 
-        return calendarView;
-    }
-
-    public void loadData(){
-
-        this.timeButton.setOnClickListener(new View.OnClickListener() {
+        this.confirmTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Date currentTime = timeUtils.setTime(
                         datePicker.getYear(),
                         datePicker.getMonth(),
-                        datePicker.getDayOfMonth(),
-                        timePicker.getHour(),
-                        timePicker.getMinute());
+                        datePicker.getDayOfMonth());
 
                 communicator.onDialogMessage(currentTime);
+                dismiss();
             }
         });
+
+        this.cancelTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        return calendarView;
     }
 }

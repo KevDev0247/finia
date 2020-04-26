@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -59,7 +60,7 @@ public class Edit_AssetsFragment extends Fragment {
                         for(AssetsValue assetsValue: Edit_AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
                             if(assetsValue.getAssetsPrimaryId() != 0) {
                                 List<AssetsValue> assetsValues = assetsValueDao.queryAsset(assetsValue.getAssetsPrimaryId());
-                                Log.d("Assets Value Check", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
+                                Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
                                 if(!assetsValues.isEmpty()) {
                                     assetsValueDao.updateAssetValue(assetsValue);
                                 } else {
