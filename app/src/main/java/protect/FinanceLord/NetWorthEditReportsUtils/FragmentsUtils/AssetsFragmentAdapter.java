@@ -101,12 +101,13 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                 String strValue = decimalFormat.format(assetsValue.getAssetsValue());
                 editText.setText(strValue);
             }
+
             this.addTextListener(editText, dataCarrier);
         } else if (level == 2) {
             convertView = inflater.inflate(R.layout.assets_list_row_second_category, null);
             TextView textView = convertView.findViewById(R.id.rowSecondCategoryText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
-        } else if (level == 3){
+        } else if (level == 3) {
             convertView = inflater.inflate(R.layout.assets_list_row_third_items, null);
             TextView textView = convertView.findViewById(R.id.rowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
@@ -120,6 +121,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                 String strValue = decimalFormat.format(assetsValue.getAssetsValue());
                 editText.setText(strValue);
             }
+
             this.addTextListener(editText, dataCarrier);
         }
         return convertView;

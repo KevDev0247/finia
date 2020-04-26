@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -57,22 +56,18 @@ public class Edit_AssetsFragment extends Fragment {
                     public void run() {
                         FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
                         AssetsValueDao assetsValueDao = database.assetsValueDao();
-                        List<AssetsValue> allAssetsValues;
-                        allAssetsValues = assetsValueDao.queryAllAssetsValue();
 
                         for(AssetsValue assetsValueInProcessor: Edit_AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
-                            for (AssetsValue assetsValueInDB: allAssetsValues){
-                                if(assetsValueInProcessor.getAssetsPrimaryId() != 0 && assetsValueInProcessor.getDate() == assetsValueInDB.getDate()) {
-                                    List<AssetsValue> assetsValues = assetsValueDao.queryAsset(assetsValueInProcessor.getAssetsPrimaryId());
-                                    Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValueInProcessor.getAssetsValue());
-                                    if(!assetsValues.isEmpty()) {
-                                        assetsValueDao.updateAssetValue(assetsValueInProcessor);
-                                    } else {
-                                        Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
-                                    }
+                            if(assetsValueInProcessor.getAssetsPrimaryId() != 0) {
+                                List<AssetsValue> assetsValues = assetsValueDao.queryAsset(assetsValueInProcessor.getAssetsPrimaryId());
+                                Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValueInProcessor.getAssetsValue());
+                                if(!assetsValues.isEmpty()) {
+                                    assetsValueDao.updateAssetValue(assetsValueInProcessor);
                                 } else {
-                                    assetsValueDao.insertAssetValue(assetsValueInProcessor);
+                                    Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
+                            } else {
+                                assetsValueDao.insertAssetValue(assetsValueInProcessor);
                             }
                         }
 
@@ -95,23 +90,23 @@ public class Edit_AssetsFragment extends Fragment {
             }
         });
 
-        initAssetCategory();
+        initAssets();
 
         return assetsView;
     }
 
-    private void initAssetCategory() {
+    public void initAssets() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
-                List<AssetsTypeQuery> assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
 
                 Long milliseconds = currentTime.getTime();
-
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsSinceDate(milliseconds);
+                List<AssetsTypeQuery> assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
+
                 Log.d("Edit_AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
                 Log.d("Edit_AssetsFragment", "Query assets Values: " + assetsValues.toString());
 
