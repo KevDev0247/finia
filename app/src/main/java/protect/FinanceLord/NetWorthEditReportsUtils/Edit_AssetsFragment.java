@@ -57,17 +57,22 @@ public class Edit_AssetsFragment extends Fragment {
                     public void run() {
                         FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
                         AssetsValueDao assetsValueDao = database.assetsValueDao();
-                        for(AssetsValue assetsValue: Edit_AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
-                            if(assetsValue.getAssetsPrimaryId() != 0) {
-                                List<AssetsValue> assetsValues = assetsValueDao.queryAsset(assetsValue.getAssetsPrimaryId());
-                                Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
-                                if(!assetsValues.isEmpty()) {
-                                    assetsValueDao.updateAssetValue(assetsValue);
+                        List<AssetsValue> allAssetsValues;
+                        allAssetsValues = assetsValueDao.queryAllAssetsValue();
+
+                        for(AssetsValue assetsValueInProcessor: Edit_AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
+                            for (AssetsValue assetsValueInDB: allAssetsValues){
+                                if(assetsValueInProcessor.getAssetsPrimaryId() != 0 && assetsValueInProcessor.getDate() == assetsValueInDB.getDate()) {
+                                    List<AssetsValue> assetsValues = assetsValueDao.queryAsset(assetsValueInProcessor.getAssetsPrimaryId());
+                                    Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValueInProcessor.getAssetsValue());
+                                    if(!assetsValues.isEmpty()) {
+                                        assetsValueDao.updateAssetValue(assetsValueInProcessor);
+                                    } else {
+                                        Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
+                                    }
                                 } else {
-                                    Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
+                                    assetsValueDao.insertAssetValue(assetsValueInProcessor);
                                 }
-                            } else {
-                                assetsValueDao.insertAssetValue(assetsValue);
                             }
                         }
 
