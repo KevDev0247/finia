@@ -87,18 +87,24 @@ public class Edit_AssetsFragment extends Fragment {
                                 Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValueInProcessor.getAssetsValue());
                                 if(!assetsValues.isEmpty()) {
                                     assetsValueDao.updateAssetValue(assetsValueInProcessor);
-                                    Log.d("Edit_AssetsFragment", "update time is " + currentTime);
+                                    Long timeInterval = assetsValueInProcessor.getDate();
+                                    Log.d("Edit_AssetsFragment", "update time is " + new Date(timeInterval));
                                 } else {
                                     Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
                             } else {
                                 assetsValueDao.insertAssetValue(assetsValueInProcessor);
-                                Log.d("Edit_AssetsFragment", "insert time is " + currentTime);
+                                Long timeInterval = assetsValueInProcessor.getDate();
+                                Log.d("Edit_AssetsFragment", "insert time is " + new Date(timeInterval));
                             }
                         }
 
-                        Log.d("Edit_AssetsFragment", "Query [Refreshing] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
-                        Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValueDao.queryAssetsByDate(getQueryStartTime().getTime(), getQueryEndTime().getTime()));
+                        Log.d("Edit_AssetsFragment", "Query [Refreshing] time interval is " + String.valueOf(getQueryStartTime().getTime()) + " and " + String.valueOf(getQueryEndTime().getTime()));
+                        Log.d("Edit_AssetsFragment", "current date: " + String.valueOf(currentTime.getTime()));
+                        List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByDate(getQueryStartTime().getTime(), getQueryEndTime().getTime());
+                        Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValues);
+
+                        Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
 
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -130,6 +136,10 @@ public class Edit_AssetsFragment extends Fragment {
                 List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
 
                 Log.d("Edit_AssetsFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
+                Log.d("Edit_AssetsFragment", "Query [Initialization] time interval is " + String.valueOf(getQueryStartTime().getTime()) + " and " + String.valueOf(getQueryEndTime().getTime()));
+                Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
+                Log.d("Edit_AssetsFragment", "current date: " + currentTime);
+                Log.d("Edit_AssetsFragment", "current date: " + String.valueOf(currentTime.getTime()));
 
                 Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues);
                 adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
@@ -149,10 +159,13 @@ public class Edit_AssetsFragment extends Fragment {
     public Date getQueryStartTime(){
         Date date;
         Calendar calendar = new GregorianCalendar();
+        calendar.setTime(currentTime);
+        /* 查看getYear的源代码，他里面的逻辑是当前年份减去1900，这样得到的年份再放回到calendar中，我们得到的年份是2020 - 1900 = 120年，所以我们查不到数据
         calendar.set(Calendar.YEAR, currentTime.getYear());
         calendar.set(Calendar.MONTH, currentTime.getMonth());
         calendar.set(Calendar.DATE, currentTime.getDate());
-        calendar.set(Calendar.HOUR, 0);
+        */
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         date = calendar.getTime();
@@ -162,10 +175,14 @@ public class Edit_AssetsFragment extends Fragment {
     public Date getQueryEndTime(){
         Date date;
         Calendar calendar = new GregorianCalendar();
+        calendar.setTime(currentTime);
+        /* 查看getYear的源代码，他里面的逻辑是当前年份减去1900，这样得到的年份再放回到calendar中，我们得到的年份是2020 - 1900 = 120年，所以我们查不到数据
         calendar.set(Calendar.YEAR, currentTime.getYear());
         calendar.set(Calendar.MONTH, currentTime.getMonth());
         calendar.set(Calendar.DATE, currentTime.getDate());
-        calendar.set(Calendar.HOUR, 23);
+        *、
+         */
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
         date = calendar.getTime();
