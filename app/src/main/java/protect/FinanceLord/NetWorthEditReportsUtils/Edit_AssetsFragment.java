@@ -71,6 +71,8 @@ public class Edit_AssetsFragment extends Fragment {
         View assetsView = inflater.inflate(R.layout.fragment_edit_assets, null);
         expandableListView = assetsView.findViewById(R.id.assets_list_view);
 
+        initAssets();
+
         this.btnCommit = assetsView.findViewById(R.id.btnCommit);
         this.btnCommit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,18 +89,17 @@ public class Edit_AssetsFragment extends Fragment {
                                 Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValueInProcessor.getAssetsValue());
                                 if(!assetsValues.isEmpty()) {
                                     assetsValueDao.updateAssetValue(assetsValueInProcessor);
-                                    Log.d("Edit_AssetsFragment", "time is " + currentTime);
+                                    Log.d("Edit_AssetsFragment", "update time is " + currentTime);
                                 } else {
                                     Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
                             } else {
                                 assetsValueDao.insertAssetValue(assetsValueInProcessor);
+                                Log.d("Edit_AssetsFragment", "insert time is " + currentTime);
                             }
                         }
 
                         Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValueDao.queryAssetsSinceDate(currentTime.getTime()));
-
-                        Log.d("Edit_AssetsFragment", "time is " + currentTime);
 
                         dataProcessor.calculateParentAssets(assetsValueDao);
 
@@ -114,8 +115,6 @@ public class Edit_AssetsFragment extends Fragment {
                 });
             }
         });
-
-        initAssets();
 
         return assetsView;
     }

@@ -194,6 +194,7 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalLiquidAssets() {
+
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Liquid assets");
         float totalLiquidAssets = 0;
         for (int assetsId : assetsIDs) {
