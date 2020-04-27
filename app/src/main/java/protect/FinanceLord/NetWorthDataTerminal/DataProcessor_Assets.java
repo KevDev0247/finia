@@ -345,7 +345,7 @@ public class DataProcessor_Assets {
             totalAssetsValue.setAssetsId((int)totalAssetsId);
             totalAssetsValue.setAssetsValue(totalAssets);
             totalAssetsValue.setDate(new Date().getTime());
-            this.assetsValues.add(totalAssetsValue);
+//            this.assetsValues.add(totalAssetsValue);
 
             assetsValueDao.insertAssetValue(totalAssetsValue);
         }
