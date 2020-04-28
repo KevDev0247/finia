@@ -39,7 +39,8 @@ public class DataProcessor_Assets {
             assetsValue = new AssetsValue();
             assetsValue.setAssetsId(assetId);
             assetsValue.setAssetsValue(assetValue);
-            assetsValue.setDate(new Date().getTime());
+            // this still uses the old mechanism (automatically retrieve the current time)
+            //assetsValue.setDate(new Date().getTime());
             this.assetsValues.add(assetsValue);
         }
     }
@@ -345,7 +346,8 @@ public class DataProcessor_Assets {
             totalAssetsValue.setAssetsId((int)totalAssetsId);
             totalAssetsValue.setAssetsValue(totalAssets);
             totalAssetsValue.setDate(new Date().getTime());
-//            this.assetsValues.add(totalAssetsValue);
+            // I don't know what this is for
+            //this.assetsValues.add(totalAssetsValue);
 
             assetsValueDao.insertAssetValue(totalAssetsValue);
         }
