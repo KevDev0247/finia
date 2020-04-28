@@ -27,7 +27,7 @@
                 <Button
                     android:id="@+id/btnCalendar"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:text="Date"/>
