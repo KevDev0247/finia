@@ -9,17 +9,17 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import protect.FinanceLord.NetWorthReportTemplateUtils.ReportItemsDataModel;
 import protect.FinanceLord.R;
 
-public class ReportListAdapter extends ArrayAdapter<ReportItemsDataModel> {
-    public ReportListAdapter(Context context, ArrayList<ReportItemsDataModel> dataSources) {
+public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
+
+    public ReportListAdapter(Context context, ArrayList<NetWorthItemsDataModel> dataSources) {
         super(context, 0, dataSources);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ReportItemsDataModel dataSource = getItem(position);
+        NetWorthItemsDataModel dataSource = getItem(position);
 
         if (convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.net_worth_report_item, parent, false);

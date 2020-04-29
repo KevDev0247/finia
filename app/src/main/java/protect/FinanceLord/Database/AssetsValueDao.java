@@ -26,6 +26,9 @@ public interface AssetsValueDao {
     @Query("SELECT * FROM AssetsValue WHERE date <= :date")
     List<AssetsValue> queryAssetsBeforeDate(Long date);
 
+    @Query("SELECT * FROM AssetsValue WHERE date <= :dateEnd AND date >= :dateStart")
+    List<AssetsValue> queryAssetsByDate(Long dateStart, Long dateEnd);
+
     @Query("SELECT * FROM AssetsValue")
     List<AssetsValue> queryAllAssetsValue();
 

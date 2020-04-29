@@ -1,5 +1,6 @@
 package protect.FinanceLord.NetWorthEditReportsUtils;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -22,6 +25,8 @@ import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.NetWorthEditReportActivity;
+import protect.FinanceLord.Communicators.ActivityToFragment;
 import protect.FinanceLord.R;
 import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
@@ -30,84 +35,155 @@ import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 public class Edit_AssetsFragment extends Fragment {
 
     String title;
-    private Button btnCommit;
-    private DataProcessor_Assets dataProcessor;
-
+    Date currentTime;
+    View assetsFragmentView;
     ExpandableListView expandableListView;
 
-    public Edit_AssetsFragment(String title) {
+    private AssetsFragmentAdapter adapter;
+    private DataProcessor_Assets dataProcessor;
+
+    public Edit_AssetsFragment(String title, Date currentTime) {
         this.title = title;
+        this.currentTime = currentTime;
+    }
+
+    ActivityToFragment parentActivityCommunicator = new ActivityToFragment() {
+        @Override
+        public void onActivityMessage(Date date) {
+            currentTime = date;
+            Log.d("Edit_AssetsFragment","the user has selected date: " + currentTime);
+            initAssets();
+        }
+    };
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof NetWorthEditReportActivity){
+            NetWorthEditReportActivity activity = (NetWorthEditReportActivity) context;
+            activity.parentActivityCommunicator = this.parentActivityCommunicator;
+        }
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View assetsView = inflater.inflate(R.layout.fragment_edit_assets, null);
-        expandableListView = assetsView.findViewById(R.id.assets_list_view);
-        this.btnCommit = assetsView.findViewById(R.id.btnCommit);
-        this.btnCommit.setOnClickListener(new View.OnClickListener() {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+        assetsFragmentView = inflater.inflate(R.layout.fragment_edit_assets, null);
+        expandableListView = assetsFragmentView.findViewById(R.id.assets_list_view);
+        Button btnCommit = assetsFragmentView.findViewById(R.id.btnCommit);
+
+        initAssets();
+
+        btnCommit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
                         FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
-                        AssetsValueDao dao = database.assetsValueDao();
-                        for(AssetsValue assetsValue: Edit_AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
-                            if(assetsValue.getAssetsPrimaryId() != 0) {
-                                List<AssetsValue> assetsValues = dao.queryAsset(assetsValue.getAssetsPrimaryId());
-                                Log.d("Assets Value Check", " Print assetsValues status " + assetsValues.isEmpty() + " assets value is " + assetsValue.getAssetsValue());
+                        AssetsValueDao assetsValueDao = database.assetsValueDao();
+
+                        for(AssetsValue assetsValueInProcessor: Edit_AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
+                            // added to set the time picked by user
+                            assetsValueInProcessor.setDate(currentTime.getTime());
+                            Log.d("Edit_AssetsFragment", "the time of the assets are set to " + currentTime);
+
+                            if(assetsValueInProcessor.getAssetsPrimaryId() != 0) {
+                                List<AssetsValue> assetsValues = assetsValueDao.queryAsset(assetsValueInProcessor.getAssetsPrimaryId());
+                                Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() +
+                                        " assets value is " + assetsValueInProcessor.getAssetsValue() +
+                                        " time stored in processor is " + new Date(assetsValueInProcessor.getDate()));
                                 if(!assetsValues.isEmpty()) {
-                                    dao.updateAssetValue(assetsValue);
+                                    assetsValueDao.updateAssetValue(assetsValueInProcessor);
+                                    Long timeInterval = assetsValueInProcessor.getDate();
+                                    Log.d("Edit_AssetsFragment", "update time is " + new Date(timeInterval));
                                 } else {
                                     Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
                             } else {
-                                dao.insertAssetValue(assetsValue);
+                                assetsValueDao.insertAssetValue(assetsValueInProcessor);
+                                Long timeInterval = assetsValueInProcessor.getDate();
+                                Log.d("Edit_AssetsFragment", "insert time is " + new Date(timeInterval));
                             }
                         }
 
-                        Date startDate = DateUtils.firstSecondOfThisMinute();
-                        Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(dao.queryAssetsSinceDate(startDate.getTime()));
+                        Log.d("Edit_AssetsFragment", "Query [Refreshing] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
+                        Log.d("Edit_AssetsFragment", "current date: " + currentTime);
 
-                        dataProcessor.calculateParentAssets(dao);
+                        List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByDate(getQueryStartTime().getTime(), getQueryEndTime().getTime());
+                        Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValues);
 
+                        Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
+
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+
+                        dataProcessor.calculateAndInsertParentAssets(assetsValueDao);
+                        dataProcessor.clearAllAssetsValues();
+                        
                         Log.d("Edit_AssetsFragment", "Assets committed!");
                     }
                 });
             }
         });
 
-        initAssetCategory();
-
-        return assetsView;
+        return assetsFragmentView;
     }
 
-    private void initAssetCategory() {
+    public void initAssets() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
-                List<AssetsTypeQuery> assetsTypeQueries = assetsTypeDao.queryGroupedAssetsType();
 
-                Date startOfMinute = DateUtils.firstSecondOfThisMinute();
-                Long milliseconds = startOfMinute.getTime();
-                List<AssetsValue> assetsValues = assetsValueDao.queryAssetsSinceDate(milliseconds);
-                Log.d("Edit_AssetsFragment", "Query all assets: " + assetsTypeQueries.toString());
-                Log.d("Edit_AssetsFragment", "Query assets Values: " + assetsValues.toString());
+                List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByDate(getQueryStartTime().getTime(), getQueryEndTime().getTime());
+                List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
 
-                Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypeQueries, assetsValues);
-                final AssetsFragmentAdapter adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
+                // the time here is not correct
+
+                Log.d("Edit_AssetsFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
+                Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
+                Log.d("Edit_AssetsFragment", "current date: " + currentTime);
+
+                Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime);
+                adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         expandableListView.setAdapter(adapter);
                         expandableListView.setOnChildClickListener(listener);
+                        adapter.notifyDataSetChanged();
                     }
                 });
             }
         });
+    }
+
+    public Date getQueryStartTime(){
+        Date date;
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(currentTime);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        date = calendar.getTime();
+        return date;
+    }
+
+    public Date getQueryEndTime(){
+        Date date;
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(currentTime);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        date = calendar.getTime();
+        return date;
     }
 }

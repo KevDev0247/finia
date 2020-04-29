@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="15dp"
-                android:text="Value"
+                android:text="value"
                 android:textSize="20dp" />
 
             <LinearLayout

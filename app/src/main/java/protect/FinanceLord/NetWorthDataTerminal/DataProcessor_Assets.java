@@ -13,12 +13,14 @@ import protect.FinanceLord.Database.AssetsValueDao;
 
 public class DataProcessor_Assets {
 
+    private Date currentTime;
     private List<AssetsTypeQuery> dataList;
     private List<AssetsValue> assetsValues;
 
-    public DataProcessor_Assets(List<AssetsTypeQuery> dataList, List<AssetsValue> assetsValues) {
+    public DataProcessor_Assets(List<AssetsTypeQuery> dataList, List<AssetsValue> assetsValues, Date currentTime) {
         this.dataList = dataList;
         this.assetsValues = assetsValues;
+        this.currentTime = currentTime;
     }
 
     public AssetsValue findAssetsValue(long assetsId) {
@@ -34,12 +36,10 @@ public class DataProcessor_Assets {
         AssetsValue assetsValue = this.findAssetsValue(assetId);
         if (assetsValue != null) {
             assetsValue.setAssetsValue(assetValue);
-            assetsValue.setDate(new Date().getTime());
         } else {
             assetsValue = new AssetsValue();
             assetsValue.setAssetsId(assetId);
             assetsValue.setAssetsValue(assetValue);
-            assetsValue.setDate(new Date().getTime());
             this.assetsValues.add(assetsValue);
         }
     }
@@ -50,6 +50,10 @@ public class DataProcessor_Assets {
 
     public void setAllAssetsValues(List<AssetsValue> assetsValues) {
         this.assetsValues = assetsValues;
+    }
+
+    public void clearAllAssetsValues(){
+        this.assetsValues.clear();
     }
 
     public List<DataCarrier_Assets> getSubSet(String parentGroupLabel, int level) {
@@ -94,6 +98,7 @@ public class DataProcessor_Assets {
                 }
             }
         }
+
         return subGroupAssets;
     }
 
@@ -193,10 +198,12 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalLiquidAssets() {
+
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Liquid assets");
         float totalLiquidAssets = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
+
             if (assetsValue != null) {
 
                 Log.d("Liquid assets id", String.valueOf(assetsValue.getAssetsId()));
@@ -217,6 +224,7 @@ public class DataProcessor_Assets {
         float totalPersonalAssets = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
+
             if (assetsValue != null) {
 
                 Log.d("Personal assets id", String.valueOf(assetsValue.getAssetsId()));
@@ -247,6 +255,7 @@ public class DataProcessor_Assets {
         float totalOwnershipInterest = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
+
             if (assetsValue != null) {
 
                 Log.d("Ownership id", String.valueOf(assetsValue.getAssetsId()));
@@ -262,10 +271,12 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalRetirementAccounts() {
+
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Retirement accounts");
         float totalRetirementAccounts = 0;
         for (int assetId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetId);
+
             if (assetsValue != null) {
 
                 Log.d("Retirement id", String.valueOf(assetsValue.getAssetsId()));
@@ -281,10 +292,12 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalTaxableAccounts(){
+
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Taxable accounts");
         float totalTotalTaxableAccounts = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
+
             if (assetsValue != null) {
 
                 Log.d("Taxable id", String.valueOf(assetsValue.getAssetsId()));
@@ -300,7 +313,7 @@ public class DataProcessor_Assets {
     }
 
 
-    public void calculateParentAssets(AssetsValueDao assetsValueDao) {
+    public void calculateAndInsertParentAssets(AssetsValueDao assetsValueDao) {
 
         float totalAssets = this.calculateTotalAssets();
         float totalLiquidAssets = this.calculateTotalLiquidAssets();
@@ -310,13 +323,6 @@ public class DataProcessor_Assets {
         float totalRetirementAccounts = this.calculateTotalRetirementAccounts();
         float totalOwnershipInterests = this.calculateTotalOwnershipInterests();
 
-        Log.d("Total Assets", " value is " + totalAssets);
-        Log.d("Liquid Assets", " value is " + totalLiquidAssets);
-        Log.d("Invested Assets", " value is " + totalInvestedAssets);
-        Log.d("Personal Assets", " value is " + totalPersonalAssets);
-        Log.d("Taxable Accounts", " value is " + totalTaxableAccounts);
-        Log.d("Retirement Accounts", " value is " + totalRetirementAccounts);
-        Log.d("Ownership Interests", " value is " + totalOwnershipInterests);
 
         long totalAssetsId = this.getAssetsId("Total Assets");
         long liquidAssetsId = this.getAssetsId("Liquid assets");
@@ -329,14 +335,22 @@ public class DataProcessor_Assets {
         AssetsValue totalAssetsValue = this.findAssetsValue(totalAssetsId);
         if (totalAssetsValue != null) {
             totalAssetsValue.setAssetsValue(totalAssets);
-            totalAssetsValue.setDate(new Date().getTime());
-            assetsValueDao.updateAssetValue();
+            totalAssetsValue.setDate(currentTime.getTime());
+
+            Log.d("DataProcessorAssets", "Total Assets value is " + totalAssetsValue.getAssetsValue() +
+                    " Update time is " + new Date(totalAssetsValue.getDate()));
+
+            assetsValueDao.updateAssetValue(totalAssetsValue);
         } else {
             totalAssetsValue = new AssetsValue();
             totalAssetsValue.setAssetsId((int)totalAssetsId);
             totalAssetsValue.setAssetsValue(totalAssets);
-            totalAssetsValue.setDate(new Date().getTime());
-            this.assetsValues.add(totalAssetsValue);
+            totalAssetsValue.setDate(currentTime.getTime());
+            // I don't know what this is for
+            //this.assetsValues.add(totalAssetsValue);
+
+            Log.d("DataProcessorAssets", "Total Assets value is " + totalAssetsValue.getAssetsValue() +
+                    " Insert time is " + new Date(totalAssetsValue.getDate()));
 
             assetsValueDao.insertAssetValue(totalAssetsValue);
         }
@@ -344,27 +358,41 @@ public class DataProcessor_Assets {
         AssetsValue liquidAssetsValue = this.findAssetsValue(liquidAssetsId);
         if (liquidAssetsValue != null) {
             liquidAssetsValue.setAssetsValue(totalLiquidAssets);
-            liquidAssetsValue.setDate(new Date().getTime());
+            liquidAssetsValue.setDate(currentTime.getTime());
+
+            Log.d("DataProcessorAssets", "Liquid Assets value is " + liquidAssetsValue.getAssetsValue() +
+                    " Update time is " + new Date(liquidAssetsValue.getDate()));
+
             assetsValueDao.updateAssetValue();
         } else {
             liquidAssetsValue = new AssetsValue();
             liquidAssetsValue.setAssetsId((int)liquidAssetsId);
             liquidAssetsValue.setAssetsValue(totalLiquidAssets);
-            liquidAssetsValue.setDate(new Date().getTime());
+            liquidAssetsValue.setDate(currentTime.getTime());
+
+            Log.d("DataProcessorAssets", "Liquid Assets value is " + liquidAssetsValue.getAssetsValue() +
+                    " Insert time is " + new Date(liquidAssetsValue.getDate()));
+
             assetsValueDao.insertAssetValue(liquidAssetsValue);
         }
 
         AssetsValue totalInvestedAssetsValue = this.findAssetsValue(investedAssetsId);
         if (totalInvestedAssetsValue != null) {
             totalInvestedAssetsValue.setAssetsValue(totalInvestedAssets);
-            totalInvestedAssetsValue.setDate(new Date().getTime());
+            totalInvestedAssetsValue.setDate(currentTime.getTime());
+
+            Log.d("DataProcessorAssets", "Invested Assets value is " + totalInvestedAssetsValue.getAssetsValue() +
+                    " Update time is " + new Date(totalInvestedAssetsValue.getDate()));
 
             assetsValueDao.updateAssetValue(totalInvestedAssetsValue);
         } else {
             totalInvestedAssetsValue = new AssetsValue();
             totalInvestedAssetsValue.setAssetsId((int)investedAssetsId);
             totalInvestedAssetsValue.setAssetsValue(totalInvestedAssets);
-            totalInvestedAssetsValue.setDate(new Date().getTime());
+            totalInvestedAssetsValue.setDate(currentTime.getTime());
+
+            Log.d("DataProcessorAssets", "Invested Assets value is " + totalInvestedAssetsValue.getAssetsValue() +
+                    " Insert time is " + new Date(totalInvestedAssetsValue.getDate()));
 
             assetsValueDao.insertAssetValue(totalInvestedAssetsValue);
         }
@@ -372,59 +400,85 @@ public class DataProcessor_Assets {
         AssetsValue personalAssetsValue = this.findAssetsValue((int)personalAssetsId);
         if (personalAssetsValue != null) {
             personalAssetsValue.setAssetsValue(totalPersonalAssets);
-            personalAssetsValue.setDate(new Date().getTime());
+            personalAssetsValue.setDate(currentTime.getTime());
+
+            Log.d("DataProcessorAssets", "Personal Assets value is " + personalAssetsValue.getAssetsValue() +
+                    " Update time is " + new Date(personalAssetsValue.getDate()));
+
             assetsValueDao.updateAssetValue(personalAssetsValue);
         } else {
             personalAssetsValue = new AssetsValue();
             personalAssetsValue.setAssetsId((int)personalAssetsId);
             personalAssetsValue.setAssetsValue(totalPersonalAssets);
-            personalAssetsValue.setDate(new Date().getTime());
+            personalAssetsValue.setDate(currentTime.getTime());
+
+            Log.d("DataProcessorAssets", "Personal Assets value is " + personalAssetsValue.getAssetsValue() +
+                    " Insert time is " + new Date(personalAssetsValue.getDate()));
 
             assetsValueDao.insertAssetValue(personalAssetsValue);
         }
 
-        AssetsValue taxableAssetsValue = this.findAssetsValue(taxableAccountAssetsId);
-        if (taxableAssetsValue != null) {
-            taxableAssetsValue.setAssetsValue(totalTaxableAccounts);
-            taxableAssetsValue.setDate(new Date().getTime());
+        AssetsValue taxableAccountsValue = this.findAssetsValue(taxableAccountAssetsId);
+        if (taxableAccountsValue != null) {
+            taxableAccountsValue.setAssetsValue(totalTaxableAccounts);
+            taxableAccountsValue.setDate(currentTime.getTime());
 
-            assetsValueDao.updateAssetValue(taxableAssetsValue);
+            Log.d("DataProcessorAssets", "Taxable Accounts value is " + taxableAccountsValue.getAssetsValue() +
+                    " Update time is " + new Date(taxableAccountsValue.getDate()));
+
+            assetsValueDao.updateAssetValue(taxableAccountsValue);
         } else {
-            taxableAssetsValue = new AssetsValue();
-            taxableAssetsValue.setAssetsId((int)taxableAccountAssetsId);;
-            taxableAssetsValue.setAssetsValue(totalTaxableAccounts);
-            taxableAssetsValue.setDate(new Date().getTime());
+            taxableAccountsValue = new AssetsValue();
+            taxableAccountsValue.setAssetsId((int)taxableAccountAssetsId);;
+            taxableAccountsValue.setAssetsValue(totalTaxableAccounts);
+            taxableAccountsValue.setDate(currentTime.getTime());
 
-            assetsValueDao.insertAssetValue(taxableAssetsValue);
+            Log.d("DataProcessorAssets", "Taxable Accounts value is " + taxableAccountsValue.getAssetsValue() +
+                    " Insert time is " + new Date(taxableAccountsValue.getDate()));
+
+            assetsValueDao.insertAssetValue(taxableAccountsValue);
         }
 
-        AssetsValue retirementAccountAssetsValue = this.findAssetsValue(retirementAccountAssetsId);
-        if (retirementAccountAssetsValue != null) {
-            retirementAccountAssetsValue.setAssetsValue(totalRetirementAccounts);
-            retirementAccountAssetsValue.setDate(new Date().getTime());
+        AssetsValue retirementAccountValue = this.findAssetsValue(retirementAccountAssetsId);
+        if (retirementAccountValue != null) {
+            retirementAccountValue.setAssetsValue(totalRetirementAccounts);
+            retirementAccountValue.setDate(currentTime.getTime());
 
-            assetsValueDao.updateAssetValue(retirementAccountAssetsValue);
+            Log.d("DataProcessorAssets", "Retirement Accounts value is " + retirementAccountValue.getAssetsValue() +
+                    " Update time is " + new Date(retirementAccountValue.getDate()));
+
+            assetsValueDao.updateAssetValue(retirementAccountValue);
         } else {
-            retirementAccountAssetsValue = new AssetsValue();
-            retirementAccountAssetsValue.setAssetsId((int)retirementAccountAssetsId);
-            retirementAccountAssetsValue.setAssetsValue(totalRetirementAccounts);
-            retirementAccountAssetsValue.setDate(new Date().getTime());
+            retirementAccountValue = new AssetsValue();
+            retirementAccountValue.setAssetsId((int)retirementAccountAssetsId);
+            retirementAccountValue.setAssetsValue(totalRetirementAccounts);
+            retirementAccountValue.setDate(currentTime.getTime());
 
-            assetsValueDao.insertAssetValue(retirementAccountAssetsValue);
+            Log.d("DataProcessorAssets", "Retirement Accounts value is " + retirementAccountValue.getAssetsValue() +
+                    " Insert time is " + new Date(retirementAccountValue.getDate()));
+
+            assetsValueDao.insertAssetValue(retirementAccountValue);
         }
 
-        AssetsValue ownershipInterestsAssetsValue = this.findAssetsValue(ownershipInterestsAssetsId);
-        if (ownershipInterestsAssetsValue != null) {
-            ownershipInterestsAssetsValue.setAssetsValue(totalOwnershipInterests);
-            ownershipInterestsAssetsValue.setDate(new Date().getTime());
+        AssetsValue ownershipInterestsValue = this.findAssetsValue(ownershipInterestsAssetsId);
+        if (ownershipInterestsValue != null) {
+            ownershipInterestsValue.setAssetsValue(totalOwnershipInterests);
+            ownershipInterestsValue.setDate(currentTime.getTime());
 
-            assetsValueDao.updateAssetValue(ownershipInterestsAssetsValue);
+            Log.d("DataProcessorAssets", "Ownership Interests value is " + ownershipInterestsValue.getAssetsValue() +
+                    " Update time is " + new Date(ownershipInterestsValue.getDate()));
+
+            assetsValueDao.updateAssetValue(ownershipInterestsValue);
         } else {
-            ownershipInterestsAssetsValue = new AssetsValue();
-            ownershipInterestsAssetsValue.setAssetsValue(totalOwnershipInterests);
-            ownershipInterestsAssetsValue.setDate(new Date().getTime());
+            ownershipInterestsValue = new AssetsValue();
+            ownershipInterestsValue.setAssetsId((int) ownershipInterestsAssetsId);
+            ownershipInterestsValue.setAssetsValue(totalOwnershipInterests);
+            ownershipInterestsValue.setDate(currentTime.getTime());
 
-            assetsValueDao.insertAssetValue(ownershipInterestsAssetsValue);
+            Log.d("DataProcessorAssets", "Ownership Interests value is " + ownershipInterestsValue.getAssetsValue() +
+                    " Insert time is " + new Date(ownershipInterestsValue.getDate()));
+
+            assetsValueDao.insertAssetValue(ownershipInterestsValue);
         }
     }
 }

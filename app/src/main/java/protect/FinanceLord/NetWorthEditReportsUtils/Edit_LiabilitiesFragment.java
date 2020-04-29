@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.Date;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.FinanceLordDatabase;
@@ -19,6 +20,8 @@ import protect.FinanceLord.R;
 public class Edit_LiabilitiesFragment extends Fragment {
 
     String title;
+    Date currentTime;
+
     public Edit_LiabilitiesFragment(String title) {
         this.title = title;
     }
