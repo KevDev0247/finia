@@ -89,13 +89,13 @@ public class NetWorthActivity extends AppCompatActivity {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
 
-                AssetsType totalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets));
-                AssetsType liquidAssets = assetsTypeDao.queryAssetsByType(getString(R.string.liquid_assets));
-                AssetsType investedAssets = assetsTypeDao.queryAssetsByType(getString(R.string.invested_assets));
-                AssetsType personalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.personal_assets));
-                AssetsType taxableAccounts = assetsTypeDao.queryAssetsByType(getString(R.string.taxable_accounts));
-                AssetsType retirementAccounts = assetsTypeDao.queryAssetsByType(getString(R.string.retirement_accounts));
-                AssetsType ownershipInterests = assetsTypeDao.queryAssetsByType(getString(R.string.ownership_interest));
+                AssetsType totalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets_name));
+                AssetsType liquidAssets = assetsTypeDao.queryAssetsByType(getString(R.string.liquid_assets_name));
+                AssetsType investedAssets = assetsTypeDao.queryAssetsByType(getString(R.string.invested_assets_name));
+                AssetsType personalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.personal_assets_name));
+                AssetsType taxableAccounts = assetsTypeDao.queryAssetsByType(getString(R.string.taxable_accounts_name));
+                AssetsType retirementAccounts = assetsTypeDao.queryAssetsByType(getString(R.string.retirement_accounts_name));
+                AssetsType ownershipInterests = assetsTypeDao.queryAssetsByType(getString(R.string.ownership_interest_name));
 
                 if (totalAssets != null && liquidAssets != null && investedAssets != null && personalAssets != null && taxableAccounts != null && retirementAccounts != null && ownershipInterests != null){
                     totalAssetsValue = assetsValueDao.queryLatestIndividualAsset(totalAssets.getAssetsId()).getAssetsValue();
@@ -112,16 +112,16 @@ public class NetWorthActivity extends AppCompatActivity {
                 }
 
                 dataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth),"0"));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets), String.valueOf(totalAssetsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets), String.valueOf(liquidAssetsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets), String.valueOf(investedAssetsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets), String.valueOf(personalAssetsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts), String.valueOf(taxableAccountsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts), String.valueOf(retirementAccountsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest), String.valueOf(ownershipInterestsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities),"0"));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities),"0"));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities), "0"));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), String.valueOf(totalAssetsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), String.valueOf(liquidAssetsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), String.valueOf(investedAssetsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets_name), String.valueOf(personalAssetsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), String.valueOf(taxableAccountsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), String.valueOf(retirementAccountsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest_name), String.valueOf(ownershipInterestsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_assets_name),"0"));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name),"0"));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), "0"));
 
                 adapter.notifyDataSetChanged();
             }
