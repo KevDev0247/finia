@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
 import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
 import protect.FinanceLord.NetWorthPastReportsListUtils.PastReportsAdapter;
@@ -22,7 +23,7 @@ import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
 
-public class NetWorthActivity extends AppCompatActivity implements NetWorthEditReportActivity.CalendarDialogCommunicator {
+public class NetWorthActivity extends AppCompatActivity implements CalendarDateBroadcast {
 
     Date currentTime = new Date();
 

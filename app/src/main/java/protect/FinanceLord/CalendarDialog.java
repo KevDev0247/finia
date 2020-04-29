@@ -13,17 +13,19 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Date;
 
+import protect.FinanceLord.Communicators.CalendarDateBroadcast;
+
 public class CalendarDialog extends DialogFragment {
 
     View calendarView;
     DatePicker datePicker;
     Button confirmTimeButton;
     Button cancelTimeButton;
-    NetWorthEditReportActivity.CalendarDialogCommunicator communicator;
+    CalendarDateBroadcast communicator;
     NetWorthTimeUtils timeUtils = new NetWorthTimeUtils();
 
 
-    public CalendarDialog(NetWorthEditReportActivity.CalendarDialogCommunicator communicator){
+    public CalendarDialog(CalendarDateBroadcast communicator){
         this.communicator = communicator;
     }
 

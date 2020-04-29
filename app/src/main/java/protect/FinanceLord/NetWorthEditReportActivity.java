@@ -18,6 +18,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import protect.FinanceLord.Communicators.ActivityToFragment;
+import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
 import protect.FinanceLord.NetWorthEditReportsUtils.Edit_LiabilitiesFragment;
 import protect.FinanceLord.NetWorthEditReportsUtils.SectionsPagerAdapter;
@@ -26,7 +28,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
 
     Date currentTime;
     Button btnCalendar;
-    public ParentActivityCommunicator parentActivityCommunicator;
+    public ActivityToFragment parentActivityCommunicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    CalendarDialogCommunicator calendarDialogCommunicator = new CalendarDialogCommunicator() {
+    CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override
         public void onDialogMessage(Date date) {
             currentTime = date;
@@ -89,8 +91,4 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
             parentActivityCommunicator.onActivityMessage(currentTime);
         }
     };
-
-    interface CalendarDialogCommunicator {
-        void onDialogMessage(Date date);
-    }
 }

@@ -26,7 +26,7 @@ import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.NetWorthEditReportActivity;
-import protect.FinanceLord.ParentActivityCommunicator;
+import protect.FinanceLord.Communicators.ActivityToFragment;
 import protect.FinanceLord.R;
 import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
@@ -47,7 +47,7 @@ public class Edit_AssetsFragment extends Fragment {
         this.currentTime = currentTime;
     }
 
-    ParentActivityCommunicator parentActivityCommunicator = new ParentActivityCommunicator() {
+    ActivityToFragment parentActivityCommunicator = new ActivityToFragment() {
         @Override
         public void onActivityMessage(Date date) {
             //the time here is correct
@@ -122,7 +122,8 @@ public class Edit_AssetsFragment extends Fragment {
                             }
                         });
 
-                        dataProcessor.calculateParentAssets(assetsValueDao);
+                        dataProcessor.calculateAndInsertParentAssets(assetsValueDao);
+                        dataProcessor.clearAllAssetsValues();
                         
                         Log.d("Edit_AssetsFragment", "Assets committed!");
                     }
@@ -150,7 +151,7 @@ public class Edit_AssetsFragment extends Fragment {
                 Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
                 Log.d("Edit_AssetsFragment", "current date: " + currentTime);
 
-                Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues);
+                Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime);
                 adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
