@@ -37,12 +37,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         this.btnCalendar = findViewById(R.id.btnCalendar);
 
         Calendar calendar = new GregorianCalendar();
-        /*
-        我们不需要吧时间清零啊，我们只需要获取今天的日期就行了，可能需要获取今天开始的一刻时间，那应该吧时分秒清零，而不是年月日
-        calendar.set(Calendar.YEAR, 0);
-        calendar.set(Calendar.MONTH, 0);
-        calendar.set(Calendar.DATE, 0);
-        */
+
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
@@ -86,7 +81,6 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
             currentTime = date;
             Log.d("EditReportCommunicator", "time is " + currentTime);
             String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, "yyyy-MM-dd");
-            // the time here is wrong
             btnCalendar.setText(stringDate);
             parentActivityCommunicator.onActivityMessage(currentTime);
         }

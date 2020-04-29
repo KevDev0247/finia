@@ -50,7 +50,6 @@ public class Edit_AssetsFragment extends Fragment {
     ActivityToFragment parentActivityCommunicator = new ActivityToFragment() {
         @Override
         public void onActivityMessage(Date date) {
-            //the time here is correct
             currentTime = date;
             Log.d("Edit_AssetsFragment","the user has selected date: " + currentTime);
             initAssets();
@@ -101,7 +100,6 @@ public class Edit_AssetsFragment extends Fragment {
                                     Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
                             } else {
-                                // the time here is incorrect (didn't use the time pick by the user)
                                 assetsValueDao.insertAssetValue(assetsValueInProcessor);
                                 Long timeInterval = assetsValueInProcessor.getDate();
                                 Log.d("Edit_AssetsFragment", "insert time is " + new Date(timeInterval));
@@ -110,6 +108,7 @@ public class Edit_AssetsFragment extends Fragment {
 
                         Log.d("Edit_AssetsFragment", "Query [Refreshing] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                         Log.d("Edit_AssetsFragment", "current date: " + currentTime);
+
                         List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByDate(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                         Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValues);
 
