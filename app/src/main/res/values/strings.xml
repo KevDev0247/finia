@@ -20,16 +20,16 @@
 
     <string name="net_worth">Net Worth</string>
 
-    <string name="total_assets_name">Total Assets</string>
-    <string name="liquid_assets_name">Liquid Assets</string>
-    <string name="invested_assets_name">Invested Assets</string>
-    <string name="personal_assets_name">Personal Assets</string>
-    <string name="taxable_accounts_name">Taxable Accounts</string>
-    <string name="retirement_accounts_name">Retirement Accounts</string>
-    <string name="ownership_interest_name">Ownership Interest</string>
+    <string name="total_assets_name">Total assets</string>
+    <string name="liquid_assets_name">Liquid assets</string>
+    <string name="invested_assets_name">Invested assets</string>
+    <string name="personal_assets_name">Personal assets</string>
+    <string name="taxable_accounts_name">Taxable accounts</string>
+    <string name="retirement_accounts_name">Retirement accounts</string>
+    <string name="ownership_interest_name">Ownership interest</string>
 
-    <string name="total_liabilities_name">Total Liabilities</string>
-    <string name="short_term_liabilities_name">Short Term Liabilities</string>
-    <string name="long_term_liabilities_name">Long Term Liabilities</string>
+    <string name="total_liabilities_name">Total liabilities</string>
+    <string name="short_term_liabilities_name">Short Term liabilities</string>
+    <string name="long_term_liabilities_name">Long Term liabilities</string>
 
 </resources>

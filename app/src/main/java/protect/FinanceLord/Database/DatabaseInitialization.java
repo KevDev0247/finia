@@ -168,9 +168,9 @@ public class DatabaseInitialization{
         type33.setAssetsName("Invested assets");
         type34.setAssetsName("Personal assets");
 
-        type32.setAssetsParentType("Total Assets");
-        type33.setAssetsParentType("Total Assets");
-        type34.setAssetsParentType("Total Assets");
+        type32.setAssetsParentType("Total assets");
+        type33.setAssetsParentType("Total assets");
+        type34.setAssetsParentType("Total assets");
 
         //Level 0 object
         AssetsType type35 = new AssetsType();
