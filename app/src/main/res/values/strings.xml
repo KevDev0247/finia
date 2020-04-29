@@ -16,14 +16,20 @@
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
 
-    <string name="total_assets">Total Assets</string>
-    <string name="liquid_assets">Liquid Assets</string>
-    <string name="invested_assets">Invested Assets</string>
-    <string name="personal_assets">Personal Assets</string>
-    <string name="taxable_accounts">Taxable Accounts</string>
-    <string name="retirement_accounts">Retirement Accounts</string>
-    <string name="ownership_interest">Ownership Interest</string>
     <string name="title_activity_net_worth_report_template">NetWorthReportTemplate</string>
 
+    <string name="net_worth">Net Worth</string>
+
+    <string name="total_assets_name">Total assets</string>
+    <string name="liquid_assets_name">Liquid assets</string>
+    <string name="invested_assets_name">Invested assets</string>
+    <string name="personal_assets_name">Personal assets</string>
+    <string name="taxable_accounts_name">Taxable accounts</string>
+    <string name="retirement_accounts_name">Retirement accounts</string>
+    <string name="ownership_interest_name">Ownership interest</string>
+
+    <string name="total_liabilities_name">Total liabilities</string>
+    <string name="short_term_liabilities_name">Short Term liabilities</string>
+    <string name="long_term_liabilities_name">Long Term liabilities</string>
 
 </resources>

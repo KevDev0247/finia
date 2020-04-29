@@ -18,17 +18,14 @@ public interface AssetsTypeDao {
     @Insert
     void insertAssetsTypes(List<AssetsType> assetsTypes);
 
-    @Update
-    void updateAssetsType(AssetsType ... assetsTypes);
-
-    @Query("SELECT * FROM AssetsType WHERE assetsId LIKE :assetsId")
+    @Query("SELECT * FROM AssetsType WHERE assetsId = :assetsId")
     List<AssetsType> queryAssetsById (int assetsId);
 
-    @Query("SELECT * FROM AssetsType WHERE assetsName LIKE :assetsName")
-    List<AssetsType> queryAssetsByName (String assetsName);
-
-    @Query("SELECT * FROM AssetsType WHERE assetsParentType LIKE :assetsParentType")
+    @Query("SELECT * FROM AssetsType WHERE assetsParentType = :assetsParentType")
     List<AssetsType> queryAssetsByParentType (String assetsParentType);
+
+    @Query("SELECT * FROM AssetsType WHERE assetsName = :assetsName")
+    AssetsType queryAssetsByType (String assetsName);
 
     @Query("SELECT * FROM AssetsType")
     List<AssetsType> queryAllAssetsType();
