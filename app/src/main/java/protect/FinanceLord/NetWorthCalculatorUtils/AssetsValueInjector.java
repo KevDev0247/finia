@@ -27,7 +27,7 @@ public class AssetsValueInjector {
         totalAssets.setDate(date);
 
         if (totalAssets.getAssetsPrimaryId() != 0){
-            List<AssetsValue> assetsValues = assetsValueDao.queryAsset(totalAssets.getAssetsPrimaryId());
+            List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(totalAssets.getAssetsPrimaryId());
             if (!assetsValues.isEmpty()){
                 assetsValueDao.updateAssetValue(totalAssets);
             }
@@ -42,7 +42,7 @@ public class AssetsValueInjector {
         liquidAssets.setDate(date);
 
         if (liquidAssets.getAssetsPrimaryId() != 0){
-            List<AssetsValue> assetsValues = assetsValueDao.queryAsset(liquidAssets.getAssetsPrimaryId());
+            List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(liquidAssets.getAssetsPrimaryId());
             if (!assetsValues.isEmpty()){
                 assetsValueDao.updateAssetValue(liquidAssets);
             }
@@ -57,7 +57,7 @@ public class AssetsValueInjector {
         investedAssets.setDate(date);
 
         if (investedAssets.getAssetsPrimaryId() != 0){
-            List<AssetsValue> assetsValues = assetsValueDao.queryAsset(investedAssets.getAssetsPrimaryId());
+            List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(investedAssets.getAssetsPrimaryId());
             if (!assetsValues.isEmpty()){
                 assetsValueDao.updateAssetValue(investedAssets);
             }
@@ -72,7 +72,7 @@ public class AssetsValueInjector {
         personalAssets.setDate(date);
 
         if (personalAssets.getAssetsPrimaryId() != 0){
-            List<AssetsValue> assetsValues = assetsValueDao.queryAsset(personalAssets.getAssetsPrimaryId());
+            List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(personalAssets.getAssetsPrimaryId());
             if (!assetsValues.isEmpty()){
                 assetsValueDao.updateAssetValue(personalAssets);
             }
@@ -87,7 +87,7 @@ public class AssetsValueInjector {
         taxableAccounts.setDate(date);
 
         if (taxableAccounts.getAssetsPrimaryId() != 0){
-            List<AssetsValue> assetsValues = assetsValueDao.queryAsset(taxableAccounts.getAssetsPrimaryId());
+            List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(taxableAccounts.getAssetsPrimaryId());
             if (!assetsValues.isEmpty()){
                 assetsValueDao.updateAssetValue(taxableAccounts);
             }
@@ -102,7 +102,7 @@ public class AssetsValueInjector {
         retirementAccounts.setDate(date);
 
         if (retirementAccounts.getAssetsPrimaryId() != 0){
-            List<AssetsValue> assetsValues = assetsValueDao.queryAsset(retirementAccounts.getAssetsPrimaryId());
+            List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(retirementAccounts.getAssetsPrimaryId());
             if (!assetsValues.isEmpty()){
                 assetsValueDao.updateAssetValue(retirementAccounts);
             }
@@ -116,7 +116,7 @@ public class AssetsValueInjector {
         ownershipInterest.setAssetsId(31);
         ownershipInterest.setDate(date);
         if (ownershipInterest.getAssetsPrimaryId() != 0){
-            List<AssetsValue> assetsValues = assetsValueDao.queryAsset(ownershipInterest.getAssetsPrimaryId());
+            List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(ownershipInterest.getAssetsPrimaryId());
             if (!assetsValues.isEmpty()){
                 assetsValueDao.updateAssetValue(ownershipInterest);
             }

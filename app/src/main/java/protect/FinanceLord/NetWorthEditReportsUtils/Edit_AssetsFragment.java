@@ -88,7 +88,7 @@ public class Edit_AssetsFragment extends Fragment {
                             Log.d("Edit_AssetsFragment", "the time of the assets are set to " + currentTime);
 
                             if(assetsValueInProcessor.getAssetsPrimaryId() != 0) {
-                                List<AssetsValue> assetsValues = assetsValueDao.queryAsset(assetsValueInProcessor.getAssetsPrimaryId());
+                                List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(assetsValueInProcessor.getAssetsPrimaryId());
                                 Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() +
                                         " assets value is " + assetsValueInProcessor.getAssetsValue() +
                                         " time stored in processor is " + new Date(assetsValueInProcessor.getDate()));

@@ -6,26 +6,25 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import protect.FinanceLord.Communicators.CalendarDateBroadcast;
-import protect.FinanceLord.NetWorthCalculatorUtils.AssetsValueExtractor;
-import protect.FinanceLord.NetWorthCalculatorUtils.NetWorthCalculator;
+import protect.FinanceLord.Database.AssetsType;
+import protect.FinanceLord.Database.AssetsTypeDao;
+import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.NetWorthPastReportsListUtils.PastReportsAdapter;
 import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
 
-public class NetWorthActivity extends AppCompatActivity implements CalendarDateBroadcast {
-
-    Date currentTime = new Date();
+public class NetWorthActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,45 +69,62 @@ public class NetWorthActivity extends AppCompatActivity implements CalendarDateB
         viewPager.setAdapter(adapter);
         viewPager.setPadding(130, 0, 130, 0);
 
-        loadData(dataModels, adapter);
+        loadDataToCards(dataModels, adapter);
     }
 
-    protected void loadData(final List<NetWorthCardsDataModel> dataModels, final NetWorthCardsAdapter adapter){
+    protected void loadDataToCards(final List<NetWorthCardsDataModel> dataModels, final NetWorthCardsAdapter adapter){
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
 
-                Long MilliSeconds = currentTime.getTime();
-                AssetsValueExtractor assetsValueExtractor = new AssetsValueExtractor(NetWorthActivity.this, MilliSeconds);
-                NetWorthCalculator netWorthCalculator = new NetWorthCalculator(assetsValueExtractor);
+                float totalAssetsValue = 0;
+                float liquidAssetsValue = 0;
+                float investedAssetsValue = 0;
+                float personalAssetsValue = 0;
+                float taxableAccountsValue = 0;
+                float retirementAccountsValue = 0;
+                float ownershipInterestsValue = 0;
 
-                float totalAssets = netWorthCalculator.calculateTotalAssets();
-                float totalLiquidAssets = netWorthCalculator.calculateTotalLiquidAssets();
-                float totalInvestedAssets = netWorthCalculator.calculateTotalInvestedAssets();
-                float totalPersonalAssets = netWorthCalculator.calculateTotalPersonalAssets();
-                float totalTaxableAccounts = netWorthCalculator.calculateTotalTaxableAccounts();
-                float totalRetirementAccounts = netWorthCalculator.calculateTotalRetirementAccounts();
-                float totalOwnershipInterests = netWorthCalculator.calculateTotalOwnershipInterests();
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
+                AssetsValueDao assetsValueDao = database.assetsValueDao();
+                AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
 
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, "Net Worth","0"));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, "Total Assets", String.valueOf(totalAssets)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, "Total Liabilities","0"));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, "Short Term Liabilities","0"));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term,"Short Term Liabilities", "0"));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, "Liquid Assets", String.valueOf(totalLiquidAssets)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, "Invested Assets", String.valueOf(totalInvestedAssets)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, "Personal Assets", String.valueOf(totalPersonalAssets)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, "Taxable Accounts", String.valueOf(totalTaxableAccounts)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, "Retirement Accounts", String.valueOf(totalRetirementAccounts)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,"Ownership Interests", String.valueOf(totalOwnershipInterests)));
+                AssetsType totalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets));
+                AssetsType liquidAssets = assetsTypeDao.queryAssetsByType(getString(R.string.liquid_assets));
+                AssetsType investedAssets = assetsTypeDao.queryAssetsByType(getString(R.string.invested_assets));
+                AssetsType personalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.personal_assets));
+                AssetsType taxableAccounts = assetsTypeDao.queryAssetsByType(getString(R.string.taxable_accounts));
+                AssetsType retirementAccounts = assetsTypeDao.queryAssetsByType(getString(R.string.retirement_accounts));
+                AssetsType ownershipInterests = assetsTypeDao.queryAssetsByType(getString(R.string.ownership_interest));
+
+                if (totalAssets != null && liquidAssets != null && investedAssets != null && personalAssets != null && taxableAccounts != null && retirementAccounts != null && ownershipInterests != null){
+                    totalAssetsValue = assetsValueDao.queryLatestIndividualAsset(totalAssets.getAssetsId()).getAssetsValue();
+                    liquidAssetsValue = assetsValueDao.queryLatestIndividualAsset(liquidAssets.getAssetsId()).getAssetsValue();
+                    investedAssetsValue = assetsValueDao.queryLatestIndividualAsset(investedAssets.getAssetsId()).getAssetsValue();
+                    personalAssetsValue = assetsValueDao.queryLatestIndividualAsset(personalAssets.getAssetsId()).getAssetsValue();
+                    taxableAccountsValue = assetsValueDao.queryLatestIndividualAsset(taxableAccounts.getAssetsId()).getAssetsValue();
+                    retirementAccountsValue = assetsValueDao.queryLatestIndividualAsset(retirementAccounts.getAssetsId()).getAssetsValue();
+                    ownershipInterestsValue = assetsValueDao.queryLatestIndividualAsset(ownershipInterests.getAssetsId()).getAssetsValue();
+
+                    Log.d("NetWorthActivity","items value has been updated");
+                } else {
+                    Log.d("NetWorthActivity","some items are null");
+                }
+
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth),"0"));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets), String.valueOf(totalAssetsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets), String.valueOf(liquidAssetsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets), String.valueOf(investedAssetsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets), String.valueOf(personalAssetsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts), String.valueOf(taxableAccountsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts), String.valueOf(retirementAccountsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest), String.valueOf(ownershipInterestsValue)));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities),"0"));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities),"0"));
+                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities), "0"));
 
                 adapter.notifyDataSetChanged();
             }
         });
-    }
-
-    @Override
-    public void onDialogMessage(Date date) {
-        currentTime = date;
     }
 }
