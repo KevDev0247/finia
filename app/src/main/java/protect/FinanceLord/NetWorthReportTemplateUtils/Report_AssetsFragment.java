@@ -73,6 +73,8 @@ public class Report_AssetsFragment extends Fragment {
         List<DataCarrier_Assets> retirementAccounts = dataProcessor.getSubSet("Retirement accounts", 3);
         List<DataCarrier_Assets> ownershipInterests = dataProcessor.getSubSet("Ownership interests", 3);
 
+
+
         for (DataCarrier_Assets dataCarrier : liquidAssets){
             NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
             liquidAssetsDataSource.add(dataModel);
