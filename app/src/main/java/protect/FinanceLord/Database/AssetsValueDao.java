@@ -30,9 +30,9 @@ public interface AssetsValueDao {
     List<AssetsValue> queryAssetsBeforeDate(Long date);
 
     @Query("SELECT * FROM AssetsValue WHERE date <= :dateEnd AND date >= :dateStart")
-    List<AssetsValue> queryAssetsByDate(Long dateStart, Long dateEnd);
+    List<AssetsValue> queryAssetsByTimePeriod(Long dateStart, Long dateEnd);
 
-    @Query("SELECT assetsPrimaryId, assetsId, assetsValue, MIN(date) FROM AssetsValue WHERE assetsId = :assetId")
+    @Query("SELECT assetsPrimaryId, assetsId, assetsValue, date FROM AssetsValue WHERE assetsId = :assetId ORDER by  date DESC LIMIT 1")
     AssetsValue queryLatestIndividualAsset(int assetId);
 
     @Query("SELECT * FROM AssetsValue")

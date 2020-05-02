@@ -53,6 +53,9 @@ public class NetWorthActivity extends AppCompatActivity {
         PastReportsAdapter adapter;
         ListView pastReportsListView = findViewById(R.id.past_report_list);
 
+        // query the number of reports had to be displayed ？
+        // code should be placed here
+
         adapter = new PastReportsAdapter(this, dataSources);
         pastReportsListView.setAdapter(adapter);
     }
@@ -73,10 +76,10 @@ public class NetWorthActivity extends AppCompatActivity {
     }
 
     protected void loadDataToCards(final List<NetWorthCardsDataModel> dataModels, final NetWorthCardsAdapter adapter){
+
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-
                 float totalAssetsValue = 0;
                 float liquidAssetsValue = 0;
                 float investedAssetsValue = 0;
@@ -111,19 +114,32 @@ public class NetWorthActivity extends AppCompatActivity {
                     Log.d("NetWorthActivity","some items are null");
                 }
 
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth),"0"));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), String.valueOf(totalAssetsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), String.valueOf(liquidAssetsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), String.valueOf(investedAssetsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets_name), String.valueOf(personalAssetsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), String.valueOf(taxableAccountsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), String.valueOf(retirementAccountsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest_name), String.valueOf(ownershipInterestsValue)));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_assets_name),"0"));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name),"0"));
-                dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), "0"));
+                final float finalTotalAssetsValue = totalAssetsValue;
+                final float finalLiquidAssetsValue = liquidAssetsValue;
+                final float finalInvestedAssetsValue = investedAssetsValue;
+                final float finalPersonalAssetsValue = personalAssetsValue;
+                final float finalTaxableAccountsValue = taxableAccountsValue;
+                final float finalRetirementAccountsValue = retirementAccountsValue;
+                final float finalOwnershipInterestsValue = ownershipInterestsValue;
 
-                adapter.notifyDataSetChanged();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth),"0"));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), String.valueOf(finalTotalAssetsValue)));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), String.valueOf(finalLiquidAssetsValue)));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), String.valueOf(finalInvestedAssetsValue)));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets_name), String.valueOf(finalPersonalAssetsValue)));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), String.valueOf(finalTaxableAccountsValue)));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), String.valueOf(finalRetirementAccountsValue)));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest_name), String.valueOf(finalOwnershipInterestsValue)));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name),"0"));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name),"0"));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), "0"));
+
+                        adapter.notifyDataSetChanged();
+                    }
+                });
             }
         });
     }

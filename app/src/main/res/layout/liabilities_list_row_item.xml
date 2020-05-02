@@ -7,7 +7,7 @@
     android:weightSum="3">
 
     <TextView
-        android:id="@+id/assetsRowItemText"
+        android:id="@+id/liabilitiesRowItemText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="25sp"
@@ -16,7 +16,7 @@
         android:layout_weight="1"/>
 
     <EditText
-        android:id="@+id/assetsValueInput"
+        android:id="@+id/liabilitiesValueInput"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:inputType="numberDecimal"

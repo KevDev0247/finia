@@ -24,11 +24,11 @@ public interface AssetsTypeDao {
     @Query("SELECT * FROM AssetsType WHERE assetsParentType = :assetsParentType")
     List<AssetsType> queryAssetsByParentType (String assetsParentType);
 
-    @Query("SELECT * FROM AssetsType WHERE assetsName = :assetsName")
-    AssetsType queryAssetsByType (String assetsName);
-
     @Query("SELECT * FROM AssetsType")
     List<AssetsType> queryAllAssetsType();
+
+    @Query("SELECT * FROM AssetsType WHERE assetsName LIKE :assetsName")
+    AssetsType queryAssetsByType (String assetsName);
 
     @Query("SELECT \n" +
             "assetsThirdLevelComposed.*, \n" +
@@ -50,10 +50,10 @@ public interface AssetsTypeDao {
             "assetsSecondLevel.assetsName AS assetsSecondLevelName \n" +
             "FROM AssetsType AS assetsFirstLevel \n" +
             "JOIN AssetsType AS assetsSecondLevel ON assetsFirstLevel.assetsParentType IS NULL \n" +
-            "AND assetsFirstLevel.assetsName = assetsSecondLevel.assetsParentType \n" +
-            ") AS assetsSecondLevelComposed \n" +
-            "LEFT JOIN AssetsType AS assetsThirdLevel ON assetsSecondLevelComposed.assetsSecondLevelName = assetsThirdLevel.assetsParentType \n" +
-            ") AS assetsThirdLevelComposed LEFT JOIN AssetsType AS assetsFourthLevel ON assetsThirdLevelComposed.assetsThirdLevelName = assetsFourthLevel.assetsParentType"
-            )
+            "AND assetsFirstLevel.assetsName = assetsSecondLevel.assetsParentType) \n" +
+            "AS assetsSecondLevelComposed \n" +
+            "LEFT JOIN AssetsType AS assetsThirdLevel ON assetsSecondLevelComposed.assetsSecondLevelName = assetsThirdLevel.assetsParentType) \n" +
+            "AS assetsThirdLevelComposed LEFT JOIN AssetsType AS assetsFourthLevel \n" +
+            "ON assetsThirdLevelComposed.assetsThirdLevelName = assetsFourthLevel.assetsParentType")
     List<AssetsTypeQuery> queryGroupedAssetsType();
 }

@@ -4,33 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NetWorthActivity">
+    android:fitsSystemWindows="true"
+    tools:context="protect.FinanceLord.NetWorthEditReportActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="#673AB7"
-            android:gravity="end">
+            android:layout_height="?attr/actionBarSize"
+            android:background="#673AB7">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="right">
+
                 <Button
                     android:id="@+id/btnCalendar"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="7dp"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:text="Date"/>
+
             </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>

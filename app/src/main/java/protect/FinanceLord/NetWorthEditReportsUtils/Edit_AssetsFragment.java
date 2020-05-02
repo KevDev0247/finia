@@ -47,7 +47,7 @@ public class Edit_AssetsFragment extends Fragment {
         this.currentTime = currentTime;
     }
 
-    ActivityToFragment parentActivityCommunicator = new ActivityToFragment() {
+    ActivityToFragment activityToFragment = new ActivityToFragment() {
         @Override
         public void onActivityMessage(Date date) {
             currentTime = date;
@@ -61,7 +61,7 @@ public class Edit_AssetsFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof NetWorthEditReportActivity){
             NetWorthEditReportActivity activity = (NetWorthEditReportActivity) context;
-            activity.parentActivityCommunicator = this.parentActivityCommunicator;
+            activity.parentActivityCommunicator = this.activityToFragment;
         }
     }
 
@@ -109,7 +109,7 @@ public class Edit_AssetsFragment extends Fragment {
                         Log.d("Edit_AssetsFragment", "Query [Refreshing] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                         Log.d("Edit_AssetsFragment", "current date: " + currentTime);
 
-                        List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByDate(getQueryStartTime().getTime(), getQueryEndTime().getTime());
+                        List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                         Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValues);
 
                         Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
@@ -123,7 +123,7 @@ public class Edit_AssetsFragment extends Fragment {
 
                         dataProcessor.calculateAndInsertParentAssets(assetsValueDao);
                         dataProcessor.clearAllAssetsValues();
-                        
+
                         Log.d("Edit_AssetsFragment", "Assets committed!");
                     }
                 });
@@ -141,7 +141,7 @@ public class Edit_AssetsFragment extends Fragment {
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 
-                List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByDate(getQueryStartTime().getTime(), getQueryEndTime().getTime());
+                List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                 List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
 
                 // the time here is not correct

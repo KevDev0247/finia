@@ -1,14 +1,18 @@
 package protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Liabilities;
+import protect.FinanceLord.R;
 
 public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
@@ -67,8 +71,23 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int position, boolean b, View view, ViewGroup viewGroup) {
-        return null;
+    public View getGroupView(int position, boolean b, View convertView, ViewGroup viewGroup) {
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (level == 1){
+            convertView = inflater.inflate(R.layout.liabilities_list_row_second,null);
+            TextView textView = convertView.findViewById(R.id.liabilitiesRowSecondText);
+            textView.setText(sectionDataSet.get(position).liabilitiesTypeName);
+        } else if (level == 2){
+            convertView = inflater.inflate(R.layout.liabilities_list_row_item,null);
+            TextView textView = convertView.findViewById(R.id.liabilitiesRowItemText);
+            textView.setText(sectionDataSet.get(position).liabilitiesTypeName);
+
+            DataCarrier_Liabilities dataCarrier = this.sectionDataSet.get(position);
+            EditText editText = convertView.findViewById(R.id.liabilitiesValueInput);
+        }
+
+        return convertView;
     }
 
     @Override
