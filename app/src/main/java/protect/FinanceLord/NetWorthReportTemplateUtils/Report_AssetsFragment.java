@@ -27,12 +27,6 @@ public class Report_AssetsFragment extends Fragment {
     private ArrayList<NetWorthItemsDataModel> retirementAccountsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> ownershipInterestsDataSource = new ArrayList<>();
 
-    ListView liquidAssetsListView;
-    ListView personalAssetsListView;
-    ListView taxableAccountsListView;
-    ListView retirementAccountsListView;
-    ListView ownershipInterestsListView;
-
     public Report_AssetsFragment(String title){
         this.title = title;
     }
@@ -44,11 +38,11 @@ public class Report_AssetsFragment extends Fragment {
 
         initDataModels();
 
-        liquidAssetsListView = assetsView.findViewById(R.id.liquid_assets_list);
-        personalAssetsListView = assetsView.findViewById(R.id.personal_assets_list);
-        taxableAccountsListView = assetsView.findViewById(R.id.taxable_accounts_list);
-        retirementAccountsListView = assetsView.findViewById(R.id.retirement_accounts_list);
-        ownershipInterestsListView = assetsView.findViewById(R.id.ownership_interests_list);
+        ListView liquidAssetsListView = assetsView.findViewById(R.id.liquid_assets_list);
+        ListView personalAssetsListView = assetsView.findViewById(R.id.personal_assets_list);
+        ListView taxableAccountsListView = assetsView.findViewById(R.id.taxable_accounts_list);
+        ListView retirementAccountsListView = assetsView.findViewById(R.id.retirement_accounts_list);
+        ListView ownershipInterestsListView = assetsView.findViewById(R.id.ownership_interests_list);
 
         ReportListAdapter liquidAssetsAdapter = new ReportListAdapter(getContext(), liquidAssetsDataSource);
         ReportListAdapter personalAssetsAdapter = new ReportListAdapter(getContext(), personalAssetsDataSource);
@@ -72,7 +66,6 @@ public class Report_AssetsFragment extends Fragment {
         List<DataCarrier_Assets> taxableAccounts = dataProcessor.getSubSet("Taxable accounts",3);
         List<DataCarrier_Assets> retirementAccounts = dataProcessor.getSubSet("Retirement accounts", 3);
         List<DataCarrier_Assets> ownershipInterests = dataProcessor.getSubSet("Ownership interests", 3);
-
 
 
         for (DataCarrier_Assets dataCarrier : liquidAssets){

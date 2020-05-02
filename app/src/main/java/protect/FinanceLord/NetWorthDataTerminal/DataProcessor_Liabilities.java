@@ -1,18 +1,30 @@
 package protect.FinanceLord.NetWorthDataTerminal;
 
+import android.content.Context;
+import android.text.TextUtils;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import protect.FinanceLord.Database.AssetsTypeQuery;
+import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.LiabilitiesTypeQuery;
 import protect.FinanceLord.Database.LiabilitiesValue;
+import protect.FinanceLord.R;
 
 public class DataProcessor_Liabilities {
 
+    private Context context;
+    private Date date;
     private List<LiabilitiesTypeQuery> dataList;
     private List<LiabilitiesValue> liabilitiesValues;
 
-    public DataProcessor_Liabilities(List<LiabilitiesTypeQuery> dataList, List<LiabilitiesValue> liabilitiesValues){
+    public DataProcessor_Liabilities(List<LiabilitiesTypeQuery> dataList, List<LiabilitiesValue> liabilitiesValues, Date date, Context context){
+        this.context = context;
+        this.date = date;
         this.dataList = dataList;
         this.liabilitiesValues = liabilitiesValues;
     }
@@ -96,5 +108,42 @@ public class DataProcessor_Liabilities {
 
             subGroupLiabilities.add(liabilitiesFragmentDataCarrier);
         }
+    }
+
+
+
+    private int getAssetsId(String liabilitiesName){
+        for (LiabilitiesTypeQuery liabilitiesTypeQuery : dataList){
+
+        }
+        return 0;
+    }
+
+    private List<Integer> getLiabilitiesIDsBelongTo(String liabilitiesName){
+
+        if (TextUtils.isEmpty(liabilitiesName)){
+            return new ArrayList<>();
+        }
+
+        List liabilitiesIDs = new ArrayList();
+        if (context.getString(R.string.short_term_liabilities_name).equals(liabilitiesName)){
+            for (LiabilitiesTypeQuery query: dataList){
+                if (query.liabilitiesSecondLevelName != null
+                        && query.liabilitiesSecondLevelName.equals(liabilitiesName)
+                        && query.liabilitiesThirdLevelName != null){
+                    liabilitiesIDs.add(query.liabilitiesThirdLevelId);
+                }
+            }
+        } else if (context.getString(R.string.long_term_liabilities_name).equals(liabilitiesName)){
+            for (LiabilitiesTypeQuery query : dataList){
+                if (query.liabilitiesSecondLevelName != null
+                        && query.liabilitiesSecondLevelName.equals(liabilitiesName)
+                        && query.liabilitiesThirdLevelName != null){
+                    liabilitiesIDs.add(query.liabilitiesThirdLevelId);
+                }
+            }
+        }
+
+        return liabilitiesIDs;
     }
 }

@@ -19,6 +19,7 @@ import protect.FinanceLord.Database.AssetsType;
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthPastReportsListUtils.PastReportsAdapter;
 import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
@@ -49,12 +50,18 @@ public class NetWorthActivity extends AppCompatActivity {
     }
 
     protected void createPastReportsListView(){
+
         ArrayList<ReportItemsDataModel> dataSources = new ArrayList<>();
         PastReportsAdapter adapter;
         ListView pastReportsListView = findViewById(R.id.past_report_list);
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
+        AssetsValueDao assetsValueDao = database.assetsValueDao();
+        LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
         // query the number of reports had to be displayed ？
         // code should be placed here
+
+
 
         adapter = new PastReportsAdapter(this, dataSources);
         pastReportsListView.setAdapter(adapter);

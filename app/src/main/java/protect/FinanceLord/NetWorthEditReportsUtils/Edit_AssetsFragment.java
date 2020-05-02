@@ -76,6 +76,7 @@ public class Edit_AssetsFragment extends Fragment {
         btnCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
@@ -134,6 +135,7 @@ public class Edit_AssetsFragment extends Fragment {
     }
 
     public void initAssets() {
+
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -150,7 +152,7 @@ public class Edit_AssetsFragment extends Fragment {
                 Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
                 Log.d("Edit_AssetsFragment", "current date: " + currentTime);
 
-                Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime);
+                Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime, getContext());
                 adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
