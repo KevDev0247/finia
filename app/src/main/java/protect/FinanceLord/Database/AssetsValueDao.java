@@ -17,11 +17,11 @@ public interface AssetsValueDao {
     @Update
     void updateAssetValue(AssetsValue ... assetsValue);
 
-    @Query("SELECT * FROM AssetsValue WHERE assetsId = :assetId")
-    List<AssetsValue> queryAssetsByTypeId(int assetId);
-
     @Query("SELECT * FROM AssetsValue WHERE assetsPrimaryId = :assetPrimaryId")
     List<AssetsValue> queryAssetById(int assetPrimaryId);
+
+    @Query("SELECT * FROM AssetsValue WHERE assetsId = :assetId ORDER BY date DESC")
+    List<AssetsValue> queryAssetsByTypeId(int assetId);
 
     @Query("SELECT * FROM AssetsValue WHERE date >= :date")
     List<AssetsValue> queryAssetsSinceDate(Long date);

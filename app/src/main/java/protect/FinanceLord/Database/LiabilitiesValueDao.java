@@ -19,7 +19,7 @@ public interface LiabilitiesValueDao {
     @Query("SELECT * FROM LiabilitiesValue WHERE liabilitiesPrimaryId = :liabilityPrimaryId")
     List<LiabilitiesValue> queryLiabilitiesById (int liabilityPrimaryId);
 
-    @Query("SELECT * FROM LiabilitiesValue WHERE liabilitiesId = :liabilityId")
+    @Query("SELECT * FROM LiabilitiesValue WHERE liabilitiesId = :liabilityId ORDER BY date DESC")
     List<LiabilitiesValue> queryLiabilitiesByTypeId (int liabilityId);
 
     @Query("SELECT * FROM LiabilitiesValue WHERE date <= :dateEnd AND date >= :dateStart")

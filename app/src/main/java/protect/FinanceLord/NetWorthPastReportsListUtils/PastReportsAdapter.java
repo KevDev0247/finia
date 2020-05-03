@@ -13,12 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import protect.FinanceLord.R;
 
 public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
 
-    public PastReportsAdapter(@NonNull Context context, ArrayList<ReportItemsDataModel> dataModels) {
+    public PastReportsAdapter(@NonNull Context context, List<ReportItemsDataModel> dataModels) {
         super(context, 0, dataModels);
     }
 

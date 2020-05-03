@@ -11,14 +11,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.AssetsType;
 import protect.FinanceLord.Database.AssetsTypeDao;
+import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.Database.LiabilitiesType;
+import protect.FinanceLord.Database.LiabilitiesTypeDao;
+import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthPastReportsListUtils.PastReportsAdapter;
 import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
@@ -51,17 +56,41 @@ public class NetWorthActivity extends AppCompatActivity {
 
     protected void createPastReportsListView(){
 
-        ArrayList<ReportItemsDataModel> dataSources = new ArrayList<>();
-        PastReportsAdapter adapter;
-        ListView pastReportsListView = findViewById(R.id.past_report_list);
         FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
         AssetsValueDao assetsValueDao = database.assetsValueDao();
+        AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
         LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
+        LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
 
-        // query the number of reports had to be displayed ？
-        // code should be placed here
+        List<ReportItemsDataModel> dataSources = new ArrayList<>();
+        PastReportsAdapter adapter;
+        ListView pastReportsListView = findViewById(R.id.past_report_list);
 
+        AssetsType assetsType = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets_name));
+        List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTypeId(assetsType.getAssetsId());
 
+        LiabilitiesType liabilitiesType = liabilitiesTypeDao.queryLiabilitiesByType(getString(R.string.total_liabilities_name));
+        List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTypeId(liabilitiesType.getLiabilitiesId());
+
+        if (assetsValues.size() == liabilitiesValues.size()){
+            int size = assetsValues.size();
+            for (int position = 0; position < size; position++){
+                float netWorthValue = assetsValues.get(position).getAssetsValue() - liabilitiesValues.get(position).getLiabilitiesValue();
+                if (position == 0){
+                    float difference = assetsValues.get(position).getAssetsValue();
+                } else {
+                    float difference = assetsValues.get(position).getAssetsValue() - assetsValues.get(position - 1).getAssetsValue();
+                }
+                
+
+            }
+        } else if (assetsValues.size() > liabilitiesValues.size()) {
+
+        } else if (assetsValues.size() < liabilitiesValues.size()){
+
+        }
+
+        // query the data for data model of the thumbnails
 
         adapter = new PastReportsAdapter(this, dataSources);
         pastReportsListView.setAdapter(adapter);
