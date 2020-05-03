@@ -1,5 +1,6 @@
 package protect.FinanceLord.NetWorthDataTerminal;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -10,21 +11,25 @@ import java.util.List;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.R;
 
 public class DataProcessor_Assets {
 
+    private Context context;
     private Date currentTime;
     private List<AssetsTypeQuery> dataList;
     private List<AssetsValue> assetsValues;
 
-    public DataProcessor_Assets(List<AssetsTypeQuery> dataList, List<AssetsValue> assetsValues, Date currentTime) {
+    public DataProcessor_Assets(List<AssetsTypeQuery> dataList, List<AssetsValue> assetsValues, Date currentTime, Context context) {
+        this.context = context;
         this.dataList = dataList;
         this.assetsValues = assetsValues;
         this.currentTime = currentTime;
     }
 
-    public AssetsValue findAssetsValue(long assetsId) {
-        for (AssetsValue assetsValue: this.assetsValues){
+    public AssetsValue getAssetsValue(long assetsId) {
+
+        for (AssetsValue assetsValue: assetsValues){
             if (assetsValue.getAssetsId() == assetsId){
                 return assetsValue;
             }
@@ -33,7 +38,8 @@ public class DataProcessor_Assets {
     }
 
     public void setAssetValue(int assetId, float assetValue) {
-        AssetsValue assetsValue = this.findAssetsValue(assetId);
+
+        AssetsValue assetsValue = this.getAssetsValue(assetId);
         if (assetsValue != null) {
             assetsValue.setAssetsValue(assetValue);
         } else {
@@ -57,6 +63,7 @@ public class DataProcessor_Assets {
     }
 
     public List<DataCarrier_Assets> getSubSet(String parentGroupLabel, int level) {
+
         List<DataCarrier_Assets> subGroupAssets = new ArrayList<>();
 
         if (level == 0) {
@@ -103,6 +110,7 @@ public class DataProcessor_Assets {
     }
 
     void addCarrierIfNotExists(DataCarrier_Assets assetsFragmentDataCarrier, List<DataCarrier_Assets> subGroupAssets) {
+
         for(DataCarrier_Assets dataCarrier : subGroupAssets) {
             if(dataCarrier.assetsId == assetsFragmentDataCarrier.assetsId && dataCarrier.assetsId != 0) {
                 return;
@@ -114,6 +122,7 @@ public class DataProcessor_Assets {
 
 
     private int getAssetsId(String assetsName) {
+
         for(AssetsTypeQuery query : dataList) {
             if (query.assetsFirstLevelName != null && query.assetsFirstLevelName.equals(assetsName)) {
                 return query.assetsFirstLevelId;
@@ -135,7 +144,7 @@ public class DataProcessor_Assets {
         }
 
         List assetsIDs = new ArrayList();
-        if ("Ownership interests".equals(assetsName)) {
+        if (context.getString(R.string.ownership_interest_name).equals(assetsName)) {
             for (AssetsTypeQuery query : dataList) {
                 if (query.assetsThirdLevelName != null
                         && query.assetsThirdLevelName.equals(assetsName)
@@ -143,7 +152,7 @@ public class DataProcessor_Assets {
                     assetsIDs.add(query.assetsFourthLevelId);
                 }
             }
-        } else if ("Retirement accounts".equals(assetsName)) {
+        } else if (context.getString(R.string.retirement_accounts_name).equals(assetsName)) {
             for (AssetsTypeQuery query : dataList) {
                 if (query.assetsThirdLevelName != null
                         && query.assetsThirdLevelName.equals(assetsName)
@@ -151,7 +160,7 @@ public class DataProcessor_Assets {
                     assetsIDs.add(query.assetsFourthLevelId);
                 }
             }
-        } else if ("Taxable accounts".equals(assetsName)) {
+        } else if (context.getString(R.string.taxable_accounts_name).equals(assetsName)) {
             for (AssetsTypeQuery query : dataList) {
                 if (query.assetsThirdLevelName != null
                         && query.assetsThirdLevelName.equals(assetsName)
@@ -159,7 +168,7 @@ public class DataProcessor_Assets {
                     assetsIDs.add(query.assetsFourthLevelId);
                 }
             }
-        } else if ("Liquid assets".equals(assetsName)) {
+        } else if (context.getString(R.string.liquid_assets_name).equals(assetsName)) {
             for (AssetsTypeQuery query : dataList) {
                 if (query.assetsSecondLevelName != null
                         && query.assetsSecondLevelName.equals(assetsName)
@@ -167,7 +176,7 @@ public class DataProcessor_Assets {
                     assetsIDs.add(query.assetsThirdLevelId);
                 }
             }
-        } else if ("Personal assets".equals(assetsName)) {
+        } else if (context.getString(R.string.personal_assets_name).equals(assetsName)) {
             for (AssetsTypeQuery query : dataList) {
                 if (query.assetsSecondLevelName != null
                         && query.assetsSecondLevelName.equals(assetsName)
@@ -179,16 +188,8 @@ public class DataProcessor_Assets {
         return assetsIDs;
     }
 
-    private AssetsValue getAssetsValue(long assetsId) {
-        for (AssetsValue assetsValue : assetsValues) {
-            if (assetsValue.getAssetsId() == assetsId) {
-                return assetsValue;
-            }
-        }
-        return null;
-    }
-
     public float calculateTotalAssets() {
+
         float totalInvestedAssets = calculateTotalInvestedAssets();
         float totalLiquidAssets = calculateTotalLiquidAssets();
         float totalPersonalAssets = calculateTotalPersonalAssets();
@@ -199,7 +200,7 @@ public class DataProcessor_Assets {
 
     public float calculateTotalLiquidAssets() {
 
-        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Liquid assets");
+        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo(context.getString(R.string.liquid_assets_name));
         float totalLiquidAssets = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
@@ -211,7 +212,7 @@ public class DataProcessor_Assets {
 
                 totalLiquidAssets += assetsValue.getAssetsValue();
             } else {
-                Log.d("Liquid assets null", "null");
+                Log.d("Liquid assets", "null");
             }
         }
 
@@ -220,7 +221,7 @@ public class DataProcessor_Assets {
 
     public float calculateTotalPersonalAssets(){
 
-        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Personal assets");
+        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo(context.getString(R.string.personal_assets_name));
         float totalPersonalAssets = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
@@ -232,7 +233,7 @@ public class DataProcessor_Assets {
 
                 totalPersonalAssets += assetsValue.getAssetsValue();
             } else {
-                Log.d("Personal null", "null");
+                Log.d("Personal assets", "null");
             }
         }
 
@@ -251,7 +252,7 @@ public class DataProcessor_Assets {
 
     public float calculateTotalOwnershipInterests() {
 
-        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Ownership interests");
+        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo(context.getString(R.string.ownership_interest_name));
         float totalOwnershipInterest = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
@@ -263,7 +264,7 @@ public class DataProcessor_Assets {
 
                 totalOwnershipInterest += assetsValue.getAssetsValue();
             } else {
-                Log.d("Ownership null", "null");
+                Log.d("Ownership interests", "null");
             }
         }
 
@@ -272,7 +273,7 @@ public class DataProcessor_Assets {
 
     public float calculateTotalRetirementAccounts() {
 
-        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Retirement accounts");
+        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo(context.getString(R.string.retirement_accounts_name));
         float totalRetirementAccounts = 0;
         for (int assetId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetId);
@@ -284,7 +285,7 @@ public class DataProcessor_Assets {
 
                 totalRetirementAccounts += assetsValue.getAssetsValue();
             } else {
-                Log.d("Retirement null", "null");
+                Log.d("Retirement accounts", "null");
             }
         }
 
@@ -293,7 +294,7 @@ public class DataProcessor_Assets {
 
     public float calculateTotalTaxableAccounts(){
 
-        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo("Taxable accounts");
+        List<Integer> assetsIDs = this.getAssetsIDsBelongsTo(context.getString(R.string.taxable_accounts_name));
         float totalTotalTaxableAccounts = 0;
         for (int assetsId : assetsIDs) {
             AssetsValue assetsValue = this.getAssetsValue(assetsId);
@@ -305,7 +306,7 @@ public class DataProcessor_Assets {
 
                 totalTotalTaxableAccounts += assetsValue.getAssetsValue();
             } else {
-                Log.d("Taxable null", "null");
+                Log.d("Taxable accounts", "null");
             }
         }
 
@@ -324,15 +325,15 @@ public class DataProcessor_Assets {
         float totalOwnershipInterests = this.calculateTotalOwnershipInterests();
 
 
-        long totalAssetsId = this.getAssetsId("Total Assets");
-        long liquidAssetsId = this.getAssetsId("Liquid assets");
-        long investedAssetsId = this.getAssetsId("Invested assets");
-        long personalAssetsId = this.getAssetsId("Personal assets");
-        long taxableAccountAssetsId = this.getAssetsId("Taxable accounts");
-        long retirementAccountAssetsId = this.getAssetsId("Retirement accounts");
-        long ownershipInterestsAssetsId = this.getAssetsId("Ownership interests");
+        long totalAssetsId = this.getAssetsId(context.getString(R.string.total_assets_name));
+        long liquidAssetsId = this.getAssetsId(context.getString(R.string.liquid_assets_name));
+        long investedAssetsId = this.getAssetsId(context.getString(R.string.invested_assets_name));
+        long personalAssetsId = this.getAssetsId(context.getString(R.string.personal_assets_name));
+        long taxableAccountAssetsId = this.getAssetsId(context.getString(R.string.taxable_accounts_name));
+        long retirementAccountAssetsId = this.getAssetsId(context.getString(R.string.retirement_accounts_name));
+        long ownershipInterestsAssetsId = this.getAssetsId(context.getString(R.string.ownership_interest_name));
 
-        AssetsValue totalAssetsValue = this.findAssetsValue(totalAssetsId);
+        AssetsValue totalAssetsValue = this.getAssetsValue(totalAssetsId);
         if (totalAssetsValue != null) {
             totalAssetsValue.setAssetsValue(totalAssets);
             totalAssetsValue.setDate(currentTime.getTime());
@@ -355,7 +356,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(totalAssetsValue);
         }
 
-        AssetsValue liquidAssetsValue = this.findAssetsValue(liquidAssetsId);
+        AssetsValue liquidAssetsValue = this.getAssetsValue(liquidAssetsId);
         if (liquidAssetsValue != null) {
             liquidAssetsValue.setAssetsValue(totalLiquidAssets);
             liquidAssetsValue.setDate(currentTime.getTime());
@@ -376,7 +377,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(liquidAssetsValue);
         }
 
-        AssetsValue totalInvestedAssetsValue = this.findAssetsValue(investedAssetsId);
+        AssetsValue totalInvestedAssetsValue = this.getAssetsValue(investedAssetsId);
         if (totalInvestedAssetsValue != null) {
             totalInvestedAssetsValue.setAssetsValue(totalInvestedAssets);
             totalInvestedAssetsValue.setDate(currentTime.getTime());
@@ -397,7 +398,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(totalInvestedAssetsValue);
         }
 
-        AssetsValue personalAssetsValue = this.findAssetsValue((int)personalAssetsId);
+        AssetsValue personalAssetsValue = this.getAssetsValue((int)personalAssetsId);
         if (personalAssetsValue != null) {
             personalAssetsValue.setAssetsValue(totalPersonalAssets);
             personalAssetsValue.setDate(currentTime.getTime());
@@ -418,7 +419,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(personalAssetsValue);
         }
 
-        AssetsValue taxableAccountsValue = this.findAssetsValue(taxableAccountAssetsId);
+        AssetsValue taxableAccountsValue = this.getAssetsValue(taxableAccountAssetsId);
         if (taxableAccountsValue != null) {
             taxableAccountsValue.setAssetsValue(totalTaxableAccounts);
             taxableAccountsValue.setDate(currentTime.getTime());
@@ -439,7 +440,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(taxableAccountsValue);
         }
 
-        AssetsValue retirementAccountValue = this.findAssetsValue(retirementAccountAssetsId);
+        AssetsValue retirementAccountValue = this.getAssetsValue(retirementAccountAssetsId);
         if (retirementAccountValue != null) {
             retirementAccountValue.setAssetsValue(totalRetirementAccounts);
             retirementAccountValue.setDate(currentTime.getTime());
@@ -460,7 +461,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(retirementAccountValue);
         }
 
-        AssetsValue ownershipInterestsValue = this.findAssetsValue(ownershipInterestsAssetsId);
+        AssetsValue ownershipInterestsValue = this.getAssetsValue(ownershipInterestsAssetsId);
         if (ownershipInterestsValue != null) {
             ownershipInterestsValue.setAssetsValue(totalOwnershipInterests);
             ownershipInterestsValue.setDate(currentTime.getTime());

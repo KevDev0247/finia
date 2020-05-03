@@ -44,7 +44,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         calendar.set(Calendar.MILLISECOND, 0);
         currentTime = calendar.getTime();
 
-        String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, "yyyy-MM-dd");
+        String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
         btnCalendar.setText(stringDate);
         String search = getIntent().getStringExtra(SearchManager.QUERY);
         resetView(search);
@@ -80,7 +80,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         public void onDialogMessage(Date date) {
             currentTime = date;
             Log.d("EditReportCommunicator", "time is " + currentTime);
-            String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, "yyyy-MM-dd");
+            String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
             btnCalendar.setText(stringDate);
             parentActivityCommunicator.onActivityMessage(currentTime);
         }

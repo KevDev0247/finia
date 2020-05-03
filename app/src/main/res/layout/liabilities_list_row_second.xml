@@ -7,7 +7,7 @@
     android:background="@drawable/ic_report_sheet_items">
 
     <TextView
-        android:id="@+id/assetsRowSecondCategoryText"
+        android:id="@+id/liabilitiesRowSecondText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"

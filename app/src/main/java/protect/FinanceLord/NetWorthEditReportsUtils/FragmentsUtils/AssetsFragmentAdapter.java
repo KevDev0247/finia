@@ -83,19 +83,19 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (level == 1){
             convertView = inflater.inflate(R.layout.assets_list_row_second_items, null);
-            TextView textView = convertView.findViewById(R.id.rowSecondText);
+            TextView textView = convertView.findViewById(R.id.assetsRowSecondText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
         } else if (level == 2 && sectionDataSet.get(position).assetsId != 29
                               && sectionDataSet.get(position).assetsId != 30
                               && sectionDataSet.get(position).assetsId != 31){
             convertView = inflater.inflate(R.layout.assets_list_row_third_items, null);
-            TextView textView = convertView.findViewById(R.id.rowThirdText);
+            TextView textView = convertView.findViewById(R.id.assetsRowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
 
             DataCarrier_Assets dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
-            AssetsValue assetsValue = dataProcessor.findAssetsValue(dataCarrier.assetsId);
+            AssetsValue assetsValue = dataProcessor.getAssetsValue(dataCarrier.assetsId);
             if (assetsValue != null) {
                 DecimalFormat decimalFormat = new DecimalFormat();
                 String strValue = decimalFormat.format(assetsValue.getAssetsValue());
@@ -105,17 +105,17 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             this.addTextListener(editText, dataCarrier);
         } else if (level == 2) {
             convertView = inflater.inflate(R.layout.assets_list_row_second_category, null);
-            TextView textView = convertView.findViewById(R.id.rowSecondCategoryText);
+            TextView textView = convertView.findViewById(R.id.assetsRowSecondCategoryText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
         } else if (level == 3) {
             convertView = inflater.inflate(R.layout.assets_list_row_third_items, null);
-            TextView textView = convertView.findViewById(R.id.rowThirdText);
+            TextView textView = convertView.findViewById(R.id.assetsRowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
 
             DataCarrier_Assets dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
-            AssetsValue assetsValue = dataProcessor.findAssetsValue(dataCarrier.assetsId);
+            AssetsValue assetsValue = dataProcessor.getAssetsValue(dataCarrier.assetsId);
             if (assetsValue != null) {
                 DecimalFormat decimalFormat = new DecimalFormat();
                 String strValue = decimalFormat.format(assetsValue.getAssetsValue());
@@ -163,7 +163,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.assets_list_row_first, null);
-            TextView textView = convertView.findViewById(R.id.rowParentText);
+            TextView textView = convertView.findViewById(R.id.assetsRowParentText);
             textView.setText(this.sectionDataSet.get(childPosition).assetsTypeName);
             return convertView;
         } else{

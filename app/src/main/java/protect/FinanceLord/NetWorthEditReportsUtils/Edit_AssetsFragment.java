@@ -47,7 +47,7 @@ public class Edit_AssetsFragment extends Fragment {
         this.currentTime = currentTime;
     }
 
-    ActivityToFragment parentActivityCommunicator = new ActivityToFragment() {
+    ActivityToFragment activityToFragment = new ActivityToFragment() {
         @Override
         public void onActivityMessage(Date date) {
             currentTime = date;
@@ -61,7 +61,7 @@ public class Edit_AssetsFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof NetWorthEditReportActivity){
             NetWorthEditReportActivity activity = (NetWorthEditReportActivity) context;
-            activity.parentActivityCommunicator = this.parentActivityCommunicator;
+            activity.parentActivityCommunicator = this.activityToFragment;
         }
     }
 
@@ -76,6 +76,7 @@ public class Edit_AssetsFragment extends Fragment {
         btnCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
@@ -109,7 +110,7 @@ public class Edit_AssetsFragment extends Fragment {
                         Log.d("Edit_AssetsFragment", "Query [Refreshing] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                         Log.d("Edit_AssetsFragment", "current date: " + currentTime);
 
-                        List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByDate(getQueryStartTime().getTime(), getQueryEndTime().getTime());
+                        List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                         Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValues);
 
                         Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
@@ -123,7 +124,7 @@ public class Edit_AssetsFragment extends Fragment {
 
                         dataProcessor.calculateAndInsertParentAssets(assetsValueDao);
                         dataProcessor.clearAllAssetsValues();
-                        
+
                         Log.d("Edit_AssetsFragment", "Assets committed!");
                     }
                 });
@@ -134,6 +135,7 @@ public class Edit_AssetsFragment extends Fragment {
     }
 
     public void initAssets() {
+
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -141,7 +143,7 @@ public class Edit_AssetsFragment extends Fragment {
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 
-                List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByDate(getQueryStartTime().getTime(), getQueryEndTime().getTime());
+                List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                 List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
 
                 // the time here is not correct
@@ -150,7 +152,7 @@ public class Edit_AssetsFragment extends Fragment {
                 Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
                 Log.d("Edit_AssetsFragment", "current date: " + currentTime);
 
-                Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime);
+                Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime, getContext());
                 adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {

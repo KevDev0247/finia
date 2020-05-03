@@ -18,18 +18,67 @@
 
     <string name="title_activity_net_worth_report_template">NetWorthReportTemplate</string>
 
+    <string name="date_format">yyyy-MM-dd</string>
+
+
+
+
     <string name="net_worth">Net Worth</string>
 
-    <string name="total_assets_name">Total assets</string>
-    <string name="liquid_assets_name">Liquid assets</string>
-    <string name="invested_assets_name">Invested assets</string>
-    <string name="personal_assets_name">Personal assets</string>
-    <string name="taxable_accounts_name">Taxable accounts</string>
-    <string name="retirement_accounts_name">Retirement accounts</string>
-    <string name="ownership_interest_name">Ownership interest</string>
+    <string name="total_assets_name">Total Assets</string>
 
-    <string name="total_liabilities_name">Total liabilities</string>
-    <string name="short_term_liabilities_name">Short Term liabilities</string>
-    <string name="long_term_liabilities_name">Long Term liabilities</string>
+    <string name="liquid_assets_name">Liquid Assets</string>
+    <string name="invested_assets_name">Invested Assets</string>
+    <string name="personal_assets_name">Personal Assets</string>
+    <string name="taxable_accounts_name">Taxable Accounts</string>
+    <string name="retirement_accounts_name">Retirement Accounts</string>
+    <string name="ownership_interest_name">Ownership Interests</string>
+
+
+    <string name="checking_accounts_name">Checking Accounts</string>
+    <string name="savings_accounts_name">Savings Accounts</string>
+    <string name="money_market_accounts_name">Money Market Accounts</string>
+    <string name="savings_bonds_name">Savings Bonds</string>
+    <string name="cds_name">CD\'s</string>
+    <string name="life_insurance_name">Cash value of life insurance</string>
+    <string name="brokerage_name">Brokerage</string>
+    <string name="others_name">Others</string>
+    <string name="ira_name">IRA</string>
+    <string name="roth_ira_name">Roth_IRA</string>
+    <string name="retirement_savings_plan_name">401k</string>
+    <string name="SEP_IRA_name">SEP_IRA</string>
+    <string name="pension__name">Pension</string>
+    <string name="annuity_name">Annuity</string>
+    <string name="keogh_name">Keogh or Other Plan</string>
+    <string name="real_estate_name">Real Estate</string>
+    <string name="sole_proprietorship_name">Sole Proprietorship</string>
+    <string name="partnership_name">Partnership</string>
+    <string name="limited_liability_company">Limited liability company</string>
+    <string name="c_corporation_name">C Corporation</string>
+    <string name="s_corporation_name">S Corporation</string>
+    <string name="principal_home_name">Principal Home</string>
+    <string name="vacation_home_name">Vacation Home</string>
+    <string name="vehicles_name">Vehicles</string>
+    <string name="home_furnishings_name">Home Furnishings</string>
+    <string name="collections_name">Collections</string>
+    <string name="luxury_goods_name">Luxury Goods</string>
+    <string name="other_name">Other</string>
+
+    <string name="total_liabilities_name">Total Liabilities</string>
+
+    <string name="short_term_liabilities_name">Short Term Liabilities</string>
+    <string name="long_term_liabilities_name">Long Term Liabilities</string>
+    <string name="credit_card_balances_name">Credit Card Balances</string>
+    <string name="income_tax_name">Estimated Income Tax Owed</string>
+    <string name="outstanding_bills_name">Other Outstanding Bills</string>
+    <string name="home_mortgage_name">Home mortgage</string>
+    <string name="home_equity_loan_name">Home Equity Loan</string>
+    <string name="mortgage_name">Mortgage on rental properties</string>
+    <string name="car_loans_name">Car Loans</string>
+    <string name="student_loans_name">Student Loans</string>
+    <string name="total_business_loans_name">Total Business Loans</string>
+    <string name="life_insurance_policy_loans_name">Life Insurance Policy Loans</string>
+    <string name="other_long_time_debt_name">Other Long Time Debt</string>
+
 
 </resources>

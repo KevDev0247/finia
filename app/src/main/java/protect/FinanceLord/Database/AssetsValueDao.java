@@ -17,11 +17,11 @@ public interface AssetsValueDao {
     @Update
     void updateAssetValue(AssetsValue ... assetsValue);
 
-    @Query("SELECT * FROM AssetsValue WHERE assetsId = :assetId")
-    List<AssetsValue> queryAssetsByTypeId(int assetId);
-
     @Query("SELECT * FROM AssetsValue WHERE assetsPrimaryId = :assetPrimaryId")
     List<AssetsValue> queryAssetById(int assetPrimaryId);
+
+    @Query("SELECT * FROM AssetsValue WHERE assetsId = :assetId ORDER BY date DESC")
+    List<AssetsValue> queryAssetsByTypeId(int assetId);
 
     @Query("SELECT * FROM AssetsValue WHERE date >= :date")
     List<AssetsValue> queryAssetsSinceDate(Long date);
@@ -30,9 +30,9 @@ public interface AssetsValueDao {
     List<AssetsValue> queryAssetsBeforeDate(Long date);
 
     @Query("SELECT * FROM AssetsValue WHERE date <= :dateEnd AND date >= :dateStart")
-    List<AssetsValue> queryAssetsByDate(Long dateStart, Long dateEnd);
+    List<AssetsValue> queryAssetsByTimePeriod(Long dateStart, Long dateEnd);
 
-    @Query("SELECT assetsPrimaryId, assetsId, assetsValue, MIN(date) FROM AssetsValue WHERE assetsId = :assetId")
+    @Query("SELECT assetsPrimaryId, assetsId, assetsValue, date FROM AssetsValue WHERE assetsId = :assetId ORDER BY date DESC LIMIT 1")
     AssetsValue queryLatestIndividualAsset(int assetId);
 
     @Query("SELECT * FROM AssetsValue")

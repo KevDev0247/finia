@@ -4,9 +4,9 @@ import androidx.room.TypeConverter;
 
 import java.sql.Date;
 
-public class Converters {
+public class DateConverters {
     @TypeConverter
-    public static Date fromTimestamp(Long value) {
+    public static Date timestampToDate(Long value) {
         return value == null ? null : new Date(value);
     }
 

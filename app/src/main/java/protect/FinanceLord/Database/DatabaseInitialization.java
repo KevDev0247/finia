@@ -1,35 +1,22 @@
 package protect.FinanceLord.Database;
 
-import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import protect.FinanceLord.Database.AssetsType;
-import protect.FinanceLord.Database.AssetsTypeDao;
-import protect.FinanceLord.Database.AssetsValue;
-import protect.FinanceLord.Database.AssetsValueDao;
-import protect.FinanceLord.Database.Budgets;
-import protect.FinanceLord.Database.BudgetsDao;
-import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.Database.LiabilitiesType;
-import protect.FinanceLord.Database.LiabilitiesTypeDao;
-import protect.FinanceLord.Database.LiabilitiesValue;
-import protect.FinanceLord.Database.LiabilitiesValueDao;
-import protect.FinanceLord.Database.Transactions;
-import protect.FinanceLord.Database.TransactionsDao;
+import protect.FinanceLord.R;
 
 public class DatabaseInitialization{
 
-    WeakReference<Activity> context;
-    public DatabaseInitialization(Activity context) {
-        this.context = new WeakReference<>(context);
+    Context context;
+    public DatabaseInitialization(Context context) {
+        this.context = context;
     }
 
     public void initAssetTypeDb(){
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
 
         List<AssetsType> allAssetsType = assetsTypeDao.queryAllAssetsType();
@@ -50,19 +37,19 @@ public class DatabaseInitialization{
         AssetsType type5 = new AssetsType();
         AssetsType type6 = new AssetsType();
 
-        type1.setAssetsName("Checking accounts");
-        type2.setAssetsName("Savings accounts");
-        type3.setAssetsName("Money market accounts");
-        type4.setAssetsName("Savings bonds");
-        type5.setAssetsName("CD's");
-        type6.setAssetsName("Cash value of life insurance");
+        type1.setAssetsName(context.getString(R.string.checking_accounts_name));
+        type2.setAssetsName(context.getString(R.string.savings_accounts_name));
+        type3.setAssetsName(context.getString(R.string.money_market_accounts_name));
+        type4.setAssetsName(context.getString(R.string.savings_bonds_name));
+        type5.setAssetsName(context.getString(R.string.cds_name));
+        type6.setAssetsName(context.getString(R.string.life_insurance_name));
 
-        type1.setAssetsParentType("Liquid assets");
-        type2.setAssetsParentType("Liquid assets");
-        type3.setAssetsParentType("Liquid assets");
-        type4.setAssetsParentType("Liquid assets");
-        type5.setAssetsParentType("Liquid assets");
-        type6.setAssetsParentType("Liquid assets");
+        type1.setAssetsParentType(context.getString(R.string.liquid_assets_name));
+        type2.setAssetsParentType(context.getString(R.string.liquid_assets_name));
+        type3.setAssetsParentType(context.getString(R.string.liquid_assets_name));
+        type4.setAssetsParentType(context.getString(R.string.liquid_assets_name));
+        type5.setAssetsParentType(context.getString(R.string.liquid_assets_name));
+        type6.setAssetsParentType(context.getString(R.string.liquid_assets_name));
 
         AssetsType type7 = new AssetsType();
         AssetsType type8 = new AssetsType();
@@ -83,43 +70,43 @@ public class DatabaseInitialization{
         AssetsType type21 = new AssetsType();
 
 
-        type7.setAssetsName("Brokerage");
-        type8.setAssetsName("Others");
+        type7.setAssetsName(context.getString(R.string.brokerage_name));
+        type8.setAssetsName(context.getString(R.string.others_name));
 
-        type7.setAssetsParentType("Taxable accounts");
-        type8.setAssetsParentType("Taxable accounts");
-
-
-        type9.setAssetsName("IRA");
-        type10.setAssetsName("Roth_IRA");
-        type11.setAssetsName("401k");
-        type12.setAssetsName("SEP_IRA");
-        type13.setAssetsName("Pension");
-        type14.setAssetsName("Annuity");
-        type15.setAssetsName("Keogh or other plan");
-
-        type9.setAssetsParentType("Retirement accounts");
-        type10.setAssetsParentType("Retirement accounts");
-        type11.setAssetsParentType("Retirement accounts");
-        type12.setAssetsParentType("Retirement accounts");
-        type13.setAssetsParentType("Retirement accounts");
-        type14.setAssetsParentType("Retirement accounts");
-        type15.setAssetsParentType("Retirement accounts");
+        type7.setAssetsParentType(context.getString(R.string.taxable_accounts_name));
+        type8.setAssetsParentType(context.getString(R.string.taxable_accounts_name));
 
 
-        type16.setAssetsName("Real estate");
-        type17.setAssetsName("Sole proprietorship");
-        type18.setAssetsName("Partnership");
-        type19.setAssetsName("C corporation");
-        type20.setAssetsName("S corporation");
-        type21.setAssetsName("Limited liability company");
+        type9.setAssetsName(context.getString(R.string.ira_name));
+        type10.setAssetsName(context.getString(R.string.roth_ira_name));
+        type11.setAssetsName(context.getString(R.string.retirement_savings_plan_name));
+        type12.setAssetsName(context.getString(R.string.SEP_IRA_name));
+        type13.setAssetsName(context.getString(R.string.pension__name));
+        type14.setAssetsName(context.getString(R.string.annuity_name));
+        type15.setAssetsName(context.getString(R.string.keogh_name));
 
-        type16.setAssetsParentType("Ownership interests");
-        type17.setAssetsParentType("Ownership interests");
-        type18.setAssetsParentType("Ownership interests");
-        type19.setAssetsParentType("Ownership interests");
-        type20.setAssetsParentType("Ownership interests");
-        type21.setAssetsParentType("Ownership interests");
+        type9.setAssetsParentType(context.getString(R.string.retirement_accounts_name));
+        type10.setAssetsParentType(context.getString(R.string.retirement_accounts_name));
+        type11.setAssetsParentType(context.getString(R.string.retirement_accounts_name));
+        type12.setAssetsParentType(context.getString(R.string.retirement_accounts_name));
+        type13.setAssetsParentType(context.getString(R.string.retirement_accounts_name));
+        type14.setAssetsParentType(context.getString(R.string.retirement_accounts_name));
+        type15.setAssetsParentType(context.getString(R.string.retirement_accounts_name));
+
+
+        type16.setAssetsName(context.getString(R.string.real_estate_name));
+        type17.setAssetsName(context.getString(R.string.sole_proprietorship_name));
+        type18.setAssetsName(context.getString(R.string.partnership_name));
+        type19.setAssetsName(context.getString(R.string.c_corporation_name));
+        type20.setAssetsName(context.getString(R.string.s_corporation_name));
+        type21.setAssetsName(context.getString(R.string.limited_liability_company));
+
+        type16.setAssetsParentType(context.getString(R.string.ownership_interest_name));
+        type17.setAssetsParentType(context.getString(R.string.ownership_interest_name));
+        type18.setAssetsParentType(context.getString(R.string.ownership_interest_name));
+        type19.setAssetsParentType(context.getString(R.string.ownership_interest_name));
+        type20.setAssetsParentType(context.getString(R.string.ownership_interest_name));
+        type21.setAssetsParentType(context.getString(R.string.ownership_interest_name));
 
 
         AssetsType type22 = new AssetsType();
@@ -130,52 +117,52 @@ public class DatabaseInitialization{
         AssetsType type27 = new AssetsType();
         AssetsType type28 = new AssetsType();
 
-        type22.setAssetsName("Principal home");
-        type23.setAssetsName("Vacation home");
-        type24.setAssetsName("Vehicles");
-        type25.setAssetsName("Home furnishings");
-        type26.setAssetsName("Collections");
-        type27.setAssetsName("Luxury goods");
-        type28.setAssetsName("Other");
+        type22.setAssetsName(context.getString(R.string.principal_home_name));
+        type23.setAssetsName(context.getString(R.string.vacation_home_name));
+        type24.setAssetsName(context.getString(R.string.vehicles_name));
+        type25.setAssetsName(context.getString(R.string.home_furnishings_name));
+        type26.setAssetsName(context.getString(R.string.collections_name));
+        type27.setAssetsName(context.getString(R.string.luxury_goods_name));
+        type28.setAssetsName(context.getString(R.string.other_name));
 
-        type22.setAssetsParentType("Personal assets");
-        type23.setAssetsParentType("Personal assets");
-        type24.setAssetsParentType("Personal assets");
-        type25.setAssetsParentType("Personal assets");
-        type26.setAssetsParentType("Personal assets");
-        type27.setAssetsParentType("Personal assets");
-        type28.setAssetsParentType("Personal assets");
+        type22.setAssetsParentType(context.getString(R.string.personal_assets_name));
+        type23.setAssetsParentType(context.getString(R.string.personal_assets_name));
+        type24.setAssetsParentType(context.getString(R.string.personal_assets_name));
+        type25.setAssetsParentType(context.getString(R.string.personal_assets_name));
+        type26.setAssetsParentType(context.getString(R.string.personal_assets_name));
+        type27.setAssetsParentType(context.getString(R.string.personal_assets_name));
+        type28.setAssetsParentType(context.getString(R.string.personal_assets_name));
 
         //Level 2 objects
         AssetsType type29 = new AssetsType();
         AssetsType type30 = new AssetsType();
         AssetsType type31 = new AssetsType();
 
-        type29.setAssetsName("Taxable accounts");
-        type30.setAssetsName("Retirement accounts");
-        type31.setAssetsName("Ownership interests");
+        type29.setAssetsName(context.getString(R.string.taxable_accounts_name));
+        type30.setAssetsName(context.getString(R.string.retirement_accounts_name));
+        type31.setAssetsName(context.getString(R.string.ownership_interest_name));
 
-        type29.setAssetsParentType("Invested assets");
-        type30.setAssetsParentType("Invested assets");
-        type31.setAssetsParentType("Invested assets");
+        type29.setAssetsParentType(context.getString(R.string.invested_assets_name));
+        type30.setAssetsParentType(context.getString(R.string.invested_assets_name));
+        type31.setAssetsParentType(context.getString(R.string.invested_assets_name));
 
         //Level 1 objects
         AssetsType type32 = new AssetsType();
         AssetsType type33 = new AssetsType();
         AssetsType type34 = new AssetsType();
 
-        type32.setAssetsName("Liquid assets");
-        type33.setAssetsName("Invested assets");
-        type34.setAssetsName("Personal assets");
+        type32.setAssetsName(context.getString(R.string.liquid_assets_name));
+        type33.setAssetsName(context.getString(R.string.invested_assets_name));
+        type34.setAssetsName(context.getString(R.string.personal_assets_name));
 
-        type32.setAssetsParentType("Total assets");
-        type33.setAssetsParentType("Total assets");
-        type34.setAssetsParentType("Total assets");
+        type32.setAssetsParentType(context.getString(R.string.total_assets_name));
+        type33.setAssetsParentType(context.getString(R.string.total_assets_name));
+        type34.setAssetsParentType(context.getString(R.string.total_assets_name));
 
         //Level 0 object
         AssetsType type35 = new AssetsType();
 
-        type35.setAssetsName("Total Assets");
+        type35.setAssetsName(context.getString(R.string.total_assets_name));
 
         assets.add(type1);
         assets.add(type2);
@@ -219,7 +206,7 @@ public class DatabaseInitialization{
     }
 
     public void initAssetValueDb(){
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         AssetsValueDao assetsValueDao = database.assetsValueDao();
 
         List<AssetsValue> allAssetsValue = assetsValueDao.queryAllAssetsValue();
@@ -229,7 +216,7 @@ public class DatabaseInitialization{
     }
 
     public void initLiabilityTypeDb(){
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
 
         List<LiabilitiesType> allLiabilities = liabilitiesTypeDao.queryAllLiabilities();
@@ -244,13 +231,13 @@ public class DatabaseInitialization{
         LiabilitiesType type_2 = new LiabilitiesType();
         LiabilitiesType type_3 = new LiabilitiesType();
 
-        type_1.setLiabilitiesName("Credit card balances");
-        type_2.setLiabilitiesName("Estimated income tax owed");
-        type_3.setLiabilitiesName("Other outstanding bills");
+        type_1.setLiabilitiesName(context.getString(R.string.credit_card_balances_name));
+        type_2.setLiabilitiesName(context.getString(R.string.income_tax_name));
+        type_3.setLiabilitiesName(context.getString(R.string.outstanding_bills_name));
 
-        type_1.setLiabilitiesParentType("Current liabilities");
-        type_2.setLiabilitiesParentType("Current liabilities");
-        type_3.setLiabilitiesParentType("Current liabilities");
+        type_1.setLiabilitiesParentType(context.getString(R.string.short_term_liabilities_name));
+        type_2.setLiabilitiesParentType(context.getString(R.string.short_term_liabilities_name));
+        type_3.setLiabilitiesParentType(context.getString(R.string.short_term_liabilities_name));
 
         LiabilitiesType type_4 = new LiabilitiesType();
         LiabilitiesType type_5 = new LiabilitiesType();
@@ -261,38 +248,38 @@ public class DatabaseInitialization{
         LiabilitiesType type_10 = new LiabilitiesType();
         LiabilitiesType type_11 = new LiabilitiesType();
 
-        type_4.setLiabilitiesName("Home mortgage");
-        type_5.setLiabilitiesName("Home equity loan");
-        type_6.setLiabilitiesName("Mortgage on rental properties");
-        type_7.setLiabilitiesName("Car loans");
-        type_8.setLiabilitiesName("Student loans");
-        type_9.setLiabilitiesName("Total Business Loans");
-        type_10.setLiabilitiesName("Life insurance policy loans");
-        type_11.setLiabilitiesName("Other long time debt");
+        type_4.setLiabilitiesName(context.getString(R.string.home_mortgage_name));
+        type_5.setLiabilitiesName(context.getString(R.string.home_equity_loan_name));
+        type_6.setLiabilitiesName(context.getString(R.string.mortgage_name));
+        type_7.setLiabilitiesName(context.getString(R.string.car_loans_name));
+        type_8.setLiabilitiesName(context.getString(R.string.student_loans_name));
+        type_9.setLiabilitiesName(context.getString(R.string.total_business_loans_name));
+        type_10.setLiabilitiesName(context.getString(R.string.life_insurance_policy_loans_name));
+        type_11.setLiabilitiesName(context.getString(R.string.other_long_time_debt_name));
 
-        type_4.setLiabilitiesParentType("Long term liabilities");
-        type_5.setLiabilitiesParentType("Long term liabilities");
-        type_6.setLiabilitiesParentType("Long term liabilities");
-        type_7.setLiabilitiesParentType("Long term liabilities");
-        type_8.setLiabilitiesParentType("Long term liabilities");
-        type_9.setLiabilitiesParentType("Long term liabilities");
-        type_10.setLiabilitiesParentType("Long term liabilities");
-        type_11.setLiabilitiesParentType("Long term liabilities");
+        type_4.setLiabilitiesParentType(context.getString(R.string.long_term_liabilities_name));
+        type_5.setLiabilitiesParentType(context.getString(R.string.long_term_liabilities_name));
+        type_6.setLiabilitiesParentType(context.getString(R.string.long_term_liabilities_name));
+        type_7.setLiabilitiesParentType(context.getString(R.string.long_term_liabilities_name));
+        type_8.setLiabilitiesParentType(context.getString(R.string.long_term_liabilities_name));
+        type_9.setLiabilitiesParentType(context.getString(R.string.long_term_liabilities_name));
+        type_10.setLiabilitiesParentType(context.getString(R.string.long_term_liabilities_name));
+        type_11.setLiabilitiesParentType(context.getString(R.string.long_term_liabilities_name));
 
         //Level 1 objects
         LiabilitiesType type_12 = new LiabilitiesType();
         LiabilitiesType type_13 = new LiabilitiesType();
 
-        type_12.setLiabilitiesName("Current liabilities");
-        type_13.setLiabilitiesName("Long term liabilities");
+        type_12.setLiabilitiesName(context.getString(R.string.short_term_liabilities_name));
+        type_13.setLiabilitiesName(context.getString(R.string.long_term_liabilities_name));
 
-        type_12.setLiabilitiesParentType("Total liabilities");
-        type_13.setLiabilitiesParentType("Total liabilities");
+        type_12.setLiabilitiesParentType(context.getString(R.string.total_liabilities_name));
+        type_13.setLiabilitiesParentType(context.getString(R.string.total_liabilities_name));
 
         //Level 0 objects
         LiabilitiesType type_14 = new LiabilitiesType();
 
-        type_14.setLiabilitiesName("Total liabilities");
+        type_14.setLiabilitiesName(context.getString(R.string.total_liabilities_name));
 
         liabilities.add(type_1);
         liabilities.add(type_2);
@@ -313,7 +300,7 @@ public class DatabaseInitialization{
     }
 
     public void initLiabilityValueDb(){
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
         List<LiabilitiesValue> allLiabilitiesValue = liabilitiesValueDao.queryAllLiabilities();
@@ -323,7 +310,7 @@ public class DatabaseInitialization{
     }
 
     public void initBudgetDb(){
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         BudgetsDao budgetsDao = database.budgetsDao();
 
         List<Budgets> allBudgets = budgetsDao.queryAllBudgets();
@@ -333,7 +320,7 @@ public class DatabaseInitialization{
     }
 
     public void initTransactionDb(){
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context.get());
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         TransactionsDao transactionsDao = database.transactionsDao();
 
         List<Transactions> allTransactions = transactionsDao.queryAllTransaction();
