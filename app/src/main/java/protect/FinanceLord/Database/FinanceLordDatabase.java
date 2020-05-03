@@ -7,10 +7,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import protect.FinanceLord.Converters;
+import protect.FinanceLord.DateConverters;
 
 @Database(entities = {AssetsType.class, AssetsValue.class, LiabilitiesType.class, LiabilitiesValue.class, Budgets.class, Transactions.class}, version = 7)
-@TypeConverters({Converters.class})
+@TypeConverters({DateConverters.class})
 public abstract class FinanceLordDatabase extends RoomDatabase {
     public abstract AssetsTypeDao assetsTypeDao();
     public abstract AssetsValueDao assetsValueDao();

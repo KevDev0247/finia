@@ -65,6 +65,7 @@ public class NetWorthActivity extends AppCompatActivity {
         List<ReportItemsDataModel> dataSources = new ArrayList<>();
         PastReportsAdapter adapter;
         ListView pastReportsListView = findViewById(R.id.past_report_list);
+        DateConverters dateConverters = new DateConverters();
 
         AssetsType assetsType = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets_name));
         List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTypeId(assetsType.getAssetsId());
@@ -73,17 +74,22 @@ public class NetWorthActivity extends AppCompatActivity {
         List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTypeId(liabilitiesType.getLiabilitiesId());
 
         if (assetsValues.size() == liabilitiesValues.size()){
+
             int size = assetsValues.size();
             for (int position = 0; position < size; position++){
+                float difference = 0;
                 float netWorthValue = assetsValues.get(position).getAssetsValue() - liabilitiesValues.get(position).getLiabilitiesValue();
                 if (position == 0){
-                    float difference = assetsValues.get(position).getAssetsValue();
+                    difference = assetsValues.get(position).getAssetsValue();
                 } else {
-                    float difference = assetsValues.get(position).getAssetsValue() - assetsValues.get(position - 1).getAssetsValue();
+                    difference = assetsValues.get(position).getAssetsValue() - assetsValues.get(position - 1).getAssetsValue();
                 }
-                
+                Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
 
+                ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
+                dataSources.add(itemData);
             }
+
         } else if (assetsValues.size() > liabilitiesValues.size()) {
 
         } else if (assetsValues.size() < liabilitiesValues.size()){
