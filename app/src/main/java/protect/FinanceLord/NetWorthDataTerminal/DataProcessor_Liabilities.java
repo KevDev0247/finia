@@ -2,15 +2,12 @@ package protect.FinanceLord.NetWorthDataTerminal;
 
 import android.content.Context;
 import android.text.TextUtils;
-
-import org.w3c.dom.Text;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import protect.FinanceLord.Database.AssetsTypeQuery;
-import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.LiabilitiesTypeQuery;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.R;
@@ -29,7 +26,8 @@ public class DataProcessor_Liabilities {
         this.liabilitiesValues = liabilitiesValues;
     }
 
-    public LiabilitiesValue findLiabilitiesValue(int liabilitiesId){
+    public LiabilitiesValue getLiabilitiesValue(int liabilitiesId){
+
         for (LiabilitiesValue liabilitiesValue: this.liabilitiesValues){
             if (liabilitiesValue.getLiabilitiesId() == liabilitiesId){
                 return liabilitiesValue;
@@ -39,7 +37,8 @@ public class DataProcessor_Liabilities {
     }
 
     public void setLiabilityValue(int assetId, float assetValue){
-        LiabilitiesValue liabilitiesValue = this.findLiabilitiesValue(assetId);
+
+        LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(assetId);
         if (liabilitiesValue != null){
             liabilitiesValue.setLiabilitiesValue(assetValue);
             liabilitiesValue.setDate(new Date().getTime());
@@ -61,6 +60,7 @@ public class DataProcessor_Liabilities {
     }
 
     public List<DataCarrier_Liabilities> getGroupSet(String parentGroupLabel, int level){
+
         List<DataCarrier_Liabilities> subGroupLiabilities = new ArrayList<>();
 
         if (level == 0){
@@ -101,6 +101,7 @@ public class DataProcessor_Liabilities {
     }
 
     void addCarrierIfNotExists(DataCarrier_Liabilities liabilitiesFragmentDataCarrier, List<DataCarrier_Liabilities> subGroupLiabilities){
+
         for (DataCarrier_Liabilities dataCarrier: subGroupLiabilities){
             if (dataCarrier.liabilitiesId == liabilitiesFragmentDataCarrier.liabilitiesId && dataCarrier.liabilitiesId != 0){
                 return;
@@ -113,8 +114,15 @@ public class DataProcessor_Liabilities {
 
 
     private int getAssetsId(String liabilitiesName){
-        for (LiabilitiesTypeQuery liabilitiesTypeQuery : dataList){
 
+        for (LiabilitiesTypeQuery query : dataList){
+            if (query.liabilitiesFirstLevelName != null && query.liabilitiesFirstLevelName.equals(liabilitiesName)){
+                return query.liabilitiesFirstLevelId;
+            } else if (query.liabilitiesSecondLevelName != null && query.liabilitiesSecondLevelName.equals(liabilitiesName)){
+                return query.liabilitiesSecondLevelId;
+            } else if (query.liabilitiesThirdLevelName != null && query.liabilitiesThirdLevelName.equals(liabilitiesName)){
+                return query.liabilitiesThirdLevelId;
+            }
         }
         return 0;
     }
@@ -145,5 +153,54 @@ public class DataProcessor_Liabilities {
         }
 
         return liabilitiesIDs;
+    }
+
+    public float calculateTotalLiability(){
+
+        float totalLongTermLiabilities = calculateTotalLongTermLiabilities();
+        float totalShortTermLiabilities = calculateTotalShortTermLiabilities();
+        float totalLiabilities = totalShortTermLiabilities + totalLongTermLiabilities;
+
+        return totalLiabilities;
+    }
+
+    public float calculateTotalLongTermLiabilities(){
+
+        List<Integer> liabilitiesIDs = this.getLiabilitiesIDsBelongTo(context.getString(R.string.long_term_liabilities_name));
+        float totalLongTermLiabilities = 0;
+        for (int liabilitiesId : liabilitiesIDs){
+            LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(liabilitiesId);
+
+            if (liabilitiesValue != null){
+                Log.d("Long Term id", String.valueOf(liabilitiesValue.getLiabilitiesId()));
+                Log.d("Long Term value", String.valueOf(liabilitiesValue.getLiabilitiesValue()));
+
+                totalLongTermLiabilities += liabilitiesValue.getLiabilitiesValue();
+            } else {
+                Log.d("Long Term Liabilities","null");
+            }
+        }
+
+        return totalLongTermLiabilities;
+    }
+
+    public float calculateTotalShortTermLiabilities(){
+
+        List<Integer> liabilitiesIDs = this.getLiabilitiesIDsBelongTo(context.getString(R.string.short_term_liabilities_name));
+        float totalShortTermLiabilities = 0;
+        for (int liabilitiesId : liabilitiesIDs){
+            LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(liabilitiesId);
+
+            if (liabilitiesValue != null){
+                Log.d("Long Term id", String.valueOf(liabilitiesValue.getLiabilitiesId()));
+                Log.d("Long Term value", String.valueOf(liabilitiesValue.getLiabilitiesValue()));
+
+                totalShortTermLiabilities += liabilitiesValue.getLiabilitiesValue();
+            } else {
+                Log.d("Long Term Liabilities","null");
+            }
+        }
+
+        return totalShortTermLiabilities;
     }
 }

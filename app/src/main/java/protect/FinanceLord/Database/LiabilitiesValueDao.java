@@ -9,11 +9,6 @@ import java.util.List;
 
 @Dao
 public interface LiabilitiesValueDao {
-    @Insert
-    void insertLiabilityId (LiabilitiesValue liabilityId);
-
-    @Update
-    void updateLiabilityId (LiabilitiesValue ... liabilityId);
 
     @Insert
     void insertLiabilityValue (LiabilitiesValue liabilitiesValue);
@@ -21,20 +16,17 @@ public interface LiabilitiesValueDao {
     @Update
     void updateLiabilityValue (LiabilitiesValue ... liabilitiesValue);
 
-    @Insert
-    void insertLiabilityDate (AssetsValue date);
+    @Query("SELECT * FROM LiabilitiesValue WHERE liabilitiesPrimaryId = :liabilityPrimaryId")
+    List<LiabilitiesValue> queryLiabilitiesById (int liabilityPrimaryId);
 
-    @Update
-    void updateLiabilityDate (AssetsValue ... date);
+    @Query("SELECT * FROM LiabilitiesValue WHERE liabilitiesId = :liabilityId")
+    List<LiabilitiesValue> queryLiabilitiesByTypeId (int liabilityId);
 
-    @Query("SELECT * FROM LiabilitiesValue WHERE liabilitiesId LIKE :liabilityId")
-    List<LiabilitiesValue> queryLiabilitiesById (int liabilityId);
+    @Query("SELECT * FROM LiabilitiesValue WHERE date <= :dateEnd AND date >= :dateStart")
+    List<LiabilitiesValue> queryLiabilitiesByTimePeriod (Long dateStart, Long dateEnd);
 
-    @Query("SELECT * FROM LiabilitiesValue WHERE liabilitiesValue LIKE :liabilitiesValue")
-    List<LiabilitiesValue> queryLiabilitiesByValue (int liabilitiesValue);
-
-    @Query("SELECT * FROM LiabilitiesValue WHERE date LIKE :date")
-    List<LiabilitiesValue> queryLiabilitiesByDate (Long date);
+    @Query("SELECT liabilitiesPrimaryId, liabilitiesId, liabilitiesValue, date FROM LiabilitiesValue WHERE liabilitiesId = :liabilityId ORDER BY date DESC LIMIT 1")
+    LiabilitiesValue queryLatestIndividualLiability (int liabilityId);
 
     @Query("SELECT * FROM LiabilitiesValue")
     List<LiabilitiesValue> queryAllLiabilities();
