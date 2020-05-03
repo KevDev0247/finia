@@ -56,46 +56,50 @@ public class NetWorthActivity extends AppCompatActivity {
 
     protected void createPastReportsListView(){
 
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
-        AssetsValueDao assetsValueDao = database.assetsValueDao();
-        AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
-        LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
-        LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
-
-        List<ReportItemsDataModel> dataSources = new ArrayList<>();
         PastReportsAdapter adapter;
         ListView pastReportsListView = findViewById(R.id.past_report_list);
-        DateConverters dateConverters = new DateConverters();
+        final List<ReportItemsDataModel> dataSources = new ArrayList<>();
 
-        AssetsType assetsType = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets_name));
-        List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTypeId(assetsType.getAssetsId());
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
+                AssetsValueDao assetsValueDao = database.assetsValueDao();
+                AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
+                LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
+                LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
 
-        LiabilitiesType liabilitiesType = liabilitiesTypeDao.queryLiabilitiesByType(getString(R.string.total_liabilities_name));
-        List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTypeId(liabilitiesType.getLiabilitiesId());
+                AssetsType assetsType = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets_name));
+                List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTypeId(assetsType.getAssetsId());
 
-        if (assetsValues.size() == liabilitiesValues.size()){
+                LiabilitiesType liabilitiesType = liabilitiesTypeDao.queryLiabilitiesByType(getString(R.string.total_liabilities_name));
+                List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTypeId(liabilitiesType.getLiabilitiesId());
 
-            int size = assetsValues.size();
-            for (int position = 0; position < size; position++){
-                float difference = 0;
-                float netWorthValue = assetsValues.get(position).getAssetsValue() - liabilitiesValues.get(position).getLiabilitiesValue();
-                if (position == 0){
-                    difference = assetsValues.get(position).getAssetsValue();
-                } else {
-                    difference = assetsValues.get(position).getAssetsValue() - assetsValues.get(position - 1).getAssetsValue();
+                if (assetsValues.size() == liabilitiesValues.size()){
+
+                    int size = assetsValues.size();
+                    for (int position = 0; position < size; position++){
+                        float difference;
+                        float netWorthValue = assetsValues.get(position).getAssetsValue() - liabilitiesValues.get(position).getLiabilitiesValue();
+                        if (position == 0){
+                            difference = assetsValues.get(position).getAssetsValue();
+                        } else {
+                            difference = assetsValues.get(position).getAssetsValue() - assetsValues.get(position - 1).getAssetsValue();
+                        }
+                        Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
+
+                        ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
+                        dataSources.add(itemData);
+                    }
+
+                } else if (assetsValues.size() > liabilitiesValues.size()) {
+
+                } else if (assetsValues.size() < liabilitiesValues.size()){
+
                 }
-                Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
 
-                ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
-                dataSources.add(itemData);
             }
-
-        } else if (assetsValues.size() > liabilitiesValues.size()) {
-
-        } else if (assetsValues.size() < liabilitiesValues.size()){
-
-        }
-
+        });
         // query the data for data model of the thumbnails
 
         adapter = new PastReportsAdapter(this, dataSources);
@@ -134,26 +138,30 @@ public class NetWorthActivity extends AppCompatActivity {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
 
-                AssetsType totalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets_name));
-                AssetsType liquidAssets = assetsTypeDao.queryAssetsByType(getString(R.string.liquid_assets_name));
-                AssetsType investedAssets = assetsTypeDao.queryAssetsByType(getString(R.string.invested_assets_name));
-                AssetsType personalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.personal_assets_name));
-                AssetsType taxableAccounts = assetsTypeDao.queryAssetsByType(getString(R.string.taxable_accounts_name));
-                AssetsType retirementAccounts = assetsTypeDao.queryAssetsByType(getString(R.string.retirement_accounts_name));
-                AssetsType ownershipInterests = assetsTypeDao.queryAssetsByType(getString(R.string.ownership_interest_name));
+                List<AssetsValue> assetsValues = assetsValueDao.queryAllAssetsValue();
 
-                if (totalAssets != null && liquidAssets != null && investedAssets != null && personalAssets != null && taxableAccounts != null && retirementAccounts != null && ownershipInterests != null){
-                    totalAssetsValue = assetsValueDao.queryLatestIndividualAsset(totalAssets.getAssetsId()).getAssetsValue();
-                    liquidAssetsValue = assetsValueDao.queryLatestIndividualAsset(liquidAssets.getAssetsId()).getAssetsValue();
-                    investedAssetsValue = assetsValueDao.queryLatestIndividualAsset(investedAssets.getAssetsId()).getAssetsValue();
-                    personalAssetsValue = assetsValueDao.queryLatestIndividualAsset(personalAssets.getAssetsId()).getAssetsValue();
-                    taxableAccountsValue = assetsValueDao.queryLatestIndividualAsset(taxableAccounts.getAssetsId()).getAssetsValue();
-                    retirementAccountsValue = assetsValueDao.queryLatestIndividualAsset(retirementAccounts.getAssetsId()).getAssetsValue();
-                    ownershipInterestsValue = assetsValueDao.queryLatestIndividualAsset(ownershipInterests.getAssetsId()).getAssetsValue();
+                if (!assetsValues.isEmpty()){
+                    AssetsType totalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets_name));
+                    AssetsType liquidAssets = assetsTypeDao.queryAssetsByType(getString(R.string.liquid_assets_name));
+                    AssetsType investedAssets = assetsTypeDao.queryAssetsByType(getString(R.string.invested_assets_name));
+                    AssetsType personalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.personal_assets_name));
+                    AssetsType taxableAccounts = assetsTypeDao.queryAssetsByType(getString(R.string.taxable_accounts_name));
+                    AssetsType retirementAccounts = assetsTypeDao.queryAssetsByType(getString(R.string.retirement_accounts_name));
+                    AssetsType ownershipInterests = assetsTypeDao.queryAssetsByType(getString(R.string.ownership_interest_name));
 
-                    Log.d("NetWorthActivity","items value has been updated");
-                } else {
-                    Log.d("NetWorthActivity","some items are null");
+                    if (totalAssets != null && liquidAssets != null && investedAssets != null && personalAssets != null && taxableAccounts != null && retirementAccounts != null && ownershipInterests != null){
+                        totalAssetsValue = assetsValueDao.queryLatestIndividualAsset(totalAssets.getAssetsId()).getAssetsValue();
+                        liquidAssetsValue = assetsValueDao.queryLatestIndividualAsset(liquidAssets.getAssetsId()).getAssetsValue();
+                        investedAssetsValue = assetsValueDao.queryLatestIndividualAsset(investedAssets.getAssetsId()).getAssetsValue();
+                        personalAssetsValue = assetsValueDao.queryLatestIndividualAsset(personalAssets.getAssetsId()).getAssetsValue();
+                        taxableAccountsValue = assetsValueDao.queryLatestIndividualAsset(taxableAccounts.getAssetsId()).getAssetsValue();
+                        retirementAccountsValue = assetsValueDao.queryLatestIndividualAsset(retirementAccounts.getAssetsId()).getAssetsValue();
+                        ownershipInterestsValue = assetsValueDao.queryLatestIndividualAsset(ownershipInterests.getAssetsId()).getAssetsValue();
+
+                        Log.d("NetWorthActivity","items value has been updated");
+                    } else {
+                        Log.d("NetWorthActivity","some items are null");
+                    }
                 }
 
                 final float finalTotalAssetsValue = totalAssetsValue;
