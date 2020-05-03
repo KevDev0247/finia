@@ -79,13 +79,9 @@ public class NetWorthActivity extends AppCompatActivity {
 
                     int size = assetsValues.size();
                     for (int position = 0; position < size; position++){
-                        float difference;
+                        float difference = 0;
                         float netWorthValue = assetsValues.get(position).getAssetsValue() - liabilitiesValues.get(position).getLiabilitiesValue();
-                        if (position == 0){
-                            difference = assetsValues.get(position).getAssetsValue();
-                        } else {
-                            difference = assetsValues.get(position).getAssetsValue() - assetsValues.get(position - 1).getAssetsValue();
-                        }
+
                         Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
 
                         ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
@@ -94,13 +90,53 @@ public class NetWorthActivity extends AppCompatActivity {
 
                 } else if (assetsValues.size() > liabilitiesValues.size()) {
 
+                    int liabilitiesSize = liabilitiesValues.size();
+                    int assetsSize = assetsValues.size();
+                    for (int position = 0; position < liabilitiesSize; position++){
+                        float difference = 0;
+                        float netWorthValue = assetsValues.get(position).getAssetsValue() - liabilitiesValues.get(position).getLiabilitiesValue();
+
+                        Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
+
+                        ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
+                        dataSources.add(itemData);
+                    }
+
+                    for (int position = liabilitiesSize; position < assetsSize; position++){
+                        float difference = 0;
+                        float netWorthValue = assetsValues.get(position).getAssetsValue();
+
+                        Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
+
+                        ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
+                        dataSources.add(itemData);
+                    }
+
                 } else if (assetsValues.size() < liabilitiesValues.size()){
+                    int liabilitiesSize = liabilitiesValues.size();
+                    int assetsSize = assetsValues.size();
+                    for (int position = 0; position < assetsSize; position++){
+                        float difference = 0;
+                        float netWorthValue = assetsValues.get(position).getAssetsValue() - liabilitiesValues.get(position).getLiabilitiesValue();
 
+                        Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
+
+                        ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
+                        dataSources.add(itemData);
+                    }
+
+                    for (int position = assetsSize; position < liabilitiesSize; position++){
+                        float difference = 0;
+                        float netWorthValue = liabilitiesValues.get(position).getLiabilitiesValue();
+
+                        Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
+
+                        ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
+                        dataSources.add(itemData);
+                    }
                 }
-
             }
         });
-        // query the data for data model of the thumbnails
 
         adapter = new PastReportsAdapter(this, dataSources);
         pastReportsListView.setAdapter(adapter);
