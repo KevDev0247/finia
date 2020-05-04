@@ -47,7 +47,8 @@ public interface LiabilitiesTypeDao {
             "liabilitiesSecondLevel.liabilitiesId AS liabilitiesSecondLevelId, \n" +
             "liabilitiesSecondLevel.liabilitiesName AS liabilitiesSecondLevelName \n" +
             "FROM LiabilitiesType AS liabilitiesFirstLevel \n" +
-            "JOIN LiabilitiesType AS liabilitiesSecondLevel ON liabilitiesFirstLevel.liabilitiesParentType IS NULL \n" +
+            "JOIN LiabilitiesType AS liabilitiesSecondLevel \n" +
+            "ON liabilitiesFirstLevel.liabilitiesParentType IS NULL \n" +
             "AND liabilitiesFirstLevel.liabilitiesName = liabilitiesSecondLevel.liabilitiesParentType)" +
             "AS liabilitiesSecondLevelComposed LEFT JOIN LiabilitiesType AS liabilitiesThirdLevel \n" +
             "ON liabilitiesSecondLevelComposed.liabilitiesSecondLevelName = liabilitiesThirdLevel.liabilitiesParentType")
