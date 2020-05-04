@@ -143,13 +143,13 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                     final float assetValue = Float.parseFloat(numberStr);
 
                     dataProcessor.setAssetValue(dataCarrier.assetsId, assetValue);
-                    Log.d("AssetsFragmentAdapter", "Value changed: " + text + ", float value: " + assetValue);
-                } else{
+                    Log.d("AFragmentAdapter", "Value changed: " + text + ", float value: " + assetValue);
+                } else {
                     String numberStr = "0.00";
                     final float assetsValue = Float.parseFloat(numberStr);
 
                     dataProcessor.setAssetValue(dataCarrier.assetsId, assetsValue);
-                    Log.d("AssetsFragmentAdapter","Value empty, set to 0: " + ", float value: " + assetsValue);
+                    Log.d("AFragmentAdapter","Value empty, set to 0 " + ", float value: " + assetsValue);
                 }
             }
         });
@@ -160,31 +160,32 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
         final DataCarrier_Assets sectionData = sectionDataSet.get(groupPosition);
         List<DataCarrier_Assets> children = dataProcessor.getSubSet(sectionData.assetsTypeName, level + 1);
+
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.assets_list_row_first, null);
             TextView textView = convertView.findViewById(R.id.assetsRowParentText);
             textView.setText(this.sectionDataSet.get(childPosition).assetsTypeName);
             return convertView;
-        } else{
-            final NetWorthExpandableListView secondLevelExpandableListView = new NetWorthExpandableListView(context);
+        } else {
+            final NetWorthExpandableListView nextLevelExpandableListView = new NetWorthExpandableListView(context);
             AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, dataProcessor, level + 1);
-            secondLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor,level + 1, sectionData.assetsTypeName));
-            secondLevelExpandableListView.setOnChildClickListener(listener);
-            secondLevelExpandableListView.setGroupIndicator(null);
-            secondLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            nextLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor,level + 1, sectionData.assetsTypeName));
+            nextLevelExpandableListView.setOnChildClickListener(listener);
+            nextLevelExpandableListView.setGroupIndicator(null);
+            nextLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
                 int previousGroup = -1;
+
                 @Override
                 public void onGroupExpand(int groupPosition) {
-
                     if (groupPosition != previousGroup){
-                        secondLevelExpandableListView.collapseGroup(previousGroup);
+                        nextLevelExpandableListView.collapseGroup(previousGroup);
                     }
                     previousGroup = groupPosition;
                 }
             });
 
-            return secondLevelExpandableListView;
+            return nextLevelExpandableListView;
         }
     }
 

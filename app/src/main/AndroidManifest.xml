@@ -15,6 +15,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".NetWorthEditReportActivity"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_net_worth_edit_reports"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TransactionActivity" />

@@ -15,7 +15,7 @@ public class LiabilitiesFragmentChildViewClickListener implements ExpandableList
     private List<DataCarrier_Liabilities> sectionDataSet;
     private int level;
 
-    public LiabilitiesFragmentChildViewClickListener(DataProcessor_Liabilities dataProcessor, List<DataCarrier_Liabilities> sectionDataSet, int level){
+    public LiabilitiesFragmentChildViewClickListener(List<DataCarrier_Liabilities> sectionDataSet, DataProcessor_Liabilities dataProcessor, int level){
         this.dataProcessor = dataProcessor;
         this.sectionDataSet = sectionDataSet;
         this.level = level;
@@ -24,9 +24,9 @@ public class LiabilitiesFragmentChildViewClickListener implements ExpandableList
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
         DataCarrier_Liabilities sectionItem = sectionDataSet.get(i);
-        List<DataCarrier_Liabilities> childSection = dataProcessor.getGroupSet(sectionItem.liabilitiesTypeName, level + 1);
+        List<DataCarrier_Liabilities> childSection = dataProcessor.getSubSet(sectionItem.liabilitiesTypeName, level + 1);
 
-        Log.d("Edit_LiabilitiesFragment", "child clicked: " + childSection.get(i1).liabilitiesTypeName + ", id in DB" + childSection.get(i1).liabilitiesId);
+        Log.d("Edit_LFragment", "child clicked: " + childSection.get(i1).liabilitiesTypeName + ", id in DB" + childSection.get(i1).liabilitiesId);
         return false;
     }
 }

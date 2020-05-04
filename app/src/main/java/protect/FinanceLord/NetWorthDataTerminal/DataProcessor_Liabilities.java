@@ -59,7 +59,7 @@ public class DataProcessor_Liabilities {
         this.liabilitiesValues = liabilitiesValues;
     }
 
-    public List<DataCarrier_Liabilities> getGroupSet(String parentGroupLabel, int level){
+    public List<DataCarrier_Liabilities> getSubSet(String parentGroupLabel, int level){
 
         List<DataCarrier_Liabilities> subGroupLiabilities = new ArrayList<>();
 
