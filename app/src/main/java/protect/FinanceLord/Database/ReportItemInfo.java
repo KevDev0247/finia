@@ -2,7 +2,7 @@ package protect.FinanceLord.Database;
 
 import java.util.Date;
 
-public class ReportItemInfoQuery {
+public class ReportItemInfo {
     public int totalAssetsId;
     public float totalAssetsValue;
     public Date totalAssetsDate;

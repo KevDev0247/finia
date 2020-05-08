@@ -69,7 +69,7 @@ public class Edit_AssetsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         assetsFragmentView = inflater.inflate(R.layout.fragment_edit_assets, null);
         expandableListView = assetsFragmentView.findViewById(R.id.assets_list_view);
-        Button btnCommit = assetsFragmentView.findViewById(R.id.btnCommit);
+        Button btnCommit = assetsFragmentView.findViewById(R.id.assets_commit_button);
 
         initAssets();
 
@@ -91,19 +91,18 @@ public class Edit_AssetsFragment extends Fragment {
                             if(assetsValueInProcessor.getAssetsPrimaryId() != 0) {
                                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(assetsValueInProcessor.getAssetsPrimaryId());
                                 Log.d("Edit_AssetsFragment", " Print assetsValues status " + assetsValues.isEmpty() +
-                                        " assets value is " + assetsValueInProcessor.getAssetsValue() +
-                                        " time stored in processor is " + new Date(assetsValueInProcessor.getDate()));
+                                        ", assets value is " + assetsValueInProcessor.getAssetsValue() +
+                                        ", time stored in processor is " + new Date(assetsValueInProcessor.getDate()));
                                 if(!assetsValues.isEmpty()) {
                                     assetsValueDao.updateAssetValue(assetsValueInProcessor);
-                                    Long timeInterval = assetsValueInProcessor.getDate();
-                                    Log.d("Edit_AssetsFragment", "update time is " + new Date(timeInterval));
+                                    Log.d("Edit_AssetsFragment", "update time is " + new Date(assetsValueInProcessor.getDate()));
                                 } else {
                                     Log.w("Edit_AssetsFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
+
                             } else {
                                 assetsValueDao.insertAssetValue(assetsValueInProcessor);
-                                Long timeInterval = assetsValueInProcessor.getDate();
-                                Log.d("Edit_AssetsFragment", "insert time is " + new Date(timeInterval));
+                                Log.d("Edit_AssetsFragment", "insert time is " + new Date(assetsValueInProcessor.getDate()));
                             }
                         }
 
@@ -125,6 +124,7 @@ public class Edit_AssetsFragment extends Fragment {
                         dataProcessor.calculateAndInsertParentAssets(assetsValueDao);
                         dataProcessor.clearAllAssetsValues();
 
+                        //cannot update on the page after insertion!
                         Log.d("Edit_AssetsFragment", "Assets committed!");
                     }
                 });
