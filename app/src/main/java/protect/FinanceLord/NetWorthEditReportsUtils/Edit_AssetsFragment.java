@@ -154,7 +154,7 @@ public class Edit_AssetsFragment extends Fragment {
                 Log.d("Edit_AFragment", "current date: " + currentTime);
 
                 Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime, getContext());
-                adapter = new AssetsFragmentAdapter(getContext(), dataProcessor, 1,getString(R.string.total_assets_name));
+                adapter = new AssetsFragmentAdapter(getContext(), dataProcessor, 1, getString(R.string.total_assets_name));
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override

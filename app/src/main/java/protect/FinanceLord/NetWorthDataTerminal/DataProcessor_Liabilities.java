@@ -77,7 +77,7 @@ public class DataProcessor_Liabilities {
         } else if (level == 1) {
             for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList) {
                 if (liabilitiesTypeQuery.liabilitiesFirstLevelName != null
-                        && liabilitiesTypeQuery.liabilitiesFirstLevelName == parentGroupLabel
+                        && liabilitiesTypeQuery.liabilitiesFirstLevelName.equals(parentGroupLabel)
                         && liabilitiesTypeQuery.liabilitiesSecondLevelName != null) {
 
                     DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesSecondLevelName, liabilitiesTypeQuery.liabilitiesSecondLevelId, 1);
@@ -87,7 +87,7 @@ public class DataProcessor_Liabilities {
         } else if (level == 2) {
             for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList) {
                 if (liabilitiesTypeQuery.liabilitiesSecondLevelName != null
-                        && liabilitiesTypeQuery.liabilitiesSecondLevelName == parentGroupLabel
+                        && liabilitiesTypeQuery.liabilitiesSecondLevelName.equals(parentGroupLabel)
                         && liabilitiesTypeQuery.liabilitiesThirdLevelName != null) {
 
                     DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesThirdLevelName, liabilitiesTypeQuery.liabilitiesThirdLevelId, 2);
