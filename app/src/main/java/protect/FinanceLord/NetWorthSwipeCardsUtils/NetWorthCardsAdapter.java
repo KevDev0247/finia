@@ -42,12 +42,12 @@ public class NetWorthCardsAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
         layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.assets_cards, container, false);
+        View view = layoutInflater.inflate(R.layout.net_worth_cards, container, false);
 
         ImageView imageView;
         TextView title, details;
 
-        imageView = view.findViewById(R.id.assets_card_graphics);
+        imageView = view.findViewById(R.id.net_worth_card_graphics);
         title = view.findViewById(R.id.cards_title);
         details = view.findViewById(R.id.details);
 

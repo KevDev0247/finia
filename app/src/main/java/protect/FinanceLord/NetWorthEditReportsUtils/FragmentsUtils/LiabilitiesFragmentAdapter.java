@@ -29,11 +29,11 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     private int level;
     private Context context;
 
-    public LiabilitiesFragmentAdapter(Context context, DataProcessor_Liabilities dataProcessor, List<DataCarrier_Liabilities> sectionDataSet, int level){
-        this.dataProcessor = dataProcessor;
-        this.sectionDataSet = sectionDataSet;
-        this.level = level;
+    public LiabilitiesFragmentAdapter(Context context, DataProcessor_Liabilities dataProcessor, int level, String parentSection){
         this.context = context;
+        this.dataProcessor = dataProcessor;
+        this.level = level;
+        this.sectionDataSet = dataProcessor.getSubSet(parentSection, level);
     }
 
     public String getLiabilitiesName(int position){
@@ -57,7 +57,6 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int i, int i1) {
-
         String liabilitiesTypeName = getLiabilitiesName(i);
         List<DataCarrier_Liabilities> carriers = dataProcessor.getSubSet(liabilitiesTypeName, level + 1);
         return carriers.get(i1);
@@ -100,6 +99,8 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
                 String strValue = decimalFormat.format(liabilitiesValue.getLiabilitiesValue());
                 editText.setText(strValue);
             }
+
+            this.addTextListener(editText, dataCarrier);
         }
         return convertView;
     }
@@ -146,11 +147,12 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
         } else {
             final NetWorthExpandableListView nextLevelExpandableListView = new NetWorthExpandableListView(context);
             LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(sectionDataSet, dataProcessor, level + 1);
-            nextLevelExpandableListView.setAdapter(new LiabilitiesFragmentAdapter(context, dataProcessor, sectionDataSet, level + 1));
+            nextLevelExpandableListView.setAdapter(new LiabilitiesFragmentAdapter(context, dataProcessor, level + 1, sectionData.liabilitiesTypeName));
             nextLevelExpandableListView.setOnChildClickListener(listener);
             nextLevelExpandableListView.setGroupIndicator(null);
             nextLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
                 int previousGroup = -1;
+
                 @Override
                 public void onGroupExpand(int i) {
                     if (groupPosition != previousGroup){

@@ -47,11 +47,13 @@ public class Edit_AssetsFragment extends Fragment {
         this.currentTime = currentTime;
     }
 
-    ActivityToFragment activityToFragment = new ActivityToFragment() {
+    //communicators
+
+    ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
         @Override
         public void onActivityMessage(Date date) {
             currentTime = date;
-            Log.d("Edit_AssetsFragment","the user has selected date: " + currentTime);
+            Log.d("Edit_AFragment","the user has selected date: " + currentTime);
             initAssets();
         }
     };
@@ -61,7 +63,7 @@ public class Edit_AssetsFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof NetWorthEditReportActivity){
             NetWorthEditReportActivity activity = (NetWorthEditReportActivity) context;
-            activity.parentActivityCommunicator = this.activityToFragment;
+            activity.toFragmentsCommunicator = this.fromActivityCommunicator;
         }
     }
 
@@ -69,11 +71,11 @@ public class Edit_AssetsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         assetsFragmentView = inflater.inflate(R.layout.fragment_edit_assets, null);
         expandableListView = assetsFragmentView.findViewById(R.id.assets_list_view);
-        Button btnCommit = assetsFragmentView.findViewById(R.id.assets_commit_button);
+        Button commitButton = assetsFragmentView.findViewById(R.id.assets_commit_button);
 
         initAssets();
 
-        btnCommit.setOnClickListener(new View.OnClickListener() {
+        commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -146,14 +148,12 @@ public class Edit_AssetsFragment extends Fragment {
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                 List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
 
-                // the time here is not correct
-
                 Log.d("Edit_AssetsFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                 Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
                 Log.d("Edit_AssetsFragment", "current date: " + currentTime);
 
                 Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime, getContext());
-                adapter = new AssetsFragmentAdapter(Edit_AssetsFragment.this.getContext(), dataProcessor, 1,"Total Assets");
+                adapter = new AssetsFragmentAdapter(getContext(), dataProcessor, 1,getString(R.string.total_assets_name));
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override

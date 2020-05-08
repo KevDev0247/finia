@@ -14,7 +14,7 @@
         android:background="@drawable/ic_cards_background">
 
         <ImageView
-            android:id="@+id/assets_card_graphics"
+            android:id="@+id/net_worth_card_graphics"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:src="@drawable/display_card_vector1"

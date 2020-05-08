@@ -58,7 +58,7 @@ public class DataProcessor_Assets {
         this.assetsValues = assetsValues;
     }
 
-    public void clearAllAssetsValues(){
+    public void clearAllAssetsValues() {
         this.assetsValues.clear();
     }
 
@@ -325,13 +325,13 @@ public class DataProcessor_Assets {
         float totalOwnershipInterests = this.calculateTotalOwnershipInterests();
 
 
-        long totalAssetsId = this.getAssetsId(context.getString(R.string.total_assets_name));
-        long liquidAssetsId = this.getAssetsId(context.getString(R.string.liquid_assets_name));
-        long investedAssetsId = this.getAssetsId(context.getString(R.string.invested_assets_name));
-        long personalAssetsId = this.getAssetsId(context.getString(R.string.personal_assets_name));
-        long taxableAccountAssetsId = this.getAssetsId(context.getString(R.string.taxable_accounts_name));
-        long retirementAccountAssetsId = this.getAssetsId(context.getString(R.string.retirement_accounts_name));
-        long ownershipInterestsAssetsId = this.getAssetsId(context.getString(R.string.ownership_interest_name));
+        int totalAssetsId = this.getAssetsId(context.getString(R.string.total_assets_name));
+        int liquidAssetsId = this.getAssetsId(context.getString(R.string.liquid_assets_name));
+        int investedAssetsId = this.getAssetsId(context.getString(R.string.invested_assets_name));
+        int personalAssetsId = this.getAssetsId(context.getString(R.string.personal_assets_name));
+        int taxableAccountAssetsId = this.getAssetsId(context.getString(R.string.taxable_accounts_name));
+        int retirementAccountAssetsId = this.getAssetsId(context.getString(R.string.retirement_accounts_name));
+        int ownershipInterestsAssetsId = this.getAssetsId(context.getString(R.string.ownership_interest_name));
 
         AssetsValue totalAssetsValue = this.getAssetsValue(totalAssetsId);
         if (totalAssetsValue != null) {
@@ -344,7 +344,7 @@ public class DataProcessor_Assets {
             assetsValueDao.updateAssetValue(totalAssetsValue);
         } else {
             totalAssetsValue = new AssetsValue();
-            totalAssetsValue.setAssetsId((int)totalAssetsId);
+            totalAssetsValue.setAssetsId(totalAssetsId);
             totalAssetsValue.setAssetsValue(totalAssets);
             totalAssetsValue.setDate(currentTime.getTime());
             // I don't know what this is for
@@ -367,7 +367,7 @@ public class DataProcessor_Assets {
             assetsValueDao.updateAssetValue();
         } else {
             liquidAssetsValue = new AssetsValue();
-            liquidAssetsValue.setAssetsId((int)liquidAssetsId);
+            liquidAssetsValue.setAssetsId(liquidAssetsId);
             liquidAssetsValue.setAssetsValue(totalLiquidAssets);
             liquidAssetsValue.setDate(currentTime.getTime());
 
@@ -388,7 +388,7 @@ public class DataProcessor_Assets {
             assetsValueDao.updateAssetValue(totalInvestedAssetsValue);
         } else {
             totalInvestedAssetsValue = new AssetsValue();
-            totalInvestedAssetsValue.setAssetsId((int)investedAssetsId);
+            totalInvestedAssetsValue.setAssetsId(investedAssetsId);
             totalInvestedAssetsValue.setAssetsValue(totalInvestedAssets);
             totalInvestedAssetsValue.setDate(currentTime.getTime());
 
@@ -398,7 +398,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(totalInvestedAssetsValue);
         }
 
-        AssetsValue personalAssetsValue = this.getAssetsValue((int)personalAssetsId);
+        AssetsValue personalAssetsValue = this.getAssetsValue(personalAssetsId);
         if (personalAssetsValue != null) {
             personalAssetsValue.setAssetsValue(totalPersonalAssets);
             personalAssetsValue.setDate(currentTime.getTime());
@@ -409,7 +409,7 @@ public class DataProcessor_Assets {
             assetsValueDao.updateAssetValue(personalAssetsValue);
         } else {
             personalAssetsValue = new AssetsValue();
-            personalAssetsValue.setAssetsId((int)personalAssetsId);
+            personalAssetsValue.setAssetsId(personalAssetsId);
             personalAssetsValue.setAssetsValue(totalPersonalAssets);
             personalAssetsValue.setDate(currentTime.getTime());
 
@@ -430,7 +430,7 @@ public class DataProcessor_Assets {
             assetsValueDao.updateAssetValue(taxableAccountsValue);
         } else {
             taxableAccountsValue = new AssetsValue();
-            taxableAccountsValue.setAssetsId((int)taxableAccountAssetsId);;
+            taxableAccountsValue.setAssetsId(taxableAccountAssetsId);;
             taxableAccountsValue.setAssetsValue(totalTaxableAccounts);
             taxableAccountsValue.setDate(currentTime.getTime());
 
@@ -451,7 +451,7 @@ public class DataProcessor_Assets {
             assetsValueDao.updateAssetValue(retirementAccountValue);
         } else {
             retirementAccountValue = new AssetsValue();
-            retirementAccountValue.setAssetsId((int)retirementAccountAssetsId);
+            retirementAccountValue.setAssetsId(retirementAccountAssetsId);
             retirementAccountValue.setAssetsValue(totalRetirementAccounts);
             retirementAccountValue.setDate(currentTime.getTime());
 
@@ -472,7 +472,7 @@ public class DataProcessor_Assets {
             assetsValueDao.updateAssetValue(ownershipInterestsValue);
         } else {
             ownershipInterestsValue = new AssetsValue();
-            ownershipInterestsValue.setAssetsId((int) ownershipInterestsAssetsId);
+            ownershipInterestsValue.setAssetsId(ownershipInterestsAssetsId);
             ownershipInterestsValue.setAssetsValue(totalOwnershipInterests);
             ownershipInterestsValue.setDate(currentTime.getTime());
 

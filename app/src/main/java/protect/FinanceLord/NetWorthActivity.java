@@ -170,11 +170,18 @@ public class NetWorthActivity extends AppCompatActivity {
                 float retirementAccountsValue = 0;
                 float ownershipInterestsValue = 0;
 
+                float totalLiabilitiesValue = 0;
+                float shortTermLiabilitiesValue = 0;
+                float longTermLiabilitiesValue = 0;
+
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
+                LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
+                LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
 
                 List<AssetsValue> assetsValues = assetsValueDao.queryAllAssetsValue();
+                List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryAllLiabilities();
 
                 if (!assetsValues.isEmpty()){
                     AssetsType totalAssets = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets_name));
@@ -194,9 +201,25 @@ public class NetWorthActivity extends AppCompatActivity {
                         retirementAccountsValue = assetsValueDao.queryLatestIndividualAsset(retirementAccounts.getAssetsId()).getAssetsValue();
                         ownershipInterestsValue = assetsValueDao.queryLatestIndividualAsset(ownershipInterests.getAssetsId()).getAssetsValue();
 
-                        Log.d("NetWorthActivity","items value has been updated");
+                        Log.d("NetWorthActivity","asset items value has been updated");
                     } else {
-                        Log.d("NetWorthActivity","some items are null");
+                        Log.d("NetWorthActivity","some asset items are null");
+                    }
+                }
+
+                if (!liabilitiesValues.isEmpty()){
+                    LiabilitiesType totalLiabilities = liabilitiesTypeDao.queryLiabilitiesByType(getString(R.string.total_liabilities_name));
+                    LiabilitiesType shortTermLiabilities = liabilitiesTypeDao.queryLiabilitiesByType(getString(R.string.short_term_liabilities_name));
+                    LiabilitiesType longTermLiabilities = liabilitiesTypeDao.queryLiabilitiesByType(getString(R.string.long_term_liabilities_name));
+
+                    if (totalLiabilities != null && shortTermLiabilities != null && longTermLiabilities != null){
+                        totalLiabilitiesValue = liabilitiesValueDao.queryLatestIndividualLiability(totalLiabilities.getLiabilitiesId()).getLiabilitiesValue();
+                        shortTermLiabilitiesValue = liabilitiesValueDao.queryLatestIndividualLiability(shortTermLiabilities.getLiabilitiesId()).getLiabilitiesValue();
+                        longTermLiabilitiesValue = liabilitiesValueDao.queryLatestIndividualLiability(longTermLiabilities.getLiabilitiesId()).getLiabilitiesValue();
+
+                        Log.d("NetWorthActivity","liability items value has been updated");
+                    } else {
+                        Log.d("NetWorthActivity","some liability items are null");
                     }
                 }
 
@@ -207,6 +230,10 @@ public class NetWorthActivity extends AppCompatActivity {
                 final float finalTaxableAccountsValue = taxableAccountsValue;
                 final float finalRetirementAccountsValue = retirementAccountsValue;
                 final float finalOwnershipInterestsValue = ownershipInterestsValue;
+
+                final float finalTotalLiabilitiesValue = totalLiabilitiesValue;
+                final float finalShortTermLiabilitiesValue = shortTermLiabilitiesValue;
+                final float finalLongTermLiabilitiesValue = longTermLiabilitiesValue;
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -219,9 +246,9 @@ public class NetWorthActivity extends AppCompatActivity {
                         dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), String.valueOf(finalTaxableAccountsValue)));
                         dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), String.valueOf(finalRetirementAccountsValue)));
                         dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest_name), String.valueOf(finalOwnershipInterestsValue)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name),"0"));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name),"0"));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), "0"));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name),String.valueOf(finalTotalLiabilitiesValue)));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name),String.valueOf(finalShortTermLiabilitiesValue)));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), String.valueOf(finalLongTermLiabilitiesValue)));
 
                         adapter.notifyDataSetChanged();
                     }

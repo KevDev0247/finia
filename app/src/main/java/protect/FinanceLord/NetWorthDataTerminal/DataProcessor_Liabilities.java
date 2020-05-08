@@ -10,23 +10,24 @@ import java.util.List;
 
 import protect.FinanceLord.Database.LiabilitiesTypeQuery;
 import protect.FinanceLord.Database.LiabilitiesValue;
+import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.R;
 
 public class DataProcessor_Liabilities {
 
     private Context context;
-    private Date date;
+    private Date currentTime;
     private List<LiabilitiesTypeQuery> dataList;
     private List<LiabilitiesValue> liabilitiesValues;
 
-    public DataProcessor_Liabilities(List<LiabilitiesTypeQuery> dataList, List<LiabilitiesValue> liabilitiesValues, Date date, Context context){
+    public DataProcessor_Liabilities(List<LiabilitiesTypeQuery> dataList, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context){
         this.context = context;
-        this.date = date;
+        this.currentTime = currentTime;
         this.dataList = dataList;
         this.liabilitiesValues = liabilitiesValues;
     }
 
-    public LiabilitiesValue getLiabilitiesValue(int liabilitiesId){
+    public LiabilitiesValue getLiabilitiesValue(long liabilitiesId){
 
         for (LiabilitiesValue liabilitiesValue: this.liabilitiesValues){
             if (liabilitiesValue.getLiabilitiesId() == liabilitiesId){
@@ -41,12 +42,10 @@ public class DataProcessor_Liabilities {
         LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(assetId);
         if (liabilitiesValue != null){
             liabilitiesValue.setLiabilitiesValue(assetValue);
-            liabilitiesValue.setDate(new Date().getTime());
         } else {
             liabilitiesValue = new LiabilitiesValue();
             liabilitiesValue.setLiabilitiesId(assetId);
             liabilitiesValue.setLiabilitiesValue(assetValue);
-            liabilitiesValue.setDate(new Date().getTime());
             this.liabilitiesValues.add(liabilitiesValue);
         }
     }
@@ -57,6 +56,10 @@ public class DataProcessor_Liabilities {
 
     public void setAllLiabilitiesValues(List<LiabilitiesValue> liabilitiesValues) {
         this.liabilitiesValues = liabilitiesValues;
+    }
+
+    public void clearAllLiabilitiesValues() {
+        this.liabilitiesValues.clear();
     }
 
     public List<DataCarrier_Liabilities> getSubSet(String parentGroupLabel, int level){
@@ -113,7 +116,7 @@ public class DataProcessor_Liabilities {
 
 
 
-    private int getAssetsId(String liabilitiesName){
+    private int getLiabilitiesId(String liabilitiesName){
 
         for (LiabilitiesTypeQuery query : dataList){
             if (query.liabilitiesFirstLevelName != null && query.liabilitiesFirstLevelName.equals(liabilitiesName)){
@@ -202,5 +205,61 @@ public class DataProcessor_Liabilities {
         }
 
         return totalShortTermLiabilities;
+    }
+
+    public void calculateAndInsertParentLiabilities(LiabilitiesValueDao liabilitiesValueDao) {
+
+        float totalLiabilities = this.calculateTotalLiability();
+        float totalShortTermLiabilities = this.calculateTotalShortTermLiabilities();
+        float totalLongTermLiabilities = this.calculateTotalLongTermLiabilities();
+
+        int totalLiabilitiesId = this.getLiabilitiesId(context.getString(R.string.total_liabilities_name));
+        int shortTermLiabilitiesId = this.getLiabilitiesId(context.getString(R.string.short_term_liabilities_name));
+        int longTernLiabilitiesId = this.getLiabilitiesId(context.getString(R.string.long_term_liabilities_name));
+
+        LiabilitiesValue totalLiabilitiesValue = this.getLiabilitiesValue(totalLiabilitiesId);
+        if (totalLiabilitiesValue != null){
+            totalLiabilitiesValue.setLiabilitiesValue(totalLiabilities);
+            totalLiabilitiesValue.setDate(currentTime.getTime());
+
+            liabilitiesValueDao.updateLiabilityValue(totalLiabilitiesValue);
+        } else {
+            totalLiabilitiesValue = new LiabilitiesValue();
+            totalLiabilitiesValue.setLiabilitiesId(totalLiabilitiesId);
+            totalLiabilitiesValue.setLiabilitiesValue(totalLiabilities);
+            totalLiabilitiesValue.setDate(currentTime.getTime());
+
+            liabilitiesValueDao.insertLiabilityValue(totalLiabilitiesValue);
+        }
+
+        LiabilitiesValue shortTermLiabilitiesValue = this.getLiabilitiesValue(shortTermLiabilitiesId);
+        if (shortTermLiabilitiesValue != null){
+            shortTermLiabilitiesValue.setLiabilitiesValue(totalShortTermLiabilities);
+            shortTermLiabilitiesValue.setDate(currentTime.getTime());
+
+            liabilitiesValueDao.updateLiabilityValue(shortTermLiabilitiesValue);
+        } else {
+            shortTermLiabilitiesValue = new LiabilitiesValue();
+            shortTermLiabilitiesValue.setLiabilitiesId(shortTermLiabilitiesId);
+            shortTermLiabilitiesValue.setLiabilitiesValue(totalShortTermLiabilities);
+            shortTermLiabilitiesValue.setDate(currentTime.getTime());
+
+            liabilitiesValueDao.insertLiabilityValue(shortTermLiabilitiesValue);
+        }
+
+        LiabilitiesValue longTermLiabilitiesValue = this.getLiabilitiesValue(longTernLiabilitiesId);
+        if (longTermLiabilitiesValue != null){
+            longTermLiabilitiesValue.setLiabilitiesValue(totalLongTermLiabilities);
+            longTermLiabilitiesValue.setDate(currentTime.getTime());
+
+            liabilitiesValueDao.updateLiabilityValue(longTermLiabilitiesValue);
+        } else {
+            longTermLiabilitiesValue = new LiabilitiesValue();
+            longTermLiabilitiesValue.setLiabilitiesId(longTernLiabilitiesId);
+            longTermLiabilitiesValue.setLiabilitiesValue(totalLongTermLiabilities);
+            longTermLiabilitiesValue.setDate(currentTime.getTime());
+
+            liabilitiesValueDao.insertLiabilityValue(longTermLiabilitiesValue);
+        }
     }
 }
