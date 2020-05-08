@@ -86,8 +86,8 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.liabilitiesRowSecondText);
             textView.setText(sectionDataSet.get(position).liabilitiesTypeName);
         } else if (level == 2){
-            convertView = inflater.inflate(R.layout.liabilities_list_row_item,null);
-            TextView textView = convertView.findViewById(R.id.liabilitiesRowItemText);
+            convertView = inflater.inflate(R.layout.liabilities_list_row_third,null);
+            TextView textView = convertView.findViewById(R.id.liabilitiesRowThirdText);
             textView.setText(sectionDataSet.get(position).liabilitiesTypeName);
 
             DataCarrier_Liabilities dataCarrier = this.sectionDataSet.get(position);
@@ -135,6 +135,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(final int groupPosition, int childPosition, boolean b, View convertView, ViewGroup viewGroup) {
+
         final DataCarrier_Liabilities sectionData = sectionDataSet.get(groupPosition);
         List<DataCarrier_Liabilities> children = dataProcessor.getSubSet(sectionData.liabilitiesTypeName, level + 1);
 

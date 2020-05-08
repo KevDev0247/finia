@@ -133,6 +133,11 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                 List<LiabilitiesTypeQuery> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
 
+                Log.d("Edit_LFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
+                Log.d("Edit_LFragment", "Query liabilities values, " + liabilitiesValues);
+                Log.d("Edit_LFragment", "Query liabilities types, " + liabilitiesTypes);
+                Log.d("Edit_LFragment", "current date: " + currentTime);
+
                 Edit_LiabilitiesFragment.this.dataProcessor = new DataProcessor_Liabilities(liabilitiesTypes, liabilitiesValues, currentTime, getContext());
                 adapter = new LiabilitiesFragmentAdapter(getContext(), dataProcessor, 1, getString(R.string.total_liabilities_name));
                 final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);

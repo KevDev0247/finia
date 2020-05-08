@@ -27,7 +27,7 @@ public class DataProcessor_Assets {
         this.currentTime = currentTime;
     }
 
-    public AssetsValue getAssetsValue(long assetsId) {
+    public AssetsValue getAssetsValue(int assetsId) {
 
         for (AssetsValue assetsValue: assetsValues){
             if (assetsValue.getAssetsId() == assetsId){

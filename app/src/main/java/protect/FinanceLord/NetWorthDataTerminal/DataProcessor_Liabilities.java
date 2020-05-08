@@ -20,32 +20,32 @@ public class DataProcessor_Liabilities {
     private List<LiabilitiesTypeQuery> dataList;
     private List<LiabilitiesValue> liabilitiesValues;
 
-    public DataProcessor_Liabilities(List<LiabilitiesTypeQuery> dataList, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context){
+    public DataProcessor_Liabilities(List<LiabilitiesTypeQuery> dataList, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context) {
         this.context = context;
         this.currentTime = currentTime;
         this.dataList = dataList;
         this.liabilitiesValues = liabilitiesValues;
     }
 
-    public LiabilitiesValue getLiabilitiesValue(long liabilitiesId){
+    public LiabilitiesValue getLiabilitiesValue(int liabilitiesId) {
 
-        for (LiabilitiesValue liabilitiesValue: this.liabilitiesValues){
-            if (liabilitiesValue.getLiabilitiesId() == liabilitiesId){
+        for (LiabilitiesValue liabilitiesValue: liabilitiesValues) {
+            if (liabilitiesValue.getLiabilitiesId() == liabilitiesId) {
                 return liabilitiesValue;
             }
         }
         return null;
     }
 
-    public void setLiabilityValue(int assetId, float assetValue){
+    public void setLiabilityValue(int liabilityId, float liabilityValue) {
 
-        LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(assetId);
+        LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(liabilityId);
         if (liabilitiesValue != null){
-            liabilitiesValue.setLiabilitiesValue(assetValue);
+            liabilitiesValue.setLiabilitiesValue(liabilityValue);
         } else {
             liabilitiesValue = new LiabilitiesValue();
-            liabilitiesValue.setLiabilitiesId(assetId);
-            liabilitiesValue.setLiabilitiesValue(assetValue);
+            liabilitiesValue.setLiabilitiesId(liabilityId);
+            liabilitiesValue.setLiabilitiesValue(liabilityValue);
             this.liabilitiesValues.add(liabilitiesValue);
         }
     }
@@ -62,37 +62,33 @@ public class DataProcessor_Liabilities {
         this.liabilitiesValues.clear();
     }
 
-    public List<DataCarrier_Liabilities> getSubSet(String parentGroupLabel, int level){
+    public List<DataCarrier_Liabilities> getSubSet(String parentGroupLabel, int level) {
 
         List<DataCarrier_Liabilities> subGroupLiabilities = new ArrayList<>();
 
-        if (level == 0){
-            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList){
-                if (liabilitiesTypeQuery.liabilitiesFirstLevelName != null){
+        if (level == 0) {
+            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList) {
+                if (liabilitiesTypeQuery.liabilitiesFirstLevelName != null) {
 
                     DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesFirstLevelName, liabilitiesTypeQuery.liabilitiesFirstLevelId, 0);
                     addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
                 }
             }
-        }
-
-        if (level == 1){
-            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList){
+        } else if (level == 1) {
+            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList) {
                 if (liabilitiesTypeQuery.liabilitiesFirstLevelName != null
                         && liabilitiesTypeQuery.liabilitiesFirstLevelName == parentGroupLabel
-                        && liabilitiesTypeQuery.liabilitiesSecondLevelName != null){
+                        && liabilitiesTypeQuery.liabilitiesSecondLevelName != null) {
 
                     DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesSecondLevelName, liabilitiesTypeQuery.liabilitiesSecondLevelId, 1);
                     addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
                 }
             }
-        }
-
-        if (level == 2){
-            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList){
+        } else if (level == 2) {
+            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList) {
                 if (liabilitiesTypeQuery.liabilitiesSecondLevelName != null
                         && liabilitiesTypeQuery.liabilitiesSecondLevelName == parentGroupLabel
-                        && liabilitiesTypeQuery.liabilitiesThirdLevelName != null){
+                        && liabilitiesTypeQuery.liabilitiesThirdLevelName != null) {
 
                     DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesThirdLevelName, liabilitiesTypeQuery.liabilitiesThirdLevelId, 2);
                     addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
@@ -103,22 +99,21 @@ public class DataProcessor_Liabilities {
         return subGroupLiabilities;
     }
 
-    void addCarrierIfNotExists(DataCarrier_Liabilities liabilitiesFragmentDataCarrier, List<DataCarrier_Liabilities> subGroupLiabilities){
+    void addCarrierIfNotExists(DataCarrier_Liabilities liabilitiesFragmentDataCarrier, List<DataCarrier_Liabilities> subGroupLiabilities) {
 
-        for (DataCarrier_Liabilities dataCarrier: subGroupLiabilities){
+        for (DataCarrier_Liabilities dataCarrier: subGroupLiabilities) {
             if (dataCarrier.liabilitiesId == liabilitiesFragmentDataCarrier.liabilitiesId && dataCarrier.liabilitiesId != 0){
                 return;
             }
-
             subGroupLiabilities.add(liabilitiesFragmentDataCarrier);
         }
     }
 
 
 
-    private int getLiabilitiesId(String liabilitiesName){
+    private int getLiabilitiesId(String liabilitiesName) {
 
-        for (LiabilitiesTypeQuery query : dataList){
+        for (LiabilitiesTypeQuery query : dataList) {
             if (query.liabilitiesFirstLevelName != null && query.liabilitiesFirstLevelName.equals(liabilitiesName)){
                 return query.liabilitiesFirstLevelId;
             } else if (query.liabilitiesSecondLevelName != null && query.liabilitiesSecondLevelName.equals(liabilitiesName)){
@@ -130,22 +125,22 @@ public class DataProcessor_Liabilities {
         return 0;
     }
 
-    private List<Integer> getLiabilitiesIDsBelongTo(String liabilitiesName){
+    private List<Integer> getLiabilitiesIDsBelongTo(String liabilitiesName) {
 
-        if (TextUtils.isEmpty(liabilitiesName)){
+        if (TextUtils.isEmpty(liabilitiesName)) {
             return new ArrayList<>();
         }
 
         List liabilitiesIDs = new ArrayList();
-        if (context.getString(R.string.short_term_liabilities_name).equals(liabilitiesName)){
+        if (context.getString(R.string.short_term_liabilities_name).equals(liabilitiesName)) {
             for (LiabilitiesTypeQuery query: dataList){
                 if (query.liabilitiesSecondLevelName != null
                         && query.liabilitiesSecondLevelName.equals(liabilitiesName)
-                        && query.liabilitiesThirdLevelName != null){
+                        && query.liabilitiesThirdLevelName != null) {
                     liabilitiesIDs.add(query.liabilitiesThirdLevelId);
                 }
             }
-        } else if (context.getString(R.string.long_term_liabilities_name).equals(liabilitiesName)){
+        } else if (context.getString(R.string.long_term_liabilities_name).equals(liabilitiesName)) {
             for (LiabilitiesTypeQuery query : dataList){
                 if (query.liabilitiesSecondLevelName != null
                         && query.liabilitiesSecondLevelName.equals(liabilitiesName)
@@ -158,7 +153,7 @@ public class DataProcessor_Liabilities {
         return liabilitiesIDs;
     }
 
-    public float calculateTotalLiability(){
+    public float calculateTotalLiability() {
 
         float totalLongTermLiabilities = calculateTotalLongTermLiabilities();
         float totalShortTermLiabilities = calculateTotalShortTermLiabilities();
@@ -167,14 +162,14 @@ public class DataProcessor_Liabilities {
         return totalLiabilities;
     }
 
-    public float calculateTotalLongTermLiabilities(){
+    public float calculateTotalLongTermLiabilities() {
 
         List<Integer> liabilitiesIDs = this.getLiabilitiesIDsBelongTo(context.getString(R.string.long_term_liabilities_name));
         float totalLongTermLiabilities = 0;
-        for (int liabilitiesId : liabilitiesIDs){
+        for (int liabilitiesId : liabilitiesIDs) {
             LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(liabilitiesId);
 
-            if (liabilitiesValue != null){
+            if (liabilitiesValue != null) {
                 Log.d("Long Term id", String.valueOf(liabilitiesValue.getLiabilitiesId()));
                 Log.d("Long Term value", String.valueOf(liabilitiesValue.getLiabilitiesValue()));
 
@@ -187,14 +182,14 @@ public class DataProcessor_Liabilities {
         return totalLongTermLiabilities;
     }
 
-    public float calculateTotalShortTermLiabilities(){
+    public float calculateTotalShortTermLiabilities() {
 
         List<Integer> liabilitiesIDs = this.getLiabilitiesIDsBelongTo(context.getString(R.string.short_term_liabilities_name));
         float totalShortTermLiabilities = 0;
-        for (int liabilitiesId : liabilitiesIDs){
+        for (int liabilitiesId : liabilitiesIDs) {
             LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(liabilitiesId);
 
-            if (liabilitiesValue != null){
+            if (liabilitiesValue != null) {
                 Log.d("Long Term id", String.valueOf(liabilitiesValue.getLiabilitiesId()));
                 Log.d("Long Term value", String.valueOf(liabilitiesValue.getLiabilitiesValue()));
 
@@ -218,7 +213,7 @@ public class DataProcessor_Liabilities {
         int longTernLiabilitiesId = this.getLiabilitiesId(context.getString(R.string.long_term_liabilities_name));
 
         LiabilitiesValue totalLiabilitiesValue = this.getLiabilitiesValue(totalLiabilitiesId);
-        if (totalLiabilitiesValue != null){
+        if (totalLiabilitiesValue != null) {
             totalLiabilitiesValue.setLiabilitiesValue(totalLiabilities);
             totalLiabilitiesValue.setDate(currentTime.getTime());
 
@@ -233,7 +228,7 @@ public class DataProcessor_Liabilities {
         }
 
         LiabilitiesValue shortTermLiabilitiesValue = this.getLiabilitiesValue(shortTermLiabilitiesId);
-        if (shortTermLiabilitiesValue != null){
+        if (shortTermLiabilitiesValue != null) {
             shortTermLiabilitiesValue.setLiabilitiesValue(totalShortTermLiabilities);
             shortTermLiabilitiesValue.setDate(currentTime.getTime());
 
@@ -248,7 +243,7 @@ public class DataProcessor_Liabilities {
         }
 
         LiabilitiesValue longTermLiabilitiesValue = this.getLiabilitiesValue(longTernLiabilitiesId);
-        if (longTermLiabilitiesValue != null){
+        if (longTermLiabilitiesValue != null) {
             longTermLiabilitiesValue.setLiabilitiesValue(totalLongTermLiabilities);
             longTermLiabilitiesValue.setDate(currentTime.getTime());
 
