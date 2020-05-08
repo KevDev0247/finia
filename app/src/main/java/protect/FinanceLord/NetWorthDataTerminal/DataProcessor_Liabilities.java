@@ -102,11 +102,11 @@ public class DataProcessor_Liabilities {
     void addCarrierIfNotExists(DataCarrier_Liabilities liabilitiesFragmentDataCarrier, List<DataCarrier_Liabilities> subGroupLiabilities) {
 
         for (DataCarrier_Liabilities dataCarrier: subGroupLiabilities) {
-            if (dataCarrier.liabilitiesId == liabilitiesFragmentDataCarrier.liabilitiesId && dataCarrier.liabilitiesId != 0){
+            if (dataCarrier.liabilitiesId == liabilitiesFragmentDataCarrier.liabilitiesId && dataCarrier.liabilitiesId != 0) {
                 return;
             }
-            subGroupLiabilities.add(liabilitiesFragmentDataCarrier);
         }
+        subGroupLiabilities.add(liabilitiesFragmentDataCarrier);
     }
 
 

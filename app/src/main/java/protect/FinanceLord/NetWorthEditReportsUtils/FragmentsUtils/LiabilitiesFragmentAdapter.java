@@ -155,16 +155,16 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
                 int previousGroup = -1;
 
                 @Override
-                public void onGroupExpand(int i) {
+                public void onGroupExpand(int groupPosition) {
                     if (groupPosition != previousGroup){
                         nextLevelExpandableListView.collapseGroup(previousGroup);
                     }
                     previousGroup = groupPosition;
                 }
             });
-        }
 
-        return null;
+            return nextLevelExpandableListView;
+        }
     }
 
     @Override
