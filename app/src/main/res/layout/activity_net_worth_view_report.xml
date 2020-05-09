@@ -46,7 +46,7 @@
         android:id="@+id/report_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="737dp"
+        android:layout_gravity="bottom"
         android:background="#009688"
         app:tabSelectedTextColor="#ffffff"
         app:tabTextColor="#000000"
@@ -55,12 +55,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Assets"/>
+            android:text="@string/assets_name"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Liabilities"/>
+            android:text="@string/liabilities_name"/>
 
     </com.google.android.material.tabs.TabLayout>
 

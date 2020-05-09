@@ -14,14 +14,14 @@
     <string name="tab_text_2">Liabilities</string>
     <string name="title_activity_net_worth2">NetWorthActivity2</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="action_settings">Settings</string>
-
     <string name="title_activity_net_worth_report_template">NetWorthReportTemplate</string>
-
+    <string name="action_settings">Settings</string>
     <string name="date_format">yyyy-MM-dd</string>
 
 
 
+    <string name="assets_name">Assets</string>
+    <string name="liabilities_name">Liabilities</string>
 
     <string name="net_worth">Net Worth</string>
 

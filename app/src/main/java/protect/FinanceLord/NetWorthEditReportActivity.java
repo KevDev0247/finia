@@ -56,8 +56,8 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.edit_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        final Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets", currentTime);
-        final Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment("Liabilities", currentTime);
+        final Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment(getString(R.string.assets_name), currentTime);
+        final Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment(getString(R.string.liabilities_name), currentTime);
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 
