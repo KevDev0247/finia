@@ -338,7 +338,7 @@ public class DataProcessor_Assets {
             totalAssetsValue.setAssetsValue(totalAssets);
             totalAssetsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Total Assets value is " + totalAssetsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Total Assets value is " + totalAssetsValue.getAssetsValue() +
                     " Update time is " + new Date(totalAssetsValue.getDate()));
 
             assetsValueDao.updateAssetValue(totalAssetsValue);
@@ -350,7 +350,7 @@ public class DataProcessor_Assets {
             // I don't know what this is for
             //this.assetsValues.add(totalAssetsValue);
 
-            Log.d("DataProcessorAssets", "Total Assets value is " + totalAssetsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Total Assets value is " + totalAssetsValue.getAssetsValue() +
                     " Insert time is " + new Date(totalAssetsValue.getDate()));
 
             assetsValueDao.insertAssetValue(totalAssetsValue);
@@ -361,7 +361,7 @@ public class DataProcessor_Assets {
             liquidAssetsValue.setAssetsValue(totalLiquidAssets);
             liquidAssetsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Liquid Assets value is " + liquidAssetsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Liquid Assets value is " + liquidAssetsValue.getAssetsValue() +
                     " Update time is " + new Date(liquidAssetsValue.getDate()));
 
             assetsValueDao.updateAssetValue();
@@ -371,7 +371,7 @@ public class DataProcessor_Assets {
             liquidAssetsValue.setAssetsValue(totalLiquidAssets);
             liquidAssetsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Liquid Assets value is " + liquidAssetsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Liquid Assets value is " + liquidAssetsValue.getAssetsValue() +
                     " Insert time is " + new Date(liquidAssetsValue.getDate()));
 
             assetsValueDao.insertAssetValue(liquidAssetsValue);
@@ -382,7 +382,7 @@ public class DataProcessor_Assets {
             totalInvestedAssetsValue.setAssetsValue(totalInvestedAssets);
             totalInvestedAssetsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Invested Assets value is " + totalInvestedAssetsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Invested Assets value is " + totalInvestedAssetsValue.getAssetsValue() +
                     " Update time is " + new Date(totalInvestedAssetsValue.getDate()));
 
             assetsValueDao.updateAssetValue(totalInvestedAssetsValue);
@@ -392,7 +392,7 @@ public class DataProcessor_Assets {
             totalInvestedAssetsValue.setAssetsValue(totalInvestedAssets);
             totalInvestedAssetsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Invested Assets value is " + totalInvestedAssetsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Invested Assets value is " + totalInvestedAssetsValue.getAssetsValue() +
                     " Insert time is " + new Date(totalInvestedAssetsValue.getDate()));
 
             assetsValueDao.insertAssetValue(totalInvestedAssetsValue);
@@ -403,7 +403,7 @@ public class DataProcessor_Assets {
             personalAssetsValue.setAssetsValue(totalPersonalAssets);
             personalAssetsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Personal Assets value is " + personalAssetsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Personal Assets value is " + personalAssetsValue.getAssetsValue() +
                     " Update time is " + new Date(personalAssetsValue.getDate()));
 
             assetsValueDao.updateAssetValue(personalAssetsValue);
@@ -413,7 +413,7 @@ public class DataProcessor_Assets {
             personalAssetsValue.setAssetsValue(totalPersonalAssets);
             personalAssetsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Personal Assets value is " + personalAssetsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Personal Assets value is " + personalAssetsValue.getAssetsValue() +
                     " Insert time is " + new Date(personalAssetsValue.getDate()));
 
             assetsValueDao.insertAssetValue(personalAssetsValue);
@@ -424,7 +424,7 @@ public class DataProcessor_Assets {
             taxableAccountsValue.setAssetsValue(totalTaxableAccounts);
             taxableAccountsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Taxable Accounts value is " + taxableAccountsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Taxable Accounts value is " + taxableAccountsValue.getAssetsValue() +
                     " Update time is " + new Date(taxableAccountsValue.getDate()));
 
             assetsValueDao.updateAssetValue(taxableAccountsValue);
@@ -434,7 +434,7 @@ public class DataProcessor_Assets {
             taxableAccountsValue.setAssetsValue(totalTaxableAccounts);
             taxableAccountsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Taxable Accounts value is " + taxableAccountsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Taxable Accounts value is " + taxableAccountsValue.getAssetsValue() +
                     " Insert time is " + new Date(taxableAccountsValue.getDate()));
 
             assetsValueDao.insertAssetValue(taxableAccountsValue);
@@ -445,7 +445,7 @@ public class DataProcessor_Assets {
             retirementAccountValue.setAssetsValue(totalRetirementAccounts);
             retirementAccountValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Retirement Accounts value is " + retirementAccountValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Retirement Accounts value is " + retirementAccountValue.getAssetsValue() +
                     " Update time is " + new Date(retirementAccountValue.getDate()));
 
             assetsValueDao.updateAssetValue(retirementAccountValue);
@@ -455,7 +455,7 @@ public class DataProcessor_Assets {
             retirementAccountValue.setAssetsValue(totalRetirementAccounts);
             retirementAccountValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Retirement Accounts value is " + retirementAccountValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Retirement Accounts value is " + retirementAccountValue.getAssetsValue() +
                     " Insert time is " + new Date(retirementAccountValue.getDate()));
 
             assetsValueDao.insertAssetValue(retirementAccountValue);
@@ -466,7 +466,7 @@ public class DataProcessor_Assets {
             ownershipInterestsValue.setAssetsValue(totalOwnershipInterests);
             ownershipInterestsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Ownership Interests value is " + ownershipInterestsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Ownership Interests value is " + ownershipInterestsValue.getAssetsValue() +
                     " Update time is " + new Date(ownershipInterestsValue.getDate()));
 
             assetsValueDao.updateAssetValue(ownershipInterestsValue);
@@ -476,7 +476,7 @@ public class DataProcessor_Assets {
             ownershipInterestsValue.setAssetsValue(totalOwnershipInterests);
             ownershipInterestsValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorAssets", "Ownership Interests value is " + ownershipInterestsValue.getAssetsValue() +
+            Log.d("DataProcessorA", "Ownership Interests value is " + ownershipInterestsValue.getAssetsValue() +
                     " Insert time is " + new Date(ownershipInterestsValue.getDate()));
 
             assetsValueDao.insertAssetValue(ownershipInterestsValue);

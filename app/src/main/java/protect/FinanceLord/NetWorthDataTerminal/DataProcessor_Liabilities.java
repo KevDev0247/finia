@@ -217,12 +217,18 @@ public class DataProcessor_Liabilities {
             totalLiabilitiesValue.setLiabilitiesValue(totalLiabilities);
             totalLiabilitiesValue.setDate(currentTime.getTime());
 
+            Log.d("DataProcessorL", "Total Liabilities value is " + totalLiabilitiesValue.getLiabilitiesValue() +
+                    " Insert time is " + new Date(totalLiabilitiesValue.getDate()));
+
             liabilitiesValueDao.updateLiabilityValue(totalLiabilitiesValue);
         } else {
             totalLiabilitiesValue = new LiabilitiesValue();
             totalLiabilitiesValue.setLiabilitiesId(totalLiabilitiesId);
             totalLiabilitiesValue.setLiabilitiesValue(totalLiabilities);
             totalLiabilitiesValue.setDate(currentTime.getTime());
+
+            Log.d("DataProcessorL", "Total Liabilities value is " + totalLiabilitiesValue.getLiabilitiesValue() +
+                    " Insert time is " + new Date(totalLiabilitiesValue.getDate()));
 
             liabilitiesValueDao.insertLiabilityValue(totalLiabilitiesValue);
         }
@@ -232,12 +238,18 @@ public class DataProcessor_Liabilities {
             shortTermLiabilitiesValue.setLiabilitiesValue(totalShortTermLiabilities);
             shortTermLiabilitiesValue.setDate(currentTime.getTime());
 
+            Log.d("DataProcessorL", "Short Term Liabilities value is " + shortTermLiabilitiesValue.getLiabilitiesValue() +
+                    " Insert time is " + new Date(shortTermLiabilitiesValue.getDate()));
+
             liabilitiesValueDao.updateLiabilityValue(shortTermLiabilitiesValue);
         } else {
             shortTermLiabilitiesValue = new LiabilitiesValue();
             shortTermLiabilitiesValue.setLiabilitiesId(shortTermLiabilitiesId);
             shortTermLiabilitiesValue.setLiabilitiesValue(totalShortTermLiabilities);
             shortTermLiabilitiesValue.setDate(currentTime.getTime());
+
+            Log.d("DataProcessorL", "Short Term Liabilities value is " + shortTermLiabilitiesValue.getLiabilitiesValue() +
+                    " Insert time is " + new Date(shortTermLiabilitiesValue.getDate()));
 
             liabilitiesValueDao.insertLiabilityValue(shortTermLiabilitiesValue);
         }
@@ -247,12 +259,18 @@ public class DataProcessor_Liabilities {
             longTermLiabilitiesValue.setLiabilitiesValue(totalLongTermLiabilities);
             longTermLiabilitiesValue.setDate(currentTime.getTime());
 
+            Log.d("DataProcessorL", "Long Term Liabilities value is " + longTermLiabilitiesValue.getLiabilitiesValue() +
+                    " Insert time is " + new Date(longTermLiabilitiesValue.getDate()));
+
             liabilitiesValueDao.updateLiabilityValue(longTermLiabilitiesValue);
         } else {
             longTermLiabilitiesValue = new LiabilitiesValue();
             longTermLiabilitiesValue.setLiabilitiesId(longTernLiabilitiesId);
             longTermLiabilitiesValue.setLiabilitiesValue(totalLongTermLiabilities);
             longTermLiabilitiesValue.setDate(currentTime.getTime());
+
+            Log.d("DataProcessorL", "Long Term Liabilities value is " + longTermLiabilitiesValue.getLiabilitiesValue() +
+                    " Insert time is " + new Date(longTermLiabilitiesValue.getDate()));
 
             liabilitiesValueDao.insertLiabilityValue(longTermLiabilitiesValue);
         }

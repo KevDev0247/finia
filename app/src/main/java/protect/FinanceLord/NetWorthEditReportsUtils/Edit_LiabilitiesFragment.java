@@ -87,21 +87,32 @@ public class Edit_LiabilitiesFragment extends Fragment {
                         for(LiabilitiesValue liabilitiesValueInProcessor: Edit_LiabilitiesFragment.this.dataProcessor.getAllLiabilitiesValues()) {
 
                             liabilitiesValueInProcessor.setDate(currentTime.getTime());
+                            Log.d("Edit_LFragment", "the time of the assets are set to " + currentTime);
 
                             if (liabilitiesValueInProcessor.getLiabilitiesPrimaryId() != 0){
                                 List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesById(liabilitiesValueInProcessor.getLiabilitiesPrimaryId());
+                                Log.d("Edit_LFragment", " Print assetsValues status " + liabilitiesValues.isEmpty() +
+                                        ", assets value is " + liabilitiesValueInProcessor.getLiabilitiesValue() +
+                                        ", time stored in processor is " + new Date(liabilitiesValueInProcessor.getDate()));
                                 if (!liabilitiesValues.isEmpty()){
-                                    liabilitiesValueDao.insertLiabilityValue(liabilitiesValueInProcessor);
+                                    liabilitiesValueDao.updateLiabilityValue(liabilitiesValueInProcessor);
+                                    Log.d("Edit_LFragment", "update time is " + new Date(liabilitiesValueInProcessor.getDate()));
                                 } else {
-
+                                    Log.w("Edit_LFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
 
                             } else {
-                                liabilitiesValueDao.updateLiabilityValue(liabilitiesValueInProcessor);
+                                liabilitiesValueDao.insertLiabilityValue(liabilitiesValueInProcessor);
+                                Log.d("Edit_LFragment", "insert time is " + new Date(liabilitiesValueInProcessor.getDate()));
                             }
+
+                            Log.d("Edit_LFragment", "Query [Refreshing] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
+                            Log.d("Edit_LFragment", "current date: " + currentTime);
 
                             List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                             Edit_LiabilitiesFragment.this.dataProcessor.setAllLiabilitiesValues(liabilitiesValues);
+
+                            Log.d("Edit_LFragment", "Query assets values, " + liabilitiesValues);
 
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
@@ -112,6 +123,8 @@ public class Edit_LiabilitiesFragment extends Fragment {
 
                             dataProcessor.calculateAndInsertParentLiabilities(liabilitiesValueDao);
                             dataProcessor.clearAllLiabilitiesValues();
+
+                            Log.d("Edit_LFragment", "Liabilities committed!");
                         }
                     }
                 });
