@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 6,
-    "identityHash": "44f7ba9e3997252f7c71e85089082c62",
+    "identityHash": "792683251c7279b081a527ca8a020fa1",
     "entities": [
       {
         "tableName": "AssetsType",
@@ -108,8 +108,14 @@
       },
       {
         "tableName": "LiabilitiesValue",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`liabilitiesId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `liabilitiesValue` REAL NOT NULL, `date` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`liabilitiesPrimaryId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `liabilitiesId` INTEGER NOT NULL, `liabilitiesValue` REAL NOT NULL, `date` INTEGER)",
         "fields": [
+          {
+            "fieldPath": "liabilitiesPrimaryId",
+            "columnName": "liabilitiesPrimaryId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
           {
             "fieldPath": "liabilitiesId",
             "columnName": "liabilitiesId",
@@ -131,7 +137,7 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "liabilitiesId"
+            "liabilitiesPrimaryId"
           ],
           "autoGenerate": true
         },
@@ -229,7 +235,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"44f7ba9e3997252f7c71e85089082c62\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"792683251c7279b081a527ca8a020fa1\")"
     ]
   }
 }

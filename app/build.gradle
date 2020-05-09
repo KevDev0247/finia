@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "protect.FinanceLord"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -18,6 +18,8 @@ android {
                         "room.expandProjection": "true"]
             }
         }
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -63,5 +65,5 @@ dependencies {
     implementation group: 'androidx.room', name: 'room-common', version: '2.2.5'
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 
-    implementation 'com.diegodobelo.expandingview:expanding-view:0.9.4'
+    implementation "androidx.cardview:cardview:1.0.0"
 }

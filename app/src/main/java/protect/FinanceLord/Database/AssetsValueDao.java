@@ -17,15 +17,24 @@ public interface AssetsValueDao {
     @Update
     void updateAssetValue(AssetsValue ... assetsValue);
 
-    @Query("SELECT * FROM AssetsValue WHERE assetsId LIKE :assetId")
-    List<AssetsValue> queryAssetsById  (int assetId);
+    @Query("SELECT * FROM AssetsValue WHERE assetsPrimaryId = :assetPrimaryId")
+    List<AssetsValue> queryAssetById(int assetPrimaryId);
 
-    @Query("SELECT * FROM ASSETSVALUE WHERE date >= :date")
+    @Query("SELECT * FROM AssetsValue WHERE assetsId = :assetId ORDER BY date DESC")
+    List<AssetsValue> queryAssetsByTypeId(int assetId);
+
+    @Query("SELECT * FROM AssetsValue WHERE date >= :date")
     List<AssetsValue> queryAssetsSinceDate(Long date);
+
+    @Query("SELECT * FROM AssetsValue WHERE date <= :date")
+    List<AssetsValue> queryAssetsBeforeDate(Long date);
+
+    @Query("SELECT * FROM AssetsValue WHERE date <= :dateEnd AND date >= :dateStart")
+    List<AssetsValue> queryAssetsByTimePeriod(Long dateStart, Long dateEnd);
+
+    @Query("SELECT assetsPrimaryId, assetsId, assetsValue, date FROM AssetsValue WHERE assetsId = :assetId ORDER BY date DESC LIMIT 1")
+    AssetsValue queryLatestIndividualAsset(int assetId);
 
     @Query("SELECT * FROM AssetsValue")
     List<AssetsValue> queryAllAssetsValue();
-
-    @Query("SELECT * FROM ASSETSVALUE WHERE date = :date and assetsId = :assetId")
-    List<AssetsValue> queryAsset(int assetId, Long date);
 }

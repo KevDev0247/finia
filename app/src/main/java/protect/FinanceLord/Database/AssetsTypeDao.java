@@ -18,20 +18,17 @@ public interface AssetsTypeDao {
     @Insert
     void insertAssetsTypes(List<AssetsType> assetsTypes);
 
-    @Update
-    void updateAssetsType(AssetsType ... assetsTypes);
-
-    @Query("SELECT * FROM AssetsType WHERE assetsId LIKE :assetsId")
+    @Query("SELECT * FROM AssetsType WHERE assetsId = :assetsId")
     List<AssetsType> queryAssetsById (int assetsId);
 
-    @Query("SELECT * FROM AssetsType WHERE assetsName LIKE :assetsName")
-    List<AssetsType> queryAssetsByName (String assetsName);
-
-    @Query("SELECT * FROM AssetsType WHERE assetsParentType LIKE :assetsParentType")
+    @Query("SELECT * FROM AssetsType WHERE assetsParentType = :assetsParentType")
     List<AssetsType> queryAssetsByParentType (String assetsParentType);
 
     @Query("SELECT * FROM AssetsType")
     List<AssetsType> queryAllAssetsType();
+
+    @Query("SELECT * FROM AssetsType WHERE assetsName LIKE :assetsName")
+    AssetsType queryAssetsByType (String assetsName);
 
     @Query("SELECT \n" +
             "assetsThirdLevelComposed.*, \n" +
@@ -52,11 +49,12 @@ public interface AssetsTypeDao {
             "assetsSecondLevel.assetsId AS assetsSecondLevelId, \n" +
             "assetsSecondLevel.assetsName AS assetsSecondLevelName \n" +
             "FROM AssetsType AS assetsFirstLevel \n" +
-            "JOIN AssetsType AS assetsSecondLevel ON assetsFirstLevel.assetsParentType IS NULL \n" +
-            "AND assetsFirstLevel.assetsName = assetsSecondLevel.assetsParentType \n" +
-            ") AS assetsSecondLevelComposed \n" +
-            "LEFT JOIN AssetsType AS assetsThirdLevel ON assetsSecondLevelComposed.assetsSecondLevelName = assetsThirdLevel.assetsParentType \n" +
-            ") AS assetsThirdLevelComposed LEFT JOIN AssetsType AS assetsFourthLevel ON assetsThirdLevelComposed.assetsThirdLevelName = assetsFourthLevel.assetsParentType"
-            )
+            "JOIN AssetsType AS assetsSecondLevel \n" +
+            "ON assetsFirstLevel.assetsParentType IS NULL \n" +
+            "AND assetsFirstLevel.assetsName = assetsSecondLevel.assetsParentType) \n" +
+            "AS assetsSecondLevelComposed \n" +
+            "LEFT JOIN AssetsType AS assetsThirdLevel ON assetsSecondLevelComposed.assetsSecondLevelName = assetsThirdLevel.assetsParentType) \n" +
+            "AS assetsThirdLevelComposed LEFT JOIN AssetsType AS assetsFourthLevel \n" +
+            "ON assetsThirdLevelComposed.assetsThirdLevelName = assetsFourthLevel.assetsParentType")
     List<AssetsTypeQuery> queryGroupedAssetsType();
 }

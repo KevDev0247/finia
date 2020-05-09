@@ -3,10 +3,11 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="45dp"
+    android:background="@drawable/ic_report_sheet_items"
     android:weightSum="3">
 
     <TextView
-        android:id="@+id/rowItemText"
+        android:id="@+id/assetsRowItemText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="25sp"

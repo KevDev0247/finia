@@ -3,14 +3,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    android:background="@drawable/ic_report_sheet_items"
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/rowParentText"
+        android:id="@+id/assetsRowParentText"
         android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#ffffff"
         android:textSize="25sp"
         android:text="First Level"
         android:layout_marginLeft="50dp"/>

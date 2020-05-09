@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_height="45dp"
+    android:padding="10dp"
+    android:background="@drawable/ic_report_sheet_items">
 
     <TextView
-        android:id="@+id/rowSecondCategoryText"
-        android:layout_weight="1"
-        android:paddingLeft="50dp"
+        android:id="@+id/assetsRowSecondCategoryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"/>
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:textColor="#f6f7fa"
+        android:textSize="20sp" />
 
 </LinearLayout>
