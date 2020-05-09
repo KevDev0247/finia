@@ -19,21 +19,24 @@ import java.util.List;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 import protect.FinanceLord.Database.AssetsValue;
+import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
 import protect.FinanceLord.R;
 import protect.FinanceLord.NetWorthEditReportsUtils.NetWorthExpandableListView;
 
 public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     private DataProcessor_Assets dataProcessor;
+    private TypeProcessor_Assets typeProcessor;
     private List<DataCarrier_Assets> sectionDataSet;
     private int level;
     private Context context;
 
-    public AssetsFragmentAdapter(Context context, DataProcessor_Assets dataProcessor, int level, String parentSection) {
+    public AssetsFragmentAdapter(Context context, DataProcessor_Assets dataProcessor, TypeProcessor_Assets typeProcessor, int level, String parentSection) {
         this.context = context;
         this.dataProcessor = dataProcessor;
+        this.typeProcessor = typeProcessor;
         this.level = level;
-        this.sectionDataSet = dataProcessor.getSubGroup(parentSection, level);
+        this.sectionDataSet = typeProcessor.getSubGroup(parentSection, level);
     }
 
     public String getAssetsName(int position) {
@@ -58,7 +61,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int i, int i1) {
         String assetsTypeName = getAssetsName(i);
-        List<DataCarrier_Assets> carriers = dataProcessor.getSubGroup(assetsTypeName, level + 1);
+        List<DataCarrier_Assets> carriers = typeProcessor.getSubGroup(assetsTypeName, level + 1);
         return carriers.get(i1);
     }
 
@@ -159,7 +162,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
         final DataCarrier_Assets sectionData = sectionDataSet.get(groupPosition);
-        List<DataCarrier_Assets> children = dataProcessor.getSubGroup(sectionData.assetsTypeName, level + 1);
+        List<DataCarrier_Assets> children = typeProcessor.getSubGroup(sectionData.assetsTypeName, level + 1);
 
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -169,8 +172,8 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             return convertView;
         } else {
             final NetWorthExpandableListView nextLevelExpandableListView = new NetWorthExpandableListView(context);
-            AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, dataProcessor, level + 1);
-            nextLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor,level + 1, sectionData.assetsTypeName));
+            AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, dataProcessor, typeProcessor, level + 1);
+            nextLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor, typeProcessor,level + 1, sectionData.assetsTypeName));
             nextLevelExpandableListView.setOnChildClickListener(listener);
             nextLevelExpandableListView.setGroupIndicator(null);
             nextLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {

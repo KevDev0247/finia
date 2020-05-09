@@ -25,6 +25,7 @@ import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
 import protect.FinanceLord.NetWorthEditReportActivity;
 import protect.FinanceLord.Communicators.ActivityToFragment;
 import protect.FinanceLord.R;
@@ -41,6 +42,7 @@ public class Edit_AssetsFragment extends Fragment {
 
     private AssetsFragmentAdapter adapter;
     private DataProcessor_Assets dataProcessor;
+    private TypeProcessor_Assets typeProcessor;
 
     public Edit_AssetsFragment(String title, Date currentTime) {
         this.title = title;
@@ -155,8 +157,9 @@ public class Edit_AssetsFragment extends Fragment {
                 Log.d("Edit_AFragment", "current date: " + currentTime);
 
                 Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime, getContext());
-                adapter = new AssetsFragmentAdapter(getContext(), dataProcessor, 1, getString(R.string.total_assets_name));
-                final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubGroup(null, 0), dataProcessor, 0);
+                Edit_AssetsFragment.this.typeProcessor = new TypeProcessor_Assets(assetsTypes);
+                adapter = new AssetsFragmentAdapter(getContext(), dataProcessor, typeProcessor,1, getString(R.string.total_assets_name));
+                final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(typeProcessor.getSubGroup(null, 0), dataProcessor, typeProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
