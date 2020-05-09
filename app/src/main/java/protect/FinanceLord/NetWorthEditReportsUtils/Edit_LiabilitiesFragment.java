@@ -105,27 +105,27 @@ public class Edit_LiabilitiesFragment extends Fragment {
                                 liabilitiesValueDao.insertLiabilityValue(liabilitiesValueInProcessor);
                                 Log.d("Edit_LFragment", "insert time is " + new Date(liabilitiesValueInProcessor.getDate()));
                             }
-
-                            Log.d("Edit_LFragment", "Query [Refreshing] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
-                            Log.d("Edit_LFragment", "current date: " + currentTime);
-
-                            List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                            Edit_LiabilitiesFragment.this.dataProcessor.setAllLiabilitiesValues(liabilitiesValues);
-
-                            Log.d("Edit_LFragment", "Query assets values, " + liabilitiesValues);
-
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    adapter.notifyDataSetChanged();
-                                }
-                            });
-
-                            dataProcessor.calculateAndInsertParentLiabilities(liabilitiesValueDao);
-                            dataProcessor.clearAllLiabilitiesValues();
-
-                            Log.d("Edit_LFragment", "Liabilities committed!");
                         }
+
+                        Log.d("Edit_LFragment", "Query [Refreshing] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
+                        Log.d("Edit_LFragment", "current date: " + currentTime);
+
+                        List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
+                        Edit_LiabilitiesFragment.this.dataProcessor.setAllLiabilitiesValues(liabilitiesValues);
+
+                        Log.d("Edit_LFragment", "Query assets values, " + liabilitiesValues);
+
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+
+                        dataProcessor.calculateAndInsertParentLiabilities(liabilitiesValueDao);
+                        dataProcessor.clearAllLiabilitiesValues();
+
+                        Log.d("Edit_LFragment", "Liabilities committed!");
                     }
                 });
             }
