@@ -147,8 +147,9 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 List<LiabilitiesTypeQuery> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
 
                 Log.d("Edit_LFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
-                Log.d("Edit_LFragment", "Query liabilities values, " + liabilitiesValues);
-                Log.d("Edit_LFragment", "Query liabilities types, " + liabilitiesTypes);
+                for (LiabilitiesValue liabilitiesValue : liabilitiesValues){
+                    Log.d("Edit_LFragment", "Query liabilities values, " + liabilitiesValue.getLiabilitiesId() + ", " + liabilitiesValue.getLiabilitiesValue() + ", " + new Date(liabilitiesValue.getDate()) );
+                }
                 Log.d("Edit_LFragment", "current date: " + currentTime);
 
                 Edit_LiabilitiesFragment.this.dataProcessor = new DataProcessor_Liabilities(liabilitiesTypes, liabilitiesValues, currentTime, getContext());
