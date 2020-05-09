@@ -146,8 +146,6 @@ public class Edit_AssetsFragment extends Fragment {
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                 List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
 
-                // the time here is not correct
-
                 Log.d("Edit_AssetsFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                 Log.d("Edit_AssetsFragment", "Query assets values, " + assetsValues);
                 Log.d("Edit_AssetsFragment", "current date: " + currentTime);
