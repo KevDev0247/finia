@@ -63,7 +63,7 @@ public class Edit_AssetsFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof NetWorthEditReportActivity){
             NetWorthEditReportActivity activity = (NetWorthEditReportActivity) context;
-            activity.toFragmentsCommunicator = this.fromActivityCommunicator;
+            activity.toAssetsFragmentCommunicator = this.fromActivityCommunicator;
         }
     }
 
@@ -149,8 +149,9 @@ public class Edit_AssetsFragment extends Fragment {
                 List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
 
                 Log.d("Edit_AFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
-                Log.d("Edit_AFragment", "Query assets values, " + assetsValues);
-                Log.d("Edit_AFragment", "Query assets types, " + assetsTypes);
+                for (AssetsValue assetsValue : assetsValues){
+                    Log.d("Edit_AFragment", "Query assets values, " + assetsValue.getAssetsId() + ", " + assetsValue.getAssetsValue() + ", " + new Date(assetsValue.getDate()));
+                }
                 Log.d("Edit_AFragment", "current date: " + currentTime);
 
                 Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime, getContext());

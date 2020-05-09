@@ -28,7 +28,8 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
 
     Date currentTime;
     Button calendarButton;
-    public ActivityToFragment toFragmentsCommunicator;
+    public ActivityToFragment toAssetsFragmentCommunicator;
+    public ActivityToFragment toLiabilitiesFragmentCommunicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,9 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
             Log.d("EditReportCommunicator", "time is " + currentTime);
             String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
             calendarButton.setText(stringDate);
-            toFragmentsCommunicator.onActivityMessage(currentTime);
+
+            toAssetsFragmentCommunicator.onActivityMessage(currentTime);
+            toLiabilitiesFragmentCommunicator.onActivityMessage(currentTime);
         }
     };
 }
