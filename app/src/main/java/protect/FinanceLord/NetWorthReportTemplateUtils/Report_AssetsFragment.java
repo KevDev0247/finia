@@ -61,11 +61,11 @@ public class Report_AssetsFragment extends Fragment {
 
     public void initDataModels(){
 
-        List<DataCarrier_Assets> liquidAssets = dataProcessor.getSubSet("Liquid assets",2);
-        List<DataCarrier_Assets> personalAssets = dataProcessor.getSubSet("Personal assets", 2);
-        List<DataCarrier_Assets> taxableAccounts = dataProcessor.getSubSet("Taxable accounts",3);
-        List<DataCarrier_Assets> retirementAccounts = dataProcessor.getSubSet("Retirement accounts", 3);
-        List<DataCarrier_Assets> ownershipInterests = dataProcessor.getSubSet("Ownership interests", 3);
+        List<DataCarrier_Assets> liquidAssets = dataProcessor.getSubGroup("Liquid assets",2);
+        List<DataCarrier_Assets> personalAssets = dataProcessor.getSubGroup("Personal assets", 2);
+        List<DataCarrier_Assets> taxableAccounts = dataProcessor.getSubGroup("Taxable accounts",3);
+        List<DataCarrier_Assets> retirementAccounts = dataProcessor.getSubGroup("Retirement accounts", 3);
+        List<DataCarrier_Assets> ownershipInterests = dataProcessor.getSubGroup("Ownership interests", 3);
 
 
         for (DataCarrier_Assets dataCarrier : liquidAssets){

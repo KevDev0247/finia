@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,8 @@ public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.past_reports_item, parent, false);
         }
 
+        LinearLayout reportItem = convertView.findViewById(R.id.report_item);
+
         TextView netWorthTime = convertView.findViewById(R.id.net_worth_time);
         TextView netWorthValue = convertView.findViewById(R.id.net_worth_value);
         TextView netWorthDifference = convertView.findViewById(R.id.net_worth_difference);
@@ -38,6 +41,13 @@ public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
         netWorthTime.setText(dataSource.time);
         netWorthValue.setText(String.valueOf(dataSource.netWorthValue));
         netWorthDifference.setText(String.valueOf(dataSource.difference));
+
+/*        reportItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });*/
 
         return convertView;
     }

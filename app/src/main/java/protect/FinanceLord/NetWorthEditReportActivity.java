@@ -27,14 +27,15 @@ import protect.FinanceLord.NetWorthEditReportsUtils.SectionsPagerAdapter;
 public class NetWorthEditReportActivity extends AppCompatActivity {
 
     Date currentTime;
-    Button btnCalendar;
-    public ActivityToFragment parentActivityCommunicator;
+    Button calendarButton;
+    public ActivityToFragment toAssetsFragmentCommunicator;
+    public ActivityToFragment toLiabilitiesFragmentCommunicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth_edit_report);
-        this.btnCalendar = findViewById(R.id.btnCalendar);
+        this.calendarButton = findViewById(R.id.btnCalendar);
 
         Calendar calendar = new GregorianCalendar();
 
@@ -45,8 +46,8 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         currentTime = calendar.getTime();
 
         String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
-        btnCalendar.setText(stringDate);
         String search = getIntent().getStringExtra(SearchManager.QUERY);
+        this.calendarButton.setText(stringDate);
         resetView(search);
     }
 
@@ -56,11 +57,11 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         final Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets", currentTime);
-        final Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment("Liabilities");
+        final Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment("Liabilities", currentTime);
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 
-        this.btnCalendar.setOnClickListener(new View.OnClickListener() {
+        this.calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CalendarDialog calendarDialog = new CalendarDialog(calendarDialogCommunicator);
@@ -81,8 +82,10 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
             currentTime = date;
             Log.d("EditReportCommunicator", "time is " + currentTime);
             String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
-            btnCalendar.setText(stringDate);
-            parentActivityCommunicator.onActivityMessage(currentTime);
+            calendarButton.setText(stringDate);
+
+            toAssetsFragmentCommunicator.onActivityMessage(currentTime);
+            toLiabilitiesFragmentCommunicator.onActivityMessage(currentTime);
         }
     };
 }

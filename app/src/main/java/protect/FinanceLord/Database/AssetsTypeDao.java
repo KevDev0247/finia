@@ -49,7 +49,8 @@ public interface AssetsTypeDao {
             "assetsSecondLevel.assetsId AS assetsSecondLevelId, \n" +
             "assetsSecondLevel.assetsName AS assetsSecondLevelName \n" +
             "FROM AssetsType AS assetsFirstLevel \n" +
-            "JOIN AssetsType AS assetsSecondLevel ON assetsFirstLevel.assetsParentType IS NULL \n" +
+            "JOIN AssetsType AS assetsSecondLevel \n" +
+            "ON assetsFirstLevel.assetsParentType IS NULL \n" +
             "AND assetsFirstLevel.assetsName = assetsSecondLevel.assetsParentType) \n" +
             "AS assetsSecondLevelComposed \n" +
             "LEFT JOIN AssetsType AS assetsThirdLevel ON assetsSecondLevelComposed.assetsSecondLevelName = assetsThirdLevel.assetsParentType) \n" +

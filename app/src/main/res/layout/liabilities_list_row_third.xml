@@ -3,14 +3,15 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="45dp"
-    android:background="@drawable/ic_report_sheet_items"
-    android:weightSum="3">
+    android:weightSum="3"
+    android:padding="10dp"
+    android:background="@drawable/ic_report_sheet_items">
 
     <TextView
-        android:id="@+id/liabilitiesRowItemText"
+        android:id="@+id/liabilitiesRowThirdText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:layout_marginLeft="40dp"
         android:text="Label"
         android:layout_weight="1"/>

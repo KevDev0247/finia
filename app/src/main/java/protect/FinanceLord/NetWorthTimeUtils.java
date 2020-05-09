@@ -15,7 +15,6 @@ public class NetWorthTimeUtils {
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DATE, day);
 
-        // 同样的，这里我们需要吧时分秒清零，因为我们需要定位到某一天的起始日期
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);

@@ -26,7 +26,7 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/btnCommit"
+            android:id="@+id/assets_commit_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Commit"/>
