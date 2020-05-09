@@ -364,7 +364,7 @@ public class DataProcessor_Assets {
             Log.d("DataProcessorA", "Liquid Assets value is " + liquidAssetsValue.getAssetsValue() +
                     " Update time is " + new Date(liquidAssetsValue.getDate()));
 
-            assetsValueDao.updateAssetValue();
+            assetsValueDao.updateAssetValue(liquidAssetsValue);
         } else {
             liquidAssetsValue = new AssetsValue();
             liquidAssetsValue.setAssetsId(liquidAssetsId);
