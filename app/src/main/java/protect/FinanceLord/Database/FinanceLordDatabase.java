@@ -18,6 +18,7 @@ public abstract class FinanceLordDatabase extends RoomDatabase {
     public abstract LiabilitiesValueDao liabilitiesValueDao();
     public abstract BudgetsDao budgetsDao();
     public abstract TransactionsDao transactionsDao();
+    public abstract ReportItemInfoDao reportItemInfoDao();
 
     private static FinanceLordDatabase database;
 

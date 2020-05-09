@@ -11,6 +11,8 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
+import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
+import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
 import protect.FinanceLord.NetWorthReportTemplateUtils.Report_AssetsFragment;
 import protect.FinanceLord.NetWorthReportTemplateUtils.Report_LiabilitiesFragment;
 import protect.FinanceLord.NetWorthReportTemplateUtils.SectionsPagerAdapter;
@@ -29,6 +31,7 @@ public class NetWorthViewReportActivity extends AppCompatActivity {
     public void resetView(String search){
         TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
+
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         Report_AssetsFragment assetsFragment = new Report_AssetsFragment("Assets");

@@ -12,15 +12,21 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
+import protect.FinanceLord.Database.AssetsTypeDao;
+import protect.FinanceLord.Database.AssetsTypeQuery;
+import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
-import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
+import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
+import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
 import protect.FinanceLord.R;
 
 public class Report_AssetsFragment extends Fragment {
 
     String title;
-    DataProcessor_Assets dataProcessor;
+    private TypeProcessor_Assets assetsTypeProcessor;
     private ArrayList<NetWorthItemsDataModel> liquidAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> personalAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> taxableAccountsDataSource = new ArrayList<>();
@@ -35,6 +41,8 @@ public class Report_AssetsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View assetsView = inflater.inflate(R.layout.fragment_report_assets, null);
+
+        getDataFromDatabase();
 
         initDataModels();
 
@@ -59,13 +67,27 @@ public class Report_AssetsFragment extends Fragment {
         return assetsView;
     }
 
+    private void getDataFromDatabase() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(Report_AssetsFragment.this.getContext());
+                AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
+
+                List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
+
+                Report_AssetsFragment.this.assetsTypeProcessor = new TypeProcessor_Assets(assetsTypes);
+            }
+        });
+    }
+
     public void initDataModels(){
 
-        List<DataCarrier_Assets> liquidAssets = dataProcessor.getSubGroup("Liquid assets",2);
-        List<DataCarrier_Assets> personalAssets = dataProcessor.getSubGroup("Personal assets", 2);
-        List<DataCarrier_Assets> taxableAccounts = dataProcessor.getSubGroup("Taxable accounts",3);
-        List<DataCarrier_Assets> retirementAccounts = dataProcessor.getSubGroup("Retirement accounts", 3);
-        List<DataCarrier_Assets> ownershipInterests = dataProcessor.getSubGroup("Ownership interests", 3);
+        List<DataCarrier_Assets> liquidAssets = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
+        List<DataCarrier_Assets> personalAssets = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
+        List<DataCarrier_Assets> taxableAccounts = assetsTypeProcessor.getSubGroup(getString(R.string.taxable_accounts_name),3);
+        List<DataCarrier_Assets> retirementAccounts = assetsTypeProcessor.getSubGroup(getString(R.string.retirement_accounts_name), 3);
+        List<DataCarrier_Assets> ownershipInterests = assetsTypeProcessor.getSubGroup(getString(R.string.ownership_interest_name), 3);
 
 
         for (DataCarrier_Assets dataCarrier : liquidAssets){

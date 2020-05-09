@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -25,6 +26,8 @@ import protect.FinanceLord.Database.LiabilitiesType;
 import protect.FinanceLord.Database.LiabilitiesTypeDao;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
+import protect.FinanceLord.Database.ReportItemInfo;
+import protect.FinanceLord.Database.ReportItemInfoDao;
 import protect.FinanceLord.NetWorthPastReportsListUtils.PastReportsAdapter;
 import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
@@ -60,83 +63,28 @@ public class NetWorthActivity extends AppCompatActivity {
         ListView pastReportsListView = findViewById(R.id.past_report_list);
         final List<ReportItemsDataModel> dataSources = new ArrayList<>();
 
-        /*Executors.newSingleThreadExecutor().execute(new Runnable() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
-                AssetsValueDao assetsValueDao = database.assetsValueDao();
-                AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
-                LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
-                LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
+                ReportItemInfoDao reportItemInfoDao = database.reportItemInfoDao();
 
-                AssetsType assetsType = assetsTypeDao.queryAssetsByType(getString(R.string.total_assets_name));
-                List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTypeId(assetsType.getAssetsId());
-
-                LiabilitiesType liabilitiesType = liabilitiesTypeDao.queryLiabilitiesByType(getString(R.string.total_liabilities_name));
-                List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTypeId(liabilitiesType.getLiabilitiesId());
-
-                if (assetsValues.size() == liabilitiesValues.size()){
-
-                    int size = assetsValues.size();
-                    for (int position = 0; position < size; position++){
-                        float difference = 0;
-                        float netWorthValue = assetsValues.get(position).getAssetsValue() - liabilitiesValues.get(position).getLiabilitiesValue();
-
-                        Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
-
-                        ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
-                        dataSources.add(itemData);
-                    }
-
-                } else if (assetsValues.size() > liabilitiesValues.size()) {
-
-                    int liabilitiesSize = liabilitiesValues.size();
-                    int assetsSize = assetsValues.size();
-                    for (int position = 0; position < liabilitiesSize; position++){
-                        float difference = 0;
-                        float netWorthValue = assetsValues.get(position).getAssetsValue() - liabilitiesValues.get(position).getLiabilitiesValue();
-
-                        Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
-
-                        ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
-                        dataSources.add(itemData);
-                    }
-
-                    for (int position = liabilitiesSize; position < assetsSize; position++){
-                        float difference = 0;
-                        float netWorthValue = assetsValues.get(position).getAssetsValue();
-
-                        Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
-
-                        ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
-                        dataSources.add(itemData);
-                    }
-
-                } else if (assetsValues.size() < liabilitiesValues.size()){
-                    int liabilitiesSize = liabilitiesValues.size();
-                    int assetsSize = assetsValues.size();
-                    for (int position = 0; position < assetsSize; position++){
-                        float difference = 0;
-                        float netWorthValue = assetsValues.get(position).getAssetsValue() - liabilitiesValues.get(position).getLiabilitiesValue();
-
-                        Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
-
-                        ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
-                        dataSources.add(itemData);
-                    }
-
-                    for (int position = assetsSize; position < liabilitiesSize; position++){
-                        float difference = 0;
-                        float netWorthValue = liabilitiesValues.get(position).getLiabilitiesValue();
-
-                        Date itemTime = DateConverters.timestampToDate(assetsValues.get(position).getDate());
-
-                        ReportItemsDataModel itemData = new ReportItemsDataModel(itemTime.toString(), netWorthValue, difference);
-                        dataSources.add(itemData);
-                    }
+                List<ReportItemInfo> reportItemInfoList = reportItemInfoDao.queryReportItemsInfo();
+                for (ReportItemInfo reportItemInfo : reportItemInfoList){
+                    ReportItemsDataModel dataModel = new ReportItemsDataModel(reportItemInfo.totalAssetsDate, reportItemInfo.netWorthValue, 0);
+                    dataSources.add(dataModel);
                 }
             }
-        });*/
+        });
+
+        pastReportsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClass(NetWorthActivity.this, NetWorthViewReportActivity.class);
+                startActivity(intent);
+            }
+        });
 
         adapter = new PastReportsAdapter(this, dataSources);
         pastReportsListView.setAdapter(adapter);
