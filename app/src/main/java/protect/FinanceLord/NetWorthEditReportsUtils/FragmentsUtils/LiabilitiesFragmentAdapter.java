@@ -33,7 +33,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
         this.context = context;
         this.dataProcessor = dataProcessor;
         this.level = level;
-        this.sectionDataSet = dataProcessor.getSubSet(parentSection, level);
+        this.sectionDataSet = dataProcessor.getSubGroup(parentSection, level);
     }
 
     public String getLiabilitiesName(int position){
@@ -58,7 +58,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int i, int i1) {
         String liabilitiesTypeName = getLiabilitiesName(i);
-        List<DataCarrier_Liabilities> carriers = dataProcessor.getSubSet(liabilitiesTypeName, level + 1);
+        List<DataCarrier_Liabilities> carriers = dataProcessor.getSubGroup(liabilitiesTypeName, level + 1);
         return carriers.get(i1);
     }
 
@@ -137,7 +137,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     public View getChildView(final int groupPosition, int childPosition, boolean b, View convertView, ViewGroup viewGroup) {
 
         final DataCarrier_Liabilities sectionData = sectionDataSet.get(groupPosition);
-        List<DataCarrier_Liabilities> children = dataProcessor.getSubSet(sectionData.liabilitiesTypeName, level + 1);
+        List<DataCarrier_Liabilities> children = dataProcessor.getSubGroup(sectionData.liabilitiesTypeName, level + 1);
 
         if (children.size() == 0){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

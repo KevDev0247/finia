@@ -62,7 +62,7 @@ public class DataProcessor_Liabilities {
         this.liabilitiesValues.clear();
     }
 
-    public List<DataCarrier_Liabilities> getSubSet(String parentGroupLabel, int level) {
+    public List<DataCarrier_Liabilities> getSubGroup(String parentGroupLabel, int level) {
 
         List<DataCarrier_Liabilities> subGroupLiabilities = new ArrayList<>();
 
@@ -71,7 +71,7 @@ public class DataProcessor_Liabilities {
                 if (liabilitiesTypeQuery.liabilitiesFirstLevelName != null) {
 
                     DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesFirstLevelName, liabilitiesTypeQuery.liabilitiesFirstLevelId, 0);
-                    addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
+                    addTypeToSubGroup(dataCarrier, subGroupLiabilities);
                 }
             }
         } else if (level == 1) {
@@ -81,7 +81,7 @@ public class DataProcessor_Liabilities {
                         && liabilitiesTypeQuery.liabilitiesSecondLevelName != null) {
 
                     DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesSecondLevelName, liabilitiesTypeQuery.liabilitiesSecondLevelId, 1);
-                    addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
+                    addTypeToSubGroup(dataCarrier, subGroupLiabilities);
                 }
             }
         } else if (level == 2) {
@@ -91,7 +91,7 @@ public class DataProcessor_Liabilities {
                         && liabilitiesTypeQuery.liabilitiesThirdLevelName != null) {
 
                     DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesThirdLevelName, liabilitiesTypeQuery.liabilitiesThirdLevelId, 2);
-                    addCarrierIfNotExists(dataCarrier, subGroupLiabilities);
+                    addTypeToSubGroup(dataCarrier, subGroupLiabilities);
                 }
             }
         }
@@ -99,7 +99,7 @@ public class DataProcessor_Liabilities {
         return subGroupLiabilities;
     }
 
-    void addCarrierIfNotExists(DataCarrier_Liabilities liabilitiesFragmentDataCarrier, List<DataCarrier_Liabilities> subGroupLiabilities) {
+    void addTypeToSubGroup(DataCarrier_Liabilities liabilitiesFragmentDataCarrier, List<DataCarrier_Liabilities> subGroupLiabilities) {
 
         for (DataCarrier_Liabilities dataCarrier: subGroupLiabilities) {
             if (dataCarrier.liabilitiesId == liabilitiesFragmentDataCarrier.liabilitiesId && dataCarrier.liabilitiesId != 0) {

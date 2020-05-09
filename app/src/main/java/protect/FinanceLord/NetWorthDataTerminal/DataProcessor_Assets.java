@@ -62,7 +62,7 @@ public class DataProcessor_Assets {
         this.assetsValues.clear();
     }
 
-    public List<DataCarrier_Assets> getSubSet(String parentGroupLabel, int level) {
+    public List<DataCarrier_Assets> getSubGroup(String parentGroupLabel, int level) {
 
         List<DataCarrier_Assets> subGroupAssets = new ArrayList<>();
 
@@ -71,7 +71,7 @@ public class DataProcessor_Assets {
                 if (assetsTypeQuery.assetsFirstLevelName != null) {
 
                     DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsFirstLevelName, assetsTypeQuery.assetsFirstLevelId, 0);
-                    addCarrierIfNotExists(dataCarrier, subGroupAssets);
+                    addTypeToSubGroup(dataCarrier, subGroupAssets);
                 }
             }
         } else if(level == 1) {
@@ -81,7 +81,7 @@ public class DataProcessor_Assets {
                         && assetsTypeQuery.assetsSecondLevelName != null) {
 
                     DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsSecondLevelName, assetsTypeQuery.assetsSecondLevelId, 1);
-                    addCarrierIfNotExists(dataCarrier, subGroupAssets);
+                    addTypeToSubGroup(dataCarrier, subGroupAssets);
                 }
             }
         } else if(level == 2) {
@@ -91,7 +91,7 @@ public class DataProcessor_Assets {
                         && assetsTypeQuery.assetsThirdLevelName != null) {
 
                     DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsThirdLevelName, assetsTypeQuery.assetsThirdLevelId, 2);
-                    addCarrierIfNotExists(dataCarrier, subGroupAssets);
+                    addTypeToSubGroup(dataCarrier, subGroupAssets);
                 }
             }
         } else if(level == 3) {
@@ -101,7 +101,7 @@ public class DataProcessor_Assets {
                         && assetsTypeQuery.assetsFourthLevelName != null) {
 
                     DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsFourthLevelName, assetsTypeQuery.assetsFourthLevelId, 3);
-                    addCarrierIfNotExists(dataCarrier, subGroupAssets);
+                    addTypeToSubGroup(dataCarrier, subGroupAssets);
                 }
             }
         }
@@ -109,7 +109,7 @@ public class DataProcessor_Assets {
         return subGroupAssets;
     }
 
-    void addCarrierIfNotExists(DataCarrier_Assets assetsFragmentDataCarrier, List<DataCarrier_Assets> subGroupAssets) {
+    void addTypeToSubGroup(DataCarrier_Assets assetsFragmentDataCarrier, List<DataCarrier_Assets> subGroupAssets) {
 
         for(DataCarrier_Assets dataCarrier : subGroupAssets) {
             if(dataCarrier.assetsId == assetsFragmentDataCarrier.assetsId && dataCarrier.assetsId != 0) {

@@ -60,7 +60,7 @@ public class NetWorthActivity extends AppCompatActivity {
         ListView pastReportsListView = findViewById(R.id.past_report_list);
         final List<ReportItemsDataModel> dataSources = new ArrayList<>();
 
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
+        /*Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
@@ -136,7 +136,7 @@ public class NetWorthActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
 
         adapter = new PastReportsAdapter(this, dataSources);
         pastReportsListView.setAdapter(adapter);
@@ -235,10 +235,12 @@ public class NetWorthActivity extends AppCompatActivity {
                 final float finalShortTermLiabilitiesValue = shortTermLiabilitiesValue;
                 final float finalLongTermLiabilitiesValue = longTermLiabilitiesValue;
 
+                final float finalNetWorthValue = finalTotalAssetsValue - finalTotalLiabilitiesValue;
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth),"0"));
+                        dataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth),String.valueOf(finalNetWorthValue)));
                         dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), String.valueOf(finalTotalAssetsValue)));
                         dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), String.valueOf(finalLiquidAssetsValue)));
                         dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), String.valueOf(finalInvestedAssetsValue)));

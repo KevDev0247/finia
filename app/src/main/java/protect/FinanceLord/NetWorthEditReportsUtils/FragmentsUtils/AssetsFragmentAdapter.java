@@ -33,7 +33,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         this.context = context;
         this.dataProcessor = dataProcessor;
         this.level = level;
-        this.sectionDataSet = dataProcessor.getSubSet(parentSection, level);
+        this.sectionDataSet = dataProcessor.getSubGroup(parentSection, level);
     }
 
     public String getAssetsName(int position) {
@@ -58,7 +58,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int i, int i1) {
         String assetsTypeName = getAssetsName(i);
-        List<DataCarrier_Assets> carriers = dataProcessor.getSubSet(assetsTypeName, level + 1);
+        List<DataCarrier_Assets> carriers = dataProcessor.getSubGroup(assetsTypeName, level + 1);
         return carriers.get(i1);
     }
 
@@ -159,7 +159,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
         final DataCarrier_Assets sectionData = sectionDataSet.get(groupPosition);
-        List<DataCarrier_Assets> children = dataProcessor.getSubSet(sectionData.assetsTypeName, level + 1);
+        List<DataCarrier_Assets> children = dataProcessor.getSubGroup(sectionData.assetsTypeName, level + 1);
 
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

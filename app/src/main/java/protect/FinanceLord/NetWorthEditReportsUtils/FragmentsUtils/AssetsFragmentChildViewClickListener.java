@@ -24,7 +24,7 @@ public class AssetsFragmentChildViewClickListener implements ExpandableListView.
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
         DataCarrier_Assets sectionItem = sectionDataSet.get(i);
-        List<DataCarrier_Assets> childSection = dataProcessor.getSubSet(sectionItem.assetsTypeName, level + 1);
+        List<DataCarrier_Assets> childSection = dataProcessor.getSubGroup(sectionItem.assetsTypeName, level + 1);
 
         Log.d("Edit_AFragment", "child Clicked: " + childSection.get(i1).assetsTypeName + ", id in DB: " + childSection.get(i1).assetsId);
         return true;

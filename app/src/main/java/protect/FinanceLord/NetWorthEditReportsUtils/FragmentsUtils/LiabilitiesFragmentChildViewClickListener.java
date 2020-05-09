@@ -24,7 +24,7 @@ public class LiabilitiesFragmentChildViewClickListener implements ExpandableList
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
         DataCarrier_Liabilities sectionItem = sectionDataSet.get(i);
-        List<DataCarrier_Liabilities> childSection = dataProcessor.getSubSet(sectionItem.liabilitiesTypeName, level + 1);
+        List<DataCarrier_Liabilities> childSection = dataProcessor.getSubGroup(sectionItem.liabilitiesTypeName, level + 1);
 
         Log.d("Edit_LFragment", "child clicked: " + childSection.get(i1).liabilitiesTypeName + ", id in DB" + childSection.get(i1).liabilitiesId);
         return false;

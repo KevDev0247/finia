@@ -153,7 +153,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
 
                 Edit_LiabilitiesFragment.this.dataProcessor = new DataProcessor_Liabilities(liabilitiesTypes, liabilitiesValues, currentTime, getContext());
                 adapter = new LiabilitiesFragmentAdapter(getContext(), dataProcessor, 1, getString(R.string.total_liabilities_name));
-                final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(dataProcessor.getSubSet(null, 0), dataProcessor, 0);
+                final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(dataProcessor.getSubGroup(null, 0), dataProcessor, 0);
                 Edit_LiabilitiesFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
