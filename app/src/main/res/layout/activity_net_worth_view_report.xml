@@ -45,9 +45,9 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/report_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="737dp"
-        android:background="#009688"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:background="#2200ff"
         app:tabSelectedTextColor="#ffffff"
         app:tabTextColor="#000000"
         app:tabIndicatorColor="#ffffff">
@@ -64,10 +64,17 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/report_view_pager"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+<!--        <include layout="@layout/fragment_report_assets"/>-->
+        <protect.FinanceLord.HeightWarpViewPager
+            android:id="@+id/report_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#28d20d"
+            />
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

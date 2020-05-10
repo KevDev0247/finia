@@ -44,8 +44,6 @@ public class Report_AssetsFragment extends Fragment {
 
         getDataFromDatabase();
 
-        initDataModels();
-
         ListView liquidAssetsListView = assetsView.findViewById(R.id.liquid_assets_list);
         ListView personalAssetsListView = assetsView.findViewById(R.id.personal_assets_list);
         ListView taxableAccountsListView = assetsView.findViewById(R.id.taxable_accounts_list);
@@ -77,6 +75,7 @@ public class Report_AssetsFragment extends Fragment {
                 List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
 
                 Report_AssetsFragment.this.assetsTypeProcessor = new TypeProcessor_Assets(assetsTypes);
+                initDataModels();
             }
         });
     }
