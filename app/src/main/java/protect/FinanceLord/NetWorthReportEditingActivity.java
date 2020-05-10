@@ -20,11 +20,13 @@ import java.util.GregorianCalendar;
 
 import protect.FinanceLord.Communicators.ActivityToFragment;
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
-import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
-import protect.FinanceLord.NetWorthEditReportsUtils.Edit_LiabilitiesFragment;
-import protect.FinanceLord.NetWorthEditReportsUtils.SectionsPagerAdapter;
+import protect.FinanceLord.NetWorthReportEditingUtils.CalendarDialog;
+import protect.FinanceLord.NetWorthReportEditingUtils.Edit_AssetsFragment;
+import protect.FinanceLord.NetWorthReportEditingUtils.Edit_LiabilitiesFragment;
+import protect.FinanceLord.NetWorthReportEditingUtils.TimeUtils;
+import protect.FinanceLord.NetWorthReportEditingUtils.SectionsPagerAdapter;
 
-public class NetWorthEditReportActivity extends AppCompatActivity {
+public class NetWorthReportEditingActivity extends AppCompatActivity {
 
     Date currentTime;
     Button calendarButton;
@@ -45,7 +47,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         calendar.set(Calendar.MILLISECOND, 0);
         currentTime = calendar.getTime();
 
-        String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
+        String stringDate = TimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
         String search = getIntent().getStringExtra(SearchManager.QUERY);
         this.calendarButton.setText(stringDate);
         resetView(search);
@@ -81,7 +83,7 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         public void onDialogMessage(Date date) {
             currentTime = date;
             Log.d("EditReportCommunicator", "time is " + currentTime);
-            String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
+            String stringDate = TimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
             calendarButton.setText(stringDate);
 
             toAssetsFragmentCommunicator.onActivityMessage(currentTime);

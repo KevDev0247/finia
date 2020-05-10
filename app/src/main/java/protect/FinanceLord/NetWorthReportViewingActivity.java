@@ -11,13 +11,11 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
-import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
-import protect.FinanceLord.NetWorthReportTemplateUtils.Report_AssetsFragment;
-import protect.FinanceLord.NetWorthReportTemplateUtils.Report_LiabilitiesFragment;
-import protect.FinanceLord.NetWorthReportTemplateUtils.SectionsPagerAdapter;
+import protect.FinanceLord.NetWorthReportViewingUtils.Report_AssetsFragment;
+import protect.FinanceLord.NetWorthReportViewingUtils.Report_LiabilitiesFragment;
+import protect.FinanceLord.NetWorthReportViewingUtils.SectionsPagerAdapter;
 
-public class NetWorthViewReportActivity extends AppCompatActivity {
+public class NetWorthReportViewingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils;
+package protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils;
 
 import android.content.Context;
 import android.text.Editable;
@@ -19,7 +19,7 @@ import java.util.List;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Liabilities;
-import protect.FinanceLord.NetWorthEditReportsUtils.NetWorthExpandableListView;
+import protect.FinanceLord.NetWorthReportEditingUtils.NetWorthExpandableListView;
 import protect.FinanceLord.R;
 
 public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {

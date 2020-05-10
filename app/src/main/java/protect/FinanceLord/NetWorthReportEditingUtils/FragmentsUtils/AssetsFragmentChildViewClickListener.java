@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils;
+package protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils;
 
 import android.util.Log;
 import android.view.View;

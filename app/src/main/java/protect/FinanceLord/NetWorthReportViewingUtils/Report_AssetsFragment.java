@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthReportTemplateUtils;
+package protect.FinanceLord.NetWorthReportViewingUtils;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,11 +16,9 @@ import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
-import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
-import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
 import protect.FinanceLord.R;
 
 public class Report_AssetsFragment extends Fragment {

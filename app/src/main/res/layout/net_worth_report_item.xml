@@ -5,49 +5,48 @@
     android:layout_height="match_parent"
     android:background="@drawable/ic_card_shape">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/report_item"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
             android:text="Items"
-            android:textSize="30sp"/>
+            android:textSize="15sp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/item_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
                 android:text="value"
                 android:textSize="20dp" />
 
             <LinearLayout
-                android:layout_width="130dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
+                android:id="@+id/net_change_block"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
                 android:background="@drawable/ic_net_increase">
 
                 <TextView
                     android:id="@+id/symbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="5dp"
                     android:text="+"
                     android:textSize="20dp" />
 
@@ -55,8 +54,6 @@
                     android:id="@+id/difference"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
                     android:text="difference"
                     android:textSize="20dp" />
 
@@ -64,6 +61,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

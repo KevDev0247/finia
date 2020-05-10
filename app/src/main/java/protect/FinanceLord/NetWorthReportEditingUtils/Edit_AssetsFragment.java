@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReportsUtils;
+package protect.FinanceLord.NetWorthReportEditingUtils;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -26,11 +26,11 @@ import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
-import protect.FinanceLord.NetWorthEditReportActivity;
+import protect.FinanceLord.NetWorthReportEditingActivity;
 import protect.FinanceLord.Communicators.ActivityToFragment;
 import protect.FinanceLord.R;
-import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentAdapter;
-import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
+import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.AssetsFragmentAdapter;
+import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 
 public class Edit_AssetsFragment extends Fragment {
@@ -63,8 +63,8 @@ public class Edit_AssetsFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof NetWorthEditReportActivity){
-            NetWorthEditReportActivity activity = (NetWorthEditReportActivity) context;
+        if (context instanceof NetWorthReportEditingActivity){
+            NetWorthReportEditingActivity activity = (NetWorthReportEditingActivity) context;
             activity.toAssetsFragmentCommunicator = this.fromActivityCommunicator;
         }
     }

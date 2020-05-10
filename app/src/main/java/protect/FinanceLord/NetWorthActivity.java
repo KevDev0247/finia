@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -51,7 +50,7 @@ public class NetWorthActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(NetWorthActivity.this, NetWorthEditReportActivity.class);
+                intent.setClass(NetWorthActivity.this, NetWorthReportEditingActivity.class);
                 startActivity(intent);
             }
         });
@@ -81,7 +80,7 @@ public class NetWorthActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
-                intent.setClass(NetWorthActivity.this, NetWorthViewReportActivity.class);
+                intent.setClass(NetWorthActivity.this, NetWorthReportViewingActivity.class);
                 startActivity(intent);
             }
         });
