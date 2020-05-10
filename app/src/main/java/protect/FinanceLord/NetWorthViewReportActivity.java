@@ -32,7 +32,6 @@ public class NetWorthViewReportActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
 
-
         ArrayList<Fragment> fragments = new ArrayList<>();
         Report_AssetsFragment assetsFragment = new Report_AssetsFragment(getString(R.string.assets_name));
         Report_LiabilitiesFragment liabilitiesFragment = new Report_LiabilitiesFragment(getString(R.string.liabilities_name));
