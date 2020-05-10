@@ -70,8 +70,7 @@
             android:id="@+id/edit_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/edit_tab_layout"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </LinearLayout>
 

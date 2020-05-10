@@ -26,6 +26,7 @@ import protect.FinanceLord.Database.LiabilitiesTypeQuery;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Liabilities;
 import protect.FinanceLord.NetWorthReportEditingActivity;
 import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.LiabilitiesFragmentAdapter;
 import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.LiabilitiesFragmentChildViewClickListener;
@@ -40,6 +41,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
 
     private LiabilitiesFragmentAdapter adapter;
     private DataProcessor_Liabilities dataProcessor;
+    private TypeProcessor_Liabilities typeProcessor;
 
     public Edit_LiabilitiesFragment(String title, Date currentTime) {
         this.title = title;
@@ -153,8 +155,9 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 Log.d("Edit_LFragment", "current date: " + currentTime);
 
                 Edit_LiabilitiesFragment.this.dataProcessor = new DataProcessor_Liabilities(liabilitiesTypes, liabilitiesValues, currentTime, getContext());
-                adapter = new LiabilitiesFragmentAdapter(getContext(), dataProcessor, 1, getString(R.string.total_liabilities_name));
-                final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(dataProcessor.getSubGroup(null, 0), dataProcessor, 0);
+                Edit_LiabilitiesFragment.this.typeProcessor = new TypeProcessor_Liabilities(liabilitiesTypes);
+                adapter = new LiabilitiesFragmentAdapter(getContext(), dataProcessor, typeProcessor,1, getString(R.string.total_liabilities_name));
+                final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(typeProcessor.getSubGroup(null, 0), typeProcessor,0);
                 Edit_LiabilitiesFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

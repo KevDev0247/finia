@@ -159,7 +159,7 @@ public class Edit_AssetsFragment extends Fragment {
                 Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime, getContext());
                 Edit_AssetsFragment.this.typeProcessor = new TypeProcessor_Assets(assetsTypes);
                 adapter = new AssetsFragmentAdapter(getContext(), dataProcessor, typeProcessor,1, getString(R.string.total_assets_name));
-                final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(typeProcessor.getSubGroup(null, 0), dataProcessor, typeProcessor, 0);
+                final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(typeProcessor.getSubGroup(null, 0), typeProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

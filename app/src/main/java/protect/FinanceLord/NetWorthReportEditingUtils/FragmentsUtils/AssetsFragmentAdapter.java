@@ -172,7 +172,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             return convertView;
         } else {
             final NetWorthExpandableListView nextLevelExpandableListView = new NetWorthExpandableListView(context);
-            AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, dataProcessor, typeProcessor, level + 1);
+            AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, typeProcessor, level + 1);
             nextLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor, typeProcessor,level + 1, sectionData.assetsTypeName));
             nextLevelExpandableListView.setOnChildClickListener(listener);
             nextLevelExpandableListView.setGroupIndicator(null);

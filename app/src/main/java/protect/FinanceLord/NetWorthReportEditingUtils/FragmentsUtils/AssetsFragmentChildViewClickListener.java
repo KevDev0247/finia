@@ -12,14 +12,12 @@ import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
 
 public class AssetsFragmentChildViewClickListener implements ExpandableListView.OnChildClickListener {
 
-    private DataProcessor_Assets dataProcessor;
     private TypeProcessor_Assets typeProcessor;
     private List<DataCarrier_Assets> sectionDataSet;
     private int level;
 
-    public AssetsFragmentChildViewClickListener(List<DataCarrier_Assets> sectionDataSet, DataProcessor_Assets dataProcessor, TypeProcessor_Assets typeProcessor, int level) {
+    public AssetsFragmentChildViewClickListener(List<DataCarrier_Assets> sectionDataSet, TypeProcessor_Assets typeProcessor, int level) {
         this.sectionDataSet = sectionDataSet;
-        this.dataProcessor = dataProcessor;
         this.typeProcessor = typeProcessor;
         this.level = level;
     }
