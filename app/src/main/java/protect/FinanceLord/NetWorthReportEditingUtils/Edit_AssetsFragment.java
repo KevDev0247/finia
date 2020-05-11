@@ -43,15 +43,7 @@ public class Edit_AssetsFragment extends Fragment {
     private AssetsFragmentAdapter adapter;
     private DataProcessor_Assets dataProcessor;
     private TypeProcessor_Assets typeProcessor;
-
-    public Edit_AssetsFragment(String title, Date currentTime) {
-        this.title = title;
-        this.currentTime = currentTime;
-    }
-
-    //communicators
-
-    ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
+    private ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
         @Override
         public void onActivityMessage(Date date) {
             currentTime = date;
@@ -60,12 +52,17 @@ public class Edit_AssetsFragment extends Fragment {
         }
     };
 
+    public Edit_AssetsFragment(String title, Date currentTime) {
+        this.title = title;
+        this.currentTime = currentTime;
+    }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof NetWorthReportEditingActivity){
             NetWorthReportEditingActivity activity = (NetWorthReportEditingActivity) context;
-            activity.toAssetsFragmentCommunicator = this.fromActivityCommunicator;
+            activity.toEditAssetsFragmentCommunicator = this.fromActivityCommunicator;
         }
     }
 

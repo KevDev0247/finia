@@ -23,15 +23,15 @@ import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.NetWorthReportEditingUtils.CalendarDialog;
 import protect.FinanceLord.NetWorthReportEditingUtils.Edit_AssetsFragment;
 import protect.FinanceLord.NetWorthReportEditingUtils.Edit_LiabilitiesFragment;
-import protect.FinanceLord.NetWorthReportEditingUtils.TimeUtils;
+import protect.FinanceLord.NetWorthReportEditingUtils.NetWorthTimeUtils;
 import protect.FinanceLord.NetWorthReportEditingUtils.SectionsPagerAdapter;
 
 public class NetWorthReportEditingActivity extends AppCompatActivity {
 
     Date currentTime;
     Button calendarButton;
-    public ActivityToFragment toAssetsFragmentCommunicator;
-    public ActivityToFragment toLiabilitiesFragmentCommunicator;
+    public ActivityToFragment toEditAssetsFragmentCommunicator;
+    public ActivityToFragment toEditLiabilitiesFragmentCommunicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
         calendar.set(Calendar.MILLISECOND, 0);
         currentTime = calendar.getTime();
 
-        String stringDate = TimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
+        String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
         String search = getIntent().getStringExtra(SearchManager.QUERY);
         this.calendarButton.setText(stringDate);
         resetView(search);
@@ -83,11 +83,11 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
         public void onDialogMessage(Date date) {
             currentTime = date;
             Log.d("EditReportCommunicator", "time is " + currentTime);
-            String stringDate = TimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
+            String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
             calendarButton.setText(stringDate);
 
-            toAssetsFragmentCommunicator.onActivityMessage(currentTime);
-            toLiabilitiesFragmentCommunicator.onActivityMessage(currentTime);
+            toEditAssetsFragmentCommunicator.onActivityMessage(currentTime);
+            toEditLiabilitiesFragmentCommunicator.onActivityMessage(currentTime);
         }
     };
 }

@@ -1,5 +1,6 @@
 package protect.FinanceLord.NetWorthReportViewingUtils;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +12,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import protect.FinanceLord.Communicators.ActivityToFragment;
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
+import protect.FinanceLord.Database.AssetsValue;
+import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.NetWorthActivity;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
 import protect.FinanceLord.R;
@@ -25,14 +33,38 @@ public class Report_AssetsFragment extends Fragment {
 
     String title;
     private TypeProcessor_Assets assetsTypeProcessor;
+    private Date itemTime;
     private ArrayList<NetWorthItemsDataModel> liquidAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> personalAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> taxableAccountsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> retirementAccountsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> ownershipInterestsDataSource = new ArrayList<>();
+    private ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
+        @Override
+        public void onActivityMessage(Date date) {
+            itemTime = date;
+            getDataFromDatabase(itemTime);
+        }
+    };
 
     public Report_AssetsFragment(String title){
         this.title = title;
+
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        this.itemTime = calendar.getTime();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof NetWorthActivity){
+            NetWorthActivity activity = (NetWorthActivity) context;
+            activity.toViewAssetsFragmentCommunicator = this.fromActivityCommunicator;
+        }
     }
 
     @Override
@@ -40,7 +72,7 @@ public class Report_AssetsFragment extends Fragment {
 
         View assetsView = inflater.inflate(R.layout.fragment_report_assets, null);
 
-        getDataFromDatabase();
+        getDataFromDatabase(itemTime);
 
         ListView liquidAssetsListView = assetsView.findViewById(R.id.liquid_assets_list);
         ListView personalAssetsListView = assetsView.findViewById(R.id.personal_assets_list);
@@ -63,23 +95,24 @@ public class Report_AssetsFragment extends Fragment {
         return assetsView;
     }
 
-    private void getDataFromDatabase() {
+    private void getDataFromDatabase(final Date itemTime) {
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(Report_AssetsFragment.this.getContext());
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
+                AssetsValueDao assetsValueDao = database.assetsValueDao();
 
                 List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
                 Report_AssetsFragment.this.assetsTypeProcessor = new TypeProcessor_Assets(assetsTypes);
 
-                initDataModels();
+                initDataModels(assetsValueDao, itemTime);
             }
         });
     }
 
-    public void initDataModels(){
+    public void initDataModels(AssetsValueDao assetsValueDao, Date itemTime){
 
         List<DataCarrier_Assets> liquidAssets = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
         List<DataCarrier_Assets> personalAssets = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
@@ -87,8 +120,8 @@ public class Report_AssetsFragment extends Fragment {
         List<DataCarrier_Assets> retirementAccounts = assetsTypeProcessor.getSubGroup(getString(R.string.retirement_accounts_name), 3);
         List<DataCarrier_Assets> ownershipInterests = assetsTypeProcessor.getSubGroup(getString(R.string.ownership_interest_name), 3);
 
-
         for (DataCarrier_Assets dataCarrier : liquidAssets){
+            AssetsValue liquidAssetsValue = new AssetsValue();
             NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
             liquidAssetsDataSource.add(dataModel);
         }

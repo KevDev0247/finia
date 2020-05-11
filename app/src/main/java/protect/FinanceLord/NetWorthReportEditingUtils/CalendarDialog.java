@@ -23,7 +23,7 @@ public class CalendarDialog extends DialogFragment {
     Button confirmTimeButton;
     Button cancelTimeButton;
     CalendarDateBroadcast communicator;
-    TimeUtils timeUtils = new TimeUtils();
+    NetWorthTimeUtils timeUtils = new NetWorthTimeUtils();
 
 
     public CalendarDialog(CalendarDateBroadcast communicator){

@@ -42,15 +42,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
     private LiabilitiesFragmentAdapter adapter;
     private DataProcessor_Liabilities dataProcessor;
     private TypeProcessor_Liabilities typeProcessor;
-
-    public Edit_LiabilitiesFragment(String title, Date currentTime) {
-        this.title = title;
-        this.currentTime = currentTime;
-    }
-
-    //communicators
-
-    ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
+    private ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
         @Override
         public void onActivityMessage(Date date) {
             currentTime = date;
@@ -59,12 +51,17 @@ public class Edit_LiabilitiesFragment extends Fragment {
         }
     };
 
+    public Edit_LiabilitiesFragment(String title, Date currentTime) {
+        this.title = title;
+        this.currentTime = currentTime;
+    }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof NetWorthReportEditingActivity){
             NetWorthReportEditingActivity activity = (NetWorthReportEditingActivity) context;
-            activity.toLiabilitiesFragmentCommunicator = this.fromActivityCommunicator;
+            activity.toEditLiabilitiesFragmentCommunicator = this.fromActivityCommunicator;
         }
     }
 

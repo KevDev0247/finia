@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class TimeUtils {
+public class NetWorthTimeUtils {
 
     public Date setTime(int year, int month, int day){
         Calendar calendar = new GregorianCalendar();
