@@ -91,6 +91,10 @@ public class NetWorthActivity extends AppCompatActivity {
         pastReportsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // I am very suspicious over the data transfer code as we never know which data model has been retrieved
+                // I am not sure the position will be the same in the index of data source
+
                 ReportItemsDataModel dataModel = dataSources.get(position);
                 SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.US);
                 Date date = null;

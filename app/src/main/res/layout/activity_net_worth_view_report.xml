@@ -48,6 +48,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <!-- still having trouble scrolling -->
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/report_view_pager"
             android:layout_width="match_parent"
