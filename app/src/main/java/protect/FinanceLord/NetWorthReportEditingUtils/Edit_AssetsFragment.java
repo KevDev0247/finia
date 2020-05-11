@@ -27,7 +27,7 @@ import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
 import protect.FinanceLord.NetWorthReportEditingActivity;
-import protect.FinanceLord.Communicators.ActivityToFragment;
+import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.R;
 import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
@@ -43,7 +43,7 @@ public class Edit_AssetsFragment extends Fragment {
     private AssetsFragmentAdapter adapter;
     private DataProcessor_Assets dataProcessor;
     private TypeProcessor_Assets typeProcessor;
-    private ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
+    private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
         @Override
         public void onActivityMessage(Date date) {
             currentTime = date;

@@ -5,11 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.icu.util.ULocale;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TimeUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,9 +19,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
-import protect.FinanceLord.Communicators.ActivityToFragment;
+import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Database.AssetsType;
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsValue;
@@ -42,9 +38,6 @@ import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
 
 public class NetWorthActivity extends AppCompatActivity {
-
-    public ActivityToFragment toViewAssetsFragmentCommunicator;
-    public ActivityToFragment toViewLiabilitiesFragmentCommunicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,17 +89,10 @@ public class NetWorthActivity extends AppCompatActivity {
                 // I am not sure the position will be the same in the index of data source
 
                 ReportItemsDataModel dataModel = dataSources.get(position);
-                SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.US);
-                Date date = null;
-                try {
-                    date = dateFormat.parse(dataModel.time);
-                } catch (ParseException e) {
-                    Log.d("NetWorthActivity","parse string to date failed");
-                    e.printStackTrace();
-                }
 
-                toViewAssetsFragmentCommunicator.onActivityMessage(date);
+                // data transfer section does not work well
                 Intent intent = new Intent();
+                intent.putExtra("itemTime", dataModel.time);
                 intent.setClass(NetWorthActivity.this, NetWorthReportViewingActivity.class);
                 startActivity(intent);
             }

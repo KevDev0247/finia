@@ -18,53 +18,31 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import protect.FinanceLord.Communicators.ActivityToFragment;
+import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.NetWorthActivity;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
+import protect.FinanceLord.NetWorthReportViewingActivity;
 import protect.FinanceLord.R;
 
 public class Report_AssetsFragment extends Fragment {
 
     String title;
-    private TypeProcessor_Assets assetsTypeProcessor;
     private Date itemTime;
+    private TypeProcessor_Assets assetsTypeProcessor;
     private ArrayList<NetWorthItemsDataModel> liquidAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> personalAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> taxableAccountsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> retirementAccountsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> ownershipInterestsDataSource = new ArrayList<>();
-    private ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
-        @Override
-        public void onActivityMessage(Date date) {
-            itemTime = date;
-            getDataFromDatabase(itemTime);
-        }
-    };
 
-    public Report_AssetsFragment(String title){
+    public Report_AssetsFragment(String title, Date itemTime){
         this.title = title;
-
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        this.itemTime = calendar.getTime();
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof NetWorthActivity){
-            NetWorthActivity activity = (NetWorthActivity) context;
-            activity.toViewAssetsFragmentCommunicator = this.fromActivityCommunicator;
-        }
+        this.itemTime = itemTime;
     }
 
     @Override

@@ -2,6 +2,6 @@ package protect.FinanceLord.Communicators;
 
 import java.util.Date;
 
-public interface ActivityToFragment {
+public interface DateCommunicator {
     void onActivityMessage(Date date);
 }
