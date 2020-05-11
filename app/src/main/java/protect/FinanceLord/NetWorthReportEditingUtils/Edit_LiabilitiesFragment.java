@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReportsUtils;
+package protect.FinanceLord.NetWorthReportEditingUtils;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -26,9 +26,10 @@ import protect.FinanceLord.Database.LiabilitiesTypeQuery;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
-import protect.FinanceLord.NetWorthEditReportActivity;
-import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.LiabilitiesFragmentAdapter;
-import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.LiabilitiesFragmentChildViewClickListener;
+import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthReportEditingActivity;
+import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.LiabilitiesFragmentAdapter;
+import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.LiabilitiesFragmentChildViewClickListener;
 import protect.FinanceLord.R;
 
 public class Edit_LiabilitiesFragment extends Fragment {
@@ -40,15 +41,8 @@ public class Edit_LiabilitiesFragment extends Fragment {
 
     private LiabilitiesFragmentAdapter adapter;
     private DataProcessor_Liabilities dataProcessor;
-
-    public Edit_LiabilitiesFragment(String title, Date currentTime) {
-        this.title = title;
-        this.currentTime = currentTime;
-    }
-
-    //communicators
-
-    ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
+    private TypeProcessor_Liabilities typeProcessor;
+    private ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
         @Override
         public void onActivityMessage(Date date) {
             currentTime = date;
@@ -57,12 +51,17 @@ public class Edit_LiabilitiesFragment extends Fragment {
         }
     };
 
+    public Edit_LiabilitiesFragment(String title, Date currentTime) {
+        this.title = title;
+        this.currentTime = currentTime;
+    }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof NetWorthEditReportActivity){
-            NetWorthEditReportActivity activity = (NetWorthEditReportActivity) context;
-            activity.toLiabilitiesFragmentCommunicator = this.fromActivityCommunicator;
+        if (context instanceof NetWorthReportEditingActivity){
+            NetWorthReportEditingActivity activity = (NetWorthReportEditingActivity) context;
+            activity.toEditLiabilitiesFragmentCommunicator = this.fromActivityCommunicator;
         }
     }
 
@@ -153,8 +152,9 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 Log.d("Edit_LFragment", "current date: " + currentTime);
 
                 Edit_LiabilitiesFragment.this.dataProcessor = new DataProcessor_Liabilities(liabilitiesTypes, liabilitiesValues, currentTime, getContext());
-                adapter = new LiabilitiesFragmentAdapter(getContext(), dataProcessor, 1, getString(R.string.total_liabilities_name));
-                final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(dataProcessor.getSubGroup(null, 0), dataProcessor, 0);
+                Edit_LiabilitiesFragment.this.typeProcessor = new TypeProcessor_Liabilities(liabilitiesTypes);
+                adapter = new LiabilitiesFragmentAdapter(getContext(), dataProcessor, typeProcessor,1, getString(R.string.total_liabilities_name));
+                final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(typeProcessor.getSubGroup(null, 0), typeProcessor,0);
                 Edit_LiabilitiesFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

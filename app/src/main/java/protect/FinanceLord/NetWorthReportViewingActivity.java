@@ -11,11 +11,11 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-import protect.FinanceLord.NetWorthReportTemplateUtils.Report_AssetsFragment;
-import protect.FinanceLord.NetWorthReportTemplateUtils.Report_LiabilitiesFragment;
-import protect.FinanceLord.NetWorthReportTemplateUtils.SectionsPagerAdapter;
+import protect.FinanceLord.NetWorthReportViewingUtils.Report_AssetsFragment;
+import protect.FinanceLord.NetWorthReportViewingUtils.Report_LiabilitiesFragment;
+import protect.FinanceLord.NetWorthReportViewingUtils.SectionsPagerAdapter;
 
-public class NetWorthViewReportActivity extends AppCompatActivity {
+public class NetWorthReportViewingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,8 @@ public class NetWorthViewReportActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        Report_AssetsFragment assetsFragment = new Report_AssetsFragment("Assets");
-        Report_LiabilitiesFragment liabilitiesFragment = new Report_LiabilitiesFragment("Liabilities");
+        Report_AssetsFragment assetsFragment = new Report_AssetsFragment(getString(R.string.assets_name));
+        Report_LiabilitiesFragment liabilitiesFragment = new Report_LiabilitiesFragment(getString(R.string.liabilities_name));
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 

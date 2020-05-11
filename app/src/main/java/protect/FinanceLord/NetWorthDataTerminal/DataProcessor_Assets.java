@@ -28,7 +28,6 @@ public class DataProcessor_Assets {
     }
 
     public AssetsValue getAssetsValue(int assetsId) {
-
         for (AssetsValue assetsValue: assetsValues){
             if (assetsValue.getAssetsId() == assetsId){
                 return assetsValue;
@@ -38,7 +37,6 @@ public class DataProcessor_Assets {
     }
 
     public void setAssetValue(int assetId, float assetValue) {
-
         AssetsValue assetsValue = this.getAssetsValue(assetId);
         if (assetsValue != null) {
             assetsValue.setAssetsValue(assetValue);
@@ -62,67 +60,7 @@ public class DataProcessor_Assets {
         this.assetsValues.clear();
     }
 
-    public List<DataCarrier_Assets> getSubGroup(String parentGroupLabel, int level) {
-
-        List<DataCarrier_Assets> subGroupAssets = new ArrayList<>();
-
-        if (level == 0) {
-            for(AssetsTypeQuery assetsTypeQuery : dataList) {
-                if (assetsTypeQuery.assetsFirstLevelName != null) {
-
-                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsFirstLevelName, assetsTypeQuery.assetsFirstLevelId, 0);
-                    addTypeToSubGroup(dataCarrier, subGroupAssets);
-                }
-            }
-        } else if(level == 1) {
-            for(AssetsTypeQuery assetsTypeQuery : dataList) {
-                if (assetsTypeQuery.assetsFirstLevelName != null
-                        && assetsTypeQuery.assetsFirstLevelName.equals(parentGroupLabel)
-                        && assetsTypeQuery.assetsSecondLevelName != null) {
-
-                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsSecondLevelName, assetsTypeQuery.assetsSecondLevelId, 1);
-                    addTypeToSubGroup(dataCarrier, subGroupAssets);
-                }
-            }
-        } else if(level == 2) {
-            for(AssetsTypeQuery assetsTypeQuery : dataList) {
-                if (assetsTypeQuery.assetsSecondLevelName != null
-                        && assetsTypeQuery.assetsSecondLevelName.equals(parentGroupLabel)
-                        && assetsTypeQuery.assetsThirdLevelName != null) {
-
-                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsThirdLevelName, assetsTypeQuery.assetsThirdLevelId, 2);
-                    addTypeToSubGroup(dataCarrier, subGroupAssets);
-                }
-            }
-        } else if(level == 3) {
-            for(AssetsTypeQuery assetsTypeQuery : dataList) {
-                if(assetsTypeQuery.assetsThirdLevelName != null
-                        && assetsTypeQuery.assetsThirdLevelName.equals(parentGroupLabel)
-                        && assetsTypeQuery.assetsFourthLevelName != null) {
-
-                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsFourthLevelName, assetsTypeQuery.assetsFourthLevelId, 3);
-                    addTypeToSubGroup(dataCarrier, subGroupAssets);
-                }
-            }
-        }
-
-        return subGroupAssets;
-    }
-
-    void addTypeToSubGroup(DataCarrier_Assets assetsFragmentDataCarrier, List<DataCarrier_Assets> subGroupAssets) {
-
-        for(DataCarrier_Assets dataCarrier : subGroupAssets) {
-            if(dataCarrier.assetsId == assetsFragmentDataCarrier.assetsId && dataCarrier.assetsId != 0) {
-                return;
-            }
-        }
-        subGroupAssets.add(assetsFragmentDataCarrier);
-    }
-
-
-
     private int getAssetsId(String assetsName) {
-
         for(AssetsTypeQuery query : dataList) {
             if (query.assetsFirstLevelName != null && query.assetsFirstLevelName.equals(assetsName)) {
                 return query.assetsFirstLevelId;
@@ -138,7 +76,6 @@ public class DataProcessor_Assets {
     }
 
     private List<Integer> getAssetsIDsBelongsTo(String assetsName) {
-
         if (TextUtils.isEmpty(assetsName)) {
             return new ArrayList<>();
         }
@@ -189,7 +126,6 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalAssets() {
-
         float totalInvestedAssets = calculateTotalInvestedAssets();
         float totalLiquidAssets = calculateTotalLiquidAssets();
         float totalPersonalAssets = calculateTotalPersonalAssets();
@@ -199,7 +135,6 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalLiquidAssets() {
-
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo(context.getString(R.string.liquid_assets_name));
         float totalLiquidAssets = 0;
         for (int assetsId : assetsIDs) {
@@ -220,7 +155,6 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalPersonalAssets(){
-
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo(context.getString(R.string.personal_assets_name));
         float totalPersonalAssets = 0;
         for (int assetsId : assetsIDs) {
@@ -241,7 +175,6 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalInvestedAssets() {
-
         float totalOwnershipInterests = calculateTotalOwnershipInterests();
         float totalRetirementAccounts = calculateTotalRetirementAccounts();
         float totalTaxableAccounts = calculateTotalTaxableAccounts();
@@ -251,7 +184,6 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalOwnershipInterests() {
-
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo(context.getString(R.string.ownership_interest_name));
         float totalOwnershipInterest = 0;
         for (int assetsId : assetsIDs) {
@@ -272,7 +204,6 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalRetirementAccounts() {
-
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo(context.getString(R.string.retirement_accounts_name));
         float totalRetirementAccounts = 0;
         for (int assetId : assetsIDs) {
@@ -293,7 +224,6 @@ public class DataProcessor_Assets {
     }
 
     public float calculateTotalTaxableAccounts(){
-
         List<Integer> assetsIDs = this.getAssetsIDsBelongsTo(context.getString(R.string.taxable_accounts_name));
         float totalTotalTaxableAccounts = 0;
         for (int assetsId : assetsIDs) {
@@ -315,7 +245,6 @@ public class DataProcessor_Assets {
 
 
     public void calculateAndInsertParentAssets(AssetsValueDao assetsValueDao) {
-
         float totalAssets = this.calculateTotalAssets();
         float totalLiquidAssets = this.calculateTotalLiquidAssets();
         float totalInvestedAssets = this.calculateTotalInvestedAssets();

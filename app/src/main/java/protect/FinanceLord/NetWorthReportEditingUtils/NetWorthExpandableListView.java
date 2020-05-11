@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReportsUtils;
+package protect.FinanceLord.NetWorthReportEditingUtils;
 
 import android.content.Context;
 import android.widget.ExpandableListView;

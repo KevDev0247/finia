@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils;
+package protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils;
 
 import android.content.Context;
 import android.text.Editable;
@@ -19,21 +19,24 @@ import java.util.List;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Liabilities;
-import protect.FinanceLord.NetWorthEditReportsUtils.NetWorthExpandableListView;
+import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthReportEditingUtils.NetWorthExpandableListView;
 import protect.FinanceLord.R;
 
 public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
     private DataProcessor_Liabilities dataProcessor;
+    private TypeProcessor_Liabilities typeProcessor;
     private List<DataCarrier_Liabilities> sectionDataSet;
     private int level;
     private Context context;
 
-    public LiabilitiesFragmentAdapter(Context context, DataProcessor_Liabilities dataProcessor, int level, String parentSection){
+    public LiabilitiesFragmentAdapter(Context context, DataProcessor_Liabilities dataProcessor, TypeProcessor_Liabilities typeProcessor, int level, String parentSection){
         this.context = context;
         this.dataProcessor = dataProcessor;
+        this.typeProcessor = typeProcessor;
         this.level = level;
-        this.sectionDataSet = dataProcessor.getSubGroup(parentSection, level);
+        this.sectionDataSet = typeProcessor.getSubGroup(parentSection, level);
     }
 
     public String getLiabilitiesName(int position){
@@ -58,7 +61,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int i, int i1) {
         String liabilitiesTypeName = getLiabilitiesName(i);
-        List<DataCarrier_Liabilities> carriers = dataProcessor.getSubGroup(liabilitiesTypeName, level + 1);
+        List<DataCarrier_Liabilities> carriers = typeProcessor.getSubGroup(liabilitiesTypeName, level + 1);
         return carriers.get(i1);
     }
 
@@ -137,7 +140,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     public View getChildView(final int groupPosition, int childPosition, boolean b, View convertView, ViewGroup viewGroup) {
 
         final DataCarrier_Liabilities sectionData = sectionDataSet.get(groupPosition);
-        List<DataCarrier_Liabilities> children = dataProcessor.getSubGroup(sectionData.liabilitiesTypeName, level + 1);
+        List<DataCarrier_Liabilities> children = typeProcessor.getSubGroup(sectionData.liabilitiesTypeName, level + 1);
 
         if (children.size() == 0){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -147,8 +150,8 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
             return convertView;
         } else {
             final NetWorthExpandableListView nextLevelExpandableListView = new NetWorthExpandableListView(context);
-            LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(sectionDataSet, dataProcessor, level + 1);
-            nextLevelExpandableListView.setAdapter(new LiabilitiesFragmentAdapter(context, dataProcessor, level + 1, sectionData.liabilitiesTypeName));
+            LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(sectionDataSet, typeProcessor,level + 1);
+            nextLevelExpandableListView.setAdapter(new LiabilitiesFragmentAdapter(context, dataProcessor, typeProcessor,level + 1, sectionData.liabilitiesTypeName));
             nextLevelExpandableListView.setOnChildClickListener(listener);
             nextLevelExpandableListView.setGroupIndicator(null);
             nextLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {

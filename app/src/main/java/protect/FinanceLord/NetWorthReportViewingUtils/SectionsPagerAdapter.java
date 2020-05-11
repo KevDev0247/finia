@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReportsUtils;
+package protect.FinanceLord.NetWorthReportViewingUtils;
 
 import android.content.Context;
 

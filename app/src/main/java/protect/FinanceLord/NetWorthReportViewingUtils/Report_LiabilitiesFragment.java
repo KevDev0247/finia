@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthReportTemplateUtils;
+package protect.FinanceLord.NetWorthReportViewingUtils;
 
 import androidx.fragment.app.Fragment;
 
