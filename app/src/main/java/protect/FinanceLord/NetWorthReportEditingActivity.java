@@ -20,16 +20,18 @@ import java.util.GregorianCalendar;
 
 import protect.FinanceLord.Communicators.ActivityToFragment;
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
-import protect.FinanceLord.NetWorthEditReportsUtils.Edit_AssetsFragment;
-import protect.FinanceLord.NetWorthEditReportsUtils.Edit_LiabilitiesFragment;
-import protect.FinanceLord.NetWorthEditReportsUtils.SectionsPagerAdapter;
+import protect.FinanceLord.NetWorthReportEditingUtils.CalendarDialog;
+import protect.FinanceLord.NetWorthReportEditingUtils.Edit_AssetsFragment;
+import protect.FinanceLord.NetWorthReportEditingUtils.Edit_LiabilitiesFragment;
+import protect.FinanceLord.NetWorthReportEditingUtils.NetWorthTimeUtils;
+import protect.FinanceLord.NetWorthReportEditingUtils.SectionsPagerAdapter;
 
-public class NetWorthEditReportActivity extends AppCompatActivity {
+public class NetWorthReportEditingActivity extends AppCompatActivity {
 
     Date currentTime;
     Button calendarButton;
-    public ActivityToFragment toAssetsFragmentCommunicator;
-    public ActivityToFragment toLiabilitiesFragmentCommunicator;
+    public ActivityToFragment toEditAssetsFragmentCommunicator;
+    public ActivityToFragment toEditLiabilitiesFragmentCommunicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,8 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.edit_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        final Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment("Assets", currentTime);
-        final Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment("Liabilities", currentTime);
+        final Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment(getString(R.string.assets_name), currentTime);
+        final Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment(getString(R.string.liabilities_name), currentTime);
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 
@@ -84,8 +86,8 @@ public class NetWorthEditReportActivity extends AppCompatActivity {
             String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
             calendarButton.setText(stringDate);
 
-            toAssetsFragmentCommunicator.onActivityMessage(currentTime);
-            toLiabilitiesFragmentCommunicator.onActivityMessage(currentTime);
+            toEditAssetsFragmentCommunicator.onActivityMessage(currentTime);
+            toEditLiabilitiesFragmentCommunicator.onActivityMessage(currentTime);
         }
     };
 }

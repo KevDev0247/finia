@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.NetWorthReportEditingUtils;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Date;
 
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
+import protect.FinanceLord.R;
 
 public class CalendarDialog extends DialogFragment {
 

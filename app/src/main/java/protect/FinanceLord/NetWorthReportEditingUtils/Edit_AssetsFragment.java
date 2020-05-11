@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthEditReportsUtils;
+package protect.FinanceLord.NetWorthReportEditingUtils;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -25,11 +25,12 @@ import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.NetWorthEditReportActivity;
+import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
+import protect.FinanceLord.NetWorthReportEditingActivity;
 import protect.FinanceLord.Communicators.ActivityToFragment;
 import protect.FinanceLord.R;
-import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentAdapter;
-import protect.FinanceLord.NetWorthEditReportsUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
+import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.AssetsFragmentAdapter;
+import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 
 public class Edit_AssetsFragment extends Fragment {
@@ -41,15 +42,8 @@ public class Edit_AssetsFragment extends Fragment {
 
     private AssetsFragmentAdapter adapter;
     private DataProcessor_Assets dataProcessor;
-
-    public Edit_AssetsFragment(String title, Date currentTime) {
-        this.title = title;
-        this.currentTime = currentTime;
-    }
-
-    //communicators
-
-    ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
+    private TypeProcessor_Assets typeProcessor;
+    private ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
         @Override
         public void onActivityMessage(Date date) {
             currentTime = date;
@@ -58,12 +52,17 @@ public class Edit_AssetsFragment extends Fragment {
         }
     };
 
+    public Edit_AssetsFragment(String title, Date currentTime) {
+        this.title = title;
+        this.currentTime = currentTime;
+    }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof NetWorthEditReportActivity){
-            NetWorthEditReportActivity activity = (NetWorthEditReportActivity) context;
-            activity.toAssetsFragmentCommunicator = this.fromActivityCommunicator;
+        if (context instanceof NetWorthReportEditingActivity){
+            NetWorthReportEditingActivity activity = (NetWorthReportEditingActivity) context;
+            activity.toEditAssetsFragmentCommunicator = this.fromActivityCommunicator;
         }
     }
 
@@ -155,8 +154,9 @@ public class Edit_AssetsFragment extends Fragment {
                 Log.d("Edit_AFragment", "current date: " + currentTime);
 
                 Edit_AssetsFragment.this.dataProcessor = new DataProcessor_Assets(assetsTypes, assetsValues, currentTime, getContext());
-                adapter = new AssetsFragmentAdapter(getContext(), dataProcessor, 1, getString(R.string.total_assets_name));
-                final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(dataProcessor.getSubGroup(null, 0), dataProcessor, 0);
+                Edit_AssetsFragment.this.typeProcessor = new TypeProcessor_Assets(assetsTypes);
+                adapter = new AssetsFragmentAdapter(getContext(), dataProcessor, typeProcessor,1, getString(R.string.total_assets_name));
+                final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(typeProcessor.getSubGroup(null, 0), typeProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
