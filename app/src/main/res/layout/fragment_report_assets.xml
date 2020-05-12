@@ -25,13 +25,12 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"/>
 
-            <LinearLayout
+            <protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView
                 android:id="@+id/liquid_assets_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-            </LinearLayout>
+            </protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView>
 
         </LinearLayout>
 
@@ -60,13 +59,12 @@
                     android:textSize="20sp"
                     android:layout_marginLeft="20dp"/>
 
-                <LinearLayout
+                <protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView
                     android:id="@+id/taxable_accounts_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
-                </LinearLayout>
+                </protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView>
 
             </LinearLayout>
 
@@ -83,13 +81,12 @@
                     android:textSize="20sp"
                     android:layout_marginLeft="20dp"/>
 
-                <LinearLayout
+                <protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView
                     android:id="@+id/retirement_accounts_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
-                </LinearLayout>
+                </protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView>
 
             </LinearLayout>
 
@@ -106,13 +103,12 @@
                     android:textSize="20sp"
                     android:layout_marginLeft="20dp"/>
 
-                <LinearLayout
+                <protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView
                     android:id="@+id/ownership_interests_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
-                </LinearLayout>
+                </protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView>
 
             </LinearLayout>
 
@@ -130,13 +126,12 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"/>
 
-            <LinearLayout
+            <protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView
                 android:id="@+id/personal_assets_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-            </LinearLayout>
+            </protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView>
 
         </LinearLayout>
 
