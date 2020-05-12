@@ -30,6 +30,7 @@ public class Report_AssetsFragment extends Fragment {
 
     String title;
     private Date itemTime;
+    private View contentView;
     private TypeProcessor_Assets assetsTypeProcessor;
     private ArrayList<NetWorthItemsDataModel> liquidAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> personalAssetsDataSource = new ArrayList<>();
@@ -49,6 +50,28 @@ public class Report_AssetsFragment extends Fragment {
 
         getDataFromDatabase(itemTime);
 
+        this.contentView = assetsView;
+        return assetsView;
+    }
+
+    private void getDataFromDatabase(final Date itemTime) {
+
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(Report_AssetsFragment.this.getContext());
+                AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
+                AssetsValueDao assetsValueDao = database.assetsValueDao();
+
+                List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
+                Report_AssetsFragment.this.assetsTypeProcessor = new TypeProcessor_Assets(assetsTypes);
+
+                initDataModels(assetsValueDao, itemTime);
+            }
+        });
+    }
+
+    private void refreshView(View assetsView) {
         LinearLayout liquidAssetsListView = assetsView.findViewById(R.id.liquid_assets_list);
         LinearLayout personalAssetsListView = assetsView.findViewById(R.id.personal_assets_list);
         LinearLayout taxableAccountsListView = assetsView.findViewById(R.id.taxable_accounts_list);
@@ -61,7 +84,7 @@ public class Report_AssetsFragment extends Fragment {
         ReportListAdapter retirementAccountsAdapter = new ReportListAdapter(getContext(), retirementAccountsDataSource);
         ReportListAdapter ownershipInterestsAdapter = new ReportListAdapter(getContext(), ownershipInterestsDataSource);
 
-        for (int i = 0; i < liquidAssetsAdapter.getCount(); i++){
+        for (int i = 0; i < liquidAssetsAdapter.getCount(); i++) {
             View itemView = liquidAssetsAdapter.getView(i, null, liquidAssetsListView);
             liquidAssetsListView.addView(itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
@@ -86,24 +109,6 @@ public class Report_AssetsFragment extends Fragment {
             ownershipInterestsListView.addView(itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
-        return assetsView;
-    }
-
-    private void getDataFromDatabase(final Date itemTime) {
-
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(Report_AssetsFragment.this.getContext());
-                AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
-                AssetsValueDao assetsValueDao = database.assetsValueDao();
-
-                List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
-                Report_AssetsFragment.this.assetsTypeProcessor = new TypeProcessor_Assets(assetsTypes);
-
-                initDataModels(assetsValueDao, itemTime);
-            }
-        });
     }
 
     public void initDataModels(AssetsValueDao assetsValueDao, Date itemTime){
@@ -142,5 +147,12 @@ public class Report_AssetsFragment extends Fragment {
             NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
             ownershipInterestsDataSource.add(dataModel);
         }
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                refreshView(contentView);
+            }
+        });
     }
 }

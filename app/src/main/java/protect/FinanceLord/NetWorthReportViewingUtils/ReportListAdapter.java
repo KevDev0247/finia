@@ -22,7 +22,7 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
         NetWorthItemsDataModel dataSource = getItem(position);
 
         if (convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.net_worth_report_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.net_worth_report_item, null, false);
         }
 
         TextView itemName = convertView.findViewById(R.id.item_name);
