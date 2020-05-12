@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="45dp"
     android:padding="10dp"
-    android:background="@drawable/ic_report_sheet_items">
+    android:background="@drawable/ic_edit_report_items_blurred">
 
     <TextView
         android:id="@+id/assetsRowThirdText"
