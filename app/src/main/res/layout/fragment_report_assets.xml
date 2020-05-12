@@ -7,106 +7,110 @@
     android:background="#ff9d00">
 
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Liquid Assets"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"/>
-
-        <ListView
-            android:id="@+id/liquid_assets_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </ListView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Invested Assets"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Taxable Accounts"
+                android:text="Liquid Assets"
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"/>
 
-            <ListView
-                android:id="@+id/taxable_accounts_list"
+            <LinearLayout
+                android:id="@+id/liquid_assets_list"
                 android:layout_width="match_parent"
-                android:layout_height="600dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            </ListView>
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Retirement Accounts"
+                android:text="Invested Assets"
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"/>
 
-            <ListView
-                android:id="@+id/retirement_accounts_list"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="600dp">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
 
-            </ListView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Taxable Accounts"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="20dp"/>
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/taxable_accounts_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:orientation="vertical">
+                </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Retirement Accounts"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="20dp"/>
+
+                <LinearLayout
+                    android:id="@+id/retirement_accounts_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ownership Interests"
                     android:textSize="20sp"
                     android:layout_marginLeft="20dp"/>
 
-                <ListView
+                <LinearLayout
                     android:id="@+id/ownership_interests_list"
                     android:layout_width="match_parent"
-                    android:layout_height="600dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                </ListView>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -124,12 +128,13 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"/>
 
-            <ListView
+            <LinearLayout
                 android:id="@+id/personal_assets_list"
                 android:layout_width="match_parent"
-                android:layout_height="600dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            </ListView>
+            </LinearLayout>
 
         </LinearLayout>
 

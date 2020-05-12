@@ -30,6 +30,7 @@ public class Report_AssetsFragment extends Fragment {
 
     String title;
     private Date itemTime;
+    private View contentView;
     private TypeProcessor_Assets assetsTypeProcessor;
     private ArrayList<NetWorthItemsDataModel> liquidAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> personalAssetsDataSource = new ArrayList<>();
@@ -46,26 +47,9 @@ public class Report_AssetsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View assetsView = inflater.inflate(R.layout.fragment_report_assets, null);
+        this.contentView = assetsView;
 
         getDataFromDatabase(itemTime);
-
-        ListView liquidAssetsListView = assetsView.findViewById(R.id.liquid_assets_list);
-        ListView personalAssetsListView = assetsView.findViewById(R.id.personal_assets_list);
-        ListView taxableAccountsListView = assetsView.findViewById(R.id.taxable_accounts_list);
-        ListView retirementAccountsListView = assetsView.findViewById(R.id.retirement_accounts_list);
-        ListView ownershipInterestsListView = assetsView.findViewById(R.id.ownership_interests_list);
-
-        ReportListAdapter liquidAssetsAdapter = new ReportListAdapter(getContext(), liquidAssetsDataSource);
-        ReportListAdapter personalAssetsAdapter = new ReportListAdapter(getContext(), personalAssetsDataSource);
-        ReportListAdapter taxableAccountsAdapter = new ReportListAdapter(getContext(), taxableAccountsDataSource);
-        ReportListAdapter retirementAccountsAdapter = new ReportListAdapter(getContext(), retirementAccountsDataSource);
-        ReportListAdapter ownershipInterestsAdapter = new ReportListAdapter(getContext(), ownershipInterestsDataSource);
-
-        liquidAssetsListView.setAdapter(liquidAssetsAdapter);
-        personalAssetsListView.setAdapter(personalAssetsAdapter);
-        taxableAccountsListView.setAdapter(taxableAccountsAdapter);
-        retirementAccountsListView.setAdapter(retirementAccountsAdapter);
-        ownershipInterestsListView.setAdapter(ownershipInterestsAdapter);
 
         return assetsView;
     }
@@ -122,6 +106,53 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : ownershipInterests){
             NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
             ownershipInterestsDataSource.add(dataModel);
+        }
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                refreshView(contentView);
+            }
+        });
+    }
+
+    public void refreshView(View contentView) {
+
+        LinearLayout liquidAssetsListView = contentView.findViewById(R.id.liquid_assets_list);
+        LinearLayout personalAssetsListView = contentView.findViewById(R.id.personal_assets_list);
+        LinearLayout taxableAccountsListView = contentView.findViewById(R.id.taxable_accounts_list);
+        LinearLayout retirementAccountsListView = contentView.findViewById(R.id.retirement_accounts_list);
+        LinearLayout ownershipInterestsListView = contentView.findViewById(R.id.ownership_interests_list);
+
+        ReportListAdapter liquidAssetsAdapter = new ReportListAdapter(getContext(), liquidAssetsDataSource);
+        ReportListAdapter personalAssetsAdapter = new ReportListAdapter(getContext(), personalAssetsDataSource);
+        ReportListAdapter taxableAccountsAdapter = new ReportListAdapter(getContext(), taxableAccountsDataSource);
+        ReportListAdapter retirementAccountsAdapter = new ReportListAdapter(getContext(), retirementAccountsDataSource);
+        ReportListAdapter ownershipInterestsAdapter = new ReportListAdapter(getContext(), ownershipInterestsDataSource);
+
+        for (int i = 0; i < liquidAssetsAdapter.getCount(); i++){
+            View itemView = liquidAssetsAdapter.getView(i, null, liquidAssetsListView);
+            liquidAssetsListView.addView(itemView);
+        }
+
+        for (int i = 0; i < personalAssetsAdapter.getCount(); i++){
+            View itemView = personalAssetsAdapter.getView(i, null, personalAssetsListView);
+            personalAssetsListView.addView(itemView);
+        }
+
+        for (int i = 0; i < taxableAccountsAdapter.getCount(); i++){
+            View itemView = taxableAccountsAdapter.getView(i, null, taxableAccountsListView);
+            personalAssetsListView.addView(itemView);
+        }
+
+        for (int i = 0; i < retirementAccountsAdapter.getCount(); i++){
+            View itemView = retirementAccountsAdapter.getView(i, null, retirementAccountsListView);
+            retirementAccountsListView.addView(itemView);
+        }
+
+        for (int i = 0; i < ownershipInterestsAdapter.getCount(); i++){
+            View itemView = ownershipInterestsAdapter.getView(i, null, ownershipInterestsListView);
+            ownershipInterestsListView.addView(itemView);
         }
     }
 }
