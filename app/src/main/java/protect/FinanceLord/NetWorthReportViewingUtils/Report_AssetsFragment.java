@@ -142,7 +142,7 @@ public class Report_AssetsFragment extends Fragment {
 
         for (int i = 0; i < taxableAccountsAdapter.getCount(); i++){
             View itemView = taxableAccountsAdapter.getView(i, null, taxableAccountsListView);
-            personalAssetsListView.addView(itemView);
+            taxableAccountsListView.addView(itemView);
         }
 
         for (int i = 0; i < retirementAccountsAdapter.getCount(); i++){

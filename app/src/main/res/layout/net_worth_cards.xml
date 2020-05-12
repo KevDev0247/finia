@@ -11,7 +11,7 @@
         android:layout_width="320dp"
         android:layout_height="280dp"
         android:orientation="vertical"
-        android:background="@drawable/ic_cards_background">
+        android:background="@drawable/ic_net_worth_cards_background">
 
         <ImageView
             android:id="@+id/net_worth_card_graphics"

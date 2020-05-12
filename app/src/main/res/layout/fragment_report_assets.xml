@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
-    android:background="#ff9d00">
+    android:padding="10dp"
+    android:background="#ffffff">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,98 +15,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Liquid Assets"
-                android:textSize="20sp"
-                android:layout_marginLeft="20dp"/>
-
-            <LinearLayout
-                android:id="@+id/liquid_assets_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Invested Assets"
-                android:textSize="20sp"
-                android:layout_marginLeft="20dp"/>
+            android:orientation="vertical"
+            android:background="@drawable/ic_report_assets_cards">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Taxable Accounts"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="20dp"/>
-
-                <LinearLayout
-                    android:id="@+id/taxable_accounts_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                </LinearLayout>
+                android:layout_height="10dp"
+                android:background="@drawable/ic_report_assets_cards_top_edge">
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Retirement Accounts"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/liquid_assets_name"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
 
                 <LinearLayout
-                    android:id="@+id/retirement_accounts_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ownership Interests"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="20dp"/>
-
-                <LinearLayout
-                    android:id="@+id/ownership_interests_list"
+                    android:id="@+id/liquid_assets_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -119,20 +54,152 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Personal Assets"
-                android:textSize="20sp"
-                android:layout_marginLeft="20dp"/>
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:background="@drawable/ic_report_assets_cards">
 
             <LinearLayout
-                android:id="@+id/personal_assets_list"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@drawable/ic_report_assets_cards_top_edge">
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="20dp"
                 android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/invested_assets_name"
+                    android:textSize="20sp"
+                    android:textColor="#ffffff"
+                    android:layout_gravity="center_horizontal"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/taxable_accounts_name"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp"/>
+
+                        <LinearLayout
+                            android:id="@+id/taxable_accounts_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/retirement_accounts_name"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp"/>
+
+                        <LinearLayout
+                            android:id="@+id/retirement_accounts_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/ownership_interest_name"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:id="@+id/ownership_interests_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ic_report_assets_cards">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@drawable/ic_report_assets_cards_top_edge">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/personal_assets_name"
+                    android:textSize="20sp"
+                    android:textColor="#ffffff"/>
+
+                <LinearLayout
+                    android:id="@+id/personal_assets_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
 
             </LinearLayout>
 

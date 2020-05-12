@@ -12,15 +12,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.Executors;
 
-import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Database.AssetsType;
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsValue;
@@ -45,9 +40,9 @@ public class NetWorthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth);
 
-        createPastReportsListView();
-
         createAssetsCardsView();
+
+        refreshPastReportsListView();
 
         Button editReportButton = findViewById(R.id.editReport);
         editReportButton.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +56,7 @@ public class NetWorthActivity extends AppCompatActivity {
         });
     }
 
-    protected void createPastReportsListView(){
+    protected void refreshPastReportsListView(){
 
         PastReportsAdapter adapter;
         ListView pastReportsListView = findViewById(R.id.past_report_list);
