@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
     android:background="#ff9d00">
-
-<!--    wrong heights-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,12 +23,12 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"/>
 
-            <protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView
+            <ListView
                 android:id="@+id/liquid_assets_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="700dp">
 
-            </protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView>
+            </ListView>
 
         </LinearLayout>
 
@@ -59,12 +57,12 @@
                     android:textSize="20sp"
                     android:layout_marginLeft="20dp"/>
 
-                <protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView
+                <ListView
                     android:id="@+id/taxable_accounts_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="700dp">
 
-                </protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView>
+                </ListView>
 
             </LinearLayout>
 
@@ -81,12 +79,12 @@
                     android:textSize="20sp"
                     android:layout_marginLeft="20dp"/>
 
-                <protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView
+                <ListView
                     android:id="@+id/retirement_accounts_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="700dp">
 
-                </protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView>
+                </ListView>
 
             </LinearLayout>
 
@@ -103,12 +101,12 @@
                     android:textSize="20sp"
                     android:layout_marginLeft="20dp"/>
 
-                <protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView
+                <ListView
                     android:id="@+id/ownership_interests_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="700dp">
 
-                </protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView>
+                </ListView>
 
             </LinearLayout>
 
@@ -126,15 +124,15 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"/>
 
-            <protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView
+            <ListView
                 android:id="@+id/personal_assets_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="700dp">
 
-            </protect.FinanceLord.NetWorthReportViewingUtils.NetWorthListView>
+            </ListView>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+</ScrollView>

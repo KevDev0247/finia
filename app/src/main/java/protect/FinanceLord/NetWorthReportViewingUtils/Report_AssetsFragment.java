@@ -49,11 +49,11 @@ public class Report_AssetsFragment extends Fragment {
 
         getDataFromDatabase(itemTime);
 
-        NetWorthListView liquidAssetsListView = assetsView.findViewById(R.id.liquid_assets_list);
-        NetWorthListView personalAssetsListView = assetsView.findViewById(R.id.personal_assets_list);
-        NetWorthListView taxableAccountsListView = assetsView.findViewById(R.id.taxable_accounts_list);
-        NetWorthListView retirementAccountsListView = assetsView.findViewById(R.id.retirement_accounts_list);
-        NetWorthListView ownershipInterestsListView = assetsView.findViewById(R.id.ownership_interests_list);
+        ListView liquidAssetsListView = assetsView.findViewById(R.id.liquid_assets_list);
+        ListView personalAssetsListView = assetsView.findViewById(R.id.personal_assets_list);
+        ListView taxableAccountsListView = assetsView.findViewById(R.id.taxable_accounts_list);
+        ListView retirementAccountsListView = assetsView.findViewById(R.id.retirement_accounts_list);
+        ListView ownershipInterestsListView = assetsView.findViewById(R.id.ownership_interests_list);
 
         ReportListAdapter liquidAssetsAdapter = new ReportListAdapter(getContext(), liquidAssetsDataSource);
         ReportListAdapter personalAssetsAdapter = new ReportListAdapter(getContext(), personalAssetsDataSource);
