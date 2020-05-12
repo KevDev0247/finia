@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import protect.FinanceLord.Communicators.ActivityToFragment;
+import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesTypeDao;
 import protect.FinanceLord.Database.LiabilitiesTypeQuery;
@@ -42,7 +42,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
     private LiabilitiesFragmentAdapter adapter;
     private DataProcessor_Liabilities dataProcessor;
     private TypeProcessor_Liabilities typeProcessor;
-    private ActivityToFragment fromActivityCommunicator = new ActivityToFragment() {
+    private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
         @Override
         public void onActivityMessage(Date date) {
             currentTime = date;

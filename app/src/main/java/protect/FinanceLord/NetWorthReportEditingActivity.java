@@ -18,7 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import protect.FinanceLord.Communicators.ActivityToFragment;
+import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.NetWorthReportEditingUtils.CalendarDialog;
 import protect.FinanceLord.NetWorthReportEditingUtils.Edit_AssetsFragment;
@@ -30,8 +30,8 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
 
     Date currentTime;
     Button calendarButton;
-    public ActivityToFragment toEditAssetsFragmentCommunicator;
-    public ActivityToFragment toEditLiabilitiesFragmentCommunicator;
+    public DateCommunicator toEditAssetsFragmentCommunicator;
+    public DateCommunicator toEditLiabilitiesFragmentCommunicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
