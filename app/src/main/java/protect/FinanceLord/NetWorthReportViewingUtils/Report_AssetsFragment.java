@@ -63,27 +63,27 @@ public class Report_AssetsFragment extends Fragment {
 
         for (int i = 0; i < liquidAssetsAdapter.getCount(); i++){
             View itemView = liquidAssetsAdapter.getView(i, null, liquidAssetsListView);
-            liquidAssetsListView.addView(itemView);
+            liquidAssetsListView.addView(itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
         for (int i = 0; i < personalAssetsAdapter.getCount(); i++){
             View itemView = personalAssetsAdapter.getView(i,null, personalAssetsListView);
-            personalAssetsListView.addView(itemView);
+            personalAssetsListView.addView(itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
         for (int i = 0; i < taxableAccountsAdapter.getCount(); i++){
             View itemView = taxableAccountsAdapter.getView(i, null, taxableAccountsListView);
-            taxableAccountsListView.addView(itemView);
+            taxableAccountsListView.addView(itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
         for (int i = 0; i < retirementAccountsAdapter.getCount(); i++){
             View itemView = retirementAccountsAdapter.getView(i, null, retirementAccountsListView);
-            retirementAccountsListView.addView(itemView);
+            retirementAccountsListView.addView(itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
         for (int i = 0; i < ownershipInterestsAdapter.getCount(); i++){
             View itemView = ownershipInterestsAdapter.getView(i, null, ownershipInterestsListView);
-            ownershipInterestsListView.addView(itemView);
+            ownershipInterestsListView.addView(itemView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
         return assetsView;
