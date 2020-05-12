@@ -38,7 +38,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
     public void resetView(String search, String date){
         TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
-        Date itemTime = transferDate(date);
+        Date itemTime = convertDate(date);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         Report_AssetsFragment assetsFragment = new Report_AssetsFragment(getString(R.string.assets_name), itemTime);
@@ -51,7 +51,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public Date transferDate(String itemTime){
+    public Date convertDate(String itemTime){
         SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.US);
         Date date = null;
         try {
@@ -60,7 +60,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
             Log.d("NetWorthActivity","parse string to date failed");
             e.printStackTrace();
         }
-
         return date;
     }
 }

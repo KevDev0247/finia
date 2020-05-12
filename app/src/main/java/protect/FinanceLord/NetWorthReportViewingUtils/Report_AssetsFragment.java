@@ -1,6 +1,5 @@
 package protect.FinanceLord.NetWorthReportViewingUtils;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
@@ -26,7 +22,6 @@ import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
-import protect.FinanceLord.NetWorthReportViewingActivity;
 import protect.FinanceLord.R;
 
 public class Report_AssetsFragment extends Fragment {
