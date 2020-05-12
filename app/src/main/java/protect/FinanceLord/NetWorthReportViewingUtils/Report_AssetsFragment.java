@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -48,11 +49,11 @@ public class Report_AssetsFragment extends Fragment {
 
         getDataFromDatabase(itemTime);
 
-        ListView liquidAssetsListView = assetsView.findViewById(R.id.liquid_assets_list);
-        ListView personalAssetsListView = assetsView.findViewById(R.id.personal_assets_list);
-        ListView taxableAccountsListView = assetsView.findViewById(R.id.taxable_accounts_list);
-        ListView retirementAccountsListView = assetsView.findViewById(R.id.retirement_accounts_list);
-        ListView ownershipInterestsListView = assetsView.findViewById(R.id.ownership_interests_list);
+        LinearLayout liquidAssetsListView = assetsView.findViewById(R.id.liquid_assets_list);
+        LinearLayout personalAssetsListView = assetsView.findViewById(R.id.personal_assets_list);
+        LinearLayout taxableAccountsListView = assetsView.findViewById(R.id.taxable_accounts_list);
+        LinearLayout retirementAccountsListView = assetsView.findViewById(R.id.retirement_accounts_list);
+        LinearLayout ownershipInterestsListView = assetsView.findViewById(R.id.ownership_interests_list);
 
         ReportListAdapter liquidAssetsAdapter = new ReportListAdapter(getContext(), liquidAssetsDataSource);
         ReportListAdapter personalAssetsAdapter = new ReportListAdapter(getContext(), personalAssetsDataSource);
@@ -60,17 +61,30 @@ public class Report_AssetsFragment extends Fragment {
         ReportListAdapter retirementAccountsAdapter = new ReportListAdapter(getContext(), retirementAccountsDataSource);
         ReportListAdapter ownershipInterestsAdapter = new ReportListAdapter(getContext(), ownershipInterestsDataSource);
 
-        liquidAssetsListView.setAdapter(liquidAssetsAdapter);
-        personalAssetsListView.setAdapter(personalAssetsAdapter);
-        taxableAccountsListView.setAdapter(taxableAccountsAdapter);
-        retirementAccountsListView.setAdapter(retirementAccountsAdapter);
-        ownershipInterestsListView.setAdapter(ownershipInterestsAdapter);
+        for (int i = 0; i < liquidAssetsAdapter.getCount(); i++){
+            View itemView = liquidAssetsAdapter.getView(i, null, liquidAssetsListView);
+            liquidAssetsListView.addView(itemView);
+        }
 
-        setListViewHeightBasedOnChildren(liquidAssetsListView);
-        setListViewHeightBasedOnChildren(personalAssetsListView);
-        setListViewHeightBasedOnChildren(taxableAccountsListView);
-        setListViewHeightBasedOnChildren(retirementAccountsListView);
-        setListViewHeightBasedOnChildren(ownershipInterestsListView);
+        for (int i = 0; i < personalAssetsAdapter.getCount(); i++){
+            View itemView = personalAssetsAdapter.getView(i,null, personalAssetsListView);
+            personalAssetsListView.addView(itemView);
+        }
+
+        for (int i = 0; i < taxableAccountsAdapter.getCount(); i++){
+            View itemView = taxableAccountsAdapter.getView(i, null, taxableAccountsListView);
+            taxableAccountsListView.addView(itemView);
+        }
+
+        for (int i = 0; i < retirementAccountsAdapter.getCount(); i++){
+            View itemView = retirementAccountsAdapter.getView(i, null, retirementAccountsListView);
+            retirementAccountsListView.addView(itemView);
+        }
+
+        for (int i = 0; i < ownershipInterestsAdapter.getCount(); i++){
+            View itemView = ownershipInterestsAdapter.getView(i, null, ownershipInterestsListView);
+            ownershipInterestsListView.addView(itemView);
+        }
 
         return assetsView;
     }
@@ -128,31 +142,5 @@ public class Report_AssetsFragment extends Fragment {
             NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
             ownershipInterestsDataSource.add(dataModel);
         }
-    }
-
-    public static void setListViewHeightBasedOnChildren (ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            return;
-        }
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
-        int totalHeight = 0;
-        View view = null;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            view = listAdapter.getView(i, view, listView);
-            if (i == 0){
-                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
-            }
-
-            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-            totalHeight += view.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-
-        listView.setLayoutParams(params);
-        listView.requestLayout();
     }
 }

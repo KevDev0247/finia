@@ -25,12 +25,13 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"/>
 
-            <ListView
+            <LinearLayout
                 android:id="@+id/liquid_assets_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            </ListView>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -59,12 +60,13 @@
                     android:textSize="20sp"
                     android:layout_marginLeft="20dp"/>
 
-                <ListView
+                <LinearLayout
                     android:id="@+id/taxable_accounts_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                </ListView>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -81,12 +83,13 @@
                     android:textSize="20sp"
                     android:layout_marginLeft="20dp"/>
 
-                <ListView
+                <LinearLayout
                     android:id="@+id/retirement_accounts_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                </ListView>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -103,12 +106,13 @@
                     android:textSize="20sp"
                     android:layout_marginLeft="20dp"/>
 
-                <ListView
+                <LinearLayout
                     android:id="@+id/ownership_interests_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                </ListView>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -126,12 +130,13 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"/>
 
-            <ListView
+            <LinearLayout
                 android:id="@+id/personal_assets_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            </ListView>
+            </LinearLayout>
 
         </LinearLayout>
 
