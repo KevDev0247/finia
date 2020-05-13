@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -118,41 +116,41 @@ public class Report_AssetsFragment extends Fragment {
 
     public void refreshView(View contentView) {
 
-        LinearLayout liquidAssetsListView = contentView.findViewById(R.id.liquid_assets_list);
-        LinearLayout personalAssetsListView = contentView.findViewById(R.id.personal_assets_list);
-        LinearLayout taxableAccountsListView = contentView.findViewById(R.id.taxable_accounts_list);
-        LinearLayout retirementAccountsListView = contentView.findViewById(R.id.retirement_accounts_list);
-        LinearLayout ownershipInterestsListView = contentView.findViewById(R.id.ownership_interests_list);
+        LinearLayout liquidAssetsList = contentView.findViewById(R.id.liquid_assets_list);
+        LinearLayout personalAssetsList = contentView.findViewById(R.id.personal_assets_list);
+        LinearLayout taxableAccountsList = contentView.findViewById(R.id.taxable_accounts_list);
+        LinearLayout retirementAccountsList = contentView.findViewById(R.id.retirement_accounts_list);
+        LinearLayout ownershipInterestsList = contentView.findViewById(R.id.ownership_interests_list);
 
-        ReportListAdapter liquidAssetsAdapter = new ReportListAdapter(getContext(), liquidAssetsDataSource);
-        ReportListAdapter personalAssetsAdapter = new ReportListAdapter(getContext(), personalAssetsDataSource);
-        ReportListAdapter taxableAccountsAdapter = new ReportListAdapter(getContext(), taxableAccountsDataSource);
-        ReportListAdapter retirementAccountsAdapter = new ReportListAdapter(getContext(), retirementAccountsDataSource);
-        ReportListAdapter ownershipInterestsAdapter = new ReportListAdapter(getContext(), ownershipInterestsDataSource);
+        ReportListAdapter liquidAssetsAdapter = new ReportListAdapter(getContext(), liquidAssetsDataSource, getString(R.string.report_assets_fragment_name));
+        ReportListAdapter personalAssetsAdapter = new ReportListAdapter(getContext(), personalAssetsDataSource, getString(R.string.report_assets_fragment_name));
+        ReportListAdapter taxableAccountsAdapter = new ReportListAdapter(getContext(), taxableAccountsDataSource, getString(R.string.report_assets_fragment_name));
+        ReportListAdapter retirementAccountsAdapter = new ReportListAdapter(getContext(), retirementAccountsDataSource, getString(R.string.report_assets_fragment_name));
+        ReportListAdapter ownershipInterestsAdapter = new ReportListAdapter(getContext(), ownershipInterestsDataSource, getString(R.string.report_assets_fragment_name));
 
         for (int i = 0; i < liquidAssetsAdapter.getCount(); i++){
-            View itemView = liquidAssetsAdapter.getView(i, null, liquidAssetsListView);
-            liquidAssetsListView.addView(itemView);
+            View itemView = liquidAssetsAdapter.getView(i, null, liquidAssetsList);
+            liquidAssetsList.addView(itemView);
         }
 
         for (int i = 0; i < personalAssetsAdapter.getCount(); i++){
-            View itemView = personalAssetsAdapter.getView(i, null, personalAssetsListView);
-            personalAssetsListView.addView(itemView);
+            View itemView = personalAssetsAdapter.getView(i, null, personalAssetsList);
+            personalAssetsList.addView(itemView);
         }
 
         for (int i = 0; i < taxableAccountsAdapter.getCount(); i++){
-            View itemView = taxableAccountsAdapter.getView(i, null, taxableAccountsListView);
-            taxableAccountsListView.addView(itemView);
+            View itemView = taxableAccountsAdapter.getView(i, null, taxableAccountsList);
+            taxableAccountsList.addView(itemView);
         }
 
         for (int i = 0; i < retirementAccountsAdapter.getCount(); i++){
-            View itemView = retirementAccountsAdapter.getView(i, null, retirementAccountsListView);
-            retirementAccountsListView.addView(itemView);
+            View itemView = retirementAccountsAdapter.getView(i, null, retirementAccountsList);
+            retirementAccountsList.addView(itemView);
         }
 
         for (int i = 0; i < ownershipInterestsAdapter.getCount(); i++){
-            View itemView = ownershipInterestsAdapter.getView(i, null, ownershipInterestsListView);
-            ownershipInterestsListView.addView(itemView);
+            View itemView = ownershipInterestsAdapter.getView(i, null, ownershipInterestsList);
+            ownershipInterestsList.addView(itemView);
         }
     }
 }

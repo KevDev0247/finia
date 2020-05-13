@@ -81,4 +81,8 @@
     <string name="other_long_time_debt_name">Other Long Time Debt</string>
 
 
+
+    <string name="report_assets_fragment_name">Report Assets Fragment</string>
+    <string name="report_liabilities_fragment_name">Report Liabilities Fragment</string>
+
 </resources>

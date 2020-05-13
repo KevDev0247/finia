@@ -16,12 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/ic_report_assets_cards">
+            android:background="@drawable/ic_report_cards_assets">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@drawable/ic_report_assets_cards_top_edge">
+                android:background="@drawable/ic_report_cards_assets_top_edge">
 
             </LinearLayout>
 
@@ -56,12 +56,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="vertical"
-            android:background="@drawable/ic_report_assets_cards">
+            android:background="@drawable/ic_report_cards_assets">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@drawable/ic_report_assets_cards_top_edge">
+                android:background="@drawable/ic_report_cards_assets_top_edge">
 
             </LinearLayout>
 
@@ -170,12 +170,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="30dp"
-            android:background="@drawable/ic_report_assets_cards">
+            android:background="@drawable/ic_report_cards_assets">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@drawable/ic_report_assets_cards_top_edge">
+                android:background="@drawable/ic_report_cards_assets_top_edge">
 
             </LinearLayout>
 
