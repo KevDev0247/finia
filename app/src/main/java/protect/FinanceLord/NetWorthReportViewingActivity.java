@@ -26,8 +26,6 @@ import protect.FinanceLord.NetWorthReportViewingUtils.SectionsPagerAdapter;
 
 public class NetWorthReportViewingActivity extends AppCompatActivity {
 
-    public DateCommunicator toViewAssetsFragmentCommunicator;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
