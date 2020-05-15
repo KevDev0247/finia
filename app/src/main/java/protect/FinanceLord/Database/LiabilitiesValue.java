@@ -20,9 +20,7 @@ public class LiabilitiesValue {
     private Long date;
 
     @Ignore
-    public LiabilitiesValue(){
-
-    }
+    public LiabilitiesValue(){ }
 
     public LiabilitiesValue(int liabilitiesPrimaryId, int liabilitiesId, float liabilitiesValue, Long date){
         this.liabilitiesPrimaryId = liabilitiesPrimaryId;
@@ -31,13 +29,13 @@ public class LiabilitiesValue {
         this.date = date;
     }
 
-    public int getLiabilityPrimaryId()    {return liabilitiesPrimaryId;}
-    public int getLiabilityId()       {return liabilitiesId;}
-    public float getLiabilityValue()      {return liabilitiesValue;}
+    public int getLiabilitiesPrimaryId()    {return liabilitiesPrimaryId;}
+    public int getLiabilitiesId()       {return liabilitiesId;}
+    public float getLiabilitiesValue()      {return liabilitiesValue;}
     public Long getDate()       {return date;}
 
-    public void setLiabilityPrimaryId(int liabilitiesPrimaryId)   {this.liabilitiesPrimaryId = liabilitiesPrimaryId;}
-    public void setLiabilityValue(float liabilitiesValue)     {this.liabilitiesValue = liabilitiesValue;}
-    public void setLiabilityId(int liabilitiesId)      {this.liabilitiesId = liabilitiesId;}
+    public void setLiabilitiesPrimaryId(int liabilitiesPrimaryId)   {this.liabilitiesPrimaryId = liabilitiesPrimaryId;}
+    public void setLiabilitiesValue(float liabilitiesValue)     {this.liabilitiesValue = liabilitiesValue;}
+    public void setLiabilitiesId(int liabilitiesId)      {this.liabilitiesId = liabilitiesId;}
     public void setDate(Long date)      {this.date = date;}
 }

@@ -89,10 +89,10 @@ public class Edit_AssetsFragment extends Fragment {
                             assetsValueInProcessor.setDate(currentTime.getTime());
                             Log.d("Edit_AFragment", "the time of the assets are set to " + currentTime);
 
-                            if(assetsValueInProcessor.getAssetPrimaryId() != 0) {
-                                List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(assetsValueInProcessor.getAssetPrimaryId());
+                            if(assetsValueInProcessor.getAssetsPrimaryId() != 0) {
+                                List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(assetsValueInProcessor.getAssetsPrimaryId());
                                 Log.d("Edit_AFragment", " Print assetsValues status " + assetsValues.isEmpty() +
-                                        ", assets value is " + assetsValueInProcessor.getAssetValue() +
+                                        ", assets value is " + assetsValueInProcessor.getAssetsValue() +
                                         ", time stored in processor is " + new Date(assetsValueInProcessor.getDate()));
                                 if(!assetsValues.isEmpty()) {
                                     assetsValueDao.updateAssetValue(assetsValueInProcessor);
@@ -149,7 +149,7 @@ public class Edit_AssetsFragment extends Fragment {
 
                 Log.d("Edit_AFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                 for (AssetsValue assetsValue : assetsValues){
-                    Log.d("Edit_AFragment", "Query assets values, " + assetsValue.getAssetId() + ", " + assetsValue.getAssetValue() + ", " + new Date(assetsValue.getDate()));
+                    Log.d("Edit_AFragment", "Query assets values, " + assetsValue.getAssetsId() + ", " + assetsValue.getAssetsValue() + ", " + new Date(assetsValue.getDate()));
                 }
                 Log.d("Edit_AFragment", "current date: " + currentTime);
 

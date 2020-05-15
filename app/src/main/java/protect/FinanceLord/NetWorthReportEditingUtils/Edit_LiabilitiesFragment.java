@@ -88,10 +88,10 @@ public class Edit_LiabilitiesFragment extends Fragment {
                             liabilitiesValueInProcessor.setDate(currentTime.getTime());
                             Log.d("Edit_LFragment", "the time of the assets are set to " + currentTime);
 
-                            if (liabilitiesValueInProcessor.getLiabilityPrimaryId() != 0){
-                                List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesById(liabilitiesValueInProcessor.getLiabilityPrimaryId());
+                            if (liabilitiesValueInProcessor.getLiabilitiesPrimaryId() != 0){
+                                List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesById(liabilitiesValueInProcessor.getLiabilitiesPrimaryId());
                                 Log.d("Edit_LFragment", " Print assetsValues status " + liabilitiesValues.isEmpty() +
-                                        ", assets value is " + liabilitiesValueInProcessor.getLiabilityValue() +
+                                        ", assets value is " + liabilitiesValueInProcessor.getLiabilitiesValue() +
                                         ", time stored in processor is " + new Date(liabilitiesValueInProcessor.getDate()));
                                 if (!liabilitiesValues.isEmpty()){
                                     liabilitiesValueDao.updateLiabilityValue(liabilitiesValueInProcessor);
@@ -147,7 +147,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
 
                 Log.d("Edit_LFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                 for (LiabilitiesValue liabilitiesValue : liabilitiesValues){
-                    Log.d("Edit_LFragment", "Query liabilities values, " + liabilitiesValue.getLiabilityId() + ", " + liabilitiesValue.getLiabilityValue() + ", " + new Date(liabilitiesValue.getDate()) );
+                    Log.d("Edit_LFragment", "Query liabilities values, " + liabilitiesValue.getLiabilitiesId() + ", " + liabilitiesValue.getLiabilitiesValue() + ", " + new Date(liabilitiesValue.getDate()) );
                 }
                 Log.d("Edit_LFragment", "current date: " + currentTime);
 

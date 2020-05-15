@@ -87,9 +87,9 @@ public class Report_AssetsFragment extends Fragment {
 
             if (liquidAssetValue != null) {
                 if (previousAssetValue != null) {
-                    difference = String.valueOf(liquidAssetValue.getAssetValue() - previousAssetValue.getAssetValue());
+                    difference = String.valueOf(liquidAssetValue.getAssetsValue() - previousAssetValue.getAssetsValue());
                 }
-                thisAssetValue = String.valueOf(liquidAssetValue.getAssetValue());
+                thisAssetValue = String.valueOf(liquidAssetValue.getAssetsValue());
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 liquidAssetsDataSource.add(dataModel);
             } else {
@@ -106,9 +106,9 @@ public class Report_AssetsFragment extends Fragment {
 
             if (personalAssetValue != null) {
                 if (previousAssetValue != null) {
-                    difference = String.valueOf(personalAssetValue.getAssetValue() - previousAssetValue.getAssetValue());
+                    difference = String.valueOf(personalAssetValue.getAssetsValue() - previousAssetValue.getAssetsValue());
                 }
-                thisAssetValue = String.valueOf(personalAssetValue.getAssetValue());
+                thisAssetValue = String.valueOf(personalAssetValue.getAssetsValue());
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 personalAssetsDataSource.add(dataModel);
             } else {
@@ -125,9 +125,9 @@ public class Report_AssetsFragment extends Fragment {
 
             if (taxableAccountValue != null) {
                 if (previousAssetValue != null) {
-                    difference = String.valueOf(taxableAccountValue.getAssetValue() - previousAssetValue.getAssetValue());
+                    difference = String.valueOf(taxableAccountValue.getAssetsValue() - previousAssetValue.getAssetsValue());
                 }
-                thisAssetValue = String.valueOf(taxableAccountValue.getAssetValue());
+                thisAssetValue = String.valueOf(taxableAccountValue.getAssetsValue());
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 taxableAccountsDataSource.add(dataModel);
             } else {
@@ -144,9 +144,9 @@ public class Report_AssetsFragment extends Fragment {
 
             if (retirementAccountValue != null) {
                 if (previousAssetValue != null) {
-                    difference = String.valueOf(retirementAccountValue.getAssetValue() - previousAssetValue.getAssetValue());
+                    difference = String.valueOf(retirementAccountValue.getAssetsValue() - previousAssetValue.getAssetsValue());
                 }
-                thisAssetValue = String.valueOf(retirementAccountValue.getAssetValue());
+                thisAssetValue = String.valueOf(retirementAccountValue.getAssetsValue());
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 retirementAccountsDataSource.add(dataModel);
             } else {
@@ -163,9 +163,9 @@ public class Report_AssetsFragment extends Fragment {
 
             if (ownershipInterestValue != null) {
                 if (previousAssetValue != null) {
-                    difference = String.valueOf(ownershipInterestValue.getAssetValue() - previousAssetValue.getAssetValue());
+                    difference = String.valueOf(ownershipInterestValue.getAssetsValue() - previousAssetValue.getAssetsValue());
                 }
-                thisAssetValue = String.valueOf(ownershipInterestValue.getAssetValue());
+                thisAssetValue = String.valueOf(ownershipInterestValue.getAssetsValue());
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 ownershipInterestsDataSource.add(dataModel);
             } else {

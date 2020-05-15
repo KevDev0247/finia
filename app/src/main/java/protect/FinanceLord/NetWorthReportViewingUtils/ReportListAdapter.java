@@ -38,7 +38,7 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
             assetValue.setText(dataSource.itemValue);
             assetDifference.setText(dataSource.difference);
 
-            if (dataSource.difference.equals(getContext().getString(R.string.no_data_initialization))){
+            if (dataSource.difference.equals(getContext().getString(R.string.no_data_initialization))) {
                 assetDifferenceSymbol.setText("");
 
             } else if (Float.parseFloat(dataSource.difference) > 0) {
@@ -46,12 +46,12 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
                 differenceBlockView.setBackgroundResource(R.drawable.ic_net_increase);
                 assetDifferenceSymbol.setText(R.string.positive_symbol);
 
-            } else if (Float.parseFloat(dataSource.difference) < 0){
+            } else if (Float.parseFloat(dataSource.difference) < 0) {
                 View differenceBlockView = convertView.findViewById(R.id.asset_item_difference_block);
                 differenceBlockView.setBackgroundResource(R.drawable.ic_net_decrease);
                 assetDifferenceSymbol.setText(R.string.negative_symbol);
 
-            } else if (Float.parseFloat(dataSource.difference) == 0){
+            } else if (Float.parseFloat(dataSource.difference) == 0) {
                 assetDifferenceSymbol.setText("");
             }
 
@@ -63,13 +63,31 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.liabilities_report_item, null, false);
             }
 
-            TextView itemName = convertView.findViewById(R.id.liabilities_item_name);
-            TextView itemValue = convertView.findViewById(R.id.liabilities_item_value);
-            TextView difference = convertView.findViewById(R.id.liabilities_item_difference);
+            TextView liabilityItemName = convertView.findViewById(R.id.liability_item_name);
+            TextView liabilityItemValue = convertView.findViewById(R.id.liability_item_value);
+            TextView liabilityDifferenceSymbol = convertView.findViewById(R.id.liability_symbol);
+            TextView liabilityDifference = convertView.findViewById(R.id.liability_item_difference);
 
-            itemName.setText(dataSource.itemName);
-            itemValue.setText(String.valueOf(dataSource.itemValue));
-            difference.setText(String.valueOf(dataSource.difference));
+            liabilityItemName.setText(dataSource.itemName);
+            liabilityItemValue.setText(dataSource.itemValue);
+            liabilityDifference.setText(String.valueOf(dataSource.difference));
+
+            if (dataSource.difference.equals(getContext().getString(R.string.no_data_initialization))) {
+                liabilityDifferenceSymbol.setText("");
+
+            } else if (Float.parseFloat(dataSource.difference) > 0) {
+                View differenceBlockView = convertView.findViewById(R.id.liability_item_difference_block);
+                differenceBlockView.setBackgroundResource(R.drawable.ic_net_increase);
+                liabilityDifferenceSymbol.setText(R.string.positive_symbol);
+
+            } else if (Float.parseFloat(dataSource.difference) < 0) {
+                View differenceBlockView = convertView.findViewById(R.id.liability_item_difference_block);
+                differenceBlockView.setBackgroundResource(R.drawable.ic_net_decrease);
+                liabilityDifferenceSymbol.setText(R.string.negative_symbol);
+
+            } else if (Float.parseFloat(dataSource.difference) == 0) {
+                liabilityDifferenceSymbol.setText("");
+            }
 
             return convertView;
         }
