@@ -70,7 +70,13 @@ public class NetWorthActivity extends AppCompatActivity {
 
                 List<ReportItemInfo> reportItemInfoList = reportItemInfoDao.queryReportItemsInfo();
                 for (ReportItemInfo reportItemInfo : reportItemInfoList){
-                    ReportItemsDataModel dataModel = new ReportItemsDataModel(reportItemInfo.totalAssetsDate, reportItemInfo.netWorthValue, 0);
+                    String difference = getString(R.string.report_item_difference_initialization);
+                    if (reportItemInfoList.indexOf(reportItemInfo) + 1 <= reportItemInfoList.size() - 1){
+                        ReportItemInfo previousReportItemInfo = reportItemInfoList.get(reportItemInfoList.indexOf(reportItemInfo) + 1);
+                        difference = String.valueOf(reportItemInfo.netWorthValue - previousReportItemInfo.netWorthValue);
+                    }
+                    Log.d("NetWorthActivity", " the time of current item is: " + reportItemInfo.totalAssetsDate + "  the difference of this item is: " + difference);
+                    ReportItemsDataModel dataModel = new ReportItemsDataModel(reportItemInfo.totalAssetsDate, reportItemInfo.netWorthValue, difference);
                     dataSources.add(dataModel);
                 }
             }
@@ -80,13 +86,9 @@ public class NetWorthActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                // I am very suspicious over the data transfer code as we never know which data model has been retrieved
-                // I am not sure the position will be the same in the index of data source
-
                 ReportItemsDataModel dataModel = dataSources.get(position);
                 Log.d("NetWorthActivity", "the user has select the report of time: " + dataModel.time);
 
-                // data transfer section does not work well
                 Intent intent = new Intent();
                 intent.putExtra("itemTime", dataModel.time);
                 intent.setClass(NetWorthActivity.this, NetWorthReportViewingActivity.class);
