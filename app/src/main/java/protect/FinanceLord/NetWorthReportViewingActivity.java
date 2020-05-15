@@ -37,7 +37,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         resetView(search, itemTime);
     }
 
-    public void resetView(String search, String date){
+    public void resetView(String search, String date) {
         final TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
         Date itemTime = convertDate(date);
@@ -73,7 +73,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         });
     }
 
-    public Date convertDate(String itemTime){
+    public Date convertDate(String itemTime) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.US);
         Date date = null;
         try {

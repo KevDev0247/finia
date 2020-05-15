@@ -37,7 +37,7 @@ public class Report_AssetsFragment extends Fragment {
     private ArrayList<NetWorthItemsDataModel> retirementAccountsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> ownershipInterestsDataSource = new ArrayList<>();
 
-    public Report_AssetsFragment(String title, Date itemTime){
+    public Report_AssetsFragment(String title, Date itemTime) {
         this.title = title;
         this.itemTime = itemTime;
     }
@@ -71,17 +71,17 @@ public class Report_AssetsFragment extends Fragment {
         });
     }
 
-    public void populateDataModels(AssetsValueDao assetsValueDao, Date itemTime){
+    public void populateDataModels(AssetsValueDao assetsValueDao, Date itemTime) {
 
-        List<DataCarrier_Assets> liquidAssets = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
-        List<DataCarrier_Assets> personalAssets = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
-        List<DataCarrier_Assets> taxableAccounts = assetsTypeProcessor.getSubGroup(getString(R.string.taxable_accounts_name),3);
-        List<DataCarrier_Assets> retirementAccounts = assetsTypeProcessor.getSubGroup(getString(R.string.retirement_accounts_name), 3);
-        List<DataCarrier_Assets> ownershipInterests = assetsTypeProcessor.getSubGroup(getString(R.string.ownership_interest_name), 3);
+        List<DataCarrier_Assets> liquidAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
+        List<DataCarrier_Assets> personalAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
+        List<DataCarrier_Assets> taxableAccountsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.taxable_accounts_name),3);
+        List<DataCarrier_Assets> retirementAccountsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.retirement_accounts_name), 3);
+        List<DataCarrier_Assets> ownershipInterestsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.ownership_interest_name), 3);
 
-        for (DataCarrier_Assets dataCarrier : liquidAssets){
+        for (DataCarrier_Assets dataCarrier : liquidAssetsTypes) {
             AssetsValue liquidAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
-            if (liquidAssetValue != null){
+            if (liquidAssetValue != null) {
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, liquidAssetValue.getAssetsValue(), 0);
                 liquidAssetsDataSource.add(dataModel);
             } else {
@@ -90,9 +90,9 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
-        for (DataCarrier_Assets dataCarrier : personalAssets){
+        for (DataCarrier_Assets dataCarrier : personalAssetsTypes) {
             AssetsValue personalAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
-            if (personalAssetValue != null){
+            if (personalAssetValue != null) {
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, personalAssetValue.getAssetsValue(), 0);
                 personalAssetsDataSource.add(dataModel);
             } else {
@@ -101,9 +101,9 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
-        for (DataCarrier_Assets dataCarrier : taxableAccounts){
+        for (DataCarrier_Assets dataCarrier : taxableAccountsTypes) {
             AssetsValue taxableAccountValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
-            if (taxableAccountValue != null){
+            if (taxableAccountValue != null) {
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, taxableAccountValue.getAssetsValue(), 0);
                 taxableAccountsDataSource.add(dataModel);
             } else {
@@ -112,9 +112,9 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
-        for (DataCarrier_Assets dataCarrier : retirementAccounts){
+        for (DataCarrier_Assets dataCarrier : retirementAccountsTypes) {
             AssetsValue retirementAccountValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
-            if (retirementAccountValue != null){
+            if (retirementAccountValue != null) {
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, retirementAccountValue.getAssetsValue(), 0);
                 retirementAccountsDataSource.add(dataModel);
             } else {
@@ -123,9 +123,9 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
-        for (DataCarrier_Assets dataCarrier : ownershipInterests){
+        for (DataCarrier_Assets dataCarrier : ownershipInterestsTypes) {
             AssetsValue ownershipInterestValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
-            if (ownershipInterestValue != null){
+            if (ownershipInterestValue != null) {
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, ownershipInterestValue.getAssetsValue(), 0);
                 ownershipInterestsDataSource.add(dataModel);
             } else {
@@ -156,27 +156,27 @@ public class Report_AssetsFragment extends Fragment {
         ReportListAdapter retirementAccountsAdapter = new ReportListAdapter(getContext(), retirementAccountsDataSource, getString(R.string.report_assets_fragment_name));
         ReportListAdapter ownershipInterestsAdapter = new ReportListAdapter(getContext(), ownershipInterestsDataSource, getString(R.string.report_assets_fragment_name));
 
-        for (int i = 0; i < liquidAssetsAdapter.getCount(); i++){
+        for (int i = 0; i < liquidAssetsAdapter.getCount(); i++) {
             View itemView = liquidAssetsAdapter.getView(i, null, liquidAssetsList);
             liquidAssetsList.addView(itemView);
         }
 
-        for (int i = 0; i < personalAssetsAdapter.getCount(); i++){
+        for (int i = 0; i < personalAssetsAdapter.getCount(); i++) {
             View itemView = personalAssetsAdapter.getView(i, null, personalAssetsList);
             personalAssetsList.addView(itemView);
         }
 
-        for (int i = 0; i < taxableAccountsAdapter.getCount(); i++){
+        for (int i = 0; i < taxableAccountsAdapter.getCount(); i++) {
             View itemView = taxableAccountsAdapter.getView(i, null, taxableAccountsList);
             taxableAccountsList.addView(itemView);
         }
 
-        for (int i = 0; i < retirementAccountsAdapter.getCount(); i++){
+        for (int i = 0; i < retirementAccountsAdapter.getCount(); i++) {
             View itemView = retirementAccountsAdapter.getView(i, null, retirementAccountsList);
             retirementAccountsList.addView(itemView);
         }
 
-        for (int i = 0; i < ownershipInterestsAdapter.getCount(); i++){
+        for (int i = 0; i < ownershipInterestsAdapter.getCount(); i++) {
             View itemView = ownershipInterestsAdapter.getView(i, null, ownershipInterestsList);
             ownershipInterestsList.addView(itemView);
         }

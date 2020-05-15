@@ -33,7 +33,7 @@ public class Report_LiabilitiesFragment extends Fragment {
     private ArrayList<NetWorthItemsDataModel> shortTermLiabilitiesDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> longTermLiabilitiesDataSource = new ArrayList<>();
 
-    public Report_LiabilitiesFragment(String title, Date itemTime){
+    public Report_LiabilitiesFragment(String title, Date itemTime) {
         this.title = title;
         this.itemTime = itemTime;
     }
@@ -49,7 +49,7 @@ public class Report_LiabilitiesFragment extends Fragment {
         return liabilitiesView;
     }
 
-    private void getDataFromDatabase(final Date itemTime){
+    private void getDataFromDatabase(final Date itemTime) {
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -66,13 +66,14 @@ public class Report_LiabilitiesFragment extends Fragment {
         });
     }
 
-    public void populateDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime){
+    public void populateDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime) {
+
         List<DataCarrier_Liabilities> shortTermLiabilities = liabilitiesTypeProcessor.getSubGroup(getString(R.string.short_term_liabilities_name),2);
         List<DataCarrier_Liabilities> longTermLiabilities = liabilitiesTypeProcessor.getSubGroup(getString(R.string.long_term_liabilities_name), 2);
 
-        for (DataCarrier_Liabilities dataCarrier : shortTermLiabilities){
+        for (DataCarrier_Liabilities dataCarrier : shortTermLiabilities) {
             LiabilitiesValue shortTermLiabilitiesValue = liabilitiesValueDao.queryIndividualLiabilityByDate(itemTime.getTime(), dataCarrier.liabilitiesId);
-            if (shortTermLiabilitiesValue != null){
+            if (shortTermLiabilitiesValue != null) {
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, shortTermLiabilitiesValue.getLiabilitiesValue(), 0);
                 shortTermLiabilitiesDataSource.add(dataModel);
             } else {
@@ -81,9 +82,9 @@ public class Report_LiabilitiesFragment extends Fragment {
             }
         }
 
-        for (DataCarrier_Liabilities dataCarrier : longTermLiabilities){
+        for (DataCarrier_Liabilities dataCarrier : longTermLiabilities) {
             LiabilitiesValue longTermLiabilitiesValue = liabilitiesValueDao.queryIndividualLiabilityByDate(itemTime.getTime(), dataCarrier.liabilitiesId);
-            if (longTermLiabilitiesValue != null){
+            if (longTermLiabilitiesValue != null) {
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, longTermLiabilitiesValue.getLiabilitiesValue(), 0);
                 longTermLiabilitiesDataSource.add(dataModel);
             } else {
@@ -100,19 +101,20 @@ public class Report_LiabilitiesFragment extends Fragment {
         });
     }
 
-    public void refreshView(View liabilitiesView){
+    public void refreshView(View liabilitiesView) {
+
         LinearLayout shortTermLiabilitiesList = liabilitiesView.findViewById(R.id.short_term_liabilities_list);
         LinearLayout longTermLiabilitiesList = liabilitiesView.findViewById(R.id.long_term_liabilities_list);
 
         ReportListAdapter shortTermLiabilitiesAdapter = new ReportListAdapter(getContext(), shortTermLiabilitiesDataSource, getString(R.string.report_liabilities_fragment_name));
         ReportListAdapter longTermLiabilitiesAdapter = new ReportListAdapter(getContext(), longTermLiabilitiesDataSource, getString(R.string.report_liabilities_fragment_name));
 
-        for (int i = 0; i < shortTermLiabilitiesAdapter.getCount(); i++){
+        for (int i = 0; i < shortTermLiabilitiesAdapter.getCount(); i++) {
             View itemView = shortTermLiabilitiesAdapter.getView(i, null, shortTermLiabilitiesList);
             shortTermLiabilitiesList.addView(itemView);
         }
 
-        for (int i = 0; i < longTermLiabilitiesAdapter.getCount(); i++){
+        for (int i = 0; i < longTermLiabilitiesAdapter.getCount(); i++) {
             View itemView = longTermLiabilitiesAdapter.getView(i, null, longTermLiabilitiesList);
             longTermLiabilitiesList.addView(itemView);
         }
