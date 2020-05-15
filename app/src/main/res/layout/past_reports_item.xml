@@ -4,7 +4,7 @@
     android:id="@+id/past_reports_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
+    android:paddingVertical="10dp"
     android:paddingEnd="20dp"
     android:orientation="horizontal"
     android:background="@drawable/ic_report_items_blurred">
@@ -59,6 +59,7 @@
             android:id="@+id/past_report_item_difference_block"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:paddingVertical="5dp"
             android:paddingEnd="10dp"
             android:layout_gravity="center_horizontal"
@@ -71,7 +72,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:orientation="horizontal">
 
                     <TextView

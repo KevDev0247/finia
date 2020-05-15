@@ -28,13 +28,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp"
-                android:orientation="horizontal"
-                android:weightSum="4">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="3">
+                    android:layout_weight="2">
 
                     <TextView
                         android:id="@+id/assets_item_name"
@@ -55,39 +54,66 @@
                     android:layout_gravity="center_vertical"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/assets_item_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="value"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingEnd="10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/assets_item_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:text="value"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/net_change_block"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:paddingStart="30dp"
+                        android:paddingVertical="5dp"
+                        android:paddingHorizontal="10dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/ic_net_increase">
+                        android:background="@drawable/ic_net_neutral">
 
-                        <TextView
-                            android:id="@+id/assets_symbol"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+"
-                            android:textColor="#ffffff"
-                            android:textSize="20dp" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/assets_difference"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="net"
-                            android:textColor="#ffffff"
-                            android:textSize="20dp" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_alignParentRight="true">
+
+                                <TextView
+                                    android:id="@+id/assets_symbol"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="+ - "
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:id="@+id/assets_difference"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="net"
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
 
                     </LinearLayout>
 

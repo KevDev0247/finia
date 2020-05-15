@@ -38,6 +38,7 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
             difference.setText(String.valueOf(dataSource.difference));
 
             return convertView;
+
         } else if (fragmentName.equals(getContext().getString(R.string.report_liabilities_fragment_name))) {
 
             if (convertView == null){
