@@ -68,27 +68,43 @@ public class Report_LiabilitiesFragment extends Fragment {
 
     public void populateDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime) {
 
-        List<DataCarrier_Liabilities> shortTermLiabilities = liabilitiesTypeProcessor.getSubGroup(getString(R.string.short_term_liabilities_name),2);
-        List<DataCarrier_Liabilities> longTermLiabilities = liabilitiesTypeProcessor.getSubGroup(getString(R.string.long_term_liabilities_name), 2);
+        List<DataCarrier_Liabilities> shortTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.short_term_liabilities_name),2);
+        List<DataCarrier_Liabilities> longTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.long_term_liabilities_name), 2);
 
-        for (DataCarrier_Liabilities dataCarrier : shortTermLiabilities) {
-            LiabilitiesValue shortTermLiabilitiesValue = liabilitiesValueDao.queryIndividualLiabilityByDate(itemTime.getTime(), dataCarrier.liabilitiesId);
-            if (shortTermLiabilitiesValue != null) {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, shortTermLiabilitiesValue.getLiabilitiesValue(), 0);
+        for (DataCarrier_Liabilities dataCarrier : shortTermLiabilitiesTypes) {
+            String difference = getString(R.string.no_data_initialization);
+            String thisLiabilityValue = getString(R.string.no_data_initialization);
+            LiabilitiesValue shortTermLiabilityValue = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), dataCarrier.liabilitiesId);
+            LiabilitiesValue previousLiabilityValue = liabilitiesValueDao.queryPreviousLiabilityBeforeTime(itemTime.getTime(), dataCarrier.liabilitiesId);
+
+            if (shortTermLiabilityValue != null) {
+                if (previousLiabilityValue != null){
+                    difference = String.valueOf(shortTermLiabilityValue.getLiabilitiesValue() - previousLiabilityValue.getLiabilitiesValue());
+                }
+                thisLiabilityValue = String.valueOf(shortTermLiabilityValue.getLiabilitiesValue());
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, thisLiabilityValue, difference);
                 shortTermLiabilitiesDataSource.add(dataModel);
             } else {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, 0, 0);
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, thisLiabilityValue, difference);
                 shortTermLiabilitiesDataSource.add(dataModel);
             }
         }
 
-        for (DataCarrier_Liabilities dataCarrier : longTermLiabilities) {
-            LiabilitiesValue longTermLiabilitiesValue = liabilitiesValueDao.queryIndividualLiabilityByDate(itemTime.getTime(), dataCarrier.liabilitiesId);
-            if (longTermLiabilitiesValue != null) {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, longTermLiabilitiesValue.getLiabilitiesValue(), 0);
+        for (DataCarrier_Liabilities dataCarrier : longTermLiabilitiesTypes) {
+            String difference = getString(R.string.no_data_initialization);
+            String thisLiabilityValue = getString(R.string.no_data_initialization);
+            LiabilitiesValue longTermLiabilityValue = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), dataCarrier.liabilitiesId);
+            LiabilitiesValue previousLiabilityValue = liabilitiesValueDao.queryPreviousLiabilityBeforeTime(itemTime.getTime(), dataCarrier.liabilitiesId);
+
+            if (longTermLiabilityValue != null) {
+                if (previousLiabilityValue != null){
+                    difference = String.valueOf(longTermLiabilityValue.getLiabilitiesValue() - previousLiabilityValue.getLiabilitiesValue());
+                }
+                thisLiabilityValue = String.valueOf(longTermLiabilityValue.getLiabilitiesValue());
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, thisLiabilityValue, difference);
                 longTermLiabilitiesDataSource.add(dataModel);
             } else {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, 0, 0);
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, thisLiabilityValue, difference);
                 longTermLiabilitiesDataSource.add(dataModel);
             }
         }

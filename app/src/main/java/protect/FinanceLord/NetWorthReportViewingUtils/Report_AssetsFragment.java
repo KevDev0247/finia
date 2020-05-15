@@ -80,56 +80,96 @@ public class Report_AssetsFragment extends Fragment {
         List<DataCarrier_Assets> ownershipInterestsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.ownership_interest_name), 3);
 
         for (DataCarrier_Assets dataCarrier : liquidAssetsTypes) {
+            String difference = getString(R.string.no_data_initialization);
+            String thisAssetValue = getString(R.string.no_data_initialization);
             AssetsValue liquidAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
+
             if (liquidAssetValue != null) {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, liquidAssetValue.getAssetsValue(), 0);
+                if (previousAssetValue != null) {
+                    difference = String.valueOf(liquidAssetValue.getAssetsValue() - previousAssetValue.getAssetsValue());
+                }
+                thisAssetValue = String.valueOf(liquidAssetValue.getAssetsValue());
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 liquidAssetsDataSource.add(dataModel);
             } else {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 liquidAssetsDataSource.add(dataModel);
             }
         }
 
         for (DataCarrier_Assets dataCarrier : personalAssetsTypes) {
+            String difference = getString(R.string.no_data_initialization);
+            String thisAssetValue = getString(R.string.no_data_initialization);
             AssetsValue personalAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
+
             if (personalAssetValue != null) {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, personalAssetValue.getAssetsValue(), 0);
+                if (previousAssetValue != null) {
+                    difference = String.valueOf(personalAssetValue.getAssetsValue() - previousAssetValue.getAssetsValue());
+                }
+                thisAssetValue = String.valueOf(personalAssetValue.getAssetsValue());
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 personalAssetsDataSource.add(dataModel);
             } else {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 personalAssetsDataSource.add(dataModel);
             }
         }
 
         for (DataCarrier_Assets dataCarrier : taxableAccountsTypes) {
+            String difference = getString(R.string.no_data_initialization);
+            String thisAssetValue = getString(R.string.no_data_initialization);
             AssetsValue taxableAccountValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
+
             if (taxableAccountValue != null) {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, taxableAccountValue.getAssetsValue(), 0);
+                if (previousAssetValue != null) {
+                    difference = String.valueOf(taxableAccountValue.getAssetsValue() - previousAssetValue.getAssetsValue());
+                }
+                thisAssetValue = String.valueOf(taxableAccountValue.getAssetsValue());
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 taxableAccountsDataSource.add(dataModel);
             } else {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 taxableAccountsDataSource.add(dataModel);
             }
         }
 
         for (DataCarrier_Assets dataCarrier : retirementAccountsTypes) {
+            String difference = getString(R.string.no_data_initialization);
+            String thisAssetValue = getString(R.string.no_data_initialization);
             AssetsValue retirementAccountValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
+
             if (retirementAccountValue != null) {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, retirementAccountValue.getAssetsValue(), 0);
+                if (previousAssetValue != null) {
+                    difference = String.valueOf(retirementAccountValue.getAssetsValue() - previousAssetValue.getAssetsValue());
+                }
+                thisAssetValue = String.valueOf(retirementAccountValue.getAssetsValue());
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 retirementAccountsDataSource.add(dataModel);
             } else {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 retirementAccountsDataSource.add(dataModel);
             }
         }
 
         for (DataCarrier_Assets dataCarrier : ownershipInterestsTypes) {
+            String difference = getString(R.string.no_data_initialization);
+            String thisAssetValue = getString(R.string.no_data_initialization);
             AssetsValue ownershipInterestValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
+
             if (ownershipInterestValue != null) {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, ownershipInterestValue.getAssetsValue(), 0);
+                if (previousAssetValue != null) {
+                    difference = String.valueOf(ownershipInterestValue.getAssetsValue() - previousAssetValue.getAssetsValue());
+                }
+                thisAssetValue = String.valueOf(ownershipInterestValue.getAssetsValue());
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 ownershipInterestsDataSource.add(dataModel);
             } else {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, thisAssetValue, difference);
                 ownershipInterestsDataSource.add(dataModel);
             }
         }

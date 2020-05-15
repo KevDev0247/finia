@@ -20,9 +20,7 @@ public class LiabilitiesValue {
     private Long date;
 
     @Ignore
-    public LiabilitiesValue(){
-
-    }
+    public LiabilitiesValue(){ }
 
     public LiabilitiesValue(int liabilitiesPrimaryId, int liabilitiesId, float liabilitiesValue, Long date){
         this.liabilitiesPrimaryId = liabilitiesPrimaryId;

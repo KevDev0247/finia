@@ -20,9 +20,7 @@ public class AssetsValue {
     private Long date;
 
     @Ignore
-    public AssetsValue(){
-
-    }
+    public AssetsValue(){ }
 
     public AssetsValue(int assetsPrimaryId, int assetsId, float assetsValue, Long date){
         this.assetsPrimaryId = assetsPrimaryId;
@@ -37,7 +35,7 @@ public class AssetsValue {
     public Long getDate()       {return date;}
 
     public void setAssetsPrimaryId (int assetsPrimaryId)       {this.assetsPrimaryId = assetsPrimaryId;}
-    public void setAssetsId (int assetsId)      {this.assetsId = assetsId;}
-    public void setAssetsValue (float assetsValue)      {this.assetsValue = assetsValue;}
+    public void setAssetsId(int assetsId)      {this.assetsId = assetsId;}
+    public void setAssetsValue(float assetsValue)      {this.assetsValue = assetsValue;}
     public void setDate (Long date)     {this.date = date;}
 }

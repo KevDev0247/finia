@@ -25,9 +25,6 @@ public interface LiabilitiesValueDao {
     @Query("SELECT * FROM LiabilitiesValue WHERE date <= :dateEnd AND date >= :dateStart")
     List<LiabilitiesValue> queryLiabilitiesByTimePeriod (Long dateStart, Long dateEnd);
 
-    @Query("SELECT * FROM LiabilitiesValue WHERE date <= :date AND liabilitiesId = :liabilityId ORDER BY date DESC")
-    List<LiabilitiesValue> querySingleTypeLiabilitiesBeforeTime(Long date, int liabilityId);
-
     @Query("SELECT * FROM LiabilitiesValue")
     List<LiabilitiesValue> queryAllLiabilities();
 
@@ -35,5 +32,8 @@ public interface LiabilitiesValueDao {
     LiabilitiesValue queryLatestIndividualLiability (int liabilityId);
 
     @Query("SELECT * FROM LiabilitiesValue WHERE date = :date AND liabilitiesId = :liabilityId")
-    LiabilitiesValue queryIndividualLiabilityByDate(Long date, int liabilityId);
+    LiabilitiesValue queryIndividualLiabilityByTime(Long date, int liabilityId);
+
+    @Query("SELECT * FROM LiabilitiesValue WHERE date < :date AND liabilitiesId = :liabilityId ORDER BY date DESC  LIMIT 1")
+    LiabilitiesValue queryPreviousLiabilityBeforeTime(Long date, int liabilityId);
 }
