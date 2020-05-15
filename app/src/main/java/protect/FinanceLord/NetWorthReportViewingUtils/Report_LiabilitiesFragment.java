@@ -74,7 +74,7 @@ public class Report_LiabilitiesFragment extends Fragment {
         for (DataCarrier_Liabilities dataCarrier : shortTermLiabilities) {
             LiabilitiesValue shortTermLiabilitiesValue = liabilitiesValueDao.queryIndividualLiabilityByDate(itemTime.getTime(), dataCarrier.liabilitiesId);
             if (shortTermLiabilitiesValue != null) {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, shortTermLiabilitiesValue.getLiabilitiesValue(), 0);
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, shortTermLiabilitiesValue.getLiabilityValue(), 0);
                 shortTermLiabilitiesDataSource.add(dataModel);
             } else {
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, 0, 0);
@@ -85,7 +85,7 @@ public class Report_LiabilitiesFragment extends Fragment {
         for (DataCarrier_Liabilities dataCarrier : longTermLiabilities) {
             LiabilitiesValue longTermLiabilitiesValue = liabilitiesValueDao.queryIndividualLiabilityByDate(itemTime.getTime(), dataCarrier.liabilitiesId);
             if (longTermLiabilitiesValue != null) {
-                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, longTermLiabilitiesValue.getLiabilitiesValue(), 0);
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, longTermLiabilitiesValue.getLiabilityValue(), 0);
                 longTermLiabilitiesDataSource.add(dataModel);
             } else {
                 NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, 0, 0);

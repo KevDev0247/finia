@@ -30,7 +30,7 @@ public class DataProcessor_Liabilities {
     public LiabilitiesValue getLiabilitiesValue(int liabilitiesId) {
 
         for (LiabilitiesValue liabilitiesValue: liabilitiesValues) {
-            if (liabilitiesValue.getLiabilitiesId() == liabilitiesId) {
+            if (liabilitiesValue.getLiabilityId() == liabilitiesId) {
                 return liabilitiesValue;
             }
         }
@@ -41,11 +41,11 @@ public class DataProcessor_Liabilities {
 
         LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(liabilityId);
         if (liabilitiesValue != null){
-            liabilitiesValue.setLiabilitiesValue(liabilityValue);
+            liabilitiesValue.setLiabilityValue(liabilityValue);
         } else {
             liabilitiesValue = new LiabilitiesValue();
-            liabilitiesValue.setLiabilitiesId(liabilityId);
-            liabilitiesValue.setLiabilitiesValue(liabilityValue);
+            liabilitiesValue.setLiabilityId(liabilityId);
+            liabilitiesValue.setLiabilityValue(liabilityValue);
             this.liabilitiesValues.add(liabilitiesValue);
         }
     }
@@ -121,10 +121,10 @@ public class DataProcessor_Liabilities {
             LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(liabilitiesId);
 
             if (liabilitiesValue != null) {
-                Log.d("Long Term id", String.valueOf(liabilitiesValue.getLiabilitiesId()));
-                Log.d("Long Term value", String.valueOf(liabilitiesValue.getLiabilitiesValue()));
+                Log.d("Long Term id", String.valueOf(liabilitiesValue.getLiabilityId()));
+                Log.d("Long Term value", String.valueOf(liabilitiesValue.getLiabilityValue()));
 
-                totalLongTermLiabilities += liabilitiesValue.getLiabilitiesValue();
+                totalLongTermLiabilities += liabilitiesValue.getLiabilityValue();
             } else {
                 Log.d("Long Term Liabilities","null");
             }
@@ -141,10 +141,10 @@ public class DataProcessor_Liabilities {
             LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(liabilitiesId);
 
             if (liabilitiesValue != null) {
-                Log.d("Long Term id", String.valueOf(liabilitiesValue.getLiabilitiesId()));
-                Log.d("Long Term value", String.valueOf(liabilitiesValue.getLiabilitiesValue()));
+                Log.d("Long Term id", String.valueOf(liabilitiesValue.getLiabilityId()));
+                Log.d("Long Term value", String.valueOf(liabilitiesValue.getLiabilityValue()));
 
-                totalShortTermLiabilities += liabilitiesValue.getLiabilitiesValue();
+                totalShortTermLiabilities += liabilitiesValue.getLiabilityValue();
             } else {
                 Log.d("Long Term Liabilities","null");
             }
@@ -165,20 +165,20 @@ public class DataProcessor_Liabilities {
 
         LiabilitiesValue totalLiabilitiesValue = this.getLiabilitiesValue(totalLiabilitiesId);
         if (totalLiabilitiesValue != null) {
-            totalLiabilitiesValue.setLiabilitiesValue(totalLiabilities);
+            totalLiabilitiesValue.setLiabilityValue(totalLiabilities);
             totalLiabilitiesValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorL", "Total Liabilities value is " + totalLiabilitiesValue.getLiabilitiesValue() +
+            Log.d("DataProcessorL", "Total Liabilities value is " + totalLiabilitiesValue.getLiabilityValue() +
                     " Insert time is " + new Date(totalLiabilitiesValue.getDate()));
 
             liabilitiesValueDao.updateLiabilityValue(totalLiabilitiesValue);
         } else {
             totalLiabilitiesValue = new LiabilitiesValue();
-            totalLiabilitiesValue.setLiabilitiesId(totalLiabilitiesId);
-            totalLiabilitiesValue.setLiabilitiesValue(totalLiabilities);
+            totalLiabilitiesValue.setLiabilityId(totalLiabilitiesId);
+            totalLiabilitiesValue.setLiabilityValue(totalLiabilities);
             totalLiabilitiesValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorL", "Total Liabilities value is " + totalLiabilitiesValue.getLiabilitiesValue() +
+            Log.d("DataProcessorL", "Total Liabilities value is " + totalLiabilitiesValue.getLiabilityValue() +
                     " Insert time is " + new Date(totalLiabilitiesValue.getDate()));
 
             liabilitiesValueDao.insertLiabilityValue(totalLiabilitiesValue);
@@ -186,20 +186,20 @@ public class DataProcessor_Liabilities {
 
         LiabilitiesValue shortTermLiabilitiesValue = this.getLiabilitiesValue(shortTermLiabilitiesId);
         if (shortTermLiabilitiesValue != null) {
-            shortTermLiabilitiesValue.setLiabilitiesValue(totalShortTermLiabilities);
+            shortTermLiabilitiesValue.setLiabilityValue(totalShortTermLiabilities);
             shortTermLiabilitiesValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorL", "Short Term Liabilities value is " + shortTermLiabilitiesValue.getLiabilitiesValue() +
+            Log.d("DataProcessorL", "Short Term Liabilities value is " + shortTermLiabilitiesValue.getLiabilityValue() +
                     " Insert time is " + new Date(shortTermLiabilitiesValue.getDate()));
 
             liabilitiesValueDao.updateLiabilityValue(shortTermLiabilitiesValue);
         } else {
             shortTermLiabilitiesValue = new LiabilitiesValue();
-            shortTermLiabilitiesValue.setLiabilitiesId(shortTermLiabilitiesId);
-            shortTermLiabilitiesValue.setLiabilitiesValue(totalShortTermLiabilities);
+            shortTermLiabilitiesValue.setLiabilityId(shortTermLiabilitiesId);
+            shortTermLiabilitiesValue.setLiabilityValue(totalShortTermLiabilities);
             shortTermLiabilitiesValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorL", "Short Term Liabilities value is " + shortTermLiabilitiesValue.getLiabilitiesValue() +
+            Log.d("DataProcessorL", "Short Term Liabilities value is " + shortTermLiabilitiesValue.getLiabilityValue() +
                     " Insert time is " + new Date(shortTermLiabilitiesValue.getDate()));
 
             liabilitiesValueDao.insertLiabilityValue(shortTermLiabilitiesValue);
@@ -207,20 +207,20 @@ public class DataProcessor_Liabilities {
 
         LiabilitiesValue longTermLiabilitiesValue = this.getLiabilitiesValue(longTernLiabilitiesId);
         if (longTermLiabilitiesValue != null) {
-            longTermLiabilitiesValue.setLiabilitiesValue(totalLongTermLiabilities);
+            longTermLiabilitiesValue.setLiabilityValue(totalLongTermLiabilities);
             longTermLiabilitiesValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorL", "Long Term Liabilities value is " + longTermLiabilitiesValue.getLiabilitiesValue() +
+            Log.d("DataProcessorL", "Long Term Liabilities value is " + longTermLiabilitiesValue.getLiabilityValue() +
                     " Insert time is " + new Date(longTermLiabilitiesValue.getDate()));
 
             liabilitiesValueDao.updateLiabilityValue(longTermLiabilitiesValue);
         } else {
             longTermLiabilitiesValue = new LiabilitiesValue();
-            longTermLiabilitiesValue.setLiabilitiesId(longTernLiabilitiesId);
-            longTermLiabilitiesValue.setLiabilitiesValue(totalLongTermLiabilities);
+            longTermLiabilitiesValue.setLiabilityId(longTernLiabilitiesId);
+            longTermLiabilitiesValue.setLiabilityValue(totalLongTermLiabilities);
             longTermLiabilitiesValue.setDate(currentTime.getTime());
 
-            Log.d("DataProcessorL", "Long Term Liabilities value is " + longTermLiabilitiesValue.getLiabilitiesValue() +
+            Log.d("DataProcessorL", "Long Term Liabilities value is " + longTermLiabilitiesValue.getLiabilityValue() +
                     " Insert time is " + new Date(longTermLiabilitiesValue.getDate()));
 
             liabilitiesValueDao.insertLiabilityValue(longTermLiabilitiesValue);

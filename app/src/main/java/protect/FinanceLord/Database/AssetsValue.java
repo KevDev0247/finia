@@ -31,13 +31,13 @@ public class AssetsValue {
         this.date = date;
     }
 
-    public int getAssetsPrimaryId()       {return this.assetsPrimaryId;}
-    public int getAssetsId()        {return this.assetsId;}
-    public float getAssetsValue()       {return  this.assetsValue;}
+    public int getAssetPrimaryId()       {return this.assetsPrimaryId;}
+    public int getAssetId()        {return this.assetsId;}
+    public float getAssetValue()       {return  this.assetsValue;}
     public Long getDate()       {return date;}
 
-    public void setAssetsPrimaryId (int assetsPrimaryId)       {this.assetsPrimaryId = assetsPrimaryId;}
-    public void setAssetsId (int assetsId)      {this.assetsId = assetsId;}
-    public void setAssetsValue (float assetsValue)      {this.assetsValue = assetsValue;}
+    public void setAssetPrimaryId (int assetsPrimaryId)       {this.assetsPrimaryId = assetsPrimaryId;}
+    public void setAssetId(int assetsId)      {this.assetsId = assetsId;}
+    public void setAssetValue(float assetsValue)      {this.assetsValue = assetsValue;}
     public void setDate (Long date)     {this.date = date;}
 }

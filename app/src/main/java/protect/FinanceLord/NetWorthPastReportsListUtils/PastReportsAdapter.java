@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.room.util.StringUtil;
 
 import java.util.List;
 
@@ -38,16 +37,19 @@ public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
         netWorthValue.setText(String.valueOf(dataSource.netWorthValue));
         netWorthDifference.setText(dataSource.difference);
 
-        if (dataSource.difference.equals(getContext().getString(R.string.report_item_difference_initialization))){
+        if (dataSource.difference.equals(getContext().getString(R.string.no_data_initialization))){
             netWorthDifferenceSymbol.setText("");
+
         } else if (Float.parseFloat(dataSource.difference) > 0) {
             View differenceBlockView = convertView.findViewById(R.id.past_report_item_difference_block);
             differenceBlockView.setBackgroundResource(R.drawable.ic_net_increase);
             netWorthDifferenceSymbol.setText(R.string.positive_symbol);
+
         } else if (Float.parseFloat(dataSource.difference) < 0) {
             View differenceBlockView = convertView.findViewById(R.id.past_report_item_difference_block);
             differenceBlockView.setBackgroundResource(R.drawable.ic_net_decrease);
             netWorthDifferenceSymbol.setText(R.string.negative_symbol);
+
         } else if (Float.parseFloat(dataSource.difference) == 0) {
             netWorthDifferenceSymbol.setText("");
         }

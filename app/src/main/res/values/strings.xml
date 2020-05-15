@@ -85,7 +85,7 @@
     <string name="report_assets_fragment_name">Report Assets Fragment</string>
     <string name="report_liabilities_fragment_name">Report Liabilities Fragment</string>
 
-    <string name="report_item_difference_initialization">No Data</string>
+    <string name="no_data_initialization">No Data</string>
     <string name="positive_symbol">+</string>
     <string name="negative_symbol">-</string>
 
