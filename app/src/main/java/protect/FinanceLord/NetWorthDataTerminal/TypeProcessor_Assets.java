@@ -63,7 +63,7 @@ public class TypeProcessor_Assets {
     void addTypeToSubGroup(DataCarrier_Assets assetsFragmentDataCarrier, List<DataCarrier_Assets> subGroupAssets) {
 
         for(DataCarrier_Assets dataCarrier : subGroupAssets) {
-            if(dataCarrier.assetsId == assetsFragmentDataCarrier.assetsId && dataCarrier.assetsId != 0) {
+            if(dataCarrier.assetsTypeId == assetsFragmentDataCarrier.assetsTypeId && dataCarrier.assetsTypeId != 0) {
                 return;
             }
         }

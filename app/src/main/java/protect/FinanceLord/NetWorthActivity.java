@@ -84,6 +84,7 @@ public class NetWorthActivity extends AppCompatActivity {
                 // I am not sure the position will be the same in the index of data source
 
                 ReportItemsDataModel dataModel = dataSources.get(position);
+                Log.d("NetWorthActivity", "the user has select the report of time: " + dataModel.time);
 
                 // data transfer section does not work well
                 Intent intent = new Intent();

@@ -33,6 +33,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
 
         String search = getIntent().getStringExtra(SearchManager.QUERY);
         String itemTime = getIntent().getExtras().getString("itemTime");
+        Log.d("NetWorthViewingActivity","the time passed into viewing activity is: " + itemTime);
         resetView(search, itemTime);
     }
 

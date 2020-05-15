@@ -88,9 +88,9 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.assets_list_row_second_items, null);
             TextView textView = convertView.findViewById(R.id.assetsRowSecondText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
-        } else if (level == 2 && sectionDataSet.get(position).assetsId != 29
-                              && sectionDataSet.get(position).assetsId != 30
-                              && sectionDataSet.get(position).assetsId != 31){
+        } else if (level == 2 && sectionDataSet.get(position).assetsTypeId != 29
+                              && sectionDataSet.get(position).assetsTypeId != 30
+                              && sectionDataSet.get(position).assetsTypeId != 31){
             convertView = inflater.inflate(R.layout.assets_list_row_third_items, null);
             TextView textView = convertView.findViewById(R.id.assetsRowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
@@ -98,7 +98,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             DataCarrier_Assets dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
-            AssetsValue assetsValue = dataProcessor.getAssetsValue(dataCarrier.assetsId);
+            AssetsValue assetsValue = dataProcessor.getAssetsValue(dataCarrier.assetsTypeId);
             if (assetsValue != null) {
                 DecimalFormat decimalFormat = new DecimalFormat();
                 String strValue = decimalFormat.format(assetsValue.getAssetsValue());
@@ -118,7 +118,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             DataCarrier_Assets dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
-            AssetsValue assetsValue = dataProcessor.getAssetsValue(dataCarrier.assetsId);
+            AssetsValue assetsValue = dataProcessor.getAssetsValue(dataCarrier.assetsTypeId);
             if (assetsValue != null) {
                 DecimalFormat decimalFormat = new DecimalFormat();
                 String strValue = decimalFormat.format(assetsValue.getAssetsValue());
@@ -145,13 +145,13 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                     String numberStr = text.replace(",", "");
                     final float assetValue = Float.parseFloat(numberStr);
 
-                    dataProcessor.setAssetValue(dataCarrier.assetsId, assetValue);
+                    dataProcessor.setAssetValue(dataCarrier.assetsTypeId, assetValue);
                     Log.d("AFragmentAdapter", "Value changed: " + text + ", float value: " + assetValue);
                 } else {
                     String numberStr = "0.00";
                     final float assetsValue = Float.parseFloat(numberStr);
 
-                    dataProcessor.setAssetValue(dataCarrier.assetsId, assetsValue);
+                    dataProcessor.setAssetValue(dataCarrier.assetsTypeId, assetsValue);
                     Log.d("AFragmentAdapter","Value empty, set to 0 " + ", float value: " + assetsValue);
                 }
             }

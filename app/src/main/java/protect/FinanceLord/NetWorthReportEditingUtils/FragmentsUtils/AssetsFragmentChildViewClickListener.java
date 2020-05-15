@@ -7,7 +7,6 @@ import android.widget.ExpandableListView;
 import java.util.List;
 
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
-import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
 
 public class AssetsFragmentChildViewClickListener implements ExpandableListView.OnChildClickListener {
@@ -27,7 +26,7 @@ public class AssetsFragmentChildViewClickListener implements ExpandableListView.
         DataCarrier_Assets sectionItem = sectionDataSet.get(i);
         List<DataCarrier_Assets> childSection = typeProcessor.getSubGroup(sectionItem.assetsTypeName, level + 1);
 
-        Log.d("Edit_AFragment", "child Clicked: " + childSection.get(i1).assetsTypeName + ", id in DB: " + childSection.get(i1).assetsId);
+        Log.d("Edit_AFragment", "child Clicked: " + childSection.get(i1).assetsTypeName + ", id in DB: " + childSection.get(i1).assetsTypeId);
         return true;
     }
 }

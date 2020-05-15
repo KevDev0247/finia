@@ -1,6 +1,7 @@
 package protect.FinanceLord.NetWorthReportViewingUtils;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class Report_AssetsFragment extends Fragment {
         View assetsView = inflater.inflate(R.layout.fragment_report_assets, null);
         this.contentView = assetsView;
 
+        Log.d("Report_AFragment","the time passed into assets viewing fragment is: " + itemTime);
         getDataFromDatabase(itemTime);
 
         return assetsView;
@@ -64,12 +66,12 @@ public class Report_AssetsFragment extends Fragment {
                 List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
                 Report_AssetsFragment.this.assetsTypeProcessor = new TypeProcessor_Assets(assetsTypes);
 
-                initDataModels(assetsValueDao, itemTime);
+                populateDataModels(assetsValueDao, itemTime);
             }
         });
     }
 
-    public void initDataModels(AssetsValueDao assetsValueDao, Date itemTime){
+    public void populateDataModels(AssetsValueDao assetsValueDao, Date itemTime){
 
         List<DataCarrier_Assets> liquidAssets = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
         List<DataCarrier_Assets> personalAssets = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
@@ -81,29 +83,58 @@ public class Report_AssetsFragment extends Fragment {
         // may need another class to store the data
 
         for (DataCarrier_Assets dataCarrier : liquidAssets){
-            AssetsValue liquidAssetsValue = new AssetsValue();
-            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
-            liquidAssetsDataSource.add(dataModel);
+            AssetsValue liquidAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            if (liquidAssetValue != null){
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, liquidAssetValue.getAssetsValue(), 0);
+                liquidAssetsDataSource.add(dataModel);
+            } else {
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+                liquidAssetsDataSource.add(dataModel);
+            }
         }
 
         for (DataCarrier_Assets dataCarrier : personalAssets){
-            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
-            personalAssetsDataSource.add(dataModel);
+            AssetsValue personalAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            if (personalAssetValue != null){
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, personalAssetValue.getAssetsValue(), 0);
+                personalAssetsDataSource.add(dataModel);
+            } else {
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+                personalAssetsDataSource.add(dataModel);
+            }
         }
 
         for (DataCarrier_Assets dataCarrier : taxableAccounts){
-            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
-            taxableAccountsDataSource.add(dataModel);
+            AssetsValue taxableAccountValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            if (taxableAccountValue != null){
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, taxableAccountValue.getAssetsValue(), 0);
+                taxableAccountsDataSource.add(dataModel);
+            } else {
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+                taxableAccountsDataSource.add(dataModel);
+            }
         }
 
         for (DataCarrier_Assets dataCarrier : retirementAccounts){
-            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
-            retirementAccountsDataSource.add(dataModel);
+            AssetsValue retirementAccountValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            if (retirementAccountValue != null){
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, retirementAccountValue.getAssetsValue(), 0);
+                retirementAccountsDataSource.add(dataModel);
+            } else {
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+                retirementAccountsDataSource.add(dataModel);
+            }
         }
 
         for (DataCarrier_Assets dataCarrier : ownershipInterests){
-            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
-            ownershipInterestsDataSource.add(dataModel);
+            AssetsValue ownershipInterestValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            if (ownershipInterestValue != null){
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, ownershipInterestValue.getAssetsValue(), 0);
+                ownershipInterestsDataSource.add(dataModel);
+            } else {
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.assetsTypeName, 0, 0);
+                ownershipInterestsDataSource.add(dataModel);
+            }
         }
 
         getActivity().runOnUiThread(new Runnable() {
