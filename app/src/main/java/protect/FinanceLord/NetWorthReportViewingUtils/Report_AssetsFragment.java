@@ -79,9 +79,6 @@ public class Report_AssetsFragment extends Fragment {
         List<DataCarrier_Assets> retirementAccounts = assetsTypeProcessor.getSubGroup(getString(R.string.retirement_accounts_name), 3);
         List<DataCarrier_Assets> ownershipInterests = assetsTypeProcessor.getSubGroup(getString(R.string.ownership_interest_name), 3);
 
-        // need to add the code for query data at itemTime
-        // may need another class to store the data
-
         for (DataCarrier_Assets dataCarrier : liquidAssets){
             AssetsValue liquidAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
             if (liquidAssetValue != null){

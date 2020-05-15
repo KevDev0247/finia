@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesTypeDao;
 import protect.FinanceLord.Database.LiabilitiesTypeQuery;
+import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Liabilities;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Liabilities;
@@ -60,23 +61,35 @@ public class Report_LiabilitiesFragment extends Fragment {
                 List<LiabilitiesTypeQuery> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
                 Report_LiabilitiesFragment.this.liabilitiesTypeProcessor = new TypeProcessor_Liabilities(liabilitiesTypes);
 
-                initDataModel(liabilitiesValueDao, itemTime);
+                populateDataModel(liabilitiesValueDao, itemTime);
             }
         });
     }
 
-    public void initDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime){
+    public void populateDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime){
         List<DataCarrier_Liabilities> shortTermLiabilities = liabilitiesTypeProcessor.getSubGroup(getString(R.string.short_term_liabilities_name),2);
         List<DataCarrier_Liabilities> longTermLiabilities = liabilitiesTypeProcessor.getSubGroup(getString(R.string.long_term_liabilities_name), 2);
 
         for (DataCarrier_Liabilities dataCarrier : shortTermLiabilities){
-            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, 0, 0);
-            shortTermLiabilitiesDataSource.add(dataModel);
+            LiabilitiesValue shortTermLiabilitiesValue = liabilitiesValueDao.queryIndividualLiabilityByDate(itemTime.getTime(), dataCarrier.liabilitiesId);
+            if (shortTermLiabilitiesValue != null){
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, shortTermLiabilitiesValue.getLiabilitiesValue(), 0);
+                shortTermLiabilitiesDataSource.add(dataModel);
+            } else {
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, 0, 0);
+                shortTermLiabilitiesDataSource.add(dataModel);
+            }
         }
 
         for (DataCarrier_Liabilities dataCarrier : longTermLiabilities){
-            NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, 0, 0);
-            longTermLiabilitiesDataSource.add(dataModel);
+            LiabilitiesValue longTermLiabilitiesValue = liabilitiesValueDao.queryIndividualLiabilityByDate(itemTime.getTime(), dataCarrier.liabilitiesId);
+            if (longTermLiabilitiesValue != null){
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, longTermLiabilitiesValue.getLiabilitiesValue(), 0);
+                longTermLiabilitiesDataSource.add(dataModel);
+            } else {
+                NetWorthItemsDataModel dataModel = new NetWorthItemsDataModel(dataCarrier.liabilitiesTypeName, 0, 0);
+                longTermLiabilitiesDataSource.add(dataModel);
+            }
         }
 
         getActivity().runOnUiThread(new Runnable() {

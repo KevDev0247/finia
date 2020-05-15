@@ -23,22 +23,16 @@ public interface AssetsValueDao {
     @Query("SELECT * FROM AssetsValue WHERE assetsId = :assetId ORDER BY date DESC")
     List<AssetsValue> queryAssetsByTypeId(int assetId);
 
-    @Query("SELECT * FROM AssetsValue WHERE date >= :date")
-    List<AssetsValue> queryAssetsSinceDate(Long date);
-
-    @Query("SELECT * FROM AssetsValue WHERE date <= :date")
-    List<AssetsValue> queryAssetsBeforeDate(Long date);
-
     @Query("SELECT * FROM AssetsValue WHERE date <= :dateEnd AND date >= :dateStart")
     List<AssetsValue> queryAssetsByTimePeriod(Long dateStart, Long dateEnd);
+
+    @Query("SELECT * FROM AssetsValue WHERE date <= :date AND assetsId = :assetId ORDER BY date DESC")
+    List<AssetsValue> querySingleTypeAssetBeforeTime(Long date, int assetId);
 
     @Query("SELECT * FROM AssetsValue")
     List<AssetsValue> queryAllAssetsValue();
 
-    @Query("SELECT assetsPrimaryId, assetsId, assetsValue, date FROM AssetsValue WHERE assetsId = :assetId AND date <= :date ORDER BY date DESC")
-    List<AssetsValue> queryOneTypeAssetByTime(int assetId, long date);
-
-    @Query("SELECT assetsPrimaryId, assetsId, assetsValue, date FROM AssetsValue WHERE assetsId = :assetId ORDER BY date DESC LIMIT 1")
+    @Query("SELECT * FROM AssetsValue WHERE assetsId = :assetId ORDER BY date DESC LIMIT 1")
     AssetsValue queryLatestIndividualAsset(int assetId);
 
     @Query("SELECT * FROM AssetsValue WHERE date = :date AND assetsId = :assetId")
