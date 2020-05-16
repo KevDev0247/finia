@@ -80,7 +80,7 @@
     <string name="life_insurance_policy_loans_name">Life Insurance Policy Loans</string>
     <string name="other_long_time_debt_name">Other Long Time Debt</string>
 
-
+    <string name="total_net_worth">Total Net Worth</string>
 
     <string name="report_assets_fragment_name">Report Assets Fragment</string>
     <string name="report_liabilities_fragment_name">Report Liabilities Fragment</string>
@@ -88,5 +88,10 @@
     <string name="no_data_initialization">No Data</string>
     <string name="positive_symbol">+</string>
     <string name="negative_symbol">-</string>
+
+
+    <string name="net_worth_time_key">itemTime</string>
+    <string name="net_worth_value_key">itemValue</string>
+    <string name="net_worth_difference_key">itemDifference</string>
 
 </resources>
