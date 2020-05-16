@@ -1,9 +1,6 @@
 package protect.FinanceLord;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +29,8 @@ import protect.FinanceLord.Database.ReportItemInfo;
 import protect.FinanceLord.Database.ReportItemInfoDao;
 import protect.FinanceLord.NetWorthPastReportsListUtils.PastReportsAdapter;
 import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
-import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
+import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 
 public class NetWorthActivity extends AppCompatActivity {
 
@@ -90,7 +90,9 @@ public class NetWorthActivity extends AppCompatActivity {
                 Log.d("NetWorthActivity", "the user has select the report of time: " + dataModel.time);
 
                 Intent intent = new Intent();
-                intent.putExtra("itemTime", dataModel.time);
+                intent.putExtra(getString(R.string.net_worth_time_key), dataModel.time);
+                intent.putExtra(getString(R.string.net_worth_value_key), String.valueOf(dataModel.netWorthValue));
+                intent.putExtra(getString(R.string.net_worth_difference_key), dataModel.difference);
                 intent.setClass(NetWorthActivity.this, NetWorthReportViewingActivity.class);
                 startActivity(intent);
             }

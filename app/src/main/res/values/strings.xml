@@ -89,4 +89,9 @@
     <string name="positive_symbol">+</string>
     <string name="negative_symbol">-</string>
 
+
+    <string name="net_worth_time_key">itemTime</string>
+    <string name="net_worth_value_key">itemValue</string>
+    <string name="net_worth_difference_key">itemDifference</string>
+
 </resources>

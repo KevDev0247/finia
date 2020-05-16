@@ -93,6 +93,7 @@
                                     android:paddingVertical="2dp">
 
                                     <TextView
+                                        android:id="@+id/total_net_worth_value"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_horizontal"
@@ -101,6 +102,7 @@
                                         android:textSize="18sp" />
 
                                     <LinearLayout
+                                        android:id="@+id/total_net_worth_difference_block"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginVertical="5dp"
@@ -221,6 +223,7 @@
                                         android:paddingHorizontal="5dp">
 
                                         <TextView
+                                            android:id="@+id/total_assets_value"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_horizontal"
@@ -229,6 +232,7 @@
                                             android:textSize="18sp" />
 
                                         <LinearLayout
+                                            android:id="@+id/total_assets_difference_block"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginVertical="5dp"
@@ -330,6 +334,7 @@
                                         android:paddingHorizontal="5dp">
 
                                         <TextView
+                                            android:id="@+id/total_liabilities_value"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_horizontal"
@@ -338,6 +343,7 @@
                                             android:textSize="18sp" />
 
                                         <LinearLayout
+                                            android:id="@+id/total_liabilities_difference_block"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginVertical="5dp"
