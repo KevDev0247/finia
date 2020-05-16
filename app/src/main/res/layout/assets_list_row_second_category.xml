@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="45dp"
+    android:paddingHorizontal="20dp"
     android:padding="10dp"
     android:background="@drawable/ic_edit_report_items_blurred">
 
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center"
-        android:textColor="#f6f7fa"
-        android:textSize="20sp" />
+        android:textColor="#ffffffff"
+        android:textSize="20sp"/>
 
 </LinearLayout>

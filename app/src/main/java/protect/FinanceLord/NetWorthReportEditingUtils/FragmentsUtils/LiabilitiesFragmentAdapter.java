@@ -31,7 +31,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     private int level;
     private Context context;
 
-    public LiabilitiesFragmentAdapter(Context context, DataProcessor_Liabilities dataProcessor, TypeProcessor_Liabilities typeProcessor, int level, String parentSection){
+    public LiabilitiesFragmentAdapter(Context context, DataProcessor_Liabilities dataProcessor, TypeProcessor_Liabilities typeProcessor, int level, String parentSection) {
         this.context = context;
         this.dataProcessor = dataProcessor;
         this.typeProcessor = typeProcessor;
@@ -39,7 +39,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
         this.sectionDataSet = typeProcessor.getSubGroup(parentSection, level);
     }
 
-    public String getLiabilitiesName(int position){
+    public String getLiabilitiesName(int position) {
         return sectionDataSet.get(position).liabilitiesTypeName;
     }
 
@@ -84,12 +84,13 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int position, boolean b, View convertView, ViewGroup viewGroup) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (level == 1){
-            convertView = inflater.inflate(R.layout.liabilities_list_row_second,null);
-            TextView textView = convertView.findViewById(R.id.liabilitiesRowSecondText);
+        if (level == 1) {
+            convertView = inflater.inflate(R.layout.liabilities_list_row_first,null);
+            TextView textView = convertView.findViewById(R.id.liabilitiesRowFirstText);
             textView.setText(sectionDataSet.get(position).liabilitiesTypeName);
-        } else if (level == 2){
-            convertView = inflater.inflate(R.layout.liabilities_list_row_third,null);
+
+        } else if (level == 2) {
+            convertView = inflater.inflate(R.layout.liabilities_list_item,null);
             TextView textView = convertView.findViewById(R.id.liabilitiesRowThirdText);
             textView.setText(sectionDataSet.get(position).liabilitiesTypeName);
 
@@ -97,7 +98,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
             EditText editText = convertView.findViewById(R.id.liabilitiesValueInput);
 
             LiabilitiesValue liabilitiesValue = dataProcessor.getLiabilitiesValue(dataCarrier.liabilitiesId);
-            if (liabilitiesValue != null){
+            if (liabilitiesValue != null) {
                 DecimalFormat decimalFormat = new DecimalFormat();
                 String strValue = decimalFormat.format(liabilitiesValue.getLiabilitiesValue());
                 editText.setText(strValue);
@@ -119,12 +120,13 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
             @Override
             public void afterTextChanged(Editable editable) {
                 String text = editable.toString();
-                if (!TextUtils.isEmpty(text)){
+                if (!TextUtils.isEmpty(text)) {
                     String numberStr = text.replace(",","");
                     final float liabilityValue = Float.parseFloat(numberStr);
 
                     dataProcessor.setLiabilityValue(dataCarrier.liabilitiesId, liabilityValue);
                     Log.d("LFragmentAdapter", "value changed: " + text + ", float value: " + liabilityValue);
+
                 } else {
                     String numberStr = "0.00";
                     final float liabilityValue = Float.parseFloat(numberStr);
@@ -142,18 +144,24 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
         final DataCarrier_Liabilities sectionData = sectionDataSet.get(groupPosition);
         List<DataCarrier_Liabilities> children = typeProcessor.getSubGroup(sectionData.liabilitiesTypeName, level + 1);
 
-        if (children.size() == 0){
+        if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.liabilities_list_row_first, null);
-            TextView textView = convertView.findViewById(R.id.liabilitiesRowParentText);
+            TextView textView = convertView.findViewById(R.id.liabilitiesRowFirstText);
             textView.setText(this.sectionDataSet.get(childPosition).liabilitiesTypeName);
             return convertView;
+
         } else {
             final NetWorthExpandableListView nextLevelExpandableListView = new NetWorthExpandableListView(context);
             LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(sectionDataSet, typeProcessor,level + 1);
             nextLevelExpandableListView.setAdapter(new LiabilitiesFragmentAdapter(context, dataProcessor, typeProcessor,level + 1, sectionData.liabilitiesTypeName));
             nextLevelExpandableListView.setOnChildClickListener(listener);
-            nextLevelExpandableListView.setGroupIndicator(null);
+            nextLevelExpandableListView.setDivider(null);
+
+            if (level == 1){
+                nextLevelExpandableListView.setGroupIndicator(null);
+                nextLevelExpandableListView.setDividerHeight(10);
+            }
             nextLevelExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
                 int previousGroup = -1;
 
