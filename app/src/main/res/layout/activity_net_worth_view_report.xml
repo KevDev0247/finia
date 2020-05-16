@@ -16,7 +16,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="445dp"
             android:fitsSystemWindows="true"
             android:background="#ffffff"
             android:theme="@style/AppTheme.AppBarOverlay">
@@ -27,27 +27,374 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:contentScrim="#15314b"
+                android:background="@drawable/ic_report_collapse_summary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:toolbarId="@id/toolbar">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/ic_report_summary_bottom_edge">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="355dp"
+                    android:layout_marginTop="57dp"
+                    android:paddingHorizontal="15dp"
+                    android:paddingTop="15dp"
+                    app:layout_collapseMode="parallax">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_report_cards_summary"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3.2"
+                            android:paddingHorizontal="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingBottom="7.5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/ic_report_cards_summary_items"
+                                android:padding="5dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:paddingHorizontal="10dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:gravity="center"
+                                        android:text="@string/total_net_worth"
+                                        android:textColor="#001528"
+                                        android:textSize="18sp" />
+
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.8"
+                                    android:orientation="vertical"
+                                    android:paddingHorizontal="5dp"
+                                    android:paddingVertical="2dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:text="Value"
+                                        android:textColor="#001528"
+                                        android:textSize="18sp" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginVertical="5dp"
+                                        android:background="@drawable/ic_net_neutral"
+                                        android:orientation="vertical"
+                                        android:paddingHorizontal="10dp"
+                                        android:paddingVertical="5dp">
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/total_net_worth_symbol"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="+ - "
+                                                android:textColor="#001528"
+                                                android:textSize="20dp" />
+
+                                            <TextView
+                                                android:id="@+id/total_net_worth_difference"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="net"
+                                                android:textColor="#001528"
+                                                android:textSize="20dp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:padding="5dp">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/net_worth_report" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.5"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7.5dp"
+                                android:paddingEnd="7.5dp"
+                                android:paddingBottom="15dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_report_cards_summary_items"
+                                    android:orientation="vertical"
+                                    android:padding="10dp"
+                                    android:weightSum="5">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.4"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/assets_report" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="2.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:text="@string/assets_name"
+                                            android:textColor="#001528"
+                                            android:textSize="18sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="3dp"
+                                        android:background="@drawable/ic_report_cards_summary">
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.4"
+                                        android:orientation="vertical"
+                                        android:paddingHorizontal="5dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:text="Value"
+                                            android:textColor="#001528"
+                                            android:textSize="18sp" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginVertical="5dp"
+                                            android:background="@drawable/ic_net_neutral"
+                                            android:orientation="vertical"
+                                            android:paddingHorizontal="10dp"
+                                            android:paddingVertical="5dp">
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:id="@+id/total_assets_symbol"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="+ - "
+                                                    android:textColor="#001528"
+                                                    android:textSize="20dp" />
+
+                                                <TextView
+                                                    android:id="@+id/total_assets_difference"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="net"
+                                                    android:textColor="#001528"
+                                                    android:textSize="20dp" />
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:paddingStart="7.5dp"
+                                android:paddingTop="7.5dp"
+                                android:paddingEnd="15dp"
+                                android:paddingBottom="15dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_report_cards_summary_items"
+                                    android:orientation="vertical"
+                                    android:padding="10dp"
+                                    android:weightSum="5">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.4"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/liabilities_report" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="2.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:text="@string/liabilities_name"
+                                            android:textColor="#001528"
+                                            android:textSize="18sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="3dp"
+                                        android:background="@drawable/ic_report_cards_summary">
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.4"
+                                        android:orientation="vertical"
+                                        android:paddingHorizontal="5dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:text="Value"
+                                            android:textColor="#001528"
+                                            android:textSize="18sp" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginVertical="5dp"
+                                            android:background="@drawable/ic_net_neutral"
+                                            android:orientation="vertical"
+                                            android:paddingHorizontal="10dp"
+                                            android:paddingVertical="5dp">
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:id="@+id/total_liabilities_symbol"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="+ - "
+                                                    android:textColor="#001528"
+                                                    android:textSize="20dp" />
+
+                                                <TextView
+                                                    android:id="@+id/total_liabilities_difference"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="net"
+                                                    android:textColor="#001528"
+                                                    android:textSize="20dp" />
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="57dp">
-
-                </LinearLayout>
+                    android:background="@android:color/transparent"
+                    app:layout_collapseMode="pin"/>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- still having trouble scrolling -->
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/report_view_pager"
             android:layout_width="match_parent"
