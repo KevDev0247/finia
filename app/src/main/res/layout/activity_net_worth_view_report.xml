@@ -133,6 +133,13 @@
                                                 android:textColor="#001528"
                                                 android:textSize="20dp" />
 
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text=" $"
+                                                android:textSize="20dp"
+                                                android:textColor="#001528"/>
+
                                         </LinearLayout>
 
                                     </LinearLayout>
@@ -263,6 +270,13 @@
                                                     android:textColor="#001528"
                                                     android:textSize="20dp" />
 
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text=" $"
+                                                    android:textSize="20dp"
+                                                    android:textColor="#001528"/>
+
                                             </LinearLayout>
 
                                         </LinearLayout>
@@ -374,6 +388,13 @@
                                                     android:textColor="#001528"
                                                     android:textSize="20dp" />
 
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text=" $"
+                                                    android:textSize="20dp"
+                                                    android:textColor="#001528"/>
+
                                             </LinearLayout>
 
                                         </LinearLayout>
@@ -432,6 +453,4 @@
     </com.google.android.material.tabs.TabLayout>
 
 </LinearLayout>
-
-
 
