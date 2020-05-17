@@ -70,12 +70,12 @@ public class Report_AssetsFragment extends Fragment {
                 List<AssetsValue> categoryAssets = new ArrayList<>();
                 List<AssetsValue> previousCategoryAssets = new ArrayList<>();
 
-                AssetsValue totalLiquidAssets = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), 32);
-                AssetsValue totalInvestedAssets = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), 33);
-                AssetsValue totalPersonalAssets = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), 34);
-                AssetsValue totalTaxableAccounts = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), 29);
-                AssetsValue totalRetirementAccounts = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), 30);
-                AssetsValue totalOwnershipInterests = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), 31);
+                AssetsValue totalLiquidAssets = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 32);
+                AssetsValue totalInvestedAssets = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 33);
+                AssetsValue totalPersonalAssets = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 34);
+                AssetsValue totalTaxableAccounts = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 29);
+                AssetsValue totalRetirementAccounts = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 30);
+                AssetsValue totalOwnershipInterests = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 31);
 
                 categoryAssets.add(totalLiquidAssets);
                 categoryAssets.add(totalInvestedAssets);
@@ -114,7 +114,7 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : liquidAssetsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
-            AssetsValue liquidAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue liquidAssetValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
             if (liquidAssetValue != null) {
@@ -133,7 +133,7 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : personalAssetsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
-            AssetsValue personalAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue personalAssetValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
             if (personalAssetValue != null) {
@@ -152,7 +152,7 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : taxableAccountsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
-            AssetsValue taxableAccountValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue taxableAccountValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
             if (taxableAccountValue != null) {
@@ -171,7 +171,7 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : retirementAccountsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
-            AssetsValue retirementAccountValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue retirementAccountValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
             if (retirementAccountValue != null) {
@@ -190,7 +190,7 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : ownershipInterestsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
-            AssetsValue ownershipInterestValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue ownershipInterestValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
             if (ownershipInterestValue != null) {
@@ -209,12 +209,12 @@ public class Report_AssetsFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                refreshView(contentView, assetsValueDao, itemTime, categoryAssets, previousCategoryAssets);
+                refreshView(contentView, categoryAssets, previousCategoryAssets);
             }
         });
     }
 
-    public void refreshView(View contentView, AssetsValueDao assetsValueDao, Date itemTime, List<AssetsValue> categoryAssets, List<AssetsValue> previousCategoryAssets) {
+    public void refreshView(View contentView, List<AssetsValue> categoryAssets, List<AssetsValue> previousCategoryAssets) {
 
         LinearLayout liquidAssetsList = contentView.findViewById(R.id.liquid_assets_list);
         LinearLayout personalAssetsList = contentView.findViewById(R.id.personal_assets_list);

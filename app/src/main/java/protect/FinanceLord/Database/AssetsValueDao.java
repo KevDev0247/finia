@@ -29,7 +29,7 @@ public interface AssetsValueDao {
     AssetsValue queryLatestIndividualAsset(int assetId);
 
     @Query("SELECT * FROM AssetsValue WHERE date = :date AND assetsId = :assetId")
-    AssetsValue queryIndividualAssetByDate(Long date, int assetId);
+    AssetsValue queryIndividualAssetByTime(Long date, int assetId);
 
     @Query("SELECT * FROM AssetsValue WHERE date < :date AND assetsId = :assetId ORDER BY date DESC LIMIT 1")
     AssetsValue queryPreviousAssetBeforeTime(Long date, int assetId);

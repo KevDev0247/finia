@@ -98,7 +98,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
-                AssetsValue totalAssets = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), 35);
+                AssetsValue totalAssets = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 35);
                 LiabilitiesValue totalLiabilities = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), 14);
                 AssetsValue previousTotalAssetsValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), 35);
                 LiabilitiesValue previousTotalLiabilitiesValue = liabilitiesValueDao.queryPreviousLiabilityBeforeTime(itemTime.getTime(), 14);

@@ -52,7 +52,7 @@
                     android:textSize="20sp" />
 
                 <LinearLayout
-                    android:id="@+id/total_short_term_liabilities_difference_block"
+                    android:id="@+id/report_short_term_liabilities_difference_block"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -147,7 +147,7 @@
                     android:textSize="20sp" />
 
                 <LinearLayout
-                    android:id="@+id/total_long_term_liabilities_difference_block"
+                    android:id="@+id/report_long_term_liabilities_difference_block"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
