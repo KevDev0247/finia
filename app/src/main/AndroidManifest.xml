@@ -12,16 +12,19 @@
         <activity
             android:name=".NetWorthReportViewingActivity"
             android:label="@string/title_activity_net_worth_report_template"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".NetWorthReportEditingActivity"
             android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_net_worth_edit_reports"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".NetWorthActivity"/>
         <activity android:name=".TransactionActivity" />
         <activity android:name=".BudgetActivity" />
         <activity android:name=".SpendingActivity" />
-        <activity android:name=".NetWorthActivity" />
+        <activity
+            android:name=".NetWorthActivity"
+            android:parentActivityName=".NetWorthReportEditingActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

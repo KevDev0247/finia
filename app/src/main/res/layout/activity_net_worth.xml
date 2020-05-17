@@ -18,14 +18,27 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_margin="12dp"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="5dp"
             android:background="@drawable/ic_toolbar_background">
 
-            <Button
-                android:id="@+id/editReport"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_marginLeft="20dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTint="#ffffff"
+                    android:src="@drawable/ic_back_icon_foreground"/>
+
+                <Button
+                    android:id="@+id/editReport"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
