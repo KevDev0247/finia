@@ -29,6 +29,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -39,6 +40,60 @@
                     android:text="@string/short_term_liabilities_name"
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/report_short_term_liabilities_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:text="Value"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:id="@+id/total_short_term_liabilities_difference_block"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="5dp"
+                    android:background="@drawable/ic_net_neutral"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="40dp"
+                    android:paddingVertical="5dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/report_short_term_liabilities_symbol"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+ - "
+                            android:textColor="#ffffff"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/report_short_term_liabilities_difference"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="net"
+                            android:textColor="#ffffff"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" $"
+                            android:textColor="#ffffff"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/short_term_liabilities_list"
@@ -69,6 +124,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -79,6 +135,60 @@
                     android:text="@string/long_term_liabilities_name"
                     android:textSize="20sp"
                     android:textColor="#ffffff"/>
+
+                <TextView
+                    android:id="@+id/report_long_term_liabilities_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:text="Value"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:id="@+id/total_long_term_liabilities_difference_block"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="5dp"
+                    android:background="@drawable/ic_net_neutral"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="40dp"
+                    android:paddingVertical="5dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/report_long_term_liabilities_symbol"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+ - "
+                            android:textColor="#ffffff"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/report_long_term_liabilities_difference"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="net"
+                            android:textColor="#ffffff"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" $"
+                            android:textColor="#ffffff"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/long_term_liabilities_list"

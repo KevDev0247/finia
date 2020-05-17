@@ -29,22 +29,84 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/liquid_assets_name"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
+                android:padding="20dp"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/liquid_assets_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/liquid_assets_name"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/report_liquid_assets_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Value"
+                        android:textColor="#ffffff"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:id="@+id/report_liquid_assets_difference_block"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/ic_net_neutral"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingHorizontal="40dp"
+                        android:paddingVertical="5dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/report_liquid_assets_symbol"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+ - "
+                                android:textColor="#ffffff"
+                                android:textSize="20dp" />
+
+                            <TextView
+                                android:id="@+id/report_liquid_assets_difference"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="net"
+                                android:textColor="#ffffff"
+                                android:textSize="20dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" $"
+                                android:textSize="20dp"
+                                android:textColor="#ffffff"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/liquid_assets_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -69,16 +131,87 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/invested_assets_name"
-                    android:textSize="20sp"
-                    android:textColor="#ffffff"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="50dp"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/invested_assets_name"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/report_invested_assets_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:text="Value"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:id="@+id/total_invested_assets_difference_block"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/ic_net_neutral"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="40dp"
+                        android:paddingVertical="5dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/report_invested_assets_symbol"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+ - "
+                                android:textColor="#ffffff"
+                                android:textSize="20dp" />
+
+                            <TextView
+                                android:id="@+id/report_invested_assets_difference"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="net"
+                                android:textColor="#ffffff"
+                                android:textSize="20dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" $"
+                                android:textColor="#ffffff"
+                                android:textSize="20dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@drawable/ic_report_cards_boundary">
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -89,10 +222,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
-
-
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingVertical="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -100,7 +232,61 @@
                             android:layout_gravity="center_horizontal"
                             android:text="@string/taxable_accounts_name"
                             android:textColor="#ffffff"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/report_taxable_accounts_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="Value"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:id="@+id/total_taxable_accounts_difference_block"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginVertical="5dp"
+                            android:background="@drawable/ic_net_neutral"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="40dp"
+                            android:paddingVertical="5dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/report_taxable_accounts_symbol"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="+ - "
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:id="@+id/report_taxable_accounts_difference"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="net"
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" $"
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/taxable_accounts_list"
@@ -114,9 +300,17 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@drawable/ic_report_cards_boundary">
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingVertical="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -124,7 +318,61 @@
                             android:layout_gravity="center_horizontal"
                             android:text="@string/retirement_accounts_name"
                             android:textColor="#ffffff"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/report_retirement_accounts_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="Value"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:id="@+id/total_retirement_accounts_difference_block"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginVertical="5dp"
+                            android:background="@drawable/ic_net_neutral"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="40dp"
+                            android:paddingVertical="5dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/report_retirement_accounts_symbol"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="+ - "
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:id="@+id/report_retirement_accounts_difference"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="net"
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" $"
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/retirement_accounts_list"
@@ -138,9 +386,17 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@drawable/ic_report_cards_boundary">
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingVertical="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -149,6 +405,60 @@
                             android:text="@string/ownership_interest_name"
                             android:textColor="#ffffff"
                             android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/report_ownership_interests_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="Value"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:id="@+id/total_ownership_interests_difference_block"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginVertical="5dp"
+                            android:background="@drawable/ic_net_neutral"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="40dp"
+                            android:paddingVertical="5dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/report_ownership_interests_symbol"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="+ - "
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:id="@+id/report_ownership_interests_difference"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="net"
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" $"
+                                    android:textColor="#ffffff"
+                                    android:textSize="20dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/ownership_interests_list"
@@ -183,6 +493,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -193,6 +504,60 @@
                     android:text="@string/personal_assets_name"
                     android:textSize="20sp"
                     android:textColor="#ffffff"/>
+
+                <TextView
+                    android:id="@+id/report_personal_assets_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:text="Value"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:id="@+id/total_personal_assets_difference_block"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:background="@drawable/ic_net_neutral"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingHorizontal="40dp"
+                    android:paddingVertical="5dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/report_personal_assets_symbol"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+ - "
+                            android:textColor="#ffffff"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/report_personal_assets_difference"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="net"
+                            android:textColor="#ffffff"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" $"
+                            android:textColor="#ffffff"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/personal_assets_list"
