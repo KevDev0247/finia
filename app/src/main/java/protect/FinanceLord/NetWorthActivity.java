@@ -40,7 +40,7 @@ public class NetWorthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth);
 
-        createAssetsCardsView();
+        refreshNetWorthCardsView();
 
         refreshPastReportsListView();
 
@@ -56,11 +56,24 @@ public class NetWorthActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        refreshPastReportsListView();
+        refreshNetWorthCardsView();
+
+        Log.d("NetWorthActivity", "Activity has been refreshed");
+    }
+
     protected void refreshPastReportsListView(){
 
-        PastReportsAdapter adapter;
+        final PastReportsAdapter adapter;
         ListView pastReportsListView = findViewById(R.id.past_report_list);
         final List<ReportItemsDataModel> dataSources = new ArrayList<>();
+
+        adapter = new PastReportsAdapter(this, dataSources);
+        pastReportsListView.setAdapter(adapter);
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -78,6 +91,13 @@ public class NetWorthActivity extends AppCompatActivity {
                     Log.d("NetWorthActivity", " the time of current item is: " + reportItemInfo.totalAssetsDate + "  the difference of this item is: " + difference);
                     ReportItemsDataModel dataModel = new ReportItemsDataModel(reportItemInfo.totalAssetsDate, reportItemInfo.netWorthValue, difference);
                     dataSources.add(dataModel);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
                 }
             }
         });
@@ -97,12 +117,9 @@ public class NetWorthActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        adapter = new PastReportsAdapter(this, dataSources);
-        pastReportsListView.setAdapter(adapter);
     }
 
-    protected void createAssetsCardsView(){
+    protected void refreshNetWorthCardsView(){
 
         NetWorthCardsAdapter adapter;
         ViewPager viewPager;

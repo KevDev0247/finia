@@ -103,7 +103,7 @@
                 <ListView
                     android:id="@+id/past_report_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:divider="@null"
                     android:dividerHeight="10dp"/>
 
