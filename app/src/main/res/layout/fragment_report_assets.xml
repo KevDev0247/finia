@@ -161,7 +161,7 @@
                         android:textSize="20sp" />
 
                     <LinearLayout
-                        android:id="@+id/total_invested_assets_difference_block"
+                        android:id="@+id/report_invested_assets_difference_block"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -245,7 +245,7 @@
                             android:textSize="20sp" />
 
                         <LinearLayout
-                            android:id="@+id/total_taxable_accounts_difference_block"
+                            android:id="@+id/report_taxable_accounts_difference_block"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -331,7 +331,7 @@
                             android:textSize="20sp" />
 
                         <LinearLayout
-                            android:id="@+id/total_retirement_accounts_difference_block"
+                            android:id="@+id/report_retirement_accounts_difference_block"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -417,7 +417,7 @@
                             android:textSize="20sp" />
 
                         <LinearLayout
-                            android:id="@+id/total_ownership_interests_difference_block"
+                            android:id="@+id/report_ownership_interests_difference_block"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -516,7 +516,7 @@
                     android:textSize="20sp" />
 
                 <LinearLayout
-                    android:id="@+id/total_personal_assets_difference_block"
+                    android:id="@+id/report_personal_assets_difference_block"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="5dp"
