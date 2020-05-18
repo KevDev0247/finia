@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,17 +56,27 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
     public void resetView(String search, String date) {
         final TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
-        Date itemTime = convertDate(date);
+        TextView reportTitle = findViewById(R.id.view_report_title);
+        ImageButton returnButton = findViewById(R.id.view_report_return_button);
+
+        reportTitle.setText(date);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        Report_AssetsFragment assetsFragment = new Report_AssetsFragment(getString(R.string.assets_name), itemTime);
-        Report_LiabilitiesFragment liabilitiesFragment = new Report_LiabilitiesFragment(getString(R.string.liabilities_name), itemTime);
+        Report_AssetsFragment assetsFragment = new Report_AssetsFragment(getString(R.string.assets_name), convertDate(date));
+        Report_LiabilitiesFragment liabilitiesFragment = new Report_LiabilitiesFragment(getString(R.string.liabilities_name), convertDate(date));
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -98,7 +109,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
-                AssetsValue totalAssets = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), 35);
+                AssetsValue totalAssets = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 35);
                 LiabilitiesValue totalLiabilities = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), 14);
                 AssetsValue previousTotalAssetsValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), 35);
                 LiabilitiesValue previousTotalLiabilitiesValue = liabilitiesValueDao.queryPreviousLiabilityBeforeTime(itemTime.getTime(), 14);

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,11 +40,11 @@ public class NetWorthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth);
 
-        createAssetsCardsView();
+        refreshNetWorthCardsView();
 
         refreshPastReportsListView();
 
-        Button editReportButton = findViewById(R.id.editReport);
+        ImageButton editReportButton = findViewById(R.id.editReport);
         editReportButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -54,13 +54,35 @@ public class NetWorthActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ImageButton returnButton = findViewById(R.id.net_worth_return_button);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        refreshPastReportsListView();
+        refreshNetWorthCardsView();
+
+        Log.d("NetWorthActivity", "Activity has been refreshed");
     }
 
     protected void refreshPastReportsListView(){
 
-        PastReportsAdapter adapter;
+        final PastReportsAdapter adapter;
         ListView pastReportsListView = findViewById(R.id.past_report_list);
         final List<ReportItemsDataModel> dataSources = new ArrayList<>();
+
+        adapter = new PastReportsAdapter(this, dataSources);
+        pastReportsListView.setAdapter(adapter);
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -78,6 +100,13 @@ public class NetWorthActivity extends AppCompatActivity {
                     Log.d("NetWorthActivity", " the time of current item is: " + reportItemInfo.totalAssetsDate + "  the difference of this item is: " + difference);
                     ReportItemsDataModel dataModel = new ReportItemsDataModel(reportItemInfo.totalAssetsDate, reportItemInfo.netWorthValue, difference);
                     dataSources.add(dataModel);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
                 }
             }
         });
@@ -97,12 +126,9 @@ public class NetWorthActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        adapter = new PastReportsAdapter(this, dataSources);
-        pastReportsListView.setAdapter(adapter);
     }
 
-    protected void createAssetsCardsView(){
+    protected void refreshNetWorthCardsView(){
 
         NetWorthCardsAdapter adapter;
         ViewPager viewPager;

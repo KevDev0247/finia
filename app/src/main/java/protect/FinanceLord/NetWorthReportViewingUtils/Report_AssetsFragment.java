@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,12 +67,43 @@ public class Report_AssetsFragment extends Fragment {
                 List<AssetsTypeQuery> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
                 Report_AssetsFragment.this.assetsTypeProcessor = new TypeProcessor_Assets(assetsTypes);
 
-                populateDataModels(assetsValueDao, itemTime);
+                List<AssetsValue> categoryAssets = new ArrayList<>();
+                List<AssetsValue> previousCategoryAssets = new ArrayList<>();
+
+                AssetsValue totalLiquidAssets = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 32);
+                AssetsValue totalInvestedAssets = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 33);
+                AssetsValue totalPersonalAssets = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 34);
+                AssetsValue totalTaxableAccounts = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 29);
+                AssetsValue totalRetirementAccounts = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 30);
+                AssetsValue totalOwnershipInterests = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), 31);
+
+                categoryAssets.add(totalLiquidAssets);
+                categoryAssets.add(totalInvestedAssets);
+                categoryAssets.add(totalPersonalAssets);
+                categoryAssets.add(totalTaxableAccounts);
+                categoryAssets.add(totalRetirementAccounts);
+                categoryAssets.add(totalOwnershipInterests);
+
+                AssetsValue previousLiquidAssets = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), 32);
+                AssetsValue previousInvestedAssets = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), 33);
+                AssetsValue previousPersonalAssets = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), 34);
+                AssetsValue previousTaxableAccounts = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), 29);
+                AssetsValue previousRetirementAccounts = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), 30);
+                AssetsValue previousOwnershipInterests = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), 31);
+
+                previousCategoryAssets.add(previousLiquidAssets);
+                previousCategoryAssets.add(previousInvestedAssets);
+                previousCategoryAssets.add(previousPersonalAssets);
+                previousCategoryAssets.add(previousTaxableAccounts);
+                previousCategoryAssets.add(previousRetirementAccounts);
+                previousCategoryAssets.add(previousOwnershipInterests);
+
+                populateDataModels(assetsValueDao, itemTime, categoryAssets, previousCategoryAssets);
             }
         });
     }
 
-    public void populateDataModels(AssetsValueDao assetsValueDao, Date itemTime) {
+    public void populateDataModels(final AssetsValueDao assetsValueDao, final Date itemTime, final List<AssetsValue> categoryAssets, final List<AssetsValue> previousCategoryAssets) {
 
         List<DataCarrier_Assets> liquidAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
         List<DataCarrier_Assets> personalAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
@@ -82,7 +114,7 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : liquidAssetsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
-            AssetsValue liquidAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue liquidAssetValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
             if (liquidAssetValue != null) {
@@ -101,7 +133,7 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : personalAssetsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
-            AssetsValue personalAssetValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue personalAssetValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
             if (personalAssetValue != null) {
@@ -120,7 +152,7 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : taxableAccountsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
-            AssetsValue taxableAccountValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue taxableAccountValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
             if (taxableAccountValue != null) {
@@ -139,7 +171,7 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : retirementAccountsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
-            AssetsValue retirementAccountValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue retirementAccountValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
             if (retirementAccountValue != null) {
@@ -158,7 +190,7 @@ public class Report_AssetsFragment extends Fragment {
         for (DataCarrier_Assets dataCarrier : ownershipInterestsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
-            AssetsValue ownershipInterestValue = assetsValueDao.queryIndividualAssetByDate(itemTime.getTime(), dataCarrier.assetsTypeId);
+            AssetsValue ownershipInterestValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
             if (ownershipInterestValue != null) {
@@ -177,12 +209,12 @@ public class Report_AssetsFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                refreshView(contentView);
+                refreshView(contentView, categoryAssets, previousCategoryAssets);
             }
         });
     }
 
-    public void refreshView(View contentView) {
+    public void refreshView(View contentView, List<AssetsValue> categoryAssets, List<AssetsValue> previousCategoryAssets) {
 
         LinearLayout liquidAssetsList = contentView.findViewById(R.id.liquid_assets_list);
         LinearLayout personalAssetsList = contentView.findViewById(R.id.personal_assets_list);
@@ -195,6 +227,162 @@ public class Report_AssetsFragment extends Fragment {
         ReportListAdapter taxableAccountsAdapter = new ReportListAdapter(getContext(), taxableAccountsDataSource, getString(R.string.report_assets_fragment_name));
         ReportListAdapter retirementAccountsAdapter = new ReportListAdapter(getContext(), retirementAccountsDataSource, getString(R.string.report_assets_fragment_name));
         ReportListAdapter ownershipInterestsAdapter = new ReportListAdapter(getContext(), ownershipInterestsDataSource, getString(R.string.report_assets_fragment_name));
+
+        TextView liquidAssetsValue = contentView.findViewById(R.id.report_liquid_assets_value);
+        View liquidAssetsDifferenceBlock = contentView.findViewById(R.id.report_liquid_assets_difference_block);
+        TextView liquidAssetsSymbol = contentView.findViewById(R.id.report_liquid_assets_symbol);
+        TextView liquidAssetsDifference = contentView.findViewById(R.id.report_liquid_assets_difference);
+
+        TextView investedAssetsValue = contentView.findViewById(R.id.report_invested_assets_value);
+        View investedAssetsDifferenceBlock = contentView.findViewById(R.id.report_invested_assets_difference_block);
+        TextView investedAssetsSymbol = contentView.findViewById(R.id.report_invested_assets_symbol);
+        TextView investedAssetsDifference = contentView.findViewById(R.id.report_invested_assets_difference);
+
+        TextView personalAssetsValue = contentView.findViewById(R.id.report_personal_assets_value);
+        View personalAssetsDifferenceBlock = contentView.findViewById(R.id.report_personal_assets_difference_block);
+        TextView personalAssetsSymbol = contentView.findViewById(R.id.report_personal_assets_symbol);
+        TextView personalAssetsDifference = contentView.findViewById(R.id.report_personal_assets_difference);
+
+        TextView taxableAccountsValue = contentView.findViewById(R.id.report_taxable_accounts_value);
+        View taxableAccountsDifferenceBlock = contentView.findViewById(R.id.report_taxable_accounts_difference_block);
+        TextView taxableAccountsSymbol = contentView.findViewById(R.id.report_taxable_accounts_symbol);
+        TextView taxableAccountsDifference = contentView.findViewById(R.id.report_taxable_accounts_difference);
+
+        TextView retirementAccountsValue = contentView.findViewById(R.id.report_retirement_accounts_value);
+        View retirementAccountsDifferenceBlock = contentView.findViewById(R.id.report_retirement_accounts_difference_block);
+        TextView retirementAccountsSymbol = contentView.findViewById(R.id.report_retirement_accounts_symbol);
+        TextView retirementAccountsDifference = contentView.findViewById(R.id.report_retirement_accounts_difference);
+
+        TextView ownershipInterestsValue = contentView.findViewById(R.id.report_ownership_interests_value);
+        View ownershipInterestsDifferenceBlock = contentView.findViewById(R.id.report_ownership_interests_difference_block);
+        TextView ownershipInterestsSymbol = contentView.findViewById(R.id.report_ownership_interests_symbol);
+        TextView ownershipInterestsDifference = contentView.findViewById(R.id.report_ownership_interests_difference);
+
+        liquidAssetsValue.setText(String.valueOf(categoryAssets.get(0).getAssetsValue()));
+        if (previousCategoryAssets.get(0) == null) {
+            liquidAssetsSymbol.setText("");
+            liquidAssetsDifference.setText(R.string.no_data_initialization);
+
+        } else {
+            float difference = categoryAssets.get(0).getAssetsValue() - previousCategoryAssets.get(0).getAssetsValue();
+            liquidAssetsDifference.setText(String.valueOf(difference));
+            if (difference == 0){
+                liquidAssetsSymbol.setText("");
+
+            } else if (difference > 0){
+                liquidAssetsSymbol.setText(getString(R.string.positive_symbol));
+                liquidAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+
+            } else if (difference < 0){
+                liquidAssetsSymbol.setText(getString(R.string.negative_symbol));
+                liquidAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            }
+        }
+
+        investedAssetsValue.setText(String.valueOf(categoryAssets.get(1).getAssetsValue()));
+        if (previousCategoryAssets.get(1) == null) {
+            investedAssetsSymbol.setText("");
+            investedAssetsDifference.setText(R.string.no_data_initialization);
+
+        } else {
+            float difference = categoryAssets.get(1).getAssetsValue() - previousCategoryAssets.get(1).getAssetsValue();
+            investedAssetsDifference.setText(String.valueOf(difference));
+            if (difference == 0){
+                investedAssetsSymbol.setText("");
+
+            } else if (difference > 0){
+                investedAssetsSymbol.setText(getString(R.string.positive_symbol));
+                investedAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+
+            } else if (difference < 0){
+                investedAssetsSymbol.setText(getString(R.string.negative_symbol));
+                investedAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            }
+        }
+
+        personalAssetsValue.setText(String.valueOf(categoryAssets.get(2).getAssetsValue()));
+        if (previousCategoryAssets.get(2) == null) {
+            personalAssetsSymbol.setText("");
+            personalAssetsDifference.setText(R.string.no_data_initialization);
+
+        } else {
+            float difference = categoryAssets.get(2).getAssetsValue() - previousCategoryAssets.get(2).getAssetsValue();
+            personalAssetsDifference.setText(String.valueOf(difference));
+            if (difference == 0){
+                personalAssetsSymbol.setText("");
+
+            } else if (difference > 0){
+                personalAssetsSymbol.setText(getString(R.string.positive_symbol));
+                personalAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+
+            } else if (difference < 0){
+                personalAssetsSymbol.setText(getString(R.string.negative_symbol));
+                personalAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            }
+        }
+
+        taxableAccountsValue.setText(String.valueOf(categoryAssets.get(3).getAssetsValue()));
+        if (previousCategoryAssets.get(3) == null) {
+            taxableAccountsSymbol.setText("");
+            taxableAccountsDifference.setText(R.string.no_data_initialization);
+
+        } else {
+            float difference = categoryAssets.get(3).getAssetsValue() - (previousCategoryAssets.get(3).getAssetsValue());
+            taxableAccountsDifference.setText(String.valueOf(difference));
+            if (difference == 0){
+                taxableAccountsSymbol.setText("");
+
+            } else if (difference > 0){
+                taxableAccountsSymbol.setText(getString(R.string.positive_symbol));
+                taxableAccountsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+
+            } else if (difference < 0){
+                taxableAccountsSymbol.setText(getString(R.string.negative_symbol));
+                taxableAccountsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            }
+        }
+
+        retirementAccountsValue.setText(String.valueOf(categoryAssets.get(4).getAssetsValue()));
+        if (previousCategoryAssets.get(4) == null) {
+            retirementAccountsSymbol.setText("");
+            retirementAccountsDifference.setText(R.string.no_data_initialization);
+
+        } else {
+            float difference = categoryAssets.get(4).getAssetsValue() - previousCategoryAssets.get(4).getAssetsValue();
+            retirementAccountsDifference.setText(String.valueOf(difference));
+            if (difference == 0){
+                retirementAccountsSymbol.setText("");
+
+            } else if (difference > 0){
+                retirementAccountsSymbol.setText(getString(R.string.positive_symbol));
+                retirementAccountsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+
+            } else if (difference < 0){
+                retirementAccountsSymbol.setText(getString(R.string.negative_symbol));
+                retirementAccountsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            }
+        }
+
+        ownershipInterestsValue.setText(String.valueOf(categoryAssets.get(5).getAssetsValue()));
+        if (previousCategoryAssets.get(5) == null) {
+            ownershipInterestsSymbol.setText("");
+            ownershipInterestsDifference.setText(R.string.no_data_initialization);
+
+        } else {
+            float difference = categoryAssets.get(5).getAssetsValue() - previousCategoryAssets.get(5).getAssetsValue();
+            ownershipInterestsDifference.setText(String.valueOf(difference));
+            if (difference == 0){
+                ownershipInterestsSymbol.setText("");
+
+            } else if (difference > 0){
+                ownershipInterestsSymbol.setText(getString(R.string.positive_symbol));
+                ownershipInterestsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+
+            } else if (difference < 0){
+                ownershipInterestsSymbol.setText(getString(R.string.negative_symbol));
+                ownershipInterestsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            }
+        }
 
         for (int i = 0; i < liquidAssetsAdapter.getCount(); i++) {
             View itemView = liquidAssetsAdapter.getView(i, null, liquidAssetsList);

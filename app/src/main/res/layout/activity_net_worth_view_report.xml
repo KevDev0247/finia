@@ -92,14 +92,28 @@
                                     android:paddingHorizontal="5dp"
                                     android:paddingVertical="2dp">
 
-                                    <TextView
-                                        android:id="@+id/total_net_worth_value"
+                                    <LinearLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_horizontal"
-                                        android:text="Value"
-                                        android:textColor="#001528"
-                                        android:textSize="18sp" />
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/total_net_worth_value"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Value"
+                                            android:textColor="#001528"
+                                            android:textSize="18sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text=" $"
+                                            android:textSize="20dp"
+                                            android:textColor="#001528"/>
+
+                                    </LinearLayout>
 
                                     <LinearLayout
                                         android:id="@+id/total_net_worth_difference_block"
@@ -132,6 +146,13 @@
                                                 android:text="net"
                                                 android:textColor="#001528"
                                                 android:textSize="20dp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text=" $"
+                                                android:textSize="20dp"
+                                                android:textColor="#001528"/>
 
                                         </LinearLayout>
 
@@ -263,6 +284,13 @@
                                                     android:textColor="#001528"
                                                     android:textSize="20dp" />
 
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text=" $"
+                                                    android:textSize="20dp"
+                                                    android:textColor="#001528"/>
+
                                             </LinearLayout>
 
                                         </LinearLayout>
@@ -374,6 +402,13 @@
                                                     android:textColor="#001528"
                                                     android:textSize="20dp" />
 
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text=" $"
+                                                    android:textSize="20dp"
+                                                    android:textColor="#001528"/>
+
                                             </LinearLayout>
 
                                         </LinearLayout>
@@ -395,7 +430,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@android:color/transparent"
-                    app:layout_collapseMode="pin"/>
+                    app:layout_collapseMode="pin">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="17dp">
+
+                        <ImageButton
+                            android:id="@+id/view_report_return_button"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:background="#0015314B"
+                            android:src="@drawable/ic_back_icon_foreground"/>
+
+                        <TextView
+                            android:id="@+id/view_report_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Current Time"
+                            android:textColor="#ffffff"
+                            android:textSize="25sp"
+                            android:layout_centerInParent="true"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true">
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -432,6 +499,4 @@
     </com.google.android.material.tabs.TabLayout>
 
 </LinearLayout>
-
-
 

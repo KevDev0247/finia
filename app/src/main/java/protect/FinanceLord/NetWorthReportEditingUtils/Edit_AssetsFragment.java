@@ -2,11 +2,6 @@ package protect.FinanceLord.NetWorthReportEditingUtils;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,24 +9,28 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Database.AssetsTypeDao;
 import protect.FinanceLord.Database.AssetsTypeQuery;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
 import protect.FinanceLord.NetWorthReportEditingActivity;
-import protect.FinanceLord.Communicators.DateCommunicator;
-import protect.FinanceLord.R;
 import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
-import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
+import protect.FinanceLord.R;
 
 public class Edit_AssetsFragment extends Fragment {
 

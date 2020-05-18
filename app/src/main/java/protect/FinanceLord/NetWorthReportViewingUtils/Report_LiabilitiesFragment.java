@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,15 +59,30 @@ public class Report_LiabilitiesFragment extends Fragment {
                 LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
+                List<LiabilitiesValue> categoryLiabilities = new ArrayList<>();
+                List<LiabilitiesValue> previousCategoryLiabilities = new ArrayList<>();
+
                 List<LiabilitiesTypeQuery> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
                 Report_LiabilitiesFragment.this.liabilitiesTypeProcessor = new TypeProcessor_Liabilities(liabilitiesTypes);
 
-                populateDataModel(liabilitiesValueDao, itemTime);
+                LiabilitiesValue totalShortTermLiabilities = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), 12);
+                LiabilitiesValue totalLongTermLiabilities = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), 13);
+
+                categoryLiabilities.add(totalShortTermLiabilities);
+                categoryLiabilities.add(totalLongTermLiabilities);
+
+                LiabilitiesValue previousShortTermLiabilities = liabilitiesValueDao.queryPreviousLiabilityBeforeTime(itemTime.getTime(), 12);
+                LiabilitiesValue previousLongTermLiabilities = liabilitiesValueDao.queryPreviousLiabilityBeforeTime(itemTime.getTime(), 13);
+
+                previousCategoryLiabilities.add(previousShortTermLiabilities);
+                previousCategoryLiabilities.add(previousLongTermLiabilities);
+
+                populateDataModel(liabilitiesValueDao, itemTime, categoryLiabilities, previousCategoryLiabilities);
             }
         });
     }
 
-    public void populateDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime) {
+    public void populateDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime, final List<LiabilitiesValue> categoryLiabilities, final List<LiabilitiesValue> previousCategoryLiabilities) {
 
         List<DataCarrier_Liabilities> shortTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.short_term_liabilities_name),2);
         List<DataCarrier_Liabilities> longTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.long_term_liabilities_name), 2);
@@ -112,18 +128,70 @@ public class Report_LiabilitiesFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                refreshView(contentView);
+                refreshView(contentView, categoryLiabilities, previousCategoryLiabilities);
             }
         });
     }
 
-    public void refreshView(View liabilitiesView) {
+    public void refreshView(View contentView, List<LiabilitiesValue> categoryLiabilities, List<LiabilitiesValue> previousCategoryLiabilities) {
 
-        LinearLayout shortTermLiabilitiesList = liabilitiesView.findViewById(R.id.short_term_liabilities_list);
-        LinearLayout longTermLiabilitiesList = liabilitiesView.findViewById(R.id.long_term_liabilities_list);
+        LinearLayout shortTermLiabilitiesList = contentView.findViewById(R.id.short_term_liabilities_list);
+        LinearLayout longTermLiabilitiesList = contentView.findViewById(R.id.long_term_liabilities_list);
 
         ReportListAdapter shortTermLiabilitiesAdapter = new ReportListAdapter(getContext(), shortTermLiabilitiesDataSource, getString(R.string.report_liabilities_fragment_name));
         ReportListAdapter longTermLiabilitiesAdapter = new ReportListAdapter(getContext(), longTermLiabilitiesDataSource, getString(R.string.report_liabilities_fragment_name));
+
+        TextView shortTermLiabilitiesValue = contentView.findViewById(R.id.report_short_term_liabilities_value);
+        View shortTermLiabilitiesDifferenceBlock = contentView.findViewById(R.id.report_short_term_liabilities_difference_block);
+        TextView shortTermLiabilitiesSymbol = contentView.findViewById(R.id.report_short_term_liabilities_symbol);
+        TextView shortTermLiabilitiesDifference = contentView.findViewById(R.id.report_short_term_liabilities_difference);
+
+        TextView longTermLiabilitiesValue = contentView.findViewById(R.id.report_long_term_liabilities_value);
+        View longTermLiabilitiesDifferenceBlock = contentView.findViewById(R.id.report_long_term_liabilities_difference_block);
+        TextView longTermLiabilitiesSymbol = contentView.findViewById(R.id.report_long_term_liabilities_symbol);
+        TextView longTermLiabilitiesDifference = contentView.findViewById(R.id.report_long_term_liabilities_difference);
+
+        shortTermLiabilitiesValue.setText(String.valueOf(categoryLiabilities.get(0).getLiabilitiesValue()));
+        if (previousCategoryLiabilities.get(0) == null) {
+            shortTermLiabilitiesSymbol.setText("");
+            shortTermLiabilitiesDifference.setText(R.string.no_data_initialization);
+
+        } else {
+            float difference = categoryLiabilities.get(0).getLiabilitiesValue() - previousCategoryLiabilities.get(0).getLiabilitiesValue();
+            shortTermLiabilitiesDifference.setText(String.valueOf(difference));
+            if (difference == 0){
+                shortTermLiabilitiesSymbol.setText("");
+
+            } else if (difference > 0){
+                shortTermLiabilitiesSymbol.setText(getString(R.string.positive_symbol));
+                shortTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+
+            } else if (difference < 0){
+                shortTermLiabilitiesSymbol.setText(getString(R.string.negative_symbol));
+                shortTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            }
+        }
+
+        longTermLiabilitiesValue.setText(String.valueOf(categoryLiabilities.get(1).getLiabilitiesValue()));
+        if (previousCategoryLiabilities.get(1) == null) {
+            longTermLiabilitiesSymbol.setText("");
+            longTermLiabilitiesDifference.setText(R.string.no_data_initialization);
+
+        } else {
+            float difference = categoryLiabilities.get(1).getLiabilitiesValue() - previousCategoryLiabilities.get(1).getLiabilitiesValue();
+            longTermLiabilitiesDifference.setText(String.valueOf(difference));
+            if (difference == 0){
+                longTermLiabilitiesSymbol.setText("");
+
+            } else if (difference > 0){
+                longTermLiabilitiesSymbol.setText(getString(R.string.positive_symbol));
+                longTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+
+            } else if (difference < 0){
+                longTermLiabilitiesSymbol.setText(getString(R.string.negative_symbol));
+                longTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            }
+        }
 
         for (int i = 0; i < shortTermLiabilitiesAdapter.getCount(); i++) {
             View itemView = shortTermLiabilitiesAdapter.getView(i, null, shortTermLiabilitiesList);
