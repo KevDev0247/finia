@@ -3,17 +3,11 @@ package protect.FinanceLord.Database;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import java.util.List;
 
 @Dao
 public interface AssetsTypeDao {
-    @Insert
-    void insertAssetType(AssetsType assetsType);
-
-    @Insert
-    void insertAssetParentType(AssetsType assetsParentType);
 
     @Insert
     void insertAssetsTypes(List<AssetsType> assetsTypes);
@@ -23,12 +17,6 @@ public interface AssetsTypeDao {
 
     @Query("SELECT * FROM AssetsType WHERE assetsParentType = :assetsParentType")
     List<AssetsType> queryAssetsByParentType (String assetsParentType);
-
-    @Query("SELECT * FROM AssetsType")
-    List<AssetsType> queryAllAssetsType();
-
-    @Query("SELECT * FROM AssetsType WHERE assetsName LIKE :assetsName")
-    AssetsType queryAssetsByType (String assetsName);
 
     @Query("SELECT \n" +
             "  assetsThirdLevelComposed.*, \n" +
@@ -57,4 +45,10 @@ public interface AssetsTypeDao {
             "AS assetsThirdLevelComposed LEFT JOIN AssetsType AS assetsFourthLevel \n" +
             "ON assetsThirdLevelComposed.assetsThirdLevelName = assetsFourthLevel.assetsParentType")
     List<AssetsTypeQuery> queryGroupedAssetsType();
+
+    @Query("SELECT * FROM AssetsType")
+    List<AssetsType> queryAllAssetsType();
+
+    @Query("SELECT * FROM AssetsType WHERE assetsName LIKE :assetsName")
+    AssetsType queryAssetsByType (String assetsName);
 }

@@ -5,15 +5,15 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
 
-@Database(entities = {AssetsType.class, AssetsValue.class, LiabilitiesType.class, LiabilitiesValue.class, Budgets.class, Transactions.class}, version = 7)
+@Database(entities = {AssetsType.class, AssetsValue.class, LiabilitiesType.class, LiabilitiesValue.class, BudgetsType.class, BudgetsValue.class, Transactions.class}, version = 8)
 public abstract class FinanceLordDatabase extends RoomDatabase {
     public abstract AssetsTypeDao assetsTypeDao();
     public abstract AssetsValueDao assetsValueDao();
     public abstract LiabilitiesTypeDao liabilitiesTypeDao();
     public abstract LiabilitiesValueDao liabilitiesValueDao();
-    public abstract BudgetsDao budgetsDao();
+    public abstract BudgetsTypeDao budgetsTypeDao();
+    public abstract BudgetsValueDao budgetsValueDao();
     public abstract TransactionsDao transactionsDao();
     public abstract ReportItemInfoDao reportItemInfoDao();
 

@@ -14,8 +14,6 @@ public class BudgetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_budget);
 
         resetView();
-
-
     }
 
     private void retrieveDataFromDatabase(){

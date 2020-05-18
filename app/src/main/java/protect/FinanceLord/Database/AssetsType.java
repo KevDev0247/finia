@@ -17,11 +17,9 @@ public class AssetsType {
     private String assetsParentType;
 
     @Ignore
-    public AssetsType(){
+    public AssetsType() { }
 
-    }
-
-    public AssetsType(int assetsId, String assetsName, String assetsParentType){
+    public AssetsType(int assetsId, String assetsName, String assetsParentType) {
         this.assetsId = assetsId;
         this.assetsName = assetsName;
         this.assetsParentType = assetsParentType;

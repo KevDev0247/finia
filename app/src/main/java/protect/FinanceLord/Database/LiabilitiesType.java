@@ -17,11 +17,9 @@ public class LiabilitiesType {
     private String liabilitiesParentType;
 
     @Ignore
-    public LiabilitiesType(){
+    public LiabilitiesType() { }
 
-    }
-
-    public LiabilitiesType(int liabilitiesId, String liabilitiesName, String liabilitiesParentType){
+    public LiabilitiesType(int liabilitiesId, String liabilitiesName, String liabilitiesParentType) {
         this.liabilitiesId = liabilitiesId;
         this.liabilitiesName = liabilitiesName;
         this.liabilitiesParentType = liabilitiesParentType;

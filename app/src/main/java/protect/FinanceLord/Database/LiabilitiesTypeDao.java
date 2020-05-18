@@ -3,20 +3,11 @@ package protect.FinanceLord.Database;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import java.util.List;
 
 @Dao
 public interface LiabilitiesTypeDao {
-    @Insert
-    void insertLiabilityType(LiabilitiesType liabilitiesType);
-
-    @Insert
-    void insertLiabilityParentType(LiabilitiesType liabilitiesTypeParentType);
-
-    @Insert
-    void insertLiabilitiesTypes(LiabilitiesType... liabilitiesTypeTypes);
 
     @Insert
     void insertLiabilitiesTypes(List<LiabilitiesType> liabilitiesTypes);
@@ -26,12 +17,6 @@ public interface LiabilitiesTypeDao {
 
     @Query("SELECT * FROM LiabilitiesType WHERE liabilitiesParentType = :liabilitiesParentType")
     List<LiabilitiesType> queryLiabilitiesByParentType (String liabilitiesParentType);
-
-    @Query("SELECT * FROM LiabilitiesType")
-    List<LiabilitiesType> queryAllLiabilities();
-
-    @Query("SELECT * FROM LiabilitiesType WHERE liabilitiesName = :liabilitiesName")
-    LiabilitiesType queryLiabilitiesByType (String liabilitiesName);
 
     @Query("SELECT \n" +
             "  liabilitiesSecondLevelComposed.liabilitiesFirstLevelId, \n" +
@@ -53,4 +38,10 @@ public interface LiabilitiesTypeDao {
             "AS liabilitiesSecondLevelComposed LEFT JOIN LiabilitiesType AS liabilitiesThirdLevel \n" +
             "ON liabilitiesSecondLevelComposed.liabilitiesSecondLevelName = liabilitiesThirdLevel.liabilitiesParentType")
     List<LiabilitiesTypeQuery> queryGroupedLiabilitiesType();
+
+    @Query("SELECT * FROM LiabilitiesType")
+    List<LiabilitiesType> queryAllLiabilities();
+
+    @Query("SELECT * FROM LiabilitiesType WHERE liabilitiesName = :liabilitiesName")
+    LiabilitiesType queryLiabilitiesByType (String liabilitiesName);
 }

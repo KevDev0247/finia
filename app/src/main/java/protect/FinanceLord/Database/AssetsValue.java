@@ -20,9 +20,9 @@ public class AssetsValue {
     private Long date;
 
     @Ignore
-    public AssetsValue(){ }
+    public AssetsValue() { }
 
-    public AssetsValue(int assetsPrimaryId, int assetsId, float assetsValue, Long date){
+    public AssetsValue(int assetsPrimaryId, int assetsId, float assetsValue, Long date) {
         this.assetsPrimaryId = assetsPrimaryId;
         this.assetsId = assetsId;
         this.assetsValue = assetsValue;
