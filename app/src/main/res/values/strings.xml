@@ -1,13 +1,16 @@
 <resources>
     <string name="app_name">FinanceLord</string>
-    <string name="transactionTitle">Transaction</string>
-    <string name="transactionDescription">Mange your transaction</string>
-    <string name="budgetTitle">Budget</string>
-    <string name="budgetDescription">Create your budget</string>
-    <string name="spendingTitle">Spending</string>
-    <string name="spendingDescription">View your monthly spending report</string>
-    <string name="net_worthTitle">Net Worth</string>
-    <string name="net_worthDescription">Calculate your net worth</string>
+
+    <string name="transaction_title">Transaction</string>
+    <string name="budget_title">Budget</string>
+    <string name="spending_title">Spending</string>
+    <string name="net_worth_title">Net Worth</string>
+
+    <string name="transaction_description">Mange your transaction</string>
+    <string name="budget_description">Create your budget</string>
+    <string name="spending_description">View your monthly spending report</string>
+    <string name="net_worth_description">Calculate your net worth</string>
+
     <string name="image_of_assets">Image of assets</string>
     <string name="title_activity_net_worth_edit_reports">NetWorthEditReportsActivity</string>
     <string name="tab_text_1">Assets</string>
@@ -19,11 +22,10 @@
     <string name="date_format">yyyy-MM-dd</string>
 
 
+    <string name="net_worth">Net Worth</string>
 
     <string name="assets_name">Assets</string>
     <string name="liabilities_name">Liabilities</string>
-
-    <string name="net_worth">Net Worth</string>
 
     <string name="total_assets_name">Total Assets</string>
 
