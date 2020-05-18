@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +44,7 @@ public class NetWorthActivity extends AppCompatActivity {
 
         refreshPastReportsListView();
 
-        Button editReportButton = findViewById(R.id.editReport);
+        ImageButton editReportButton = findViewById(R.id.editReport);
         editReportButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -52,6 +52,15 @@ public class NetWorthActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(NetWorthActivity.this, NetWorthReportEditingActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        ImageButton returnButton = findViewById(R.id.net_worth_return_button);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

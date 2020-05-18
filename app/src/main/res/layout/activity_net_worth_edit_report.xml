@@ -22,16 +22,76 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="right">
+                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnCalendar"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="Date"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageButton
+                            android:id="@+id/edit_report_return_button"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:background="#00FFFFFF"
+                            android:src="@drawable/ic_back_icon_foreground"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.8">
+
+                        <TextView
+                            android:id="@+id/view_report_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="New Report"
+                            android:textColor="#ffffff"
+                            android:textSize="25sp"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.3">
+
+                        <LinearLayout
+                            android:id="@+id/calendar_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_centerVertical="true"
+                            android:background="#00FFFFFF">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_time_icon_foreground"/>
+
+                            <TextView
+                                android:id="@+id/time_selected"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="Time"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp"/>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 

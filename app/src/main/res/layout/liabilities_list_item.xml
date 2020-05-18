@@ -53,8 +53,10 @@
                     android:id="@+id/liabilitiesValueInput"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:padding="10dp"
                     android:inputType="numberDecimal"
                     android:textSize="20sp"
+                    android:textColor="#ffffff"
                     android:background="@drawable/ic_edit_report_input" />
 
             </LinearLayout>

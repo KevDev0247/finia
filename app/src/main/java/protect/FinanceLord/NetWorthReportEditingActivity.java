@@ -4,22 +4,24 @@ import android.app.SearchManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.google.android.material.tabs.TabLayout;
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
+import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.NetWorthReportEditingUtils.CalendarDialog;
 import protect.FinanceLord.NetWorthReportEditingUtils.Edit_AssetsFragment;
 import protect.FinanceLord.NetWorthReportEditingUtils.Edit_LiabilitiesFragment;
@@ -29,7 +31,8 @@ import protect.FinanceLord.NetWorthReportEditingUtils.SectionsPagerAdapter;
 public class NetWorthReportEditingActivity extends AppCompatActivity {
 
     Date currentTime;
-    Button calendarButton;
+    LinearLayout calendarButton;
+    TextView timeDisplay;
     public DateCommunicator toEditAssetsFragmentCommunicator;
     public DateCommunicator toEditLiabilitiesFragmentCommunicator;
 
@@ -37,7 +40,8 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth_edit_report);
-        this.calendarButton = findViewById(R.id.btnCalendar);
+        this.calendarButton = findViewById(R.id.calendar_button);
+        this.timeDisplay = findViewById(R.id.time_selected);
 
         Calendar calendar = new GregorianCalendar();
 
@@ -49,12 +53,13 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
 
         String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
         String search = getIntent().getStringExtra(SearchManager.QUERY);
-        this.calendarButton.setText(stringDate);
+        this.timeDisplay.setText(stringDate);
         resetView(search);
     }
 
     private void resetView(String search){
         TabLayout tabLayout = findViewById(R.id.edit_tab_layout);
+        ImageButton returnButton = findViewById(R.id.edit_report_return_button);
         final ViewPager viewPager = findViewById(R.id.edit_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
@@ -63,7 +68,14 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 
-        this.calendarButton.setOnClickListener(new View.OnClickListener() {
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CalendarDialog calendarDialog = new CalendarDialog(calendarDialogCommunicator);
@@ -84,7 +96,7 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
             currentTime = date;
             Log.d("EditReportCommunicator", "time is " + currentTime);
             String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
-            calendarButton.setText(stringDate);
+            timeDisplay.setText(stringDate);
 
             toEditAssetsFragmentCommunicator.onActivityMessage(currentTime);
             toEditLiabilitiesFragmentCommunicator.onActivityMessage(currentTime);
