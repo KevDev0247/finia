@@ -2,9 +2,9 @@ package protect.FinanceLord.TransactionViewingUtils;
 
 import androidx.fragment.app.Fragment;
 
-public class Report_ExpensesFragment extends Fragment {
+public class View_RevenuesFragment extends Fragment {
 
-    public Report_ExpensesFragment(){
+    public View_RevenuesFragment(){
 
     }
 }

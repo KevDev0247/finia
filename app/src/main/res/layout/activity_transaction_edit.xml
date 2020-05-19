@@ -20,14 +20,13 @@
             android:layout_marginEnd="17dp">
 
             <ImageButton
-                android:id="@+id/view_report_return_button"
+                android:id="@+id/edit_transaction_return_button"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:background="#0015314B"
                 android:src="@drawable/ic_back_icon_foreground"/>
 
             <TextView
-                android:id="@+id/view_report_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Transaction"
@@ -53,7 +52,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/edit_tab_layout"
+            android:id="@+id/edit_transaction_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#4156BE"
@@ -74,7 +73,7 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/edit_view_pager"
+            android:id="@+id/edit_transaction_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>

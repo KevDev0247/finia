@@ -21,9 +21,9 @@ import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.TransactionViewingUtils.CategoryLabelsAdapter;
-import protect.FinanceLord.TransactionViewingUtils.Report_ExpensesFragment;
-import protect.FinanceLord.TransactionViewingUtils.Report_RevenuesFragment;
-import protect.FinanceLord.TransactionViewingUtils.ReportPagerAdapter;
+import protect.FinanceLord.TransactionViewingUtils.View_ExpensesFragment;
+import protect.FinanceLord.TransactionViewingUtils.View_RevenuesFragment;
+import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
 
 public class TransactionActivity extends AppCompatActivity {
 
@@ -44,12 +44,12 @@ public class TransactionActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.transaction_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        Report_ExpensesFragment expensesFragment = new Report_ExpensesFragment();
-        Report_RevenuesFragment revenuesFragment = new Report_RevenuesFragment();
+        View_ExpensesFragment expensesFragment = new View_ExpensesFragment();
+        View_RevenuesFragment revenuesFragment = new View_RevenuesFragment();
         fragments.add(expensesFragment);
         fragments.add(revenuesFragment);
 
-        ReportPagerAdapter sectionsPagerAdapter = new ReportPagerAdapter(this, getSupportFragmentManager(), fragments);
+        ViewPagerAdapter sectionsPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
         tablayout.setupWithViewPager(viewPager);
 
