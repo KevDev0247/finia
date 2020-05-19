@@ -28,5 +28,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 
 </resources>

@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthReportViewingUtils;
+package protect.FinanceLord.NetWorthReportEditingUtils;
 
 import android.content.Context;
 
@@ -16,14 +16,14 @@ import protect.FinanceLord.R;
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class EditPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_assets_text, R.string.tab_liabilities_tab};
     private final Context mContext;
     private ArrayList<Fragment> fragments;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm, ArrayList<Fragment> fragments) {
+    public EditPagerAdapter(Context context, FragmentManager fm, ArrayList<Fragment> fragments) {
         super(fm);
         mContext = context;
         this.fragments = fragments;

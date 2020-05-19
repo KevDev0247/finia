@@ -28,7 +28,7 @@ import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthReportViewingUtils.Report_AssetsFragment;
 import protect.FinanceLord.NetWorthReportViewingUtils.Report_LiabilitiesFragment;
-import protect.FinanceLord.NetWorthReportViewingUtils.SectionsPagerAdapter;
+import protect.FinanceLord.NetWorthReportViewingUtils.ReportPagerAdapter;
 
 public class NetWorthReportViewingActivity extends AppCompatActivity {
 
@@ -67,7 +67,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
+        ReportPagerAdapter sectionsPagerAdapter = new ReportPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 

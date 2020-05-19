@@ -1,20 +1,29 @@
 package protect.FinanceLord;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.TranscationUtils.CategoryLabelsAdapter;
+import protect.FinanceLord.TransactionViewingUtils.CategoryLabelsAdapter;
+import protect.FinanceLord.TransactionViewingUtils.Report_ExpensesFragment;
+import protect.FinanceLord.TransactionViewingUtils.Report_RevenuesFragment;
+import protect.FinanceLord.TransactionViewingUtils.ReportPagerAdapter;
 
 public class TransactionActivity extends AppCompatActivity {
 
@@ -28,9 +37,21 @@ public class TransactionActivity extends AppCompatActivity {
         retrieveDataFromDatabase();
     }
 
-    private void resetView(){
+    private void resetView() {
         ImageButton returnButton = findViewById(R.id.transaction_return_button);
         ImageButton addButton = findViewById(R.id.add_transaction_button);
+        TabLayout tablayout = findViewById(R.id.transaction_tab_layout);
+        final ViewPager viewPager = findViewById(R.id.transaction_view_pager);
+
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        Report_ExpensesFragment expensesFragment = new Report_ExpensesFragment();
+        Report_RevenuesFragment revenuesFragment = new Report_RevenuesFragment();
+        fragments.add(expensesFragment);
+        fragments.add(revenuesFragment);
+
+        ReportPagerAdapter sectionsPagerAdapter = new ReportPagerAdapter(this, getSupportFragmentManager(), fragments);
+        viewPager.setAdapter(sectionsPagerAdapter);
+        tablayout.setupWithViewPager(viewPager);
 
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +63,9 @@ public class TransactionActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent();
+                intent.setClass(TransactionActivity.this, TransactionEditActivity.class);
+                startActivity(intent);
             }
         });
     }

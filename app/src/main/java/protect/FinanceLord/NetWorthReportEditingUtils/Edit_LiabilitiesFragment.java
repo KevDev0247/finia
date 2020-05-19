@@ -34,7 +34,6 @@ import protect.FinanceLord.R;
 
 public class Edit_LiabilitiesFragment extends Fragment {
 
-    String title;
     Date currentTime;
     View liabilitiesFragmentView;
     ExpandableListView expandableListView;
@@ -51,8 +50,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
         }
     };
 
-    public Edit_LiabilitiesFragment(String title, Date currentTime) {
-        this.title = title;
+    public Edit_LiabilitiesFragment(Date currentTime) {
         this.currentTime = currentTime;
     }
 

@@ -1,6 +1,5 @@
 package protect.FinanceLord;
 
-import android.app.SearchManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,10 +22,10 @@ import java.util.GregorianCalendar;
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.NetWorthReportEditingUtils.CalendarDialog;
+import protect.FinanceLord.NetWorthReportEditingUtils.EditPagerAdapter;
 import protect.FinanceLord.NetWorthReportEditingUtils.Edit_AssetsFragment;
 import protect.FinanceLord.NetWorthReportEditingUtils.Edit_LiabilitiesFragment;
 import protect.FinanceLord.NetWorthReportEditingUtils.NetWorthTimeUtils;
-import protect.FinanceLord.NetWorthReportEditingUtils.SectionsPagerAdapter;
 
 public class NetWorthReportEditingActivity extends AppCompatActivity {
 
@@ -52,21 +51,24 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
         currentTime = calendar.getTime();
 
         String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
-        String search = getIntent().getStringExtra(SearchManager.QUERY);
         this.timeDisplay.setText(stringDate);
-        resetView(search);
+        resetView();
     }
 
-    private void resetView(String search){
-        TabLayout tabLayout = findViewById(R.id.edit_tab_layout);
+    private void resetView(){
         ImageButton returnButton = findViewById(R.id.edit_report_return_button);
+        TabLayout tabLayout = findViewById(R.id.edit_tab_layout);
         final ViewPager viewPager = findViewById(R.id.edit_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        final Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment(getString(R.string.assets_name), currentTime);
-        final Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment(getString(R.string.liabilities_name), currentTime);
+        final Edit_AssetsFragment assetsFragment = new Edit_AssetsFragment(currentTime);
+        final Edit_LiabilitiesFragment liabilitiesFragment = new Edit_LiabilitiesFragment(currentTime);
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
+
+        EditPagerAdapter sectionsPagerAdapter = new EditPagerAdapter(this, getSupportFragmentManager(), fragments);
+        viewPager.setAdapter(sectionsPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
 
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,10 +86,6 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
                 calendarDialog.show(fragmentManager, "DateTimePicker");
             }
         });
-
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
     }
 
     CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {

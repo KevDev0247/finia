@@ -63,6 +63,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -74,11 +75,44 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <ListView
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/transaction_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="12dp"
+        android:paddingHorizontal="15dp"
+        android:background="@drawable/ic_toolbar_background">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/transaction_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#4156BE"
+            app:tabSelectedTextColor="#ffffff"
+            app:tabTextColor="#ffffff">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/expenses_name"
+                android:textSize="25sp"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/revenues_name"
+                android:textSize="25sp"/>
+
+        </com.google.android.material.tabs.TabLayout>
 
     </LinearLayout>
 
