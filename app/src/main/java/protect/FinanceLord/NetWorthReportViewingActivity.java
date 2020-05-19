@@ -53,7 +53,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         retrieveSummaryData(itemTime);
     }
 
-    public void resetView(String search, String date) {
+    private void resetView(String search, String date) {
         final TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
         TextView reportTitle = findViewById(R.id.view_report_title);
@@ -99,7 +99,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         });
     }
 
-    public void retrieveSummaryData(final String date) {
+    private void retrieveSummaryData(final String date) {
         final Date itemTime = convertDate(date);
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
@@ -141,7 +141,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         });
     }
 
-    public void refreshSummaryView(float totalAssetsValue, float totalLiabilitiesValue, Float totalAssetsDifference, Float totalLiabilitiesDifference){
+    private void refreshSummaryView(float totalAssetsValue, float totalLiabilitiesValue, Float totalAssetsDifference, Float totalLiabilitiesDifference){
 
         TextView reportNetWorthValue = findViewById(R.id.total_net_worth_value);
         TextView reportNetWorthSymbol = findViewById(R.id.total_net_worth_symbol);
@@ -219,7 +219,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         }
     }
 
-    public Date convertDate(String itemTime) {
+    private Date convertDate(String itemTime) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.US);
         Date date = null;
         try {

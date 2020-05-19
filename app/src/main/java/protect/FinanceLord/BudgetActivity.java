@@ -6,6 +6,13 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+import java.util.concurrent.Executors;
+
+import protect.FinanceLord.Database.BudgetsValue;
+import protect.FinanceLord.Database.BudgetsValueDao;
+import protect.FinanceLord.Database.FinanceLordDatabase;
+
 public class BudgetActivity extends AppCompatActivity {
 
     @Override
@@ -14,10 +21,6 @@ public class BudgetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_budget);
 
         resetView();
-    }
-
-    private void retrieveDataFromDatabase(){
-
     }
 
     private void resetView(){
@@ -35,6 +38,19 @@ public class BudgetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+    }
+
+    private void retrieveDataFromDatabase(){
+
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(BudgetActivity.this);
+                BudgetsValueDao budgetsValueDao = database.budgetsValueDao();
+
+                List<BudgetsValue> allBudgetsValues = budgetsValueDao.queryAllBudgets();
             }
         });
     }

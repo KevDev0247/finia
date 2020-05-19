@@ -28,8 +28,8 @@ import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Liabilities;
 import protect.FinanceLord.NetWorthReportEditingActivity;
-import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.LiabilitiesFragmentAdapter;
-import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.LiabilitiesFragmentChildViewClickListener;
+import protect.FinanceLord.NetWorthReportEditingUtils.FragmentUtils.LiabilitiesFragmentAdapter;
+import protect.FinanceLord.NetWorthReportEditingUtils.FragmentUtils.LiabilitiesFragmentChildViewClickListener;
 import protect.FinanceLord.R;
 
 public class Edit_LiabilitiesFragment extends Fragment {

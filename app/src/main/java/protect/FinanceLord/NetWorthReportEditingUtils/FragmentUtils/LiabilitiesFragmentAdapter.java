@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils;
+package protect.FinanceLord.NetWorthReportEditingUtils.FragmentUtils;
 
 import android.content.Context;
 import android.text.Editable;
