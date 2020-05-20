@@ -27,17 +27,17 @@ public class BudgetActivity extends AppCompatActivity {
         ImageButton returnButton = findViewById(R.id.budget_return_button);
         ImageButton addButton = findViewById(R.id.add_budget_button);
 
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

@@ -1,5 +1,6 @@
 package protect.FinanceLord.TransactionEditingUtils;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,17 +17,32 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Date;
 
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
+import protect.FinanceLord.Communicators.SaveDataCommunicator;
 import protect.FinanceLord.NetWorthReportEditingUtils.CalendarDialog;
 import protect.FinanceLord.NetWorthReportEditingUtils.NetWorthTimeUtils;
 import protect.FinanceLord.R;
+import protect.FinanceLord.TransactionEditActivity;
 
 public class Edit_RevenuesFragment extends Fragment {
 
     Date currentTime;
     private TextInputEditText dateInput;
+    private SaveDataCommunicator fromActivityCommunicator = new SaveDataCommunicator() {
+        @Override
+        public void onActivityMessage() {
 
-    public Edit_RevenuesFragment(){
+        }
+    };
 
+    public Edit_RevenuesFragment(Date currentTime){
+        this.currentTime = currentTime;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        TransactionEditActivity activity = (TransactionEditActivity) context;
+        activity.toEditRevenuesFragmentCommunicator = fromActivityCommunicator;
     }
 
     @Nullable

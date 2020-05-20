@@ -2,7 +2,6 @@ package protect.FinanceLord.Database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
-import androidx.room.PrimaryKey;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -10,23 +9,12 @@ import java.util.List;
 
 @Dao
 public interface TransactionsDao {
+
     @Insert
-    void insertTransactionValue (Transactions transactionsValue);
+    void insertTransaction (Transactions transaction);
 
     @Update
-    void updateTransactionValue (Transactions ... transactionsValue);
-
-    @Insert
-    void insertTransactionComments (Transactions transactionsComments);
-
-    @Insert
-    void updateTransactionComments (Transactions ... transactionsComments);
-
-    @Insert
-    void insertTransactionDate (Transactions transactionsDate);
-
-    @Update
-    void updateTransactionDate (Transactions ... transactionsDate);
+    void updateTransaction (Transactions ... transaction);
 
     @Query("SELECT * FROM Transactions WHERE transactionId LIKE :transactionId")
     List<Transactions> queryTransactionsById (int transactionId);

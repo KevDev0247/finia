@@ -120,4 +120,8 @@
     <string name="transaction_label_category">Category</string>
     <string name="transaction_label_date">Date</string>
 
+    <string name="transaction_name_error_message">Please enter a name</string>
+    <string name="transaction_value_error_message">Please enter a value</string>
+    <string name="transaction_date_error_message">Please enter a date</string>
+
 </resources>

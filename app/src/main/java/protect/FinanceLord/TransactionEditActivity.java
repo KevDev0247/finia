@@ -1,6 +1,7 @@
 package protect.FinanceLord;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -11,12 +12,22 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
+import protect.FinanceLord.Communicators.SaveDataCommunicator;
 import protect.FinanceLord.TransactionEditingUtils.EditPagerAdapter;
 import protect.FinanceLord.TransactionEditingUtils.Edit_ExpensesFragment;
 import protect.FinanceLord.TransactionEditingUtils.Edit_RevenuesFragment;
 
 public class TransactionEditActivity extends AppCompatActivity {
+
+    Date currentTime;
+    public SaveDataCommunicator toEditExpensesFragmentCommunicator;
+    public SaveDataCommunicator toEditRevenuesFragmentCommunicator;
+
+    private static final String TAG = "TransactionEditActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +39,42 @@ public class TransactionEditActivity extends AppCompatActivity {
 
     private void resetView(){
         ImageButton returnButton = findViewById(R.id.edit_transaction_return_button);
-        TabLayout tablayout = findViewById(R.id.edit_transaction_tab_layout);
+        ImageButton saveButton = findViewById(R.id.save_transaction_button);
+        final TabLayout tablayout = findViewById(R.id.edit_transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.edit_transaction_view_pager);
 
+        Calendar calendar = new GregorianCalendar();
+
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        currentTime = calendar.getTime();
+
         ArrayList<Fragment> fragments = new ArrayList<>();
-        Edit_ExpensesFragment expensesFragment = new Edit_ExpensesFragment();
-        Edit_RevenuesFragment revenuesFragment = new Edit_RevenuesFragment();
+        Edit_ExpensesFragment expensesFragment = new Edit_ExpensesFragment(currentTime);
+        Edit_RevenuesFragment revenuesFragment = new Edit_RevenuesFragment(currentTime);
         fragments.add(expensesFragment);
         fragments.add(revenuesFragment);
 
         EditPagerAdapter sectionsPagerAdapter = new EditPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
         tablayout.setupWithViewPager(viewPager);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d(TAG,tablayout.getTabAt(viewPager.getCurrentItem()).getText().toString() + " Fragment has data to save");
+
+                if (tablayout.getTabAt(viewPager.getCurrentItem()).getText().toString().equals(getString(R.string.expenses_name))){
+                    toEditExpensesFragmentCommunicator.onActivityMessage();
+
+                } else if (tablayout.getTabAt(viewPager.getCurrentItem()).getText().toString().equals(getString(R.string.revenues_name))){
+                    toEditRevenuesFragmentCommunicator.onActivityMessage();
+                }
+            }
+        });
 
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override

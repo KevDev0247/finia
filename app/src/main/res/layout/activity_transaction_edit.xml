@@ -39,6 +39,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true">
 
+                <ImageButton
+                    android:id="@+id/save_transaction_button"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_save_icon_foreground" />
+
             </LinearLayout>
 
         </RelativeLayout>
