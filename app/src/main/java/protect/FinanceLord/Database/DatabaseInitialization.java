@@ -15,19 +15,16 @@ public class DatabaseInitialization{
         this.context = context;
     }
 
-    public void initAssetTypeDb(){
+    public void initAssetTypeDb() {
         FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
 
-        List<AssetsType> allAssetsType = assetsTypeDao.queryAllAssetsType();
-
-        Log.d("DatabaseInitialization", "initialize assets type Db, types: " + allAssetsType);
-
-        if (allAssetsType.size() > 0){
+        List<AssetsType> allAssetsTypes = assetsTypeDao.queryAllAssetsType();
+        if (allAssetsTypes.size() > 0) {
             return;
         }
 
-        List<AssetsType> assets = new ArrayList<>();
+        List<AssetsType> assetsTypes = new ArrayList<>();
 
         //Level 3 objects
         AssetsType type1 = new AssetsType();
@@ -164,67 +161,67 @@ public class DatabaseInitialization{
 
         type35.setAssetsName(context.getString(R.string.total_assets_name));
 
-        assets.add(type1);
-        assets.add(type2);
-        assets.add(type3);
-        assets.add(type4);
-        assets.add(type5);
-        assets.add(type6);
-        assets.add(type7);
-        assets.add(type8);
-        assets.add(type9);
-        assets.add(type10);
-        assets.add(type11);
-        assets.add(type12);
-        assets.add(type13);
-        assets.add(type14);
-        assets.add(type15);
-        assets.add(type16);
-        assets.add(type17);
-        assets.add(type18);
-        assets.add(type19);
-        assets.add(type20);
-        assets.add(type21);
-        assets.add(type22);
-        assets.add(type23);
-        assets.add(type24);
-        assets.add(type25);
-        assets.add(type26);
-        assets.add(type27);
-        assets.add(type28);
-        assets.add(type29);
-        assets.add(type30);
-        assets.add(type31);
-        assets.add(type32);
-        assets.add(type33);
-        assets.add(type34);
-        assets.add(type35);
+        assetsTypes.add(type1);
+        assetsTypes.add(type2);
+        assetsTypes.add(type3);
+        assetsTypes.add(type4);
+        assetsTypes.add(type5);
+        assetsTypes.add(type6);
+        assetsTypes.add(type7);
+        assetsTypes.add(type8);
+        assetsTypes.add(type9);
+        assetsTypes.add(type10);
+        assetsTypes.add(type11);
+        assetsTypes.add(type12);
+        assetsTypes.add(type13);
+        assetsTypes.add(type14);
+        assetsTypes.add(type15);
+        assetsTypes.add(type16);
+        assetsTypes.add(type17);
+        assetsTypes.add(type18);
+        assetsTypes.add(type19);
+        assetsTypes.add(type20);
+        assetsTypes.add(type21);
+        assetsTypes.add(type22);
+        assetsTypes.add(type23);
+        assetsTypes.add(type24);
+        assetsTypes.add(type25);
+        assetsTypes.add(type26);
+        assetsTypes.add(type27);
+        assetsTypes.add(type28);
+        assetsTypes.add(type29);
+        assetsTypes.add(type30);
+        assetsTypes.add(type31);
+        assetsTypes.add(type32);
+        assetsTypes.add(type33);
+        assetsTypes.add(type34);
+        assetsTypes.add(type35);
 
-        assetsTypeDao.insertAssetsTypes(assets);
+        assetsTypeDao.insertAssetsTypes(assetsTypes);
 
-        Log.d("DatabaseInitialization", "initialize assets type Db finished");
+        Log.d("DatabaseInitialization", "initialize assetsTypes type Db finished");
     }
 
-    public void initAssetValueDb(){
+    public void initAssetValueDb() {
         FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         AssetsValueDao assetsValueDao = database.assetsValueDao();
 
-        List<AssetsValue> allAssetsValue = assetsValueDao.queryAllAssetsValue();
-        if (allAssetsValue.size() > 0){
+        List<AssetsValue> allAssetsValues = assetsValueDao.queryAllAssetsValue();
+        if (allAssetsValues.size() > 0) {
             return;
         }
     }
 
-    public void initLiabilityTypeDb(){
+    public void initLiabilityTypeDb() {
         FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
 
-        List<LiabilitiesType> allLiabilities = liabilitiesTypeDao.queryAllLiabilities();
-        if (allLiabilities.size() > 0){
+        List<LiabilitiesType> allLiabilitiesTypes = liabilitiesTypeDao.queryAllLiabilities();
+        if (allLiabilitiesTypes.size() > 0) {
             return;
         }
 
-        List<LiabilitiesType> liabilities = new ArrayList<>();
+        List<LiabilitiesType> liabilitiesTypes = new ArrayList<>();
 
         //Level 2 objects
         LiabilitiesType type_1 = new LiabilitiesType();
@@ -281,50 +278,103 @@ public class DatabaseInitialization{
 
         type_14.setLiabilitiesName(context.getString(R.string.total_liabilities_name));
 
-        liabilities.add(type_1);
-        liabilities.add(type_2);
-        liabilities.add(type_3);
-        liabilities.add(type_4);
-        liabilities.add(type_5);
-        liabilities.add(type_6);
-        liabilities.add(type_7);
-        liabilities.add(type_8);
-        liabilities.add(type_9);
-        liabilities.add(type_10);
-        liabilities.add(type_11);
-        liabilities.add(type_12);
-        liabilities.add(type_13);
-        liabilities.add(type_14);
+        liabilitiesTypes.add(type_1);
+        liabilitiesTypes.add(type_2);
+        liabilitiesTypes.add(type_3);
+        liabilitiesTypes.add(type_4);
+        liabilitiesTypes.add(type_5);
+        liabilitiesTypes.add(type_6);
+        liabilitiesTypes.add(type_7);
+        liabilitiesTypes.add(type_8);
+        liabilitiesTypes.add(type_9);
+        liabilitiesTypes.add(type_10);
+        liabilitiesTypes.add(type_11);
+        liabilitiesTypes.add(type_12);
+        liabilitiesTypes.add(type_13);
+        liabilitiesTypes.add(type_14);
 
-        liabilitiesTypeDao.insertLiabilitiesTypes(liabilities);
+        liabilitiesTypeDao.insertLiabilitiesTypes(liabilitiesTypes);
     }
 
-    public void initLiabilityValueDb(){
+    public void initLiabilityValueDb() {
         FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
-        List<LiabilitiesValue> allLiabilitiesValue = liabilitiesValueDao.queryAllLiabilities();
-        if (allLiabilitiesValue.size() > 0){
+        List<LiabilitiesValue> allLiabilitiesValues = liabilitiesValueDao.queryAllLiabilities();
+        if (allLiabilitiesValues.size() > 0) {
             return;
         }
     }
 
-    public void initBudgetDb(){
+    public void initBudgetTypeDb() {
         FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
-        BudgetsDao budgetsDao = database.budgetsDao();
+        BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
 
-        List<Budgets> allBudgets = budgetsDao.queryAllBudgets();
-        if (allBudgets.size() > 0){
+        List<BudgetsType> allBudgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
+        if (allBudgetsTypes.size() > 0){
+            return;
+        }
+
+        List<BudgetsType> budgetsTypes = new ArrayList<>();
+
+        BudgetsType type1 = new BudgetsType();
+        BudgetsType type2 = new BudgetsType();
+        BudgetsType type3 = new BudgetsType();
+        BudgetsType type4 = new BudgetsType();
+        BudgetsType type5 = new BudgetsType();
+        BudgetsType type6 = new BudgetsType();
+        BudgetsType type7 = new BudgetsType();
+        BudgetsType type8 = new BudgetsType();
+        BudgetsType type9 = new BudgetsType();
+        BudgetsType type10 = new BudgetsType();
+        BudgetsType type11 = new BudgetsType();
+        BudgetsType type12 = new BudgetsType();
+
+        type1.setBudgetsName(context.getString(R.string.housing_name));
+        type2.setBudgetsName(context.getString(R.string.transportation_name));
+        type3.setBudgetsName(context.getString(R.string.food_name));
+        type4.setBudgetsName(context.getString(R.string.utilities_name));
+        type5.setBudgetsName(context.getString(R.string.health_care_name));
+        type6.setBudgetsName(context.getString(R.string.insurance_name));
+        type7.setBudgetsName(context.getString(R.string.household_supplies_name));
+        type8.setBudgetsName(context.getString(R.string.personal_spending_name));
+        type9.setBudgetsName(context.getString(R.string.debt_name));
+        type10.setBudgetsName(context.getString(R.string.education_name));
+        type11.setBudgetsName(context.getString(R.string.savings_name));
+        type12.setBudgetsName(context.getString(R.string.entertainment_name));
+
+        budgetsTypes.add(type1);
+        budgetsTypes.add(type2);
+        budgetsTypes.add(type3);
+        budgetsTypes.add(type4);
+        budgetsTypes.add(type5);
+        budgetsTypes.add(type6);
+        budgetsTypes.add(type7);
+        budgetsTypes.add(type8);
+        budgetsTypes.add(type9);
+        budgetsTypes.add(type10);
+        budgetsTypes.add(type11);
+        budgetsTypes.add(type12);
+
+        budgetsTypeDao.insertBudgetsTypes(budgetsTypes);
+    }
+
+    public void initBudgetValueDb() {
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        BudgetsValueDao budgetsDao = database.budgetsValueDao();
+
+        List<BudgetsValue> allBudgetsValues = budgetsDao.queryAllBudgets();
+        if (allBudgetsValues.size() > 0) {
             return;
         }
     }
 
-    public void initTransactionDb(){
+    public void initTransactionDb() {
         FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         TransactionsDao transactionsDao = database.transactionsDao();
 
         List<Transactions> allTransactions = transactionsDao.queryAllTransaction();
-        if (allTransactions.size() > 0){
+        if (allTransactions.size() > 0) {
             return;
         }
     }

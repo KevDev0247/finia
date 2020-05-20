@@ -28,7 +28,6 @@ import protect.FinanceLord.R;
 
 public class Report_AssetsFragment extends Fragment {
 
-    String title;
     private Date itemTime;
     private View contentView;
     private TypeProcessor_Assets assetsTypeProcessor;
@@ -38,21 +37,18 @@ public class Report_AssetsFragment extends Fragment {
     private ArrayList<NetWorthItemsDataModel> retirementAccountsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> ownershipInterestsDataSource = new ArrayList<>();
 
-    public Report_AssetsFragment(String title, Date itemTime) {
-        this.title = title;
+    public Report_AssetsFragment(Date itemTime) {
         this.itemTime = itemTime;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View assetsView = inflater.inflate(R.layout.fragment_report_assets, null);
-        this.contentView = assetsView;
+        contentView = inflater.inflate(R.layout.fragment_report_assets, null);
 
         Log.d("Report_AFragment","the time passed into assets viewing fragment is: " + itemTime);
         getDataFromDatabase(itemTime);
 
-        return assetsView;
+        return contentView;
     }
 
     private void getDataFromDatabase(final Date itemTime) {

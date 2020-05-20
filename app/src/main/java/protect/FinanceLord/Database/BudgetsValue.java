@@ -5,8 +5,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Budgets")
-public class Budgets {
+@Entity(tableName = "BudgetsValue")
+public class BudgetsValue {
     @PrimaryKey(autoGenerate = true)
     private int budgetsId;
 
@@ -23,11 +23,9 @@ public class Budgets {
     private Long dateEnd;
 
     @Ignore
-    public Budgets(){
+    public BudgetsValue() { }
 
-    }
-
-    public Budgets(int budgetsId,float budgetsValue,int budgetsCategoryId,Long dateStart,Long dateEnd){
+    public BudgetsValue(int budgetsId, float budgetsValue, int budgetsCategoryId, Long dateStart, Long dateEnd){
         this.budgetsId = budgetsId;
         this.budgetsValue = budgetsValue;
         this.budgetsCategoryId = budgetsCategoryId;

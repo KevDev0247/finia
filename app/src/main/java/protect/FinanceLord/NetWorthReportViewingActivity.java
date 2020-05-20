@@ -28,7 +28,7 @@ import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthReportViewingUtils.Report_AssetsFragment;
 import protect.FinanceLord.NetWorthReportViewingUtils.Report_LiabilitiesFragment;
-import protect.FinanceLord.NetWorthReportViewingUtils.SectionsPagerAdapter;
+import protect.FinanceLord.NetWorthReportViewingUtils.ReportPagerAdapter;
 
 public class NetWorthReportViewingActivity extends AppCompatActivity {
 
@@ -53,7 +53,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         retrieveSummaryData(itemTime);
     }
 
-    public void resetView(String search, String date) {
+    private void resetView(String search, String date) {
         final TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
         TextView reportTitle = findViewById(R.id.view_report_title);
@@ -62,12 +62,12 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         reportTitle.setText(date);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        Report_AssetsFragment assetsFragment = new Report_AssetsFragment(getString(R.string.assets_name), convertDate(date));
-        Report_LiabilitiesFragment liabilitiesFragment = new Report_LiabilitiesFragment(getString(R.string.liabilities_name), convertDate(date));
+        Report_AssetsFragment assetsFragment = new Report_AssetsFragment(convertDate(date));
+        Report_LiabilitiesFragment liabilitiesFragment = new Report_LiabilitiesFragment(convertDate(date));
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), fragments);
+        ReportPagerAdapter sectionsPagerAdapter = new ReportPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -99,7 +99,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         });
     }
 
-    public void retrieveSummaryData(final String date) {
+    private void retrieveSummaryData(final String date) {
         final Date itemTime = convertDate(date);
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
@@ -141,7 +141,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         });
     }
 
-    public void refreshSummaryView(float totalAssetsValue, float totalLiabilitiesValue, Float totalAssetsDifference, Float totalLiabilitiesDifference){
+    private void refreshSummaryView(float totalAssetsValue, float totalLiabilitiesValue, Float totalAssetsDifference, Float totalLiabilitiesDifference){
 
         TextView reportNetWorthValue = findViewById(R.id.total_net_worth_value);
         TextView reportNetWorthSymbol = findViewById(R.id.total_net_worth_symbol);
@@ -219,7 +219,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         }
     }
 
-    public Date convertDate(String itemTime) {
+    private Date convertDate(String itemTime) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.US);
         Date date = null;
         try {

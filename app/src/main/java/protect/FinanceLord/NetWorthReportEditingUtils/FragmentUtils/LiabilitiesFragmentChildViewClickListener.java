@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils;
+package protect.FinanceLord.NetWorthReportEditingUtils.FragmentUtils;
 
 import android.util.Log;
 import android.view.View;
@@ -6,7 +6,6 @@ import android.widget.ExpandableListView;
 
 import java.util.List;
 
-import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Liabilities;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Liabilities;
 

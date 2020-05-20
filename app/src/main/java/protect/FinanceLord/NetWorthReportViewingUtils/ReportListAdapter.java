@@ -13,7 +13,7 @@ import protect.FinanceLord.R;
 
 public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
 
-    String fragmentName;
+    private String fragmentName;
 
     public ReportListAdapter(Context context, ArrayList<NetWorthItemsDataModel> dataSources, String fragmentName) {
         super(context, 0, dataSources);

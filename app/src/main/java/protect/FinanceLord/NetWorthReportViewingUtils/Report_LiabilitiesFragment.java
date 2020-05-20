@@ -27,27 +27,24 @@ import protect.FinanceLord.R;
 
 public class Report_LiabilitiesFragment extends Fragment {
 
-    String title;
     private Date itemTime;
     private View contentView;
     private TypeProcessor_Liabilities liabilitiesTypeProcessor;
     private ArrayList<NetWorthItemsDataModel> shortTermLiabilitiesDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> longTermLiabilitiesDataSource = new ArrayList<>();
 
-    public Report_LiabilitiesFragment(String title, Date itemTime) {
-        this.title = title;
+    public Report_LiabilitiesFragment(Date itemTime) {
         this.itemTime = itemTime;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View liabilitiesView = inflater.inflate(R.layout.fragment_report_liabilities, null);
-        this.contentView = liabilitiesView;
+        contentView = inflater.inflate(R.layout.fragment_report_liabilities, null);
 
         getDataFromDatabase(itemTime);
 
-        return liabilitiesView;
+        return contentView;
     }
 
     private void getDataFromDatabase(final Date itemTime) {

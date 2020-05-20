@@ -28,16 +28,14 @@ import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
 import protect.FinanceLord.NetWorthReportEditingActivity;
-import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.AssetsFragmentAdapter;
-import protect.FinanceLord.NetWorthReportEditingUtils.FragmentsUtils.AssetsFragmentChildViewClickListener;
+import protect.FinanceLord.NetWorthReportEditingUtils.FragmentUtils.AssetsFragmentAdapter;
+import protect.FinanceLord.NetWorthReportEditingUtils.FragmentUtils.AssetsFragmentChildViewClickListener;
 import protect.FinanceLord.R;
 
 public class Edit_AssetsFragment extends Fragment {
 
-    String title;
-    Date currentTime;
-    View assetsFragmentView;
-    ExpandableListView expandableListView;
+    private Date currentTime;
+    private ExpandableListView expandableListView;
 
     private AssetsFragmentAdapter adapter;
     private DataProcessor_Assets dataProcessor;
@@ -51,8 +49,7 @@ public class Edit_AssetsFragment extends Fragment {
         }
     };
 
-    public Edit_AssetsFragment(String title, Date currentTime) {
-        this.title = title;
+    public Edit_AssetsFragment(Date currentTime) {
         this.currentTime = currentTime;
     }
 
@@ -67,7 +64,7 @@ public class Edit_AssetsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        assetsFragmentView = inflater.inflate(R.layout.fragment_edit_assets, null);
+        View assetsFragmentView = inflater.inflate(R.layout.fragment_edit_assets, null);
         expandableListView = assetsFragmentView.findViewById(R.id.assets_list_view);
         Button commitButton = assetsFragmentView.findViewById(R.id.assets_commit_button);
 
