@@ -33,9 +33,12 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="TransactionTextBoxStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxStrokeColor">#ffffff</item>
-        <item name="boxStrokeWidth">10dp</item>
+    <style name="CalendarDialogTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">#4156BE</item>
+    </style>
+
+    <style name="CalendarButtonTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">#ffffff</item>
     </style>
 
 </resources>

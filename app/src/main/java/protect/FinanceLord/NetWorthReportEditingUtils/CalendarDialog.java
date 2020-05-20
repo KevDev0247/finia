@@ -5,8 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -20,8 +20,8 @@ public class CalendarDialog extends DialogFragment {
 
     View calendarView;
     DatePicker datePicker;
-    Button confirmTimeButton;
-    Button cancelTimeButton;
+    RelativeLayout confirmTimeButton;
+    RelativeLayout cancelTimeButton;
     CalendarDateBroadcast communicator;
     NetWorthTimeUtils timeUtils = new NetWorthTimeUtils();
 
@@ -35,11 +35,12 @@ public class CalendarDialog extends DialogFragment {
 
         calendarView = inflater.inflate(R.layout.time_setting_layout, null);
         datePicker = calendarView.findViewById(R.id.date_picker);
-        this.confirmTimeButton = calendarView.findViewById(R.id.confirm_time_button);
-        this.cancelTimeButton = calendarView.findViewById(R.id.cancel_time_button);
+
+        confirmTimeButton = calendarView.findViewById(R.id.confirm_time_button);
+        cancelTimeButton = calendarView.findViewById(R.id.cancel_time_button);
         setCancelable(true);
 
-        this.confirmTimeButton.setOnClickListener(new View.OnClickListener() {
+        confirmTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Date currentTime = timeUtils.setTime(
