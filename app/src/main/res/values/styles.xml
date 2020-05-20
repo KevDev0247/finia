@@ -33,4 +33,9 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="TransactionTextBoxStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#ffffff</item>
+        <item name="boxStrokeWidth">10dp</item>
+    </style>
+
 </resources>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingVertical="20dp"
     android:background="@drawable/revenues_sheets_gradient">
 
     <LinearLayout
@@ -16,13 +17,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/transaction_label_name"
+            android:textColorHint="@color/revenues_input_text_color"
+            app:boxStrokeColor="@color/revenues_input_box_stroke"
+            app:hintTextColor="#ffffff"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/revenue_name_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:textColor="#ffffff"
+                android:textCursorDrawable="@drawable/transaction_cursor"
+                android:inputType="text"
                 android:singleLine="true"
                 android:scrollbars="vertical"/>
 
@@ -40,15 +46,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/transaction_label_value"
+            android:textColorHint="@color/revenues_input_text_color"
+            app:boxStrokeColor="@color/revenues_input_box_stroke"
+            app:hintTextColor="#ffffff"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/revenue_value_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:textColor="#ffffff"
+                android:textCursorDrawable="@drawable/transaction_cursor"
+                android:inputType="numberDecimal"
                 android:singleLine="true"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,15 +74,19 @@
             android:id="@+id/revenue_comments_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:hint="@string/transaction_label_comments"
+            android:textColorHint="@color/revenues_input_text_color"
+            app:boxStrokeColor="@color/revenues_input_box_stroke"
+            app:hintTextColor="#ffffff"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/revenue_comments_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:textColor="#ffffff"
+                android:textCursorDrawable="@drawable/transaction_cursor"
+                android:inputType="text"
                 android:singleLine="true"
                 android:scrollbars="vertical"/>
 
@@ -88,14 +103,18 @@
             android:id="@+id/revenue_category_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:hint="@string/transaction_label_category"
+            android:textColorHint="@color/revenues_input_text_color"
+            app:boxStrokeColor="@color/revenues_input_box_stroke"
+            app:hintTextColor="#ffffff"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
             <AutoCompleteTextView
                 android:id="@+id/revenue_filled_exposed_dropdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textCursorDrawable="@drawable/transaction_cursor"
                 android:inputType="none"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -112,12 +131,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/transaction_label_date"
+            android:textColorHint="@color/revenues_input_text_color"
+            app:boxStrokeColor="@color/expenses_input_box_stroke"
+            app:hintTextColor="#ffffff"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/revenue_date_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textCursorDrawable="@drawable/transaction_cursor"
                 android:inputType="none"
                 android:singleLine="true"
                 android:focusable="false"
