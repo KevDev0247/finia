@@ -62,8 +62,8 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         reportTitle.setText(date);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        Report_AssetsFragment assetsFragment = new Report_AssetsFragment(getString(R.string.assets_name), convertDate(date));
-        Report_LiabilitiesFragment liabilitiesFragment = new Report_LiabilitiesFragment(getString(R.string.liabilities_name), convertDate(date));
+        Report_AssetsFragment assetsFragment = new Report_AssetsFragment(convertDate(date));
+        Report_LiabilitiesFragment liabilitiesFragment = new Report_LiabilitiesFragment(convertDate(date));
         fragments.add(assetsFragment);
         fragments.add(liabilitiesFragment);
 

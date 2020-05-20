@@ -34,9 +34,8 @@ import protect.FinanceLord.R;
 
 public class Edit_LiabilitiesFragment extends Fragment {
 
-    Date currentTime;
-    View liabilitiesFragmentView;
-    ExpandableListView expandableListView;
+    private Date currentTime;
+    private ExpandableListView expandableListView;
 
     private LiabilitiesFragmentAdapter adapter;
     private DataProcessor_Liabilities dataProcessor;
@@ -65,7 +64,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        liabilitiesFragmentView = inflater.inflate(R.layout.fragment_edit_liabilities, null);
+        View liabilitiesFragmentView = inflater.inflate(R.layout.fragment_edit_liabilities, null);
         expandableListView = liabilitiesFragmentView.findViewById(R.id.liabilities_list_view);
         Button commitButton = liabilitiesFragmentView.findViewById(R.id.liabilities_commit_button);
 
