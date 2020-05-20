@@ -25,28 +25,25 @@ public class Edit_ExpensesFragment extends Fragment {
     Date currentTime;
     private TextInputEditText dateInput;
 
-
     public Edit_ExpensesFragment(){
 
     }
 
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View expensesFragmentView = inflater.inflate(R.layout.fragment_edit_transactions, null);
+        View expensesFragmentView = inflater.inflate(R.layout.fragment_edit_expenses, null);
 
-        dateInput = expensesFragmentView.findViewById(R.id.transaction_date_input);
+        dateInput = expensesFragmentView.findViewById(R.id.expenses_date_input);
 
         dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CalendarDialog calendarDialog = new CalendarDialog(calendarDialogCommunicator);
                 FragmentManager fragmentManager = getFragmentManager();
-                Log.d("EditReportPassing", "time is " + currentTime);
+                Log.d("Edit_EFragment", "Date input is clicked");
                 calendarDialog.show(fragmentManager, "DateTimePicker");
             }
         });
-
 
         return expensesFragmentView;
     }
@@ -55,7 +52,7 @@ public class Edit_ExpensesFragment extends Fragment {
         @Override
         public void onDialogMessage(Date date) {
             currentTime = date;
-            Log.d("EditReportCommunicator", "time is " + currentTime);
+            Log.d("Edit_EFragment", "time is " + currentTime);
             String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
             dateInput.setText(stringDate);
         }

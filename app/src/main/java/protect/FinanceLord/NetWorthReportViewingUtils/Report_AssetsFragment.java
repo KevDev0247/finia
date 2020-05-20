@@ -43,8 +43,7 @@ public class Report_AssetsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        this.contentView = inflater.inflate(R.layout.fragment_report_assets, null);
+        contentView = inflater.inflate(R.layout.fragment_report_assets, null);
 
         Log.d("Report_AFragment","the time passed into assets viewing fragment is: " + itemTime);
         getDataFromDatabase(itemTime);

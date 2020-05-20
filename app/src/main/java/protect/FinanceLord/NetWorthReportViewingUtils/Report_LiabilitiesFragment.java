@@ -40,8 +40,7 @@ public class Report_LiabilitiesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        this.contentView = inflater.inflate(R.layout.fragment_report_liabilities, null);
+        contentView = inflater.inflate(R.layout.fragment_report_liabilities, null);
 
         getDataFromDatabase(itemTime);
 
