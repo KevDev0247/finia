@@ -15,10 +15,10 @@ import protect.FinanceLord.R;
 
 public class FragmentUtils {
 
-    Context context;
-    String TAG;
-    Date currentTime;
-    TransactionInputUtils inputUtils;
+    private Context context;
+    private String TAG;
+    private Date currentTime;
+    private TransactionInputUtils inputUtils;
 
     public FragmentUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, String TAG){
         this.context = context;

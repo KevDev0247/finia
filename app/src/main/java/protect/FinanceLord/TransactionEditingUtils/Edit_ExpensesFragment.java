@@ -30,16 +30,6 @@ public class Edit_ExpensesFragment extends Fragment {
 
     private static final String TAG = "Edit_ExpensesFragment";
 
-    private SaveDataCommunicator fromActivityCommunicator = new SaveDataCommunicator() {
-        @Override
-        public void onActivityMessage() {
-            Log.d(TAG, "the message from activity was received");
-
-            fragmentUtils.retrieveDataFromInputBox();
-            fragmentUtils.addTextListener();
-        }
-    };
-
     public Edit_ExpensesFragment(Date currentTime){
         this.currentTime = currentTime;
     }
@@ -79,6 +69,16 @@ public class Edit_ExpensesFragment extends Fragment {
 
         return expensesFragmentView;
     }
+
+    private SaveDataCommunicator fromActivityCommunicator = new SaveDataCommunicator() {
+        @Override
+        public void onActivityMessage() {
+            Log.d(TAG, "the message from activity was received");
+
+            fragmentUtils.retrieveDataFromInputBox();
+            fragmentUtils.addTextListener();
+        }
+    };
 
     CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override
