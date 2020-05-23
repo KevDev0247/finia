@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -26,8 +27,7 @@ import protect.FinanceLord.TransactionEditActivity;
 
 public class Edit_RevenuesFragment extends Fragment {
 
-    Date currentTime;
-
+    private Date currentTime;
     private TransactionInputUtils inputUtils;
     private FragmentUtils fragmentUtils;
     private List<String> typeNames = new ArrayList<>();
@@ -66,7 +66,9 @@ public class Edit_RevenuesFragment extends Fragment {
         inputUtils.categoryInput = revenuesFragmentView.findViewById(R.id.revenue_category_input);
         inputUtils.dateInput = revenuesFragmentView.findViewById(R.id.revenue_date_input);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, typeNames);
+        inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.expenses_dropdown_background, null));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
         fragmentUtils = new FragmentUtils(getContext(), currentTime, inputUtils, TAG);

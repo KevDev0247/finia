@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,147 +10,152 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp">
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/expenses_name_field"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/transaction_label_name"
-            android:textColorHint="@color/expenses_input_text_color"
-            app:boxStrokeColor="@color/expenses_input_box_stroke"
-            app:hintTextColor="#ffffff"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:padding="15dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/expenses_name_input"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/expenses_category_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:textCursorDrawable="@drawable/transaction_cursor"
-                android:inputType="text"
-                android:singleLine="true"
-                android:scrollbars="vertical"/>
+                android:hint="@string/transaction_label_category"
+                android:textColorHint="@color/expenses_input_text_color"
+                app:boxStrokeColor="@color/expenses_input_box_stroke"
+                app:hintTextColor="#ffffff"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/expenses_category_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:textCursorDrawable="@drawable/transaction_cursor"
+                    android:completionThreshold="1"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/expenses_name_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/transaction_label_name"
+                android:textColorHint="@color/expenses_input_text_color"
+                app:boxStrokeColor="@color/expenses_input_box_stroke"
+                app:hintTextColor="#ffffff"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/expenses_name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:textCursorDrawable="@drawable/transaction_cursor"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:scrollbars="vertical"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/expenses_value_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/transaction_label_value"
+                android:textColorHint="@color/expenses_input_text_color"
+                app:boxStrokeColor="@color/expenses_input_box_stroke"
+                app:hintTextColor="#ffffff"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/expenses_value_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:textCursorDrawable="@drawable/transaction_cursor"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"
+                    android:scrollbars="vertical"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/expenses_comments_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/transaction_label_comments"
+                android:textColorHint="@color/expenses_input_text_color"
+                app:boxStrokeColor="@color/expenses_input_box_stroke"
+                app:hintTextColor="#ffffff"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/expenses_comments_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:textCursorDrawable="@drawable/transaction_cursor"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:scrollbars="vertical"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/expenses_date_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/transaction_label_date"
+                android:textColorHint="@color/expenses_input_text_color"
+                app:boxStrokeColor="@color/expenses_input_box_stroke"
+                app:hintTextColor="#ffffff"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/expenses_date_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="#ffffff"
+                    android:textCursorDrawable="@drawable/transaction_cursor"
+                    android:singleLine="true"
+                    android:focusable="false"
+                    android:scrollbars="vertical"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/expenses_value_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/transaction_label_value"
-            android:textColorHint="@color/expenses_input_text_color"
-            app:boxStrokeColor="@color/expenses_input_box_stroke"
-            app:hintTextColor="#ffffff"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/expenses_value_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:textCursorDrawable="@drawable/transaction_cursor"
-                android:inputType="numberDecimal"
-                android:singleLine="true"
-                android:scrollbars="vertical"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/expenses_comments_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/transaction_label_comments"
-            android:textColorHint="@color/expenses_input_text_color"
-            app:boxStrokeColor="@color/expenses_input_box_stroke"
-            app:hintTextColor="#ffffff"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/expenses_comments_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:textCursorDrawable="@drawable/transaction_cursor"
-                android:inputType="text"
-                android:singleLine="true"
-                android:scrollbars="vertical"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/expenses_category_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/transaction_label_category"
-            android:textColorHint="@color/expenses_input_text_color"
-            app:boxStrokeColor="@color/expenses_input_box_stroke"
-            app:hintTextColor="#ffffff"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-
-            <AutoCompleteTextView
-                android:id="@+id/expenses_category_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:textCursorDrawable="@drawable/transaction_cursor"
-                android:inputType="none"
-                android:completionThreshold="1"
-                android:completionHint="select a category"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/expenses_date_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/transaction_label_date"
-            android:textColorHint="@color/expenses_input_text_color"
-            app:boxStrokeColor="@color/expenses_input_box_stroke"
-            app:hintTextColor="#ffffff"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/expenses_date_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                android:textColor="#ffffff"
-                android:textCursorDrawable="@drawable/transaction_cursor"
-                android:singleLine="true"
-                android:focusable="false"
-                android:scrollbars="vertical"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

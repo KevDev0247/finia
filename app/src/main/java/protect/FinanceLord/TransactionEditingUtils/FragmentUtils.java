@@ -27,8 +27,9 @@ public class FragmentUtils {
         this.TAG = TAG;
     }
 
-    public void retrieveDataFromInputBox(){
-        Transactions transaction = new Transactions();
+    public void retrieveDataFromInputBox() {
+        final Transactions transaction = new Transactions();
+        boolean whetherToInsert = true;
 
         if (!inputUtils.nameInput.getText().toString().isEmpty()){
             Log.d(TAG, "this transaction's name is " + inputUtils.nameInput.getText().toString());
@@ -36,7 +37,7 @@ public class FragmentUtils {
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.nameInputField.setError(context.getString(R.string.transaction_name_error_message));
-            return;
+            whetherToInsert = false;
         }
 
         if (!inputUtils.valueInput.getText().toString().isEmpty()){
@@ -45,7 +46,7 @@ public class FragmentUtils {
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.valueInputField.setError(context.getString(R.string.transaction_value_error_message));
-            return;
+            whetherToInsert = false;
         }
 
         if (!inputUtils.commentInput.getText().toString().isEmpty()){
@@ -57,20 +58,20 @@ public class FragmentUtils {
         Log.d(TAG, "this transaction's date is " + currentTime.toString());
         transaction.setDate(currentTime.getTime());
 
-        insertTransactionIntoDb(transaction);
-    }
+        if (whetherToInsert){
 
-    private void insertTransactionIntoDb(final Transactions transaction) {
+            Executors.newSingleThreadExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+                    TransactionsDao transactionsDao = database.transactionsDao();
 
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
-                TransactionsDao transactionsDao = database.transactionsDao();
-
-                transactionsDao.insertTransaction(transaction);
-            }
-        });
+                    transactionsDao.insertTransaction(transaction);
+                }
+            });
+        } else {
+            Log.d(TAG, "the transaction has some null values");
+        }
     }
 
     public void addTextListener(){
