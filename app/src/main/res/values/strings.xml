@@ -117,7 +117,7 @@
     <string name="transaction_name_error_message">Please enter a name</string>
     <string name="transaction_value_error_message">Please enter a value</string>
     <string name="transaction_date_error_message">Please enter a date</string>
-
+    <string name="transaction_category_error_message">Please pick a category</string>
 
 
 

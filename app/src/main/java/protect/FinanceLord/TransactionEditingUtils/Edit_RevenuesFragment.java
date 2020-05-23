@@ -30,12 +30,14 @@ public class Edit_RevenuesFragment extends Fragment {
     private Date currentTime;
     private TransactionInputUtils inputUtils;
     private FragmentUtils fragmentUtils;
+    private List<BudgetTypesDataModel> dataModels;
     private List<String> typeNames = new ArrayList<>();
 
     private static final String TAG = "Edit_RevenuesFragment";
 
     public Edit_RevenuesFragment(Date currentTime, List<BudgetTypesDataModel> dataModels){
         this.currentTime = currentTime;
+        this.dataModels = dataModels;
 
         for (BudgetTypesDataModel dataModel : dataModels){
             String typeName = dataModel.typeName;
@@ -71,7 +73,7 @@ public class Edit_RevenuesFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
-        fragmentUtils = new FragmentUtils(getContext(), currentTime, inputUtils, TAG);
+        fragmentUtils = new FragmentUtils(getContext(), currentTime, inputUtils, dataModels, TAG);
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +93,7 @@ public class Edit_RevenuesFragment extends Fragment {
         public void onActivityMessage() {
             Log.d(TAG, "the message from activity was received");
 
-            fragmentUtils.retrieveDataFromInputBox();
+            fragmentUtils.retrieveAndInsertData();
             fragmentUtils.addTextListener();
         }
     };

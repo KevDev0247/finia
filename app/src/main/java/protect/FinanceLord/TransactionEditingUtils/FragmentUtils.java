@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.FinanceLordDatabase;
@@ -13,26 +14,28 @@ import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.R;
 
-public class FragmentUtils {
+class FragmentUtils {
 
     private Context context;
     private String TAG;
     private Date currentTime;
     private TransactionInputUtils inputUtils;
+    private List<BudgetTypesDataModel> dataModels;
 
-    public FragmentUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, String TAG){
+    FragmentUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetTypesDataModel> dataModels, String TAG){
         this.context = context;
         this.currentTime = currentTime;
         this.inputUtils = inputUtils;
+        this.dataModels = dataModels;
         this.TAG = TAG;
     }
 
-    public void retrieveDataFromInputBox() {
+    void retrieveAndInsertData() {
         final Transactions transaction = new Transactions();
         boolean whetherToInsert = true;
 
         if (!inputUtils.nameInput.getText().toString().isEmpty()){
-            Log.d(TAG, "this transaction's name is " + inputUtils.nameInput.getText().toString());
+            Log.d(TAG, "this transaction's name is " + inputUtils.nameInput.getText());
             transaction.setTransactionName(inputUtils.nameInput.getText().toString());
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
@@ -41,7 +44,7 @@ public class FragmentUtils {
         }
 
         if (!inputUtils.valueInput.getText().toString().isEmpty()){
-            Log.d(TAG, "this transaction's value is " + inputUtils.valueInput.getText().toString());
+            Log.d(TAG, "this transaction's value is " + inputUtils.valueInput.getText());
             transaction.setTransactionValue(Float.parseFloat(inputUtils.valueInput.getText().toString().replace(",", "")));
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
@@ -50,11 +53,25 @@ public class FragmentUtils {
         }
 
         if (!inputUtils.commentInput.getText().toString().isEmpty()){
-            Log.d(TAG, "this transaction's comment is " + inputUtils.commentInput.getText().toString());
+            Log.d(TAG, "this transaction's comment is " + inputUtils.commentInput.getText());
             transaction.setTransactionComments(inputUtils.commentInput.getText().toString());
         } else {
             transaction.setTransactionComments(null);
         }
+
+        if (!inputUtils.categoryInput.getText().toString().isEmpty()){
+            Log.d(TAG, "this transaction's category is " + inputUtils.categoryInput.getText());
+            for (BudgetTypesDataModel dataModel : dataModels){
+                if (dataModel.typeName.equals(inputUtils.categoryInput.getText().toString())){
+                    transaction.setTransactionCategoryId(dataModel.typeId);
+                }
+            }
+        } else {
+            Log.d(TAG, "no data is inputted, an error should be displayed ");
+            inputUtils.valueInputField.setError(context.getString(R.string.transaction_category_error_message));
+            whetherToInsert = false;
+        }
+
         Log.d(TAG, "this transaction's date is " + currentTime.toString());
         transaction.setDate(currentTime.getTime());
 
@@ -74,7 +91,7 @@ public class FragmentUtils {
         }
     }
 
-    public void addTextListener(){
+    void addTextListener() {
         inputUtils.nameInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
