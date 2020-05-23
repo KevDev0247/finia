@@ -110,12 +110,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
             <AutoCompleteTextView
-                android:id="@+id/revenue_filled_exposed_dropdown"
+                android:id="@+id/revenue_category_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:textCursorDrawable="@drawable/transaction_cursor"
-                android:inputType="none"/>
+                android:inputType="none"
+                android:completionHint="select a category"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,7 +133,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/transaction_label_date"
             android:textColorHint="@color/revenues_input_text_color"
-            app:boxStrokeColor="@color/expenses_input_box_stroke"
+            app:boxStrokeColor="@color/revenues_input_box_stroke"
             app:hintTextColor="#ffffff"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 

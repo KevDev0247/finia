@@ -6,13 +6,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Communicators.SaveDataCommunicator;
@@ -27,18 +30,24 @@ public class Edit_ExpensesFragment extends Fragment {
 
     private TransactionInputUtils inputUtils;
     private FragmentUtils fragmentUtils;
+    private List<String> typeNames = new ArrayList<>();
 
     private static final String TAG = "Edit_ExpensesFragment";
 
-    public Edit_ExpensesFragment(Date currentTime){
+    public Edit_ExpensesFragment(Date currentTime, List<BudgetTypesDataModel> dataModels){
         this.currentTime = currentTime;
+
+        for (BudgetTypesDataModel dataModel : dataModels){
+            String typeName = dataModel.typeName;
+            typeNames.add(typeName);
+        }
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         TransactionEditActivity activity = (TransactionEditActivity) context;
-        activity.toEditExpensesFragmentCommunicator = fromActivityCommunicator;
+        activity.toEditExpensesCommunicator = fromActivityCommunicator;
     }
 
     @Override
@@ -49,11 +58,16 @@ public class Edit_ExpensesFragment extends Fragment {
 
         inputUtils.nameInputField = expensesFragmentView.findViewById(R.id.expenses_name_field);
         inputUtils.valueInputField = expensesFragmentView.findViewById(R.id.expenses_value_field);
+        inputUtils.categoryInputField = expensesFragmentView.findViewById(R.id.expenses_category_field);
 
         inputUtils.nameInput = expensesFragmentView.findViewById(R.id.expenses_name_input);
         inputUtils.valueInput = expensesFragmentView.findViewById(R.id.expenses_value_input);
         inputUtils.commentInput = expensesFragmentView.findViewById(R.id.expenses_comments_input);
+        inputUtils.categoryInput = expensesFragmentView.findViewById(R.id.expenses_category_input);
         inputUtils.dateInput = expensesFragmentView.findViewById(R.id.expenses_date_input);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, typeNames);
+        inputUtils.categoryInput.setAdapter(adapter);
 
         fragmentUtils = new FragmentUtils(getContext(), currentTime, inputUtils, TAG);
 
@@ -80,7 +94,7 @@ public class Edit_ExpensesFragment extends Fragment {
         }
     };
 
-    CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
+    private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override
         public void onDialogMessage(Date date) {
             currentTime = date;

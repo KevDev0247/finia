@@ -110,12 +110,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
             <AutoCompleteTextView
-                android:id="@+id/expenses_filled_exposed_dropdown"
+                android:id="@+id/expenses_category_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:textCursorDrawable="@drawable/transaction_cursor"
-                android:inputType="none"/>
+                android:inputType="none"
+                android:completionThreshold="1"
+                android:completionHint="select a category"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -98,12 +98,6 @@
     <string name="positive_symbol">+</string>
     <string name="negative_symbol">-</string>
 
-
-    <string name="net_worth_time_key">itemTime</string>
-    <string name="net_worth_value_key">itemValue</string>
-    <string name="net_worth_difference_key">itemDifference</string>
-
-
     <string name="image_of_assets">Image of assets</string>
     <string name="title_activity_net_worth_edit_reports">NetWorthEditReportsActivity</string>
     <string name="tab_assets_text">Assets</string>
@@ -123,5 +117,13 @@
     <string name="transaction_name_error_message">Please enter a name</string>
     <string name="transaction_value_error_message">Please enter a value</string>
     <string name="transaction_date_error_message">Please enter a date</string>
+
+
+
+
+    <string name="net_worth_time_key">itemTime</string>
+    <string name="net_worth_value_key">itemValue</string>
+    <string name="net_worth_difference_key">itemDifference</string>
+    <string name="budget_categories_key">budgetsCategory</string>
 
 </resources>

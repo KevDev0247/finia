@@ -6,13 +6,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Communicators.SaveDataCommunicator;
@@ -27,18 +30,24 @@ public class Edit_RevenuesFragment extends Fragment {
 
     private TransactionInputUtils inputUtils;
     private FragmentUtils fragmentUtils;
+    private List<String> typeNames = new ArrayList<>();
 
     private static final String TAG = "Edit_RevenuesFragment";
 
-    public Edit_RevenuesFragment(Date currentTime){
+    public Edit_RevenuesFragment(Date currentTime, List<BudgetTypesDataModel> dataModels){
         this.currentTime = currentTime;
+
+        for (BudgetTypesDataModel dataModel : dataModels){
+            String typeName = dataModel.typeName;
+            typeNames.add(typeName);
+        }
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         TransactionEditActivity activity = (TransactionEditActivity) context;
-        activity.toEditRevenuesFragmentCommunicator = fromActivityCommunicator;
+        activity.toEditRevenuesCommunicator = fromActivityCommunicator;
     }
 
     @Override
@@ -49,11 +58,16 @@ public class Edit_RevenuesFragment extends Fragment {
 
         inputUtils.nameInputField = revenuesFragmentView.findViewById(R.id.revenue_name_field);
         inputUtils.valueInputField = revenuesFragmentView.findViewById(R.id.revenue_value_field);
+        inputUtils.categoryInputField = revenuesFragmentView.findViewById(R.id.expenses_category_field);
 
         inputUtils.nameInput = revenuesFragmentView.findViewById(R.id.revenue_name_input);
         inputUtils.valueInput = revenuesFragmentView.findViewById(R.id.revenue_value_input);
         inputUtils.commentInput = revenuesFragmentView.findViewById(R.id.revenue_comments_input);
+        inputUtils.categoryInput = revenuesFragmentView.findViewById(R.id.revenue_category_input);
         inputUtils.dateInput = revenuesFragmentView.findViewById(R.id.revenue_date_input);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, typeNames);
+        inputUtils.categoryInput.setAdapter(adapter);
 
         fragmentUtils = new FragmentUtils(getContext(), currentTime, inputUtils, TAG);
 

@@ -20,10 +20,11 @@ import java.util.concurrent.Executors;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionViewingUtils.CategoryLabelsAdapter;
+import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
 import protect.FinanceLord.TransactionViewingUtils.View_ExpensesFragment;
 import protect.FinanceLord.TransactionViewingUtils.View_RevenuesFragment;
-import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
 
 public class TransactionActivity extends AppCompatActivity {
 
@@ -32,12 +33,12 @@ public class TransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
 
-        resetView();
-
         retrieveDataFromDatabase();
+
+        resetView(null);
     }
 
-    private void resetView() {
+    private void resetView(final List<BudgetsType> budgetsTypes) {
         ImageButton returnButton = findViewById(R.id.transaction_return_button);
         ImageButton addButton = findViewById(R.id.add_transaction_button);
         TabLayout tablayout = findViewById(R.id.transaction_tab_layout);
@@ -60,10 +61,22 @@ public class TransactionActivity extends AppCompatActivity {
             }
         });
 
+        ArrayList<BudgetTypesDataModel> dataModels = new ArrayList<>();
+        if (budgetsTypes != null){
+            for (BudgetsType budgetsType : budgetsTypes){
+                BudgetTypesDataModel dataModel = new BudgetTypesDataModel(budgetsType.getBudgetsCategoryId(), budgetsType.getBudgetsName());
+                dataModels.add(dataModel);
+            }
+        } else {
+            dataModels = null;
+        }
+
+        final ArrayList<BudgetTypesDataModel> finalDataModels = dataModels;
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
+                intent.putParcelableArrayListExtra(getString(R.string.budget_categories_key), finalDataModels);
                 intent.setClass(TransactionActivity.this, TransactionEditActivity.class);
                 startActivity(intent);
             }
@@ -83,6 +96,7 @@ public class TransactionActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         refreshCategoryViewList(budgetsTypes);
+                        resetView(budgetsTypes);
                     }
                 });
             }
