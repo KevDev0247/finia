@@ -20,6 +20,8 @@ import java.util.concurrent.Executors;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.Database.Transactions;
+import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionViewingUtils.CategoryLabelsAdapter;
 import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
@@ -34,19 +36,39 @@ public class TransactionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaction);
 
         retrieveDataFromDatabase();
-
-        resetView(null);
     }
 
-    private void resetView(final List<BudgetsType> budgetsTypes) {
+    private void retrieveDataFromDatabase() {
+
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
+                TransactionsDao transactionsDao = database.transactionsDao();
+                BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
+                final List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
+                final List<Transactions> transactions = transactionsDao.queryAllTransaction();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshCategoryViewList(budgetsTypes);
+                        resetView(budgetsTypes, transactions);
+                    }
+                });
+            }
+        });
+    }
+
+    private void resetView(List<BudgetsType> budgetsTypes, List<Transactions> transactions) {
         ImageButton returnButton = findViewById(R.id.transaction_return_button);
         ImageButton addButton = findViewById(R.id.add_transaction_button);
         TabLayout tablayout = findViewById(R.id.transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.transaction_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        View_ExpensesFragment expensesFragment = new View_ExpensesFragment();
-        View_RevenuesFragment revenuesFragment = new View_RevenuesFragment();
+        View_ExpensesFragment expensesFragment = new View_ExpensesFragment(transactions);
+        View_RevenuesFragment revenuesFragment = new View_RevenuesFragment(transactions);
         fragments.add(expensesFragment);
         fragments.add(revenuesFragment);
 
@@ -79,26 +101,6 @@ public class TransactionActivity extends AppCompatActivity {
                 intent.putParcelableArrayListExtra(getString(R.string.budget_categories_key), finalDataModels);
                 intent.setClass(TransactionActivity.this, TransactionEditActivity.class);
                 startActivity(intent);
-            }
-        });
-    }
-
-    private void retrieveDataFromDatabase() {
-
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
-                BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
-                final List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshCategoryViewList(budgetsTypes);
-                        resetView(budgetsTypes);
-                    }
-                });
             }
         });
     }

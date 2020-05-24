@@ -43,12 +43,12 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
 
             } else if (Float.parseFloat(dataSource.difference) > 0) {
                 View differenceBlockView = convertView.findViewById(R.id.asset_item_difference_block);
-                differenceBlockView.setBackgroundResource(R.drawable.ic_net_increase);
+                differenceBlockView.setBackgroundResource(R.drawable.net_increase);
                 assetDifferenceSymbol.setText(R.string.positive_symbol);
 
             } else if (Float.parseFloat(dataSource.difference) < 0) {
                 View differenceBlockView = convertView.findViewById(R.id.asset_item_difference_block);
-                differenceBlockView.setBackgroundResource(R.drawable.ic_net_decrease);
+                differenceBlockView.setBackgroundResource(R.drawable.net_decrease);
                 assetDifferenceSymbol.setText(R.string.negative_symbol);
 
             } else if (Float.parseFloat(dataSource.difference) == 0) {
@@ -77,12 +77,12 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
 
             } else if (Float.parseFloat(dataSource.difference) > 0) {
                 View differenceBlockView = convertView.findViewById(R.id.liability_item_difference_block);
-                differenceBlockView.setBackgroundResource(R.drawable.ic_net_increase);
+                differenceBlockView.setBackgroundResource(R.drawable.net_increase);
                 liabilityDifferenceSymbol.setText(R.string.positive_symbol);
 
             } else if (Float.parseFloat(dataSource.difference) < 0) {
                 View differenceBlockView = convertView.findViewById(R.id.liability_item_difference_block);
-                differenceBlockView.setBackgroundResource(R.drawable.ic_net_decrease);
+                differenceBlockView.setBackgroundResource(R.drawable.net_decrease);
                 liabilityDifferenceSymbol.setText(R.string.negative_symbol);
 
             } else if (Float.parseFloat(dataSource.difference) == 0) {

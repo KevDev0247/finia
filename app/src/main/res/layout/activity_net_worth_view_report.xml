@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:contentScrim="#15314b"
-                android:background="@drawable/ic_report_collapse_summary"
+                android:background="@drawable/report_collapse_summary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:toolbarId="@id/toolbar">
 
@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_gravity="bottom"
-                    android:background="@drawable/ic_report_summary_bottom_edge">
+                    android:background="@drawable/report_summary_bottom_edge">
 
                 </LinearLayout>
 
@@ -50,7 +50,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ic_report_cards_summary"
+                        android:background="@drawable/report_cards_summary"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -64,7 +64,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/ic_report_cards_summary_items"
+                                android:background="@drawable/report_cards_summary_items"
                                 android:padding="5dp">
 
                                 <RelativeLayout
@@ -120,7 +120,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginVertical="5dp"
-                                        android:background="@drawable/ic_net_neutral"
+                                        android:background="@drawable/net_neutral"
                                         android:orientation="vertical"
                                         android:paddingHorizontal="10dp"
                                         android:paddingVertical="5dp">
@@ -195,7 +195,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/ic_report_cards_summary_items"
+                                    android:background="@drawable/report_cards_summary_items"
                                     android:orientation="vertical"
                                     android:padding="10dp"
                                     android:weightSum="5">
@@ -232,7 +232,7 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="3dp"
-                                        android:background="@drawable/ic_report_cards_summary">
+                                        android:background="@drawable/report_cards_summary">
 
                                     </LinearLayout>
 
@@ -257,7 +257,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginVertical="5dp"
-                                            android:background="@drawable/ic_net_neutral"
+                                            android:background="@drawable/net_neutral"
                                             android:orientation="vertical"
                                             android:paddingHorizontal="10dp"
                                             android:paddingVertical="5dp">
@@ -313,7 +313,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/ic_report_cards_summary_items"
+                                    android:background="@drawable/report_cards_summary_items"
                                     android:orientation="vertical"
                                     android:padding="10dp"
                                     android:weightSum="5">
@@ -350,7 +350,7 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="3dp"
-                                        android:background="@drawable/ic_report_cards_summary">
+                                        android:background="@drawable/report_cards_summary">
 
                                     </LinearLayout>
 
@@ -375,7 +375,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginVertical="5dp"
-                                            android:background="@drawable/ic_net_neutral"
+                                            android:background="@drawable/net_neutral"
                                             android:orientation="vertical"
                                             android:paddingHorizontal="10dp"
                                             android:paddingVertical="5dp">

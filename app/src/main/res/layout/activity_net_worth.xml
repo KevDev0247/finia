@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_margin="12dp"
             android:paddingVertical="5dp"
-            android:background="@drawable/ic_toolbar_background">
+            android:background="@drawable/toolbar_background">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -78,7 +78,7 @@
             android:orientation="vertical"
             android:layout_marginBottom="0dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_cards_blurred_background">
+            android:background="@drawable/net_worth_pager_background">
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/assets_cards_view_pager"
@@ -96,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/ic_list_header_background"
+        android:background="@drawable/past_reports_sheet_background"
         app:behavior_peekHeight="56dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 

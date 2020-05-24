@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_margin="12dp"
             android:paddingVertical="5dp"
-            android:background="@drawable/ic_toolbar_background">
+            android:background="@drawable/toolbar_background">
 
             <RelativeLayout
                 android:layout_width="match_parent"

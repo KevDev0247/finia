@@ -3,12 +3,12 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/ic_edit_report_items_blurred">
+    android:background="@drawable/edit_report_items_blurred">
 
     <LinearLayout
         android:layout_width="10dp"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_edit_report_item_left_edge">
+        android:background="@drawable/edit_report_input_left_edge">
 
     </LinearLayout>
 
@@ -57,7 +57,7 @@
                     android:inputType="numberDecimal"
                     android:textSize="20sp"
                     android:textColor="#ffffff"
-                    android:background="@drawable/ic_edit_report_input" />
+                    android:background="@drawable/edit_report_input_box" />
 
             </LinearLayout>
 

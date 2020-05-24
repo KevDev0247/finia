@@ -267,11 +267,11 @@ public class Report_AssetsFragment extends Fragment {
 
             } else if (difference > 0){
                 liquidAssetsSymbol.setText(getString(R.string.positive_symbol));
-                liquidAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+                liquidAssetsDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
 
             } else if (difference < 0){
                 liquidAssetsSymbol.setText(getString(R.string.negative_symbol));
-                liquidAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+                liquidAssetsDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             }
         }
 
@@ -288,11 +288,11 @@ public class Report_AssetsFragment extends Fragment {
 
             } else if (difference > 0){
                 investedAssetsSymbol.setText(getString(R.string.positive_symbol));
-                investedAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+                investedAssetsDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
 
             } else if (difference < 0){
                 investedAssetsSymbol.setText(getString(R.string.negative_symbol));
-                investedAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+                investedAssetsDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             }
         }
 
@@ -309,11 +309,11 @@ public class Report_AssetsFragment extends Fragment {
 
             } else if (difference > 0){
                 personalAssetsSymbol.setText(getString(R.string.positive_symbol));
-                personalAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+                personalAssetsDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
 
             } else if (difference < 0){
                 personalAssetsSymbol.setText(getString(R.string.negative_symbol));
-                personalAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+                personalAssetsDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             }
         }
 
@@ -330,11 +330,11 @@ public class Report_AssetsFragment extends Fragment {
 
             } else if (difference > 0){
                 taxableAccountsSymbol.setText(getString(R.string.positive_symbol));
-                taxableAccountsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+                taxableAccountsDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
 
             } else if (difference < 0){
                 taxableAccountsSymbol.setText(getString(R.string.negative_symbol));
-                taxableAccountsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+                taxableAccountsDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             }
         }
 
@@ -351,11 +351,11 @@ public class Report_AssetsFragment extends Fragment {
 
             } else if (difference > 0){
                 retirementAccountsSymbol.setText(getString(R.string.positive_symbol));
-                retirementAccountsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+                retirementAccountsDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
 
             } else if (difference < 0){
                 retirementAccountsSymbol.setText(getString(R.string.negative_symbol));
-                retirementAccountsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+                retirementAccountsDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             }
         }
 
@@ -372,11 +372,11 @@ public class Report_AssetsFragment extends Fragment {
 
             } else if (difference > 0){
                 ownershipInterestsSymbol.setText(getString(R.string.positive_symbol));
-                ownershipInterestsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+                ownershipInterestsDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
 
             } else if (difference < 0){
                 ownershipInterestsSymbol.setText(getString(R.string.negative_symbol));
-                ownershipInterestsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+                ownershipInterestsDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             }
         }
 

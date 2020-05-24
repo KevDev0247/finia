@@ -7,7 +7,7 @@
     android:paddingVertical="10dp"
     android:paddingEnd="20dp"
     android:orientation="horizontal"
-    android:background="@drawable/ic_report_items_blurred">
+    android:background="@drawable/report_items_blurred">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -77,7 +77,7 @@
             android:paddingVertical="5dp"
             android:paddingEnd="10dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/ic_net_neutral">
+            android:background="@drawable/net_neutral">
 
             <RelativeLayout
                 android:layout_width="match_parent"
