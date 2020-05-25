@@ -30,7 +30,7 @@
                     android:id="@+id/net_worth_return_button"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:background="#4156BE"
+                    android:background="@color/app_blue_theme"
                     android:src="@drawable/ic_back_icon_foreground"/>
 
                 <TextView

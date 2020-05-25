@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthReportEditingUtils;
+package protect.FinanceLord.TimeUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class NetWorthTimeUtils {
+public class TimeProcessor {
 
     public Date setTime(int year, int month, int day){
         Calendar calendar = new GregorianCalendar();

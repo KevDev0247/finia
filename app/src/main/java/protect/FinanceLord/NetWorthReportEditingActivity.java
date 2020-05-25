@@ -21,11 +21,11 @@ import java.util.GregorianCalendar;
 
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Communicators.DateCommunicator;
-import protect.FinanceLord.NetWorthReportEditingUtils.CalendarDialog;
 import protect.FinanceLord.NetWorthReportEditingUtils.EditPagerAdapter;
 import protect.FinanceLord.NetWorthReportEditingUtils.Edit_AssetsFragment;
 import protect.FinanceLord.NetWorthReportEditingUtils.Edit_LiabilitiesFragment;
-import protect.FinanceLord.NetWorthReportEditingUtils.NetWorthTimeUtils;
+import protect.FinanceLord.TimeUtils.CalendarDialog;
+import protect.FinanceLord.TimeUtils.TimeProcessor;
 
 public class NetWorthReportEditingActivity extends AppCompatActivity {
 
@@ -50,7 +50,7 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
         calendar.set(Calendar.MILLISECOND, 0);
         currentTime = calendar.getTime();
 
-        String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
+        String stringDate = TimeProcessor.getStringFromDate(currentTime, getString(R.string.date_format));
         this.timeDisplay.setText(stringDate);
         resetView();
     }
@@ -93,7 +93,7 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
         public void onDialogMessage(Date date) {
             currentTime = date;
             Log.d("EditReportCommunicator", "time is " + currentTime);
-            String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
+            String stringDate = TimeProcessor.getStringFromDate(currentTime, getString(R.string.date_format));
             timeDisplay.setText(stringDate);
 
             toEditAssetsFragmentCommunicator.onActivityMessage(currentTime);

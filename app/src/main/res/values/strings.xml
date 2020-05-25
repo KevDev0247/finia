@@ -91,8 +91,6 @@
     <string name="entertainment_name">Entertainment</string>
 
 
-    <string name="report_assets_fragment_name">Report Assets Fragment</string>
-    <string name="report_liabilities_fragment_name">Report Liabilities Fragment</string>
 
     <string name="no_data_initialization">No Data</string>
     <string name="positive_symbol">+</string>
@@ -125,5 +123,13 @@
     <string name="net_worth_value_key">itemValue</string>
     <string name="net_worth_difference_key">itemDifference</string>
     <string name="budget_categories_key">budgetsCategory</string>
+
+    <string name="report_assets_fragment_key">Report Assets Fragment</string>
+    <string name="report_liabilities_fragment_key">Report Liabilities Fragment</string>
+
+    <string name="view_expenses_fragment_key">View_ExpensesFragment</string>
+    <string name="view_revenues_fragment_key">View_RevenuesFragment</string>
+    <string name="edit_expenses_fragment_key">Edit_ExpensesFragment</string>
+    <string name="edit_revenues_fragment_key">Edit_RevenuesFragment</string>
 
 </resources>

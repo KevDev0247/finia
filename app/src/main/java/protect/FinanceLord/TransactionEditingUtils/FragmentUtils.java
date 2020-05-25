@@ -22,7 +22,7 @@ class FragmentUtils {
     private TransactionInputUtils inputUtils;
     private List<BudgetTypesDataModel> dataModels;
 
-    FragmentUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetTypesDataModel> dataModels, String TAG){
+    FragmentUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetTypesDataModel> dataModels, String TAG) {
         this.context = context;
         this.currentTime = currentTime;
         this.inputUtils = inputUtils;
@@ -32,34 +32,38 @@ class FragmentUtils {
 
     void retrieveAndInsertData() {
         final Transactions transaction = new Transactions();
-        boolean whetherToInsert = true;
+        boolean insert = true;
 
-        if (!inputUtils.nameInput.getText().toString().isEmpty()){
+        if (!inputUtils.nameInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's name is " + inputUtils.nameInput.getText());
             transaction.setTransactionName(inputUtils.nameInput.getText().toString());
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.nameInputField.setError(context.getString(R.string.transaction_name_error_message));
-            whetherToInsert = false;
+            insert = false;
         }
 
-        if (!inputUtils.valueInput.getText().toString().isEmpty()){
+        if (!inputUtils.valueInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's value is " + inputUtils.valueInput.getText());
-            transaction.setTransactionValue(Float.parseFloat(inputUtils.valueInput.getText().toString().replace(",", "")));
+            if (TAG.equals(context.getString(R.string.edit_revenues_fragment_key))) {
+                transaction.setTransactionValue(Float.parseFloat(inputUtils.valueInput.getText().toString().replace(",", "")));
+            } else if (TAG.equals(context.getString(R.string.edit_expenses_fragment_key))) {
+                transaction.setTransactionValue( - Float.parseFloat(inputUtils.valueInput.getText().toString().replace(",", "")));
+            }
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.valueInputField.setError(context.getString(R.string.transaction_value_error_message));
-            whetherToInsert = false;
+            insert = false;
         }
 
-        if (!inputUtils.commentInput.getText().toString().isEmpty()){
+        if (!inputUtils.commentInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's comment is " + inputUtils.commentInput.getText());
             transaction.setTransactionComments(inputUtils.commentInput.getText().toString());
         } else {
             transaction.setTransactionComments(null);
         }
 
-        if (!inputUtils.categoryInput.getText().toString().isEmpty()){
+        if (!inputUtils.categoryInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's category is " + inputUtils.categoryInput.getText());
             for (BudgetTypesDataModel dataModel : dataModels){
                 if (dataModel.typeName.equals(inputUtils.categoryInput.getText().toString())){
@@ -69,13 +73,13 @@ class FragmentUtils {
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.valueInputField.setError(context.getString(R.string.transaction_category_error_message));
-            whetherToInsert = false;
+            insert = false;
         }
 
         Log.d(TAG, "this transaction's date is " + currentTime.toString());
         transaction.setDate(currentTime.getTime());
 
-        if (whetherToInsert){
+        if (insert) {
 
             Executors.newSingleThreadExecutor().execute(new Runnable() {
                 @Override

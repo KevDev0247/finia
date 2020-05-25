@@ -30,7 +30,7 @@
                     android:id="@+id/transaction_return_button"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:background="#4156BE"
+                    android:background="@color/app_blue_theme"
                     android:src="@drawable/ic_back_icon_foreground"/>
 
                 <TextView
@@ -96,20 +96,20 @@
             android:id="@+id/transaction_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#4156BE"
+            android:background="@color/app_blue_theme"
             app:tabSelectedTextColor="#ffffff"
             app:tabTextColor="#ffffff">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/expenses_name"
+                android:text="@string/revenues_name"
                 android:textSize="25sp"/>
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/revenues_name"
+                android:text="@string/expenses_name"
                 android:textSize="25sp"/>
 
         </com.google.android.material.tabs.TabLayout>

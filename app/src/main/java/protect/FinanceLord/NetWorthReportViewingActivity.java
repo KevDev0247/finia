@@ -1,6 +1,5 @@
 package protect.FinanceLord;
 
-import android.app.SearchManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,9 +25,9 @@ import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
+import protect.FinanceLord.NetWorthReportViewingUtils.ReportPagerAdapter;
 import protect.FinanceLord.NetWorthReportViewingUtils.Report_AssetsFragment;
 import protect.FinanceLord.NetWorthReportViewingUtils.Report_LiabilitiesFragment;
-import protect.FinanceLord.NetWorthReportViewingUtils.ReportPagerAdapter;
 
 public class NetWorthReportViewingActivity extends AppCompatActivity {
 
@@ -40,7 +39,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth_view_report);
 
-        String search = getIntent().getStringExtra(SearchManager.QUERY);
         String itemTime = getIntent().getExtras().getString(getString(R.string.net_worth_time_key));
         netWorthDifference = getIntent().getExtras().getString(getString(R.string.net_worth_difference_key));
         netWorthValue = getIntent().getExtras().getString(getString(R.string.net_worth_value_key));
@@ -48,12 +46,12 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         Log.d("NetWorthViewingActivity","the time passed into viewing activity is: " + itemTime);
         Log.d("NetWorthViewingActivity","the value passed into viewing activity is: " + netWorthValue);
 
-        resetView(search, itemTime);
+        resetView(itemTime);
 
         retrieveSummaryData(itemTime);
     }
 
-    private void resetView(String search, String date) {
+    private void resetView(String date) {
         final TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
         TextView reportTitle = findViewById(R.id.view_report_title);

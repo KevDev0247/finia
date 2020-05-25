@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthReportEditingUtils;
+package protect.FinanceLord.TimeUtils;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +23,7 @@ public class CalendarDialog extends DialogFragment {
     RelativeLayout confirmTimeButton;
     RelativeLayout cancelTimeButton;
     CalendarDateBroadcast communicator;
-    NetWorthTimeUtils timeUtils = new NetWorthTimeUtils();
+    TimeProcessor timeUtils = new TimeProcessor();
 
 
     public CalendarDialog(CalendarDateBroadcast communicator){

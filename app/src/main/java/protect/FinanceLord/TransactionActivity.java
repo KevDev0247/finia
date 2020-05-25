@@ -25,8 +25,7 @@ import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionViewingUtils.CategoryLabelsAdapter;
 import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
-import protect.FinanceLord.TransactionViewingUtils.View_ExpensesFragment;
-import protect.FinanceLord.TransactionViewingUtils.View_RevenuesFragment;
+import protect.FinanceLord.TransactionViewingUtils.View_TransactionsFragment;
 
 public class TransactionActivity extends AppCompatActivity {
 
@@ -34,6 +33,13 @@ public class TransactionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
+
+        retrieveDataFromDatabase();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         retrieveDataFromDatabase();
     }
@@ -61,20 +67,11 @@ public class TransactionActivity extends AppCompatActivity {
     }
 
     private void resetView(List<BudgetsType> budgetsTypes, List<Transactions> transactions) {
+
         ImageButton returnButton = findViewById(R.id.transaction_return_button);
         ImageButton addButton = findViewById(R.id.add_transaction_button);
         TabLayout tablayout = findViewById(R.id.transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.transaction_view_pager);
-
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        View_ExpensesFragment expensesFragment = new View_ExpensesFragment(transactions);
-        View_RevenuesFragment revenuesFragment = new View_RevenuesFragment(transactions);
-        fragments.add(expensesFragment);
-        fragments.add(revenuesFragment);
-
-        ViewPagerAdapter sectionsPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager(), fragments);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        tablayout.setupWithViewPager(viewPager);
 
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +89,16 @@ public class TransactionActivity extends AppCompatActivity {
         } else {
             dataModels = null;
         }
+
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        View_TransactionsFragment revenuesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.view_revenues_fragment_key));
+        View_TransactionsFragment expensesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.view_expenses_fragment_key));
+        fragments.add(revenuesFragment);
+        fragments.add(expensesFragment);
+
+        ViewPagerAdapter sectionsPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager(), fragments);
+        viewPager.setAdapter(sectionsPagerAdapter);
+        tablayout.setupWithViewPager(viewPager);
 
         final ArrayList<BudgetTypesDataModel> finalDataModels = dataModels;
         addButton.setOnClickListener(new View.OnClickListener() {

@@ -20,8 +20,8 @@ import java.util.List;
 
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Communicators.SaveDataCommunicator;
-import protect.FinanceLord.NetWorthReportEditingUtils.CalendarDialog;
-import protect.FinanceLord.NetWorthReportEditingUtils.NetWorthTimeUtils;
+import protect.FinanceLord.TimeUtils.CalendarDialog;
+import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.R;
 import protect.FinanceLord.TransactionEditActivity;
 
@@ -103,7 +103,7 @@ public class Edit_RevenuesFragment extends Fragment {
         public void onDialogMessage(Date date) {
             currentTime = date;
             Log.d(TAG, "time is " + currentTime);
-            String stringDate = NetWorthTimeUtils.getStringFromDate(currentTime, getString(R.string.date_format));
+            String stringDate = TimeProcessor.getStringFromDate(currentTime, getString(R.string.date_format));
             inputUtils.dateInput.setText(stringDate);
         }
     };
