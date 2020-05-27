@@ -5,7 +5,7 @@
     android:layout_height="45dp"
     android:paddingHorizontal="20dp"
     android:padding="10dp"
-    android:background="@drawable/ic_edit_report_items_blurred">
+    android:background="@drawable/edit_report_items_blurred">
 
     <TextView
         android:id="@+id/assetsRowSecondCategoryText"

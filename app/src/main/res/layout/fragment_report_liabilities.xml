@@ -17,12 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/ic_report_cards_category">
+            android:background="@drawable/report_cards_category">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@drawable/ic_report_cards_liabilities_top_edge">
+                android:background="@drawable/report_cards_liabilities_top_edge">
 
             </LinearLayout>
 
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="5dp"
-                    android:background="@drawable/ic_net_neutral"
+                    android:background="@drawable/net_neutral"
                     android:orientation="vertical"
                     android:paddingHorizontal="40dp"
                     android:paddingVertical="5dp">
@@ -112,12 +112,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="30dp"
-            android:background="@drawable/ic_report_cards_category">
+            android:background="@drawable/report_cards_category">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@drawable/ic_report_cards_liabilities_top_edge">
+                android:background="@drawable/report_cards_liabilities_top_edge">
 
             </LinearLayout>
 
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="5dp"
-                    android:background="@drawable/ic_net_neutral"
+                    android:background="@drawable/net_neutral"
                     android:orientation="vertical"
                     android:paddingHorizontal="40dp"
                     android:paddingVertical="5dp">

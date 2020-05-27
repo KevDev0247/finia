@@ -58,7 +58,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof NetWorthReportEditingActivity){
             NetWorthReportEditingActivity activity = (NetWorthReportEditingActivity) context;
-            activity.toEditLiabilitiesFragmentCommunicator = this.fromActivityCommunicator;
+            activity.toEditLiabilitiesFragmentCommunicator = fromActivityCommunicator;
         }
     }
 

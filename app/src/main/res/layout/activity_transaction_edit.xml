@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".TransactionEditActivity">
+    tools:context=".TransactionAddActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -20,16 +20,17 @@
             android:layout_marginEnd="17dp">
 
             <ImageButton
-                android:id="@+id/edit_transaction_return_button"
+                android:id="@+id/transaction_edit_return_button"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:background="#0015314B"
                 android:src="@drawable/ic_back_icon_foreground"/>
 
             <TextView
+                android:id="@+id/transaction_edit_item_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Transaction"
+                android:text="@string/current_time"
                 android:textColor="#ffffff"
                 android:textSize="25sp"
                 android:layout_centerInParent="true"/>
@@ -39,6 +40,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true">
 
+                <ImageButton
+                    android:id="@+id/transaction_edit_save_button"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_save_icon_foreground" />
+
             </LinearLayout>
 
         </RelativeLayout>
@@ -46,37 +53,11 @@
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
+        android:id="@+id/transaction_section_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/edit_transaction_tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#4156BE"
-            app:tabSelectedTextColor="#ffffff"
-            app:tabTextColor="#2196F3"
-            app:tabIndicatorColor="#ffffff">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/expenses_name"/>
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/revenues_name"/>
-
-        </com.google.android.material.tabs.TabLayout>
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/edit_transaction_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </LinearLayout>
 

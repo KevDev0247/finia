@@ -19,7 +19,7 @@ import protect.FinanceLord.R;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.expenses_name, R.string.revenues_name};
+    private static final int[] TAB_TITLES = new int[]{R.string.revenues_name, R.string.expenses_name};
     private final Context mContext;
     private ArrayList<Fragment> fragments;
 

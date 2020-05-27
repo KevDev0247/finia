@@ -13,18 +13,18 @@ import protect.FinanceLord.R;
 
 public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
 
-    private String fragmentName;
+    private String fragmentTag;
 
     public ReportListAdapter(Context context, ArrayList<NetWorthItemsDataModel> dataSources, String fragmentName) {
         super(context, 0, dataSources);
-        this.fragmentName = fragmentName;
+        this.fragmentTag = fragmentName;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         NetWorthItemsDataModel dataSource = getItem(position);
 
-        if (fragmentName.equals(getContext().getString(R.string.report_assets_fragment_name))) {
+        if (fragmentTag.equals(getContext().getString(R.string.report_assets_fragment_key))) {
             if (convertView == null){
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.assets_report_item, null, false);
             }
@@ -43,12 +43,12 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
 
             } else if (Float.parseFloat(dataSource.difference) > 0) {
                 View differenceBlockView = convertView.findViewById(R.id.asset_item_difference_block);
-                differenceBlockView.setBackgroundResource(R.drawable.ic_net_increase);
+                differenceBlockView.setBackgroundResource(R.drawable.net_increase);
                 assetDifferenceSymbol.setText(R.string.positive_symbol);
 
             } else if (Float.parseFloat(dataSource.difference) < 0) {
                 View differenceBlockView = convertView.findViewById(R.id.asset_item_difference_block);
-                differenceBlockView.setBackgroundResource(R.drawable.ic_net_decrease);
+                differenceBlockView.setBackgroundResource(R.drawable.net_decrease);
                 assetDifferenceSymbol.setText(R.string.negative_symbol);
 
             } else if (Float.parseFloat(dataSource.difference) == 0) {
@@ -57,7 +57,7 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
 
             return convertView;
 
-        } else if (fragmentName.equals(getContext().getString(R.string.report_liabilities_fragment_name))) {
+        } else if (fragmentTag.equals(getContext().getString(R.string.report_liabilities_fragment_key))) {
 
             if (convertView == null){
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.liabilities_report_item, null, false);
@@ -77,12 +77,12 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
 
             } else if (Float.parseFloat(dataSource.difference) > 0) {
                 View differenceBlockView = convertView.findViewById(R.id.liability_item_difference_block);
-                differenceBlockView.setBackgroundResource(R.drawable.ic_net_increase);
+                differenceBlockView.setBackgroundResource(R.drawable.net_increase);
                 liabilityDifferenceSymbol.setText(R.string.positive_symbol);
 
             } else if (Float.parseFloat(dataSource.difference) < 0) {
                 View differenceBlockView = convertView.findViewById(R.id.liability_item_difference_block);
-                differenceBlockView.setBackgroundResource(R.drawable.ic_net_decrease);
+                differenceBlockView.setBackgroundResource(R.drawable.net_decrease);
                 liabilityDifferenceSymbol.setText(R.string.negative_symbol);
 
             } else if (Float.parseFloat(dataSource.difference) == 0) {

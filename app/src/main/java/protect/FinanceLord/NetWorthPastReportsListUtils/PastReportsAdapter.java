@@ -42,12 +42,12 @@ public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
 
         } else if (Float.parseFloat(dataSource.difference) > 0) {
             View differenceBlockView = convertView.findViewById(R.id.past_report_item_difference_block);
-            differenceBlockView.setBackgroundResource(R.drawable.ic_net_increase);
+            differenceBlockView.setBackgroundResource(R.drawable.net_increase);
             netWorthDifferenceSymbol.setText(R.string.positive_symbol);
 
         } else if (Float.parseFloat(dataSource.difference) < 0) {
             View differenceBlockView = convertView.findViewById(R.id.past_report_item_difference_block);
-            differenceBlockView.setBackgroundResource(R.drawable.ic_net_decrease);
+            differenceBlockView.setBackgroundResource(R.drawable.net_decrease);
             netWorthDifferenceSymbol.setText(R.string.negative_symbol);
 
         } else if (Float.parseFloat(dataSource.difference) == 0) {

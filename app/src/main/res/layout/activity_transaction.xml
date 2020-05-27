@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_margin="12dp"
             android:paddingVertical="5dp"
-            android:background="@drawable/ic_toolbar_background">
+            android:background="@drawable/toolbar_background">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                     android:id="@+id/transaction_return_button"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:background="#4156BE"
+                    android:background="@color/app_blue_theme"
                     android:src="@drawable/ic_back_icon_foreground"/>
 
                 <TextView
@@ -90,26 +90,26 @@
         android:layout_marginHorizontal="12dp"
         android:layout_marginBottom="12dp"
         android:paddingHorizontal="15dp"
-        android:background="@drawable/ic_toolbar_background">
+        android:background="@drawable/toolbar_background">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/transaction_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#4156BE"
+            android:background="@color/app_blue_theme"
             app:tabSelectedTextColor="#ffffff"
             app:tabTextColor="#ffffff">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/expenses_name"
+                android:text="@string/revenues_name"
                 android:textSize="25sp"/>
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/revenues_name"
+                android:text="@string/expenses_name"
                 android:textSize="25sp"/>
 
         </com.google.android.material.tabs.TabLayout>

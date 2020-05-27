@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".TransactionEditActivity"></activity>
+        <activity android:name=".TransactionAddActivity" />
         <activity android:name=".BudgetEditActivity" />
         <activity
             android:name=".NetWorthReportViewingActivity"

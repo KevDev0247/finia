@@ -77,11 +77,10 @@ public class NetWorthActivity extends AppCompatActivity {
 
     protected void refreshPastReportsListView(){
 
-        final PastReportsAdapter adapter;
         ListView pastReportsListView = findViewById(R.id.past_report_list);
         final List<ReportItemsDataModel> dataSources = new ArrayList<>();
+        final PastReportsAdapter adapter = new PastReportsAdapter(this, dataSources);
 
-        adapter = new PastReportsAdapter(this, dataSources);
         pastReportsListView.setAdapter(adapter);
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {

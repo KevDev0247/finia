@@ -11,9 +11,37 @@
     <string name="spending_description">View your monthly spending report</string>
     <string name="net_worth_description">Calculate your net worth</string>
 
+<!--    general-->
+
+    <string name="value">Value</string>
+    <string name="net">Net</string>
+    <string name="current_time">Current Time</string>
+    <string name="dollar_sign">" $"</string>
+    <string name="sign">"+ - "</string>
+
+    <string name="no_data_initialization">No Data</string>
+    <string name="positive_symbol">+</string>
+    <string name="negative_symbol">-</string>
+
+<!--    transaction add fragments-->
+
     <string name="expenses_name">Expenses</string>
     <string name="revenues_name">Revenues</string>
+    <string name="new_transaction">New Transaction</string>
 
+    <string name="transaction_label_name">Name</string>
+    <string name="transaction_label_value">Value</string>
+    <string name="transaction_label_comments">Comments</string>
+    <string name="transaction_label_category">Category</string>
+    <string name="transaction_label_date">Date</string>
+
+    <string name="transaction_name_error_message">Please enter a name</string>
+    <string name="transaction_value_error_message">Please enter a value</string>
+    <string name="transaction_date_error_message">Please enter a date</string>
+    <string name="transaction_category_error_message">Please pick a category</string>
+
+
+<!--    net worth categories' name-->
 
     <string name="net_worth">Net Worth</string>
 
@@ -91,33 +119,39 @@
     <string name="entertainment_name">Entertainment</string>
 
 
-    <string name="report_assets_fragment_name">Report Assets Fragment</string>
-    <string name="report_liabilities_fragment_name">Report Liabilities Fragment</string>
-
-    <string name="no_data_initialization">No Data</string>
-    <string name="positive_symbol">+</string>
-    <string name="negative_symbol">-</string>
-
-
-    <string name="net_worth_time_key">itemTime</string>
-    <string name="net_worth_value_key">itemValue</string>
-    <string name="net_worth_difference_key">itemDifference</string>
-
-
     <string name="image_of_assets">Image of assets</string>
     <string name="title_activity_net_worth_edit_reports">NetWorthEditReportsActivity</string>
     <string name="tab_assets_text">Assets</string>
     <string name="tab_liabilities_tab">Liabilities</string>
-    <string name="title_activity_net_worth2">NetWorthActivity2</string>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="title_activity_net_worth_report_template">NetWorthReportTemplate</string>
     <string name="action_settings">Settings</string>
     <string name="date_format">yyyy-MM-dd</string>
 
-    <string name="transaction_label_name">Name</string>
-    <string name="transaction_label_value">Value</string>
-    <string name="transaction_label_comments">Comments</string>
-    <string name="transaction_label_category">Category</string>
-    <string name="transaction_label_date">Date</string>
+<!--    net worth view report-->
+
+
+
+
+<!--    keys-->
+
+    <string name="net_worth_time_key">itemTime</string>
+    <string name="net_worth_value_key">itemValue</string>
+    <string name="net_worth_difference_key">itemDifference</string>
+    <string name="budget_categories_key">budgetsCategory</string>
+
+    <string name="report_assets_fragment_key">Report Assets Fragment</string>
+    <string name="report_liabilities_fragment_key">Report Liabilities Fragment</string>
+
+    <string name="view_expenses_fragment_key">View_ExpensesFragment</string>
+    <string name="view_revenues_fragment_key">View_RevenuesFragment</string>
+    <string name="edit_expenses_fragment_key">Edit_ExpensesFragment</string>
+    <string name="edit_revenues_fragment_key">Edit_RevenuesFragment</string>
+
+    <string name="transaction_fragment_key">Transaction</string>
+    <string name="transaction_name_key">Name</string>
+    <string name="transaction_value_key">Value</string>
+    <string name="transaction_category_key">Category</string>
+    <string name="transaction_comments_key">Comments</string>
+    <string name="transaction_date_key">Date</string>
 
 </resources>

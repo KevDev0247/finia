@@ -1,6 +1,5 @@
 package protect.FinanceLord;
 
-import android.app.SearchManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,9 +25,9 @@ import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
+import protect.FinanceLord.NetWorthReportViewingUtils.ReportPagerAdapter;
 import protect.FinanceLord.NetWorthReportViewingUtils.Report_AssetsFragment;
 import protect.FinanceLord.NetWorthReportViewingUtils.Report_LiabilitiesFragment;
-import protect.FinanceLord.NetWorthReportViewingUtils.ReportPagerAdapter;
 
 public class NetWorthReportViewingActivity extends AppCompatActivity {
 
@@ -40,7 +39,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth_view_report);
 
-        String search = getIntent().getStringExtra(SearchManager.QUERY);
         String itemTime = getIntent().getExtras().getString(getString(R.string.net_worth_time_key));
         netWorthDifference = getIntent().getExtras().getString(getString(R.string.net_worth_difference_key));
         netWorthValue = getIntent().getExtras().getString(getString(R.string.net_worth_value_key));
@@ -48,12 +46,12 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         Log.d("NetWorthViewingActivity","the time passed into viewing activity is: " + itemTime);
         Log.d("NetWorthViewingActivity","the value passed into viewing activity is: " + netWorthValue);
 
-        resetView(search, itemTime);
+        resetView(itemTime);
 
         retrieveSummaryData(itemTime);
     }
 
-    private void resetView(String search, String date) {
+    private void resetView(String date) {
         final TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
         TextView reportTitle = findViewById(R.id.view_report_title);
@@ -71,13 +69,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -85,6 +76,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
                 if (tab.getText().toString().equals(getString(R.string.assets_name))) {
                     tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#626ee3"));
                     tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#626ee3"));
+
                 } else if (tab.getText().toString().equals(getString(R.string.liabilities_name))) {
                     tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#5ABD5C"));
                     tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#5ABD5C"));
@@ -96,6 +88,13 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
+        });
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
     }
 
@@ -168,12 +167,12 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
             reportNetWorthDifference.setText(netWorthDifference);
 
         } else if (Float.parseFloat(netWorthDifference) > 0){
-            reportNetWorthDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+            reportNetWorthDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
             reportNetWorthSymbol.setText(R.string.positive_symbol);
             reportNetWorthDifference.setText(netWorthDifference);
 
         } else if (Float.parseFloat(netWorthDifference) < 0) {
-            reportNetWorthDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            reportNetWorthDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             reportNetWorthSymbol.setText(R.string.negative_symbol);
             reportNetWorthDifference.setText(netWorthDifference);
         }
@@ -188,12 +187,12 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
             reportTotalAssetsDifference.setText(String.valueOf(totalAssetsDifference));
 
         } else if (totalAssetsDifference > 0){
-            reportTotalAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+            reportTotalAssetsDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
             reportTotalAssetsSymbol.setText(R.string.positive_symbol);
             reportTotalAssetsDifference.setText(String.valueOf(totalAssetsDifference));
 
         } else if (totalAssetsDifference < 0){
-            reportTotalAssetsDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            reportTotalAssetsDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             reportTotalAssetsSymbol.setText(R.string.negative_symbol);
             reportTotalAssetsDifference.setText(String.valueOf(totalAssetsDifference));
         }
@@ -208,12 +207,12 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
             reportTotalLiabilitiesDifference.setText(String.valueOf(totalLiabilitiesDifference));
 
         } else if (totalLiabilitiesDifference > 0){
-            reportLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+            reportLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
             reportTotalLiabilitiesSymbol.setText(R.string.positive_symbol);
             reportTotalLiabilitiesDifference.setText(String.valueOf(totalLiabilitiesDifference));
 
         } else if (totalLiabilitiesDifference < 0){
-            reportLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+            reportLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             reportTotalLiabilitiesSymbol.setText(R.string.negative_symbol);
             reportTotalLiabilitiesDifference.setText(String.valueOf(totalLiabilitiesDifference));
         }

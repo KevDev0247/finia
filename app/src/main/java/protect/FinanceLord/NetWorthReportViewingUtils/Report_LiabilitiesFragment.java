@@ -135,8 +135,8 @@ public class Report_LiabilitiesFragment extends Fragment {
         LinearLayout shortTermLiabilitiesList = contentView.findViewById(R.id.short_term_liabilities_list);
         LinearLayout longTermLiabilitiesList = contentView.findViewById(R.id.long_term_liabilities_list);
 
-        ReportListAdapter shortTermLiabilitiesAdapter = new ReportListAdapter(getContext(), shortTermLiabilitiesDataSource, getString(R.string.report_liabilities_fragment_name));
-        ReportListAdapter longTermLiabilitiesAdapter = new ReportListAdapter(getContext(), longTermLiabilitiesDataSource, getString(R.string.report_liabilities_fragment_name));
+        ReportListAdapter shortTermLiabilitiesAdapter = new ReportListAdapter(getContext(), shortTermLiabilitiesDataSource, getString(R.string.report_liabilities_fragment_key));
+        ReportListAdapter longTermLiabilitiesAdapter = new ReportListAdapter(getContext(), longTermLiabilitiesDataSource, getString(R.string.report_liabilities_fragment_key));
 
         TextView shortTermLiabilitiesValue = contentView.findViewById(R.id.report_short_term_liabilities_value);
         View shortTermLiabilitiesDifferenceBlock = contentView.findViewById(R.id.report_short_term_liabilities_difference_block);
@@ -161,11 +161,11 @@ public class Report_LiabilitiesFragment extends Fragment {
 
             } else if (difference > 0){
                 shortTermLiabilitiesSymbol.setText(getString(R.string.positive_symbol));
-                shortTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+                shortTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
 
             } else if (difference < 0){
                 shortTermLiabilitiesSymbol.setText(getString(R.string.negative_symbol));
-                shortTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+                shortTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             }
         }
 
@@ -182,11 +182,11 @@ public class Report_LiabilitiesFragment extends Fragment {
 
             } else if (difference > 0){
                 longTermLiabilitiesSymbol.setText(getString(R.string.positive_symbol));
-                longTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.ic_net_increase);
+                longTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.net_increase);
 
             } else if (difference < 0){
                 longTermLiabilitiesSymbol.setText(getString(R.string.negative_symbol));
-                longTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.ic_net_decrease);
+                longTermLiabilitiesDifferenceBlock.setBackgroundResource(R.drawable.net_decrease);
             }
         }
 

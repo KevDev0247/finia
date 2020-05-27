@@ -7,6 +7,7 @@
     <color name="separatorColor">#18102C</color>
     <color name="expenses_input_text_color">#BDDAF1</color>
     <color name="revenues_input_text_color">#D0E6D1</color>
+    <color name="app_blue_theme">#4156BE</color>
 
 </resources>
 
