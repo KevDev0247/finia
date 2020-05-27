@@ -10,7 +10,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -102,15 +102,15 @@
                                             android:id="@+id/total_net_worth_value"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Value"
+                                            android:text="@string/value"
                                             android:textColor="#001528"
                                             android:textSize="18sp" />
 
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text=" $"
-                                            android:textSize="20dp"
+                                            android:text="@string/dollar_sign"
+                                            android:textSize="20sp"
                                             android:textColor="#001528"/>
 
                                     </LinearLayout>
@@ -135,23 +135,23 @@
                                                 android:id="@+id/total_net_worth_symbol"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:text="+ - "
+                                                android:text="@string/sign"
                                                 android:textColor="#001528"
-                                                android:textSize="20dp" />
+                                                android:textSize="20sp" />
 
                                             <TextView
                                                 android:id="@+id/total_net_worth_difference"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:text="net"
+                                                android:text="@string/net"
                                                 android:textColor="#001528"
-                                                android:textSize="20dp" />
+                                                android:textSize="20sp" />
 
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:text=" $"
-                                                android:textSize="20dp"
+                                                android:text="@string/dollar_sign"
+                                                android:textSize="20sp"
                                                 android:textColor="#001528"/>
 
                                         </LinearLayout>
@@ -190,7 +190,8 @@
                                 android:paddingStart="15dp"
                                 android:paddingTop="7.5dp"
                                 android:paddingEnd="7.5dp"
-                                android:paddingBottom="15dp">
+                                android:paddingBottom="15dp"
+                                tools:ignore="NestedWeights">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -243,14 +244,29 @@
                                         android:orientation="vertical"
                                         android:paddingHorizontal="5dp">
 
-                                        <TextView
-                                            android:id="@+id/total_assets_value"
+                                        <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_horizontal"
-                                            android:text="Value"
-                                            android:textColor="#001528"
-                                            android:textSize="18sp" />
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/total_assets_value"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_horizontal"
+                                                android:text="@string/value"
+                                                android:textColor="#001528"
+                                                android:textSize="18sp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/dollar_sign"
+                                                android:textSize="18sp"
+                                                android:textColor="#001528"/>
+
+                                        </LinearLayout>
 
                                         <LinearLayout
                                             android:id="@+id/total_assets_difference_block"
@@ -272,23 +288,23 @@
                                                     android:id="@+id/total_assets_symbol"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:text="+ - "
+                                                    android:text="@string/sign"
                                                     android:textColor="#001528"
-                                                    android:textSize="20dp" />
+                                                    android:textSize="20sp" />
 
                                                 <TextView
                                                     android:id="@+id/total_assets_difference"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:text="net"
+                                                    android:text="@string/net"
                                                     android:textColor="#001528"
-                                                    android:textSize="20dp" />
+                                                    android:textSize="20sp" />
 
                                                 <TextView
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:text=" $"
-                                                    android:textSize="20dp"
+                                                    android:text="@string/dollar_sign"
+                                                    android:textSize="20sp"
                                                     android:textColor="#001528"/>
 
                                             </LinearLayout>
@@ -361,14 +377,29 @@
                                         android:orientation="vertical"
                                         android:paddingHorizontal="5dp">
 
-                                        <TextView
-                                            android:id="@+id/total_liabilities_value"
+                                        <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_horizontal"
-                                            android:text="Value"
-                                            android:textColor="#001528"
-                                            android:textSize="18sp" />
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/total_liabilities_value"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_horizontal"
+                                                android:text="@string/value"
+                                                android:textColor="#001528"
+                                                android:textSize="18sp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/dollar_sign"
+                                                android:textSize="18sp"
+                                                android:textColor="#001528"/>
+
+                                        </LinearLayout>
 
                                         <LinearLayout
                                             android:id="@+id/total_liabilities_difference_block"
@@ -390,23 +421,23 @@
                                                     android:id="@+id/total_liabilities_symbol"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:text="+ - "
+                                                    android:text="@string/sign"
                                                     android:textColor="#001528"
-                                                    android:textSize="20dp" />
+                                                    android:textSize="20sp" />
 
                                                 <TextView
                                                     android:id="@+id/total_liabilities_difference"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:text="net"
+                                                    android:text="@string/net"
                                                     android:textColor="#001528"
-                                                    android:textSize="20dp" />
+                                                    android:textSize="20sp" />
 
                                                 <TextView
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:text=" $"
-                                                    android:textSize="20dp"
+                                                    android:text="@string/dollar_sign"
+                                                    android:textSize="20sp"
                                                     android:textColor="#001528"/>
 
                                             </LinearLayout>
@@ -448,7 +479,7 @@
                             android:id="@+id/view_report_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Current Time"
+                            android:text="@string/current_time"
                             android:textColor="#ffffff"
                             android:textSize="25sp"
                             android:layout_centerInParent="true"/>

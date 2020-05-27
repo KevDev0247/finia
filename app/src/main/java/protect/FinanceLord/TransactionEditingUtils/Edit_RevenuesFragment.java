@@ -23,7 +23,7 @@ import protect.FinanceLord.Communicators.SaveDataCommunicator;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.R;
-import protect.FinanceLord.TransactionEditActivity;
+import protect.FinanceLord.TransactionAddActivity;
 
 public class Edit_RevenuesFragment extends Fragment {
 
@@ -48,7 +48,7 @@ public class Edit_RevenuesFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        TransactionEditActivity activity = (TransactionEditActivity) context;
+        TransactionAddActivity activity = (TransactionAddActivity) context;
         activity.toEditRevenuesCommunicator = fromActivityCommunicator;
     }
 

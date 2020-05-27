@@ -106,7 +106,7 @@ public class TransactionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putParcelableArrayListExtra(getString(R.string.budget_categories_key), finalDataModels);
-                intent.setClass(TransactionActivity.this, TransactionEditActivity.class);
+                intent.setClass(TransactionActivity.this, TransactionAddActivity.class);
                 startActivity(intent);
             }
         });
