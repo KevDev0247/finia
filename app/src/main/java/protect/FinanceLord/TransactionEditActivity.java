@@ -47,22 +47,22 @@ public class TransactionEditActivity extends AppCompatActivity {
 
         String fragmentTag = getIntent().getExtras().getString(getString(R.string.transaction_fragment_key));
         if (fragmentTag.equals(getString(R.string.view_revenues_fragment_key))) {
-            View editSectionView = LayoutInflater.from(this).inflate(R.layout.fragment_edit_expenses, null, false);
-            LinearLayout sheet = findViewById(R.id.transaction_section_view);
-            sheet.addView(editSectionView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
-            retrieveDataFromDatabase(fragmentTag);
-
-        } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
             View editSectionView = LayoutInflater.from(this).inflate(R.layout.fragment_edit_revenues, null, false);
             LinearLayout sheet = findViewById(R.id.transaction_section_view);
             sheet.addView(editSectionView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
-            retrieveDataFromDatabase(fragmentTag);
+            retrieveDataFromDatabase(fragmentTag, editSectionView);
+
+        } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
+            View editSectionView = LayoutInflater.from(this).inflate(R.layout.fragment_edit_expenses, null, false);
+            LinearLayout sheet = findViewById(R.id.transaction_section_view);
+            sheet.addView(editSectionView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+            retrieveDataFromDatabase(fragmentTag, editSectionView);
         }
     }
 
-    private void retrieveDataFromDatabase(final String fragmentTag) {
+    private void retrieveDataFromDatabase(final String fragmentTag, final View editSectionView) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -70,22 +70,32 @@ public class TransactionEditActivity extends AppCompatActivity {
                 BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
                 List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
 
-                List<String> typeNames = new ArrayList<>();
+                final List<String> typeNames = new ArrayList<>();
                 for (BudgetsType budgetsType : budgetsTypes){
                     typeNames.add(budgetsType.getBudgetsName());
                 }
 
                 if (fragmentTag.equals(getString(R.string.view_revenues_fragment_key))) {
-                    initializeRevenueSection(typeNames);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            initializeRevenueSection(typeNames, editSectionView);
+                        }
+                    });
 
                 } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
-                    initializeExpenseSection(typeNames);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            initializeExpenseSection(typeNames, editSectionView);
+                        }
+                    });
                 }
             }
         });
     }
 
-    private void initializeRevenueSection(List<String> typeNames) {
+    private void initializeRevenueSection(List<String> typeNames, View editSectionView) {
         inputUtils.nameInputField = findViewById(R.id.revenue_name_field);
         inputUtils.valueInputField = findViewById(R.id.revenue_value_field);
         inputUtils.categoryInputField = findViewById(R.id.expenses_category_field);
@@ -111,10 +121,10 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeExpenseSection(List<String> typeNames) {
-        inputUtils.nameInputField = findViewById(R.id.expenses_name_field);
-        inputUtils.valueInputField = findViewById(R.id.expenses_value_field);
-        inputUtils.categoryInputField = findViewById(R.id.expenses_category_field);
+    private void initializeExpenseSection(List<String> typeNames, View editSectionView) {
+        inputUtils.nameInputField = editSectionView.findViewById(R.id.expenses_name_field);
+        inputUtils.valueInputField = editSectionView.findViewById(R.id.expenses_value_field);
+        inputUtils.categoryInputField = editSectionView.findViewById(R.id.expenses_category_field);
 
         inputUtils.nameInput = findViewById(R.id.expenses_name_input);
         inputUtils.valueInput = findViewById(R.id.expenses_value_input);
