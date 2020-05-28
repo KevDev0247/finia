@@ -28,10 +28,10 @@ import protect.FinanceLord.TransactionAddActivity;
 public class Edit_RevenuesFragment extends Fragment {
 
     private Date currentTime;
-    private TransactionInputUtils inputUtils;
-    private FragmentUtils fragmentUtils;
+    private TransactionInsertUtils transactionInsertUtils;
     private List<BudgetTypesDataModel> dataModels;
     private List<String> typeNames = new ArrayList<>();
+    private TransactionInputUtils inputUtils = new TransactionInputUtils();
 
     private static final String TAG = "Edit_RevenuesFragment";
 
@@ -40,8 +40,7 @@ public class Edit_RevenuesFragment extends Fragment {
         this.dataModels = dataModels;
 
         for (BudgetTypesDataModel dataModel : dataModels){
-            String typeName = dataModel.typeName;
-            typeNames.add(typeName);
+            typeNames.add(dataModel.typeName);
         }
     }
 
@@ -55,8 +54,6 @@ public class Edit_RevenuesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View revenuesFragmentView = inflater.inflate(R.layout.fragment_edit_revenues, null);
-
-        inputUtils = new TransactionInputUtils();
 
         inputUtils.nameInputField = revenuesFragmentView.findViewById(R.id.revenue_name_field);
         inputUtils.valueInputField = revenuesFragmentView.findViewById(R.id.revenue_value_field);
@@ -73,7 +70,7 @@ public class Edit_RevenuesFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
-        fragmentUtils = new FragmentUtils(getContext(), currentTime, inputUtils, dataModels, TAG);
+        transactionInsertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, TAG);
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,8 +90,8 @@ public class Edit_RevenuesFragment extends Fragment {
         public void onActivityMessage() {
             Log.d(TAG, "the message from activity was received");
 
-            fragmentUtils.retrieveAndInsertData();
-            fragmentUtils.addTextListener();
+            transactionInsertUtils.retrieveAndInsertData();
+            transactionInsertUtils.addTextListener();
         }
     };
 

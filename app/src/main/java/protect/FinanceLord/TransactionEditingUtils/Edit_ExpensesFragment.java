@@ -28,10 +28,10 @@ import protect.FinanceLord.TransactionAddActivity;
 public class Edit_ExpensesFragment extends Fragment {
 
     private Date currentTime;
-    private TransactionInputUtils inputUtils;
-    private FragmentUtils fragmentUtils;
+    private TransactionInsertUtils fragmentUtils;
     private List<BudgetTypesDataModel> dataModels;
     private List<String> typeNames = new ArrayList<>();
+    private TransactionInputUtils inputUtils = new TransactionInputUtils();
 
     private static final String TAG = "Edit_ExpensesFragment";
 
@@ -40,8 +40,7 @@ public class Edit_ExpensesFragment extends Fragment {
         this.dataModels = dataModels;
 
         for (BudgetTypesDataModel dataModel : dataModels){
-            String typeName = dataModel.typeName;
-            typeNames.add(typeName);
+            typeNames.add(dataModel.typeName);
         }
     }
 
@@ -55,8 +54,6 @@ public class Edit_ExpensesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View expensesFragmentView = inflater.inflate(R.layout.fragment_edit_expenses, null);
-
-        inputUtils = new TransactionInputUtils();
 
         inputUtils.nameInputField = expensesFragmentView.findViewById(R.id.expenses_name_field);
         inputUtils.valueInputField = expensesFragmentView.findViewById(R.id.expenses_value_field);
@@ -73,7 +70,7 @@ public class Edit_ExpensesFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
-        fragmentUtils = new FragmentUtils(getContext(), currentTime, inputUtils, dataModels, TAG);
+        fragmentUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, TAG);
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override

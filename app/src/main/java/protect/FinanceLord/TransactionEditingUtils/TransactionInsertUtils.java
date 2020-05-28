@@ -14,7 +14,7 @@ import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.R;
 
-class FragmentUtils {
+class TransactionInsertUtils {
 
     private Context context;
     private String TAG;
@@ -22,7 +22,7 @@ class FragmentUtils {
     private TransactionInputUtils inputUtils;
     private List<BudgetTypesDataModel> dataModels;
 
-    FragmentUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetTypesDataModel> dataModels, String TAG) {
+    TransactionInsertUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetTypesDataModel> dataModels, String TAG) {
         this.context = context;
         this.currentTime = currentTime;
         this.inputUtils = inputUtils;

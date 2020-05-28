@@ -6,13 +6,13 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class TransactionInputUtils {
-    TextInputLayout nameInputField;
-    TextInputLayout valueInputField;
-    TextInputLayout categoryInputField;
+    public TextInputLayout nameInputField;
+    public TextInputLayout valueInputField;
+    public TextInputLayout categoryInputField;
 
-    TextInputEditText dateInput;
-    TextInputEditText nameInput;
-    TextInputEditText commentInput;
-    TextInputEditText valueInput;
-    AutoCompleteTextView categoryInput;
+    public TextInputEditText dateInput;
+    public TextInputEditText nameInput;
+    public TextInputEditText commentInput;
+    public TextInputEditText valueInput;
+    public AutoCompleteTextView categoryInput;
 }
