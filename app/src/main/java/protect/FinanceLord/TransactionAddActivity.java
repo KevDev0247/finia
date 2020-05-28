@@ -37,22 +37,28 @@ public class TransactionAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaction_add);
         ArrayList<BudgetTypesDataModel> dataModels = getIntent().getExtras().getParcelableArrayList(getString(R.string.budget_categories_key));
 
-        resetView(dataModels);
-    }
-
-    private void resetView(List<BudgetTypesDataModel> dataModels){
         ImageButton returnButton = findViewById(R.id.transaction_add_return_button);
-        ImageButton saveButton = findViewById(R.id.transaction_add_save_button);
-        final TabLayout tablayout = findViewById(R.id.add_transaction_tab_layout);
-        final ViewPager viewPager = findViewById(R.id.edit_transaction_view_pager);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Calendar calendar = new GregorianCalendar();
-
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         currentTime = calendar.getTime();
+
+        initializeTabsAndSaveButton(dataModels);
+    }
+
+    private void initializeTabsAndSaveButton(List<BudgetTypesDataModel> dataModels){
+        ImageButton saveButton = findViewById(R.id.transaction_add_save_button);
+        final TabLayout tablayout = findViewById(R.id.add_transaction_tab_layout);
+        final ViewPager viewPager = findViewById(R.id.edit_transaction_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         Edit_ExpensesFragment expensesFragment = new Edit_ExpensesFragment(currentTime, dataModels);
@@ -76,13 +82,6 @@ public class TransactionAddActivity extends AppCompatActivity {
                 } else if (tablayout.getTabAt(viewPager.getCurrentItem()).getText().toString().equals(getString(R.string.revenues_name))){
                     toEditRevenuesCommunicator.onActivityMessage();
                 }
-            }
-        });
-
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
     }

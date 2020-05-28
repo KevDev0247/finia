@@ -73,7 +73,6 @@ public class Edit_LiabilitiesFragment extends Fragment {
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
@@ -131,7 +130,6 @@ public class Edit_LiabilitiesFragment extends Fragment {
     }
 
     private void initLiabilities() {
-
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {

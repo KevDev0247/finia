@@ -58,7 +58,6 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
             return convertView;
 
         } else if (fragmentTag.equals(getContext().getString(R.string.report_liabilities_fragment_key))) {
-
             if (convertView == null){
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.liabilities_report_item, null, false);
             }

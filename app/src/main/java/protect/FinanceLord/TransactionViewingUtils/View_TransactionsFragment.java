@@ -36,7 +36,6 @@ public class View_TransactionsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         if (fragmentTag.equals(getString(R.string.view_revenues_fragment_key))) {
             View revenuesFragmentView = inflater.inflate(R.layout.fragment_view_transactions, null);
             ListView revenuesListView = revenuesFragmentView.findViewById(R.id.transactions_list);

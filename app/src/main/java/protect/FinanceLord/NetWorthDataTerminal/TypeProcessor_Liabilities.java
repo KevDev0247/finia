@@ -14,7 +14,6 @@ public class TypeProcessor_Liabilities {
     }
 
     public List<DataCarrier_Liabilities> getSubGroup(String parentGroupLabel, int level) {
-
         List<DataCarrier_Liabilities> subGroupLiabilities = new ArrayList<>();
 
         if (level == 0) {
@@ -51,7 +50,6 @@ public class TypeProcessor_Liabilities {
     }
 
     void addTypeToSubGroup(DataCarrier_Liabilities liabilitiesFragmentDataCarrier, List<DataCarrier_Liabilities> subGroupLiabilities) {
-
         for (DataCarrier_Liabilities dataCarrier: subGroupLiabilities) {
             if (dataCarrier.liabilitiesId == liabilitiesFragmentDataCarrier.liabilitiesId && dataCarrier.liabilitiesId != 0) {
                 return;
