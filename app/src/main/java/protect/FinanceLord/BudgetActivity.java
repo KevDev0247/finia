@@ -43,7 +43,6 @@ public class BudgetActivity extends AppCompatActivity {
     }
 
     private void retrieveDataFromDatabase(){
-
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {

@@ -56,7 +56,6 @@ public class TransactionAddActivity extends AppCompatActivity {
     }
 
     private void initializeTabsAndSaveButton(List<BudgetTypesDataModel> dataModels){
-
         ImageButton saveButton = findViewById(R.id.transaction_add_save_button);
         final TabLayout tablayout = findViewById(R.id.add_transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.edit_transaction_view_pager);

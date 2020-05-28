@@ -52,7 +52,6 @@ public class Report_AssetsFragment extends Fragment {
     }
 
     private void getDataFromDatabase(final Date itemTime) {
-
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -100,7 +99,6 @@ public class Report_AssetsFragment extends Fragment {
     }
 
     public void populateDataModels(final AssetsValueDao assetsValueDao, final Date itemTime, final List<AssetsValue> categoryAssets, final List<AssetsValue> previousCategoryAssets) {
-
         List<DataCarrier_Assets> liquidAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
         List<DataCarrier_Assets> personalAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
         List<DataCarrier_Assets> taxableAccountsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.taxable_accounts_name),3);
@@ -211,7 +209,6 @@ public class Report_AssetsFragment extends Fragment {
     }
 
     public void refreshView(View contentView, List<AssetsValue> categoryAssets, List<AssetsValue> previousCategoryAssets) {
-
         LinearLayout liquidAssetsList = contentView.findViewById(R.id.liquid_assets_list);
         LinearLayout personalAssetsList = contentView.findViewById(R.id.personal_assets_list);
         LinearLayout taxableAccountsList = contentView.findViewById(R.id.taxable_accounts_list);

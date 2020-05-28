@@ -14,7 +14,6 @@ public class TypeProcessor_Assets {
     }
 
     public List<DataCarrier_Assets> getSubGroup(String parentGroupLabel, int level) {
-
         List<DataCarrier_Assets> subGroupAssets = new ArrayList<>();
 
         if (level == 0) {
@@ -61,7 +60,6 @@ public class TypeProcessor_Assets {
     }
 
     void addTypeToSubGroup(DataCarrier_Assets assetsFragmentDataCarrier, List<DataCarrier_Assets> subGroupAssets) {
-
         for(DataCarrier_Assets dataCarrier : subGroupAssets) {
             if(dataCarrier.assetsTypeId == assetsFragmentDataCarrier.assetsTypeId && dataCarrier.assetsTypeId != 0) {
                 return;

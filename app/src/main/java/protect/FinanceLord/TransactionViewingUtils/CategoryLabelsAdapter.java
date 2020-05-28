@@ -17,8 +17,8 @@ import protect.FinanceLord.R;
 
 public class CategoryLabelsAdapter extends RecyclerView.Adapter<CategoryLabelsAdapter.LabelViewHolder> {
 
-    Context context;
-    List<BudgetsType> budgetsTypes;
+    private Context context;
+    private List<BudgetsType> budgetsTypes;
 
     public CategoryLabelsAdapter(Context context, List<BudgetsType> budgetsTypes){
         this.context = context;
@@ -51,12 +51,11 @@ public class CategoryLabelsAdapter extends RecyclerView.Adapter<CategoryLabelsAd
         return budgetsTypes.size();
     }
 
-    public class LabelViewHolder extends RecyclerView.ViewHolder {
-
+    static class LabelViewHolder extends RecyclerView.ViewHolder {
         TextView categoryName;
         LinearLayout label;
 
-        public LabelViewHolder(View itemView) {
+        LabelViewHolder(View itemView) {
             super(itemView);
             categoryName = itemView.findViewById(R.id.transaction_label_name);
             label = itemView.findViewById(R.id.transaction_category_label);

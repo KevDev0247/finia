@@ -82,7 +82,6 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int position, boolean b, View convertView, ViewGroup viewGroup) {
-
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (level == 1) {
             convertView = inflater.inflate(R.layout.liabilities_list_row_first,null);
@@ -140,7 +139,6 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(final int groupPosition, int childPosition, boolean b, View convertView, ViewGroup viewGroup) {
-
         final DataCarrier_Liabilities sectionData = sectionDataSet.get(groupPosition);
         List<DataCarrier_Liabilities> children = typeProcessor.getSubGroup(sectionData.liabilitiesTypeName, level + 1);
 

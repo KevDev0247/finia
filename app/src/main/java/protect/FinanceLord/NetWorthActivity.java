@@ -141,7 +141,6 @@ public class NetWorthActivity extends AppCompatActivity {
     }
 
     protected void loadDataToCards(final List<NetWorthCardsDataModel> dataModels, final NetWorthCardsAdapter adapter) {
-
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {

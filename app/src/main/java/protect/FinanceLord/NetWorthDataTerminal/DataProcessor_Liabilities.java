@@ -28,7 +28,6 @@ public class DataProcessor_Liabilities {
     }
 
     public LiabilitiesValue getLiabilitiesValue(int liabilitiesId) {
-
         for (LiabilitiesValue liabilitiesValue: liabilitiesValues) {
             if (liabilitiesValue.getLiabilitiesId() == liabilitiesId) {
                 return liabilitiesValue;
@@ -38,7 +37,6 @@ public class DataProcessor_Liabilities {
     }
 
     public void setLiabilityValue(int liabilityId, float liabilityValue) {
-
         LiabilitiesValue liabilitiesValue = this.getLiabilitiesValue(liabilityId);
         if (liabilitiesValue != null){
             liabilitiesValue.setLiabilitiesValue(liabilityValue);
@@ -63,7 +61,6 @@ public class DataProcessor_Liabilities {
     }
 
     private int getLiabilitiesId(String liabilitiesName) {
-
         for (LiabilitiesTypeQuery query : dataList) {
             if (query.liabilitiesFirstLevelName != null && query.liabilitiesFirstLevelName.equals(liabilitiesName)){
                 return query.liabilitiesFirstLevelId;
@@ -77,7 +74,6 @@ public class DataProcessor_Liabilities {
     }
 
     private List<Integer> getLiabilitiesIDsBelongTo(String liabilitiesName) {
-
         if (TextUtils.isEmpty(liabilitiesName)) {
             return new ArrayList<>();
         }
@@ -105,7 +101,6 @@ public class DataProcessor_Liabilities {
     }
 
     public float calculateTotalLiability() {
-
         float totalLongTermLiabilities = calculateTotalLongTermLiabilities();
         float totalShortTermLiabilities = calculateTotalShortTermLiabilities();
         float totalLiabilities = totalShortTermLiabilities + totalLongTermLiabilities;
@@ -114,7 +109,6 @@ public class DataProcessor_Liabilities {
     }
 
     public float calculateTotalLongTermLiabilities() {
-
         List<Integer> liabilitiesIDs = this.getLiabilitiesIDsBelongTo(context.getString(R.string.long_term_liabilities_name));
         float totalLongTermLiabilities = 0;
         for (int liabilitiesId : liabilitiesIDs) {
@@ -134,7 +128,6 @@ public class DataProcessor_Liabilities {
     }
 
     public float calculateTotalShortTermLiabilities() {
-
         List<Integer> liabilitiesIDs = this.getLiabilitiesIDsBelongTo(context.getString(R.string.short_term_liabilities_name));
         float totalShortTermLiabilities = 0;
         for (int liabilitiesId : liabilitiesIDs) {
@@ -154,7 +147,6 @@ public class DataProcessor_Liabilities {
     }
 
     public void calculateAndInsertParentLiabilities(LiabilitiesValueDao liabilitiesValueDao) {
-
         float totalLiabilities = this.calculateTotalLiability();
         float totalShortTermLiabilities = this.calculateTotalShortTermLiabilities();
         float totalLongTermLiabilities = this.calculateTotalLongTermLiabilities();

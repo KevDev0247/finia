@@ -82,7 +82,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int position, boolean b, View convertView, ViewGroup viewGroup) {
-
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (level == 1) {
             convertView = inflater.inflate(R.layout.assets_list_row_first_category, null);
@@ -165,7 +164,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-
         final DataCarrier_Assets sectionData = sectionDataSet.get(groupPosition);
         List<DataCarrier_Assets> children = typeProcessor.getSubGroup(sectionData.assetsTypeName, level + 1);
 

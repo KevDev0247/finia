@@ -40,7 +40,6 @@ public class NetWorthCardsAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-
         layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.net_worth_cards, container, false);
 

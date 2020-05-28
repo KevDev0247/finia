@@ -140,7 +140,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
     }
 
     private void refreshSummaryView(float totalAssetsValue, float totalLiabilitiesValue, Float totalAssetsDifference, Float totalLiabilitiesDifference) {
-
         TextView reportNetWorthValue = findViewById(R.id.total_net_worth_value);
         TextView reportNetWorthSymbol = findViewById(R.id.total_net_worth_symbol);
         TextView reportNetWorthDifference = findViewById(R.id.total_net_worth_difference);

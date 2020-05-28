@@ -48,7 +48,6 @@ public class Report_LiabilitiesFragment extends Fragment {
     }
 
     private void getDataFromDatabase(final Date itemTime) {
-
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -80,7 +79,6 @@ public class Report_LiabilitiesFragment extends Fragment {
     }
 
     public void populateDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime, final List<LiabilitiesValue> categoryLiabilities, final List<LiabilitiesValue> previousCategoryLiabilities) {
-
         List<DataCarrier_Liabilities> shortTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.short_term_liabilities_name),2);
         List<DataCarrier_Liabilities> longTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.long_term_liabilities_name), 2);
 
@@ -131,7 +129,6 @@ public class Report_LiabilitiesFragment extends Fragment {
     }
 
     public void refreshView(View contentView, List<LiabilitiesValue> categoryLiabilities, List<LiabilitiesValue> previousCategoryLiabilities) {
-
         LinearLayout shortTermLiabilitiesList = contentView.findViewById(R.id.short_term_liabilities_list);
         LinearLayout longTermLiabilitiesList = contentView.findViewById(R.id.long_term_liabilities_list);
 

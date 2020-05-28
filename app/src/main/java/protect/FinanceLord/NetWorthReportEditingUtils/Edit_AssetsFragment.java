@@ -73,7 +73,6 @@ public class Edit_AssetsFragment extends Fragment {
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
@@ -132,7 +131,6 @@ public class Edit_AssetsFragment extends Fragment {
     }
 
     public void initAssets() {
-
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
