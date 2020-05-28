@@ -75,22 +75,17 @@ public class TransactionEditActivity extends AppCompatActivity {
                     typeNames.add(budgetsType.getBudgetsName());
                 }
 
-                if (fragmentTag.equals(getString(R.string.view_revenues_fragment_key))) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (fragmentTag.equals(getString(R.string.view_revenues_fragment_key))) {
                             initializeRevenueSection(typeNames, editSectionView);
-                        }
-                    });
 
-                } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                        } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
                             initializeExpenseSection(typeNames, editSectionView);
                         }
-                    });
-                }
+                    }
+                });
             }
         });
     }
