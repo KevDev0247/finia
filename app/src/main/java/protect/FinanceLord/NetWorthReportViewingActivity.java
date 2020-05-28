@@ -39,6 +39,14 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth_view_report);
 
+        ImageButton returnButton = findViewById(R.id.view_report_return_button);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         String itemTime = getIntent().getExtras().getString(getString(R.string.net_worth_time_key));
         netWorthDifference = getIntent().getExtras().getString(getString(R.string.net_worth_difference_key));
         netWorthValue = getIntent().getExtras().getString(getString(R.string.net_worth_value_key));
@@ -46,17 +54,15 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         Log.d("NetWorthViewingActivity","the time passed into viewing activity is: " + itemTime);
         Log.d("NetWorthViewingActivity","the value passed into viewing activity is: " + netWorthValue);
 
-        resetView(itemTime);
+        initializeTabs(itemTime);
 
         retrieveSummaryData(itemTime);
     }
 
-    private void resetView(String date) {
+    private void initializeTabs(String date) {
         final TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
         TextView reportTitle = findViewById(R.id.view_report_title);
-        ImageButton returnButton = findViewById(R.id.view_report_return_button);
-
         reportTitle.setText(date);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
@@ -88,13 +94,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
-        });
-
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
         });
     }
 
@@ -140,7 +139,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         });
     }
 
-    private void refreshSummaryView(float totalAssetsValue, float totalLiabilitiesValue, Float totalAssetsDifference, Float totalLiabilitiesDifference){
+    private void refreshSummaryView(float totalAssetsValue, float totalLiabilitiesValue, Float totalAssetsDifference, Float totalLiabilitiesDifference) {
 
         TextView reportNetWorthValue = findViewById(R.id.total_net_worth_value);
         TextView reportNetWorthSymbol = findViewById(R.id.total_net_worth_symbol);

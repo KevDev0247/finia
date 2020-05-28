@@ -34,6 +34,14 @@ public class TransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
 
+        ImageButton returnButton = findViewById(R.id.transaction_return_button);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         retrieveDataFromDatabase();
     }
 
@@ -59,26 +67,17 @@ public class TransactionActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         refreshCategoryViewList(budgetsTypes);
-                        resetView(budgetsTypes, transactions);
+                        initializeTabsAndAddButton(budgetsTypes, transactions);
                     }
                 });
             }
         });
     }
 
-    private void resetView(List<BudgetsType> budgetsTypes, List<Transactions> transactions) {
-
-        ImageButton returnButton = findViewById(R.id.transaction_return_button);
+    private void initializeTabsAndAddButton(List<BudgetsType> budgetsTypes, List<Transactions> transactions) {
         ImageButton addButton = findViewById(R.id.add_transaction_button);
         TabLayout tablayout = findViewById(R.id.transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.transaction_view_pager);
-
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         ArrayList<BudgetTypesDataModel> dataModels = new ArrayList<>();
         if (budgetsTypes != null){

@@ -42,8 +42,15 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
         this.calendarButton = findViewById(R.id.calendar_button);
         this.timeDisplay = findViewById(R.id.time_selected);
 
-        Calendar calendar = new GregorianCalendar();
+        ImageButton returnButton = findViewById(R.id.edit_report_return_button);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
+        Calendar calendar = new GregorianCalendar();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
@@ -52,11 +59,11 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
 
         String stringDate = TimeProcessor.getStringFromDate(currentTime, getString(R.string.date_format));
         this.timeDisplay.setText(stringDate);
-        resetView();
+
+        initializeTabs();
     }
 
-    private void resetView(){
-        ImageButton returnButton = findViewById(R.id.edit_report_return_button);
+    private void initializeTabs() {
         TabLayout tabLayout = findViewById(R.id.edit_tab_layout);
         final ViewPager viewPager = findViewById(R.id.edit_view_pager);
 
@@ -77,13 +84,6 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 Log.d("EditReportPassing", "time is " + currentTime);
                 calendarDialog.show(fragmentManager, "DateTimePicker");
-            }
-        });
-
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
     }

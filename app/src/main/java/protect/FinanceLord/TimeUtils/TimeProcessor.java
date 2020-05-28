@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class TimeProcessor {
 
@@ -24,14 +25,12 @@ public class TimeProcessor {
     }
 
     public static String getStringFromDate(Date date, String format) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
-        String dateStr = dateFormat.format(date);
-        return dateStr;
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.CANADA);
+        return dateFormat.format(date);
     }
 
     public static Date parseDateString(String dateStr, String format) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
-        Date date = dateFormat.parse(dateStr);
-        return date;
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.CANADA);
+        return dateFormat.parse(dateStr);
     }
 }

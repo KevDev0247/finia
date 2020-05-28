@@ -36,13 +36,17 @@ public class NetWorthActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_worth);
 
-        refreshNetWorthCardsView();
+        ImageButton returnButton = findViewById(R.id.net_worth_return_button);
+        returnButton.setOnClickListener(new View.OnClickListener() {
 
-        refreshPastReportsListView();
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         ImageButton editReportButton = findViewById(R.id.editReport);
         editReportButton.setOnClickListener(new View.OnClickListener() {
@@ -55,14 +59,9 @@ public class NetWorthActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton returnButton = findViewById(R.id.net_worth_return_button);
-        returnButton.setOnClickListener(new View.OnClickListener() {
+        refreshNetWorthCardsView();
 
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        refreshPastReportsListView();
     }
 
     @Override
@@ -75,8 +74,7 @@ public class NetWorthActivity extends AppCompatActivity {
         Log.d("NetWorthActivity", "Activity has been refreshed");
     }
 
-    protected void refreshPastReportsListView(){
-
+    protected void refreshPastReportsListView() {
         ListView pastReportsListView = findViewById(R.id.past_report_list);
         final List<ReportItemsDataModel> dataSources = new ArrayList<>();
         final PastReportsAdapter adapter = new PastReportsAdapter(this, dataSources);
@@ -86,6 +84,7 @@ public class NetWorthActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
+
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
                 ReportItemInfoDao reportItemInfoDao = database.reportItemInfoDao();
 
@@ -127,8 +126,7 @@ public class NetWorthActivity extends AppCompatActivity {
         });
     }
 
-    protected void refreshNetWorthCardsView(){
-
+    protected void refreshNetWorthCardsView() {
         NetWorthCardsAdapter adapter;
         ViewPager viewPager;
         List<NetWorthCardsDataModel> dataModels = new ArrayList<>();
@@ -142,7 +140,7 @@ public class NetWorthActivity extends AppCompatActivity {
         loadDataToCards(dataModels, adapter);
     }
 
-    protected void loadDataToCards(final List<NetWorthCardsDataModel> dataModels, final NetWorthCardsAdapter adapter){
+    protected void loadDataToCards(final List<NetWorthCardsDataModel> dataModels, final NetWorthCardsAdapter adapter) {
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
