@@ -1,4 +1,4 @@
-package protect.FinanceLord.TransactionEditingUtils;
+package protect.FinanceLord.TransactionUtils;
 
 import android.content.Context;
 import android.text.Editable;
@@ -13,8 +13,9 @@ import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.R;
+import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 
-class TransactionInsertUtils {
+public class TransactionInsertUtils {
 
     private Context context;
     private String TAG;
@@ -22,7 +23,7 @@ class TransactionInsertUtils {
     private TransactionInputUtils inputUtils;
     private List<BudgetTypesDataModel> dataModels;
 
-    TransactionInsertUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetTypesDataModel> dataModels, String TAG) {
+    public TransactionInsertUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetTypesDataModel> dataModels, String TAG) {
         this.context = context;
         this.currentTime = currentTime;
         this.inputUtils = inputUtils;
@@ -30,9 +31,9 @@ class TransactionInsertUtils {
         this.TAG = TAG;
     }
 
-    void retrieveAndInsertData() {
+    public void insertOrUpdateData(final boolean insert, final boolean update, Integer transactionId) {
         final Transactions transaction = new Transactions();
-        boolean insert = true;
+        boolean nullValue = false;
 
         if (!inputUtils.nameInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's name is " + inputUtils.nameInput.getText());
@@ -40,20 +41,20 @@ class TransactionInsertUtils {
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.nameInputField.setError(context.getString(R.string.transaction_name_error_message));
-            insert = false;
+            nullValue = true;
         }
 
         if (!inputUtils.valueInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's value is " + inputUtils.valueInput.getText());
-            if (TAG.equals(context.getString(R.string.edit_revenues_fragment_key))) {
+            if (TAG.equals(context.getString(R.string.revenues_section_key))) {
                 transaction.setTransactionValue(Float.parseFloat(inputUtils.valueInput.getText().toString().replace(",", "")));
-            } else if (TAG.equals(context.getString(R.string.edit_expenses_fragment_key))) {
+            } else if (TAG.equals(context.getString(R.string.expenses_section_key))) {
                 transaction.setTransactionValue( - Float.parseFloat(inputUtils.valueInput.getText().toString().replace(",", "")));
             }
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.valueInputField.setError(context.getString(R.string.transaction_value_error_message));
-            insert = false;
+            nullValue = true;
         }
 
         if (!inputUtils.commentInput.getText().toString().isEmpty()) {
@@ -72,30 +73,36 @@ class TransactionInsertUtils {
             }
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
-            inputUtils.valueInputField.setError(context.getString(R.string.transaction_category_error_message));
-            insert = false;
+            inputUtils.categoryInputField.setError(context.getString(R.string.transaction_category_error_message));
+            nullValue = true;
         }
 
         Log.d(TAG, "this transaction's date is " + currentTime.toString());
+        Log.d(TAG, "this transaction's id is " + transactionId);
         transaction.setDate(currentTime.getTime());
-
-        if (insert) {
-
-            Executors.newSingleThreadExecutor().execute(new Runnable() {
-                @Override
-                public void run() {
-                    FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
-                    TransactionsDao transactionsDao = database.transactionsDao();
-
-                    transactionsDao.insertTransaction(transaction);
-                }
-            });
-        } else {
-            Log.d(TAG, "the transaction has some null values");
+        if (transactionId != null){
+            transaction.setTransactionId(transactionId);
         }
+
+        final boolean finalNullValue = nullValue;
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+                TransactionsDao transactionsDao = database.transactionsDao();
+
+                if (!finalNullValue && insert) {
+                    transactionsDao.insertTransaction(transaction);
+                } else if (!finalNullValue && update) {
+                    transactionsDao.updateTransaction(transaction);
+                } else {
+                    Log.d(TAG, "the transaction has some null values");
+                }
+            }
+        });
     }
 
-    void addTextListener() {
+    public void addTextListener() {
         inputUtils.nameInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }

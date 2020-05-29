@@ -54,12 +54,12 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         Log.d("NetWorthViewingActivity","the time passed into viewing activity is: " + itemTime);
         Log.d("NetWorthViewingActivity","the value passed into viewing activity is: " + netWorthValue);
 
-        initializeTabs(itemTime);
+        setUpTabs(itemTime);
 
         retrieveSummaryData(itemTime);
     }
 
-    private void initializeTabs(String date) {
+    private void setUpTabs(String date) {
         final TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
         TextView reportTitle = findViewById(R.id.view_report_title);

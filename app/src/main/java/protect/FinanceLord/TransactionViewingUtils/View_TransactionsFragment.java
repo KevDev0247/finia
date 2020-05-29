@@ -58,6 +58,7 @@ public class View_TransactionsFragment extends Fragment {
                     Transactions revenue = revenues.get(position);
 
                     Intent intent = new Intent();
+                    intent.putExtra(getString(R.string.transaction_id_key), revenue.getTransactionId());
                     intent.putExtra(getString(R.string.transaction_name_key), revenue.getTransactionName());
                     intent.putExtra(getString(R.string.transaction_value_key), revenue.getTransactionValue());
                     intent.putExtra(getString(R.string.transaction_category_key), revenue.getTransactionCategoryId());
@@ -93,6 +94,7 @@ public class View_TransactionsFragment extends Fragment {
                     Transactions expense = expenses.get(position);
 
                     Intent intent = new Intent();
+                    intent.putExtra(getString(R.string.transaction_id_key), expense.getTransactionId());
                     intent.putExtra(getString(R.string.transaction_name_key), expense.getTransactionName());
                     intent.putExtra(getString(R.string.transaction_value_key), expense.getTransactionValue());
                     intent.putExtra(getString(R.string.transaction_category_key), expense.getTransactionCategoryId());

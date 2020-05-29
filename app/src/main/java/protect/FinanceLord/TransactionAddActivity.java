@@ -52,10 +52,10 @@ public class TransactionAddActivity extends AppCompatActivity {
         calendar.set(Calendar.MILLISECOND, 0);
         currentTime = calendar.getTime();
 
-        initializeTabsAndSaveButton(dataModels);
+        setUpTabsAndSaveButton(dataModels);
     }
 
-    private void initializeTabsAndSaveButton(List<BudgetTypesDataModel> dataModels){
+    private void setUpTabsAndSaveButton(List<BudgetTypesDataModel> dataModels){
         ImageButton saveButton = findViewById(R.id.transaction_add_save_button);
         final TabLayout tablayout = findViewById(R.id.add_transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.edit_transaction_view_pager);

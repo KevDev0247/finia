@@ -46,9 +46,14 @@ public class TransactionActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        retrieveDataFromDatabase();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-
         retrieveDataFromDatabase();
     }
 
@@ -66,14 +71,14 @@ public class TransactionActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         refreshCategoryViewList(budgetsTypes);
-                        initializeTabsAndAddButton(budgetsTypes, transactions);
+                        setUpTabsAndAddButton(budgetsTypes, transactions);
                     }
                 });
             }
         });
     }
 
-    private void initializeTabsAndAddButton(List<BudgetsType> budgetsTypes, List<Transactions> transactions) {
+    private void setUpTabsAndAddButton(List<BudgetsType> budgetsTypes, List<Transactions> transactions) {
         ImageButton addButton = findViewById(R.id.add_transaction_button);
         TabLayout tablayout = findViewById(R.id.transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.transaction_view_pager);

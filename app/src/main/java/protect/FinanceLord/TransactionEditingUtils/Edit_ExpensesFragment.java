@@ -24,11 +24,13 @@ import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.R;
 import protect.FinanceLord.TransactionAddActivity;
+import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
+import protect.FinanceLord.TransactionUtils.TransactionInsertUtils;
 
 public class Edit_ExpensesFragment extends Fragment {
 
     private Date currentTime;
-    private TransactionInsertUtils fragmentUtils;
+    private TransactionInsertUtils insertUtils;
     private List<BudgetTypesDataModel> dataModels;
     private List<String> typeNames = new ArrayList<>();
     private TransactionInputUtils inputUtils = new TransactionInputUtils();
@@ -70,7 +72,7 @@ public class Edit_ExpensesFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
-        fragmentUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, TAG);
+        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, getString(R.string.expenses_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +92,8 @@ public class Edit_ExpensesFragment extends Fragment {
         public void onActivityMessage() {
             Log.d(TAG, "the message from activity was received");
 
-            fragmentUtils.retrieveAndInsertData();
-            fragmentUtils.addTextListener();
+            insertUtils.insertOrUpdateData(true, false, null);
+            insertUtils.addTextListener();
         }
     };
 

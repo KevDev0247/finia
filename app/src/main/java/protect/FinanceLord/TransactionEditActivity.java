@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,11 +26,14 @@ import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
-import protect.FinanceLord.TransactionEditingUtils.TransactionInputUtils;
+import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
+import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
+import protect.FinanceLord.TransactionUtils.TransactionInsertUtils;
 
 public class TransactionEditActivity extends AppCompatActivity {
 
     private Date currentTime;
+    private TransactionInsertUtils insertUtils;
     private TransactionInputUtils inputUtils = new TransactionInputUtils();
 
     private static String TAG = "TransactionEditActivity";
@@ -91,7 +95,7 @@ public class TransactionEditActivity extends AppCompatActivity {
     private void initializeRevenueSection(List<BudgetsType> budgetsTypes) {
         inputUtils.nameInputField = findViewById(R.id.revenue_name_field);
         inputUtils.valueInputField = findViewById(R.id.revenue_value_field);
-        inputUtils.categoryInputField = findViewById(R.id.expenses_category_field);
+        inputUtils.categoryInputField = findViewById(R.id.revenue_category_field);
 
         inputUtils.nameInput = findViewById(R.id.revenue_name_input);
         inputUtils.valueInput = findViewById(R.id.revenue_value_input);
@@ -101,7 +105,11 @@ public class TransactionEditActivity extends AppCompatActivity {
 
         setUpCategoryAndDateInput(budgetsTypes);
 
-        loadDataToInputFields(budgetsTypes);
+        setUpSaveButton();
+
+        loadDataToInputBoxes(budgetsTypes);
+
+        setUpInputUtils(budgetsTypes, getString(R.string.revenues_section_key));
     }
 
     private void initializeExpenseSection(List<BudgetsType> budgetsTypes) {
@@ -117,7 +125,11 @@ public class TransactionEditActivity extends AppCompatActivity {
 
         setUpCategoryAndDateInput(budgetsTypes);
 
-        loadDataToInputFields(budgetsTypes);
+        setUpSaveButton();
+
+        loadDataToInputBoxes(budgetsTypes);
+
+        setUpInputUtils(budgetsTypes, getString(R.string.expenses_section_key));
     }
 
     private void setUpCategoryAndDateInput(List<BudgetsType> budgetsTypes){
@@ -140,13 +152,30 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
     }
 
-    private void loadDataToInputFields(List<BudgetsType> budgetsTypes) {
+    private void setUpSaveButton() {
+        ImageButton saveButton = findViewById(R.id.transaction_edit_save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertUtils.insertOrUpdateData(false, true, getIntent().getExtras().getInt(getString(R.string.transaction_id_key)));
+                insertUtils.addTextListener();
+            }
+        });
+    }
+
+    private void loadDataToInputBoxes(List<BudgetsType> budgetsTypes) {
         DecimalFormat decimalFormat = new DecimalFormat();
         SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.CANADA);
 
         inputUtils.nameInput.setText(getIntent().getStringExtra(getString(R.string.transaction_name_key)));
         inputUtils.valueInput.setText(decimalFormat.format(getIntent().getExtras().getFloat(getString(R.string.transaction_value_key))).replace("-",""));
         inputUtils.dateInput.setText(dateFormat.format(getIntent().getExtras().getLong(getString(R.string.transaction_date_key))));
+
+        try {
+            currentTime = TimeProcessor.parseDateString(dateFormat.format(getIntent().getExtras().getLong(getString(R.string.transaction_date_key))), getString(R.string.date_format));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         if (getIntent().getStringExtra(getString(R.string.transaction_comments_key)) != null){
             inputUtils.commentInput.setText(getIntent().getStringExtra(getString(R.string.transaction_comments_key)));
@@ -157,6 +186,20 @@ public class TransactionEditActivity extends AppCompatActivity {
                 inputUtils.categoryInput.setText(budgetsType.getBudgetsName());
             }
         }
+    }
+
+    private void setUpInputUtils(List<BudgetsType> budgetsTypes, String sectionTag) {
+        ArrayList<BudgetTypesDataModel> dataModels = new ArrayList<>();
+        if (budgetsTypes != null){
+            for (BudgetsType budgetsType : budgetsTypes){
+                BudgetTypesDataModel dataModel = new BudgetTypesDataModel(budgetsType.getBudgetsCategoryId(), budgetsType.getBudgetsName());
+                dataModels.add(dataModel);
+            }
+        } else {
+            dataModels = null;
+        }
+
+        insertUtils = new TransactionInsertUtils(this, currentTime, inputUtils, dataModels, sectionTag);
     }
 
     private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {

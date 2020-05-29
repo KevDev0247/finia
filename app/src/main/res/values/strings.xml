@@ -144,14 +144,16 @@
 
     <string name="view_expenses_fragment_key">View_ExpensesFragment</string>
     <string name="view_revenues_fragment_key">View_RevenuesFragment</string>
-    <string name="edit_expenses_fragment_key">Edit_ExpensesFragment</string>
-    <string name="edit_revenues_fragment_key">Edit_RevenuesFragment</string>
 
     <string name="transaction_fragment_key">Transaction</string>
+    <string name="transaction_id_key">Id</string>
     <string name="transaction_name_key">Name</string>
     <string name="transaction_value_key">Value</string>
     <string name="transaction_category_key">Category</string>
     <string name="transaction_comments_key">Comments</string>
     <string name="transaction_date_key">Date</string>
+
+    <string name="expenses_section_key">ExpensesSection</string>
+    <string name="revenues_section_key">RevenuesSection</string>
 
 </resources>

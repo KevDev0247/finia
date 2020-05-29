@@ -18,12 +18,9 @@ import protect.FinanceLord.R;
 
 public class CalendarDialog extends DialogFragment {
 
-    View calendarView;
-    DatePicker datePicker;
-    RelativeLayout confirmTimeButton;
-    RelativeLayout cancelTimeButton;
-    CalendarDateBroadcast communicator;
-    TimeProcessor timeUtils = new TimeProcessor();
+    private DatePicker datePicker;
+    private CalendarDateBroadcast communicator;
+    private TimeProcessor timeUtils = new TimeProcessor();
 
 
     public CalendarDialog(CalendarDateBroadcast communicator){
@@ -33,11 +30,11 @@ public class CalendarDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        calendarView = inflater.inflate(R.layout.time_setting_layout, null);
+        View calendarView = inflater.inflate(R.layout.time_setting_layout, null);
         datePicker = calendarView.findViewById(R.id.date_picker);
 
-        confirmTimeButton = calendarView.findViewById(R.id.confirm_time_button);
-        cancelTimeButton = calendarView.findViewById(R.id.cancel_time_button);
+        RelativeLayout confirmTimeButton = calendarView.findViewById(R.id.confirm_time_button);
+        RelativeLayout cancelTimeButton = calendarView.findViewById(R.id.cancel_time_button);
         setCancelable(true);
 
         confirmTimeButton.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +52,7 @@ public class CalendarDialog extends DialogFragment {
             }
         });
 
-        this.cancelTimeButton.setOnClickListener(new View.OnClickListener() {
+        cancelTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();

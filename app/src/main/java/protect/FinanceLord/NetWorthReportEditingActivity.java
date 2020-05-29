@@ -60,10 +60,10 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
         String stringDate = TimeProcessor.getStringFromDate(currentTime, getString(R.string.date_format));
         this.timeDisplay.setText(stringDate);
 
-        initializeTabs();
+        setUpTabs();
     }
 
-    private void initializeTabs() {
+    private void setUpTabs() {
         TabLayout tabLayout = findViewById(R.id.edit_tab_layout);
         final ViewPager viewPager = findViewById(R.id.edit_view_pager);
 
