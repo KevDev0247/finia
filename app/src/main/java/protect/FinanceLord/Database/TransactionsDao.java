@@ -16,19 +16,19 @@ public interface TransactionsDao {
     @Update
     void updateTransaction (Transactions ... transaction);
 
-    @Query("SELECT * FROM Transactions WHERE transactionId LIKE :transactionId")
+    @Query("SELECT * FROM Transactions WHERE transactionId = :transactionId")
     List<Transactions> queryTransactionsById (int transactionId);
 
-    @Query("SELECT * FROM Transactions WHERE transactionValue LIKE :transactionValue")
+    @Query("SELECT * FROM Transactions WHERE transactionValue = :transactionValue")
     List<Transactions> queryTransactionByByValue (float transactionValue);
 
-    @Query("SELECT * FROM Transactions WHERE transactionCategoryId LIKE :transactionCategoryId")
+    @Query("SELECT * FROM Transactions WHERE transactionCategoryId = :transactionCategoryId")
     List<Transactions> queryTransactionByCategoryId (int transactionCategoryId);
 
-    @Query("SELECT * FROM Transactions WHERE transactionComments LIKE :transactionComments")
+    @Query("SELECT * FROM Transactions WHERE transactionComments = :transactionComments")
     List<Transactions> queryTransactionByComments (String transactionComments);
 
-    @Query("SELECT * FROM Transactions WHERE date LIKE :date")
+    @Query("SELECT * FROM Transactions WHERE date = :date")
     List<Transactions> queryTransactionByDate (Long date);
 
     @Query("SELECT * FROM Transactions")

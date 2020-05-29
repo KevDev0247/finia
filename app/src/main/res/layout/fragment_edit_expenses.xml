@@ -151,7 +151,7 @@
                         android:id="@+id/expenses_date_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
+                        android:inputType="text"
                         android:textColor="#ffffff"
                         android:textCursorDrawable="@drawable/transaction_cursor"
                         android:singleLine="true"

@@ -65,7 +65,7 @@ public class Edit_RevenuesFragment extends Fragment {
         inputUtils.categoryInput = revenuesFragmentView.findViewById(R.id.revenue_category_input);
         inputUtils.dateInput = revenuesFragmentView.findViewById(R.id.revenue_date_input);
 
-        inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.expenses_dropdown_background, null));
+        inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.transactions_dropdown_background, null));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);

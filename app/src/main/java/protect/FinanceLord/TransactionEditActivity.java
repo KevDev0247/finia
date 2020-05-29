@@ -11,9 +11,12 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
@@ -68,21 +71,16 @@ public class TransactionEditActivity extends AppCompatActivity {
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionEditActivity.this);
                 BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
-                List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
-
-                final List<String> typeNames = new ArrayList<>();
-                for (BudgetsType budgetsType : budgetsTypes){
-                    typeNames.add(budgetsType.getBudgetsName());
-                }
+                final List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if (fragmentTag.equals(getString(R.string.view_revenues_fragment_key))) {
-                            initializeRevenueSection(typeNames);
+                            initializeRevenueSection(budgetsTypes);
 
                         } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
-                            initializeExpenseSection(typeNames);
+                            initializeExpenseSection(budgetsTypes);
                         }
                     }
                 });
@@ -90,7 +88,7 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeRevenueSection(List<String> typeNames) {
+    private void initializeRevenueSection(List<BudgetsType> budgetsTypes) {
         inputUtils.nameInputField = findViewById(R.id.revenue_name_field);
         inputUtils.valueInputField = findViewById(R.id.revenue_value_field);
         inputUtils.categoryInputField = findViewById(R.id.expenses_category_field);
@@ -101,8 +99,34 @@ public class TransactionEditActivity extends AppCompatActivity {
         inputUtils.categoryInput = findViewById(R.id.revenue_category_input);
         inputUtils.dateInput = findViewById(R.id.revenue_date_input);
 
-        inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.expenses_dropdown_background, null));
+        setUpCategoryAndDateInput(budgetsTypes);
 
+        loadDataToInputFields(budgetsTypes);
+    }
+
+    private void initializeExpenseSection(List<BudgetsType> budgetsTypes) {
+        inputUtils.nameInputField = findViewById(R.id.expenses_name_field);
+        inputUtils.valueInputField = findViewById(R.id.expenses_value_field);
+        inputUtils.categoryInputField = findViewById(R.id.expenses_category_field);
+
+        inputUtils.nameInput = findViewById(R.id.expenses_name_input);
+        inputUtils.valueInput = findViewById(R.id.expenses_value_input);
+        inputUtils.commentInput = findViewById(R.id.expenses_comments_input);
+        inputUtils.categoryInput = findViewById(R.id.expenses_category_input);
+        inputUtils.dateInput = findViewById(R.id.expenses_date_input);
+
+        setUpCategoryAndDateInput(budgetsTypes);
+
+        loadDataToInputFields(budgetsTypes);
+    }
+
+    private void setUpCategoryAndDateInput(List<BudgetsType> budgetsTypes){
+        List<String> typeNames = new ArrayList<>();
+        for (BudgetsType budgetsType : budgetsTypes){
+            typeNames.add(budgetsType.getBudgetsName());
+        }
+
+        inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.transactions_dropdown_background, null));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
@@ -116,30 +140,23 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeExpenseSection(List<String> typeNames) {
-        inputUtils.nameInputField = findViewById(R.id.expenses_name_field);
-        inputUtils.valueInputField = findViewById(R.id.expenses_value_field);
-        inputUtils.categoryInputField = findViewById(R.id.expenses_category_field);
+    private void loadDataToInputFields(List<BudgetsType> budgetsTypes) {
+        DecimalFormat decimalFormat = new DecimalFormat();
+        SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.CANADA);
 
-        inputUtils.nameInput = findViewById(R.id.expenses_name_input);
-        inputUtils.valueInput = findViewById(R.id.expenses_value_input);
-        inputUtils.commentInput = findViewById(R.id.expenses_comments_input);
-        inputUtils.categoryInput = findViewById(R.id.expenses_category_input);
-        inputUtils.dateInput = findViewById(R.id.expenses_date_input);
+        inputUtils.nameInput.setText(getIntent().getStringExtra(getString(R.string.transaction_name_key)));
+        inputUtils.valueInput.setText(decimalFormat.format(getIntent().getExtras().getFloat(getString(R.string.transaction_value_key))).replace("-",""));
+        inputUtils.dateInput.setText(dateFormat.format(getIntent().getExtras().getLong(getString(R.string.transaction_date_key))));
 
-        inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.expenses_dropdown_background, null));
+        if (getIntent().getStringExtra(getString(R.string.transaction_comments_key)) != null){
+            inputUtils.commentInput.setText(getIntent().getStringExtra(getString(R.string.transaction_comments_key)));
+        }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.transaction_categories_dropdown, typeNames);
-        inputUtils.categoryInput.setAdapter(adapter);
-
-        inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CalendarDialog calendarDialog = new CalendarDialog(calendarDialogCommunicator);
-                Log.d(TAG, "Date input is clicked");
-                calendarDialog.show(getSupportFragmentManager(), "DateTimePicker");
+        for (BudgetsType budgetsType : budgetsTypes) {
+            if (getIntent().getExtras().getInt(getString(R.string.transaction_category_key)) == budgetsType.getBudgetsCategoryId()) {
+                inputUtils.categoryInput.setText(budgetsType.getBudgetsName());
             }
-        });
+        }
     }
 
     private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
