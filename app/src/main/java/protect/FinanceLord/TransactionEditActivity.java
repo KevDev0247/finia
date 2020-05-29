@@ -51,18 +51,18 @@ public class TransactionEditActivity extends AppCompatActivity {
             LinearLayout sheet = findViewById(R.id.transaction_section_view);
             sheet.addView(editSectionView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
-            retrieveDataFromDatabase(fragmentTag, editSectionView);
+            retrieveDataFromDatabase(fragmentTag);
 
         } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
             View editSectionView = LayoutInflater.from(this).inflate(R.layout.fragment_edit_expenses, null, false);
             LinearLayout sheet = findViewById(R.id.transaction_section_view);
             sheet.addView(editSectionView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
-            retrieveDataFromDatabase(fragmentTag, editSectionView);
+            retrieveDataFromDatabase(fragmentTag);
         }
     }
 
-    private void retrieveDataFromDatabase(final String fragmentTag, final View editSectionView) {
+    private void retrieveDataFromDatabase(final String fragmentTag) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -79,10 +79,10 @@ public class TransactionEditActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (fragmentTag.equals(getString(R.string.view_revenues_fragment_key))) {
-                            initializeRevenueSection(typeNames, editSectionView);
+                            initializeRevenueSection(typeNames);
 
                         } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
-                            initializeExpenseSection(typeNames, editSectionView);
+                            initializeExpenseSection(typeNames);
                         }
                     }
                 });
@@ -90,7 +90,7 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeRevenueSection(List<String> typeNames, View editSectionView) {
+    private void initializeRevenueSection(List<String> typeNames) {
         inputUtils.nameInputField = findViewById(R.id.revenue_name_field);
         inputUtils.valueInputField = findViewById(R.id.revenue_value_field);
         inputUtils.categoryInputField = findViewById(R.id.expenses_category_field);
@@ -116,10 +116,10 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeExpenseSection(List<String> typeNames, View editSectionView) {
-        inputUtils.nameInputField = editSectionView.findViewById(R.id.expenses_name_field);
-        inputUtils.valueInputField = editSectionView.findViewById(R.id.expenses_value_field);
-        inputUtils.categoryInputField = editSectionView.findViewById(R.id.expenses_category_field);
+    private void initializeExpenseSection(List<String> typeNames) {
+        inputUtils.nameInputField = findViewById(R.id.expenses_name_field);
+        inputUtils.valueInputField = findViewById(R.id.expenses_value_field);
+        inputUtils.categoryInputField = findViewById(R.id.expenses_category_field);
 
         inputUtils.nameInput = findViewById(R.id.expenses_name_input);
         inputUtils.valueInput = findViewById(R.id.expenses_value_input);
