@@ -2,6 +2,7 @@ package protect.FinanceLord;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -29,6 +30,8 @@ import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
 import protect.FinanceLord.TransactionViewingUtils.View_TransactionsFragment;
 
 public class TransactionActivity extends AppCompatActivity {
+
+    private static String TAG = "TransactionActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,10 @@ public class TransactionActivity extends AppCompatActivity {
                 final List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
                 final List<Transactions> transactions = transactionsDao.queryAllTransaction();
 
+                for (Transactions transaction : transactions){
+                    Log.d(TAG + "retrieveData", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
+                }
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -92,6 +99,10 @@ public class TransactionActivity extends AppCompatActivity {
             }
         } else {
             dataModels = null;
+        }
+
+        for (Transactions transaction : transactions){
+            Log.d(TAG + " setUpTabsAndAddButton", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
         }
 
         ArrayList<Fragment> fragments = new ArrayList<>();
@@ -139,7 +150,12 @@ public class TransactionActivity extends AppCompatActivity {
                     for (BudgetsType budgetsType : budgetsTypes){
                         if (budgetsType.getBudgetsName().equals(categoryLabel)) {
                             groupedTransactions = transactionsDao.queryTransactionByCategoryId(budgetsType.getBudgetsCategoryId());
+                            Log.d(TAG,"budget type name is " + budgetsType.getBudgetsName());
                         }
+                    }
+
+                    for (Transactions transaction : groupedTransactions){
+                        Log.d(TAG + "Communicator", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
                     }
 
                     final List<Transactions> finalGroupedTransactions = groupedTransactions;

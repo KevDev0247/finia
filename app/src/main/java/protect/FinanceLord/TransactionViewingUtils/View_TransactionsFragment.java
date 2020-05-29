@@ -44,7 +44,7 @@ public class View_TransactionsFragment extends Fragment {
 
             for (Transactions transaction : transactions) {
                 if (transaction.getTransactionValue() > 0) {
-                    Log.d(fragmentTag, "the value is " + transaction.getTransactionValue());
+                    Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
                     revenues.add(transaction);
                 }
             }
@@ -80,7 +80,7 @@ public class View_TransactionsFragment extends Fragment {
 
             for (Transactions transaction : transactions) {
                 if (transaction.getTransactionValue() < 0) {
-                    Log.d(fragmentTag, "the value is " + transaction.getTransactionValue());
+                    Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
                     expenses.add(transaction);
                 }
             }

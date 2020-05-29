@@ -1,6 +1,7 @@
 package protect.FinanceLord.TransactionViewingUtils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class CategoryLabelsAdapter extends RecyclerView.Adapter<CategoryLabelsAd
         holder.label.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("CategoryAdapter", "the label was clicked");
                 String categoryLabel = holder.categoryName.getText().toString();
                 toTransactionActivityCommunicator.onActivityMessage(categoryLabel);
             }
