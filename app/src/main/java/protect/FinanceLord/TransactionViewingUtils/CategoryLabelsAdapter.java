@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import protect.FinanceLord.Communicators.GroupByCategoryCommunicator;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.R;
 
@@ -19,10 +20,12 @@ public class CategoryLabelsAdapter extends RecyclerView.Adapter<CategoryLabelsAd
 
     private Context context;
     private List<BudgetsType> budgetsTypes;
+    private GroupByCategoryCommunicator toTransactionActivityCommunicator;
 
-    public CategoryLabelsAdapter(Context context, List<BudgetsType> budgetsTypes){
+    public CategoryLabelsAdapter(Context context, List<BudgetsType> budgetsTypes, GroupByCategoryCommunicator fromAdapterCommunicator){
         this.context = context;
         this.budgetsTypes = budgetsTypes;
+        this.toTransactionActivityCommunicator = fromAdapterCommunicator;
     }
 
     @NonNull
@@ -34,14 +37,14 @@ public class CategoryLabelsAdapter extends RecyclerView.Adapter<CategoryLabelsAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LabelViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final LabelViewHolder holder, int position) {
         holder.categoryName.setText(budgetsTypes.get(position).getBudgetsName());
 
         holder.label.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //query database for all transactions under this category
+                String categoryLabel = holder.categoryName.getText().toString();
+                toTransactionActivityCommunicator.onActivityMessage(categoryLabel);
             }
         });
     }

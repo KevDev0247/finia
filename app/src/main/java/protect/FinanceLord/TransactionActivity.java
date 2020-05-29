@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import protect.FinanceLord.Communicators.GroupByCategoryCommunicator;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
@@ -119,7 +120,37 @@ public class TransactionActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView categoryLabelsList = findViewById(R.id.transaction_label_list);
         categoryLabelsList.setLayoutManager(layoutManager);
-        CategoryLabelsAdapter categoryLabelsAdapter = new CategoryLabelsAdapter(this, budgetsTypes);
+        CategoryLabelsAdapter categoryLabelsAdapter = new CategoryLabelsAdapter(this, budgetsTypes, fromAdapterCommunicator);
         categoryLabelsList.setAdapter(categoryLabelsAdapter);
     }
+
+    private GroupByCategoryCommunicator fromAdapterCommunicator = new GroupByCategoryCommunicator() {
+        @Override
+        public void onActivityMessage(final String categoryLabel) {
+            Executors.newSingleThreadExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
+                    TransactionsDao transactionsDao = database.transactionsDao();
+                    BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
+                    final List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
+
+                    List<Transactions> groupedTransactions = new ArrayList<>();
+                    for (BudgetsType budgetsType : budgetsTypes){
+                        if (budgetsType.getBudgetsName().equals(categoryLabel)) {
+                            groupedTransactions = transactionsDao.queryTransactionByCategoryId(budgetsType.getBudgetsCategoryId());
+                        }
+                    }
+
+                    final List<Transactions> finalGroupedTransactions = groupedTransactions;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setUpTabsAndAddButton(budgetsTypes, finalGroupedTransactions);
+                        }
+                    });
+                }
+            });
+        }
+    };
 }
