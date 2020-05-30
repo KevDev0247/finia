@@ -77,7 +77,7 @@ public class TransactionActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (initialize){
-                            refreshCategoryViewList(budgetsTypes);
+                            setUpCategoryViewList(budgetsTypes);
                             setUpTabsAndAddButton(budgetsTypes, transactions);
                         } else if (refresh){
                             viewModel.pushToTransactionGroup(transactions);
@@ -129,7 +129,11 @@ public class TransactionActivity extends AppCompatActivity {
         });
     }
 
-    private void refreshCategoryViewList(List<BudgetsType> budgetsTypes) {
+    private void setUpCategoryViewList(List<BudgetsType> budgetsTypes) {
+        BudgetsType allBudgets = new BudgetsType();
+        allBudgets.setBudgetsName(getString(R.string.all));
+        budgetsTypes.add(0, allBudgets);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView categoryLabelsList = findViewById(R.id.transaction_label_list);
         categoryLabelsList.setLayoutManager(layoutManager);
@@ -154,6 +158,10 @@ public class TransactionActivity extends AppCompatActivity {
                             groupedTransactions = transactionsDao.queryTransactionByCategoryId(budgetsType.getBudgetsCategoryId());
                             Log.d(TAG,"budget type name is " + budgetsType.getBudgetsName());
                         }
+                    }
+
+                    if (getString(R.string.all).equals(categoryLabel)){
+                        groupedTransactions = transactionsDao.queryAllTransaction();
                     }
 
                     final List<Transactions> finalGroupedTransactions = groupedTransactions;

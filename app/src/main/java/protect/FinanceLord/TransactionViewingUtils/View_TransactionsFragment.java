@@ -146,7 +146,7 @@ public class View_TransactionsFragment extends Fragment {
         });
     }
 
-    public void setUpRevenuesListObserver() {
+    private void setUpRevenuesListObserver() {
         TransactionsViewModel model = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
         model.getGroupedTransactions().observe(this, new Observer<List<Transactions>>() {
             @Override
@@ -164,7 +164,7 @@ public class View_TransactionsFragment extends Fragment {
         });
     }
 
-    public void setUpExpensesListObserver() {
+    private void setUpExpensesListObserver() {
         TransactionsViewModel model = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
         model.getGroupedTransactions().observe(this, new Observer<List<Transactions>>() {
             @Override

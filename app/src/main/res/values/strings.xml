@@ -18,6 +18,7 @@
     <string name="current_time">Current Time</string>
     <string name="dollar_sign">" $"</string>
     <string name="sign">"+ - "</string>
+    <string name="all">All</string>
 
     <string name="no_data_initialization">No Data</string>
     <string name="positive_symbol">+</string>
