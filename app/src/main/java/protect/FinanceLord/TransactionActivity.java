@@ -33,8 +33,7 @@ import protect.FinanceLord.TransactionViewingUtils.View_TransactionsFragment;
 
 public class TransactionActivity extends AppCompatActivity {
 
-    private View_TransactionsFragment revenuesFragment;
-    private View_TransactionsFragment expensesFragment;
+    private TransactionsViewModel viewModel;
     private static String TAG = "TransactionActivity";
 
     @Override
@@ -42,6 +41,7 @@ public class TransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
 
+        viewModel = ViewModelProviders.of(TransactionActivity.this).get(TransactionsViewModel.class);
         ImageButton returnButton = findViewById(R.id.transaction_return_button);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,22 +50,16 @@ public class TransactionActivity extends AppCompatActivity {
             }
         });
 
-        retrieveDataFromDatabase();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        retrieveDataFromDatabase();
+        retrieveDataFromDatabase(true, false);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        retrieveDataFromDatabase();
+        retrieveDataFromDatabase(false, true);
     }
 
-    private void retrieveDataFromDatabase() {
+    private void retrieveDataFromDatabase(final boolean initialize, final boolean refresh) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -76,14 +70,18 @@ public class TransactionActivity extends AppCompatActivity {
                 final List<Transactions> transactions = transactionsDao.queryAllTransaction();
 
                 for (Transactions transaction : transactions) {
-                    Log.d(TAG + "retrieveData", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
+                    Log.d(TAG + " retrieveData", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
                 }
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        refreshCategoryViewList(budgetsTypes);
-                        setUpTabsAndAddButton(budgetsTypes, transactions);
+                        if (initialize){
+                            refreshCategoryViewList(budgetsTypes);
+                            setUpTabsAndAddButton(budgetsTypes, transactions);
+                        } else if (refresh){
+                            viewModel.pushToTransactionGroup(transactions);
+                        }
                     }
                 });
             }
@@ -110,8 +108,8 @@ public class TransactionActivity extends AppCompatActivity {
         }
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        revenuesFragment = new View_TransactionsFragment(this, transactions, dataModels, getString(R.string.view_revenues_fragment_key));
-        expensesFragment = new View_TransactionsFragment(this, transactions, dataModels, getString(R.string.view_expenses_fragment_key));
+        View_TransactionsFragment revenuesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.view_revenues_fragment_key));
+        View_TransactionsFragment expensesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.view_expenses_fragment_key));
         fragments.add(revenuesFragment);
         fragments.add(expensesFragment);
 
@@ -145,7 +143,6 @@ public class TransactionActivity extends AppCompatActivity {
             Executors.newSingleThreadExecutor().execute(new Runnable() {
                 @Override
                 public void run() {
-                    final TransactionsViewModel viewModel = ViewModelProviders.of(TransactionActivity.this).get(TransactionsViewModel.class);
                     FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
                     TransactionsDao transactionsDao = database.transactionsDao();
                     BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
@@ -164,8 +161,6 @@ public class TransactionActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             viewModel.pushToTransactionGroup(finalGroupedTransactions);
-                            revenuesFragment.refreshRevenuesListView();
-                            expensesFragment.refreshExpensesListView();
                         }
                     });
                 }

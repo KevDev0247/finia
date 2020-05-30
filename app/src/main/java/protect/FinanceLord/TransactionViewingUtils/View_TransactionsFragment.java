@@ -39,12 +39,10 @@ public class View_TransactionsFragment extends Fragment {
     private List<Transactions> allRevenues = new ArrayList<>();
     private List<Transactions> allExpenses = new ArrayList<>();
 
-    public View_TransactionsFragment(Context context, List<Transactions> transactions, List<BudgetTypesDataModel> dataModels, String fragmentTag) {
+    public View_TransactionsFragment(List<Transactions> transactions, List<BudgetTypesDataModel> dataModels, String fragmentTag) {
         this.transactions = transactions;
         this.dataModels = dataModels;
         this.fragmentTag = fragmentTag;
-
-        onAttach(context);
     }
 
     @Override
@@ -63,12 +61,16 @@ public class View_TransactionsFragment extends Fragment {
 
             setUpRevenuesListView(revenuesFragmentView);
 
+            setUpRevenuesListObserver();
+
             return revenuesFragmentView;
 
         } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
             View expensesFragmentView = inflater.inflate(R.layout.fragment_view_transactions, null);
 
             setUpExpensesListView(expensesFragmentView);
+
+            setUpExpensesListObserver();
 
             return expensesFragmentView;
         }
@@ -144,13 +146,12 @@ public class View_TransactionsFragment extends Fragment {
         });
     }
 
-    public void refreshRevenuesListView() {
+    public void setUpRevenuesListObserver() {
         TransactionsViewModel model = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
         model.getGroupedTransactions().observe(this, new Observer<List<Transactions>>() {
             @Override
             public void onChanged(List<Transactions> transactions) {
                 adapterRevenuesList.clear();
-
                 for (Transactions transaction : transactions) {
                     if (transaction.getTransactionValue() > 0) {
                         Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
@@ -163,13 +164,12 @@ public class View_TransactionsFragment extends Fragment {
         });
     }
 
-    public void refreshExpensesListView() {
+    public void setUpExpensesListObserver() {
         TransactionsViewModel model = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
         model.getGroupedTransactions().observe(this, new Observer<List<Transactions>>() {
             @Override
             public void onChanged(List<Transactions> transactions) {
                 adapterExpensesList.clear();
-
                 for (Transactions transaction : transactions) {
                     if (transaction.getTransactionValue() < 0) {
                         Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
