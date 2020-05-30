@@ -1,4 +1,4 @@
-package protect.FinanceLord.TransactionViewingUtils;
+package protect.FinanceLord.ViewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

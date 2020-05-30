@@ -27,7 +27,7 @@ import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionViewingUtils.CategoryLabelsAdapter;
-import protect.FinanceLord.TransactionViewingUtils.TransactionsViewModel;
+import protect.FinanceLord.ViewModels.TransactionsViewModel;
 import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
 import protect.FinanceLord.TransactionViewingUtils.View_TransactionsFragment;
 

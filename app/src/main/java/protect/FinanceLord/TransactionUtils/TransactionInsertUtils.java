@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import protect.FinanceLord.Database.BudgetsType;
+import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
@@ -22,6 +24,11 @@ public class TransactionInsertUtils {
     private Date currentTime;
     private TransactionInputUtils inputUtils;
     private List<BudgetTypesDataModel> dataModels;
+    private Transactions transaction = new Transactions();
+
+    private boolean nullValue = false;
+    private boolean mInsert;
+    private boolean mUpdate;
 
     public TransactionInsertUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetTypesDataModel> dataModels, String TAG) {
         this.context = context;
@@ -32,8 +39,8 @@ public class TransactionInsertUtils {
     }
 
     public void insertOrUpdateData(final boolean insert, final boolean update, Integer transactionId) {
-        final Transactions transaction = new Transactions();
-        boolean nullValue = false;
+        mInsert = insert;
+        mUpdate = update;
 
         if (!inputUtils.nameInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's name is " + inputUtils.nameInput.getText());
@@ -64,19 +71,6 @@ public class TransactionInsertUtils {
             transaction.setTransactionComments(null);
         }
 
-        if (!inputUtils.categoryInput.getText().toString().isEmpty()) {
-            Log.d(TAG, "this transaction's category is " + inputUtils.categoryInput.getText());
-            for (BudgetTypesDataModel dataModel : dataModels){
-                if (dataModel.typeName.equals(inputUtils.categoryInput.getText().toString())){
-                    transaction.setTransactionCategoryId(dataModel.typeId);
-                }
-            }
-        } else {
-            Log.d(TAG, "no data is inputted, an error should be displayed ");
-            inputUtils.categoryInputField.setError(context.getString(R.string.transaction_category_error_message));
-            nullValue = true;
-        }
-
         Log.d(TAG, "this transaction's date is " + currentTime.toString());
         Log.d(TAG, "this transaction's id is " + transactionId);
         transaction.setDate(currentTime.getTime());
@@ -84,16 +78,36 @@ public class TransactionInsertUtils {
             transaction.setTransactionId(transactionId);
         }
 
-        final boolean finalNullValue = nullValue;
+        if (!inputUtils.categoryInput.getText().toString().isEmpty()) {
+            Log.d(TAG, "this transaction's category is " + inputUtils.categoryInput.getText());
+            for (BudgetTypesDataModel dataModel : dataModels){
+                if (dataModel.typeName.equals(inputUtils.categoryInput.getText().toString())){
+                    transaction.setTransactionCategoryId(dataModel.typeId);
+                } else {
+                    transaction.setTransactionCategoryId(0);
+                }
+            }
+
+            if (transaction.getTransactionCategoryId() == 0) {
+                Log.d(TAG, " a new category is created");
+                addNewCategoryToDatabase();
+                return;
+            }
+        } else {
+            Log.d(TAG, "no data is inputted, an error should be displayed ");
+            inputUtils.categoryInputField.setError(context.getString(R.string.transaction_category_error_message));
+            nullValue = true;
+        }
+
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
                 TransactionsDao transactionsDao = database.transactionsDao();
 
-                if (!finalNullValue && insert) {
+                if (!nullValue && insert) {
                     transactionsDao.insertTransaction(transaction);
-                } else if (!finalNullValue && update) {
+                } else if (!nullValue && update) {
                     transactionsDao.updateTransaction(transaction);
                 } else {
                     Log.d(TAG, "the transaction has some null values");
@@ -132,5 +146,43 @@ public class TransactionInsertUtils {
                 }
             }
         });
+    }
+
+    private void addNewCategoryToDatabase() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+                BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
+
+                BudgetsType newType = new BudgetsType();
+                newType.setBudgetsName(inputUtils.categoryInput.getText().toString());
+                budgetsTypeDao.insertIndividualBudgetType(newType);
+
+                Log.d(TAG, " the new category's name is set to " + inputUtils.categoryInput.getText().toString());
+
+                List<BudgetsType> allBudgetTypes = budgetsTypeDao.queryAllBudgetsTypes();
+                for (BudgetsType budgetsType : allBudgetTypes) {
+                    if (budgetsType.getBudgetsName().equals(inputUtils.categoryInput.getText().toString())) {
+                        Log.d(TAG, " the new category's name is " + budgetsType.getBudgetsName() + " id is " + budgetsType.getBudgetsCategoryId());
+
+                        insertTransactionWithNewCategory(budgetsType.getBudgetsCategoryId(), database);
+                    }
+                }
+            }
+        });
+    }
+
+    private void insertTransactionWithNewCategory(int budgetsCategoryId, FinanceLordDatabase database) {
+        TransactionsDao transactionsDao = database.transactionsDao();
+        transaction.setTransactionCategoryId(budgetsCategoryId);
+
+        if (!nullValue && mInsert) {
+            transactionsDao.insertTransaction(transaction);
+        } else if (!nullValue && mUpdate) {
+            transactionsDao.updateTransaction(transaction);
+        } else {
+            Log.d(TAG, "the transaction has some null values");
+        }
     }
 }

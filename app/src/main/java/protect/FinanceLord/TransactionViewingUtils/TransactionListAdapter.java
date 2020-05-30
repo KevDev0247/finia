@@ -24,7 +24,7 @@ public class TransactionListAdapter extends ArrayAdapter<Transactions> {
     private Context context;
     private List<BudgetTypesDataModel> dataModels;
 
-    public TransactionListAdapter(@NonNull Context context, List<Transactions> transactions, List<BudgetTypesDataModel> dataModels) {
+    TransactionListAdapter(@NonNull Context context, List<Transactions> transactions, List<BudgetTypesDataModel> dataModels) {
         super(context, 0, transactions);
 
         this.context = context;

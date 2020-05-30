@@ -24,6 +24,7 @@ import protect.FinanceLord.R;
 import protect.FinanceLord.TransactionActivity;
 import protect.FinanceLord.TransactionEditActivity;
 import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
+import protect.FinanceLord.ViewModels.TransactionsViewModel;
 
 public class View_TransactionsFragment extends Fragment {
 
@@ -36,8 +37,6 @@ public class View_TransactionsFragment extends Fragment {
     private List<BudgetTypesDataModel> dataModels;
     private List<Transactions> adapterRevenuesList = new ArrayList<>();
     private List<Transactions> adapterExpensesList = new ArrayList<>();
-    private List<Transactions> allRevenues = new ArrayList<>();
-    private List<Transactions> allExpenses = new ArrayList<>();
 
     public View_TransactionsFragment(List<Transactions> transactions, List<BudgetTypesDataModel> dataModels, String fragmentTag) {
         this.transactions = transactions;
@@ -88,8 +87,6 @@ public class View_TransactionsFragment extends Fragment {
             }
         }
 
-        allRevenues = adapterRevenuesList;
-
         revenuesAdapter = new TransactionListAdapter(getContext(), adapterRevenuesList, dataModels);
         revenuesListView.setAdapter(revenuesAdapter);
 
@@ -125,8 +122,6 @@ public class View_TransactionsFragment extends Fragment {
         expensesAdapter = new TransactionListAdapter(getContext(), adapterExpensesList, dataModels);
         expensesListView.setAdapter(expensesAdapter);
 
-        allExpenses = adapterExpensesList;
-
         expensesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -147,8 +142,8 @@ public class View_TransactionsFragment extends Fragment {
     }
 
     private void setUpRevenuesListObserver() {
-        TransactionsViewModel model = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
-        model.getGroupedTransactions().observe(this, new Observer<List<Transactions>>() {
+        TransactionsViewModel viewModel = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
+        viewModel.getGroupedTransactions().observe(this, new Observer<List<Transactions>>() {
             @Override
             public void onChanged(List<Transactions> transactions) {
                 adapterRevenuesList.clear();
@@ -165,8 +160,8 @@ public class View_TransactionsFragment extends Fragment {
     }
 
     private void setUpExpensesListObserver() {
-        TransactionsViewModel model = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
-        model.getGroupedTransactions().observe(this, new Observer<List<Transactions>>() {
+        TransactionsViewModel viewModel = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
+        viewModel.getGroupedTransactions().observe(this, new Observer<List<Transactions>>() {
             @Override
             public void onChanged(List<Transactions> transactions) {
                 adapterExpensesList.clear();

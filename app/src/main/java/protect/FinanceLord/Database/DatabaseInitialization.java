@@ -10,7 +10,8 @@ import protect.FinanceLord.R;
 
 public class DatabaseInitialization{
 
-    Context context;
+    private Context context;
+
     public DatabaseInitialization(Context context) {
         this.context = context;
     }
