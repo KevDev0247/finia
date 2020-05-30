@@ -39,10 +39,12 @@ public class View_TransactionsFragment extends Fragment {
     private List<Transactions> allRevenues = new ArrayList<>();
     private List<Transactions> allExpenses = new ArrayList<>();
 
-    public View_TransactionsFragment(List<Transactions> transactions, List<BudgetTypesDataModel> dataModels, String fragmentTag) {
+    public View_TransactionsFragment(Context context, List<Transactions> transactions, List<BudgetTypesDataModel> dataModels, String fragmentTag) {
         this.transactions = transactions;
         this.dataModels = dataModels;
         this.fragmentTag = fragmentTag;
+
+        onAttach(context);
     }
 
     @Override

@@ -110,8 +110,8 @@ public class TransactionActivity extends AppCompatActivity {
         }
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        revenuesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.view_revenues_fragment_key));
-        expensesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.view_expenses_fragment_key));
+        revenuesFragment = new View_TransactionsFragment(this, transactions, dataModels, getString(R.string.view_revenues_fragment_key));
+        expensesFragment = new View_TransactionsFragment(this, transactions, dataModels, getString(R.string.view_expenses_fragment_key));
         fragments.add(revenuesFragment);
         fragments.add(expensesFragment);
 
