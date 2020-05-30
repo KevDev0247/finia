@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -26,11 +27,14 @@ import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionViewingUtils.CategoryLabelsAdapter;
+import protect.FinanceLord.TransactionViewingUtils.TransactionsViewModel;
 import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
 import protect.FinanceLord.TransactionViewingUtils.View_TransactionsFragment;
 
 public class TransactionActivity extends AppCompatActivity {
 
+    private View_TransactionsFragment revenuesFragment;
+    private View_TransactionsFragment expensesFragment;
     private static String TAG = "TransactionActivity";
 
     @Override
@@ -71,7 +75,7 @@ public class TransactionActivity extends AppCompatActivity {
                 final List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
                 final List<Transactions> transactions = transactionsDao.queryAllTransaction();
 
-                for (Transactions transaction : transactions){
+                for (Transactions transaction : transactions) {
                     Log.d(TAG + "retrieveData", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
                 }
 
@@ -93,7 +97,7 @@ public class TransactionActivity extends AppCompatActivity {
 
         ArrayList<BudgetTypesDataModel> dataModels = new ArrayList<>();
         if (budgetsTypes != null){
-            for (BudgetsType budgetsType : budgetsTypes){
+            for (BudgetsType budgetsType : budgetsTypes) {
                 BudgetTypesDataModel dataModel = new BudgetTypesDataModel(budgetsType.getBudgetsCategoryId(), budgetsType.getBudgetsName());
                 dataModels.add(dataModel);
             }
@@ -101,13 +105,13 @@ public class TransactionActivity extends AppCompatActivity {
             dataModels = null;
         }
 
-        for (Transactions transaction : transactions){
+        for (Transactions transaction : transactions) {
             Log.d(TAG + " setUpTabsAndAddButton", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
         }
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        View_TransactionsFragment revenuesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.view_revenues_fragment_key));
-        View_TransactionsFragment expensesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.view_expenses_fragment_key));
+        revenuesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.view_revenues_fragment_key));
+        expensesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.view_expenses_fragment_key));
         fragments.add(revenuesFragment);
         fragments.add(expensesFragment);
 
@@ -141,28 +145,27 @@ public class TransactionActivity extends AppCompatActivity {
             Executors.newSingleThreadExecutor().execute(new Runnable() {
                 @Override
                 public void run() {
+                    final TransactionsViewModel viewModel = ViewModelProviders.of(TransactionActivity.this).get(TransactionsViewModel.class);
                     FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
                     TransactionsDao transactionsDao = database.transactionsDao();
                     BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
                     final List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
 
                     List<Transactions> groupedTransactions = new ArrayList<>();
-                    for (BudgetsType budgetsType : budgetsTypes){
+                    for (BudgetsType budgetsType : budgetsTypes) {
                         if (budgetsType.getBudgetsName().equals(categoryLabel)) {
                             groupedTransactions = transactionsDao.queryTransactionByCategoryId(budgetsType.getBudgetsCategoryId());
                             Log.d(TAG,"budget type name is " + budgetsType.getBudgetsName());
                         }
                     }
 
-                    for (Transactions transaction : groupedTransactions){
-                        Log.d(TAG + "Communicator", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
-                    }
-
                     final List<Transactions> finalGroupedTransactions = groupedTransactions;
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            setUpTabsAndAddButton(budgetsTypes, finalGroupedTransactions);
+                            viewModel.pushToTransactionGroup(finalGroupedTransactions);
+                            revenuesFragment.refreshRevenuesListView();
+                            expensesFragment.refreshExpensesListView();
                         }
                     });
                 }
