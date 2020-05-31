@@ -18,10 +18,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import protect.FinanceLord.Communicators.SaveDataCommunicator;
+import protect.FinanceLord.TransactionEditingUtils.Add_TransactionsFragment;
 import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionEditingUtils.EditPagerAdapter;
-import protect.FinanceLord.TransactionEditingUtils.Edit_ExpensesFragment;
-import protect.FinanceLord.TransactionEditingUtils.Edit_RevenuesFragment;
 
 public class TransactionAddActivity extends AppCompatActivity {
 
@@ -61,8 +60,8 @@ public class TransactionAddActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.edit_transaction_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        Edit_ExpensesFragment expensesFragment = new Edit_ExpensesFragment(currentTime, dataModels);
-        Edit_RevenuesFragment revenuesFragment = new Edit_RevenuesFragment(currentTime, dataModels);
+        Add_TransactionsFragment revenuesFragment = new Add_TransactionsFragment(currentTime, dataModels, getString(R.string.revenues_fragment_key));
+        Add_TransactionsFragment expensesFragment = new Add_TransactionsFragment(currentTime, dataModels, getString(R.string.expenses_fragments_key));
         fragments.add(expensesFragment);
         fragments.add(revenuesFragment);
 

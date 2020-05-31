@@ -143,8 +143,8 @@
     <string name="report_assets_fragment_key">Report Assets Fragment</string>
     <string name="report_liabilities_fragment_key">Report Liabilities Fragment</string>
 
-    <string name="view_expenses_fragment_key">View_ExpensesFragment</string>
-    <string name="view_revenues_fragment_key">View_RevenuesFragment</string>
+    <string name="expenses_fragments_key">ExpensesFragment</string>
+    <string name="revenues_fragment_key">RevenuesFragment</string>
 
     <string name="transaction_fragment_key">Transaction</string>
     <string name="transaction_id_key">Id</string>

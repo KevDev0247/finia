@@ -53,14 +53,14 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
 
         String fragmentTag = getIntent().getExtras().getString(getString(R.string.transaction_fragment_key));
-        if (fragmentTag.equals(getString(R.string.view_revenues_fragment_key))) {
+        if (fragmentTag.equals(getString(R.string.revenues_fragment_key))) {
             View editSectionView = LayoutInflater.from(this).inflate(R.layout.fragment_edit_revenues, null, false);
             LinearLayout sheet = findViewById(R.id.transaction_section_view);
             sheet.addView(editSectionView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
             retrieveDataFromDatabase(fragmentTag);
 
-        } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
+        } else if (fragmentTag.equals(getString(R.string.expenses_fragments_key))) {
             View editSectionView = LayoutInflater.from(this).inflate(R.layout.fragment_edit_expenses, null, false);
             LinearLayout sheet = findViewById(R.id.transaction_section_view);
             sheet.addView(editSectionView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -80,10 +80,10 @@ public class TransactionEditActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (fragmentTag.equals(getString(R.string.view_revenues_fragment_key))) {
+                        if (fragmentTag.equals(getString(R.string.revenues_fragment_key))) {
                             initializeRevenueSection(budgetsTypes);
 
-                        } else if (fragmentTag.equals(getString(R.string.view_expenses_fragment_key))) {
+                        } else if (fragmentTag.equals(getString(R.string.expenses_fragments_key))) {
                             initializeExpenseSection(budgetsTypes);
                         }
                     }
