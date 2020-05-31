@@ -80,11 +80,13 @@ public class TransactionInsertUtils {
 
         if (!inputUtils.categoryInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's category is " + inputUtils.categoryInput.getText());
-            for (BudgetTypesDataModel dataModel : dataModels){
-                if (dataModel.typeName.equals(inputUtils.categoryInput.getText().toString())){
+            for (BudgetTypesDataModel dataModel : dataModels) {
+                transaction.setTransactionCategoryId(0);
+                Log.d(TAG, "this data model item is " + dataModel.typeName);
+                if (dataModel.typeName.equals(inputUtils.categoryInput.getText().toString())) {
+                    Log.d(TAG, " find the match ");
                     transaction.setTransactionCategoryId(dataModel.typeId);
-                } else {
-                    transaction.setTransactionCategoryId(0);
+                    break;
                 }
             }
 
