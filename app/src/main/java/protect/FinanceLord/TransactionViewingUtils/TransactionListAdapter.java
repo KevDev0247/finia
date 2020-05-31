@@ -15,20 +15,20 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.R;
-import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 
 public class TransactionListAdapter extends ArrayAdapter<Transactions> {
 
     private Context context;
-    private List<BudgetTypesDataModel> dataModels;
+    private List<BudgetsType> budgetsTypes;
 
-    TransactionListAdapter(@NonNull Context context, List<Transactions> transactions, List<BudgetTypesDataModel> dataModels) {
+    TransactionListAdapter(@NonNull Context context, List<Transactions> transactions, List<BudgetsType> budgetsTypes) {
         super(context, 0, transactions);
 
         this.context = context;
-        this.dataModels = dataModels;
+        this.budgetsTypes = budgetsTypes;
     }
 
     @Override
@@ -53,9 +53,9 @@ public class TransactionListAdapter extends ArrayAdapter<Transactions> {
                 itemValue.setText(String.valueOf(transaction.getTransactionValue()));
                 itemDate.setText(dateFormat.format(transaction.getDate()));
 
-                for (BudgetTypesDataModel dataModel : dataModels) {
-                    if (dataModel.typeId == transaction.getTransactionCategoryId()) {
-                        itemCategory.setText(dataModel.typeName);
+                for (BudgetsType budgetsType : budgetsTypes) {
+                    if (budgetsType.getBudgetsCategoryId() == transaction.getTransactionCategoryId()) {
+                        itemCategory.setText(budgetsType.getBudgetsName());
                     }
                 }
 
@@ -77,9 +77,9 @@ public class TransactionListAdapter extends ArrayAdapter<Transactions> {
                 itemValue.setText(String.valueOf(transaction.getTransactionValue()));
                 itemDate.setText(dateFormat.format(transaction.getDate()));
 
-                for (BudgetTypesDataModel dataModel : dataModels) {
-                    if (dataModel.typeId == transaction.getTransactionCategoryId()) {
-                        itemCategory.setText(dataModel.typeName);
+                for (BudgetsType budgetsType : budgetsTypes) {
+                    if (budgetsType.getBudgetsCategoryId() == transaction.getTransactionCategoryId()) {
+                        itemCategory.setText(budgetsType.getBudgetsName());
                     }
                 }
 

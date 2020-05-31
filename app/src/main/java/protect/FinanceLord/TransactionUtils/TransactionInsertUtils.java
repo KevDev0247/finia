@@ -6,7 +6,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -17,7 +16,6 @@ import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.R;
-import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class TransactionInsertUtils {
@@ -26,7 +24,7 @@ public class TransactionInsertUtils {
     private String TAG;
     private Date currentTime;
     private TransactionInputUtils inputUtils;
-    private List<BudgetTypesDataModel> dataModels;
+    private List<BudgetsType> budgetsTypes;
     private BudgetTypesViewModel viewModel;
     private Transactions transaction = new Transactions();
 
@@ -34,11 +32,11 @@ public class TransactionInsertUtils {
     private boolean mInsert;
     private boolean mUpdate;
 
-    public TransactionInsertUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetTypesDataModel> dataModels, BudgetTypesViewModel viewModel, String TAG) {
+    public TransactionInsertUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetsType> budgetsTypes, BudgetTypesViewModel viewModel, String TAG) {
         this.context = context;
         this.currentTime = currentTime;
         this.inputUtils = inputUtils;
-        this.dataModels = dataModels;
+        this.budgetsTypes = budgetsTypes;
         this.viewModel = viewModel;
         this.TAG = TAG;
     }
@@ -85,12 +83,12 @@ public class TransactionInsertUtils {
 
         if (!inputUtils.categoryInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's category is " + inputUtils.categoryInput.getText());
-            for (BudgetTypesDataModel dataModel : dataModels) {
+            for (BudgetsType budgetsType : budgetsTypes) {
                 transaction.setTransactionCategoryId(0);
-                Log.d(TAG, "this data model item is " + dataModel.typeName);
-                if (dataModel.typeName.equals(inputUtils.categoryInput.getText().toString())) {
+                Log.d(TAG, "this data model item is " + budgetsType.getBudgetsName());
+                if (budgetsType.getBudgetsName().equals(inputUtils.categoryInput.getText().toString())) {
                     Log.d(TAG, " find the match ");
-                    transaction.setTransactionCategoryId(dataModel.typeId);
+                    transaction.setTransactionCategoryId(budgetsType.getBudgetsCategoryId());
                     break;
                 }
             }
@@ -169,10 +167,7 @@ public class TransactionInsertUtils {
                 Log.d(TAG, " the new category's name is set to " + inputUtils.categoryInput.getText().toString());
 
                 final List<BudgetsType> allBudgetTypes = budgetsTypeDao.queryAllBudgetsTypes();
-                final List<BudgetTypesDataModel> dataModels = new ArrayList<>();
                 for (BudgetsType budgetsType : allBudgetTypes) {
-                    BudgetTypesDataModel dataModel = new BudgetTypesDataModel(budgetsType.getBudgetsCategoryId(), budgetsType.getBudgetsName());
-                    dataModels.add(dataModel);
                     if (budgetsType.getBudgetsName().equals(inputUtils.categoryInput.getText().toString())) {
                         Log.d(TAG, " the new category's name is " + budgetsType.getBudgetsName() + " id is " + budgetsType.getBudgetsCategoryId());
 
@@ -184,7 +179,6 @@ public class TransactionInsertUtils {
                     public void run() {
                         Log.d(TAG + " Insert Utilities", " data has changed");
                         viewModel.pushToBudgetTypes(allBudgetTypes);
-                        viewModel.pushToDataModels(dataModels);
                     }
                 });
             }

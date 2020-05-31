@@ -21,6 +21,7 @@ import java.util.List;
 
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Communicators.SaveDataCommunicator;
+import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.R;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
@@ -35,20 +36,16 @@ public class Add_TransactionsFragment extends Fragment {
     private Date currentTime;
     private TransactionInsertUtils insertUtils;
     private TransactionAddActivity transactionAddActivity;
-    private List<BudgetTypesDataModel> dataModels;
+    private List<BudgetsType> budgetsTypes;
     private List<String> typeNames = new ArrayList<>();
     private TransactionInputUtils inputUtils = new TransactionInputUtils();
 
     private static final String TAG = "Edit_RevenuesFragment";
 
-    public Add_TransactionsFragment(Date currentTime, List<BudgetTypesDataModel> dataModels, BudgetTypesViewModel viewModel, String fragmentTag) {
+    public Add_TransactionsFragment(Date currentTime, List<BudgetsType> budgetsTypes, BudgetTypesViewModel viewModel, String fragmentTag) {
         this.currentTime = currentTime;
-        this.dataModels = dataModels;
+        this.budgetsTypes = budgetsTypes;
         this.fragmentTag = fragmentTag;
-
-        for (BudgetTypesDataModel dataModel : dataModels){
-            typeNames.add(dataModel.typeName);
-        }
     }
 
     @Override
@@ -102,7 +99,7 @@ public class Add_TransactionsFragment extends Fragment {
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
 
-        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, viewModel, getString(R.string.revenues_section_key));
+        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +130,7 @@ public class Add_TransactionsFragment extends Fragment {
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
 
-        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, viewModel, getString(R.string.expenses_section_key));
+        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override

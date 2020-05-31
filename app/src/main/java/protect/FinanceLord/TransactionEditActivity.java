@@ -27,7 +27,6 @@ import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
-import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
 import protect.FinanceLord.TransactionUtils.TransactionInsertUtils;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
@@ -192,17 +191,7 @@ public class TransactionEditActivity extends AppCompatActivity {
 
     private void setUpInputUtils(List<BudgetsType> budgetsTypes, String sectionTag) {
         BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
-        ArrayList<BudgetTypesDataModel> dataModels = new ArrayList<>();
-        if (budgetsTypes != null){
-            for (BudgetsType budgetsType : budgetsTypes){
-                BudgetTypesDataModel dataModel = new BudgetTypesDataModel(budgetsType.getBudgetsCategoryId(), budgetsType.getBudgetsName());
-                dataModels.add(dataModel);
-            }
-        } else {
-            dataModels = null;
-        }
-
-        insertUtils = new TransactionInsertUtils(this, currentTime, inputUtils, dataModels, viewModel, sectionTag);
+        insertUtils = new TransactionInsertUtils(this, currentTime, inputUtils, budgetsTypes, viewModel, sectionTag);
     }
 
     private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {

@@ -19,11 +19,11 @@ import androidx.lifecycle.ViewModelProviders;
 import java.util.ArrayList;
 import java.util.List;
 
+import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.R;
 import protect.FinanceLord.TransactionActivity;
 import protect.FinanceLord.TransactionEditActivity;
-import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 import protect.FinanceLord.ViewModels.TransactionsViewModel;
 
@@ -35,13 +35,13 @@ public class View_TransactionsFragment extends Fragment {
     private TransactionActivity transactionActivity;
 
     private List<Transactions> transactions;
-    private List<BudgetTypesDataModel> dataModels;
+    private List<BudgetsType> budgetsTypes;
     private List<Transactions> adapterRevenuesList = new ArrayList<>();
     private List<Transactions> adapterExpensesList = new ArrayList<>();
 
-    public View_TransactionsFragment(List<Transactions> transactions, List<BudgetTypesDataModel> dataModels, String fragmentTag) {
+    public View_TransactionsFragment(List<Transactions> transactions, List<BudgetsType> budgetsTypes, String fragmentTag) {
         this.transactions = transactions;
-        this.dataModels = dataModels;
+        this.budgetsTypes = budgetsTypes;
         this.fragmentTag = fragmentTag;
     }
 
@@ -88,7 +88,7 @@ public class View_TransactionsFragment extends Fragment {
             }
         }
 
-        revenuesAdapter = new TransactionListAdapter(getContext(), adapterRevenuesList, dataModels);
+        revenuesAdapter = new TransactionListAdapter(getContext(), adapterRevenuesList, budgetsTypes);
         revenuesListView.setAdapter(revenuesAdapter);
 
         revenuesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -110,13 +110,13 @@ public class View_TransactionsFragment extends Fragment {
         });
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
-        viewModel.getBudgetsDataModels().observe(getViewLifecycleOwner(), new Observer<List<BudgetTypesDataModel>>() {
+        viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
             @Override
-            public void onChanged(List<BudgetTypesDataModel> newDataModels) {
+            public void onChanged(List<BudgetsType> newBudgetsTypes) {
                 Log.d(fragmentTag + " Fragment", " data has changed");
-                dataModels.clear();
-                dataModels.addAll(newDataModels);
-                revenuesAdapter.notifyDataSetChanged();
+                budgetsTypes.clear();
+                budgetsTypes.addAll(newBudgetsTypes);
+                expensesAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -131,7 +131,7 @@ public class View_TransactionsFragment extends Fragment {
             }
         }
 
-        expensesAdapter = new TransactionListAdapter(getContext(), adapterExpensesList, dataModels);
+        expensesAdapter = new TransactionListAdapter(getContext(), adapterExpensesList, budgetsTypes);
         expensesListView.setAdapter(expensesAdapter);
 
         expensesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -153,12 +153,12 @@ public class View_TransactionsFragment extends Fragment {
         });
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
-        viewModel.getBudgetsDataModels().observe(getViewLifecycleOwner(), new Observer<List<BudgetTypesDataModel>>() {
+        viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
             @Override
-            public void onChanged(List<BudgetTypesDataModel> newDataModels) {
+            public void onChanged(List<BudgetsType> newBudgetsTypes) {
                 Log.d(fragmentTag + " Fragment", " data has changed");
-                dataModels.clear();
-                dataModels.addAll(newDataModels);
+                budgetsTypes.clear();
+                budgetsTypes.addAll(newBudgetsTypes);
                 expensesAdapter.notifyDataSetChanged();
             }
         });

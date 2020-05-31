@@ -26,7 +26,6 @@ import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
-import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionViewingUtils.CategoryLabelsAdapter;
 import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
 import protect.FinanceLord.TransactionViewingUtils.View_TransactionsFragment;
@@ -98,23 +97,13 @@ public class TransactionActivity extends AppCompatActivity {
         TabLayout tablayout = findViewById(R.id.transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.transaction_view_pager);
 
-        ArrayList<BudgetTypesDataModel> dataModels = new ArrayList<>();
-        if (budgetsTypes != null){
-            for (BudgetsType budgetsType : budgetsTypes) {
-                BudgetTypesDataModel dataModel = new BudgetTypesDataModel(budgetsType.getBudgetsCategoryId(), budgetsType.getBudgetsName());
-                dataModels.add(dataModel);
-            }
-        } else {
-            dataModels = null;
-        }
-
         for (Transactions transaction : transactions) {
             Log.d(TAG + " setUpTabsAndAddButton", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
         }
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        View_TransactionsFragment revenuesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.revenues_fragment_key));
-        View_TransactionsFragment expensesFragment = new View_TransactionsFragment(transactions, dataModels, getString(R.string.expenses_fragments_key));
+        View_TransactionsFragment revenuesFragment = new View_TransactionsFragment(transactions, budgetsTypes, getString(R.string.revenues_fragment_key));
+        View_TransactionsFragment expensesFragment = new View_TransactionsFragment(transactions, budgetsTypes, getString(R.string.expenses_fragments_key));
         fragments.add(revenuesFragment);
         fragments.add(expensesFragment);
 
@@ -122,12 +111,12 @@ public class TransactionActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         tablayout.setupWithViewPager(viewPager);
 
-        final ArrayList<BudgetTypesDataModel> finalDataModels = dataModels;
+        final ArrayList<BudgetsType> finalBudgetsTypes = new ArrayList<>(budgetsTypes);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putParcelableArrayListExtra(getString(R.string.budget_categories_key), finalDataModels);
+                intent.putParcelableArrayListExtra(getString(R.string.budget_categories_key), finalBudgetsTypes);
                 intent.setClass(TransactionActivity.this, TransactionAddActivity.class);
                 startActivityForResult(intent, MAIN_ACTIVITY_REQUEST_CODE);
             }
