@@ -3,7 +3,9 @@ package protect.FinanceLord.TransactionEditingUtils;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class BudgetTypesDataModel implements Parcelable {
+import java.io.Serializable;
+
+public class BudgetTypesDataModel implements Parcelable, Serializable {
 
     public int typeId;
     public String typeName;

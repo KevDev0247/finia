@@ -35,8 +35,10 @@ import protect.FinanceLord.ViewModels.TransactionsViewModel;
 
 public class TransactionActivity extends AppCompatActivity {
 
-    private TransactionsViewModel viewModel;
+    private TransactionsViewModel transactionsViewModel;
     private List<BudgetsType> budgetsTypes;
+
+    static final int MAIN_ACTIVITY_REQUEST_CODE = 1000;
     private static String TAG = "TransactionActivity";
 
     @Override
@@ -44,7 +46,7 @@ public class TransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
 
-        viewModel = ViewModelProviders.of(TransactionActivity.this).get(TransactionsViewModel.class);
+        transactionsViewModel = ViewModelProviders.of(TransactionActivity.this).get(TransactionsViewModel.class);
         ImageButton returnButton = findViewById(R.id.transaction_return_button);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +85,7 @@ public class TransactionActivity extends AppCompatActivity {
                             setUpCategoryViewList();
                             setUpTabsAndAddButton(transactions);
                         } else if (refresh){
-                            viewModel.pushToTransactionGroup(transactions);
+                            transactionsViewModel.pushToTransactionGroup(transactions);
                         }
                     }
                 });
@@ -127,7 +129,7 @@ public class TransactionActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putParcelableArrayListExtra(getString(R.string.budget_categories_key), finalDataModels);
                 intent.setClass(TransactionActivity.this, TransactionAddActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, MAIN_ACTIVITY_REQUEST_CODE);
             }
         });
     }
@@ -185,7 +187,7 @@ public class TransactionActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            viewModel.pushToTransactionGroup(finalGroupedTransactions);
+                            transactionsViewModel.pushToTransactionGroup(finalGroupedTransactions);
                         }
                     });
                 }

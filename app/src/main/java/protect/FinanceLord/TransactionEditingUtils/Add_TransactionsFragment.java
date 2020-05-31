@@ -34,14 +34,14 @@ public class Add_TransactionsFragment extends Fragment {
     private String fragmentTag;
     private Date currentTime;
     private TransactionInsertUtils insertUtils;
-    private TransactionAddActivity activity;
+    private TransactionAddActivity transactionAddActivity;
     private List<BudgetTypesDataModel> dataModels;
     private List<String> typeNames = new ArrayList<>();
     private TransactionInputUtils inputUtils = new TransactionInputUtils();
 
     private static final String TAG = "Edit_RevenuesFragment";
 
-    public Add_TransactionsFragment(Date currentTime, List<BudgetTypesDataModel> dataModels, String fragmentTag){
+    public Add_TransactionsFragment(Date currentTime, List<BudgetTypesDataModel> dataModels, BudgetTypesViewModel viewModel, String fragmentTag) {
         this.currentTime = currentTime;
         this.dataModels = dataModels;
         this.fragmentTag = fragmentTag;
@@ -54,12 +54,12 @@ public class Add_TransactionsFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        activity = (TransactionAddActivity) context;
+        transactionAddActivity = (TransactionAddActivity) context;
 
         if (fragmentTag.equals(getString(R.string.revenues_fragment_key))) {
-            activity.toEditRevenuesCommunicator = fromActivityCommunicator;
+            transactionAddActivity.toEditRevenuesCommunicator = fromActivityCommunicator;
         } else if (fragmentTag.equals(getString(R.string.expenses_fragments_key))) {
-            activity.toEditExpensesCommunicator = fromActivityCommunicator;
+            transactionAddActivity.toEditExpensesCommunicator = fromActivityCommunicator;
         }
     }
 
@@ -100,7 +100,7 @@ public class Add_TransactionsFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
-        BudgetTypesViewModel viewModel = ViewModelProviders.of(activity).get(BudgetTypesViewModel.class);
+        BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
 
         insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, viewModel, getString(R.string.revenues_section_key));
 
@@ -131,7 +131,7 @@ public class Add_TransactionsFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
-        BudgetTypesViewModel viewModel = ViewModelProviders.of(activity).get(BudgetTypesViewModel.class);
+        BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
 
         insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, viewModel, getString(R.string.expenses_section_key));
 

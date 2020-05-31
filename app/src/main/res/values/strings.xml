@@ -139,6 +139,7 @@
     <string name="net_worth_value_key">itemValue</string>
     <string name="net_worth_difference_key">itemDifference</string>
     <string name="budget_categories_key">budgetsCategory</string>
+    <string name="budget_types_view_model">budgetTypesViewModel</string>
 
     <string name="report_assets_fragment_key">Report Assets Fragment</string>
     <string name="report_liabilities_fragment_key">Report Liabilities Fragment</string>
@@ -156,5 +157,8 @@
 
     <string name="expenses_section_key">ExpensesSection</string>
     <string name="revenues_section_key">RevenuesSection</string>
+
+    <string name="transaction_add_new_models_key">newModels</string>
+    <string name="transaction_add_new_types_key">newTypes</string>
 
 </resources>

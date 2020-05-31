@@ -1,5 +1,6 @@
 package protect.FinanceLord.TransactionUtils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -167,8 +168,8 @@ public class TransactionInsertUtils {
 
                 Log.d(TAG, " the new category's name is set to " + inputUtils.categoryInput.getText().toString());
 
-                List<BudgetsType> allBudgetTypes = budgetsTypeDao.queryAllBudgetsTypes();
-                List<BudgetTypesDataModel> dataModels = new ArrayList<>();
+                final List<BudgetsType> allBudgetTypes = budgetsTypeDao.queryAllBudgetsTypes();
+                final List<BudgetTypesDataModel> dataModels = new ArrayList<>();
                 for (BudgetsType budgetsType : allBudgetTypes) {
                     BudgetTypesDataModel dataModel = new BudgetTypesDataModel(budgetsType.getBudgetsCategoryId(), budgetsType.getBudgetsName());
                     dataModels.add(dataModel);
@@ -178,8 +179,14 @@ public class TransactionInsertUtils {
                         insertTransactionWithNewCategory(budgetsType.getBudgetsCategoryId(), database);
                     }
                 }
-                viewModel.pushToBudgetTypes(allBudgetTypes);
-                viewModel.pushToDataModels(dataModels);
+
+                ((Activity)context).runOnUiThread(new Runnable() {
+                    public void run() {
+                        Log.d(TAG + " Insert Utilities", " data has changed");
+                        viewModel.pushToBudgetTypes(allBudgetTypes);
+                        viewModel.pushToDataModels(dataModels);
+                    }
+                });
             }
         });
     }

@@ -1,5 +1,7 @@
 package protect.FinanceLord;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,6 +9,8 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -17,16 +21,21 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import protect.FinanceLord.Communicators.NewCategoryCommunicator;
 import protect.FinanceLord.Communicators.SaveDataCommunicator;
+import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.TransactionEditingUtils.Add_TransactionsFragment;
 import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionEditingUtils.EditPagerAdapter;
+import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class TransactionAddActivity extends AppCompatActivity {
 
     Date currentTime;
     public SaveDataCommunicator toEditExpensesCommunicator;
     public SaveDataCommunicator toEditRevenuesCommunicator;
+    private NewCategoryCommunicator toTransactionActivityCommunicator;
+    private BudgetTypesViewModel budgetTypesViewModel;
 
     private static final String TAG = "TransactionEditActivity";
 
@@ -35,6 +44,7 @@ public class TransactionAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_add);
         ArrayList<BudgetTypesDataModel> dataModels = getIntent().getExtras().getParcelableArrayList(getString(R.string.budget_categories_key));
+        budgetTypesViewModel = (BudgetTypesViewModel) getIntent().getExtras().getSerializable(getString(R.string.budget_types_view_model));
 
         ImageButton returnButton = findViewById(R.id.transaction_add_return_button);
         returnButton.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +62,8 @@ public class TransactionAddActivity extends AppCompatActivity {
         currentTime = calendar.getTime();
 
         setUpTabsAndSaveButton(dataModels);
+
+        setUpBudgetTypesObserver();
     }
 
     private void setUpTabsAndSaveButton(List<BudgetTypesDataModel> dataModels){
@@ -60,8 +72,8 @@ public class TransactionAddActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.edit_transaction_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        Add_TransactionsFragment revenuesFragment = new Add_TransactionsFragment(currentTime, dataModels, getString(R.string.revenues_fragment_key));
-        Add_TransactionsFragment expensesFragment = new Add_TransactionsFragment(currentTime, dataModels, getString(R.string.expenses_fragments_key));
+        Add_TransactionsFragment revenuesFragment = new Add_TransactionsFragment(currentTime, dataModels, budgetTypesViewModel, getString(R.string.revenues_fragment_key));
+        Add_TransactionsFragment expensesFragment = new Add_TransactionsFragment(currentTime, dataModels, budgetTypesViewModel, getString(R.string.expenses_fragments_key));
         fragments.add(expensesFragment);
         fragments.add(revenuesFragment);
 
@@ -81,6 +93,26 @@ public class TransactionAddActivity extends AppCompatActivity {
                 } else if (tablayout.getTabAt(viewPager.getCurrentItem()).getText().toString().equals(getString(R.string.revenues_name))){
                     toEditRevenuesCommunicator.onActivityMessage();
                 }
+            }
+        });
+    }
+
+    private void setUpBudgetTypesObserver() {
+        BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
+        viewModel.getBudgetsDataModels().observe(this, new Observer<List<BudgetTypesDataModel>>() {
+            @Override
+            public void onChanged(List<BudgetTypesDataModel> newDataModels) {
+                Intent intent = new Intent();
+                ArrayList<BudgetTypesDataModel> dataModels = new ArrayList<>(newDataModels);
+                intent.putParcelableArrayListExtra(getString(R.string.transaction_add_new_models_key), dataModels);
+                setResult(Activity.RESULT_OK, intent);
+            }
+        });
+
+        viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
+            @Override
+            public void onChanged(List<BudgetsType> newBudgetsTypes) {
+                Intent intent = new Intent();
             }
         });
     }

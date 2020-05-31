@@ -110,10 +110,12 @@ public class View_TransactionsFragment extends Fragment {
         });
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
-        viewModel.getBudgetsDataModels().observe(this, new Observer<List<BudgetTypesDataModel>>() {
+        viewModel.getBudgetsDataModels().observe(getViewLifecycleOwner(), new Observer<List<BudgetTypesDataModel>>() {
             @Override
             public void onChanged(List<BudgetTypesDataModel> newDataModels) {
-                dataModels = newDataModels;
+                Log.d(fragmentTag + " Fragment", " data has changed");
+                dataModels.clear();
+                dataModels.addAll(newDataModels);
                 revenuesAdapter.notifyDataSetChanged();
             }
         });
@@ -151,10 +153,12 @@ public class View_TransactionsFragment extends Fragment {
         });
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
-        viewModel.getBudgetsDataModels().observe(this, new Observer<List<BudgetTypesDataModel>>() {
+        viewModel.getBudgetsDataModels().observe(getViewLifecycleOwner(), new Observer<List<BudgetTypesDataModel>>() {
             @Override
             public void onChanged(List<BudgetTypesDataModel> newDataModels) {
-                dataModels = newDataModels;
+                Log.d(fragmentTag + " Fragment", " data has changed");
+                dataModels.clear();
+                dataModels.addAll(newDataModels);
                 expensesAdapter.notifyDataSetChanged();
             }
         });
@@ -162,17 +166,16 @@ public class View_TransactionsFragment extends Fragment {
 
     private void setUpRevenuesListObserver() {
         TransactionsViewModel viewModel = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
-        viewModel.getGroupedTransactions().observe(this, new Observer<List<Transactions>>() {
+        viewModel.getGroupedTransactions().observe(getViewLifecycleOwner(), new Observer<List<Transactions>>() {
             @Override
             public void onChanged(List<Transactions> transactions) {
                 adapterRevenuesList.clear();
-                adapterRevenuesList = transactions;
-                /*for (Transactions transaction : transactions) {
+                for (Transactions transaction : transactions) {
                     if (transaction.getTransactionValue() > 0) {
                         Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
                         adapterRevenuesList.add(transaction);
                     }
-                }*/
+                }
 
                 revenuesAdapter.notifyDataSetChanged();
             }
@@ -181,17 +184,16 @@ public class View_TransactionsFragment extends Fragment {
 
     private void setUpExpensesListObserver() {
         TransactionsViewModel viewModel = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
-        viewModel.getGroupedTransactions().observe(this, new Observer<List<Transactions>>() {
+        viewModel.getGroupedTransactions().observe(getViewLifecycleOwner(), new Observer<List<Transactions>>() {
             @Override
             public void onChanged(List<Transactions> transactions) {
                 adapterExpensesList.clear();
-                adapterExpensesList = transactions;
-                /*for (Transactions transaction : transactions) {
+                for (Transactions transaction : transactions) {
                     if (transaction.getTransactionValue() < 0) {
-                        Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
+                        Log.d(fragmentTag  + "Fragment", "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
                         adapterExpensesList.add(transaction);
                     }
-                }*/
+                }
 
                 expensesAdapter.notifyDataSetChanged();
             }
