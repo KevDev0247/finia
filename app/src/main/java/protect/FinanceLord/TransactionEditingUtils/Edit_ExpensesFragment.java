@@ -72,7 +72,7 @@ public class Edit_ExpensesFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
-        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, getString(R.string.expenses_section_key));
+//        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, getString(R.string.expenses_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override

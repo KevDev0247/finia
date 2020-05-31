@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,12 +27,14 @@ import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.TransactionAddActivity;
 import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
 import protect.FinanceLord.TransactionUtils.TransactionInsertUtils;
+import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class Add_TransactionsFragment extends Fragment {
 
     private String fragmentTag;
     private Date currentTime;
     private TransactionInsertUtils insertUtils;
+    private TransactionAddActivity activity;
     private List<BudgetTypesDataModel> dataModels;
     private List<String> typeNames = new ArrayList<>();
     private TransactionInputUtils inputUtils = new TransactionInputUtils();
@@ -51,7 +54,7 @@ public class Add_TransactionsFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        TransactionAddActivity activity = (TransactionAddActivity) context;
+        activity = (TransactionAddActivity) context;
 
         if (fragmentTag.equals(getString(R.string.revenues_fragment_key))) {
             activity.toEditRevenuesCommunicator = fromActivityCommunicator;
@@ -97,7 +100,9 @@ public class Add_TransactionsFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
-        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, getString(R.string.revenues_section_key));
+        BudgetTypesViewModel viewModel = ViewModelProviders.of(activity).get(BudgetTypesViewModel.class);
+
+        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, viewModel, getString(R.string.revenues_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +131,9 @@ public class Add_TransactionsFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
-        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, getString(R.string.expenses_section_key));
+        BudgetTypesViewModel viewModel = ViewModelProviders.of(activity).get(BudgetTypesViewModel.class);
+
+        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, dataModels, viewModel, getString(R.string.expenses_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override

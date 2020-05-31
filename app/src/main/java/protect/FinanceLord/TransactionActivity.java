@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,13 +28,15 @@ import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionViewingUtils.CategoryLabelsAdapter;
-import protect.FinanceLord.ViewModels.TransactionsViewModel;
 import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
 import protect.FinanceLord.TransactionViewingUtils.View_TransactionsFragment;
+import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
+import protect.FinanceLord.ViewModels.TransactionsViewModel;
 
 public class TransactionActivity extends AppCompatActivity {
 
     private TransactionsViewModel viewModel;
+    private List<BudgetsType> budgetsTypes;
     private static String TAG = "TransactionActivity";
 
     @Override
@@ -66,8 +69,8 @@ public class TransactionActivity extends AppCompatActivity {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
                 TransactionsDao transactionsDao = database.transactionsDao();
                 BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
-                final List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
                 final List<Transactions> transactions = transactionsDao.queryAllTransaction();
+                budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
 
                 for (Transactions transaction : transactions) {
                     Log.d(TAG + " retrieveData", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
@@ -77,8 +80,8 @@ public class TransactionActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (initialize){
-                            setUpCategoryViewList(budgetsTypes);
-                            setUpTabsAndAddButton(budgetsTypes, transactions);
+                            setUpCategoryViewList();
+                            setUpTabsAndAddButton(transactions);
                         } else if (refresh){
                             viewModel.pushToTransactionGroup(transactions);
                         }
@@ -88,7 +91,7 @@ public class TransactionActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpTabsAndAddButton(List<BudgetsType> budgetsTypes, List<Transactions> transactions) {
+    private void setUpTabsAndAddButton(List<Transactions> transactions) {
         ImageButton addButton = findViewById(R.id.add_transaction_button);
         TabLayout tablayout = findViewById(R.id.transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.transaction_view_pager);
@@ -129,16 +132,30 @@ public class TransactionActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpCategoryViewList(List<BudgetsType> budgetsTypes) {
-        BudgetsType allBudgets = new BudgetsType();
-        allBudgets.setBudgetsName(getString(R.string.all));
-        budgetsTypes.add(0, allBudgets);
+    private void setUpCategoryViewList() {
+        addLabelAll(budgetsTypes);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView categoryLabelsList = findViewById(R.id.transaction_label_list);
         categoryLabelsList.setLayoutManager(layoutManager);
-        CategoryLabelsAdapter categoryLabelsAdapter = new CategoryLabelsAdapter(this, budgetsTypes, fromAdapterCommunicator);
-        categoryLabelsList.setAdapter(categoryLabelsAdapter);
+        final CategoryLabelsAdapter adapter = new CategoryLabelsAdapter(this, budgetsTypes, fromAdapterCommunicator);
+        categoryLabelsList.setAdapter(adapter);
+
+        BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
+        viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
+            @Override
+            public void onChanged(List<BudgetsType> newBudgetsTypesList) {
+                budgetsTypes = newBudgetsTypesList;
+                addLabelAll(budgetsTypes);
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void addLabelAll(List<BudgetsType> budgetsTypes) {
+        BudgetsType allBudgets = new BudgetsType();
+        allBudgets.setBudgetsName(getString(R.string.all));
+        budgetsTypes.add(0, allBudgets);
     }
 
     private GroupByCategoryCommunicator fromAdapterCommunicator = new GroupByCategoryCommunicator() {

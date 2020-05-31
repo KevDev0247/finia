@@ -24,6 +24,7 @@ import protect.FinanceLord.R;
 import protect.FinanceLord.TransactionActivity;
 import protect.FinanceLord.TransactionEditActivity;
 import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
+import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 import protect.FinanceLord.ViewModels.TransactionsViewModel;
 
 public class View_TransactionsFragment extends Fragment {
@@ -107,6 +108,15 @@ public class View_TransactionsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
+        viewModel.getBudgetsDataModels().observe(this, new Observer<List<BudgetTypesDataModel>>() {
+            @Override
+            public void onChanged(List<BudgetTypesDataModel> newDataModels) {
+                dataModels = newDataModels;
+                revenuesAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void setUpExpensesListView(View expensesFragmentView) {
@@ -139,6 +149,15 @@ public class View_TransactionsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
+        viewModel.getBudgetsDataModels().observe(this, new Observer<List<BudgetTypesDataModel>>() {
+            @Override
+            public void onChanged(List<BudgetTypesDataModel> newDataModels) {
+                dataModels = newDataModels;
+                expensesAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void setUpRevenuesListObserver() {
@@ -147,12 +166,13 @@ public class View_TransactionsFragment extends Fragment {
             @Override
             public void onChanged(List<Transactions> transactions) {
                 adapterRevenuesList.clear();
-                for (Transactions transaction : transactions) {
+                adapterRevenuesList = transactions;
+                /*for (Transactions transaction : transactions) {
                     if (transaction.getTransactionValue() > 0) {
                         Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
                         adapterRevenuesList.add(transaction);
                     }
-                }
+                }*/
 
                 revenuesAdapter.notifyDataSetChanged();
             }
@@ -165,12 +185,13 @@ public class View_TransactionsFragment extends Fragment {
             @Override
             public void onChanged(List<Transactions> transactions) {
                 adapterExpensesList.clear();
-                for (Transactions transaction : transactions) {
+                adapterExpensesList = transactions;
+                /*for (Transactions transaction : transactions) {
                     if (transaction.getTransactionValue() < 0) {
                         Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
                         adapterExpensesList.add(transaction);
                     }
-                }
+                }*/
 
                 expensesAdapter.notifyDataSetChanged();
             }

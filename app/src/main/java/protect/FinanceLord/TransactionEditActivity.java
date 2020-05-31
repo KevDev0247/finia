@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -29,6 +30,7 @@ import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.TransactionEditingUtils.BudgetTypesDataModel;
 import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
 import protect.FinanceLord.TransactionUtils.TransactionInsertUtils;
+import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class TransactionEditActivity extends AppCompatActivity {
 
@@ -189,6 +191,7 @@ public class TransactionEditActivity extends AppCompatActivity {
     }
 
     private void setUpInputUtils(List<BudgetsType> budgetsTypes, String sectionTag) {
+        BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
         ArrayList<BudgetTypesDataModel> dataModels = new ArrayList<>();
         if (budgetsTypes != null){
             for (BudgetsType budgetsType : budgetsTypes){
@@ -199,7 +202,7 @@ public class TransactionEditActivity extends AppCompatActivity {
             dataModels = null;
         }
 
-        insertUtils = new TransactionInsertUtils(this, currentTime, inputUtils, dataModels, sectionTag);
+        insertUtils = new TransactionInsertUtils(this, currentTime, inputUtils, dataModels, viewModel, sectionTag);
     }
 
     private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
