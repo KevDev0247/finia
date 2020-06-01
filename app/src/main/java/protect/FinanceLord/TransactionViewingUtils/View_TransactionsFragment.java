@@ -61,7 +61,7 @@ public class View_TransactionsFragment extends Fragment {
 
             setUpRevenuesListView(revenuesFragmentView);
 
-            setUpRevenuesListObserver();
+            setUpRevenuesViewModels();
 
             return revenuesFragmentView;
 
@@ -70,7 +70,7 @@ public class View_TransactionsFragment extends Fragment {
 
             setUpExpensesListView(expensesFragmentView);
 
-            setUpExpensesListObserver();
+            setUpExpensesViewModels();
 
             return expensesFragmentView;
         }
@@ -108,17 +108,6 @@ public class View_TransactionsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
-        viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
-            @Override
-            public void onChanged(List<BudgetsType> newBudgetsTypes) {
-                Log.d(fragmentTag + " Fragment", " data has changed");
-                budgetsTypes.clear();
-                budgetsTypes.addAll(newBudgetsTypes);
-                expensesAdapter.notifyDataSetChanged();
-            }
-        });
     }
 
     private void setUpExpensesListView(View expensesFragmentView) {
@@ -151,22 +140,11 @@ public class View_TransactionsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
-        viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
-            @Override
-            public void onChanged(List<BudgetsType> newBudgetsTypes) {
-                Log.d(fragmentTag + " Fragment", " data has changed");
-                budgetsTypes.clear();
-                budgetsTypes.addAll(newBudgetsTypes);
-                expensesAdapter.notifyDataSetChanged();
-            }
-        });
     }
 
-    private void setUpRevenuesListObserver() {
-        TransactionsViewModel viewModel = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
-        viewModel.getGroupedTransactions().observe(getViewLifecycleOwner(), new Observer<List<Transactions>>() {
+    private void setUpRevenuesViewModels() {
+        TransactionsViewModel transactionsViewModel = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
+        transactionsViewModel.getGroupedTransactions().observe(getViewLifecycleOwner(), new Observer<List<Transactions>>() {
             @Override
             public void onChanged(List<Transactions> transactions) {
                 adapterRevenuesList.clear();
@@ -180,11 +158,22 @@ public class View_TransactionsFragment extends Fragment {
                 revenuesAdapter.notifyDataSetChanged();
             }
         });
+
+        BudgetTypesViewModel budgetTypesViewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
+        budgetTypesViewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
+            @Override
+            public void onChanged(List<BudgetsType> newBudgetsTypes) {
+                Log.d(fragmentTag + " Fragment", " data has changed");
+                budgetsTypes.clear();
+                budgetsTypes.addAll(newBudgetsTypes);
+                revenuesAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
-    private void setUpExpensesListObserver() {
-        TransactionsViewModel viewModel = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
-        viewModel.getGroupedTransactions().observe(getViewLifecycleOwner(), new Observer<List<Transactions>>() {
+    private void setUpExpensesViewModels() {
+        TransactionsViewModel transactionsViewModel = ViewModelProviders.of(transactionActivity).get(TransactionsViewModel.class);
+        transactionsViewModel.getGroupedTransactions().observe(getViewLifecycleOwner(), new Observer<List<Transactions>>() {
             @Override
             public void onChanged(List<Transactions> transactions) {
                 adapterExpensesList.clear();
@@ -195,6 +184,17 @@ public class View_TransactionsFragment extends Fragment {
                     }
                 }
 
+                expensesAdapter.notifyDataSetChanged();
+            }
+        });
+
+        BudgetTypesViewModel budgetTypesViewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
+        budgetTypesViewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
+            @Override
+            public void onChanged(List<BudgetsType> newBudgetsTypes) {
+                Log.d(fragmentTag + " Fragment", " data has changed");
+                budgetsTypes.clear();
+                budgetsTypes.addAll(newBudgetsTypes);
                 expensesAdapter.notifyDataSetChanged();
             }
         });

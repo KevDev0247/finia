@@ -1,14 +1,15 @@
 package protect.FinanceLord;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +36,7 @@ import protect.FinanceLord.ViewModels.TransactionsViewModel;
 public class TransactionActivity extends AppCompatActivity {
 
     private TransactionsViewModel transactionsViewModel;
+    private CategoryLabelsAdapter adapter;
     private List<BudgetsType> budgetsTypes;
 
     static final int MAIN_ACTIVITY_REQUEST_CODE = 1000;
@@ -129,24 +131,30 @@ public class TransactionActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView categoryLabelsList = findViewById(R.id.transaction_label_list);
         categoryLabelsList.setLayoutManager(layoutManager);
-        final CategoryLabelsAdapter adapter = new CategoryLabelsAdapter(this, budgetsTypes, fromAdapterCommunicator);
+        adapter = new CategoryLabelsAdapter(this, budgetsTypes, fromAdapterCommunicator);
         categoryLabelsList.setAdapter(adapter);
-
-        BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
-        viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
-            @Override
-            public void onChanged(List<BudgetsType> newBudgetsTypesList) {
-                budgetsTypes = newBudgetsTypesList;
-                addLabelAll(budgetsTypes);
-                adapter.notifyDataSetChanged();
-            }
-        });
     }
 
     private void addLabelAll(List<BudgetsType> budgetsTypes) {
         BudgetsType allBudgets = new BudgetsType();
         allBudgets.setBudgetsName(getString(R.string.all));
         budgetsTypes.add(0, allBudgets);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK) {
+            ArrayList<BudgetsType> newBudgetTypes = (ArrayList<BudgetsType>) data.getSerializableExtra(getString(R.string.transaction_add_new_types_key));
+
+            budgetsTypes.clear();
+            budgetsTypes.addAll(newBudgetTypes);
+            addLabelAll(budgetsTypes);
+            adapter.notifyDataSetChanged();
+
+            BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
+            viewModel.pushToBudgetTypes(newBudgetTypes);
+        }
     }
 
     private GroupByCategoryCommunicator fromAdapterCommunicator = new GroupByCategoryCommunicator() {

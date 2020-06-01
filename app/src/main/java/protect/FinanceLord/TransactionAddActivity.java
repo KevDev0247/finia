@@ -1,5 +1,6 @@
 package protect.FinanceLord;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import protect.FinanceLord.Communicators.NewCategoryCommunicator;
 import protect.FinanceLord.Communicators.SaveDataCommunicator;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.TransactionAddingUtils.Add_TransactionsFragment;
@@ -32,7 +32,6 @@ public class TransactionAddActivity extends AppCompatActivity {
     Date currentTime;
     public SaveDataCommunicator toEditExpensesCommunicator;
     public SaveDataCommunicator toEditRevenuesCommunicator;
-    private NewCategoryCommunicator toTransactionActivityCommunicator;
     private BudgetTypesViewModel budgetTypesViewModel;
 
     private static final String TAG = "TransactionEditActivity";
@@ -100,7 +99,10 @@ public class TransactionAddActivity extends AppCompatActivity {
         viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
             @Override
             public void onChanged(List<BudgetsType> newBudgetsTypes) {
+                ArrayList<BudgetsType> budgetsTypes = new ArrayList<>(newBudgetsTypes);
                 Intent intent = new Intent();
+                intent.putParcelableArrayListExtra(getString(R.string.transaction_add_new_types_key), budgetsTypes);
+                setResult(Activity.RESULT_OK, intent);
             }
         });
     }
