@@ -88,6 +88,8 @@ public class TransactionAddActivity extends AppCompatActivity {
                 } else if (tablayout.getTabAt(viewPager.getCurrentItem()).getText().toString().equals(getString(R.string.revenues_name))){
                     toEditRevenuesCommunicator.onActivityMessage();
                 }
+
+                finish();
             }
         });
     }

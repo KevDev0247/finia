@@ -26,9 +26,9 @@ public class TransactionDatabaseUtils {
     private TransactionInputUtils inputUtils;
     private List<BudgetsType> budgetsTypes;
     private BudgetTypesViewModel viewModel;
-    private Transactions transaction = new Transactions();
     private TransactionsDao transactionsDao;
     private BudgetsTypeDao budgetsTypeDao;
+    private Transactions transaction = new Transactions();
 
     private boolean nullValue = false;
     private boolean mInsert;
@@ -47,7 +47,7 @@ public class TransactionDatabaseUtils {
         budgetsTypeDao = database.budgetsTypeDao();
     }
 
-    public void insertOrUpdateData(final boolean insert, final boolean update, Integer transactionId) {
+    public void insertOrUpdateData(final boolean insert, final boolean update, final Integer transactionId) {
         mInsert = insert;
         mUpdate = update;
 

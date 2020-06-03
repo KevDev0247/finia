@@ -26,15 +26,15 @@ import protect.FinanceLord.R;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.TransactionAddActivity;
-import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
 import protect.FinanceLord.TransactionUtils.TransactionDatabaseUtils;
+import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class Add_TransactionsFragment extends Fragment {
 
     private String fragmentTag;
     private Date currentTime;
-    private TransactionDatabaseUtils insertUtils;
+    private TransactionDatabaseUtils databaseUtils;
     private TransactionAddActivity transactionAddActivity;
     private List<BudgetsType> budgetsTypes;
     private List<String> typeNames = new ArrayList<>();
@@ -95,6 +95,7 @@ public class Add_TransactionsFragment extends Fragment {
         inputUtils.commentInput = revenuesFragmentView.findViewById(R.id.revenue_comments_input);
         inputUtils.categoryInput = revenuesFragmentView.findViewById(R.id.revenue_category_input);
         inputUtils.dateInput = revenuesFragmentView.findViewById(R.id.revenue_date_input);
+        inputUtils.deleteButton = revenuesFragmentView.findViewById(R.id.revenue_delete_button);
 
         inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.transactions_dropdown_background, null));
 
@@ -103,7 +104,7 @@ public class Add_TransactionsFragment extends Fragment {
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
 
-        insertUtils = new TransactionDatabaseUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
+        databaseUtils = new TransactionDatabaseUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +115,8 @@ public class Add_TransactionsFragment extends Fragment {
                 calendarDialog.show(fragmentManager, "DateTimePicker");
             }
         });
+
+        setUpDeleteButton();
     }
 
     private void setUpExpensesInputUtils(View expensesFragmentView) {
@@ -126,6 +129,7 @@ public class Add_TransactionsFragment extends Fragment {
         inputUtils.commentInput = expensesFragmentView.findViewById(R.id.expenses_comments_input);
         inputUtils.categoryInput = expensesFragmentView.findViewById(R.id.expenses_category_input);
         inputUtils.dateInput = expensesFragmentView.findViewById(R.id.expenses_date_input);
+        inputUtils.deleteButton = expensesFragmentView.findViewById(R.id.expense_delete_button);
 
         inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.transactions_dropdown_background, null));
 
@@ -134,7 +138,7 @@ public class Add_TransactionsFragment extends Fragment {
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
 
-        insertUtils = new TransactionDatabaseUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
+        databaseUtils = new TransactionDatabaseUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +149,17 @@ public class Add_TransactionsFragment extends Fragment {
                 calendarDialog.show(fragmentManager, "DateTimePicker");
             }
         });
+
+        setUpDeleteButton();
+    }
+
+    private void setUpDeleteButton() {
+        inputUtils.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
     }
 
     private SaveDataCommunicator fromActivityCommunicator = new SaveDataCommunicator() {
@@ -152,8 +167,8 @@ public class Add_TransactionsFragment extends Fragment {
         public void onActivityMessage() {
             Log.d(TAG, "the message from activity was received");
 
-            insertUtils.insertOrUpdateData(true, false, null);
-            insertUtils.addTextListener();
+            databaseUtils.insertOrUpdateData(true, false, null);
+            databaseUtils.addTextListener();
         }
     };
 
