@@ -84,7 +84,7 @@ public class Add_TransactionsFragment extends Fragment {
     private void setUpRevenuesInputUtils(View revenuesFragmentView) {
         inputUtils.nameInputField = revenuesFragmentView.findViewById(R.id.revenue_name_field);
         inputUtils.valueInputField = revenuesFragmentView.findViewById(R.id.revenue_value_field);
-        inputUtils.categoryInputField = revenuesFragmentView.findViewById(R.id.expenses_category_field);
+        inputUtils.categoryInputField = revenuesFragmentView.findViewById(R.id.revenue_category_field);
 
         inputUtils.nameInput = revenuesFragmentView.findViewById(R.id.revenue_name_input);
         inputUtils.valueInput = revenuesFragmentView.findViewById(R.id.revenue_value_input);
