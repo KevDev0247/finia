@@ -27,6 +27,10 @@
 
     <string name="delete">Delete</string>
 
+<!--    budget-->
+
+    <string name="new_budget">New Budget</string>
+
 <!--    transaction add fragments-->
 
     <string name="expenses_name">Expenses</string>

@@ -48,7 +48,6 @@ public class TransactionEditActivity extends AppCompatActivity {
 
         ImageButton returnButton = findViewById(R.id.transaction_edit_return_button);
         returnButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 finish();
@@ -88,10 +87,10 @@ public class TransactionEditActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (fragmentTag.equals(getString(R.string.revenues_fragment_key))) {
-                            initializeRevenueSection(budgetsTypes);
+                            setUpRevenueSection(budgetsTypes);
 
                         } else if (fragmentTag.equals(getString(R.string.expenses_fragments_key))) {
-                            initializeExpenseSection(budgetsTypes);
+                            setUpExpenseSection(budgetsTypes);
                         }
                     }
                 });
@@ -99,7 +98,7 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeRevenueSection(List<BudgetsType> budgetsTypes) {
+    private void setUpRevenueSection(List<BudgetsType> budgetsTypes) {
         inputUtils.nameInputField = findViewById(R.id.revenue_name_field);
         inputUtils.valueInputField = findViewById(R.id.revenue_value_field);
         inputUtils.categoryInputField = findViewById(R.id.revenue_category_field);
@@ -121,7 +120,7 @@ public class TransactionEditActivity extends AppCompatActivity {
         setUpSaveAndDeleteButton();
     }
 
-    private void initializeExpenseSection(List<BudgetsType> budgetsTypes) {
+    private void setUpExpenseSection(List<BudgetsType> budgetsTypes) {
         inputUtils.nameInputField = findViewById(R.id.expenses_name_field);
         inputUtils.valueInputField = findViewById(R.id.expenses_value_field);
         inputUtils.categoryInputField = findViewById(R.id.expenses_category_field);
