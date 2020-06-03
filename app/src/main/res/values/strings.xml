@@ -24,6 +24,8 @@
     <string name="positive_symbol">+</string>
     <string name="negative_symbol">-</string>
 
+    <string name="delete">Delete</string>
+
 <!--    transaction add fragments-->
 
     <string name="expenses_name">Expenses</string>
