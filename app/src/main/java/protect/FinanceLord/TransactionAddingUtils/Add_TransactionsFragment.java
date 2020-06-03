@@ -42,7 +42,7 @@ public class Add_TransactionsFragment extends Fragment {
 
     private static final String TAG = "Edit_RevenuesFragment";
 
-    public Add_TransactionsFragment(Date currentTime, List<BudgetsType> budgetsTypes, BudgetTypesViewModel viewModel, String fragmentTag) {
+    public Add_TransactionsFragment(Date currentTime, List<BudgetsType> budgetsTypes, String fragmentTag) {
         this.currentTime = currentTime;
         this.budgetsTypes = budgetsTypes;
         this.fragmentTag = fragmentTag;

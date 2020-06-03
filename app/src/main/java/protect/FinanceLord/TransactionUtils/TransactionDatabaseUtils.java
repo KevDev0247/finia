@@ -27,6 +27,8 @@ public class TransactionDatabaseUtils {
     private List<BudgetsType> budgetsTypes;
     private BudgetTypesViewModel viewModel;
     private Transactions transaction = new Transactions();
+    private TransactionsDao transactionsDao;
+    private BudgetsTypeDao budgetsTypeDao;
 
     private boolean nullValue = false;
     private boolean mInsert;
@@ -39,6 +41,10 @@ public class TransactionDatabaseUtils {
         this.budgetsTypes = budgetsTypes;
         this.viewModel = viewModel;
         this.TAG = TAG;
+
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        transactionsDao = database.transactionsDao();
+        budgetsTypeDao = database.budgetsTypeDao();
     }
 
     public void insertOrUpdateData(final boolean insert, final boolean update, Integer transactionId) {
@@ -107,9 +113,6 @@ public class TransactionDatabaseUtils {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
-                TransactionsDao transactionsDao = database.transactionsDao();
-
                 if (!nullValue && insert) {
                     transactionsDao.insertTransaction(transaction);
                 } else if (!nullValue && update) {
@@ -125,8 +128,6 @@ public class TransactionDatabaseUtils {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
-                TransactionsDao transactionsDao = database.transactionsDao();
                 transactionsDao.deleteIndividualTransaction(transactionId);
             }
         });
@@ -168,9 +169,6 @@ public class TransactionDatabaseUtils {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
-                BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
-
                 BudgetsType newType = new BudgetsType();
                 newType.setBudgetsName(inputUtils.categoryInput.getText().toString());
                 budgetsTypeDao.insertIndividualBudgetType(newType);
@@ -182,7 +180,7 @@ public class TransactionDatabaseUtils {
                     if (budgetsType.getBudgetsName().equals(inputUtils.categoryInput.getText().toString())) {
                         Log.d(TAG, " the new category's name is " + budgetsType.getBudgetsName() + " id is " + budgetsType.getBudgetsCategoryId());
 
-                        insertTransactionWithNewCategory(budgetsType.getBudgetsCategoryId(), database);
+                        insertTransactionWithNewCategory(budgetsType.getBudgetsCategoryId());
                     }
                 }
 
@@ -196,8 +194,7 @@ public class TransactionDatabaseUtils {
         });
     }
 
-    private void insertTransactionWithNewCategory(int budgetsCategoryId, FinanceLordDatabase database) {
-        TransactionsDao transactionsDao = database.transactionsDao();
+    private void insertTransactionWithNewCategory(int budgetsCategoryId) {
         transaction.setTransactionCategoryId(budgetsCategoryId);
 
         if (!nullValue && mInsert) {

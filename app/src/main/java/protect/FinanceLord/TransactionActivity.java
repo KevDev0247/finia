@@ -38,6 +38,8 @@ public class TransactionActivity extends AppCompatActivity {
     private TransactionsViewModel transactionsViewModel;
     private CategoryLabelsAdapter adapter;
     private List<BudgetsType> budgetsTypes;
+    private TransactionsDao transactionsDao;
+    private BudgetsTypeDao budgetsTypeDao;
 
     static final int MAIN_ACTIVITY_REQUEST_CODE = 1000;
     private static String TAG = "TransactionActivity";
@@ -56,6 +58,10 @@ public class TransactionActivity extends AppCompatActivity {
             }
         });
 
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
+        transactionsDao = database.transactionsDao();
+        budgetsTypeDao = database.budgetsTypeDao();
+
         retrieveDataFromDatabase(true, false);
     }
 
@@ -69,9 +75,6 @@ public class TransactionActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
-                TransactionsDao transactionsDao = database.transactionsDao();
-                BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
                 final List<Transactions> transactions = transactionsDao.queryAllTransaction();
                 budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
 
@@ -163,9 +166,6 @@ public class TransactionActivity extends AppCompatActivity {
             Executors.newSingleThreadExecutor().execute(new Runnable() {
                 @Override
                 public void run() {
-                    FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
-                    TransactionsDao transactionsDao = database.transactionsDao();
-                    BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
                     final List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
 
                     List<Transactions> groupedTransactions = new ArrayList<>();
