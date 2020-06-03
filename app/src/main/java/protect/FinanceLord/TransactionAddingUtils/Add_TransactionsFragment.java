@@ -46,6 +46,10 @@ public class Add_TransactionsFragment extends Fragment {
         this.currentTime = currentTime;
         this.budgetsTypes = budgetsTypes;
         this.fragmentTag = fragmentTag;
+
+        for (BudgetsType budgetsType : budgetsTypes) {
+            typeNames.add(budgetsType.getBudgetsName());
+        }
     }
 
     @Override
