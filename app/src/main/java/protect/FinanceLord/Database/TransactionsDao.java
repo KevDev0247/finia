@@ -19,18 +19,15 @@ public interface TransactionsDao {
     @Query("SELECT * FROM Transactions WHERE transactionId = :transactionId")
     List<Transactions> queryTransactionsById (int transactionId);
 
-    @Query("SELECT * FROM Transactions WHERE transactionValue = :transactionValue")
-    List<Transactions> queryTransactionByByValue (float transactionValue);
-
     @Query("SELECT * FROM Transactions WHERE transactionCategoryId = :transactionCategoryId")
     List<Transactions> queryTransactionByCategoryId (int transactionCategoryId);
-
-    @Query("SELECT * FROM Transactions WHERE transactionComments = :transactionComments")
-    List<Transactions> queryTransactionByComments (String transactionComments);
 
     @Query("SELECT * FROM Transactions WHERE date = :date")
     List<Transactions> queryTransactionByDate (Long date);
 
     @Query("SELECT * FROM Transactions")
     List<Transactions> queryAllTransaction ();
+
+    @Query("DELETE FROM Transactions WHERE transactionId = :transactionId")
+    void deleteIndividualTransaction(int transactionId);
 }

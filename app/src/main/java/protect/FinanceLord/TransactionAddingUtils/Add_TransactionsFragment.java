@@ -27,14 +27,14 @@ import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.TransactionAddActivity;
 import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
-import protect.FinanceLord.TransactionUtils.TransactionInsertUtils;
+import protect.FinanceLord.TransactionUtils.TransactionDatabaseUtils;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class Add_TransactionsFragment extends Fragment {
 
     private String fragmentTag;
     private Date currentTime;
-    private TransactionInsertUtils insertUtils;
+    private TransactionDatabaseUtils insertUtils;
     private TransactionAddActivity transactionAddActivity;
     private List<BudgetsType> budgetsTypes;
     private List<String> typeNames = new ArrayList<>();
@@ -99,7 +99,7 @@ public class Add_TransactionsFragment extends Fragment {
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
 
-        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
+        insertUtils = new TransactionDatabaseUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +130,7 @@ public class Add_TransactionsFragment extends Fragment {
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
 
-        insertUtils = new TransactionInsertUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
+        insertUtils = new TransactionDatabaseUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override

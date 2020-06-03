@@ -28,13 +28,13 @@ import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
-import protect.FinanceLord.TransactionUtils.TransactionInsertUtils;
+import protect.FinanceLord.TransactionUtils.TransactionDatabaseUtils;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class TransactionEditActivity extends AppCompatActivity {
 
     private Date currentTime;
-    private TransactionInsertUtils insertUtils;
+    private TransactionDatabaseUtils databaseUtils;
     private TransactionInputUtils inputUtils = new TransactionInputUtils();
 
     private static String TAG = "TransactionEditActivity";
@@ -104,13 +104,15 @@ public class TransactionEditActivity extends AppCompatActivity {
         inputUtils.categoryInput = findViewById(R.id.revenue_category_input);
         inputUtils.dateInput = findViewById(R.id.revenue_date_input);
 
-        setUpCategoryAndDateInput(budgetsTypes);
+        inputUtils.deleteButton = findViewById(R.id.revenue_delete_button);
 
-        setUpSaveButton();
+        setUpCategoryAndDateInput(budgetsTypes);
 
         loadDataToInputBoxes(budgetsTypes);
 
         setUpInputUtils(budgetsTypes, getString(R.string.revenues_section_key));
+
+        setUpSaveAndDeleteButton();
     }
 
     private void initializeExpenseSection(List<BudgetsType> budgetsTypes) {
@@ -124,13 +126,15 @@ public class TransactionEditActivity extends AppCompatActivity {
         inputUtils.categoryInput = findViewById(R.id.expenses_category_input);
         inputUtils.dateInput = findViewById(R.id.expenses_date_input);
 
-        setUpCategoryAndDateInput(budgetsTypes);
+        inputUtils.deleteButton = findViewById(R.id.expense_delete_button);
 
-        setUpSaveButton();
+        setUpCategoryAndDateInput(budgetsTypes);
 
         loadDataToInputBoxes(budgetsTypes);
 
         setUpInputUtils(budgetsTypes, getString(R.string.expenses_section_key));
+
+        setUpSaveAndDeleteButton();
     }
 
     private void setUpCategoryAndDateInput(List<BudgetsType> budgetsTypes){
@@ -149,17 +153,6 @@ public class TransactionEditActivity extends AppCompatActivity {
                 CalendarDialog calendarDialog = new CalendarDialog(calendarDialogCommunicator);
                 Log.d(TAG, "Date input is clicked");
                 calendarDialog.show(getSupportFragmentManager(), "DateTimePicker");
-            }
-        });
-    }
-
-    private void setUpSaveButton() {
-        ImageButton saveButton = findViewById(R.id.transaction_edit_save_button);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                insertUtils.insertOrUpdateData(false, true, getIntent().getExtras().getInt(getString(R.string.transaction_id_key)));
-                insertUtils.addTextListener();
             }
         });
     }
@@ -191,7 +184,26 @@ public class TransactionEditActivity extends AppCompatActivity {
 
     private void setUpInputUtils(List<BudgetsType> budgetsTypes, String sectionTag) {
         BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
-        insertUtils = new TransactionInsertUtils(this, currentTime, inputUtils, budgetsTypes, viewModel, sectionTag);
+        databaseUtils = new TransactionDatabaseUtils(this, currentTime, inputUtils, budgetsTypes, viewModel, sectionTag);
+    }
+
+    private void setUpSaveAndDeleteButton() {
+        ImageButton saveButton = findViewById(R.id.transaction_edit_save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseUtils.insertOrUpdateData(false, true, getIntent().getExtras().getInt(getString(R.string.transaction_id_key)));
+                databaseUtils.addTextListener();
+            }
+        });
+
+        inputUtils.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseUtils.deleteData(getIntent().getExtras().getInt(getString(R.string.transaction_id_key)));
+                finish();
+            }
+        });
     }
 
     private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {

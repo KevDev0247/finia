@@ -18,7 +18,7 @@ import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.R;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
-public class TransactionInsertUtils {
+public class TransactionDatabaseUtils {
 
     private Context context;
     private String TAG;
@@ -32,7 +32,7 @@ public class TransactionInsertUtils {
     private boolean mInsert;
     private boolean mUpdate;
 
-    public TransactionInsertUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetsType> budgetsTypes, BudgetTypesViewModel viewModel, String TAG) {
+    public TransactionDatabaseUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetsType> budgetsTypes, BudgetTypesViewModel viewModel, String TAG) {
         this.context = context;
         this.currentTime = currentTime;
         this.inputUtils = inputUtils;
@@ -117,6 +117,17 @@ public class TransactionInsertUtils {
                 } else {
                     Log.d(TAG, "the transaction has some null values");
                 }
+            }
+        });
+    }
+
+    public void deleteData(final int transactionId) {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+                TransactionsDao transactionsDao = database.transactionsDao();
+                transactionsDao.deleteIndividualTransaction(transactionId);
             }
         });
     }
