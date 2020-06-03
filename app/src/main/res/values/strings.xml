@@ -27,9 +27,11 @@
 
     <string name="delete">Delete</string>
 
-<!--    budget-->
+<!--    budget add & edit activity-->
 
     <string name="new_budget">New Budget</string>
+    <string name="budget_start_date">Start Date</string>
+    <string name="budget_end_date">End Date</string>
 
 <!--    transaction add fragments-->
 

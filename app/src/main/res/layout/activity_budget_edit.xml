@@ -90,7 +90,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
-                            android:textCursorDrawable="@drawable/transaction_cursor"
+                            android:textCursorDrawable="@drawable/input_cursor_white"
                             android:completionThreshold="1"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -117,7 +117,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
-                            android:textCursorDrawable="@drawable/transaction_cursor"
+                            android:textCursorDrawable="@drawable/input_cursor_white"
                             android:inputType="text"
                             android:singleLine="true"
                             android:scrollbars="vertical"/>
@@ -146,7 +146,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
-                            android:textCursorDrawable="@drawable/transaction_cursor"
+                            android:textCursorDrawable="@drawable/input_cursor_white"
                             android:inputType="numberDecimal"
                             android:singleLine="true"
                             android:scrollbars="vertical"/>
@@ -158,13 +158,43 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="15dp">
+                    android:padding="15dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/budget_start_date_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="15dp"
+                        android:hint="@string/budget_start_date"
+                        android:textColorHint="@color/budgets_input_text_color"
+                        app:boxStrokeColor="@color/budgets_input_box_stroke"
+                        app:hintTextColor="#ffffff"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/budget_start_date_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:textColor="#ffffff"
+                            android:textCursorDrawable="@drawable/input_cursor_white"
+                            android:singleLine="true"
+                            android:focusable="false"
+                            android:scrollbars="vertical"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/budget_date_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/transaction_label_date"
+                        android:layout_weight="1"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="0dp"
+                        android:hint="@string/budget_end_date"
                         android:textColorHint="@color/budgets_input_text_color"
                         app:boxStrokeColor="@color/budgets_input_box_stroke"
                         app:hintTextColor="#ffffff"
@@ -176,7 +206,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="text"
                             android:textColor="#ffffff"
-                            android:textCursorDrawable="@drawable/transaction_cursor"
+                            android:textCursorDrawable="@drawable/input_cursor_white"
                             android:singleLine="true"
                             android:focusable="false"
                             android:scrollbars="vertical"/>
