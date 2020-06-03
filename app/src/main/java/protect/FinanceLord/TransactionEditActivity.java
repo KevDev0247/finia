@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
@@ -27,8 +28,8 @@ import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
-import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
 import protect.FinanceLord.TransactionUtils.TransactionDatabaseUtils;
+import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class TransactionEditActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class TransactionEditActivity extends AppCompatActivity {
     private Date currentTime;
     private TransactionDatabaseUtils databaseUtils;
     private TransactionInputUtils inputUtils = new TransactionInputUtils();
+    private SimpleDateFormat dateFormat;
 
     private static String TAG = "TransactionEditActivity";
 
@@ -52,6 +54,10 @@ public class TransactionEditActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.CANADA);
+        TextView pageTitle = findViewById(R.id.transaction_edit_item_date);
+        pageTitle.setText(dateFormat.format(getIntent().getExtras().getLong(getString(R.string.transaction_date_key))));
 
         String fragmentTag = getIntent().getExtras().getString(getString(R.string.transaction_fragment_key));
         if (fragmentTag.equals(getString(R.string.revenues_fragment_key))) {
@@ -159,7 +165,6 @@ public class TransactionEditActivity extends AppCompatActivity {
 
     private void loadDataToInputBoxes(List<BudgetsType> budgetsTypes) {
         DecimalFormat decimalFormat = new DecimalFormat();
-        SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.CANADA);
 
         inputUtils.nameInput.setText(getIntent().getStringExtra(getString(R.string.transaction_name_key)));
         inputUtils.valueInput.setText(decimalFormat.format(getIntent().getExtras().getFloat(getString(R.string.transaction_value_key))).replace("-",""));
