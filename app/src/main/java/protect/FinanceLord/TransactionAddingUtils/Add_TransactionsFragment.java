@@ -163,7 +163,6 @@ public class Add_TransactionsFragment extends Fragment {
         @Override
         public void message() {
             Log.d(TAG, "the message from activity was received");
-
             databaseUtils.insertOrUpdateData(true, false, null);
             databaseUtils.addTextListener();
         }

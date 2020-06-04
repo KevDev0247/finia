@@ -115,8 +115,10 @@ public class TransactionDatabaseUtils {
             public void run() {
                 if (!nullValue && insert) {
                     transactionsDao.insertTransaction(transaction);
+                    ((Activity) context).finish();
                 } else if (!nullValue && update) {
                     transactionsDao.updateTransaction(transaction);
+                    ((Activity) context).finish();
                 } else {
                     Log.d(TAG, "the transaction has some null values");
                 }
@@ -134,6 +136,21 @@ public class TransactionDatabaseUtils {
     }
 
     public void addTextListener() {
+        inputUtils.categoryInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (inputUtils.categoryInputField.isErrorEnabled()) {
+                    inputUtils.categoryInputField.setErrorEnabled(false);
+                }
+            }
+        });
+
         inputUtils.nameInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -180,7 +197,7 @@ public class TransactionDatabaseUtils {
                     if (budgetsType.getBudgetsName().equals(inputUtils.categoryInput.getText().toString())) {
                         Log.d(TAG, " the new category's name is " + budgetsType.getBudgetsName() + " id is " + budgetsType.getBudgetsCategoryId());
 
-                        insertTransactionWithNewCategory(budgetsType.getBudgetsCategoryId());
+                        insertOrUpdateWithNewCategory(budgetsType.getBudgetsCategoryId());
                     }
                 }
 
@@ -188,13 +205,14 @@ public class TransactionDatabaseUtils {
                     public void run() {
                         Log.d(TAG + " Insert Utilities", " data has changed");
                         viewModel.pushToBudgetTypes(allBudgetTypes);
+                        ((Activity) context).finish();
                     }
                 });
             }
         });
     }
 
-    private void insertTransactionWithNewCategory(int budgetsCategoryId) {
+    private void insertOrUpdateWithNewCategory(int budgetsCategoryId) {
         transaction.setTransactionCategoryId(budgetsCategoryId);
 
         if (!nullValue && mInsert) {
