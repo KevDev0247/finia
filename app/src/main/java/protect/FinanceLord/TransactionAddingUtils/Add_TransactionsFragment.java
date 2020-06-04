@@ -47,6 +47,7 @@ public class Add_TransactionsFragment extends Fragment {
         this.budgetsTypes = budgetsTypes;
         this.fragmentTag = fragmentTag;
 
+        budgetsTypes.remove(0);
         for (BudgetsType budgetsType : budgetsTypes) {
             typeNames.add(budgetsType.getBudgetsName());
         }
@@ -98,12 +99,10 @@ public class Add_TransactionsFragment extends Fragment {
         inputUtils.deleteButton = revenuesFragmentView.findViewById(R.id.revenue_delete_button);
 
         inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.transactions_dropdown_background, null));
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
-
         databaseUtils = new TransactionDatabaseUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
@@ -132,12 +131,10 @@ public class Add_TransactionsFragment extends Fragment {
         inputUtils.deleteButton = expensesFragmentView.findViewById(R.id.expense_delete_button);
 
         inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.transactions_dropdown_background, null));
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.transaction_categories_dropdown, typeNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
-
         databaseUtils = new TransactionDatabaseUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {

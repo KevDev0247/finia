@@ -96,7 +96,6 @@ public class TransactionAddActivity extends AppCompatActivity {
 
     private void setUpBudgetTypesObserver() {
         BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
-
         viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
             @Override
             public void onChanged(List<BudgetsType> newBudgetsTypes) {

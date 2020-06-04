@@ -149,7 +149,7 @@ public class TransactionEditActivity extends AppCompatActivity {
         }
 
         inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.transactions_dropdown_background, null));
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.transaction_categories_dropdown, typeNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.categories_dropdown, typeNames);
         inputUtils.categoryInput.setAdapter(adapter);
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
