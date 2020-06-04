@@ -42,7 +42,8 @@
     <string name="budget_name_error_message">Please pick or enter a name</string>
     <string name="budget_value_error_message">Please enter a value</string>
     <string name="budget_start_date_error_message">Please pick a start date</string>
-    <string name="budget_end_date_error_message">Please pick a start date</string>
+    <string name="budget_end_date_error_message">Please pick a end date</string>
+    <string name="date_order_error_message">Please enter a valid start date and end date</string>
 
 <!--    transaction add fragments-->
 

@@ -7,10 +7,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.BudgetsType;
@@ -34,7 +32,7 @@ public class TransactionDatabaseUtils {
     private BudgetsTypeDao budgetsTypeDao;
     private Transactions transaction = new Transactions();
 
-    private boolean nullValue = false;
+    private boolean invalidInput;
     private boolean mInsert;
     private boolean mUpdate;
 
@@ -54,6 +52,7 @@ public class TransactionDatabaseUtils {
     public void insertOrUpdateData(final boolean insert, final boolean update, final Integer transactionId) {
         mInsert = insert;
         mUpdate = update;
+        invalidInput = false;
 
         if (!inputUtils.nameInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's name is " + inputUtils.nameInput.getText());
@@ -61,7 +60,7 @@ public class TransactionDatabaseUtils {
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.nameInputField.setError(context.getString(R.string.transaction_name_error_message));
-            nullValue = true;
+            invalidInput = true;
         }
 
         if (!inputUtils.valueInput.getText().toString().isEmpty()) {
@@ -74,7 +73,7 @@ public class TransactionDatabaseUtils {
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.valueInputField.setError(context.getString(R.string.transaction_value_error_message));
-            nullValue = true;
+            invalidInput = true;
         }
 
         if (!inputUtils.commentInput.getText().toString().isEmpty()) {
@@ -85,7 +84,6 @@ public class TransactionDatabaseUtils {
         }
 
         if (!inputUtils.dateInput.getText().toString().isEmpty()) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat(context.getString(R.string.date_format), Locale.CANADA);
             Log.d(TAG, "this transaction's date is " + inputUtils.dateInput.getText());
             try {
                 transaction.setDate(TimeProcessor.parseDateString(inputUtils.dateInput.getText().toString(), context.getString(R.string.date_format)).getTime());
@@ -112,8 +110,7 @@ public class TransactionDatabaseUtils {
                     break;
                 }
             }
-
-            if (transaction.getTransactionCategoryId() == 0) {
+            if (transaction.getTransactionCategoryId() == 0 && !invalidInput) {
                 Log.d(TAG, " a new category is created");
                 addNewCategoryToDatabase();
                 return;
@@ -121,17 +118,19 @@ public class TransactionDatabaseUtils {
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.categoryInputField.setError(context.getString(R.string.transaction_category_error_message));
-            nullValue = true;
+            invalidInput = true;
         }
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                if (!nullValue && insert) {
+                if (!invalidInput && insert) {
                     transactionsDao.insertTransaction(transaction);
+                    Log.d(TAG, "the transaction was inserted through normal entry");
                     ((Activity) context).finish();
-                } else if (!nullValue && update) {
+                } else if (!invalidInput && update) {
                     transactionsDao.updateTransaction(transaction);
+                    Log.d(TAG, "the transaction was updated through normal entry");
                     ((Activity) context).finish();
                 } else {
                     Log.d(TAG, "the transaction has some null values");
@@ -200,6 +199,7 @@ public class TransactionDatabaseUtils {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
+                boolean inputError = false;
                 BudgetsType newType = new BudgetsType();
                 newType.setBudgetsName(inputUtils.categoryInput.getText().toString());
                 budgetsTypeDao.insertIndividualBudgetType(newType);
@@ -209,30 +209,37 @@ public class TransactionDatabaseUtils {
                 for (BudgetsType budgetsType : allBudgetTypes) {
                     if (budgetsType.getBudgetsName().equals(inputUtils.categoryInput.getText().toString())) {
                         Log.d(TAG, " the new category's name is " + budgetsType.getBudgetsName() + " id is " + budgetsType.getBudgetsCategoryId());
-
-                        insertOrUpdateWithNewCategory(budgetsType.getBudgetsCategoryId());
+                        inputError = insertOrUpdateWithNewCategory(budgetsType.getBudgetsCategoryId());
                     }
                 }
 
+                final boolean finalInputError = inputError;
                 ((Activity)context).runOnUiThread(new Runnable() {
                     public void run() {
                         Log.d(TAG + " Insert Utilities", " data has changed");
                         viewModel.pushToBudgetTypes(allBudgetTypes);
-                        ((Activity) context).finish();
+                        if (!finalInputError) {
+                            ((Activity) context).finish();
+                        }
                     }
                 });
             }
         });
     }
 
-    private void insertOrUpdateWithNewCategory(int budgetsCategoryId) {
+    private boolean insertOrUpdateWithNewCategory(int budgetsCategoryId) {
         transaction.setTransactionCategoryId(budgetsCategoryId);
-        if (!nullValue && mInsert) {
+        if (!invalidInput && mInsert) {
             transactionsDao.insertTransaction(transaction);
-        } else if (!nullValue && mUpdate) {
+            Log.d(TAG, "the transaction was inserted through new category entry");
+            return false;
+        } else if (!invalidInput && mUpdate) {
             transactionsDao.updateTransaction(transaction);
+            Log.d(TAG, "the transaction was updated through new category entry & new category is" + transaction.getTransactionCategoryId());
+            return false;
         } else {
             Log.d(TAG, "the transaction has some null values");
+            return true;
         }
     }
 }

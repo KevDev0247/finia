@@ -6,8 +6,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.BudgetsType;
@@ -20,35 +23,32 @@ import protect.FinanceLord.R;
 public class BudgetDatabaseUtils {
 
     private Context context;
-    private Date startTime;
-    private Date endTime;
     private BudgetInputUtils inputUtils;
     private List<BudgetsType> budgetsTypes;
     private BudgetsValueDao budgetsValueDao;
     private BudgetsTypeDao budgetsTypeDao;
     private BudgetsValue budgetsValue = new BudgetsValue();
 
-    private boolean nullValue = false;
+    private boolean invalidInput = false;
     private boolean mInsert;
     private boolean mUpdate;
 
     private String TAG = "BudgetDatabaseUtils";
 
-    public BudgetDatabaseUtils(Context context, Date startTime, Date endTime, BudgetInputUtils inputUtils, List<BudgetsType> budgetsTypes) {
+    public BudgetDatabaseUtils(Context context, BudgetInputUtils inputUtils, List<BudgetsType> budgetsTypes) {
         this.context = context;
         this.inputUtils = inputUtils;
         this.budgetsTypes = budgetsTypes;
-        this.startTime = startTime;
-        this.endTime = endTime;
 
         FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         budgetsValueDao = database.budgetsValueDao();
         budgetsTypeDao = database.budgetsTypeDao();
     }
 
-    public void insertOrUpdateData(final boolean insert, final boolean update, final Integer budgetId) {
+    public void insertOrUpdateData(final boolean insert, final boolean update, final Integer budgetId) throws ParseException {
         mInsert = insert;
         mUpdate = update;
+        SimpleDateFormat dateFormat = new SimpleDateFormat(context.getString(R.string.date_format), Locale.CANADA);
 
         if (!inputUtils.nameInput.getText().toString().isEmpty()){
             for (BudgetsType budgetsType : budgetsTypes) {
@@ -59,7 +59,6 @@ public class BudgetDatabaseUtils {
                     break;
                 }
             }
-
             if (budgetsValue.getBudgetsCategoryId() == 0) {
                 Log.d(TAG, " a new category is created");
                 addNewCategoryToDatabase();
@@ -68,7 +67,7 @@ public class BudgetDatabaseUtils {
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.nameInputField.setError(context.getString(R.string.budget_name_error_message));
-            nullValue = true;
+            invalidInput = true;
         }
 
         if (!inputUtils.valueInput.getText().toString().isEmpty()) {
@@ -77,27 +76,36 @@ public class BudgetDatabaseUtils {
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.valueInputField.setError(context.getString(R.string.budget_value_error_message));
-            nullValue = true;
+            invalidInput = true;
         }
 
         if (!inputUtils.startDateInput.getText().toString().isEmpty()) {
             Log.d(TAG, "the budget's start date is " + inputUtils.startDateInput.getText());
-            budgetsValue.setDateStart(startTime.getTime());
+            budgetsValue.setDateStart(dateFormat.parse(inputUtils.startDateInput.getText().toString()).getTime());
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.startDateInputField.setError(context.getString(R.string.budget_start_date_error_message));
-            nullValue = true;
+            invalidInput = true;
         }
 
         if (!inputUtils.endDateInput.getText().toString().isEmpty()) {
             Log.d(TAG, "the budget's end date is " + inputUtils.endDateInput.getText());
-            budgetsValue.setDateStart(endTime.getTime());
+            budgetsValue.setDateEnd(dateFormat.parse(inputUtils.endDateInput.getText().toString()).getTime());
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
             inputUtils.endDateInputField.setError(context.getString(R.string.budget_end_date_error_message));
-            nullValue = true;
+            invalidInput = true;
         }
 
+        Date startDate = dateFormat.parse(inputUtils.startDateInput.getText().toString());
+        Date endDate = dateFormat.parse(inputUtils.endDateInput.getText().toString());
+        if (endDate.compareTo(startDate) < 0) {
+            inputUtils.startDateInputField.setError(context.getString(R.string.date_order_error_message));
+            inputUtils.endDateInputField.setError(context.getString(R.string.date_order_error_message));
+            invalidInput = true;
+        }
+
+        Log.d(TAG, "this transaction's id is " + budgetId);
         if (budgetId != null) {
             budgetsValue.setBudgetsId(budgetId);
         }
@@ -105,14 +113,14 @@ public class BudgetDatabaseUtils {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                if (!nullValue && insert) {
+                if (!invalidInput && insert) {
                     budgetsValueDao.insertBudgetValue(budgetsValue);
                     ((Activity) context).finish();
-                } else if (!nullValue && update) {
+                } else if (!invalidInput && update) {
                     budgetsValueDao.updateBudgetValue(budgetsValue);
                     ((Activity) context).finish();
                 } else {
-                    Log.d(TAG, "the transaction has some null values");
+                    Log.d(TAG, "the budget has some null values");
                 }
             }
         });
@@ -205,9 +213,9 @@ public class BudgetDatabaseUtils {
 
     private void insertOrUpdateWithNewCategory(int budgetsCategoryId) {
         budgetsValue.setBudgetsId(budgetsCategoryId);
-        if (!nullValue && mInsert) {
+        if (!invalidInput && mInsert) {
             budgetsValueDao.insertBudgetValue(budgetsValue);
-        } else if (!nullValue && mUpdate) {
+        } else if (!invalidInput && mUpdate) {
             budgetsValueDao.updateBudgetValue(budgetsValue);
         } else {
             Log.d(TAG, "the budget has some null values");

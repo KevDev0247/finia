@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,8 +24,6 @@ import protect.FinanceLord.TimeUtils.TimeProcessor;
 
 public class BudgetEditActivity extends AppCompatActivity {
 
-    private Date startTime;
-    private Date endTime;
     private BudgetDatabaseUtils databaseUtils;
     private BudgetInputUtils inputUtils = new BudgetInputUtils();
 
@@ -70,8 +69,7 @@ public class BudgetEditActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.categories_dropdown, typeNames);
         inputUtils.nameInput.setAdapter(adapter);
 
-        databaseUtils = new BudgetDatabaseUtils(this, startTime, endTime, inputUtils,
-                getIntent().<BudgetsType>getParcelableArrayListExtra(getString(R.string.budget_categories_key)));
+        databaseUtils = new BudgetDatabaseUtils(this, inputUtils, getIntent().<BudgetsType>getParcelableArrayListExtra(getString(R.string.budget_categories_key)));
 
         inputUtils.startDateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +97,12 @@ public class BudgetEditActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseUtils.insertOrUpdateData(true,false, null);
-                databaseUtils.addTextListener();
+                try {
+                    databaseUtils.insertOrUpdateData(true,false, null);
+                    databaseUtils.addTextListener();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -115,9 +117,8 @@ public class BudgetEditActivity extends AppCompatActivity {
     private CalendarDateBroadcast startTimeCommunicator = new CalendarDateBroadcast() {
         @Override
         public void message(Date date) {
-            startTime = date;
-            Log.d(TAG, "time is " + startTime);
-            String stringDate = TimeProcessor.getStringFromDate(startTime, getString(R.string.date_format));
+            Log.d(TAG, "time is " + date);
+            String stringDate = TimeProcessor.getStringFromDate(date, getString(R.string.date_format));
             inputUtils.startDateInput.setText(stringDate);
         }
     };
@@ -125,9 +126,8 @@ public class BudgetEditActivity extends AppCompatActivity {
     private CalendarDateBroadcast endTimeCommunicator = new CalendarDateBroadcast() {
         @Override
         public void message(Date date) {
-            endTime = date;
-            Log.d(TAG, "time is " + endTime);
-            String stringDate = TimeProcessor.getStringFromDate(endTime, getString(R.string.date_format));
+            Log.d(TAG, "time is " + date);
+            String stringDate = TimeProcessor.getStringFromDate(date, getString(R.string.date_format));
             inputUtils.endDateInput.setText(stringDate);
         }
     };
