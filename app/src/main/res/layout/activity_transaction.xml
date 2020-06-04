@@ -62,7 +62,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -97,7 +97,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/app_blue_theme"
-            app:tabSelectedTextColor="#ffffff"
+            app:tabSelectedTextColor="#B592F1"
+            app:tabIndicatorColor="#B592F1"
+            app:tabIndicatorHeight="3dp"
             app:tabTextColor="#ffffff">
 
             <com.google.android.material.tabs.TabItem
