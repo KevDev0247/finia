@@ -15,18 +15,6 @@ public interface BudgetsValueDao {
     @Update
     void updateBudgetValue(BudgetsValue... budgetValue);
 
-    @Insert
-    void insertDateStart(BudgetsValue budgetDateStart);
-
-    @Update
-    void updateDateStart(BudgetsValue... budgetDateStart);
-
-    @Insert
-    void insertDateEnd(BudgetsValue budgetDateEnd);
-
-    @Update
-    void updateDataEnd(BudgetsValue... budgetDateEnd);
-
     @Query("SELECT * FROM BudgetsValue WHERE budgetsId LIKE :budgetsId")
     List<BudgetsValue> queryBudgetsById (int budgetsId);
 

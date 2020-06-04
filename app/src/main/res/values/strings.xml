@@ -19,12 +19,11 @@
     <string name="dollar_sign">" $"</string>
     <string name="sign">"+ - "</string>
     <string name="all">All</string>
+    <string name="delete">Delete</string>
 
     <string name="no_data_initialization">No Data</string>
     <string name="positive_symbol">+</string>
     <string name="negative_symbol">-</string>
-
-    <string name="delete">Delete</string>
 
 <!--    input hints-->
 
@@ -39,6 +38,10 @@
 <!--    budget add & edit activity-->
 
     <string name="new_budget">New Budget</string>
+    <string name="budget_name_error_message">Please pick or enter a name</string>
+    <string name="budget_value_error_message">Please enter a value</string>
+    <string name="budget_start_date_error_message">Please pick a start date</string>
+    <string name="budget_end_date_error_message">Please pick a start date</string>
 
 <!--    transaction add fragments-->
 
@@ -50,7 +53,6 @@
     <string name="transaction_value_error_message">Please enter a value</string>
     <string name="transaction_date_error_message">Please enter a date</string>
     <string name="transaction_category_error_message">Please pick a category</string>
-
 
 <!--    net worth categories' name-->
 
@@ -139,8 +141,6 @@
     <string name="date_format">yyyy-MM-dd</string>
 
 <!--    net worth view report-->
-
-
 
 
 <!--    keys-->

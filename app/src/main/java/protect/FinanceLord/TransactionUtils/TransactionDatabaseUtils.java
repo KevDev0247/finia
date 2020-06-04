@@ -83,7 +83,7 @@ public class TransactionDatabaseUtils {
         Log.d(TAG, "this transaction's date is " + currentTime.toString());
         Log.d(TAG, "this transaction's id is " + transactionId);
         transaction.setDate(currentTime.getTime());
-        if (transactionId != null){
+        if (transactionId != null) {
             transaction.setTransactionId(transactionId);
         }
 
