@@ -99,7 +99,7 @@ public class TransactionActivity extends AppCompatActivity {
 
     private void setUpTabsAndAddButton(List<Transactions> transactions) {
         ImageButton addButton = findViewById(R.id.add_transaction_button);
-        TabLayout tablayout = findViewById(R.id.transaction_tab_layout);
+        TabLayout tabLayout = findViewById(R.id.transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.transaction_view_pager);
 
         for (Transactions transaction : transactions) {
@@ -114,7 +114,7 @@ public class TransactionActivity extends AppCompatActivity {
 
         ViewPagerAdapter sectionsPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
-        tablayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
 
         final ArrayList<BudgetsType> finalBudgetsTypes = new ArrayList<>(budgetsTypes);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +134,7 @@ public class TransactionActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView categoryLabelsList = findViewById(R.id.transaction_label_list);
         categoryLabelsList.setLayoutManager(layoutManager);
-        adapter = new CategoryLabelsAdapter(this, budgetsTypes, fromAdapterCommunicator);
+        adapter = new CategoryLabelsAdapter(budgetsTypes, fromAdapterCommunicator);
         categoryLabelsList.setAdapter(adapter);
     }
 

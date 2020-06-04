@@ -78,7 +78,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
                 if (tab.getText().toString().equals(getString(R.string.assets_name))) {
                     tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#626ee3"));
                     tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#626ee3"));

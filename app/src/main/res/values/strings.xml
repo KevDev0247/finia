@@ -20,6 +20,7 @@
     <string name="sign">"+ - "</string>
     <string name="all">All</string>
     <string name="delete">Delete</string>
+    <string name="label_name">Label Name</string>
 
     <string name="no_data_initialization">No Data</string>
     <string name="positive_symbol">+</string>

@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:paddingHorizontal="15dp"
-        android:background="@drawable/transaction_labels_background">
+        android:background="@drawable/revenues_labels_background">
 
         <TextView
             android:id="@+id/transaction_label_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="label Name"
+            android:text="@string/label_name"
             android:textColor="#ffffff"
             android:textSize="20sp"/>
 

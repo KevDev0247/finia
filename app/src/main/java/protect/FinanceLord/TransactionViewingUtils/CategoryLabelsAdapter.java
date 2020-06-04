@@ -1,6 +1,5 @@
 package protect.FinanceLord.TransactionViewingUtils;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +18,10 @@ import protect.FinanceLord.R;
 
 public class CategoryLabelsAdapter extends RecyclerView.Adapter<CategoryLabelsAdapter.LabelViewHolder> {
 
-    private Context context;
     private List<BudgetsType> budgetsTypes;
     private GroupByCategoryCommunicator toTransactionActivityCommunicator;
 
-    public CategoryLabelsAdapter(Context context, List<BudgetsType> budgetsTypes, GroupByCategoryCommunicator fromAdapterCommunicator){
-        this.context = context;
+    public CategoryLabelsAdapter(List<BudgetsType> budgetsTypes, GroupByCategoryCommunicator fromAdapterCommunicator){
         this.budgetsTypes = budgetsTypes;
         this.toTransactionActivityCommunicator = fromAdapterCommunicator;
     }
