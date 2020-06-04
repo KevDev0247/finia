@@ -6,8 +6,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.BudgetsType;
@@ -16,6 +19,7 @@ import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
 import protect.FinanceLord.R;
+import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class TransactionDatabaseUtils {
@@ -80,9 +84,19 @@ public class TransactionDatabaseUtils {
             transaction.setTransactionComments(null);
         }
 
-        Log.d(TAG, "this transaction's date is " + currentTime.toString());
+        if (!inputUtils.dateInput.getText().toString().isEmpty()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(context.getString(R.string.date_format), Locale.CANADA);
+            Log.d(TAG, "this transaction's date is " + inputUtils.dateInput.getText());
+            try {
+                transaction.setDate(TimeProcessor.parseDateString(inputUtils.dateInput.getText().toString(), context.getString(R.string.date_format)).getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            transaction.setDate(currentTime.getTime());
+        }
+
         Log.d(TAG, "this transaction's id is " + transactionId);
-        transaction.setDate(currentTime.getTime());
         if (transactionId != null) {
             transaction.setTransactionId(transactionId);
         }
@@ -191,7 +205,6 @@ public class TransactionDatabaseUtils {
                 budgetsTypeDao.insertIndividualBudgetType(newType);
 
                 Log.d(TAG, " the new category's name is set to " + inputUtils.categoryInput.getText().toString());
-
                 final List<BudgetsType> allBudgetTypes = budgetsTypeDao.queryAllBudgetsTypes();
                 for (BudgetsType budgetsType : allBudgetTypes) {
                     if (budgetsType.getBudgetsName().equals(inputUtils.categoryInput.getText().toString())) {
@@ -214,7 +227,6 @@ public class TransactionDatabaseUtils {
 
     private void insertOrUpdateWithNewCategory(int budgetsCategoryId) {
         transaction.setTransactionCategoryId(budgetsCategoryId);
-
         if (!nullValue && mInsert) {
             transactionsDao.insertTransaction(transaction);
         } else if (!nullValue && mUpdate) {

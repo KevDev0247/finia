@@ -1,6 +1,9 @@
 package protect.FinanceLord.BudgetUtils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 
 import java.util.Date;
@@ -8,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.BudgetsType;
+import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.BudgetsValue;
 import protect.FinanceLord.Database.BudgetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
@@ -21,7 +25,8 @@ public class BudgetDatabaseUtils {
     private BudgetInputUtils inputUtils;
     private List<BudgetsType> budgetsTypes;
     private BudgetsValueDao budgetsValueDao;
-    private BudgetsValue budgetsValue;
+    private BudgetsTypeDao budgetsTypeDao;
+    private BudgetsValue budgetsValue = new BudgetsValue();
 
     private boolean nullValue = false;
     private boolean mInsert;
@@ -38,6 +43,7 @@ public class BudgetDatabaseUtils {
 
         FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
         budgetsValueDao = database.budgetsValueDao();
+        budgetsTypeDao = database.budgetsTypeDao();
     }
 
     public void insertOrUpdateData(final boolean insert, final boolean update, final Integer budgetId) {
@@ -61,7 +67,7 @@ public class BudgetDatabaseUtils {
             }
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
-            inputUtils.nameInput.setError(context.getString(R.string.budget_name_error_message));
+            inputUtils.nameInputField.setError(context.getString(R.string.budget_name_error_message));
             nullValue = true;
         }
 
@@ -70,7 +76,7 @@ public class BudgetDatabaseUtils {
             budgetsValue.setBudgetsValue(Float.parseFloat(inputUtils.valueInput.getText().toString().replace(",", "")));
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
-            inputUtils.valueInput.setError(context.getString(R.string.budget_value_error_message));
+            inputUtils.valueInputField.setError(context.getString(R.string.budget_value_error_message));
             nullValue = true;
         }
 
@@ -79,7 +85,7 @@ public class BudgetDatabaseUtils {
             budgetsValue.setDateStart(startTime.getTime());
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
-            inputUtils.startDateInput.setError(context.getString(R.string.budget_start_date_error_message));
+            inputUtils.startDateInputField.setError(context.getString(R.string.budget_start_date_error_message));
             nullValue = true;
         }
 
@@ -88,7 +94,7 @@ public class BudgetDatabaseUtils {
             budgetsValue.setDateStart(endTime.getTime());
         } else {
             Log.d(TAG, "no data is inputted, an error should be displayed ");
-            inputUtils.endDateInput.setError(context.getString(R.string.budget_end_date_error_message));
+            inputUtils.endDateInputField.setError(context.getString(R.string.budget_end_date_error_message));
             nullValue = true;
         }
 
@@ -101,8 +107,10 @@ public class BudgetDatabaseUtils {
             public void run() {
                 if (!nullValue && insert) {
                     budgetsValueDao.insertBudgetValue(budgetsValue);
+                    ((Activity) context).finish();
                 } else if (!nullValue && update) {
                     budgetsValueDao.updateBudgetValue(budgetsValue);
+                    ((Activity) context).finish();
                 } else {
                     Log.d(TAG, "the transaction has some null values");
                 }
@@ -111,14 +119,98 @@ public class BudgetDatabaseUtils {
     }
 
     public void addTextListener() {
+        inputUtils.nameInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (inputUtils.nameInputField.isErrorEnabled()) {
+                    inputUtils.nameInputField.setErrorEnabled(false);
+                }
+            }
+        });
+
+        inputUtils.valueInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (inputUtils.nameInputField.isErrorEnabled()) {
+                    inputUtils.valueInputField.setErrorEnabled(false);
+                }
+            }
+        });
+
+        inputUtils.startDateInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (inputUtils.startDateInputField.isErrorEnabled()) {
+                    inputUtils.startDateInputField.setErrorEnabled(false);
+                }
+            }
+        });
+
+        inputUtils.endDateInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (inputUtils.endDateInputField.isErrorEnabled()) {
+                    inputUtils.endDateInputField.setErrorEnabled(false);
+                }
+            }
+        });
     }
 
     private void addNewCategoryToDatabase() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                BudgetsType newType = new BudgetsType();
+                newType.setBudgetsName(inputUtils.nameInput.getText().toString());
+                budgetsTypeDao.insertIndividualBudgetType(newType);
 
+                Log.d(TAG, " the new category's name is set to " + inputUtils.nameInput.getText().toString());
+                final List<BudgetsType> allBudgetTypes = budgetsTypeDao.queryAllBudgetsTypes();
+                for (BudgetsType budgetsType : allBudgetTypes) {
+                    if (budgetsType.getBudgetsName().equals(inputUtils.nameInput.getText().toString())) {
+                        Log.d(TAG, " the new category's name is " + budgetsType.getBudgetsName() + " id is " + budgetsType.getBudgetsCategoryId());
+
+                        insertOrUpdateWithNewCategory(budgetsType.getBudgetsCategoryId());
+                    }
+                }
+
+                ((Activity) context).finish();
+            }
+        });
     }
 
-    private void insertBudgetWithNewCategory() {
-
+    private void insertOrUpdateWithNewCategory(int budgetsCategoryId) {
+        budgetsValue.setBudgetsId(budgetsCategoryId);
+        if (!nullValue && mInsert) {
+            budgetsValueDao.insertBudgetValue(budgetsValue);
+        } else if (!nullValue && mUpdate) {
+            budgetsValueDao.updateBudgetValue(budgetsValue);
+        } else {
+            Log.d(TAG, "the budget has some null values");
+        }
     }
 }

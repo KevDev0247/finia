@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import protect.FinanceLord.BudgetUtils.BudgetDatabaseUtils;
 import protect.FinanceLord.BudgetUtils.BudgetInputUtils;
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Database.BudgetsType;
@@ -24,6 +25,7 @@ public class BudgetEditActivity extends AppCompatActivity {
 
     private Date startTime;
     private Date endTime;
+    private BudgetDatabaseUtils databaseUtils;
     private BudgetInputUtils inputUtils = new BudgetInputUtils();
 
     private String TAG = "BudgetEditActivity";
@@ -68,6 +70,9 @@ public class BudgetEditActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.categories_dropdown, typeNames);
         inputUtils.nameInput.setAdapter(adapter);
 
+        databaseUtils = new BudgetDatabaseUtils(this, startTime, endTime, inputUtils,
+                getIntent().<BudgetsType>getParcelableArrayListExtra(getString(R.string.budget_categories_key)));
+
         inputUtils.startDateInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +99,8 @@ public class BudgetEditActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                databaseUtils.insertOrUpdateData(true,false, null);
+                databaseUtils.addTextListener();
             }
         });
 
