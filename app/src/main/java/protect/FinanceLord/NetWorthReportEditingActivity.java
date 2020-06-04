@@ -90,14 +90,14 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
 
     CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override
-        public void onDialogMessage(Date date) {
+        public void message(Date date) {
             currentTime = date;
             Log.d("EditReportCommunicator", "time is " + currentTime);
             String stringDate = TimeProcessor.getStringFromDate(currentTime, getString(R.string.date_format));
             timeDisplay.setText(stringDate);
 
-            toEditAssetsFragmentCommunicator.onActivityMessage(currentTime);
-            toEditLiabilitiesFragmentCommunicator.onActivityMessage(currentTime);
+            toEditAssetsFragmentCommunicator.message(currentTime);
+            toEditLiabilitiesFragmentCommunicator.message(currentTime);
         }
     };
 }

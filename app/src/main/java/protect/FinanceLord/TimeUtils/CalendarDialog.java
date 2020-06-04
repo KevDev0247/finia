@@ -46,7 +46,7 @@ public class CalendarDialog extends DialogFragment {
                         datePicker.getDayOfMonth());
 
                 Log.d("CalendarDialog", "date picked is " + currentTime);
-                communicator.onDialogMessage(currentTime);
+                communicator.message(currentTime);
 
                 dismiss();
             }

@@ -162,7 +162,7 @@ public class TransactionActivity extends AppCompatActivity {
 
     private GroupByCategoryCommunicator fromAdapterCommunicator = new GroupByCategoryCommunicator() {
         @Override
-        public void onActivityMessage(final String categoryLabel) {
+        public void message(final String categoryLabel) {
             Executors.newSingleThreadExecutor().execute(new Runnable() {
                 @Override
                 public void run() {

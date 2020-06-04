@@ -42,7 +42,7 @@ public class Edit_AssetsFragment extends Fragment {
     private TypeProcessor_Assets typeProcessor;
     private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
         @Override
-        public void onActivityMessage(Date date) {
+        public void message(Date date) {
             currentTime = date;
             Log.d("Edit_AFragment","the user has selected date: " + currentTime);
             initAssets();

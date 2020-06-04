@@ -212,7 +212,7 @@ public class TransactionEditActivity extends AppCompatActivity {
 
     private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override
-        public void onDialogMessage(Date date) {
+        public void message(Date date) {
             currentTime = date;
             Log.d(TAG, "time is " + currentTime);
             String stringDate = TimeProcessor.getStringFromDate(currentTime, getString(R.string.date_format));

@@ -46,7 +46,7 @@ public class CategoryLabelsAdapter extends RecyclerView.Adapter<CategoryLabelsAd
             public void onClick(View v) {
                 Log.d("CategoryAdapter", "the label was clicked");
                 String categoryLabel = holder.categoryName.getText().toString();
-                toTransactionActivityCommunicator.onActivityMessage(categoryLabel);
+                toTransactionActivityCommunicator.message(categoryLabel);
             }
         });
     }

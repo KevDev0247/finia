@@ -83,10 +83,10 @@ public class TransactionAddActivity extends AppCompatActivity {
                 Log.d(TAG,tablayout.getTabAt(viewPager.getCurrentItem()).getText().toString() + " Fragment has data to save");
 
                 if (tablayout.getTabAt(viewPager.getCurrentItem()).getText().toString().equals(getString(R.string.expenses_name))){
-                    toEditExpensesCommunicator.onActivityMessage();
+                    toEditExpensesCommunicator.message();
 
                 } else if (tablayout.getTabAt(viewPager.getCurrentItem()).getText().toString().equals(getString(R.string.revenues_name))){
-                    toEditRevenuesCommunicator.onActivityMessage();
+                    toEditRevenuesCommunicator.message();
                 }
 
                 finish();

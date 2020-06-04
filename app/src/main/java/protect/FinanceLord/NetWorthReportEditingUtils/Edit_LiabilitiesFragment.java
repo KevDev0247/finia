@@ -42,7 +42,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
     private TypeProcessor_Liabilities typeProcessor;
     private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
         @Override
-        public void onActivityMessage(Date date) {
+        public void message(Date date) {
             currentTime = date;
             Log.d("Edit_LFragment","the user has selected date: " + currentTime);
             initLiabilities();

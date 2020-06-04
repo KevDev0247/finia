@@ -161,7 +161,7 @@ public class Add_TransactionsFragment extends Fragment {
 
     private SaveDataCommunicator fromActivityCommunicator = new SaveDataCommunicator() {
         @Override
-        public void onActivityMessage() {
+        public void message() {
             Log.d(TAG, "the message from activity was received");
 
             databaseUtils.insertOrUpdateData(true, false, null);
@@ -171,7 +171,7 @@ public class Add_TransactionsFragment extends Fragment {
 
     private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override
-        public void onDialogMessage(Date date) {
+        public void message(Date date) {
             currentTime = date;
             Log.d(TAG, "time is " + currentTime);
             String stringDate = TimeProcessor.getStringFromDate(currentTime, getString(R.string.date_format));

@@ -108,7 +108,7 @@ public class BudgetEditActivity extends AppCompatActivity {
 
     private CalendarDateBroadcast startTimeCommunicator = new CalendarDateBroadcast() {
         @Override
-        public void onDialogMessage(Date date) {
+        public void message(Date date) {
             startTime = date;
             Log.d(TAG, "time is " + startTime);
             String stringDate = TimeProcessor.getStringFromDate(startTime, getString(R.string.date_format));
@@ -118,7 +118,7 @@ public class BudgetEditActivity extends AppCompatActivity {
 
     private CalendarDateBroadcast endTimeCommunicator = new CalendarDateBroadcast() {
         @Override
-        public void onDialogMessage(Date date) {
+        public void message(Date date) {
             endTime = date;
             Log.d(TAG, "time is " + endTime);
             String stringDate = TimeProcessor.getStringFromDate(endTime, getString(R.string.date_format));
