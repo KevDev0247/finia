@@ -23,6 +23,7 @@ public class BudgetActivity extends AppCompatActivity {
 
     private List<BudgetsType> allBudgetsTypes;
     private List<BudgetsValue> allBudgetsValues;
+    private BudgetListAdapter budgetListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,16 @@ public class BudgetActivity extends AppCompatActivity {
             }
         });
 
-        retrieveDataFromDatabase();
+        retrieveDataFromDatabase(true,false);
     }
 
-    private void retrieveDataFromDatabase(){
+    @Override
+    protected void onResume() {
+        super.onResume();
+        retrieveDataFromDatabase(false, true);
+    }
+
+    private void retrieveDataFromDatabase(final boolean initialize, final boolean refresh) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -54,15 +61,19 @@ public class BudgetActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setUpSaveButton(allBudgetsTypes);
-                        setUpBudgetsListView();
+                        if (initialize) {
+                            setUpAddButton(allBudgetsTypes);
+                            setUpBudgetsListView();
+                        } else if (refresh) {
+                            budgetListAdapter.notifyDataSetChanged();
+                        }
                     }
                 });
             }
         });
     }
 
-    private void setUpSaveButton(List<BudgetsType> allBudgetsTypes){
+    private void setUpAddButton(List<BudgetsType> allBudgetsTypes){
         final ArrayList<BudgetsType> budgetTypes = new ArrayList<>(allBudgetsTypes);
         ImageButton addButton = findViewById(R.id.add_budget_button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +89,7 @@ public class BudgetActivity extends AppCompatActivity {
 
     private void setUpBudgetsListView() {
         ListView budgetsList = findViewById(R.id.budgets_list);
-        BudgetListAdapter budgetListAdapter = new BudgetListAdapter(this, allBudgetsValues, allBudgetsTypes);
+        budgetListAdapter = new BudgetListAdapter(this, allBudgetsValues, allBudgetsTypes);
         budgetsList.setAdapter(budgetListAdapter);
     }
 }
