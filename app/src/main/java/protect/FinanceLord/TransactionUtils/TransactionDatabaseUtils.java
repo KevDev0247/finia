@@ -54,6 +54,11 @@ public class TransactionDatabaseUtils {
         mUpdate = update;
         invalidInput = false;
 
+        Log.d(TAG, "this transaction's id is " + transactionId);
+        if (transactionId != null) {
+            transaction.setTransactionId(transactionId);
+        }
+
         if (!inputUtils.nameInput.getText().toString().isEmpty()) {
             Log.d(TAG, "this transaction's name is " + inputUtils.nameInput.getText());
             transaction.setTransactionName(inputUtils.nameInput.getText().toString());
@@ -92,11 +97,6 @@ public class TransactionDatabaseUtils {
             }
         } else {
             transaction.setDate(currentTime.getTime());
-        }
-
-        Log.d(TAG, "this transaction's id is " + transactionId);
-        if (transactionId != null) {
-            transaction.setTransactionId(transactionId);
         }
 
         if (!inputUtils.categoryInput.getText().toString().isEmpty()) {
@@ -220,8 +220,7 @@ public class TransactionDatabaseUtils {
                     }
                 }
 
-                final boolean finalInputError = inputError;
-                if (!finalInputError) {
+                if (!inputError) {
                     ((Activity) context).finish();
                 }
             }

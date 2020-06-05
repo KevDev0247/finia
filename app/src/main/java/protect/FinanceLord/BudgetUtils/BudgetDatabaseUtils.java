@@ -50,6 +50,11 @@ public class BudgetDatabaseUtils {
         mUpdate = update;
         SimpleDateFormat dateFormat = new SimpleDateFormat(context.getString(R.string.date_format), Locale.CANADA);
 
+        Log.d(TAG, "this transaction's id is " + budgetId);
+        if (budgetId != null) {
+            budgetsValue.setBudgetsId(budgetId);
+        }
+
         if (!inputUtils.nameInput.getText().toString().isEmpty()){
             for (BudgetsType budgetsType : budgetsTypes) {
                 budgetsValue.setBudgetsCategoryId(0);
@@ -105,11 +110,6 @@ public class BudgetDatabaseUtils {
             invalidInput = true;
         }
 
-        Log.d(TAG, "this transaction's id is " + budgetId);
-        if (budgetId != null) {
-            budgetsValue.setBudgetsId(budgetId);
-        }
-
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -122,6 +122,15 @@ public class BudgetDatabaseUtils {
                 } else {
                     Log.d(TAG, "the budget has some null values");
                 }
+            }
+        });
+    }
+
+    public void deleteData(final int budgetId) {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                budgetsValueDao.deleteIndividualBudget(budgetId);
             }
         });
     }
@@ -192,33 +201,39 @@ public class BudgetDatabaseUtils {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
+                boolean inputError = false;
                 BudgetsType newType = new BudgetsType();
                 newType.setBudgetsName(inputUtils.nameInput.getText().toString());
                 budgetsTypeDao.insertIndividualBudgetType(newType);
 
                 Log.d(TAG, " the new category's name is set to " + inputUtils.nameInput.getText().toString());
-                final List<BudgetsType> allBudgetTypes = budgetsTypeDao.queryAllBudgetsTypes();
+                List<BudgetsType> allBudgetTypes = budgetsTypeDao.queryAllBudgetsTypes();
                 for (BudgetsType budgetsType : allBudgetTypes) {
                     if (budgetsType.getBudgetsName().equals(inputUtils.nameInput.getText().toString())) {
                         Log.d(TAG, " the new category's name is " + budgetsType.getBudgetsName() + " id is " + budgetsType.getBudgetsCategoryId());
 
-                        insertOrUpdateWithNewCategory(budgetsType.getBudgetsCategoryId());
+                        inputError = insertOrUpdateWithNewCategory(budgetsType.getBudgetsCategoryId());
                     }
                 }
 
-                ((Activity) context).finish();
+                if (!inputError) {
+                    ((Activity) context).finish();
+                }
             }
         });
     }
 
-    private void insertOrUpdateWithNewCategory(int budgetsCategoryId) {
+    private boolean insertOrUpdateWithNewCategory(int budgetsCategoryId) {
         budgetsValue.setBudgetsId(budgetsCategoryId);
         if (!invalidInput && mInsert) {
             budgetsValueDao.insertBudgetValue(budgetsValue);
+            return false;
         } else if (!invalidInput && mUpdate) {
             budgetsValueDao.updateBudgetValue(budgetsValue);
+            return false;
         } else {
             Log.d(TAG, "the budget has some null values");
+            return true;
         }
     }
 }

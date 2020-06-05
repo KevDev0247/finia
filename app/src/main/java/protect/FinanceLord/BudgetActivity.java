@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import protect.FinanceLord.BudgetUtils.BudgetListAdapter;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.BudgetsValue;
@@ -18,6 +20,9 @@ import protect.FinanceLord.Database.BudgetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 
 public class BudgetActivity extends AppCompatActivity {
+
+    private List<BudgetsType> allBudgetsTypes;
+    private List<BudgetsValue> allBudgetsValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +48,14 @@ public class BudgetActivity extends AppCompatActivity {
                 BudgetsValueDao budgetsValueDao = database.budgetsValueDao();
                 BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
 
-                List<BudgetsValue> allBudgetsValues = budgetsValueDao.queryAllBudgets();
-                final List<BudgetsType> allBudgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
+                allBudgetsValues = budgetsValueDao.queryAllBudgets();
+                allBudgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         setUpSaveButton(allBudgetsTypes);
+                        setUpBudgetsListView();
                     }
                 });
             }
@@ -68,5 +74,11 @@ public class BudgetActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void setUpBudgetsListView() {
+        ListView budgetsList = findViewById(R.id.budgets_list);
+        BudgetListAdapter budgetListAdapter = new BudgetListAdapter(this, allBudgetsValues, allBudgetsTypes);
+        budgetsList.setAdapter(budgetListAdapter);
     }
 }

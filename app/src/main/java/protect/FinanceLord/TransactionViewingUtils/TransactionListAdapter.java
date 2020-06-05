@@ -26,7 +26,6 @@ public class TransactionListAdapter extends ArrayAdapter<Transactions> {
 
     TransactionListAdapter(@NonNull Context context, List<Transactions> transactions, List<BudgetsType> budgetsTypes) {
         super(context, 0, transactions);
-
         this.context = context;
         this.budgetsTypes = budgetsTypes;
     }

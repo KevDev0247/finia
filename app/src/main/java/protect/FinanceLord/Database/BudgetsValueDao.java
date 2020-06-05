@@ -32,4 +32,7 @@ public interface BudgetsValueDao {
 
     @Query("SELECT * FROM BudgetsValue")
     List<BudgetsValue> queryAllBudgets ();
+
+    @Query("DELETE FROM BudgetsValue WHERE budgetsId = :budgetId")
+    void deleteIndividualBudget(int budgetId);
 }
