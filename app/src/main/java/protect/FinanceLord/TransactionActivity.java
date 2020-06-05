@@ -79,7 +79,9 @@ public class TransactionActivity extends AppCompatActivity {
                 budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
 
                 for (Transactions transaction : transactions) {
-                    Log.d(TAG + " retrieveData", "this item is " + transaction.getTransactionName() + " value is " + transaction.getTransactionValue());
+                    Log.d(TAG, "the item is " + transaction.getTransactionName() +
+                            " the value is " + transaction.getTransactionValue() +
+                            " the category is " + transaction.getTransactionCategoryId());
                 }
 
                 runOnUiThread(new Runnable() {

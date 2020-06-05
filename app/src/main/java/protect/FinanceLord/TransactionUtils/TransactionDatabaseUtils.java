@@ -206,6 +206,13 @@ public class TransactionDatabaseUtils {
 
                 Log.d(TAG, " the new category's name is set to " + inputUtils.categoryInput.getText().toString());
                 final List<BudgetsType> allBudgetTypes = budgetsTypeDao.queryAllBudgetsTypes();
+                ((Activity)context).runOnUiThread(new Runnable() {
+                    public void run() {
+                        Log.d(TAG + " Insert Utilities", " data has changed, ready to push to view model");
+                        viewModel.pushToBudgetTypes(allBudgetTypes);
+                    }
+                });
+
                 for (BudgetsType budgetsType : allBudgetTypes) {
                     if (budgetsType.getBudgetsName().equals(inputUtils.categoryInput.getText().toString())) {
                         Log.d(TAG, " the new category's name is " + budgetsType.getBudgetsName() + " id is " + budgetsType.getBudgetsCategoryId());
@@ -214,15 +221,9 @@ public class TransactionDatabaseUtils {
                 }
 
                 final boolean finalInputError = inputError;
-                ((Activity)context).runOnUiThread(new Runnable() {
-                    public void run() {
-                        Log.d(TAG + " Insert Utilities", " data has changed");
-                        viewModel.pushToBudgetTypes(allBudgetTypes);
-                        if (!finalInputError) {
-                            ((Activity) context).finish();
-                        }
-                    }
-                });
+                if (!finalInputError) {
+                    ((Activity) context).finish();
+                }
             }
         });
     }
