@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:paddingHorizontal="15dp"
-        android:background="@drawable/revenues_labels_background">
+        android:background="@drawable/transactions_labels_background">
 
         <TextView
             android:id="@+id/transaction_label_name"

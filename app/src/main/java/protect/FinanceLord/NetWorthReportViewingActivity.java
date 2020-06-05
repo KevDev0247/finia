@@ -81,7 +81,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
                 if (tab.getText().toString().equals(getString(R.string.assets_name))) {
                     tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#626ee3"));
                     tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#626ee3"));
-
                 } else if (tab.getText().toString().equals(getString(R.string.liabilities_name))) {
                     tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#5ABD5C"));
                     tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#5ABD5C"));

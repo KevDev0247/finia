@@ -2,6 +2,7 @@ package protect.FinanceLord;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -101,7 +102,7 @@ public class TransactionActivity extends AppCompatActivity {
 
     private void setUpTabsAndAddButton(List<Transactions> transactions) {
         ImageButton addButton = findViewById(R.id.add_transaction_button);
-        TabLayout tabLayout = findViewById(R.id.transaction_tab_layout);
+        final TabLayout tabLayout = findViewById(R.id.transaction_tab_layout);
         final ViewPager viewPager = findViewById(R.id.transaction_view_pager);
 
         for (Transactions transaction : transactions) {
@@ -117,6 +118,24 @@ public class TransactionActivity extends AppCompatActivity {
         ViewPagerAdapter sectionsPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager(), fragments);
         viewPager.setAdapter(sectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getText().toString().equals(getString(R.string.expenses_name))) {
+                    tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#9DAE9D"));
+                    tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#9DAE9D"));
+                } else if (tab.getText().toString().equals(getString(R.string.revenues_name))) {
+                    tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#B592F1"));
+                    tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#B592F1"));
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) { }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) { }
+        });
 
         final ArrayList<BudgetsType> finalBudgetsTypes = new ArrayList<>(budgetsTypes);
         addButton.setOnClickListener(new View.OnClickListener() {
