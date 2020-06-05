@@ -14,29 +14,32 @@
 <!--    general-->
 
     <string name="name">Name</string>
+    <string name="date">Date</string>
     <string name="net">Net</string>
+    <string name="category">Category</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
     <string name="current_time">Current Time</string>
     <string name="page_title">Page Title</string>
-    <string name="dollar_sign">" $"</string>
-    <string name="sign">"+ - "</string>
     <string name="all">All</string>
     <string name="delete">Delete</string>
     <string name="label_name">Label Name</string>
-
-    <string name="status">Status</string>
+    <string name="items">Items</string>
+    <string name="usage">Usage</string>
+    <string name="total">Total</string>
+    <string name="value">Value</string>
+    <string name="comments">Comments</string>
 
     <string name="no_data_initialization">No Data</string>
     <string name="positive_symbol">+</string>
     <string name="negative_symbol">-</string>
-
-<!--    input hints-->
-
-    <string name="value">Value</string>
-    <string name="comments">Comments</string>
-    <string name="category">Category</string>
-    <string name="date">Date</string>
-    <string name="start_date">Start Date</string>
-    <string name="end_date">End Date</string>
+    
+<!--    signs-->
+    
+    <string name="dollar_sign">" $"</string>
+    <string name="slash">" / "</string>
+    <string name="algebra_sign">"+ - "</string>
+    <string name="tilde_sign">" ~ "</string>
 
 <!--    budget add & edit activity-->
 

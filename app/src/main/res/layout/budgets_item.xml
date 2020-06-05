@@ -8,7 +8,7 @@
         android:id="@+id/report_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp">
+        android:paddingHorizontal="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,46 +27,113 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="10dp"
+                android:paddingVertical="7dp"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:paddingHorizontal="12dp"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/budget_item_name"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:text="@string/name"
-                        android:textColor="#ffffff"
-                        android:textSize="18sp"/>
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/budget_item_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/status"
-                        android:textColor="#ffffff"
-                        android:textSize="18sp"/>
+                        <TextView
+                            android:id="@+id/budget_item_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp"/>
 
-                </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/budget_start_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/start_date"
+                                android:textColor="#ffffff"
+                                android:textSize="13sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tilde_sign"
+                                android:textColor="#ffffff"
+                                android:textSize="13sp"/>
+
+                            <TextView
+                                android:id="@+id/budget_end_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/end_date"
+                                android:textColor="#ffffff"
+                                android:textSize="13sp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/budget_item_usage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/usage"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/slash"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:id="@+id/budget_item_total"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/total"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp"/>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="3dp"
                     android:paddingHorizontal="12dp">
 
                     <ProgressBar
                         android:id="@+id/budget_progress_bar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:progress="20"
                         android:progressTint="#4156BE"
                         android:progressBackgroundTint="#F8F5F5"

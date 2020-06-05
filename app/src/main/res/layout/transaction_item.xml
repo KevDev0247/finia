@@ -12,6 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="0dp"
             android:paddingEnd="10dp"
             android:orientation="horizontal"
             android:background="@drawable/transaction_item_background">
@@ -44,7 +45,7 @@
                         android:id="@+id/transaction_item_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Items"
+                        android:text="@string/items"
                         android:textColor="#ffffff"
                         android:textSize="18sp"/>
 
@@ -53,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Category"
+                        android:text="@string/category"
                         android:textColor="#ffffff"
                         android:textSize="13sp"/>
 
@@ -82,14 +83,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="value"
+                                android:text="@string/value"
                                 android:textColor="#ffffff"
                                 android:textSize="18sp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=" $"
+                                android:text="@string/dollar_sign"
                                 android:textColor="#ffffff"
                                 android:textSize="18sp"/>
 
@@ -101,7 +102,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_marginTop="10dp"
-                            android:text="date"
+                            android:text="@string/date"
                             android:textColor="#ffffff"
                             android:textSize="13sp"/>
 

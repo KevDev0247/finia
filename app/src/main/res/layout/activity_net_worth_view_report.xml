@@ -135,7 +135,7 @@
                                                 android:id="@+id/total_net_worth_symbol"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:text="@string/sign"
+                                                android:text="@string/algebra_sign"
                                                 android:textColor="#001528"
                                                 android:textSize="20sp" />
 
@@ -288,7 +288,7 @@
                                                     android:id="@+id/total_assets_symbol"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:text="@string/sign"
+                                                    android:text="@string/algebra_sign"
                                                     android:textColor="#001528"
                                                     android:textSize="20sp" />
 
@@ -421,7 +421,7 @@
                                                     android:id="@+id/total_liabilities_symbol"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:text="@string/sign"
+                                                    android:text="@string/algebra_sign"
                                                     android:textColor="#001528"
                                                     android:textSize="20sp" />
 
