@@ -1,7 +1,5 @@
 package protect.FinanceLord.Database;
 
-import java.util.Date;
-
 public class ReportItemInfo {
     public int totalAssetsId;
     public float totalAssetsValue;

@@ -47,7 +47,6 @@ public class Add_TransactionsFragment extends Fragment {
         this.budgetsTypes = budgetsTypes;
         this.fragmentTag = fragmentTag;
 
-        budgetsTypes.remove(0);
         for (BudgetsType budgetsType : budgetsTypes) {
             typeNames.add(budgetsType.getBudgetsName());
         }

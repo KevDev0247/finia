@@ -67,6 +67,7 @@ public class TransactionAddActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.edit_transaction_view_pager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
+        budgetsTypes.remove(0);
         Add_TransactionsFragment revenuesFragment = new Add_TransactionsFragment(currentTime, budgetsTypes, getString(R.string.revenues_fragment_key));
         Add_TransactionsFragment expensesFragment = new Add_TransactionsFragment(currentTime, budgetsTypes, getString(R.string.expenses_fragments_key));
         fragments.add(expensesFragment);

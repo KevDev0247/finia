@@ -22,8 +22,8 @@ public interface TransactionsDao {
     @Query("SELECT * FROM Transactions WHERE transactionCategoryId = :transactionCategoryId")
     List<Transactions> queryTransactionByCategoryId (int transactionCategoryId);
 
-    @Query("SELECT * FROM Transactions WHERE date = :date")
-    List<Transactions> queryTransactionByDate (Long date);
+    @Query("SELECT * FROM Transactions WHERE transactionCategoryId = :transactionCategoryId AND date <= :endDate AND date >= :startDate")
+    List<Transactions> queryGroupedTransactionByTimePeriod (int transactionCategoryId, Long startDate, Long endDate);
 
     @Query("SELECT * FROM Transactions")
     List<Transactions> queryAllTransaction ();

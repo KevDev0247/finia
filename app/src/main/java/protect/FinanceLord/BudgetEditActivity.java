@@ -99,10 +99,10 @@ public class BudgetEditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     databaseUtils.insertOrUpdateData(true,false, null);
-                    databaseUtils.addTextListener();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                databaseUtils.addTextListener();
             }
         });
 

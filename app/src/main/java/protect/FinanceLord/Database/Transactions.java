@@ -11,19 +11,19 @@ public class Transactions {
     @PrimaryKey(autoGenerate = true)
     private int transactionId;
 
-    @ColumnInfo(name = "TransactionName")
+    @ColumnInfo(name = "transactionName")
     private String transactionName;
 
-    @ColumnInfo(name = "TransactionValue")
+    @ColumnInfo(name = "transactionValue")
     private float transactionValue;
 
-    @ColumnInfo(name = "TransactionCategoryId")
+    @ColumnInfo(name = "transactionCategoryId")
     private int transactionCategoryId;
 
-    @ColumnInfo(name = "TransactionComments")
+    @ColumnInfo(name = "transactionComments")
     private String transactionComments;
 
-    @ColumnInfo(name = "Date")
+    @ColumnInfo(name = "date")
     private Long date;
 
     @Ignore
