@@ -1,5 +1,7 @@
 package protect.FinanceLord;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import java.text.DecimalFormat;
@@ -36,8 +39,9 @@ public class TransactionEditActivity extends AppCompatActivity {
 
     private Date currentTime;
     private TransactionDatabaseUtils databaseUtils;
-    private TransactionInputUtils inputUtils = new TransactionInputUtils();
+    private BudgetTypesViewModel viewModel;
     private SimpleDateFormat dateFormat;
+    private TransactionInputUtils inputUtils = new TransactionInputUtils();
 
     private static String TAG = "TransactionEditActivity";
 
@@ -111,13 +115,15 @@ public class TransactionEditActivity extends AppCompatActivity {
 
         inputUtils.deleteButton = findViewById(R.id.revenue_delete_button);
 
+        setUpBudgetTypesObserver();
+
         setUpCategoryAndDateInput(budgetsTypes);
 
         loadDataToInputBoxes(budgetsTypes);
 
-        setUpInputUtils(budgetsTypes, getString(R.string.revenues_section_key));
-
         setUpSaveAndDeleteButton();
+
+        databaseUtils = new TransactionDatabaseUtils(this, currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
     }
 
     private void setUpExpenseSection(List<BudgetsType> budgetsTypes) {
@@ -133,13 +139,15 @@ public class TransactionEditActivity extends AppCompatActivity {
 
         inputUtils.deleteButton = findViewById(R.id.expense_delete_button);
 
+        setUpBudgetTypesObserver();
+
         setUpCategoryAndDateInput(budgetsTypes);
 
         loadDataToInputBoxes(budgetsTypes);
 
-        setUpInputUtils(budgetsTypes, getString(R.string.expenses_section_key));
-
         setUpSaveAndDeleteButton();
+
+        databaseUtils = new TransactionDatabaseUtils(this, currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
     }
 
     private void setUpCategoryAndDateInput(List<BudgetsType> budgetsTypes){
@@ -186,11 +194,6 @@ public class TransactionEditActivity extends AppCompatActivity {
         }
     }
 
-    private void setUpInputUtils(List<BudgetsType> budgetsTypes, String sectionTag) {
-        BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
-        databaseUtils = new TransactionDatabaseUtils(this, currentTime, inputUtils, budgetsTypes, viewModel, sectionTag);
-    }
-
     private void setUpSaveAndDeleteButton() {
         ImageButton saveButton = findViewById(R.id.transaction_edit_save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +209,19 @@ public class TransactionEditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 databaseUtils.deleteData(getIntent().getExtras().getInt(getString(R.string.transaction_id_key)));
                 finish();
+            }
+        });
+    }
+
+    private void setUpBudgetTypesObserver() {
+        viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
+        viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
+            @Override
+            public void onChanged(List<BudgetsType> newBudgetsTypes) {
+                ArrayList<BudgetsType> budgetsTypes = new ArrayList<>(newBudgetsTypes);
+                Intent intent = new Intent();
+                intent.putParcelableArrayListExtra(getString(R.string.transaction_add_new_types_key), budgetsTypes);
+                setResult(Activity.RESULT_OK, intent);
             }
         });
     }

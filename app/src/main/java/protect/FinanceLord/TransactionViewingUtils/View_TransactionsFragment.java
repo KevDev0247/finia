@@ -29,7 +29,6 @@ import protect.FinanceLord.ViewModels.TransactionsViewModel;
 
 public class View_TransactionsFragment extends Fragment {
 
-    private String fragmentTag;
     private TransactionListAdapter revenuesAdapter;
     private TransactionListAdapter expensesAdapter;
     private TransactionActivity transactionActivity;
@@ -38,6 +37,9 @@ public class View_TransactionsFragment extends Fragment {
     private List<BudgetsType> budgetsTypes;
     private List<Transactions> adapterRevenuesList = new ArrayList<>();
     private List<Transactions> adapterExpensesList = new ArrayList<>();
+
+    static final int MAIN_ACTIVITY_REQUEST_CODE = 1000;
+    private String fragmentTag;
 
     public View_TransactionsFragment(List<Transactions> transactions, List<BudgetsType> budgetsTypes, String fragmentTag) {
         this.transactions = transactions;
@@ -104,7 +106,7 @@ public class View_TransactionsFragment extends Fragment {
                 intent.putExtra(getString(R.string.transaction_date_key), revenue.getDate());
                 intent.putExtra(getString(R.string.transaction_fragment_key), fragmentTag);
                 intent.setClass(getContext(), TransactionEditActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, MAIN_ACTIVITY_REQUEST_CODE);
             }
         });
     }
@@ -135,7 +137,7 @@ public class View_TransactionsFragment extends Fragment {
                 intent.putExtra(getString(R.string.transaction_date_key), expense.getDate());
                 intent.putExtra(getString(R.string.transaction_fragment_key), fragmentTag);
                 intent.setClass(getContext(), TransactionEditActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, MAIN_ACTIVITY_REQUEST_CODE);
             }
         });
     }
