@@ -65,9 +65,4 @@ public class BudgetListAdapter extends ArrayAdapter<FinancialRecords> {
 
         return convertView;
     }
-
-    @Override
-    public int getCount() {
-        return super.getCount();
-    }
 }

@@ -47,7 +47,7 @@ public class BudgetActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         retrieveDataFromDatabase(initialize);
-        initialize = true;
+        initialize = false;
     }
 
     private void retrieveDataFromDatabase(final boolean initialize) {

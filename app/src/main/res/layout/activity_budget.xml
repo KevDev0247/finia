@@ -69,6 +69,7 @@
             android:id="@+id/budgets_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingVertical="12dp"
             android:divider="@null"
             android:dividerHeight="7dp">
 
