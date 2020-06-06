@@ -10,17 +10,19 @@ public interface FinancialRecordsDao {
 
     @Query("SELECT \n" +
             "  FinanceRecord.budgetCategoryId AS budgetCategoryId, \n" +
+            "  FinanceRecord.budgetValue AS budgetTotal, \n" +
             "  SUM(FinanceRecord.transactionValue) AS totalUsage, \n" +
             "  FinanceRecord.dateStart AS dateStart, \n" +
             "  FinanceRecord.dateEnd AS dateEnd \n" +
             "FROM ( \n" +
             "  SELECT" +
             "    BudgetsValue.budgetCategoryId, \n" +
+            "    BudgetsValue.budgetValue, \n" +
             "    BudgetsValue.dateStart, \n" +
             "    BudgetsValue.dateEnd, \n" +
             "    Transactions.transactionValue, \n" +
             "    Transactions.date \n" +
-            "  FROM BudgetsValue JOIN Transactions \n" +
+            "  FROM BudgetsValue LEFT JOIN Transactions \n" +
             "  ON BudgetsValue.budgetCategoryId = Transactions.transactionCategoryId \n" +
             "  AND Transactions.date >= BudgetsValue.dateStart AND Transactions.date <= BudgetsValue.dateEnd) \n" +
             "AS FinanceRecord \n" +

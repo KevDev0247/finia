@@ -16,18 +16,17 @@ import java.util.concurrent.Executors;
 import protect.FinanceLord.BudgetUtils.BudgetListAdapter;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.BudgetsTypeDao;
-import protect.FinanceLord.Database.BudgetsValue;
-import protect.FinanceLord.Database.BudgetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.Database.FinancialRecords;
 import protect.FinanceLord.Database.FinancialRecordsDao;
-import protect.FinanceLord.Database.TransactionsDao;
 
 public class BudgetActivity extends AppCompatActivity {
 
     private List<BudgetsType> allBudgetsTypes;
-    private List<BudgetsValue> allBudgetsValues;
+    private List<FinancialRecords> financialRecords;
     private BudgetListAdapter budgetListAdapter;
 
+    private boolean initialize = true;
     private String TAG = "BudgetActivity";
 
     @Override
@@ -42,44 +41,43 @@ public class BudgetActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        retrieveDataFromDatabase(true,false);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        retrieveDataFromDatabase(false, true);
+        retrieveDataFromDatabase(initialize);
+        initialize = true;
     }
 
-    private void retrieveDataFromDatabase(final boolean initialize, final boolean refresh) {
+    private void retrieveDataFromDatabase(final boolean initialize) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(BudgetActivity.this);
-                BudgetsValueDao budgetsValueDao = database.budgetsValueDao();
                 BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
                 FinancialRecordsDao financialRecordsDao = database.financeRecordsDao();
-                final TransactionsDao transactionsDao = database.transactionsDao();
 
-                allBudgetsValues = budgetsValueDao.queryAllBudgets();
                 allBudgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
-
+                financialRecords = financialRecordsDao.queryFinancialRecords();
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if (initialize) {
                             setUpAddButton(allBudgetsTypes);
-                            setUpBudgetsListView(transactionsDao);
-                        } else if (refresh) {
+                            setUpBudgetsListView();
+                        } else {
                             if (budgetListAdapter != null) {
-                                for (BudgetsValue budgetsValue : allBudgetsValues) {
-                                    Log.d(TAG, " this budget id is " + budgetsValue.getBudgetsCategoryId() +
-                                            " value is " + budgetsValue.getBudgetsValue() +
-                                            " date start is " + budgetsValue.getDateStart() +
-                                            " date end is " + budgetsValue.getDateEnd());
+                                for (FinancialRecords financialRecord : financialRecords) {
+                                    Log.d(TAG, " this financial record id is " + financialRecord.budgetCategoryId +
+                                            " total value is " + financialRecord.budgetTotal +
+                                            " total usage is" + financialRecord.totalUsage +
+                                            " date start is " + financialRecord.dateStart +
+                                            " date end is " + financialRecord.dateEnd);
                                 }
+                                budgetListAdapter.clear();
+                                budgetListAdapter.addAll(financialRecords);
                                 budgetListAdapter.notifyDataSetChanged();
                             }
                         }
@@ -103,9 +101,9 @@ public class BudgetActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpBudgetsListView(TransactionsDao transactionsDao) {
+    private void setUpBudgetsListView() {
         ListView budgetsList = findViewById(R.id.budgets_list);
-        budgetListAdapter = new BudgetListAdapter(this, transactionsDao, allBudgetsValues, allBudgetsTypes);
+        budgetListAdapter = new BudgetListAdapter(this, financialRecords, allBudgetsTypes);
         budgetsList.setAdapter(budgetListAdapter);
     }
 }

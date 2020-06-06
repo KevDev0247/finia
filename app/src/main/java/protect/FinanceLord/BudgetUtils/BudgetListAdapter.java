@@ -1,7 +1,6 @@
 package protect.FinanceLord.BudgetUtils;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,26 +15,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.BudgetsType;
-import protect.FinanceLord.Database.BudgetsValue;
-import protect.FinanceLord.Database.Transactions;
-import protect.FinanceLord.Database.TransactionsDao;
+import protect.FinanceLord.Database.FinancialRecords;
 import protect.FinanceLord.R;
 
-public class BudgetListAdapter extends ArrayAdapter<BudgetsValue> {
+public class BudgetListAdapter extends ArrayAdapter<FinancialRecords> {
 
     private Context context;
     private List<BudgetsType> budgetsTypes;
-    private TransactionsDao transactionsDao;
-    private float totalUsage = 0;
 
     private String TAG = "BudgetListAdapter";
 
-    public BudgetListAdapter(@NonNull Context context, TransactionsDao transactionsDao, List<BudgetsValue> budgetsValues, List<BudgetsType> budgetsTypes) {
-        super(context, 0, budgetsValues);
-        this.transactionsDao = transactionsDao;
+    public BudgetListAdapter(@NonNull Context context, List<FinancialRecords> financialRecords, List<BudgetsType> budgetsTypes) {
+        super(context, 0, financialRecords);
         this.context = context;
         this.budgetsTypes = budgetsTypes;
     }
@@ -43,7 +36,7 @@ public class BudgetListAdapter extends ArrayAdapter<BudgetsValue> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        BudgetsValue budgetsValue = getItem(position);
+        FinancialRecords financialRecords = getItem(position);
         SimpleDateFormat dateFormat = new SimpleDateFormat(context.getString(R.string.date_format), Locale.CANADA);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.budgets_item, null, false);
@@ -56,36 +49,25 @@ public class BudgetListAdapter extends ArrayAdapter<BudgetsValue> {
         TextView budgetTotal = convertView.findViewById(R.id.budget_item_total);
         ProgressBar budgetProgress = convertView.findViewById(R.id.budget_progress_bar);
 
-        budgetStartDate.setText(dateFormat.format(new Date(budgetsValue.getDateStart())));
-        budgetEndDate.setText(dateFormat.format(new Date(budgetsValue.getDateEnd())));
-        budgetTotal.setText(String.valueOf(budgetsValue.getBudgetsValue()));
+        budgetTotal.setText(String.valueOf(financialRecords.budgetTotal));
+        budgetStartDate.setText(dateFormat.format(new Date(financialRecords.dateStart)));
+        budgetEndDate.setText(dateFormat.format(new Date(financialRecords.dateEnd)));
+        if (!String.valueOf(financialRecords.totalUsage).isEmpty()) {
+            budgetUsage.setText(String.valueOf(financialRecords.totalUsage));
+        } else {
+            budgetUsage.setText(0);
+        }
         for (BudgetsType budgetsType : budgetsTypes) {
-            if (budgetsType.getBudgetsCategoryId() == budgetsValue.getBudgetsCategoryId()) {
+            if (budgetsType.getBudgetsCategoryId() == financialRecords.budgetCategoryId) {
                 budgetName.setText(budgetsType.getBudgetsName());
-                calculateBudgetUsage(budgetsValue.getBudgetsCategoryId(), budgetsValue.getDateStart(), budgetsValue.getDateEnd());
             }
         }
-
-        budgetUsage.setText(String.valueOf(totalUsage));
 
         return convertView;
     }
 
-    private void calculateBudgetUsage(final int budgetCategoryId, final Long startDate, final Long endDate) {
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                List<Transactions> groupedTransactions = transactionsDao.queryGroupedTransactionByTimePeriod(budgetCategoryId, startDate, endDate);
-                float usage = 0;
-                for (Transactions transaction : groupedTransactions) {
-                    Log.d(TAG, " this transaction name is " + transaction.getTransactionName() +
-                            " category id is " + transaction.getTransactionCategoryId() +
-                            " value is " + transaction.getTransactionValue());
-                    usage += transaction.getTransactionValue();
-                }
-                totalUsage = usage;
-                Log.d(TAG, " this transaction total usage " + totalUsage + " this transaction usage " + usage);
-            }
-        });
+    @Override
+    public int getCount() {
+        return super.getCount();
     }
 }
