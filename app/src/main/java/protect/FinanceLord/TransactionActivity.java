@@ -42,7 +42,7 @@ public class TransactionActivity extends AppCompatActivity {
     private TransactionsDao transactionsDao;
     private BudgetsTypeDao budgetsTypeDao;
 
-    static final int MAIN_ACTIVITY_REQUEST_CODE = 1000;
+    private static final int MAIN_ACTIVITY_REQUEST_CODE = 1000;
     private static String TAG = "TransactionActivity";
 
     @Override

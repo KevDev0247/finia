@@ -38,7 +38,7 @@ public class View_TransactionsFragment extends Fragment {
     private List<Transactions> adapterRevenuesList = new ArrayList<>();
     private List<Transactions> adapterExpensesList = new ArrayList<>();
 
-    static final int MAIN_ACTIVITY_REQUEST_CODE = 1000;
+    private static final int MAIN_ACTIVITY_REQUEST_CODE = 1000;
     private String fragmentTag;
 
     public View_TransactionsFragment(List<Transactions> transactions, List<BudgetsType> budgetsTypes, String fragmentTag) {
