@@ -1,12 +1,15 @@
 package protect.FinanceLord;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -22,11 +25,11 @@ import protect.FinanceLord.Database.FinancialRecordsDao;
 
 public class BudgetActivity extends AppCompatActivity {
 
-    private List<BudgetsType> allBudgetsTypes;
-    private List<FinancialRecords> financialRecords;
     private BudgetListAdapter budgetListAdapter;
+    private ArrayList<BudgetsType> allBudgetsTypes;
 
     private boolean initialize = true;
+    private static final int BUDGET_ACTIVITY_REQUEST_CODE = 1000;
     private String TAG = "BudgetActivity";
 
     @Override
@@ -58,15 +61,16 @@ public class BudgetActivity extends AppCompatActivity {
                 BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
                 FinancialRecordsDao financialRecordsDao = database.financeRecordsDao();
 
-                allBudgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
-                financialRecords = financialRecordsDao.queryFinancialRecords();
+                List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
+                allBudgetsTypes = new ArrayList<>(budgetsTypes);
+                final List<FinancialRecords> financialRecords = financialRecordsDao.queryFinancialRecords();
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if (initialize) {
-                            setUpAddButton(allBudgetsTypes);
-                            setUpBudgetsListView();
+                            setUpAddButton();
+                            setUpBudgetsListView(financialRecords);
                         } else {
                             if (budgetListAdapter != null) {
                                 for (FinancialRecords financialRecord : financialRecords) {
@@ -87,23 +91,45 @@ public class BudgetActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpAddButton(List<BudgetsType> allBudgetsTypes) {
-        final ArrayList<BudgetsType> budgetTypes = new ArrayList<>(allBudgetsTypes);
+    private void setUpAddButton() {
         ImageButton addButton = findViewById(R.id.add_budget_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra(getString(R.string.budget_categories_key), budgetTypes);
+                intent.putExtra(getString(R.string.add_budget_access_key), getString(R.string.add_budget_access_key));
+                intent.putExtra(getString(R.string.budget_categories_key), allBudgetsTypes);
                 intent.setClass(BudgetActivity.this, BudgetEditActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, BUDGET_ACTIVITY_REQUEST_CODE);
             }
         });
     }
 
-    private void setUpBudgetsListView() {
+    private void setUpBudgetsListView(List<FinancialRecords> financialRecords) {
         ListView budgetsList = findViewById(R.id.budgets_list);
         budgetListAdapter = new BudgetListAdapter(this, financialRecords, allBudgetsTypes);
         budgetsList.setAdapter(budgetListAdapter);
+
+        budgetsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.putExtra(getString(R.string.edit_budget_access_key), getString(R.string.edit_budget_access_key));
+                intent.putExtra(getString(R.string.budget_categories_key), allBudgetsTypes);
+                intent.setClass(BudgetActivity.this, BudgetEditActivity.class);
+                startActivityForResult(intent, BUDGET_ACTIVITY_REQUEST_CODE);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            ArrayList<BudgetsType> newBudgetTypes = (ArrayList<BudgetsType>) data.getSerializableExtra(getString(R.string.budget_add_new_types_key));
+            allBudgetsTypes.clear();
+            allBudgetsTypes.addAll(newBudgetTypes);
+            budgetListAdapter.notifyDataSetChanged();
+        }
     }
 }

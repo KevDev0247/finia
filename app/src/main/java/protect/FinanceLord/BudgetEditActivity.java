@@ -1,5 +1,7 @@
 package protect.FinanceLord;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -21,10 +25,12 @@ import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
+import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class BudgetEditActivity extends AppCompatActivity {
 
     private BudgetDatabaseUtils databaseUtils;
+    private BudgetTypesViewModel viewModel;
     private BudgetInputUtils inputUtils = new BudgetInputUtils();
 
     private String TAG = "BudgetEditActivity";
@@ -50,6 +56,9 @@ public class BudgetEditActivity extends AppCompatActivity {
         for (BudgetsType budgetsType : allBudgetTypes){
             typeNames.add(budgetsType.getBudgetsName());
         }
+
+        setUpBudgetTypesViewModel();
+
         setUpInputFields(typeNames);
     }
 
@@ -69,7 +78,7 @@ public class BudgetEditActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.categories_dropdown, typeNames);
         inputUtils.nameInput.setAdapter(adapter);
 
-        databaseUtils = new BudgetDatabaseUtils(this, inputUtils, getIntent().<BudgetsType>getParcelableArrayListExtra(getString(R.string.budget_categories_key)));
+        databaseUtils = new BudgetDatabaseUtils(this, inputUtils, viewModel, getIntent().<BudgetsType>getParcelableArrayListExtra(getString(R.string.budget_categories_key)));
 
         inputUtils.startDateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +119,19 @@ public class BudgetEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+    }
+
+    private void setUpBudgetTypesViewModel() {
+        viewModel = ViewModelProviders.of(BudgetEditActivity.this).get(BudgetTypesViewModel.class);
+        viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
+            @Override
+            public void onChanged(List<BudgetsType> newBudgetsTypes) {
+                ArrayList<BudgetsType> budgetsTypes = new ArrayList<>(newBudgetsTypes);
+                Intent intent = new Intent();
+                intent.putParcelableArrayListExtra(getString(R.string.budget_add_new_types_key), budgetsTypes);
+                setResult(Activity.RESULT_OK, intent);
             }
         });
     }
