@@ -144,6 +144,7 @@ public class TransactionDatabaseUtils {
             @Override
             public void run() {
                 transactionsDao.deleteIndividualTransaction(transactionId);
+                ((Activity) context).finish();
             }
         });
     }

@@ -139,10 +139,15 @@ public class BudgetEditActivity extends AppCompatActivity {
                 databaseUtils.addTextListener();
             }
         });
+
         inputUtils.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (getIntent().getExtras().getString(getString(R.string.budget_access_key)).equals(getString(R.string.add_budget_access_key))) {
+                    finish();
+                } else if (getIntent().getExtras().getString(getString(R.string.budget_access_key)).equals(getString(R.string.edit_budget_access_key))) {
+                    databaseUtils.deleteData(getIntent().getExtras().getInt(getString(R.string.budget_id_key)));
+                }
             }
         });
     }

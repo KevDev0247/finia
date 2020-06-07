@@ -208,7 +208,6 @@ public class TransactionEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseUtils.deleteData(getIntent().getExtras().getInt(getString(R.string.transaction_id_key)));
-                finish();
             }
         });
     }

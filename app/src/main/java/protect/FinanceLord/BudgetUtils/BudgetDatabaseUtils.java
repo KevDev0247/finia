@@ -137,6 +137,7 @@ public class BudgetDatabaseUtils {
             @Override
             public void run() {
                 budgetsValueDao.deleteIndividualBudget(budgetId);
+                ((Activity) context).finish();
             }
         });
     }
