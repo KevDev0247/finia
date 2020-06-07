@@ -1,6 +1,8 @@
 package protect.FinanceLord.BudgetUtils;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,11 +51,17 @@ public class BudgetListAdapter extends ArrayAdapter<FinancialRecords> {
         TextView budgetTotal = convertView.findViewById(R.id.budget_item_total);
         ProgressBar budgetProgress = convertView.findViewById(R.id.budget_progress_bar);
 
+        budgetProgress.setMax(100);
+        budgetProgress.setProgress(-Math.round(financialRecords.totalUsage/financialRecords.budgetTotal * 100));
+        if (-financialRecords.totalUsage > financialRecords.budgetTotal) {
+            budgetProgress.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        }
+
         budgetTotal.setText(String.valueOf(financialRecords.budgetTotal));
         budgetStartDate.setText(dateFormat.format(new Date(financialRecords.dateStart)));
         budgetEndDate.setText(dateFormat.format(new Date(financialRecords.dateEnd)));
         if (!String.valueOf(financialRecords.totalUsage).isEmpty()) {
-            budgetUsage.setText(String.valueOf(financialRecords.totalUsage));
+            budgetUsage.setText(String.valueOf(-financialRecords.totalUsage));
         } else {
             budgetUsage.setText(0);
         }
