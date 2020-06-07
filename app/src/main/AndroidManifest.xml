@@ -9,32 +9,58 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TransactionEditActivity"></activity>
-        <activity android:name=".TransactionAddActivity" />
-        <activity android:name=".BudgetEditActivity" />
+
+        <activity
+            android:name=".TransactionEditActivity"
+            android:theme="@style/AppTheme.InputSheet"/>
+
+        <activity
+            android:name=".TransactionAddActivity"
+            android:theme="@style/AppTheme.InputSheet"/>
+
+        <activity
+            android:name=".BudgetEditActivity"
+            android:theme="@style/AppTheme.InputSheet"/>
+
         <activity
             android:name=".NetWorthReportViewingActivity"
             android:label="@string/title_activity_net_worth_report_template"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.ReportSheet"/>
+
         <activity
             android:name=".NetWorthReportEditingActivity"
             android:label="@string/title_activity_net_worth_edit_reports"
             android:parentActivityName=".NetWorthActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".TransactionActivity" />
-        <activity android:name=".BudgetActivity" />
-        <activity android:name=".SpendingActivity" />
+            android:theme="@style/AppTheme.InputSheet"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
+            android:name=".TransactionActivity"
+            android:theme="@style/AppTheme.MajorActivities"/>
+
+        <activity
+            android:name=".BudgetActivity"
+            android:theme="@style/AppTheme.MajorActivities"/>
+
+        <activity
+            android:name=".SpendingActivity"
+            android:theme="@style/AppTheme.MajorActivities"/>
+
         <activity
             android:name=".NetWorthActivity"
-            android:parentActivityName=".NetWorthReportEditingActivity" />
-        <activity android:name=".MainActivity">
+            android:theme="@style/AppTheme.MajorActivities"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.MajorActivities">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
     </application>
 
 </manifest>
