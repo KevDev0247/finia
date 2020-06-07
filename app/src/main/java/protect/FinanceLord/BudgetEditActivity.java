@@ -14,10 +14,13 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import protect.FinanceLord.BudgetUtils.BudgetDatabaseUtils;
 import protect.FinanceLord.BudgetUtils.BudgetInputUtils;
@@ -59,10 +62,10 @@ public class BudgetEditActivity extends AppCompatActivity {
 
         setUpBudgetTypesViewModel();
 
-        setUpInputFields(typeNames);
+        setUpInputFields(typeNames, allBudgetTypes);
     }
 
-    private void setUpInputFields(List<String> typeNames) {
+    private void setUpInputFields(List<String> typeNames, List<BudgetsType> allBudgetTypes) {
         inputUtils.nameInputField = findViewById(R.id.budget_name_field);
         inputUtils.valueInputField = findViewById(R.id.budget_value_field);
         inputUtils.startDateInputField = findViewById(R.id.budget_start_date_field);
@@ -98,7 +101,25 @@ public class BudgetEditActivity extends AppCompatActivity {
             }
         });
 
+        if (getIntent().getExtras().getString(getString(R.string.budget_access_key)).equals(getString(R.string.edit_budget_access_key))) {
+            loadDataToInputBox(allBudgetTypes);
+        }
+
         setUpSaveAndDeleteButton();
+    }
+
+    private void loadDataToInputBox(List<BudgetsType> allBudgetTypes) {
+        DecimalFormat decimalFormat = new DecimalFormat();
+        SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.CANADA);
+
+        inputUtils.valueInput.setText(decimalFormat.format(getIntent().getExtras().getFloat(getString(R.string.budget_total_key))));
+        inputUtils.startDateInput.setText(dateFormat.format(getIntent().getExtras().getLong(getString(R.string.budget_start_date_key))));
+        inputUtils.endDateInput.setText(dateFormat.format(getIntent().getExtras().getLong(getString(R.string.budget_end_date_key))));
+        for (BudgetsType budgetsType : allBudgetTypes) {
+            if (budgetsType.getBudgetsCategoryId() == getIntent().getExtras().getInt(getString(R.string.budget_name_id_key))) {
+                inputUtils.nameInput.setText(budgetsType.getBudgetsName());
+            }
+        }
     }
 
     private void setUpSaveAndDeleteButton() {
@@ -114,7 +135,6 @@ public class BudgetEditActivity extends AppCompatActivity {
                 databaseUtils.addTextListener();
             }
         });
-
         inputUtils.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

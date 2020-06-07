@@ -180,5 +180,11 @@
 
     <string name="add_budget_access_key">addBudget</string>
     <string name="edit_budget_access_key">editBudget</string>
+    <string name="budget_access_key">budget</string>
+    <string name="budget_name_id_key">budgetName</string>
+    <string name="budget_total_key">budgetTotal</string>
+    <string name="budget_usage_key">budgetUsage</string>
+    <string name="budget_start_date_key">budgetStartDate</string>
+    <string name="budget_end_date_key">budgetEndDate</string>
 
 </resources>

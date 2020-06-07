@@ -65,4 +65,8 @@ public class BudgetListAdapter extends ArrayAdapter<FinancialRecords> {
 
         return convertView;
     }
+
+    public void refreshBudgetTypes(List<BudgetsType> newBudgetsTypes) {
+        this.budgetsTypes = newBudgetsTypes;
+    }
 }
