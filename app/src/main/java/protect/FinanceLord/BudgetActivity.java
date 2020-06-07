@@ -118,6 +118,7 @@ public class BudgetActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra(getString(R.string.budget_categories_key), allBudgetsTypes);
                 intent.putExtra(getString(R.string.budget_access_key), getString(R.string.edit_budget_access_key));
+                intent.putExtra(getString(R.string.budget_id_key), financialRecord.budgetId);
                 intent.putExtra(getString(R.string.budget_name_id_key), financialRecord.budgetCategoryId);
                 intent.putExtra(getString(R.string.budget_total_key), financialRecord.budgetTotal);
                 intent.putExtra(getString(R.string.budget_start_date_key), financialRecord.dateStart);

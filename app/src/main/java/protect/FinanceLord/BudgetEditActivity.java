@@ -128,7 +128,11 @@ public class BudgetEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    databaseUtils.insertOrUpdateData(true,false, null);
+                    if (getIntent().getExtras().getString(getString(R.string.budget_access_key)).equals(getString(R.string.add_budget_access_key))) {
+                        databaseUtils.insertOrUpdateData(true,false, null);
+                    } else if (getIntent().getExtras().getString(getString(R.string.budget_access_key)).equals(getString(R.string.edit_budget_access_key))) {
+                        databaseUtils.insertOrUpdateData(false,true, getIntent().getExtras().getInt(getString(R.string.budget_id_key)));
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

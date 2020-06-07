@@ -9,6 +9,7 @@ import java.util.List;
 public interface FinancialRecordsDao {
 
     @Query("SELECT \n" +
+            "  FinanceRecord.budgetsId AS budgetId, \n" +
             "  FinanceRecord.budgetCategoryId AS budgetCategoryId, \n" +
             "  FinanceRecord.budgetValue AS budgetTotal, \n" +
             "  SUM(FinanceRecord.transactionValue) AS totalUsage, \n" +
@@ -16,6 +17,7 @@ public interface FinancialRecordsDao {
             "  FinanceRecord.dateEnd AS dateEnd \n" +
             "FROM ( \n" +
             "  SELECT" +
+            "    BudgetsValue.budgetsId, \n" +
             "    BudgetsValue.budgetCategoryId, \n" +
             "    BudgetsValue.budgetValue, \n" +
             "    BudgetsValue.dateStart, \n" +

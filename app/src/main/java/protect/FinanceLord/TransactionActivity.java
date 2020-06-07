@@ -42,7 +42,7 @@ public class TransactionActivity extends AppCompatActivity {
     private TransactionsDao transactionsDao;
     private BudgetsTypeDao budgetsTypeDao;
 
-    private static final int MAIN_ACTIVITY_REQUEST_CODE = 1000;
+    private static final int TRANSACTION_ACTIVITY_REQUEST_CODE = 1000;
     private static String TAG = "TransactionActivity";
 
     @Override
@@ -144,7 +144,7 @@ public class TransactionActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putParcelableArrayListExtra(getString(R.string.budget_categories_key), finalBudgetsTypes);
                 intent.setClass(TransactionActivity.this, TransactionAddActivity.class);
-                startActivityForResult(intent, MAIN_ACTIVITY_REQUEST_CODE);
+                startActivityForResult(intent, TRANSACTION_ACTIVITY_REQUEST_CODE);
             }
         });
     }

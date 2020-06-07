@@ -181,6 +181,7 @@
     <string name="add_budget_access_key">addBudget</string>
     <string name="edit_budget_access_key">editBudget</string>
     <string name="budget_access_key">budget</string>
+    <string name="budget_id_key">budgetId</string>
     <string name="budget_name_id_key">budgetName</string>
     <string name="budget_total_key">budgetTotal</string>
     <string name="budget_usage_key">budgetUsage</string>
