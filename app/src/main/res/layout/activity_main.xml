@@ -21,10 +21,10 @@
             android:fitsSystemWindows="true"
             app:contentScrim="#ffffff"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="Finance Lord"
             app:toolbarId="@id/toolbar">
 
             <ImageView
-                android:id="@+id/front_page_image"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:contentDescription="@string/image_of_assets"
@@ -38,7 +38,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
-                app:title="Finance Lord"
                 app:layout_collapseMode="pin"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -65,7 +64,6 @@
                 android:background="#0a7d80">
 
                 <ImageView
-                    android:id="@+id/transactionButtonImage"
                     android:layout_width="180dp"
                     android:layout_height="150dp"
                     android:src="@drawable/transaction"/>
@@ -74,22 +72,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginStart="25dp"
                     android:gravity="center">
+
                     <TextView
-                        android:id="@+id/TransTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="25sp"
-                        android:text="Transaction"
-                        android:textColor="#000000"
-                        android:textFontWeight="600"/>
+                        android:text="@string/transaction_title"
+                        android:textColor="#000000"/>
+
                     <TextView
-                        android:id="@+id/TransDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:text="Mange your transaction"/>
+                        android:text="@string/transaction_description"/>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -103,7 +101,6 @@
                 android:background="#f05424">
 
                 <ImageView
-                    android:id="@+id/BudgetButtonImage"
                     android:layout_width="180dp"
                     android:layout_height="150dp"
                     android:src="@drawable/budget"/>
@@ -112,21 +109,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginStart="25dp"
                     android:gravity="center">
+
                     <TextView
-                        android:id="@+id/BudgetTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="25sp"
-                        android:text="Budget"
+                        android:text="@string/budget_title"
                         android:textColor="#000000"/>
+
                     <TextView
-                        android:id="@+id/BudgetDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:text="Create your budget"/>
+                        android:text="@string/budget_description"/>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -140,7 +138,6 @@
                 android:background="#1a76ff">
 
                 <ImageView
-                    android:id="@+id/SpendingButtonImage"
                     android:layout_width="180dp"
                     android:layout_height="150dp"
                     android:src="@drawable/spending"/>
@@ -151,19 +148,20 @@
                     android:orientation="vertical"
                     android:layout_marginLeft="25dp"
                     android:gravity="center">
+
                     <TextView
-                        android:id="@+id/SpendTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="25sp"
-                        android:text="Spending"
+                        android:text="@string/spending_title"
                         android:textColor="#000000"/>
+
                     <TextView
-                        android:id="@+id/SpendDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:text="View your monthly spending report"/>
+                        android:text="@string/spending_description"/>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -177,7 +175,6 @@
                 android:background="#fdaf17">
 
                 <ImageView
-                    android:id="@+id/networthButtonImage"
                     android:layout_width="180dp"
                     android:layout_height="150dp"
                     android:src="@drawable/networth"/>
@@ -186,21 +183,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginStart="25dp"
                     android:gravity="center">
+
                     <TextView
-                        android:id="@+id/networthTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Net Worth"
+                        android:text="@string/net_worth_title"
                         android:textSize="25sp"
                         android:textColor="#000000"/>
+
                     <TextView
-                        android:id="@+id/networthDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:text="Calculate your net worth"/>
+                        android:text="@string/net_worth_description"/>
+
                 </LinearLayout>
 
             </LinearLayout>

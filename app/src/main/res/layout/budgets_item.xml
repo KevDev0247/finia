@@ -48,7 +48,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/name"
                             android:textColor="#ffffff"
-                            android:textSize="18sp"/>
+                            android:textSize="20sp"/>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -61,6 +61,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/start_date"
+                                android:textStyle="italic"
                                 android:textColor="#ffffff"
                                 android:textSize="13sp"/>
 
@@ -68,6 +69,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/tilde_sign"
+                                android:textStyle="italic"
                                 android:textColor="#ffffff"
                                 android:textSize="13sp"/>
 
@@ -76,6 +78,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/end_date"
+                                android:textStyle="italic"
                                 android:textColor="#ffffff"
                                 android:textSize="13sp"/>
 

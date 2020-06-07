@@ -36,7 +36,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Net Worth"
+                    android:text="@string/net_worth_title"
+                    android:textStyle="bold"
                     android:textColor="#ffffff"
                     android:textSize="25sp"
                     android:layout_centerInParent="true"/>
@@ -106,23 +107,22 @@
             android:orientation="vertical"
             android:elevation="4dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:elevation="4dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Past Reports"
+                    android:text="@string/past_reports"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
                     android:textColor="#ffffff"
                     android:textSize="25sp"
-                    android:layout_marginLeft="125dp"
                     android:layout_marginTop="10dp"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
