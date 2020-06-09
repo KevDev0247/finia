@@ -29,11 +29,30 @@ import protect.FinanceLord.NetWorthReportViewingUtils.ReportPagerAdapter;
 import protect.FinanceLord.NetWorthReportViewingUtils.Report_AssetsFragment;
 import protect.FinanceLord.NetWorthReportViewingUtils.Report_LiabilitiesFragment;
 
+/**
+ * The activity to view the report the user wish to see.
+ * It contains two fragments for assets and liabilities report sheet.
+ * Information contained includes the value, net change, and name of all items and parent items
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class NetWorthReportViewingActivity extends AppCompatActivity {
 
     String netWorthValue;
     String netWorthDifference;
 
+    /**
+     * Create and initialize the activity.
+     * This method was called when the activity was created.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * Next, the data saved in the intent from NetWorth activity will be retrieved.
+     * Lastly, the setUpTabs method is called to set up the tabs for report sheets
+     * and retrieveSummaryData method is called to retrieve the data of parent categories.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +78,14 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         retrieveSummaryData(itemTime);
     }
 
+    /**
+     * Set up the tabs for assets and liabilities report sheets.
+     * First initialize the TabLayout, each fragment, as well the ViewPager for the the layout.
+     * Then, set up ViewPager by adding an adapter sectionsPagerAdapter as well as TabLayout by adding the ViewPager
+     * Lastly, set onTabSelectedListener for the TabLayout to change the color of the tab text and indicator color.
+     *
+     * @author Owner Kevin Zhijun Wang
+     */
     private void setUpTabs(String date) {
         final TabLayout tabLayout = findViewById(R.id.report_tab_layout);
         final ViewPager viewPager = findViewById(R.id.report_view_pager);
@@ -95,9 +122,17 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Retrieve the data for parent categories: totalNetWorth, totalAssets, totalLiabilities.
+     * Query is completed in a separate thread to avoid locking the UI thread for a long period of time.
+     * The current data and data of the previous report is retrieved to calculate the difference.
+     * Lastly, refreshSummaryView is called to refresh the summary dashboard of total values.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param date the time of this report
+     */
     private void retrieveSummaryData(final String date) {
         final Date itemTime = convertDate(date);
-
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -137,6 +172,18 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Initialize the textViews and set the populate the textViews with data
+     * First, the method initialize the textViews and differenceBlocks on the dashboard.
+     * Then, populate the totalValue and difference textViews and determine the color of the difference block
+     * for netWorth, totalAssets, and totalLiabilities.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param totalAssetsValue Total assets value
+     * @param totalLiabilitiesValue Total liabilities value
+     * @param totalAssetsDifference The difference of current total assets and previous total assets
+     * @param totalLiabilitiesDifference The difference of current total liabilities and previous total liabilities
+     */
     private void refreshSummaryView(float totalAssetsValue, float totalLiabilitiesValue, Float totalAssetsDifference, Float totalLiabilitiesDifference) {
         TextView reportNetWorthValue = findViewById(R.id.total_net_worth_value);
         TextView reportNetWorthSymbol = findViewById(R.id.total_net_worth_symbol);
@@ -214,6 +261,12 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Convert the date-formatted string to Date object.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param itemTime the formatted string date of the item
+     */
     private Date convertDate(String itemTime) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.US);
         Date date = null;

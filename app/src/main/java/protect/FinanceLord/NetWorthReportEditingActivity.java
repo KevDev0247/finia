@@ -83,7 +83,7 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
     }
 
     /**
-     * Set up the tabs for assets and liabilities input sheet
+     * Set up the tabs for assets and liabilities input sheets
      * First initialize the TabLayout, each fragment, as well the ViewPager for the the layout.
      * Then, set up ViewPager by adding an adapter sectionsPagerAdapter as well as TabLayout by adding the ViewPager
      * Lastly, set onClickListener for the calendar button to show the datePicker dialog when the button is clicked.

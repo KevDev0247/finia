@@ -106,6 +106,7 @@ public class NetWorthActivity extends AppCompatActivity {
      * Query was completed in a separate thread to avoid locking the UI thread for a long period of time.
      * View.onclickListener is added to the each item in the list
      * to enable user go to the corresponding report through a click.
+     * The information on the list item will be stored in intent and transferred to the report activity for query and display purposes.
      *
      * @author Owner  Kevin Zhijun Wang
      */
