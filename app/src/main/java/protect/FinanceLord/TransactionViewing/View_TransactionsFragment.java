@@ -1,4 +1,4 @@
-package protect.FinanceLord.TransactionViewingUtils;
+package protect.FinanceLord.TransactionViewing;
 
 import android.content.Context;
 import android.content.Intent;

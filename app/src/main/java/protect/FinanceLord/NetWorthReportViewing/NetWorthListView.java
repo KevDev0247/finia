@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthReportViewingUtils;
+package protect.FinanceLord.NetWorthReportViewing;
 
 import android.content.Context;
 import android.widget.ListView;

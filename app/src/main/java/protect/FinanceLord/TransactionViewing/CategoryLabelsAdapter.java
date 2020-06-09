@@ -1,4 +1,4 @@
-package protect.FinanceLord.TransactionViewingUtils;
+package protect.FinanceLord.TransactionViewing;
 
 import android.util.Log;
 import android.view.LayoutInflater;

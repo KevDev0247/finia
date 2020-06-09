@@ -21,9 +21,9 @@ import java.util.GregorianCalendar;
 
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Communicators.DateCommunicator;
-import protect.FinanceLord.NetWorthReportEditingUtils.EditPagerAdapter;
-import protect.FinanceLord.NetWorthReportEditingUtils.Edit_AssetsFragment;
-import protect.FinanceLord.NetWorthReportEditingUtils.Edit_LiabilitiesFragment;
+import protect.FinanceLord.NetWorthReportEditing.EditPagerAdapter;
+import protect.FinanceLord.NetWorthReportEditing.Edit_AssetsFragment;
+import protect.FinanceLord.NetWorthReportEditing.Edit_LiabilitiesFragment;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 

@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthReportEditingUtils;
+package protect.FinanceLord.NetWorthReportEditing;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -28,8 +28,8 @@ import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
 import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Liabilities;
 import protect.FinanceLord.NetWorthReportEditingActivity;
-import protect.FinanceLord.NetWorthReportEditingUtils.FragmentUtils.LiabilitiesFragmentAdapter;
-import protect.FinanceLord.NetWorthReportEditingUtils.FragmentUtils.LiabilitiesFragmentChildViewClickListener;
+import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragmentAdapter;
+import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragmentChildViewClickListener;
 import protect.FinanceLord.R;
 
 public class Edit_LiabilitiesFragment extends Fragment {

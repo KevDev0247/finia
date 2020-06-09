@@ -25,9 +25,9 @@ import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
-import protect.FinanceLord.NetWorthReportViewingUtils.ReportPagerAdapter;
-import protect.FinanceLord.NetWorthReportViewingUtils.Report_AssetsFragment;
-import protect.FinanceLord.NetWorthReportViewingUtils.Report_LiabilitiesFragment;
+import protect.FinanceLord.NetWorthReportViewing.ReportPagerAdapter;
+import protect.FinanceLord.NetWorthReportViewing.Report_AssetsFragment;
+import protect.FinanceLord.NetWorthReportViewing.Report_LiabilitiesFragment;
 
 /**
  * The activity to view the report the user wish to see.

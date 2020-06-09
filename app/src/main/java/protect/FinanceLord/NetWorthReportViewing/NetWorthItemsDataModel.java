@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthReportViewingUtils;
+package protect.FinanceLord.NetWorthReportViewing;
 
 public class NetWorthItemsDataModel {
     public String itemName;
