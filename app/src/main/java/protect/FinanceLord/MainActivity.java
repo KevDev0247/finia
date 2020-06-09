@@ -12,10 +12,28 @@ import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.DatabaseInitialization;
 
+/**
+ * The starter activity of the whole application.
+ * The Main Activity will direct the user to the four sections :
+ * Transaction, Budget, Spending, and Net Worth.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = "FinanceLord";
 
+    /**
+     * Create and initialize the activity
+     * The method first set the view of the content by finding the corresponding layout file through id.
+     * Then the method define the buttons for the four sections. Note that the buttons' layout was defined
+     * as LinearLayout because the resources in this circumstance were more difficult to load to a Button class.
+     * The four buttons will take the user to each section.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +85,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Initialize the database by calling each initialize method in an object of DatabaseInitialization class.
+     * The initialization methods are called on separate threads to avoid
+     * locking the UI thread for a long period of time.
+     * These methods will insert the default categories of each section into
+     * the corresponding entity in the database.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     private void initializeDatabase() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
