@@ -27,6 +27,15 @@ import protect.FinanceLord.NetWorthReportEditingUtils.Edit_LiabilitiesFragment;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 
+/**
+ * The activity to edit or add a new report of net worth.
+ * It contains two fragments for assets and liabilities input sheets.
+ * The user will be able to submit two sheets separately.
+ * The data of assets and liabilities are saved separately in different entities in the database.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class NetWorthReportEditingActivity extends AppCompatActivity {
 
     Date currentTime;
@@ -35,6 +44,16 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
     public DateCommunicator toEditAssetsFragmentCommunicator;
     public DateCommunicator toEditLiabilitiesFragmentCommunicator;
 
+    /**
+     * Create and initialize the activity.
+     * This method was called when the activity was created.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * Then, it will initialize the date to the current time and set up the calendar picker button and the return button.
+     * Lastly, it will call the methods to set up the two tabs for assets and liabilities input sheets.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +82,14 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
         setUpTabs();
     }
 
+    /**
+     * Set up the tabs for assets and liabilities input sheet
+     * First initialize the TabLayout, each fragment, as well the ViewPager for the the layout.
+     * Then, set up ViewPager by adding an adapter sectionsPagerAdapter as well as TabLayout by adding the ViewPager
+     * Lastly, set onClickListener for the calendar button to show the datePicker dialog when the button is clicked.
+     *
+     * @author Owner Kevin Zhijun Wang
+     */
     private void setUpTabs() {
         TabLayout tabLayout = findViewById(R.id.edit_tab_layout);
         final ViewPager viewPager = findViewById(R.id.edit_view_pager);
@@ -88,6 +115,13 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Communicator between this activity and CalendarDialog.
+     * Method message is implemented by the activity and the object is passed to CalendarDialog.
+     * CalendarDialog will call message method to transfer the data to this activity.
+     * Then, the time picked by the user will be displayed on the calendar button and sent to each fragment
+     * through two other communicators.
+     */
     CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override
         public void message(Date date) {
