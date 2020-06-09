@@ -28,9 +28,9 @@ import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.Database.TransactionsDao;
-import protect.FinanceLord.TransactionViewingUtils.CategoryLabelsAdapter;
-import protect.FinanceLord.TransactionViewingUtils.ViewPagerAdapter;
-import protect.FinanceLord.TransactionViewingUtils.View_TransactionsFragment;
+import protect.FinanceLord.TransactionViewing.CategoryLabelsAdapter;
+import protect.FinanceLord.TransactionViewing.ViewPagerAdapter;
+import protect.FinanceLord.TransactionViewing.View_TransactionsFragment;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 import protect.FinanceLord.ViewModels.TransactionsViewModel;
 
