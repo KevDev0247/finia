@@ -20,16 +20,17 @@ import protect.FinanceLord.Database.DatabaseInitialization;
  * @author Owner  Kevin Zhijun Wang
  * @version 2020.0609
  */
-
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = "FinanceLord";
 
     /**
-     * Create and initialize the activity
+     * Create and initialize the activity.
+     * This method was called when the activity was created.
      * The method first set the view of the content by finding the corresponding layout file through id.
+     * Next, the function to initialize the database is called
      * Then the method define the buttons for the four sections. Note that the buttons' layout was defined
      * as LinearLayout because the resources in this circumstance were more difficult to load to a Button class.
-     * The four buttons will take the user to each section.
+     * View.onclickListener was added to the button to enable user go to the corresponding section through a click.
      *
      * @author Owner Kevin Zhijun Wang
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
@@ -87,8 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Initialize the database by calling each initialize method in an object of DatabaseInitialization class.
-     * The initialization methods are called on separate threads to avoid
-     * locking the UI thread for a long period of time.
+     * The initialization methods are called on separate threads to avoid locking the UI thread for a long period of time.
      * These methods will insert the default categories of each section into
      * the corresponding entity in the database.
      *

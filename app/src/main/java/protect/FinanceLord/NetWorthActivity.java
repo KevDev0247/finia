@@ -31,8 +31,26 @@ import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
 import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
 
+/**
+ * The activity that provides a dashboard of the data of assets and liabilities as well as the list of reports.
+ * The dashboard displays the current data. The activity also provides entry to edit report page.
+ * The report list in the bottom sheet provide entries to each report that is saved.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class NetWorthActivity extends AppCompatActivity {
 
+    /**
+     * Create and initialize the activity.
+     * This method was called when the activity was created.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * Then, it will initialize return button and the entry button to edit report section.
+     * Lastly, it will call the methods to create the past report list and the swiping dashboard.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +81,14 @@ public class NetWorthActivity extends AppCompatActivity {
         refreshPastReportsListView();
     }
 
+    /**
+     * Call the methods to update the data immediately after the user returned to the page.
+     * This method is called first after the activity is created or whenever the user returns to this activity.
+     * When the user returned to the activity, the two methods will be called to
+     * refresh the data on past report list and the swipe dashboard cards.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -73,6 +99,16 @@ public class NetWorthActivity extends AppCompatActivity {
         Log.d("NetWorthActivity", "Activity has been refreshed");
     }
 
+    /**
+     * Create or update the data in the past report list.
+     * First, a listView and its adapter is created and set up.
+     * Then, database is queried for the most up-to-date data for display.
+     * Query was completed in a separate thread to avoid locking the UI thread for a long period of time.
+     * View.onclickListener is added to the each item in the list
+     * to enable user go to the corresponding report through a click.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     protected void refreshPastReportsListView() {
         ListView pastReportsListView = findViewById(R.id.past_report_list);
         final List<ReportItemsDataModel> dataSources = new ArrayList<>();
@@ -83,7 +119,6 @@ public class NetWorthActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
                 ReportItemInfoDao reportItemInfoDao = database.reportItemInfoDao();
 
@@ -111,7 +146,6 @@ public class NetWorthActivity extends AppCompatActivity {
         pastReportsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 ReportItemsDataModel dataModel = dataSources.get(position);
                 Log.d("NetWorthActivity", "the user has select the report of time: " + dataModel.time);
 
@@ -125,6 +159,13 @@ public class NetWorthActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Create or update the data in the swiping dashboard.
+     * First, a ViewPager for swiping and its adapter is created and setup.
+     * Then, the most up-to-date data will be loaded to the cards.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     protected void refreshNetWorthCardsView() {
         NetWorthCardsAdapter adapter;
         ViewPager viewPager;
@@ -139,6 +180,16 @@ public class NetWorthActivity extends AppCompatActivity {
         loadDataToCards(dataModels, adapter);
     }
 
+    /**
+     * Load the latest data to the cards
+     * First, all the parent categories Total value are initialized.
+     * Then, the latest data of assets and liabilities will be queried from the database.
+     * Lastly, inject the name, image resource, and value to the data model for the adapter to format and display.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param dataModels the data model to store the data and resources, preparing them for the adapter to display.
+     * @param adapter the adapter to carry the data from the data model and delivers it to a layout.
+     */
     protected void loadDataToCards(final List<NetWorthCardsDataModel> dataModels, final NetWorthCardsAdapter adapter) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
