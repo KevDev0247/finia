@@ -39,7 +39,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
         this.level = level;
     }
 
-    public String getLiabilitiesName(int position) {
+    private String getLiabilitiesName(int position) {
         return currentLevelNodeContainers.get(position).liabilitiesTypeName;
     }
 
@@ -108,7 +108,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    void addTextListener(EditText editText, final NodeContainer_Liabilities nodeContainer){
+    private void addTextListener(EditText editText, final NodeContainer_Liabilities nodeContainer){
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }

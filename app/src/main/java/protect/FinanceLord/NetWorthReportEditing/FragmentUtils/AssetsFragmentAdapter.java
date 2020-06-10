@@ -39,7 +39,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         this.level = level;
     }
 
-    public String getAssetsName(int position) {
+    private String getAssetsName(int position) {
         return this.currentLevelNodesContainers.get(position).assetsTypeName;
     }
 
@@ -133,7 +133,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    void addTextListener(EditText editText, final NodeContainer_Assets nodeContainer) {
+    private void addTextListener(EditText editText, final NodeContainer_Assets nodeContainer) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }

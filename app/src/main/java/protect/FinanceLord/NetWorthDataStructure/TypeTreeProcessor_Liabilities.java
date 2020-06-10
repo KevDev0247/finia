@@ -47,7 +47,7 @@ public class TypeTreeProcessor_Liabilities {
         return subGroupLiabilities;
     }
 
-    void addTypeToSubGroup(NodeContainer_Liabilities liabilitiesFragmentDataCarrier, List<NodeContainer_Liabilities> subGroupLiabilities) {
+    private void addTypeToSubGroup(NodeContainer_Liabilities liabilitiesFragmentDataCarrier, List<NodeContainer_Liabilities> subGroupLiabilities) {
         for (NodeContainer_Liabilities dataCarrier: subGroupLiabilities) {
             if (dataCarrier.liabilitiesId == liabilitiesFragmentDataCarrier.liabilitiesId && dataCarrier.liabilitiesId != 0) {
                 return;

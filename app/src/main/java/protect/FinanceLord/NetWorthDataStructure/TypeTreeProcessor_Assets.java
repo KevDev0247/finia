@@ -57,7 +57,7 @@ public class TypeTreeProcessor_Assets {
         return subGroupAssets;
     }
 
-    void addTypeToSubGroup(NodeContainer_Assets assetsFragmentDataCarrier, List<NodeContainer_Assets> subGroupAssets) {
+    private void addTypeToSubGroup(NodeContainer_Assets assetsFragmentDataCarrier, List<NodeContainer_Assets> subGroupAssets) {
         for(NodeContainer_Assets dataCarrier : subGroupAssets) {
             if(dataCarrier.assetsTypeId == assetsFragmentDataCarrier.assetsTypeId && dataCarrier.assetsTypeId != 0) {
                 return;
