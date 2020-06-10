@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.AssetsTypeDao;
+import protect.FinanceLord.Database.AssetsTypeTreeLeaf;
 import protect.FinanceLord.Database.AssetsValueDao;
-import protect.FinanceLord.Database.AssetsTypeTree;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
@@ -59,7 +59,7 @@ public class Report_AssetsFragment extends Fragment {
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 
-                List<AssetsTypeTree> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
+                List<AssetsTypeTreeLeaf> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
                 Report_AssetsFragment.this.assetsTypeProcessor = new TypeProcessor_Assets(assetsTypes);
 
                 List<AssetsValue> categoryAssets = new ArrayList<>();

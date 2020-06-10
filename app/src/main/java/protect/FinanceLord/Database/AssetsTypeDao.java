@@ -44,7 +44,7 @@ public interface AssetsTypeDao {
             "  LEFT JOIN AssetsType AS assetsThirdLevel ON assetsSecondLevelComposed.assetsSecondLevelName = assetsThirdLevel.assetsParentType) \n" +
             "AS assetsThirdLevelComposed LEFT JOIN AssetsType AS assetsFourthLevel \n" +
             "ON assetsThirdLevelComposed.assetsThirdLevelName = assetsFourthLevel.assetsParentType")
-    List<AssetsTypeTree> queryGroupedAssetsType();
+    List<AssetsTypeTreeLeaf> queryGroupedAssetsType();
 
     @Query("SELECT * FROM AssetsType")
     List<AssetsType> queryAllAssetsType();

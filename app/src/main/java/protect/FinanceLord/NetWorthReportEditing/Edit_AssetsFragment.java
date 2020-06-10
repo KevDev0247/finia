@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Database.AssetsTypeDao;
-import protect.FinanceLord.Database.AssetsTypeTree;
+import protect.FinanceLord.Database.AssetsTypeTreeLeaf;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
@@ -138,7 +138,7 @@ public class Edit_AssetsFragment extends Fragment {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                List<AssetsTypeTree> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
+                List<AssetsTypeTreeLeaf> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
 
                 Log.d("Edit_AFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                 for (AssetsValue assetsValue : assetsValues){

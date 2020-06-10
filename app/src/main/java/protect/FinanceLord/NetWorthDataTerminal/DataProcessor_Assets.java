@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import protect.FinanceLord.Database.AssetsTypeTree;
+import protect.FinanceLord.Database.AssetsTypeTreeLeaf;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.R;
 
 /**
- * The data processor to retrieve or insert any data or data collection from the Assets Value Tree Structure.
+ * The data processor to retrieve or insert any data or data collection from the AssetsValueTree Structure.
  * The idea behind this utility class is to provide methods to perform actions like read, edit, group, and delete on each node.
  * Methods for READ action : getAssetValue, getAllAssetsValues, getAssetsId.
  * Methods for EDIT action : setAssetValue, setAllAssetsValues.
@@ -22,9 +22,12 @@ import protect.FinanceLord.R;
  * Methods for DELETE action : clearAllAssetsValues.
  * Each node of the Assets Value Tree is an AssetsValue object containing information about the asset item
  * including id, name, time.
- * The structure of the Assets Value tree is mapped from the Assets Type Tree that was queried from the database entity AssetsType.
- * However, in this case, Assets Value tree is dependent on Assets Type Tree as Assets Type tree provides each node with
+ * The structure of the AssetsValueTree is mapped from the AssetsTypeTree that was queried from the database entity AssetsType.
+ * However, in this case, AssetsValueTree is dependent on AssetsTypeTree as Assets Type tree provides each node with
  * its relationship with the other nodes.
+ * The AssetsTypeTree is represented by a list of all the leaf nodes of the AssetsTypes, which are the all the items of assets.
+ * These leaf nodes contains the information of their parent node and their parent node. The list representation makes it more compatible
+ * with the SQLite database operations
  * When calculating the sum value of each parent node, the Depth-First Search Algorithm is used to traverse the tree.
  * The method to calculate the root value will call the methods to calculate the child nodes of the root and then their child nodes
  * until the leaf node is reached. The value of the leaf nodes will be returned for the summation of their parent node and other nodes
@@ -38,12 +41,12 @@ public class DataProcessor_Assets {
 
     private Context context;
     private Date currentTime;
-    private List<AssetsTypeTree> dataList;
+    private List<AssetsTypeTreeLeaf> assetsTypeTree;
     private List<AssetsValue> assetsValues;
 
-    public DataProcessor_Assets(List<AssetsTypeTree> dataList, List<AssetsValue> assetsValues, Date currentTime, Context context) {
+    public DataProcessor_Assets(List<AssetsTypeTreeLeaf> assetsTypeTree, List<AssetsValue> assetsValues, Date currentTime, Context context) {
         this.context = context;
-        this.dataList = dataList;
+        this.assetsTypeTree = assetsTypeTree;
         this.assetsValues = assetsValues;
         this.currentTime = currentTime;
     }
@@ -124,15 +127,15 @@ public class DataProcessor_Assets {
      * @return an integer value represents the id of the node in the data structure.
      */
     private int getAssetsId(String assetsName) {
-        for(AssetsTypeTree assetsTypeTree : dataList) {
-            if (assetsTypeTree.assetsFirstLevelName != null && assetsTypeTree.assetsFirstLevelName.equals(assetsName)) {
-                return assetsTypeTree.assetsFirstLevelId;
-            } else if (assetsTypeTree.assetsSecondLevelName != null && assetsTypeTree.assetsSecondLevelName.equals(assetsName)) {
-                return assetsTypeTree.assetsSecondLevelId;
-            } else if (assetsTypeTree.assetsThirdLevelName != null && assetsTypeTree.assetsThirdLevelName.equals(assetsName)) {
-                return assetsTypeTree.assetsThirdLevelId;
-            } else if (assetsTypeTree.assetsFourthLevelName != null && assetsTypeTree.assetsFourthLevelName.equals(assetsName)) {
-                return assetsTypeTree.assetsFourthLevelId;
+        for(AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+            if (assetsTypeTreeLeaf.assetsFirstLevelName != null && assetsTypeTreeLeaf.assetsFirstLevelName.equals(assetsName)) {
+                return assetsTypeTreeLeaf.assetsFirstLevelId;
+            } else if (assetsTypeTreeLeaf.assetsSecondLevelName != null && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)) {
+                return assetsTypeTreeLeaf.assetsSecondLevelId;
+            } else if (assetsTypeTreeLeaf.assetsThirdLevelName != null && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)) {
+                return assetsTypeTreeLeaf.assetsThirdLevelId;
+            } else if (assetsTypeTreeLeaf.assetsFourthLevelName != null && assetsTypeTreeLeaf.assetsFourthLevelName.equals(assetsName)) {
+                return assetsTypeTreeLeaf.assetsFourthLevelId;
             }
         }
         return 0;
@@ -153,43 +156,43 @@ public class DataProcessor_Assets {
 
         List assetsIDs = new ArrayList();
         if (context.getString(R.string.ownership_interest_name).equals(assetsName)) {
-            for (AssetsTypeTree assetsTypeTree : dataList) {
-                if (assetsTypeTree.assetsThirdLevelName != null
-                        && assetsTypeTree.assetsThirdLevelName.equals(assetsName)
-                        && assetsTypeTree.assetsFourthLevelName != null) {
-                    assetsIDs.add(assetsTypeTree.assetsFourthLevelId);
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+                if (assetsTypeTreeLeaf.assetsThirdLevelName != null
+                        && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
+                        && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
+                    assetsIDs.add(assetsTypeTreeLeaf.assetsFourthLevelId);
                 }
             }
         } else if (context.getString(R.string.retirement_accounts_name).equals(assetsName)) {
-            for (AssetsTypeTree assetsTypeTree : dataList) {
-                if (assetsTypeTree.assetsThirdLevelName != null
-                        && assetsTypeTree.assetsThirdLevelName.equals(assetsName)
-                        && assetsTypeTree.assetsFourthLevelName != null) {
-                    assetsIDs.add(assetsTypeTree.assetsFourthLevelId);
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+                if (assetsTypeTreeLeaf.assetsThirdLevelName != null
+                        && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
+                        && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
+                    assetsIDs.add(assetsTypeTreeLeaf.assetsFourthLevelId);
                 }
             }
         } else if (context.getString(R.string.taxable_accounts_name).equals(assetsName)) {
-            for (AssetsTypeTree assetsTypeTree : dataList) {
-                if (assetsTypeTree.assetsThirdLevelName != null
-                        && assetsTypeTree.assetsThirdLevelName.equals(assetsName)
-                        && assetsTypeTree.assetsFourthLevelName != null) {
-                    assetsIDs.add(assetsTypeTree.assetsFourthLevelId);
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+                if (assetsTypeTreeLeaf.assetsThirdLevelName != null
+                        && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
+                        && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
+                    assetsIDs.add(assetsTypeTreeLeaf.assetsFourthLevelId);
                 }
             }
         } else if (context.getString(R.string.liquid_assets_name).equals(assetsName)) {
-            for (AssetsTypeTree assetsTypeTree : dataList) {
-                if (assetsTypeTree.assetsSecondLevelName != null
-                        && assetsTypeTree.assetsSecondLevelName.equals(assetsName)
-                        && assetsTypeTree.assetsThirdLevelName != null) {
-                    assetsIDs.add(assetsTypeTree.assetsThirdLevelId);
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+                if (assetsTypeTreeLeaf.assetsSecondLevelName != null
+                        && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)
+                        && assetsTypeTreeLeaf.assetsThirdLevelName != null) {
+                    assetsIDs.add(assetsTypeTreeLeaf.assetsThirdLevelId);
                 }
             }
         } else if (context.getString(R.string.personal_assets_name).equals(assetsName)) {
-            for (AssetsTypeTree assetsTypeTree : dataList) {
-                if (assetsTypeTree.assetsSecondLevelName != null
-                        && assetsTypeTree.assetsSecondLevelName.equals(assetsName)
-                        && assetsTypeTree.assetsThirdLevelName != null) {
-                    assetsIDs.add(assetsTypeTree.assetsThirdLevelId);
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+                if (assetsTypeTreeLeaf.assetsSecondLevelName != null
+                        && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)
+                        && assetsTypeTreeLeaf.assetsThirdLevelName != null) {
+                    assetsIDs.add(assetsTypeTreeLeaf.assetsThirdLevelId);
                 }
             }
         }
