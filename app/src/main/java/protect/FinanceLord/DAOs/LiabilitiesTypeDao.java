@@ -40,7 +40,7 @@ public interface LiabilitiesTypeDao {
             "  AND liabilitiesFirstLevel.liabilitiesName = liabilitiesSecondLevel.liabilitiesParentType)" +
             "AS liabilitiesSecondLevelComposed LEFT JOIN LiabilitiesType AS liabilitiesThirdLevel \n" +
             "ON liabilitiesSecondLevelComposed.liabilitiesSecondLevelName = liabilitiesThirdLevel.liabilitiesParentType")
-    List<TypeTreeLeaf_Liabilities> queryGroupedLiabilitiesType();
+    List<TypeTreeLeaf_Liabilities> queryLiabilitiesTypeTreeAsList();
 
     @Query("SELECT * FROM LiabilitiesType")
     List<LiabilitiesType> queryAllLiabilities();

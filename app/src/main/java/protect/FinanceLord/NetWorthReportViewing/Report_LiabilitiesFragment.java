@@ -58,7 +58,7 @@ public class Report_LiabilitiesFragment extends Fragment {
                 List<LiabilitiesValue> categoryLiabilities = new ArrayList<>();
                 List<LiabilitiesValue> previousCategoryLiabilities = new ArrayList<>();
 
-                List<TypeTreeLeaf_Liabilities> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
+                List<TypeTreeLeaf_Liabilities> liabilitiesTypes = liabilitiesTypeDao.queryLiabilitiesTypeTreeAsList();
                 Report_LiabilitiesFragment.this.liabilitiesTypeProcessor = new TypeTreeProcessor_Liabilities(liabilitiesTypes);
 
                 LiabilitiesValue totalShortTermLiabilities = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), 12);

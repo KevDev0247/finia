@@ -38,16 +38,8 @@ public class Edit_LiabilitiesFragment extends Fragment {
     private ExpandableListView expandableListView;
 
     private LiabilitiesFragmentAdapter adapter;
-    private ValueTreeProcessor_Liabilities dataProcessor;
-    private TypeTreeProcessor_Liabilities typeProcessor;
-    private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
-        @Override
-        public void message(Date date) {
-            currentTime = date;
-            Log.d("Edit_LFragment","the user has selected date: " + currentTime);
-            initLiabilities();
-        }
-    };
+    private ValueTreeProcessor_Liabilities valueTreeProcessor;
+    private TypeTreeProcessor_Liabilities typeTreeProcessor;
 
     public Edit_LiabilitiesFragment(Date currentTime) {
         this.currentTime = currentTime;
@@ -79,7 +71,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
                         FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_LiabilitiesFragment.this.getContext());
                         LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
-                        for(LiabilitiesValue liabilitiesValueInProcessor: Edit_LiabilitiesFragment.this.dataProcessor.getAllLiabilitiesValues()) {
+                        for(LiabilitiesValue liabilitiesValueInProcessor: Edit_LiabilitiesFragment.this.valueTreeProcessor.getAllLiabilitiesValues()) {
 
                             liabilitiesValueInProcessor.setDate(currentTime.getTime());
                             Log.d("Edit_LFragment", "the time of the assets are set to " + currentTime);
@@ -95,7 +87,6 @@ public class Edit_LiabilitiesFragment extends Fragment {
                                 } else {
                                     Log.w("Edit_LFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
-
                             } else {
                                 liabilitiesValueDao.insertLiabilityValue(liabilitiesValueInProcessor);
                                 Log.d("Edit_LFragment", "insert time is " + new Date(liabilitiesValueInProcessor.getDate()));
@@ -106,7 +97,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
                         Log.d("Edit_LFragment", "current date: " + currentTime);
 
                         List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                        Edit_LiabilitiesFragment.this.dataProcessor.setAllLiabilitiesValues(liabilitiesValues);
+                        Edit_LiabilitiesFragment.this.valueTreeProcessor.setAllLiabilitiesValues(liabilitiesValues);
 
                         Log.d("Edit_LFragment", "Query assets values, " + liabilitiesValues);
 
@@ -117,8 +108,8 @@ public class Edit_LiabilitiesFragment extends Fragment {
                             }
                         });
 
-                        dataProcessor.insertOrUpdateParentLiabilities(liabilitiesValueDao);
-                        dataProcessor.clearAllLiabilitiesValues();
+                        valueTreeProcessor.insertOrUpdateParentLiabilities(liabilitiesValueDao);
+                        valueTreeProcessor.clearAllLiabilitiesValues();
 
                         Log.d("Edit_LFragment", "Liabilities committed!");
                     }
@@ -138,7 +129,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
                 List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                List<TypeTreeLeaf_Liabilities> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
+                List<TypeTreeLeaf_Liabilities> liabilitiesTypesTree = liabilitiesTypeDao.queryLiabilitiesTypeTreeAsList();
 
                 Log.d("Edit_LFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                 for (LiabilitiesValue liabilitiesValue : liabilitiesValues){
@@ -146,10 +137,10 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 }
                 Log.d("Edit_LFragment", "current date: " + currentTime);
 
-                Edit_LiabilitiesFragment.this.dataProcessor = new ValueTreeProcessor_Liabilities(liabilitiesTypes, liabilitiesValues, currentTime, getContext());
-                Edit_LiabilitiesFragment.this.typeProcessor = new TypeTreeProcessor_Liabilities(liabilitiesTypes);
-                adapter = new LiabilitiesFragmentAdapter(getContext(), dataProcessor, typeProcessor,1, getString(R.string.total_liabilities_name));
-                final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(typeProcessor.getSubGroup(null, 0), typeProcessor,0);
+                Edit_LiabilitiesFragment.this.valueTreeProcessor = new ValueTreeProcessor_Liabilities(liabilitiesTypesTree, liabilitiesValues, currentTime, getContext());
+                Edit_LiabilitiesFragment.this.typeTreeProcessor = new TypeTreeProcessor_Liabilities(liabilitiesTypesTree);
+                adapter = new LiabilitiesFragmentAdapter(getContext(), valueTreeProcessor, typeTreeProcessor,1, getString(R.string.total_liabilities_name));
+                final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(typeTreeProcessor.getSubGroup(null, 0), typeTreeProcessor,0);
                 Edit_LiabilitiesFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -162,7 +153,16 @@ public class Edit_LiabilitiesFragment extends Fragment {
         });
     }
 
-    public Date getQueryStartTime(){
+    private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
+        @Override
+        public void message(Date date) {
+            currentTime = date;
+            Log.d("Edit_LFragment","the user has selected date: " + currentTime);
+            initLiabilities();
+        }
+    };
+
+    private Date getQueryStartTime(){
         Date date;
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(currentTime);
@@ -173,7 +173,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
         return date;
     }
 
-    public Date getQueryEndTime(){
+    private Date getQueryEndTime(){
         Date date;
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(currentTime);

@@ -59,7 +59,7 @@ public class Report_AssetsFragment extends Fragment {
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 
-                List<TypeTreeLeaf_Assets> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
+                List<TypeTreeLeaf_Assets> assetsTypes = assetsTypeDao.queryAssetsTypeTreeAsList();
                 Report_AssetsFragment.this.assetsTypeProcessor = new TypeTreeProcessor_Assets(assetsTypes);
 
                 List<AssetsValue> categoryAssets = new ArrayList<>();

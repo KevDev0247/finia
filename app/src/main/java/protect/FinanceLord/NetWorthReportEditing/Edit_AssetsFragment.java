@@ -38,16 +38,8 @@ public class Edit_AssetsFragment extends Fragment {
     private ExpandableListView expandableListView;
 
     private AssetsFragmentAdapter adapter;
-    private ValueTreeProcessor_Assets dataProcessor;
-    private TypeTreeProcessor_Assets typeProcessor;
-    private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
-        @Override
-        public void message(Date date) {
-            currentTime = date;
-            Log.d("Edit_AFragment","the user has selected date: " + currentTime);
-            initAssets();
-        }
-    };
+    private ValueTreeProcessor_Assets valueTreeProcessor;
+    private TypeTreeProcessor_Assets typeTreeProcessor;
 
     public Edit_AssetsFragment(Date currentTime) {
         this.currentTime = currentTime;
@@ -79,7 +71,7 @@ public class Edit_AssetsFragment extends Fragment {
                         FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
                         AssetsValueDao assetsValueDao = database.assetsValueDao();
 
-                        for(AssetsValue assetsValueInProcessor: Edit_AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
+                        for(AssetsValue assetsValueInProcessor: Edit_AssetsFragment.this.valueTreeProcessor.getAllAssetsValues()) {
                             assetsValueInProcessor.setDate(currentTime.getTime());
                             Log.d("Edit_AFragment", "the time of the assets are set to " + currentTime);
 
@@ -94,7 +86,6 @@ public class Edit_AssetsFragment extends Fragment {
                                 } else {
                                     Log.w("Edit_AFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
-
                             } else {
                                 assetsValueDao.insertAssetValue(assetsValueInProcessor);
                                 Log.d("Edit_AFragment", "insert time is " + new Date(assetsValueInProcessor.getDate()));
@@ -105,7 +96,7 @@ public class Edit_AssetsFragment extends Fragment {
                         Log.d("Edit_AFragment", "current date: " + currentTime);
 
                         List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                        Edit_AssetsFragment.this.dataProcessor.setAllAssetsValues(assetsValues);
+                        Edit_AssetsFragment.this.valueTreeProcessor.setAllAssetsValues(assetsValues);
 
                         Log.d("Edit_AFragment", "Query assets values, " + assetsValues);
 
@@ -116,10 +107,9 @@ public class Edit_AssetsFragment extends Fragment {
                             }
                         });
 
-                        dataProcessor.insertOrUpdateParentAssets(assetsValueDao);
-                        dataProcessor.clearAllAssetsValues();
+                        valueTreeProcessor.insertOrUpdateParentAssets(assetsValueDao);
+                        valueTreeProcessor.clearAllAssetsValues();
 
-                        //cannot update on the page after insertion!
                         Log.d("Edit_AFragment", "Assets committed!");
                     }
                 });
@@ -129,7 +119,7 @@ public class Edit_AssetsFragment extends Fragment {
         return assetsFragmentView;
     }
 
-    public void initAssets() {
+    private void initAssets() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -138,7 +128,7 @@ public class Edit_AssetsFragment extends Fragment {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                List<TypeTreeLeaf_Assets> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
+                List<TypeTreeLeaf_Assets> assetsTypesTree = assetsTypeDao.queryAssetsTypeTreeAsList();
 
                 Log.d("Edit_AFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                 for (AssetsValue assetsValue : assetsValues){
@@ -146,10 +136,10 @@ public class Edit_AssetsFragment extends Fragment {
                 }
                 Log.d("Edit_AFragment", "current date: " + currentTime);
 
-                Edit_AssetsFragment.this.dataProcessor = new ValueTreeProcessor_Assets(assetsTypes, assetsValues, currentTime, getContext());
-                Edit_AssetsFragment.this.typeProcessor = new TypeTreeProcessor_Assets(assetsTypes);
-                adapter = new AssetsFragmentAdapter(getContext(), dataProcessor, typeProcessor,1, getString(R.string.total_assets_name));
-                final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(typeProcessor.getSubGroup(null, 0), typeProcessor, 0);
+                Edit_AssetsFragment.this.valueTreeProcessor = new ValueTreeProcessor_Assets(assetsTypesTree, assetsValues, currentTime, getContext());
+                Edit_AssetsFragment.this.typeTreeProcessor = new TypeTreeProcessor_Assets(assetsTypesTree);
+                adapter = new AssetsFragmentAdapter(getContext(), valueTreeProcessor, typeTreeProcessor,1, getString(R.string.total_assets_name));
+                final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(typeTreeProcessor.getSubGroup(null, 0), typeTreeProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -162,7 +152,16 @@ public class Edit_AssetsFragment extends Fragment {
         });
     }
 
-    public Date getQueryStartTime(){
+    private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
+        @Override
+        public void message(Date date) {
+            currentTime = date;
+            Log.d("Edit_AFragment","the user has selected date: " + currentTime);
+            initAssets();
+        }
+    };
+
+    private Date getQueryStartTime(){
         Date date;
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(currentTime);
@@ -173,7 +172,7 @@ public class Edit_AssetsFragment extends Fragment {
         return date;
     }
 
-    public Date getQueryEndTime(){
+    private Date getQueryEndTime(){
         Date date;
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(currentTime);
