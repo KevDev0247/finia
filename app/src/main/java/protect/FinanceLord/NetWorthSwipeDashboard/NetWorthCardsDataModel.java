@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthSwipeCardsUtils;
+package protect.FinanceLord.NetWorthSwipeDashboard;
 
 public class NetWorthCardsDataModel {
 

@@ -6,16 +6,16 @@ import android.widget.ExpandableListView;
 
 import java.util.List;
 
-import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
-import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
+import protect.FinanceLord.NetWorthDataStructureProcessors.DataCarrier_Assets;
+import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Assets;
 
 public class AssetsFragmentChildViewClickListener implements ExpandableListView.OnChildClickListener {
 
-    private TypeProcessor_Assets typeProcessor;
+    private TypeTreeProcessor_Assets typeProcessor;
     private List<DataCarrier_Assets> sectionDataSet;
     private int level;
 
-    public AssetsFragmentChildViewClickListener(List<DataCarrier_Assets> sectionDataSet, TypeProcessor_Assets typeProcessor, int level) {
+    public AssetsFragmentChildViewClickListener(List<DataCarrier_Assets> sectionDataSet, TypeTreeProcessor_Assets typeProcessor, int level) {
         this.sectionDataSet = sectionDataSet;
         this.typeProcessor = typeProcessor;
         this.level = level;

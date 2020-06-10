@@ -31,17 +31,17 @@ import protect.FinanceLord.Database.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
-import protect.FinanceLord.TransactionUtils.TransactionDatabaseUtils;
-import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
+import protect.FinanceLord.TransactionUtils.TransactionDatabaseHelper;
+import protect.FinanceLord.TransactionUtils.TransactionInputWidgets;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class TransactionEditActivity extends AppCompatActivity {
 
     private Date currentTime;
-    private TransactionDatabaseUtils databaseUtils;
+    private TransactionDatabaseHelper databaseUtils;
     private BudgetTypesViewModel viewModel;
     private SimpleDateFormat dateFormat;
-    private TransactionInputUtils inputUtils = new TransactionInputUtils();
+    private TransactionInputWidgets inputUtils = new TransactionInputWidgets();
 
     private static String TAG = "TransactionEditActivity";
 
@@ -123,7 +123,7 @@ public class TransactionEditActivity extends AppCompatActivity {
 
         setUpSaveAndDeleteButton();
 
-        databaseUtils = new TransactionDatabaseUtils(this, currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
+        databaseUtils = new TransactionDatabaseHelper(this, currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
     }
 
     private void setUpExpenseSection(List<BudgetsType> budgetsTypes) {
@@ -147,7 +147,7 @@ public class TransactionEditActivity extends AppCompatActivity {
 
         setUpSaveAndDeleteButton();
 
-        databaseUtils = new TransactionDatabaseUtils(this, currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
+        databaseUtils = new TransactionDatabaseHelper(this, currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
     }
 
     private void setUpCategoryAndDateInput(List<BudgetsType> budgetsTypes){

@@ -26,19 +26,19 @@ import protect.FinanceLord.R;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.TransactionAddActivity;
-import protect.FinanceLord.TransactionUtils.TransactionDatabaseUtils;
-import protect.FinanceLord.TransactionUtils.TransactionInputUtils;
+import protect.FinanceLord.TransactionUtils.TransactionDatabaseHelper;
+import protect.FinanceLord.TransactionUtils.TransactionInputWidgets;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class Add_TransactionsFragment extends Fragment {
 
     private String fragmentTag;
     private Date currentTime;
-    private TransactionDatabaseUtils databaseUtils;
+    private TransactionDatabaseHelper databaseUtils;
     private TransactionAddActivity transactionAddActivity;
     private List<BudgetsType> budgetsTypes;
     private List<String> typeNames = new ArrayList<>();
-    private TransactionInputUtils inputUtils = new TransactionInputUtils();
+    private TransactionInputWidgets inputUtils = new TransactionInputWidgets();
 
     private static final String TAG = "Edit_RevenuesFragment";
 
@@ -102,7 +102,7 @@ public class Add_TransactionsFragment extends Fragment {
         inputUtils.categoryInput.setAdapter(adapter);
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
-        databaseUtils = new TransactionDatabaseUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
+        databaseUtils = new TransactionDatabaseHelper(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +134,7 @@ public class Add_TransactionsFragment extends Fragment {
         inputUtils.categoryInput.setAdapter(adapter);
 
         BudgetTypesViewModel viewModel = ViewModelProviders.of(transactionAddActivity).get(BudgetTypesViewModel.class);
-        databaseUtils = new TransactionDatabaseUtils(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
+        databaseUtils = new TransactionDatabaseHelper(getContext(), currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
 
         inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override

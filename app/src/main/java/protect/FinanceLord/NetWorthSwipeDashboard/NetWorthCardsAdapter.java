@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthSwipeCardsUtils;
+package protect.FinanceLord.NetWorthSwipeDashboard;
 
 import android.content.Context;
 import android.util.Log;

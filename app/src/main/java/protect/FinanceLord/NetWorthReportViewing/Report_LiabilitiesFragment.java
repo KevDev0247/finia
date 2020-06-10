@@ -21,15 +21,15 @@ import protect.FinanceLord.Database.LiabilitiesTypeDao;
 import protect.FinanceLord.Database.LiabilitiesTypeTreeLeaf;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
-import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Liabilities;
-import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataStructureProcessors.DataCarrier_Liabilities;
+import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Liabilities;
 import protect.FinanceLord.R;
 
 public class Report_LiabilitiesFragment extends Fragment {
 
     private Date itemTime;
     private View contentView;
-    private TypeProcessor_Liabilities liabilitiesTypeProcessor;
+    private TypeTreeProcessor_Liabilities liabilitiesTypeProcessor;
     private ArrayList<NetWorthItemsDataModel> shortTermLiabilitiesDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> longTermLiabilitiesDataSource = new ArrayList<>();
 
@@ -59,7 +59,7 @@ public class Report_LiabilitiesFragment extends Fragment {
                 List<LiabilitiesValue> previousCategoryLiabilities = new ArrayList<>();
 
                 List<LiabilitiesTypeTreeLeaf> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
-                Report_LiabilitiesFragment.this.liabilitiesTypeProcessor = new TypeProcessor_Liabilities(liabilitiesTypes);
+                Report_LiabilitiesFragment.this.liabilitiesTypeProcessor = new TypeTreeProcessor_Liabilities(liabilitiesTypes);
 
                 LiabilitiesValue totalShortTermLiabilities = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), 12);
                 LiabilitiesValue totalLongTermLiabilities = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), 13);

@@ -1,15 +1,15 @@
-package protect.FinanceLord.NetWorthDataTerminal;
+package protect.FinanceLord.NetWorthDataStructureProcessors;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import protect.FinanceLord.Database.LiabilitiesTypeTreeLeaf;
 
-public class TypeProcessor_Liabilities {
+public class TypeTreeProcessor_Liabilities {
 
     private List<LiabilitiesTypeTreeLeaf> dataList;
 
-    public TypeProcessor_Liabilities(List<LiabilitiesTypeTreeLeaf> dataList){
+    public TypeTreeProcessor_Liabilities(List<LiabilitiesTypeTreeLeaf> dataList){
         this.dataList = dataList;
     }
 

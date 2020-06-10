@@ -22,15 +22,15 @@ import protect.FinanceLord.Database.AssetsTypeTreeLeaf;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
-import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
+import protect.FinanceLord.NetWorthDataStructureProcessors.DataCarrier_Assets;
+import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Assets;
 import protect.FinanceLord.R;
 
 public class Report_AssetsFragment extends Fragment {
 
     private Date itemTime;
     private View contentView;
-    private TypeProcessor_Assets assetsTypeProcessor;
+    private TypeTreeProcessor_Assets assetsTypeProcessor;
     private ArrayList<NetWorthItemsDataModel> liquidAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> personalAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> taxableAccountsDataSource = new ArrayList<>();
@@ -60,7 +60,7 @@ public class Report_AssetsFragment extends Fragment {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 
                 List<AssetsTypeTreeLeaf> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
-                Report_AssetsFragment.this.assetsTypeProcessor = new TypeProcessor_Assets(assetsTypes);
+                Report_AssetsFragment.this.assetsTypeProcessor = new TypeTreeProcessor_Assets(assetsTypes);
 
                 List<AssetsValue> categoryAssets = new ArrayList<>();
                 List<AssetsValue> previousCategoryAssets = new ArrayList<>();

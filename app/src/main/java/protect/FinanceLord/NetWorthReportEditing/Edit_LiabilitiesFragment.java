@@ -25,8 +25,8 @@ import protect.FinanceLord.Database.LiabilitiesTypeDao;
 import protect.FinanceLord.Database.LiabilitiesTypeTreeLeaf;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
-import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
-import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataStructureProcessors.ValueTreeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Liabilities;
 import protect.FinanceLord.NetWorthReportEditingActivity;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragmentAdapter;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragmentChildViewClickListener;
@@ -38,8 +38,8 @@ public class Edit_LiabilitiesFragment extends Fragment {
     private ExpandableListView expandableListView;
 
     private LiabilitiesFragmentAdapter adapter;
-    private DataProcessor_Liabilities dataProcessor;
-    private TypeProcessor_Liabilities typeProcessor;
+    private ValueTreeProcessor_Liabilities dataProcessor;
+    private TypeTreeProcessor_Liabilities typeProcessor;
     private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
         @Override
         public void message(Date date) {
@@ -146,8 +146,8 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 }
                 Log.d("Edit_LFragment", "current date: " + currentTime);
 
-                Edit_LiabilitiesFragment.this.dataProcessor = new DataProcessor_Liabilities(liabilitiesTypes, liabilitiesValues, currentTime, getContext());
-                Edit_LiabilitiesFragment.this.typeProcessor = new TypeProcessor_Liabilities(liabilitiesTypes);
+                Edit_LiabilitiesFragment.this.dataProcessor = new ValueTreeProcessor_Liabilities(liabilitiesTypes, liabilitiesValues, currentTime, getContext());
+                Edit_LiabilitiesFragment.this.typeProcessor = new TypeTreeProcessor_Liabilities(liabilitiesTypes);
                 adapter = new LiabilitiesFragmentAdapter(getContext(), dataProcessor, typeProcessor,1, getString(R.string.total_liabilities_name));
                 final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(typeProcessor.getSubGroup(null, 0), typeProcessor,0);
                 Edit_LiabilitiesFragment.this.getActivity().runOnUiThread(new Runnable() {

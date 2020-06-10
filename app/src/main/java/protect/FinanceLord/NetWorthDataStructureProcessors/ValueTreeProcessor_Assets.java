@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthDataTerminal;
+package protect.FinanceLord.NetWorthDataStructureProcessors;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -38,14 +38,14 @@ import protect.FinanceLord.R;
  * @version 2020.0609
  * @see AssetsValue
  */
-public class DataProcessor_Assets {
+public class ValueTreeProcessor_Assets {
 
     private Context context;
     private Date currentTime;
     private List<AssetsTypeTreeLeaf> assetsTypeTreeLeaves;
     private List<AssetsValue> assetsValues;
 
-    public DataProcessor_Assets(List<AssetsTypeTreeLeaf> assetsTypeTreeLeaves, List<AssetsValue> assetsValues, Date currentTime, Context context) {
+    public ValueTreeProcessor_Assets(List<AssetsTypeTreeLeaf> assetsTypeTreeLeaves, List<AssetsValue> assetsValues, Date currentTime, Context context) {
         this.context = context;
         this.assetsTypeTreeLeaves = assetsTypeTreeLeaves;
         this.assetsValues = assetsValues;

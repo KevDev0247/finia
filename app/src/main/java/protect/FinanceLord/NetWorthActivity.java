@@ -26,10 +26,10 @@ import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.Database.ReportItemInfo;
 import protect.FinanceLord.Database.ReportItemInfoDao;
-import protect.FinanceLord.NetWorthPastReportsListUtils.PastReportsAdapter;
-import protect.FinanceLord.NetWorthPastReportsListUtils.ReportItemsDataModel;
-import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsAdapter;
-import protect.FinanceLord.NetWorthSwipeCardsUtils.NetWorthCardsDataModel;
+import protect.FinanceLord.NetWorthPastReportsList.PastReportsAdapter;
+import protect.FinanceLord.NetWorthPastReportsList.ReportItemsDataModel;
+import protect.FinanceLord.NetWorthSwipeDashboard.NetWorthCardsAdapter;
+import protect.FinanceLord.NetWorthSwipeDashboard.NetWorthCardsDataModel;
 
 /**
  * The activity that provides a dashboard of the data of assets and liabilities as well as the list of reports.

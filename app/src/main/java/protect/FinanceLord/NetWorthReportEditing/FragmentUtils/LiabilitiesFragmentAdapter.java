@@ -17,21 +17,21 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import protect.FinanceLord.Database.LiabilitiesValue;
-import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
-import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Liabilities;
-import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataStructureProcessors.ValueTreeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataStructureProcessors.DataCarrier_Liabilities;
+import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Liabilities;
 import protect.FinanceLord.NetWorthReportEditing.NetWorthExpandableListView;
 import protect.FinanceLord.R;
 
 public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
-    private DataProcessor_Liabilities dataProcessor;
-    private TypeProcessor_Liabilities typeProcessor;
+    private ValueTreeProcessor_Liabilities dataProcessor;
+    private TypeTreeProcessor_Liabilities typeProcessor;
     private List<DataCarrier_Liabilities> sectionDataSet;
     private int level;
     private Context context;
 
-    public LiabilitiesFragmentAdapter(Context context, DataProcessor_Liabilities dataProcessor, TypeProcessor_Liabilities typeProcessor, int level, String parentSection) {
+    public LiabilitiesFragmentAdapter(Context context, ValueTreeProcessor_Liabilities dataProcessor, TypeTreeProcessor_Liabilities typeProcessor, int level, String parentSection) {
         this.context = context;
         this.dataProcessor = dataProcessor;
         this.typeProcessor = typeProcessor;

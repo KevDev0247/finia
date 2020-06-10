@@ -6,7 +6,7 @@ import android.widget.RelativeLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class TransactionInputUtils {
+public class TransactionInputWidgets {
     public TextInputLayout nameInputField;
     public TextInputLayout valueInputField;
     public TextInputLayout categoryInputField;

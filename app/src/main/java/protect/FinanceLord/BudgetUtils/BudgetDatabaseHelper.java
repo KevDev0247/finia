@@ -21,10 +21,10 @@ import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
-public class BudgetDatabaseUtils {
+public class BudgetDatabaseHelper {
 
     private Context context;
-    private BudgetInputUtils inputUtils;
+    private BudgetInputWidgets inputUtils;
     private List<BudgetsType> budgetsTypes;
     private BudgetTypesViewModel viewModel;
     private BudgetsValueDao budgetsValueDao;
@@ -37,7 +37,7 @@ public class BudgetDatabaseUtils {
 
     private String TAG = "BudgetDatabaseUtils";
 
-    public BudgetDatabaseUtils(Context context, BudgetInputUtils inputUtils, BudgetTypesViewModel viewModel, List<BudgetsType> budgetsTypes) {
+    public BudgetDatabaseHelper(Context context, BudgetInputWidgets inputUtils, BudgetTypesViewModel viewModel, List<BudgetsType> budgetsTypes) {
         this.context = context;
         this.inputUtils = inputUtils;
         this.viewModel = viewModel;

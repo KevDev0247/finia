@@ -16,22 +16,22 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Assets;
-import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Assets;
+import protect.FinanceLord.NetWorthDataStructureProcessors.DataCarrier_Assets;
+import protect.FinanceLord.NetWorthDataStructureProcessors.ValueTreeProcessor_Assets;
 import protect.FinanceLord.Database.AssetsValue;
-import protect.FinanceLord.NetWorthDataTerminal.TypeProcessor_Assets;
+import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Assets;
 import protect.FinanceLord.NetWorthReportEditing.NetWorthExpandableListView;
 import protect.FinanceLord.R;
 
 public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
-    private DataProcessor_Assets dataProcessor;
-    private TypeProcessor_Assets typeProcessor;
+    private ValueTreeProcessor_Assets dataProcessor;
+    private TypeTreeProcessor_Assets typeProcessor;
     private List<DataCarrier_Assets> sectionDataSet;
     private int level;
     private Context context;
 
-    public AssetsFragmentAdapter(Context context, DataProcessor_Assets dataProcessor, TypeProcessor_Assets typeProcessor, int level, String parentSection) {
+    public AssetsFragmentAdapter(Context context, ValueTreeProcessor_Assets dataProcessor, TypeTreeProcessor_Assets typeProcessor, int level, String parentSection) {
         this.context = context;
         this.dataProcessor = dataProcessor;
         this.typeProcessor = typeProcessor;

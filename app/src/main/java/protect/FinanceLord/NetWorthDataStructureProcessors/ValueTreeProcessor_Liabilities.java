@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthDataTerminal;
+package protect.FinanceLord.NetWorthDataStructureProcessors;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -38,14 +38,14 @@ import protect.FinanceLord.R;
  * @version 2020.0609
  * @see LiabilitiesValue
  */
-public class DataProcessor_Liabilities {
+public class ValueTreeProcessor_Liabilities {
 
     private Context context;
     private Date currentTime;
     private List<LiabilitiesTypeTreeLeaf> typeTreeLeaves;
     private List<LiabilitiesValue> liabilitiesValues;
 
-    public DataProcessor_Liabilities(List<LiabilitiesTypeTreeLeaf> typeTreeLeaves, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context) {
+    public ValueTreeProcessor_Liabilities(List<LiabilitiesTypeTreeLeaf> typeTreeLeaves, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context) {
         this.context = context;
         this.currentTime = currentTime;
         this.typeTreeLeaves = typeTreeLeaves;

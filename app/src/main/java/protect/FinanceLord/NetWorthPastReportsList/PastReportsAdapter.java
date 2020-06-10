@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthPastReportsListUtils;
+package protect.FinanceLord.NetWorthPastReportsList;
 
 import android.content.Context;
 import android.view.LayoutInflater;

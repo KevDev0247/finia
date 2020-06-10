@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthPastReportsListUtils;
+package protect.FinanceLord.NetWorthPastReportsList;
 
 public class ReportItemsDataModel {
     public String time;

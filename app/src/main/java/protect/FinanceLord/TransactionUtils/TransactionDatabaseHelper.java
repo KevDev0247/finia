@@ -20,12 +20,12 @@ import protect.FinanceLord.R;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
-public class TransactionDatabaseUtils {
+public class TransactionDatabaseHelper {
 
     private Context context;
     private String TAG;
     private Date currentTime;
-    private TransactionInputUtils inputUtils;
+    private TransactionInputWidgets inputUtils;
     private List<BudgetsType> budgetsTypes;
     private BudgetTypesViewModel viewModel;
     private TransactionsDao transactionsDao;
@@ -36,7 +36,7 @@ public class TransactionDatabaseUtils {
     private boolean mInsert;
     private boolean mUpdate;
 
-    public TransactionDatabaseUtils(Context context, Date currentTime, TransactionInputUtils inputUtils, List<BudgetsType> budgetsTypes, BudgetTypesViewModel viewModel, String TAG) {
+    public TransactionDatabaseHelper(Context context, Date currentTime, TransactionInputWidgets inputUtils, List<BudgetsType> budgetsTypes, BudgetTypesViewModel viewModel, String TAG) {
         this.context = context;
         this.currentTime = currentTime;
         this.inputUtils = inputUtils;

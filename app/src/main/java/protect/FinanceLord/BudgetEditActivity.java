@@ -22,8 +22,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import protect.FinanceLord.BudgetUtils.BudgetDatabaseUtils;
-import protect.FinanceLord.BudgetUtils.BudgetInputUtils;
+import protect.FinanceLord.BudgetUtils.BudgetDatabaseHelper;
+import protect.FinanceLord.BudgetUtils.BudgetInputWidgets;
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
@@ -32,9 +32,9 @@ import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
 public class BudgetEditActivity extends AppCompatActivity {
 
-    private BudgetDatabaseUtils databaseUtils;
+    private BudgetDatabaseHelper databaseUtils;
     private BudgetTypesViewModel viewModel;
-    private BudgetInputUtils inputUtils = new BudgetInputUtils();
+    private BudgetInputWidgets inputUtils = new BudgetInputWidgets();
 
     private String TAG = "BudgetEditActivity";
 
@@ -81,7 +81,7 @@ public class BudgetEditActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.categories_dropdown, typeNames);
         inputUtils.nameInput.setAdapter(adapter);
 
-        databaseUtils = new BudgetDatabaseUtils(this, inputUtils, viewModel, getIntent().<BudgetsType>getParcelableArrayListExtra(getString(R.string.budget_categories_key)));
+        databaseUtils = new BudgetDatabaseHelper(this, inputUtils, viewModel, getIntent().<BudgetsType>getParcelableArrayListExtra(getString(R.string.budget_categories_key)));
 
         inputUtils.startDateInput.setOnClickListener(new View.OnClickListener() {
             @Override
