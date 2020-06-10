@@ -20,14 +20,15 @@ import protect.FinanceLord.R;
  * Methods for EDIT action : setAssetValue, setAllAssetsValues.
  * Methods for GROUP action : getAssetsChildrenNodeIDs.
  * Methods for DELETE action : clearAllAssetsValues.
- * Each node of the Assets Value Tree is an AssetsValue object containing information about the asset item
- * including id, name, time.
+ * Each node of the Assets Value Tree is an AssetsValue object containing information about the asset item including id, name, time.
  * The structure of the AssetsValueTree is mapped from the AssetsTypeTree that was queried from the database entity AssetsType.
  * However, in this case, AssetsValueTree is dependent on AssetsTypeTree as Assets Type tree provides each node with
  * its relationship with the other nodes.
  * The AssetsTypeTree is represented by a list of all the leaf nodes of the AssetsTypes, which are the all the items of assets.
  * These leaf nodes contains the information of their parent node and their parent node. The list representation makes it more compatible
- * with the SQLite database operations
+ * with the SQLite database operations.
+ * The date object currentTime refers to the current time associated with the data source --- list of AssetsValue objects.
+ * The data source of this processor is the list of AssetsValue objects.
  * When calculating the sum value of each parent node, the Depth-First Search Algorithm is used to traverse the tree.
  * The method to calculate the root value will call the methods to calculate the child nodes of the root and then their child nodes
  * until the leaf node is reached. The value of the leaf nodes will be returned for the summation of their parent node and other nodes
@@ -41,18 +42,18 @@ public class DataProcessor_Assets {
 
     private Context context;
     private Date currentTime;
-    private List<AssetsTypeTreeLeaf> assetsTypeTree;
+    private List<AssetsTypeTreeLeaf> assetsTypeTreeLeaves;
     private List<AssetsValue> assetsValues;
 
-    public DataProcessor_Assets(List<AssetsTypeTreeLeaf> assetsTypeTree, List<AssetsValue> assetsValues, Date currentTime, Context context) {
+    public DataProcessor_Assets(List<AssetsTypeTreeLeaf> assetsTypeTreeLeaves, List<AssetsValue> assetsValues, Date currentTime, Context context) {
         this.context = context;
-        this.assetsTypeTree = assetsTypeTree;
+        this.assetsTypeTreeLeaves = assetsTypeTreeLeaves;
         this.assetsValues = assetsValues;
         this.currentTime = currentTime;
     }
 
     /**
-     * Retrieve the AssetValue object.
+     * Retrieve an AssetsValue object of an individual node.
      *
      * @author Owner  Kevin Zhijun Wang
      * @param assetsId the id of the AssetsValue object
@@ -69,7 +70,7 @@ public class DataProcessor_Assets {
     }
 
     /**
-     * Set the values of some parameters of the AssetsValue object and push the object into the list.
+     * Assign values to some parameters of the AssetsValue object and push the object into the list.
      *
      * @author Owner  Kevin Zhijun Wang
      * @param assetId the id of the AssetsValue object
@@ -88,7 +89,7 @@ public class DataProcessor_Assets {
     }
 
     /**
-     * Retrieve all AssetsValue objects.
+     * Retrieve all AssetsValue objects from the data resource list -- assetsValues.
      *
      * @author Owner  Kevin Zhijun Wang
      * @return List of AssetsValue objects
@@ -103,14 +104,14 @@ public class DataProcessor_Assets {
      * Processing data in this class refers to calculation and retrieve certain groups of data.
      *
      * @author Owner  Kevin Zhijun Wang
-     * @param assetsValues the list of AssetsValue objects
+     * @param assetsValues the list of AssetsValue objects representing an updated data source list
      */
     public void setAllAssetsValues(List<AssetsValue> assetsValues) {
         this.assetsValues = assetsValues;
     }
 
     /**
-     * Clear the data resource list.
+     * Clear the data resource list assetsValues.
      * Similar to clear the cache.
      *
      * @author Owner  Kevin Zhijun Wang
@@ -120,14 +121,14 @@ public class DataProcessor_Assets {
     }
 
     /**
-     * Retrieve the id of the node in the Tree data structure that stores the items or categories.
+     * Retrieve the id of the node in the Type Tree data structure.
      *
      * @author Owner  Kevin Zhijun Wang
      * @param assetsName the name of the asset category or item
      * @return an integer value represents the id of the node in the data structure.
      */
     private int getAssetsId(String assetsName) {
-        for(AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+        for(AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
             if (assetsTypeTreeLeaf.assetsFirstLevelName != null && assetsTypeTreeLeaf.assetsFirstLevelName.equals(assetsName)) {
                 return assetsTypeTreeLeaf.assetsFirstLevelId;
             } else if (assetsTypeTreeLeaf.assetsSecondLevelName != null && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)) {
@@ -156,7 +157,7 @@ public class DataProcessor_Assets {
 
         List assetsIDs = new ArrayList();
         if (context.getString(R.string.ownership_interest_name).equals(assetsName)) {
-            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
                 if (assetsTypeTreeLeaf.assetsThirdLevelName != null
                         && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
@@ -164,7 +165,7 @@ public class DataProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.retirement_accounts_name).equals(assetsName)) {
-            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
                 if (assetsTypeTreeLeaf.assetsThirdLevelName != null
                         && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
@@ -172,7 +173,7 @@ public class DataProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.taxable_accounts_name).equals(assetsName)) {
-            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
                 if (assetsTypeTreeLeaf.assetsThirdLevelName != null
                         && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
@@ -180,7 +181,7 @@ public class DataProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.liquid_assets_name).equals(assetsName)) {
-            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
                 if (assetsTypeTreeLeaf.assetsSecondLevelName != null
                         && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsThirdLevelName != null) {
@@ -188,7 +189,7 @@ public class DataProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.personal_assets_name).equals(assetsName)) {
-            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
                 if (assetsTypeTreeLeaf.assetsSecondLevelName != null
                         && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsThirdLevelName != null) {
@@ -382,7 +383,7 @@ public class DataProcessor_Assets {
      * Insert or update the parent node AssetsValue.
      * First, the parent node values are calculated through calling the corresponding calculation methods.
      * Then, retrieve the object of each node and set the values to the parameters of AssetsValue.
-     * Finally, insert or update the object AssetsValue
+     * Finally, insert or update the object AssetsValue.
      *
      * @author Owner  Kevin Zhijun Wang
      * @param assetsValueDao the data access object to insert or update AssetsValue object
@@ -404,7 +405,7 @@ public class DataProcessor_Assets {
         int retirementAccountAssetsId = this.getAssetsId(context.getString(R.string.retirement_accounts_name));
         int ownershipInterestsAssetsId = this.getAssetsId(context.getString(R.string.ownership_interest_name));
 
-        /* total AssetsValue */
+        /* total Assets Value */
         AssetsValue totalAssetsValue = this.getAssetValue(totalAssetsId);
         if (totalAssetsValue != null) {
             totalAssetsValue.setAssetsValue(totalAssets);
@@ -426,7 +427,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(totalAssetsValue);
         }
 
-        /* liquid AssetsValue */
+        /* liquid assets value */
         AssetsValue liquidAssetsValue = this.getAssetValue(liquidAssetsId);
         if (liquidAssetsValue != null) {
             liquidAssetsValue.setAssetsValue(totalLiquidAssets);
@@ -448,7 +449,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(liquidAssetsValue);
         }
 
-        /* invested AssetsValue */
+        /* invested assets value */
         AssetsValue totalInvestedAssetsValue = this.getAssetValue(investedAssetsId);
         if (totalInvestedAssetsValue != null) {
             totalInvestedAssetsValue.setAssetsValue(totalInvestedAssets);
@@ -470,7 +471,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(totalInvestedAssetsValue);
         }
 
-        /* invested AssetsValue*/
+        /* personal assets value*/
         AssetsValue personalAssetsValue = this.getAssetValue(personalAssetsId);
         if (personalAssetsValue != null) {
             personalAssetsValue.setAssetsValue(totalPersonalAssets);
@@ -492,7 +493,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(personalAssetsValue);
         }
 
-        /* taxable accounts AssetsValue */
+        /* taxable accounts assets value */
         AssetsValue taxableAccountsValue = this.getAssetValue(taxableAccountAssetsId);
         if (taxableAccountsValue != null) {
             taxableAccountsValue.setAssetsValue(totalTaxableAccounts);
@@ -514,7 +515,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(taxableAccountsValue);
         }
 
-        /* retirement accounts AssetsValue */
+        /* retirement accounts assets value */
         AssetsValue retirementAccountValue = this.getAssetValue(retirementAccountAssetsId);
         if (retirementAccountValue != null) {
             retirementAccountValue.setAssetsValue(totalRetirementAccounts);
@@ -536,7 +537,7 @@ public class DataProcessor_Assets {
             assetsValueDao.insertAssetValue(retirementAccountValue);
         }
 
-        /* ownership interests AssetsValue */
+        /* ownership interests assets value */
         AssetsValue ownershipInterestsValue = this.getAssetValue(ownershipInterestsAssetsId);
         if (ownershipInterestsValue != null) {
             ownershipInterestsValue.setAssetsValue(totalOwnershipInterests);

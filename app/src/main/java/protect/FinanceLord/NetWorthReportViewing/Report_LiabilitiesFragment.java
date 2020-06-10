@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesTypeDao;
-import protect.FinanceLord.Database.LiabilitiesTypeTree;
+import protect.FinanceLord.Database.LiabilitiesTypeTreeLeaf;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthDataTerminal.DataCarrier_Liabilities;
@@ -58,7 +58,7 @@ public class Report_LiabilitiesFragment extends Fragment {
                 List<LiabilitiesValue> categoryLiabilities = new ArrayList<>();
                 List<LiabilitiesValue> previousCategoryLiabilities = new ArrayList<>();
 
-                List<LiabilitiesTypeTree> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
+                List<LiabilitiesTypeTreeLeaf> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
                 Report_LiabilitiesFragment.this.liabilitiesTypeProcessor = new TypeProcessor_Liabilities(liabilitiesTypes);
 
                 LiabilitiesValue totalShortTermLiabilities = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), 12);

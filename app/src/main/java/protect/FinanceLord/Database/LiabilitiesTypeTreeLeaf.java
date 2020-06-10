@@ -1,6 +1,6 @@
 package protect.FinanceLord.Database;
 
-public class LiabilitiesTypeTree {
+public class LiabilitiesTypeTreeLeaf {
 
     public int liabilitiesFirstLevelId;
     public String liabilitiesFirstLevelName;
