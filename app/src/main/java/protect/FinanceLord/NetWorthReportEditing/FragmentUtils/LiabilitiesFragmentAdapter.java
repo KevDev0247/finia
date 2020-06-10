@@ -96,7 +96,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
             DataCarrier_Liabilities dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.liabilitiesValueInput);
 
-            LiabilitiesValue liabilitiesValue = dataProcessor.getLiabilitiesValue(dataCarrier.liabilitiesId);
+            LiabilitiesValue liabilitiesValue = dataProcessor.getLiabilityValue(dataCarrier.liabilitiesId);
             if (liabilitiesValue != null) {
                 DecimalFormat decimalFormat = new DecimalFormat();
                 String strValue = decimalFormat.format(liabilitiesValue.getLiabilitiesValue());

@@ -117,7 +117,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
                             }
                         });
 
-                        dataProcessor.calculateAndInsertParentLiabilities(liabilitiesValueDao);
+                        dataProcessor.insertOrUpdateParentLiabilities(liabilitiesValueDao);
                         dataProcessor.clearAllLiabilitiesValues();
 
                         Log.d("Edit_LFragment", "Liabilities committed!");

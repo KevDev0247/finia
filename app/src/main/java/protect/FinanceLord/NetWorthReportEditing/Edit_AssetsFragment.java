@@ -80,7 +80,6 @@ public class Edit_AssetsFragment extends Fragment {
                         AssetsValueDao assetsValueDao = database.assetsValueDao();
 
                         for(AssetsValue assetsValueInProcessor: Edit_AssetsFragment.this.dataProcessor.getAllAssetsValues()) {
-                            // added to set the time picked by user
                             assetsValueInProcessor.setDate(currentTime.getTime());
                             Log.d("Edit_AFragment", "the time of the assets are set to " + currentTime);
 
@@ -117,7 +116,7 @@ public class Edit_AssetsFragment extends Fragment {
                             }
                         });
 
-                        dataProcessor.calculateAndInsertParentAssets(assetsValueDao);
+                        dataProcessor.insertOrUpdateParentAssets(assetsValueDao);
                         dataProcessor.clearAllAssetsValues();
 
                         //cannot update on the page after insertion!
