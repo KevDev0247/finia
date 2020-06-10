@@ -6,8 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,15 +21,15 @@ import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.DAOs.AssetsTypeDao;
-import protect.FinanceLord.NetWorthDataStructure.TypeTreeLeaf_Assets;
-import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.DAOs.AssetsValueDao;
+import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.NetWorthDataStructure.ValueTreeProcessor_Assets;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeLeaf_Assets;
 import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Assets;
-import protect.FinanceLord.NetWorthReportEditingActivity;
+import protect.FinanceLord.NetWorthDataStructure.ValueTreeProcessor_Assets;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.AssetsFragmentChildViewClickListener;
+import protect.FinanceLord.NetWorthReportEditingActivity;
 import protect.FinanceLord.R;
 
 public class Edit_AssetsFragment extends Fragment {
@@ -58,7 +58,7 @@ public class Edit_AssetsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View assetsFragmentView = inflater.inflate(R.layout.fragment_edit_assets, null);
         expandableListView = assetsFragmentView.findViewById(R.id.assets_list_view);
-        Button commitButton = assetsFragmentView.findViewById(R.id.assets_commit_button);
+        RelativeLayout commitButton = assetsFragmentView.findViewById(R.id.assets_commit_button);
 
         initializeAssets();
 
@@ -67,7 +67,7 @@ public class Edit_AssetsFragment extends Fragment {
         return assetsFragmentView;
     }
 
-    private void setUpCommitButton(Button commitButton) {
+    private void setUpCommitButton(RelativeLayout commitButton) {
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

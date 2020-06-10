@@ -19,19 +19,30 @@
 
     </ExpandableListView>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="0dp"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:paddingTop="10dp"
+        android:paddingBottom="30dp">
 
-        <Button
+        <RelativeLayout
             android:id="@+id/liabilities_commit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Commit"/>
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/net_worth_commit_button">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/commit"
+                android:textColor="#ffffff"
+                android:textSize="20sp"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

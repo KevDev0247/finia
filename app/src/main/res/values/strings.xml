@@ -24,6 +24,7 @@
     <string name="page_title">Page Title</string>
     <string name="all">All</string>
     <string name="delete">Delete</string>
+    <string name="commit">Commit</string>
     <string name="label_name">Label Name</string>
     <string name="items">Items</string>
     <string name="usage">Usage</string>

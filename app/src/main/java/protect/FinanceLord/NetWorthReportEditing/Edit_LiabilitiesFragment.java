@@ -6,8 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,16 +20,16 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Communicators.DateCommunicator;
-import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.DAOs.LiabilitiesTypeDao;
-import protect.FinanceLord.NetWorthDataStructure.TypeTreeLeaf_Liabilities;
-import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.DAOs.LiabilitiesValueDao;
-import protect.FinanceLord.NetWorthDataStructure.ValueTreeProcessor_Liabilities;
+import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.Database.LiabilitiesValue;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeLeaf_Liabilities;
 import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Liabilities;
-import protect.FinanceLord.NetWorthReportEditingActivity;
+import protect.FinanceLord.NetWorthDataStructure.ValueTreeProcessor_Liabilities;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragmentAdapter;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragmentChildViewClickListener;
+import protect.FinanceLord.NetWorthReportEditingActivity;
 import protect.FinanceLord.R;
 
 public class Edit_LiabilitiesFragment extends Fragment {
@@ -48,7 +48,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof NetWorthReportEditingActivity){
+        if (context instanceof NetWorthReportEditingActivity) {
             NetWorthReportEditingActivity activity = (NetWorthReportEditingActivity) context;
             activity.toEditLiabilitiesFragmentCommunicator = fromActivityCommunicator;
         }
@@ -58,7 +58,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View liabilitiesFragmentView = inflater.inflate(R.layout.fragment_edit_liabilities, null);
         expandableListView = liabilitiesFragmentView.findViewById(R.id.liabilities_list_view);
-        Button commitButton = liabilitiesFragmentView.findViewById(R.id.liabilities_commit_button);
+        RelativeLayout commitButton = liabilitiesFragmentView.findViewById(R.id.liabilities_commit_button);
 
         initializeLiabilities();
 
@@ -67,7 +67,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
         return liabilitiesFragmentView;
     }
 
-    private void setUpCommitButton(Button commitButton) {
+    private void setUpCommitButton(RelativeLayout commitButton) {
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
