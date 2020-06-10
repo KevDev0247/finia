@@ -60,8 +60,14 @@ public class Edit_AssetsFragment extends Fragment {
         expandableListView = assetsFragmentView.findViewById(R.id.assets_list_view);
         Button commitButton = assetsFragmentView.findViewById(R.id.assets_commit_button);
 
-        initAssets();
+        initializeAssets();
 
+        setUpCommitButton(commitButton);
+
+        return assetsFragmentView;
+    }
+
+    private void setUpCommitButton(Button commitButton) {
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,11 +121,9 @@ public class Edit_AssetsFragment extends Fragment {
                 });
             }
         });
-
-        return assetsFragmentView;
     }
 
-    private void initAssets() {
+    private void initializeAssets() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -157,7 +161,7 @@ public class Edit_AssetsFragment extends Fragment {
         public void message(Date date) {
             currentTime = date;
             Log.d("Edit_AFragment","the user has selected date: " + currentTime);
-            initAssets();
+            initializeAssets();
         }
     };
 

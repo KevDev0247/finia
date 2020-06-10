@@ -60,8 +60,14 @@ public class Edit_LiabilitiesFragment extends Fragment {
         expandableListView = liabilitiesFragmentView.findViewById(R.id.liabilities_list_view);
         Button commitButton = liabilitiesFragmentView.findViewById(R.id.liabilities_commit_button);
 
-        initLiabilities();
+        initializeLiabilities();
 
+        setUpCommitButton(commitButton);
+
+        return liabilitiesFragmentView;
+    }
+
+    private void setUpCommitButton(Button commitButton) {
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,11 +122,9 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 });
             }
         });
-
-        return liabilitiesFragmentView;
     }
 
-    private void initLiabilities() {
+    private void initializeLiabilities() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -158,7 +162,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
         public void message(Date date) {
             currentTime = date;
             Log.d("Edit_LFragment","the user has selected date: " + currentTime);
-            initLiabilities();
+            initializeLiabilities();
         }
     };
 
