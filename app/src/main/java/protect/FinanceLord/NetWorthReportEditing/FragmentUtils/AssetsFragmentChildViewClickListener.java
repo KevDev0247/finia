@@ -6,16 +6,16 @@ import android.widget.ExpandableListView;
 
 import java.util.List;
 
-import protect.FinanceLord.NetWorthDataStructureProcessors.DataCarrier_Assets;
-import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Assets;
+import protect.FinanceLord.NetWorthDataStructure.NodeContainer_Assets;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Assets;
 
 public class AssetsFragmentChildViewClickListener implements ExpandableListView.OnChildClickListener {
 
     private TypeTreeProcessor_Assets typeProcessor;
-    private List<DataCarrier_Assets> sectionDataSet;
+    private List<NodeContainer_Assets> sectionDataSet;
     private int level;
 
-    public AssetsFragmentChildViewClickListener(List<DataCarrier_Assets> sectionDataSet, TypeTreeProcessor_Assets typeProcessor, int level) {
+    public AssetsFragmentChildViewClickListener(List<NodeContainer_Assets> sectionDataSet, TypeTreeProcessor_Assets typeProcessor, int level) {
         this.sectionDataSet = sectionDataSet;
         this.typeProcessor = typeProcessor;
         this.level = level;
@@ -23,8 +23,8 @@ public class AssetsFragmentChildViewClickListener implements ExpandableListView.
 
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-        DataCarrier_Assets sectionItem = sectionDataSet.get(i);
-        List<DataCarrier_Assets> childSection = typeProcessor.getSubGroup(sectionItem.assetsTypeName, level + 1);
+        NodeContainer_Assets sectionItem = sectionDataSet.get(i);
+        List<NodeContainer_Assets> childSection = typeProcessor.getSubGroup(sectionItem.assetsTypeName, level + 1);
 
         Log.d("Edit_AFragment", "child Clicked: " + childSection.get(i1).assetsTypeName + ", id in DB: " + childSection.get(i1).assetsTypeId);
         return true;

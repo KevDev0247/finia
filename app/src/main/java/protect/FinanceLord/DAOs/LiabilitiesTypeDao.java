@@ -1,10 +1,13 @@
-package protect.FinanceLord.Database;
+package protect.FinanceLord.DAOs;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
+
+import protect.FinanceLord.Database.LiabilitiesType;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeLeaf_Liabilities;
 
 @Dao
 public interface LiabilitiesTypeDao {
@@ -37,7 +40,7 @@ public interface LiabilitiesTypeDao {
             "  AND liabilitiesFirstLevel.liabilitiesName = liabilitiesSecondLevel.liabilitiesParentType)" +
             "AS liabilitiesSecondLevelComposed LEFT JOIN LiabilitiesType AS liabilitiesThirdLevel \n" +
             "ON liabilitiesSecondLevelComposed.liabilitiesSecondLevelName = liabilitiesThirdLevel.liabilitiesParentType")
-    List<LiabilitiesTypeTreeLeaf> queryGroupedLiabilitiesType();
+    List<TypeTreeLeaf_Liabilities> queryGroupedLiabilitiesType();
 
     @Query("SELECT * FROM LiabilitiesType")
     List<LiabilitiesType> queryAllLiabilities();

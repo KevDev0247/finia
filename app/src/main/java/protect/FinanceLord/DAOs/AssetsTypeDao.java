@@ -1,10 +1,13 @@
-package protect.FinanceLord.Database;
+package protect.FinanceLord.DAOs;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
+
+import protect.FinanceLord.Database.AssetsType;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeLeaf_Assets;
 
 @Dao
 public interface AssetsTypeDao {
@@ -44,7 +47,7 @@ public interface AssetsTypeDao {
             "  LEFT JOIN AssetsType AS assetsThirdLevel ON assetsSecondLevelComposed.assetsSecondLevelName = assetsThirdLevel.assetsParentType) \n" +
             "AS assetsThirdLevelComposed LEFT JOIN AssetsType AS assetsFourthLevel \n" +
             "ON assetsThirdLevelComposed.assetsThirdLevelName = assetsFourthLevel.assetsParentType")
-    List<AssetsTypeTreeLeaf> queryGroupedAssetsType();
+    List<TypeTreeLeaf_Assets> queryGroupedAssetsType();
 
     @Query("SELECT * FROM AssetsType")
     List<AssetsType> queryAllAssetsType();

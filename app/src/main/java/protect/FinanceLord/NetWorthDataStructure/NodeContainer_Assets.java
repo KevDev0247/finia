@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthDataStructureProcessors;
+package protect.FinanceLord.NetWorthDataStructure;
 
 /**
  * A data carrier to carry assets type data in AssetsAdapter and AssetsTypeTreeProcessor.
@@ -11,13 +11,13 @@ package protect.FinanceLord.NetWorthDataStructureProcessors;
  * @author Owner  Kevin Zhijun Wang
  * @version 2020.0609
  */
-public class DataCarrier_Assets {
+public class NodeContainer_Assets {
 
     public String assetsTypeName;
     public int assetsTypeId;
     public int level;
 
-    DataCarrier_Assets(String assetsTypeName, int assetsTypeId, int level) {
+    NodeContainer_Assets(String assetsTypeName, int assetsTypeId, int level) {
         this.assetsTypeName = assetsTypeName;
         this.assetsTypeId = assetsTypeId;
         this.level = level;

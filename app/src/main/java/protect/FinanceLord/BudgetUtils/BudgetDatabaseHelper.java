@@ -14,9 +14,9 @@ import java.util.Locale;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.BudgetsType;
-import protect.FinanceLord.Database.BudgetsTypeDao;
+import protect.FinanceLord.DAOs.BudgetsTypeDao;
 import protect.FinanceLord.Database.BudgetsValue;
-import protect.FinanceLord.Database.BudgetsValueDao;
+import protect.FinanceLord.DAOs.BudgetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;

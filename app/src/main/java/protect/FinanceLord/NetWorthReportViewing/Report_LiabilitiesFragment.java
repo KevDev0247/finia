@@ -17,12 +17,12 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.Database.LiabilitiesTypeDao;
-import protect.FinanceLord.Database.LiabilitiesTypeTreeLeaf;
+import protect.FinanceLord.DAOs.LiabilitiesTypeDao;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeLeaf_Liabilities;
 import protect.FinanceLord.Database.LiabilitiesValue;
-import protect.FinanceLord.Database.LiabilitiesValueDao;
-import protect.FinanceLord.NetWorthDataStructureProcessors.DataCarrier_Liabilities;
-import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Liabilities;
+import protect.FinanceLord.DAOs.LiabilitiesValueDao;
+import protect.FinanceLord.NetWorthDataStructure.NodeContainer_Liabilities;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Liabilities;
 import protect.FinanceLord.R;
 
 public class Report_LiabilitiesFragment extends Fragment {
@@ -58,7 +58,7 @@ public class Report_LiabilitiesFragment extends Fragment {
                 List<LiabilitiesValue> categoryLiabilities = new ArrayList<>();
                 List<LiabilitiesValue> previousCategoryLiabilities = new ArrayList<>();
 
-                List<LiabilitiesTypeTreeLeaf> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
+                List<TypeTreeLeaf_Liabilities> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
                 Report_LiabilitiesFragment.this.liabilitiesTypeProcessor = new TypeTreeProcessor_Liabilities(liabilitiesTypes);
 
                 LiabilitiesValue totalShortTermLiabilities = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), 12);
@@ -79,10 +79,10 @@ public class Report_LiabilitiesFragment extends Fragment {
     }
 
     public void populateDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime, final List<LiabilitiesValue> categoryLiabilities, final List<LiabilitiesValue> previousCategoryLiabilities) {
-        List<DataCarrier_Liabilities> shortTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.short_term_liabilities_name),2);
-        List<DataCarrier_Liabilities> longTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.long_term_liabilities_name), 2);
+        List<NodeContainer_Liabilities> shortTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.short_term_liabilities_name),2);
+        List<NodeContainer_Liabilities> longTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.long_term_liabilities_name), 2);
 
-        for (DataCarrier_Liabilities dataCarrier : shortTermLiabilitiesTypes) {
+        for (NodeContainer_Liabilities dataCarrier : shortTermLiabilitiesTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisLiabilityValue = getString(R.string.no_data_initialization);
             LiabilitiesValue shortTermLiabilityValue = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), dataCarrier.liabilitiesId);
@@ -101,7 +101,7 @@ public class Report_LiabilitiesFragment extends Fragment {
             }
         }
 
-        for (DataCarrier_Liabilities dataCarrier : longTermLiabilitiesTypes) {
+        for (NodeContainer_Liabilities dataCarrier : longTermLiabilitiesTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisLiabilityValue = getString(R.string.no_data_initialization);
             LiabilitiesValue longTermLiabilityValue = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), dataCarrier.liabilitiesId);

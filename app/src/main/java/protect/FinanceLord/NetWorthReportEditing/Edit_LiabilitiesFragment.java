@@ -21,12 +21,12 @@ import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.Database.LiabilitiesTypeDao;
-import protect.FinanceLord.Database.LiabilitiesTypeTreeLeaf;
+import protect.FinanceLord.DAOs.LiabilitiesTypeDao;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeLeaf_Liabilities;
 import protect.FinanceLord.Database.LiabilitiesValue;
-import protect.FinanceLord.Database.LiabilitiesValueDao;
-import protect.FinanceLord.NetWorthDataStructureProcessors.ValueTreeProcessor_Liabilities;
-import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Liabilities;
+import protect.FinanceLord.DAOs.LiabilitiesValueDao;
+import protect.FinanceLord.NetWorthDataStructure.ValueTreeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Liabilities;
 import protect.FinanceLord.NetWorthReportEditingActivity;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragmentAdapter;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragmentChildViewClickListener;
@@ -138,7 +138,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
                 List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                List<LiabilitiesTypeTreeLeaf> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
+                List<TypeTreeLeaf_Liabilities> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
 
                 Log.d("Edit_LFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                 for (LiabilitiesValue liabilitiesValue : liabilitiesValues){

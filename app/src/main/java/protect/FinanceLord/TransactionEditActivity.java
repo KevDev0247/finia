@@ -27,7 +27,7 @@ import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Database.BudgetsType;
-import protect.FinanceLord.Database.BudgetsTypeDao;
+import protect.FinanceLord.DAOs.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;

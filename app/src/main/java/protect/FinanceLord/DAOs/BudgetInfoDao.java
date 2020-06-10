@@ -1,12 +1,14 @@
-package protect.FinanceLord.Database;
+package protect.FinanceLord.DAOs;
 
 import androidx.room.Dao;
 import androidx.room.Query;
 
 import java.util.List;
 
+import protect.FinanceLord.BudgetUtils.BudgetInfo;
+
 @Dao
-public interface FinancialRecordsDao {
+public interface BudgetInfoDao {
 
     @Query("SELECT \n" +
             "  FinanceRecord.budgetsId AS budgetId, \n" +
@@ -29,5 +31,5 @@ public interface FinancialRecordsDao {
             "  AND Transactions.date >= BudgetsValue.dateStart AND Transactions.date <= BudgetsValue.dateEnd) \n" +
             "AS FinanceRecord \n" +
             "GROUP BY FinanceRecord.budgetCategoryId, FinanceRecord.dateStart, FinanceRecord.dateEnd")
-    List<FinancialRecords> queryFinancialRecords();
+    List<BudgetInfo> queryFinancialRecords();
 }

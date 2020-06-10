@@ -6,6 +6,13 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import protect.FinanceLord.DAOs.AssetsTypeDao;
+import protect.FinanceLord.DAOs.AssetsValueDao;
+import protect.FinanceLord.DAOs.BudgetsTypeDao;
+import protect.FinanceLord.DAOs.BudgetsValueDao;
+import protect.FinanceLord.DAOs.LiabilitiesTypeDao;
+import protect.FinanceLord.DAOs.LiabilitiesValueDao;
+import protect.FinanceLord.DAOs.TransactionsDao;
 import protect.FinanceLord.R;
 
 public class DatabaseInitialization{

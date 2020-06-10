@@ -1,6 +1,6 @@
-package protect.FinanceLord.Database;
+package protect.FinanceLord.NetWorthDataStructure;
 
-public class LiabilitiesTypeTreeLeaf {
+public class TypeTreeLeaf_Liabilities {
 
     public int liabilitiesFirstLevelId;
     public String liabilitiesFirstLevelName;

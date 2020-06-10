@@ -16,10 +16,10 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import protect.FinanceLord.NetWorthDataStructureProcessors.DataCarrier_Assets;
-import protect.FinanceLord.NetWorthDataStructureProcessors.ValueTreeProcessor_Assets;
+import protect.FinanceLord.NetWorthDataStructure.NodeContainer_Assets;
+import protect.FinanceLord.NetWorthDataStructure.ValueTreeProcessor_Assets;
 import protect.FinanceLord.Database.AssetsValue;
-import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Assets;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Assets;
 import protect.FinanceLord.NetWorthReportEditing.NetWorthExpandableListView;
 import protect.FinanceLord.R;
 
@@ -27,7 +27,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     private ValueTreeProcessor_Assets dataProcessor;
     private TypeTreeProcessor_Assets typeProcessor;
-    private List<DataCarrier_Assets> sectionDataSet;
+    private List<NodeContainer_Assets> sectionDataSet;
     private int level;
     private Context context;
 
@@ -61,7 +61,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int i, int i1) {
         String assetsTypeName = getAssetsName(i);
-        List<DataCarrier_Assets> carriers = typeProcessor.getSubGroup(assetsTypeName, level + 1);
+        List<NodeContainer_Assets> carriers = typeProcessor.getSubGroup(assetsTypeName, level + 1);
         return carriers.get(i1);
     }
 
@@ -95,7 +95,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.assetsRowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
 
-            DataCarrier_Assets dataCarrier = this.sectionDataSet.get(position);
+            NodeContainer_Assets dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
             AssetsValue assetsValue = dataProcessor.getAssetValue(dataCarrier.assetsTypeId);
@@ -118,7 +118,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.assetsRowThirdText);
             textView.setText(this.sectionDataSet.get(position).assetsTypeName);
 
-            DataCarrier_Assets dataCarrier = this.sectionDataSet.get(position);
+            NodeContainer_Assets dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
             AssetsValue assetsValue = dataProcessor.getAssetValue(dataCarrier.assetsTypeId);
@@ -133,7 +133,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    void addTextListener(EditText editText, final DataCarrier_Assets dataCarrier) {
+    void addTextListener(EditText editText, final NodeContainer_Assets dataCarrier) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -164,8 +164,8 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        final DataCarrier_Assets sectionData = sectionDataSet.get(groupPosition);
-        List<DataCarrier_Assets> children = typeProcessor.getSubGroup(sectionData.assetsTypeName, level + 1);
+        final NodeContainer_Assets sectionData = sectionDataSet.get(groupPosition);
+        List<NodeContainer_Assets> children = typeProcessor.getSubGroup(sectionData.assetsTypeName, level + 1);
 
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

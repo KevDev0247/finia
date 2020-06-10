@@ -21,10 +21,10 @@ import java.util.Locale;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.AssetsValue;
-import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.DAOs.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesValue;
-import protect.FinanceLord.Database.LiabilitiesValueDao;
+import protect.FinanceLord.DAOs.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthReportViewing.ReportPagerAdapter;
 import protect.FinanceLord.NetWorthReportViewing.Report_AssetsFragment;
 import protect.FinanceLord.NetWorthReportViewing.Report_LiabilitiesFragment;

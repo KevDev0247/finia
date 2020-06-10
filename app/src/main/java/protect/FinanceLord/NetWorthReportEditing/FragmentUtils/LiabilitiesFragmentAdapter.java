@@ -17,9 +17,9 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import protect.FinanceLord.Database.LiabilitiesValue;
-import protect.FinanceLord.NetWorthDataStructureProcessors.ValueTreeProcessor_Liabilities;
-import protect.FinanceLord.NetWorthDataStructureProcessors.DataCarrier_Liabilities;
-import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataStructure.ValueTreeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataStructure.NodeContainer_Liabilities;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Liabilities;
 import protect.FinanceLord.NetWorthReportEditing.NetWorthExpandableListView;
 import protect.FinanceLord.R;
 
@@ -27,7 +27,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
     private ValueTreeProcessor_Liabilities dataProcessor;
     private TypeTreeProcessor_Liabilities typeProcessor;
-    private List<DataCarrier_Liabilities> sectionDataSet;
+    private List<NodeContainer_Liabilities> sectionDataSet;
     private int level;
     private Context context;
 
@@ -61,7 +61,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int i, int i1) {
         String liabilitiesTypeName = getLiabilitiesName(i);
-        List<DataCarrier_Liabilities> carriers = typeProcessor.getSubGroup(liabilitiesTypeName, level + 1);
+        List<NodeContainer_Liabilities> carriers = typeProcessor.getSubGroup(liabilitiesTypeName, level + 1);
         return carriers.get(i1);
     }
 
@@ -93,7 +93,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.liabilitiesRowThirdText);
             textView.setText(sectionDataSet.get(position).liabilitiesTypeName);
 
-            DataCarrier_Liabilities dataCarrier = this.sectionDataSet.get(position);
+            NodeContainer_Liabilities dataCarrier = this.sectionDataSet.get(position);
             EditText editText = convertView.findViewById(R.id.liabilitiesValueInput);
 
             LiabilitiesValue liabilitiesValue = dataProcessor.getLiabilityValue(dataCarrier.liabilitiesId);
@@ -108,7 +108,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    void addTextListener(EditText editText, final DataCarrier_Liabilities dataCarrier){
+    void addTextListener(EditText editText, final NodeContainer_Liabilities dataCarrier){
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -139,8 +139,8 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(final int groupPosition, int childPosition, boolean b, View convertView, ViewGroup viewGroup) {
-        final DataCarrier_Liabilities sectionData = sectionDataSet.get(groupPosition);
-        List<DataCarrier_Liabilities> children = typeProcessor.getSubGroup(sectionData.liabilitiesTypeName, level + 1);
+        final NodeContainer_Liabilities sectionData = sectionDataSet.get(groupPosition);
+        List<NodeContainer_Liabilities> children = typeProcessor.getSubGroup(sectionData.liabilitiesTypeName, level + 1);
 
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

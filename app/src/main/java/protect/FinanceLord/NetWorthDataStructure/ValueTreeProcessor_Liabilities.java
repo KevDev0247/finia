@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthDataStructureProcessors;
+package protect.FinanceLord.NetWorthDataStructure;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import protect.FinanceLord.Database.LiabilitiesTypeTreeLeaf;
 import protect.FinanceLord.Database.LiabilitiesValue;
-import protect.FinanceLord.Database.LiabilitiesValueDao;
+import protect.FinanceLord.DAOs.LiabilitiesValueDao;
 import protect.FinanceLord.R;
 
 /**
@@ -42,10 +41,10 @@ public class ValueTreeProcessor_Liabilities {
 
     private Context context;
     private Date currentTime;
-    private List<LiabilitiesTypeTreeLeaf> typeTreeLeaves;
+    private List<TypeTreeLeaf_Liabilities> typeTreeLeaves;
     private List<LiabilitiesValue> liabilitiesValues;
 
-    public ValueTreeProcessor_Liabilities(List<LiabilitiesTypeTreeLeaf> typeTreeLeaves, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context) {
+    public ValueTreeProcessor_Liabilities(List<TypeTreeLeaf_Liabilities> typeTreeLeaves, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context) {
         this.context = context;
         this.currentTime = currentTime;
         this.typeTreeLeaves = typeTreeLeaves;
@@ -128,7 +127,7 @@ public class ValueTreeProcessor_Liabilities {
      * @return an integer value represents the id of the node in the data structure.
      */
     private int getLiabilitiesId(String liabilitiesName) {
-        for (LiabilitiesTypeTreeLeaf liabilitiesTypeTreeLeaf : typeTreeLeaves) {
+        for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typeTreeLeaves) {
             if (liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName != null && liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName.equals(liabilitiesName)){
                 return liabilitiesTypeTreeLeaf.liabilitiesFirstLevelId;
             } else if (liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName.equals(liabilitiesName)){
@@ -155,7 +154,7 @@ public class ValueTreeProcessor_Liabilities {
 
         List liabilitiesIDs = new ArrayList();
         if (context.getString(R.string.short_term_liabilities_name).equals(liabilitiesName)) {
-            for (LiabilitiesTypeTreeLeaf liabilitiesTypeTreeLeaf : typeTreeLeaves){
+            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typeTreeLeaves){
                 if (liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null
                         && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName.equals(liabilitiesName)
                         && liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName != null) {
@@ -163,7 +162,7 @@ public class ValueTreeProcessor_Liabilities {
                 }
             }
         } else if (context.getString(R.string.long_term_liabilities_name).equals(liabilitiesName)) {
-            for (LiabilitiesTypeTreeLeaf liabilitiesTypeTreeLeaf : typeTreeLeaves){
+            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typeTreeLeaves){
                 if (liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null
                         && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName.equals(liabilitiesName)
                         && liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName != null){

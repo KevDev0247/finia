@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import protect.FinanceLord.BudgetUtils.BudgetInfo;
 import protect.FinanceLord.BudgetUtils.BudgetListAdapter;
 import protect.FinanceLord.Database.BudgetsType;
-import protect.FinanceLord.Database.BudgetsTypeDao;
+import protect.FinanceLord.DAOs.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.Database.FinancialRecords;
-import protect.FinanceLord.Database.FinancialRecordsDao;
+import protect.FinanceLord.DAOs.BudgetInfoDao;
 
 public class BudgetActivity extends AppCompatActivity {
 
@@ -59,11 +59,11 @@ public class BudgetActivity extends AppCompatActivity {
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(BudgetActivity.this);
                 BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
-                FinancialRecordsDao financialRecordsDao = database.financeRecordsDao();
+                BudgetInfoDao budgetInfoDao = database.financeRecordsDao();
 
                 List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
                 allBudgetsTypes = new ArrayList<>(budgetsTypes);
-                final List<FinancialRecords> financialRecords = financialRecordsDao.queryFinancialRecords();
+                final List<BudgetInfo> financialRecords = budgetInfoDao.queryFinancialRecords();
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -73,7 +73,7 @@ public class BudgetActivity extends AppCompatActivity {
                             setUpBudgetsListView(financialRecords);
                         } else {
                             if (budgetListAdapter != null) {
-                                for (FinancialRecords financialRecord : financialRecords) {
+                                for (BudgetInfo financialRecord : financialRecords) {
                                     Log.d(TAG, " this financial record id is " + financialRecord.budgetCategoryId +
                                             " total value is " + financialRecord.budgetTotal +
                                             " total usage is" + financialRecord.totalUsage +
@@ -105,7 +105,7 @@ public class BudgetActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpBudgetsListView(final List<FinancialRecords> financialRecords) {
+    private void setUpBudgetsListView(final List<BudgetInfo> financialRecords) {
         ListView budgetsList = findViewById(R.id.budgets_list);
         budgetListAdapter = new BudgetListAdapter(this, financialRecords, allBudgetsTypes);
         budgetsList.setAdapter(budgetListAdapter);
@@ -113,7 +113,7 @@ public class BudgetActivity extends AppCompatActivity {
         budgetsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                FinancialRecords financialRecord = financialRecords.get(position);
+                BudgetInfo financialRecord = financialRecords.get(position);
 
                 Intent intent = new Intent();
                 intent.putExtra(getString(R.string.budget_categories_key), allBudgetsTypes);

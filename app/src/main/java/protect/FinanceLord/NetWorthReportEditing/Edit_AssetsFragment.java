@@ -20,13 +20,13 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Communicators.DateCommunicator;
-import protect.FinanceLord.Database.AssetsTypeDao;
-import protect.FinanceLord.Database.AssetsTypeTreeLeaf;
+import protect.FinanceLord.DAOs.AssetsTypeDao;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeLeaf_Assets;
 import protect.FinanceLord.Database.AssetsValue;
-import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.DAOs.AssetsValueDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
-import protect.FinanceLord.NetWorthDataStructureProcessors.ValueTreeProcessor_Assets;
-import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Assets;
+import protect.FinanceLord.NetWorthDataStructure.ValueTreeProcessor_Assets;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Assets;
 import protect.FinanceLord.NetWorthReportEditingActivity;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.AssetsFragmentAdapter;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.AssetsFragmentChildViewClickListener;
@@ -138,7 +138,7 @@ public class Edit_AssetsFragment extends Fragment {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                List<AssetsTypeTreeLeaf> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
+                List<TypeTreeLeaf_Assets> assetsTypes = assetsTypeDao.queryGroupedAssetsType();
 
                 Log.d("Edit_AFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                 for (AssetsValue assetsValue : assetsValues){

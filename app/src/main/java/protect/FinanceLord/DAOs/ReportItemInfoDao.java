@@ -1,9 +1,11 @@
-package protect.FinanceLord.Database;
+package protect.FinanceLord.DAOs;
 
 import androidx.room.Dao;
 import androidx.room.Query;
 
 import java.util.List;
+
+import protect.FinanceLord.NetWorthPastReportsList.ReportItemInfo;
 
 @Dao
 public interface ReportItemInfoDao {

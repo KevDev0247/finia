@@ -1,6 +1,6 @@
-package protect.FinanceLord.Database;
+package protect.FinanceLord.BudgetUtils;
 
-public class FinancialRecords {
+public class BudgetInfo {
     public int budgetId;
     public int budgetCategoryId;
     public float budgetTotal;

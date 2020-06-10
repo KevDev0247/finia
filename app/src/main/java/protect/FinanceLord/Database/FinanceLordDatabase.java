@@ -6,6 +6,16 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import protect.FinanceLord.DAOs.AssetsTypeDao;
+import protect.FinanceLord.DAOs.AssetsValueDao;
+import protect.FinanceLord.DAOs.BudgetInfoDao;
+import protect.FinanceLord.DAOs.BudgetsTypeDao;
+import protect.FinanceLord.DAOs.BudgetsValueDao;
+import protect.FinanceLord.DAOs.LiabilitiesTypeDao;
+import protect.FinanceLord.DAOs.LiabilitiesValueDao;
+import protect.FinanceLord.DAOs.ReportItemInfoDao;
+import protect.FinanceLord.DAOs.TransactionsDao;
+
 @Database(entities = {AssetsType.class, AssetsValue.class, LiabilitiesType.class, LiabilitiesValue.class, BudgetsType.class, BudgetsValue.class, Transactions.class}, version = 10)
 public abstract class FinanceLordDatabase extends RoomDatabase {
 
@@ -17,7 +27,7 @@ public abstract class FinanceLordDatabase extends RoomDatabase {
     public abstract BudgetsValueDao budgetsValueDao();
     public abstract TransactionsDao transactionsDao();
     public abstract ReportItemInfoDao reportItemInfoDao();
-    public abstract FinancialRecordsDao financeRecordsDao();
+    public abstract BudgetInfoDao financeRecordsDao();
 
     private static FinanceLordDatabase database;
 

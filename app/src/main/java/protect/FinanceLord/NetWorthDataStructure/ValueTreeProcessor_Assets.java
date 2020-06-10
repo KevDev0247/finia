@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthDataStructureProcessors;
+package protect.FinanceLord.NetWorthDataStructure;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import protect.FinanceLord.Database.AssetsTypeTreeLeaf;
 import protect.FinanceLord.Database.AssetsValue;
-import protect.FinanceLord.Database.AssetsValueDao;
+import protect.FinanceLord.DAOs.AssetsValueDao;
 import protect.FinanceLord.R;
 
 /**
@@ -42,10 +41,10 @@ public class ValueTreeProcessor_Assets {
 
     private Context context;
     private Date currentTime;
-    private List<AssetsTypeTreeLeaf> assetsTypeTreeLeaves;
+    private List<TypeTreeLeaf_Assets> assetsTypeTreeLeaves;
     private List<AssetsValue> assetsValues;
 
-    public ValueTreeProcessor_Assets(List<AssetsTypeTreeLeaf> assetsTypeTreeLeaves, List<AssetsValue> assetsValues, Date currentTime, Context context) {
+    public ValueTreeProcessor_Assets(List<TypeTreeLeaf_Assets> assetsTypeTreeLeaves, List<AssetsValue> assetsValues, Date currentTime, Context context) {
         this.context = context;
         this.assetsTypeTreeLeaves = assetsTypeTreeLeaves;
         this.assetsValues = assetsValues;
@@ -128,7 +127,7 @@ public class ValueTreeProcessor_Assets {
      * @return an integer value represents the id of the node in the data structure.
      */
     private int getAssetsId(String assetsName) {
-        for(AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
+        for(TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
             if (assetsTypeTreeLeaf.assetsFirstLevelName != null && assetsTypeTreeLeaf.assetsFirstLevelName.equals(assetsName)) {
                 return assetsTypeTreeLeaf.assetsFirstLevelId;
             } else if (assetsTypeTreeLeaf.assetsSecondLevelName != null && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)) {
@@ -157,7 +156,7 @@ public class ValueTreeProcessor_Assets {
 
         List assetsIDs = new ArrayList();
         if (context.getString(R.string.ownership_interest_name).equals(assetsName)) {
-            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
+            for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
                 if (assetsTypeTreeLeaf.assetsThirdLevelName != null
                         && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
@@ -165,7 +164,7 @@ public class ValueTreeProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.retirement_accounts_name).equals(assetsName)) {
-            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
+            for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
                 if (assetsTypeTreeLeaf.assetsThirdLevelName != null
                         && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
@@ -173,7 +172,7 @@ public class ValueTreeProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.taxable_accounts_name).equals(assetsName)) {
-            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
+            for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
                 if (assetsTypeTreeLeaf.assetsThirdLevelName != null
                         && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
@@ -181,7 +180,7 @@ public class ValueTreeProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.liquid_assets_name).equals(assetsName)) {
-            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
+            for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
                 if (assetsTypeTreeLeaf.assetsSecondLevelName != null
                         && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsThirdLevelName != null) {
@@ -189,7 +188,7 @@ public class ValueTreeProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.personal_assets_name).equals(assetsName)) {
-            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
+            for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTreeLeaves) {
                 if (assetsTypeTreeLeaf.assetsSecondLevelName != null
                         && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsThirdLevelName != null) {

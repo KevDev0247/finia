@@ -1,46 +1,44 @@
-package protect.FinanceLord.NetWorthDataStructureProcessors;
+package protect.FinanceLord.NetWorthDataStructure;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import protect.FinanceLord.Database.LiabilitiesTypeTreeLeaf;
-
 public class TypeTreeProcessor_Liabilities {
 
-    private List<LiabilitiesTypeTreeLeaf> dataList;
+    private List<TypeTreeLeaf_Liabilities> dataList;
 
-    public TypeTreeProcessor_Liabilities(List<LiabilitiesTypeTreeLeaf> dataList){
+    public TypeTreeProcessor_Liabilities(List<TypeTreeLeaf_Liabilities> dataList){
         this.dataList = dataList;
     }
 
-    public List<DataCarrier_Liabilities> getSubGroup(String parentGroupLabel, int level) {
-        List<DataCarrier_Liabilities> subGroupLiabilities = new ArrayList<>();
+    public List<NodeContainer_Liabilities> getSubGroup(String parentGroupLabel, int level) {
+        List<NodeContainer_Liabilities> subGroupLiabilities = new ArrayList<>();
 
         if (level == 0) {
-            for (LiabilitiesTypeTreeLeaf liabilitiesTypeTreeLeaf : dataList) {
+            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : dataList) {
                 if (liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName != null) {
 
-                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName, liabilitiesTypeTreeLeaf.liabilitiesFirstLevelId, 0);
+                    NodeContainer_Liabilities dataCarrier = new NodeContainer_Liabilities(liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName, liabilitiesTypeTreeLeaf.liabilitiesFirstLevelId, 0);
                     addTypeToSubGroup(dataCarrier, subGroupLiabilities);
                 }
             }
         } else if (level == 1) {
-            for (LiabilitiesTypeTreeLeaf liabilitiesTypeTreeLeaf : dataList) {
+            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : dataList) {
                 if (liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName != null
                         && liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName.equals(parentGroupLabel)
                         && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null) {
 
-                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName, liabilitiesTypeTreeLeaf.liabilitiesSecondLevelId, 1);
+                    NodeContainer_Liabilities dataCarrier = new NodeContainer_Liabilities(liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName, liabilitiesTypeTreeLeaf.liabilitiesSecondLevelId, 1);
                     addTypeToSubGroup(dataCarrier, subGroupLiabilities);
                 }
             }
         } else if (level == 2) {
-            for (LiabilitiesTypeTreeLeaf liabilitiesTypeTreeLeaf : dataList) {
+            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : dataList) {
                 if (liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null
                         && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName.equals(parentGroupLabel)
                         && liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName != null) {
 
-                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName, liabilitiesTypeTreeLeaf.liabilitiesThirdLevelId, 2);
+                    NodeContainer_Liabilities dataCarrier = new NodeContainer_Liabilities(liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName, liabilitiesTypeTreeLeaf.liabilitiesThirdLevelId, 2);
                     addTypeToSubGroup(dataCarrier, subGroupLiabilities);
                 }
             }
@@ -49,8 +47,8 @@ public class TypeTreeProcessor_Liabilities {
         return subGroupLiabilities;
     }
 
-    void addTypeToSubGroup(DataCarrier_Liabilities liabilitiesFragmentDataCarrier, List<DataCarrier_Liabilities> subGroupLiabilities) {
-        for (DataCarrier_Liabilities dataCarrier: subGroupLiabilities) {
+    void addTypeToSubGroup(NodeContainer_Liabilities liabilitiesFragmentDataCarrier, List<NodeContainer_Liabilities> subGroupLiabilities) {
+        for (NodeContainer_Liabilities dataCarrier: subGroupLiabilities) {
             if (dataCarrier.liabilitiesId == liabilitiesFragmentDataCarrier.liabilitiesId && dataCarrier.liabilitiesId != 0) {
                 return;
             }

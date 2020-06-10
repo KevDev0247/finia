@@ -1,4 +1,4 @@
-package protect.FinanceLord.Database;
+package protect.FinanceLord.NetWorthPastReportsList;
 
 public class ReportItemInfo {
     public int totalAssetsId;

@@ -6,16 +6,16 @@ import android.widget.ExpandableListView;
 
 import java.util.List;
 
-import protect.FinanceLord.NetWorthDataStructureProcessors.DataCarrier_Liabilities;
-import protect.FinanceLord.NetWorthDataStructureProcessors.TypeTreeProcessor_Liabilities;
+import protect.FinanceLord.NetWorthDataStructure.NodeContainer_Liabilities;
+import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Liabilities;
 
 public class LiabilitiesFragmentChildViewClickListener implements ExpandableListView.OnChildClickListener {
 
     private TypeTreeProcessor_Liabilities typeProcessor;
-    private List<DataCarrier_Liabilities> sectionDataSet;
+    private List<NodeContainer_Liabilities> sectionDataSet;
     private int level;
 
-    public LiabilitiesFragmentChildViewClickListener(List<DataCarrier_Liabilities> sectionDataSet, TypeTreeProcessor_Liabilities typeProcessor, int level){
+    public LiabilitiesFragmentChildViewClickListener(List<NodeContainer_Liabilities> sectionDataSet, TypeTreeProcessor_Liabilities typeProcessor, int level){
         this.sectionDataSet = sectionDataSet;
         this.typeProcessor = typeProcessor;
         this.level = level;
@@ -23,8 +23,8 @@ public class LiabilitiesFragmentChildViewClickListener implements ExpandableList
 
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-        DataCarrier_Liabilities sectionItem = sectionDataSet.get(i);
-        List<DataCarrier_Liabilities> childSection = typeProcessor.getSubGroup(sectionItem.liabilitiesTypeName, level + 1);
+        NodeContainer_Liabilities sectionItem = sectionDataSet.get(i);
+        List<NodeContainer_Liabilities> childSection = typeProcessor.getSubGroup(sectionItem.liabilitiesTypeName, level + 1);
 
         Log.d("Edit_LFragment", "child clicked: " + childSection.get(i1).liabilitiesTypeName + ", id in DB" + childSection.get(i1).liabilitiesId);
         return false;

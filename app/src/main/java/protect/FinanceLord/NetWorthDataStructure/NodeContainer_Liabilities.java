@@ -1,4 +1,4 @@
-package protect.FinanceLord.NetWorthDataStructureProcessors;
+package protect.FinanceLord.NetWorthDataStructure;
 
 /**
  * A data carrier to carry assets type data in LiabilitiesAdapter and LiabilitiesTypeTreeProcessor.
@@ -11,13 +11,13 @@ package protect.FinanceLord.NetWorthDataStructureProcessors;
  * @author Owner  Kevin Zhijun Wang
  * @version 2020.0609
  */
-public class DataCarrier_Liabilities {
+public class NodeContainer_Liabilities {
 
     public String liabilitiesTypeName;
     public int liabilitiesId;
     public int level;
 
-    DataCarrier_Liabilities(String liabilitiesTypeName, int liabilitiesId, int level){
+    NodeContainer_Liabilities(String liabilitiesTypeName, int liabilitiesId, int level){
         this.liabilitiesTypeName = liabilitiesTypeName;
         this.liabilitiesId = liabilitiesId;
         this.level = level;
