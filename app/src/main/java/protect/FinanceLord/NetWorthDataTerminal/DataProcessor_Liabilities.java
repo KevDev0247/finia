@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import protect.FinanceLord.Database.LiabilitiesTypeQuery;
+import protect.FinanceLord.Database.LiabilitiesTypeTree;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.R;
@@ -17,10 +17,10 @@ public class DataProcessor_Liabilities {
 
     private Context context;
     private Date currentTime;
-    private List<LiabilitiesTypeQuery> dataList;
+    private List<LiabilitiesTypeTree> dataList;
     private List<LiabilitiesValue> liabilitiesValues;
 
-    public DataProcessor_Liabilities(List<LiabilitiesTypeQuery> dataList, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context) {
+    public DataProcessor_Liabilities(List<LiabilitiesTypeTree> dataList, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context) {
         this.context = context;
         this.currentTime = currentTime;
         this.dataList = dataList;
@@ -61,13 +61,13 @@ public class DataProcessor_Liabilities {
     }
 
     private int getLiabilitiesId(String liabilitiesName) {
-        for (LiabilitiesTypeQuery query : dataList) {
-            if (query.liabilitiesFirstLevelName != null && query.liabilitiesFirstLevelName.equals(liabilitiesName)){
-                return query.liabilitiesFirstLevelId;
-            } else if (query.liabilitiesSecondLevelName != null && query.liabilitiesSecondLevelName.equals(liabilitiesName)){
-                return query.liabilitiesSecondLevelId;
-            } else if (query.liabilitiesThirdLevelName != null && query.liabilitiesThirdLevelName.equals(liabilitiesName)){
-                return query.liabilitiesThirdLevelId;
+        for (LiabilitiesTypeTree liabilitiesTypeTree : dataList) {
+            if (liabilitiesTypeTree.liabilitiesFirstLevelName != null && liabilitiesTypeTree.liabilitiesFirstLevelName.equals(liabilitiesName)){
+                return liabilitiesTypeTree.liabilitiesFirstLevelId;
+            } else if (liabilitiesTypeTree.liabilitiesSecondLevelName != null && liabilitiesTypeTree.liabilitiesSecondLevelName.equals(liabilitiesName)){
+                return liabilitiesTypeTree.liabilitiesSecondLevelId;
+            } else if (liabilitiesTypeTree.liabilitiesThirdLevelName != null && liabilitiesTypeTree.liabilitiesThirdLevelName.equals(liabilitiesName)){
+                return liabilitiesTypeTree.liabilitiesThirdLevelId;
             }
         }
         return 0;
@@ -80,19 +80,19 @@ public class DataProcessor_Liabilities {
 
         List liabilitiesIDs = new ArrayList();
         if (context.getString(R.string.short_term_liabilities_name).equals(liabilitiesName)) {
-            for (LiabilitiesTypeQuery query: dataList){
-                if (query.liabilitiesSecondLevelName != null
-                        && query.liabilitiesSecondLevelName.equals(liabilitiesName)
-                        && query.liabilitiesThirdLevelName != null) {
-                    liabilitiesIDs.add(query.liabilitiesThirdLevelId);
+            for (LiabilitiesTypeTree liabilitiesTypeTree: dataList){
+                if (liabilitiesTypeTree.liabilitiesSecondLevelName != null
+                        && liabilitiesTypeTree.liabilitiesSecondLevelName.equals(liabilitiesName)
+                        && liabilitiesTypeTree.liabilitiesThirdLevelName != null) {
+                    liabilitiesIDs.add(liabilitiesTypeTree.liabilitiesThirdLevelId);
                 }
             }
         } else if (context.getString(R.string.long_term_liabilities_name).equals(liabilitiesName)) {
-            for (LiabilitiesTypeQuery query : dataList){
-                if (query.liabilitiesSecondLevelName != null
-                        && query.liabilitiesSecondLevelName.equals(liabilitiesName)
-                        && query.liabilitiesThirdLevelName != null){
-                    liabilitiesIDs.add(query.liabilitiesThirdLevelId);
+            for (LiabilitiesTypeTree liabilitiesTypeTree : dataList){
+                if (liabilitiesTypeTree.liabilitiesSecondLevelName != null
+                        && liabilitiesTypeTree.liabilitiesSecondLevelName.equals(liabilitiesName)
+                        && liabilitiesTypeTree.liabilitiesThirdLevelName != null){
+                    liabilitiesIDs.add(liabilitiesTypeTree.liabilitiesThirdLevelId);
                 }
             }
         }

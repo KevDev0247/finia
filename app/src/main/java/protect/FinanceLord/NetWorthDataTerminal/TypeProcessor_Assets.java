@@ -3,13 +3,13 @@ package protect.FinanceLord.NetWorthDataTerminal;
 import java.util.ArrayList;
 import java.util.List;
 
-import protect.FinanceLord.Database.AssetsTypeQuery;
+import protect.FinanceLord.Database.AssetsTypeTree;
 
 public class TypeProcessor_Assets {
 
-    private List<AssetsTypeQuery> dataList;
+    private List<AssetsTypeTree> dataList;
 
-    public TypeProcessor_Assets(List<AssetsTypeQuery> dataList){
+    public TypeProcessor_Assets(List<AssetsTypeTree> dataList){
         this.dataList = dataList;
     }
 
@@ -17,40 +17,40 @@ public class TypeProcessor_Assets {
         List<DataCarrier_Assets> subGroupAssets = new ArrayList<>();
 
         if (level == 0) {
-            for(AssetsTypeQuery assetsTypeQuery : dataList) {
-                if (assetsTypeQuery.assetsFirstLevelName != null) {
+            for(AssetsTypeTree assetsTypeTree : dataList) {
+                if (assetsTypeTree.assetsFirstLevelName != null) {
 
-                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsFirstLevelName, assetsTypeQuery.assetsFirstLevelId, 0);
+                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeTree.assetsFirstLevelName, assetsTypeTree.assetsFirstLevelId, 0);
                     addTypeToSubGroup(dataCarrier, subGroupAssets);
                 }
             }
         } else if(level == 1) {
-            for(AssetsTypeQuery assetsTypeQuery : dataList) {
-                if (assetsTypeQuery.assetsFirstLevelName != null
-                        && assetsTypeQuery.assetsFirstLevelName.equals(parentGroupLabel)
-                        && assetsTypeQuery.assetsSecondLevelName != null) {
+            for(AssetsTypeTree assetsTypeTree : dataList) {
+                if (assetsTypeTree.assetsFirstLevelName != null
+                        && assetsTypeTree.assetsFirstLevelName.equals(parentGroupLabel)
+                        && assetsTypeTree.assetsSecondLevelName != null) {
 
-                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsSecondLevelName, assetsTypeQuery.assetsSecondLevelId, 1);
+                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeTree.assetsSecondLevelName, assetsTypeTree.assetsSecondLevelId, 1);
                     addTypeToSubGroup(dataCarrier, subGroupAssets);
                 }
             }
         } else if(level == 2) {
-            for(AssetsTypeQuery assetsTypeQuery : dataList) {
-                if (assetsTypeQuery.assetsSecondLevelName != null
-                        && assetsTypeQuery.assetsSecondLevelName.equals(parentGroupLabel)
-                        && assetsTypeQuery.assetsThirdLevelName != null) {
+            for(AssetsTypeTree assetsTypeTree : dataList) {
+                if (assetsTypeTree.assetsSecondLevelName != null
+                        && assetsTypeTree.assetsSecondLevelName.equals(parentGroupLabel)
+                        && assetsTypeTree.assetsThirdLevelName != null) {
 
-                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsThirdLevelName, assetsTypeQuery.assetsThirdLevelId, 2);
+                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeTree.assetsThirdLevelName, assetsTypeTree.assetsThirdLevelId, 2);
                     addTypeToSubGroup(dataCarrier, subGroupAssets);
                 }
             }
         } else if(level == 3) {
-            for(AssetsTypeQuery assetsTypeQuery : dataList) {
-                if(assetsTypeQuery.assetsThirdLevelName != null
-                        && assetsTypeQuery.assetsThirdLevelName.equals(parentGroupLabel)
-                        && assetsTypeQuery.assetsFourthLevelName != null) {
+            for(AssetsTypeTree assetsTypeTree : dataList) {
+                if(assetsTypeTree.assetsThirdLevelName != null
+                        && assetsTypeTree.assetsThirdLevelName.equals(parentGroupLabel)
+                        && assetsTypeTree.assetsFourthLevelName != null) {
 
-                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeQuery.assetsFourthLevelName, assetsTypeQuery.assetsFourthLevelId, 3);
+                    DataCarrier_Assets dataCarrier = new DataCarrier_Assets(assetsTypeTree.assetsFourthLevelName, assetsTypeTree.assetsFourthLevelId, 3);
                     addTypeToSubGroup(dataCarrier, subGroupAssets);
                 }
             }

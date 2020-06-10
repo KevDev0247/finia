@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import protect.FinanceLord.Database.AssetsTypeQuery;
+import protect.FinanceLord.Database.AssetsTypeTree;
 import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.AssetsValueDao;
 import protect.FinanceLord.R;
@@ -38,10 +38,10 @@ public class DataProcessor_Assets {
 
     private Context context;
     private Date currentTime;
-    private List<AssetsTypeQuery> dataList;
+    private List<AssetsTypeTree> dataList;
     private List<AssetsValue> assetsValues;
 
-    public DataProcessor_Assets(List<AssetsTypeQuery> dataList, List<AssetsValue> assetsValues, Date currentTime, Context context) {
+    public DataProcessor_Assets(List<AssetsTypeTree> dataList, List<AssetsValue> assetsValues, Date currentTime, Context context) {
         this.context = context;
         this.dataList = dataList;
         this.assetsValues = assetsValues;
@@ -124,15 +124,15 @@ public class DataProcessor_Assets {
      * @return an integer value represents the id of the node in the data structure.
      */
     private int getAssetsId(String assetsName) {
-        for(AssetsTypeQuery query : dataList) {
-            if (query.assetsFirstLevelName != null && query.assetsFirstLevelName.equals(assetsName)) {
-                return query.assetsFirstLevelId;
-            } else if (query.assetsSecondLevelName != null && query.assetsSecondLevelName.equals(assetsName)) {
-                return query.assetsSecondLevelId;
-            } else if (query.assetsThirdLevelName != null && query.assetsThirdLevelName.equals(assetsName)) {
-                return query.assetsThirdLevelId;
-            } else if (query.assetsFourthLevelName != null && query.assetsFourthLevelName.equals(assetsName)) {
-                return query.assetsFourthLevelId;
+        for(AssetsTypeTree assetsTypeTree : dataList) {
+            if (assetsTypeTree.assetsFirstLevelName != null && assetsTypeTree.assetsFirstLevelName.equals(assetsName)) {
+                return assetsTypeTree.assetsFirstLevelId;
+            } else if (assetsTypeTree.assetsSecondLevelName != null && assetsTypeTree.assetsSecondLevelName.equals(assetsName)) {
+                return assetsTypeTree.assetsSecondLevelId;
+            } else if (assetsTypeTree.assetsThirdLevelName != null && assetsTypeTree.assetsThirdLevelName.equals(assetsName)) {
+                return assetsTypeTree.assetsThirdLevelId;
+            } else if (assetsTypeTree.assetsFourthLevelName != null && assetsTypeTree.assetsFourthLevelName.equals(assetsName)) {
+                return assetsTypeTree.assetsFourthLevelId;
             }
         }
         return 0;
@@ -153,43 +153,43 @@ public class DataProcessor_Assets {
 
         List assetsIDs = new ArrayList();
         if (context.getString(R.string.ownership_interest_name).equals(assetsName)) {
-            for (AssetsTypeQuery query : dataList) {
-                if (query.assetsThirdLevelName != null
-                        && query.assetsThirdLevelName.equals(assetsName)
-                        && query.assetsFourthLevelName != null) {
-                    assetsIDs.add(query.assetsFourthLevelId);
+            for (AssetsTypeTree assetsTypeTree : dataList) {
+                if (assetsTypeTree.assetsThirdLevelName != null
+                        && assetsTypeTree.assetsThirdLevelName.equals(assetsName)
+                        && assetsTypeTree.assetsFourthLevelName != null) {
+                    assetsIDs.add(assetsTypeTree.assetsFourthLevelId);
                 }
             }
         } else if (context.getString(R.string.retirement_accounts_name).equals(assetsName)) {
-            for (AssetsTypeQuery query : dataList) {
-                if (query.assetsThirdLevelName != null
-                        && query.assetsThirdLevelName.equals(assetsName)
-                        && query.assetsFourthLevelName != null) {
-                    assetsIDs.add(query.assetsFourthLevelId);
+            for (AssetsTypeTree assetsTypeTree : dataList) {
+                if (assetsTypeTree.assetsThirdLevelName != null
+                        && assetsTypeTree.assetsThirdLevelName.equals(assetsName)
+                        && assetsTypeTree.assetsFourthLevelName != null) {
+                    assetsIDs.add(assetsTypeTree.assetsFourthLevelId);
                 }
             }
         } else if (context.getString(R.string.taxable_accounts_name).equals(assetsName)) {
-            for (AssetsTypeQuery query : dataList) {
-                if (query.assetsThirdLevelName != null
-                        && query.assetsThirdLevelName.equals(assetsName)
-                        && query.assetsFourthLevelName != null) {
-                    assetsIDs.add(query.assetsFourthLevelId);
+            for (AssetsTypeTree assetsTypeTree : dataList) {
+                if (assetsTypeTree.assetsThirdLevelName != null
+                        && assetsTypeTree.assetsThirdLevelName.equals(assetsName)
+                        && assetsTypeTree.assetsFourthLevelName != null) {
+                    assetsIDs.add(assetsTypeTree.assetsFourthLevelId);
                 }
             }
         } else if (context.getString(R.string.liquid_assets_name).equals(assetsName)) {
-            for (AssetsTypeQuery query : dataList) {
-                if (query.assetsSecondLevelName != null
-                        && query.assetsSecondLevelName.equals(assetsName)
-                        && query.assetsThirdLevelName != null) {
-                    assetsIDs.add(query.assetsThirdLevelId);
+            for (AssetsTypeTree assetsTypeTree : dataList) {
+                if (assetsTypeTree.assetsSecondLevelName != null
+                        && assetsTypeTree.assetsSecondLevelName.equals(assetsName)
+                        && assetsTypeTree.assetsThirdLevelName != null) {
+                    assetsIDs.add(assetsTypeTree.assetsThirdLevelId);
                 }
             }
         } else if (context.getString(R.string.personal_assets_name).equals(assetsName)) {
-            for (AssetsTypeQuery query : dataList) {
-                if (query.assetsSecondLevelName != null
-                        && query.assetsSecondLevelName.equals(assetsName)
-                        && query.assetsThirdLevelName != null) {
-                    assetsIDs.add(query.assetsThirdLevelId);
+            for (AssetsTypeTree assetsTypeTree : dataList) {
+                if (assetsTypeTree.assetsSecondLevelName != null
+                        && assetsTypeTree.assetsSecondLevelName.equals(assetsName)
+                        && assetsTypeTree.assetsThirdLevelName != null) {
+                    assetsIDs.add(assetsTypeTree.assetsThirdLevelId);
                 }
             }
         }

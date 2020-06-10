@@ -3,13 +3,13 @@ package protect.FinanceLord.NetWorthDataTerminal;
 import java.util.ArrayList;
 import java.util.List;
 
-import protect.FinanceLord.Database.LiabilitiesTypeQuery;
+import protect.FinanceLord.Database.LiabilitiesTypeTree;
 
 public class TypeProcessor_Liabilities {
 
-    private List<LiabilitiesTypeQuery> dataList;
+    private List<LiabilitiesTypeTree> dataList;
 
-    public TypeProcessor_Liabilities(List<LiabilitiesTypeQuery> dataList){
+    public TypeProcessor_Liabilities(List<LiabilitiesTypeTree> dataList){
         this.dataList = dataList;
     }
 
@@ -17,30 +17,30 @@ public class TypeProcessor_Liabilities {
         List<DataCarrier_Liabilities> subGroupLiabilities = new ArrayList<>();
 
         if (level == 0) {
-            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList) {
-                if (liabilitiesTypeQuery.liabilitiesFirstLevelName != null) {
+            for (LiabilitiesTypeTree liabilitiesTypeTree : dataList) {
+                if (liabilitiesTypeTree.liabilitiesFirstLevelName != null) {
 
-                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesFirstLevelName, liabilitiesTypeQuery.liabilitiesFirstLevelId, 0);
+                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeTree.liabilitiesFirstLevelName, liabilitiesTypeTree.liabilitiesFirstLevelId, 0);
                     addTypeToSubGroup(dataCarrier, subGroupLiabilities);
                 }
             }
         } else if (level == 1) {
-            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList) {
-                if (liabilitiesTypeQuery.liabilitiesFirstLevelName != null
-                        && liabilitiesTypeQuery.liabilitiesFirstLevelName.equals(parentGroupLabel)
-                        && liabilitiesTypeQuery.liabilitiesSecondLevelName != null) {
+            for (LiabilitiesTypeTree liabilitiesTypeTree : dataList) {
+                if (liabilitiesTypeTree.liabilitiesFirstLevelName != null
+                        && liabilitiesTypeTree.liabilitiesFirstLevelName.equals(parentGroupLabel)
+                        && liabilitiesTypeTree.liabilitiesSecondLevelName != null) {
 
-                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesSecondLevelName, liabilitiesTypeQuery.liabilitiesSecondLevelId, 1);
+                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeTree.liabilitiesSecondLevelName, liabilitiesTypeTree.liabilitiesSecondLevelId, 1);
                     addTypeToSubGroup(dataCarrier, subGroupLiabilities);
                 }
             }
         } else if (level == 2) {
-            for (LiabilitiesTypeQuery liabilitiesTypeQuery: dataList) {
-                if (liabilitiesTypeQuery.liabilitiesSecondLevelName != null
-                        && liabilitiesTypeQuery.liabilitiesSecondLevelName.equals(parentGroupLabel)
-                        && liabilitiesTypeQuery.liabilitiesThirdLevelName != null) {
+            for (LiabilitiesTypeTree liabilitiesTypeTree : dataList) {
+                if (liabilitiesTypeTree.liabilitiesSecondLevelName != null
+                        && liabilitiesTypeTree.liabilitiesSecondLevelName.equals(parentGroupLabel)
+                        && liabilitiesTypeTree.liabilitiesThirdLevelName != null) {
 
-                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeQuery.liabilitiesThirdLevelName, liabilitiesTypeQuery.liabilitiesThirdLevelId, 2);
+                    DataCarrier_Liabilities dataCarrier = new DataCarrier_Liabilities(liabilitiesTypeTree.liabilitiesThirdLevelName, liabilitiesTypeTree.liabilitiesThirdLevelId, 2);
                     addTypeToSubGroup(dataCarrier, subGroupLiabilities);
                 }
             }

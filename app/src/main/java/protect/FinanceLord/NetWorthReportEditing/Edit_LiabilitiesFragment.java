@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesTypeDao;
-import protect.FinanceLord.Database.LiabilitiesTypeQuery;
+import protect.FinanceLord.Database.LiabilitiesTypeTree;
 import protect.FinanceLord.Database.LiabilitiesValue;
 import protect.FinanceLord.Database.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthDataTerminal.DataProcessor_Liabilities;
@@ -138,7 +138,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
                 List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                List<LiabilitiesTypeQuery> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
+                List<LiabilitiesTypeTree> liabilitiesTypes = liabilitiesTypeDao.queryGroupedLiabilitiesType();
 
                 Log.d("Edit_LFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
                 for (LiabilitiesValue liabilitiesValue : liabilitiesValues){

@@ -1,6 +1,6 @@
 package protect.FinanceLord.Database;
 // tree structure
-public class AssetsTypeQuery {
+public class AssetsTypeTree {
 
     public int assetsFirstLevelId;
     public String assetsFirstLevelName;
