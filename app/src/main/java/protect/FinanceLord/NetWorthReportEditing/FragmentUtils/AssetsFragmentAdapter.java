@@ -25,27 +25,27 @@ import protect.FinanceLord.R;
 
 public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
-    private ValueTreeProcessor_Assets dataProcessor;
-    private TypeTreeProcessor_Assets typeProcessor;
-    private List<NodeContainer_Assets> sectionDataSet;
-    private int level;
+    private ValueTreeProcessor_Assets valueTreeProcessor;
+    private TypeTreeProcessor_Assets typeTreeProcessor;
+    private List<NodeContainer_Assets> currentLevelNodesContainers;
     private Context context;
+    private int level;
 
-    public AssetsFragmentAdapter(Context context, ValueTreeProcessor_Assets dataProcessor, TypeTreeProcessor_Assets typeProcessor, int level, String parentSection) {
+    public AssetsFragmentAdapter(Context context, ValueTreeProcessor_Assets valueTreeProcessor, TypeTreeProcessor_Assets typeTreeProcessor, int level, String parentNodeName) {
         this.context = context;
-        this.dataProcessor = dataProcessor;
-        this.typeProcessor = typeProcessor;
+        this.valueTreeProcessor = valueTreeProcessor;
+        this.typeTreeProcessor = typeTreeProcessor;
+        this.currentLevelNodesContainers = typeTreeProcessor.getSubGroup(parentNodeName, level);
         this.level = level;
-        this.sectionDataSet = typeProcessor.getSubGroup(parentSection, level);
     }
 
     public String getAssetsName(int position) {
-        return this.sectionDataSet.get(position).assetsTypeName;
+        return this.currentLevelNodesContainers.get(position).assetsTypeName;
     }
 
     @Override
     public int getGroupCount() {
-        return sectionDataSet.size();
+        return currentLevelNodesContainers.size();
     }
 
     @Override
@@ -55,13 +55,13 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int i) {
-        return sectionDataSet.get(i);
+        return currentLevelNodesContainers.get(i);
     }
 
     @Override
     public Object getChild(int i, int i1) {
         String assetsTypeName = getAssetsName(i);
-        List<NodeContainer_Assets> carriers = typeProcessor.getSubGroup(assetsTypeName, level + 1);
+        List<NodeContainer_Assets> carriers = typeTreeProcessor.getSubGroup(assetsTypeName, level + 1);
         return carriers.get(i1);
     }
 
@@ -86,19 +86,19 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         if (level == 1) {
             convertView = inflater.inflate(R.layout.assets_list_row_first_category, null);
             TextView textView = convertView.findViewById(R.id.assetsRowParentText);
-            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+            textView.setText(this.currentLevelNodesContainers.get(position).assetsTypeName);
 
-        } else if (level == 2 && sectionDataSet.get(position).assetsTypeId != 29
-                              && sectionDataSet.get(position).assetsTypeId != 30
-                              && sectionDataSet.get(position).assetsTypeId != 31) {
+        } else if (level == 2 && currentLevelNodesContainers.get(position).assetsTypeId != 29
+                              && currentLevelNodesContainers.get(position).assetsTypeId != 30
+                              && currentLevelNodesContainers.get(position).assetsTypeId != 31) {
             convertView = inflater.inflate(R.layout.assets_list_items, null);
             TextView textView = convertView.findViewById(R.id.assetsRowThirdText);
-            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+            textView.setText(this.currentLevelNodesContainers.get(position).assetsTypeName);
 
-            NodeContainer_Assets dataCarrier = this.sectionDataSet.get(position);
+            NodeContainer_Assets dataCarrier = this.currentLevelNodesContainers.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
-            AssetsValue assetsValue = dataProcessor.getAssetValue(dataCarrier.assetsTypeId);
+            AssetsValue assetsValue = valueTreeProcessor.getAssetValue(dataCarrier.assetsTypeId);
 
             if (assetsValue != null) {
                 DecimalFormat decimalFormat = new DecimalFormat();
@@ -111,29 +111,29 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
         } else if (level == 2) {
             convertView = inflater.inflate(R.layout.assets_list_row_second_category, null);
             TextView textView = convertView.findViewById(R.id.assetsRowSecondCategoryText);
-            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+            textView.setText(this.currentLevelNodesContainers.get(position).assetsTypeName);
 
         } else if (level == 3) {
             convertView = inflater.inflate(R.layout.assets_list_items, null);
             TextView textView = convertView.findViewById(R.id.assetsRowThirdText);
-            textView.setText(this.sectionDataSet.get(position).assetsTypeName);
+            textView.setText(this.currentLevelNodesContainers.get(position).assetsTypeName);
 
-            NodeContainer_Assets dataCarrier = this.sectionDataSet.get(position);
+            NodeContainer_Assets nodeContainer = this.currentLevelNodesContainers.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
-            AssetsValue assetsValue = dataProcessor.getAssetValue(dataCarrier.assetsTypeId);
+            AssetsValue assetsValue = valueTreeProcessor.getAssetValue(nodeContainer.assetsTypeId);
             if (assetsValue != null) {
                 DecimalFormat decimalFormat = new DecimalFormat();
                 String strValue = decimalFormat.format(assetsValue.getAssetsValue());
                 editText.setText(strValue);
             }
 
-            this.addTextListener(editText, dataCarrier);
+            this.addTextListener(editText, nodeContainer);
         }
         return convertView;
     }
 
-    void addTextListener(EditText editText, final NodeContainer_Assets dataCarrier) {
+    void addTextListener(EditText editText, final NodeContainer_Assets nodeContainer) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -148,14 +148,14 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
                     String numberStr = text.replace(",", "");
                     final float assetValue = Float.parseFloat(numberStr);
 
-                    dataProcessor.setAssetValue(dataCarrier.assetsTypeId, assetValue);
+                    valueTreeProcessor.setAssetValue(nodeContainer.assetsTypeId, assetValue);
                     Log.d("AFragmentAdapter", "Value changed: " + text + ", float value: " + assetValue);
 
                 } else {
                     String numberStr = "0.00";
                     final float assetsValue = Float.parseFloat(numberStr);
 
-                    dataProcessor.setAssetValue(dataCarrier.assetsTypeId, assetsValue);
+                    valueTreeProcessor.setAssetValue(nodeContainer.assetsTypeId, assetsValue);
                     Log.d("AFragmentAdapter","Value empty, set to 0 " + ", float value: " + assetsValue);
                 }
             }
@@ -164,20 +164,20 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        final NodeContainer_Assets sectionData = sectionDataSet.get(groupPosition);
-        List<NodeContainer_Assets> children = typeProcessor.getSubGroup(sectionData.assetsTypeName, level + 1);
+        final NodeContainer_Assets sectionData = currentLevelNodesContainers.get(groupPosition);
+        List<NodeContainer_Assets> children = typeTreeProcessor.getSubGroup(sectionData.assetsTypeName, level + 1);
 
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.assets_list_row_first_category, null);
             TextView textView = convertView.findViewById(R.id.assetsRowParentText);
-            textView.setText(this.sectionDataSet.get(childPosition).assetsTypeName);
+            textView.setText(this.currentLevelNodesContainers.get(childPosition).assetsTypeName);
             return convertView;
 
         } else {
             final NetWorthExpandableListView nextLevelExpandableListView = new NetWorthExpandableListView(context);
-            AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(sectionDataSet, typeProcessor, level + 1);
-            nextLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, dataProcessor, typeProcessor,level + 1, sectionData.assetsTypeName));
+            AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(currentLevelNodesContainers, typeTreeProcessor, level + 1);
+            nextLevelExpandableListView.setAdapter(new AssetsFragmentAdapter(context, valueTreeProcessor, typeTreeProcessor,level + 1, sectionData.assetsTypeName));
             nextLevelExpandableListView.setOnChildClickListener(listener);
             nextLevelExpandableListView.setDivider(null);
 
