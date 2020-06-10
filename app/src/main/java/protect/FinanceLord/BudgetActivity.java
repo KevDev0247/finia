@@ -63,25 +63,25 @@ public class BudgetActivity extends AppCompatActivity {
 
                 List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
                 allBudgetsTypes = new ArrayList<>(budgetsTypes);
-                final List<BudgetInfo> financialRecords = budgetInfoDao.queryFinancialRecords();
+                final List<BudgetInfo> budgetInfoList = budgetInfoDao.queryFinancialRecords();
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if (initialize) {
                             setUpAddButton();
-                            setUpBudgetsListView(financialRecords);
+                            setUpBudgetsListView(budgetInfoList);
                         } else {
                             if (budgetListAdapter != null) {
-                                for (BudgetInfo financialRecord : financialRecords) {
-                                    Log.d(TAG, " this financial record id is " + financialRecord.budgetCategoryId +
-                                            " total value is " + financialRecord.budgetTotal +
-                                            " total usage is" + financialRecord.totalUsage +
-                                            " date start is " + financialRecord.dateStart +
-                                            " date end is " + financialRecord.dateEnd);
+                                for (BudgetInfo budgetInfo : budgetInfoList) {
+                                    Log.d(TAG, " this financial record id is " + budgetInfo.budgetCategoryId +
+                                            " total value is " + budgetInfo.budgetTotal +
+                                            " total usage is" + budgetInfo.totalUsage +
+                                            " date start is " + budgetInfo.dateStart +
+                                            " date end is " + budgetInfo.dateEnd);
                                 }
                                 budgetListAdapter.clear();
-                                budgetListAdapter.addAll(financialRecords);
+                                budgetListAdapter.addAll(budgetInfoList);
                                 budgetListAdapter.notifyDataSetChanged();
                             }
                         }
@@ -105,15 +105,15 @@ public class BudgetActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpBudgetsListView(final List<BudgetInfo> financialRecords) {
+    private void setUpBudgetsListView(final List<BudgetInfo> budgetInfoList) {
         ListView budgetsList = findViewById(R.id.budgets_list);
-        budgetListAdapter = new BudgetListAdapter(this, financialRecords, allBudgetsTypes);
+        budgetListAdapter = new BudgetListAdapter(this, budgetInfoList, allBudgetsTypes);
         budgetsList.setAdapter(budgetListAdapter);
 
         budgetsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BudgetInfo financialRecord = financialRecords.get(position);
+                BudgetInfo financialRecord = budgetInfoList.get(position);
 
                 Intent intent = new Intent();
                 intent.putExtra(getString(R.string.budget_categories_key), allBudgetsTypes);

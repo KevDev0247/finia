@@ -48,7 +48,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/name"
                             android:textColor="#ffffff"
-                            android:textSize="20sp"/>
+                            android:textSize="18sp"/>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -104,14 +104,14 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/usage"
                                 android:textColor="#ffffff"
-                                android:textSize="20sp"/>
+                                android:textSize="18sp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/slash"
                                 android:textColor="#ffffff"
-                                android:textSize="20sp"/>
+                                android:textSize="18sp"/>
 
                             <TextView
                                 android:id="@+id/budget_item_total"
@@ -119,7 +119,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/total"
                                 android:textColor="#ffffff"
-                                android:textSize="20sp"/>
+                                android:textSize="18sp"/>
 
                         </LinearLayout>
 

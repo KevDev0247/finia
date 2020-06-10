@@ -62,7 +62,7 @@ public class BudgetListAdapter extends ArrayAdapter<BudgetInfo> {
         if (!String.valueOf(budgetInfo.totalUsage).isEmpty()) {
             budgetUsage.setText(String.valueOf(-budgetInfo.totalUsage));
         } else {
-            budgetUsage.setText(0);
+            budgetUsage.setText(-(0));
         }
         for (BudgetsType budgetsType : budgetsTypes) {
             if (budgetsType.getBudgetsCategoryId() == budgetInfo.budgetCategoryId) {

@@ -51,7 +51,9 @@ public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
             netWorthDifferenceSymbol.setText(R.string.negative_symbol);
 
         } else if (Float.parseFloat(dataSource.difference) == 0) {
+            View differenceBlockView = convertView.findViewById(R.id.past_report_item_difference_block);
             netWorthDifferenceSymbol.setText("");
+            differenceBlockView.setBackgroundResource(R.drawable.net_neutral);
         }
 
         return convertView;

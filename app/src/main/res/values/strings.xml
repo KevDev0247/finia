@@ -139,7 +139,10 @@
     <string name="education_name">Education</string>
     <string name="savings_name">Savings</string>
     <string name="entertainment_name">Entertainment</string>
-
+    <string name="salary_name">Salary</string>
+    <string name="dividend_name">Dividend</string>
+    <string name="rent_name">Rent</string>
+    <string name="interests_name">Interests</string>
 
     <string name="image_of_assets">Image of assets</string>
     <string name="title_activity_net_worth_edit_reports">NetWorthEditReportsActivity</string>

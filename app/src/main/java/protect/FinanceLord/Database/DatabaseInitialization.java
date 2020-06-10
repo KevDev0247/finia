@@ -337,6 +337,10 @@ public class DatabaseInitialization{
         BudgetsType type10 = new BudgetsType();
         BudgetsType type11 = new BudgetsType();
         BudgetsType type12 = new BudgetsType();
+        BudgetsType type13 = new BudgetsType();
+        BudgetsType type14 = new BudgetsType();
+        BudgetsType type15 = new BudgetsType();
+        BudgetsType type16 = new BudgetsType();
 
         type1.setBudgetsName(context.getString(R.string.housing_name));
         type2.setBudgetsName(context.getString(R.string.transportation_name));
@@ -350,6 +354,10 @@ public class DatabaseInitialization{
         type10.setBudgetsName(context.getString(R.string.education_name));
         type11.setBudgetsName(context.getString(R.string.savings_name));
         type12.setBudgetsName(context.getString(R.string.entertainment_name));
+        type13.setBudgetsName(context.getString(R.string.salary_name));
+        type14.setBudgetsName(context.getString(R.string.dividend_name));
+        type15.setBudgetsName(context.getString(R.string.rent_name));
+        type16.setBudgetsName(context.getString(R.string.interests_name));
 
         budgetsTypes.add(type1);
         budgetsTypes.add(type2);
@@ -363,6 +371,10 @@ public class DatabaseInitialization{
         budgetsTypes.add(type10);
         budgetsTypes.add(type11);
         budgetsTypes.add(type12);
+        budgetsTypes.add(type13);
+        budgetsTypes.add(type14);
+        budgetsTypes.add(type15);
+        budgetsTypes.add(type16);
 
         budgetsTypeDao.insertBudgetsTypes(budgetsTypes);
     }

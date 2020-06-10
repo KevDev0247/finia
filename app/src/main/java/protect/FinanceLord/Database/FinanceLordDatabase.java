@@ -16,7 +16,7 @@ import protect.FinanceLord.DAOs.LiabilitiesValueDao;
 import protect.FinanceLord.DAOs.ReportItemInfoDao;
 import protect.FinanceLord.DAOs.TransactionsDao;
 
-@Database(entities = {AssetsType.class, AssetsValue.class, LiabilitiesType.class, LiabilitiesValue.class, BudgetsType.class, BudgetsValue.class, Transactions.class}, version = 10)
+@Database(entities = {AssetsType.class, AssetsValue.class, LiabilitiesType.class, LiabilitiesValue.class, BudgetsType.class, BudgetsValue.class, Transactions.class}, version = 11)
 public abstract class FinanceLordDatabase extends RoomDatabase {
 
     public abstract AssetsTypeDao assetsTypeDao();
