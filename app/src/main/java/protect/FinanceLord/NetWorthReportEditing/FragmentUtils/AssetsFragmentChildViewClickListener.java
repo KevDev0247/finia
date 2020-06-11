@@ -9,6 +9,9 @@ import java.util.List;
 import protect.FinanceLord.NetWorthDataStructure.NodeContainer_Assets;
 import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Assets;
 
+/**
+ * A Listener class that will detect whether a parent of the items in an expandable list has been clicked
+ */
 public class AssetsFragmentChildViewClickListener implements ExpandableListView.OnChildClickListener {
 
     private TypeTreeProcessor_Assets typeProcessor;
