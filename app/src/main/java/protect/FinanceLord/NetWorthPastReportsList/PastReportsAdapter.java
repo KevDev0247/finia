@@ -14,12 +14,34 @@ import java.util.List;
 
 import protect.FinanceLord.R;
 
+/**
+ * The adapter for list of net worth items on the report sheet.
+ * Each report item acts as a link to the report sheet.
+ * Each report item contains the data of the report, the net worth value,
+ * and the difference of net worth compare to the last period.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
 
     public PastReportsAdapter(@NonNull Context context, List<ReportItemsDataModel> dataModels) {
         super(context, 0, dataModels);
     }
 
+    /**
+     * Create and return the view for each item in the list.
+     * The method first retrieve the data source of the current item, which contains the information to be displayed.
+     * Then the method set the content of the view if it is not initialized.
+     * Next, all the widgets on the UI are initialized.
+     * Lastly, the data is displayed on to the widgets.
+     * The color of difference block is also determined here by whether the difference is positive.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param position the position of the current item in the list
+     * @param convertView the view class of this item
+     * @param parent the ViewGroup of this list
+     */
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ReportItemsDataModel dataSource = getItem(position);
