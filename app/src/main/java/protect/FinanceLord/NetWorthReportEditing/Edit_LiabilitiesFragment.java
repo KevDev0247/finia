@@ -32,6 +32,15 @@ import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragme
 import protect.FinanceLord.NetWorthReportEditingActivity;
 import protect.FinanceLord.R;
 
+/**
+ * The class for the fragment to edit the liabilities sheet.
+ * The class includes the expandable list, input fields, and commit button.
+ * The custom expandable list in the fragment is a part of UX design designed to improve user experiences to avoid
+ * the scenario when user cannot find the right category and input fields.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class Edit_LiabilitiesFragment extends Fragment {
 
     private Date currentTime;
@@ -45,6 +54,14 @@ public class Edit_LiabilitiesFragment extends Fragment {
         this.currentTime = currentTime;
     }
 
+    /**
+     * Attach the fragment to the activity it belongs to.
+     * In this method, the fragment will retrieve the instance of communicator in the activity
+     * in order to communicate with the activity
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param context the context of this fragment
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -54,6 +71,19 @@ public class Edit_LiabilitiesFragment extends Fragment {
         }
     }
 
+    /**
+     * Create the view of the fragment.
+     * First, the method will first set the view of the content by finding the corresponding layout file through id.
+     * Then, the method will first set the view of the the expandable list view by finding the corresponding layout file through id.
+     * Next, the liabilities types and values are retrieved from database and set up the expandable list view.
+     * Lastly, the method will set up the tree processor and commit logic of the commit button.
+     * The commit logic include how the data was retrieved from the input fields and transferred to the type and value tree processor to prepare for the insertion of the data.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
+     * @param container the container of the group of views.
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View liabilitiesFragmentView = inflater.inflate(R.layout.fragment_edit_liabilities, null);
@@ -67,6 +97,18 @@ public class Edit_LiabilitiesFragment extends Fragment {
         return liabilitiesFragmentView;
     }
 
+    /**
+     * Set up the commit button.
+     * First, the data source in the processor is retrieved and stored into a list.
+     * Then the list of data is traversed and inserted or updated into the database.
+     * Next, the data is displayed onto the expandable list.
+     * Lastly, the data in the processor is deleted.
+     * The data source act as a cache for the expandable list.
+     * After the data is inserted, the data in the data source is cleared.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param commitButton the instance of commit button.
+     */
     private void setUpCommitButton(RelativeLayout commitButton) {
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +166,15 @@ public class Edit_LiabilitiesFragment extends Fragment {
         });
     }
 
+    /**
+     * Initialize liabilities values, types, and tree processor set up.
+     * First, the liabilities values of the date is queried from the database.
+     * Then, with the liabilities values and types queried, the type tree processor and value tree processor.
+     * The data queried is injected into processors as data source, or cache.
+     * Lastly, the tree processors help to set up expandable list.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     private void initializeLiabilities() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -157,6 +208,11 @@ public class Edit_LiabilitiesFragment extends Fragment {
         });
     }
 
+    /**
+     * The communicator that communicate the date from calendar dialog to the fragment.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
         @Override
         public void message(Date date) {
@@ -166,6 +222,11 @@ public class Edit_LiabilitiesFragment extends Fragment {
         }
     };
 
+    /**
+     * Specify the lower bound of the time period, start time.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     private Date getQueryStartTime(){
         Date date;
         Calendar calendar = new GregorianCalendar();
@@ -177,6 +238,11 @@ public class Edit_LiabilitiesFragment extends Fragment {
         return date;
     }
 
+    /**
+     * Specify the upper bound of the time period, end time.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     private Date getQueryEndTime(){
         Date date;
         Calendar calendar = new GregorianCalendar();
