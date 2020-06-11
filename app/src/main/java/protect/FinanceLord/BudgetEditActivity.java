@@ -127,6 +127,7 @@ public class BudgetEditActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                databaseUtils.addTextListener();
                 try {
                     if (getIntent().getExtras().getString(getString(R.string.budget_access_key)).equals(getString(R.string.add_budget_access_key))) {
                         databaseUtils.insertOrUpdateData(true,false, null);
@@ -136,7 +137,6 @@ public class BudgetEditActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                databaseUtils.addTextListener();
             }
         });
 

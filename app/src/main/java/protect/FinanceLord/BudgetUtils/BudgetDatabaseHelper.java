@@ -59,6 +59,12 @@ public class BudgetDatabaseHelper {
             budgetsValue.setBudgetsId(budgetId);
         }
 
+        if (inputUtils.nameInput.getText().toString().isEmpty()) {
+            Log.d(TAG, "no data is inputted for name, an error should be displayed ");
+            inputUtils.nameInputField.setError(context.getString(R.string.budget_name_error_message));
+            invalidInput = true;
+        }
+
         if (!inputUtils.valueInput.getText().toString().isEmpty()) {
             Log.d(TAG, "the budget's value is " + inputUtils.valueInput.getText());
             budgetsValue.setBudgetsValue(Float.parseFloat(inputUtils.valueInput.getText().toString().replace(",", "")));
@@ -94,7 +100,7 @@ public class BudgetDatabaseHelper {
             invalidInput = true;
         }
 
-        if (!inputUtils.nameInput.getText().toString().isEmpty()){
+        if (!inputUtils.nameInput.getText().toString().isEmpty()) {
             for (BudgetsType budgetsType : budgetsTypes) {
                 budgetsValue.setBudgetsCategoryId(0);
                 if (budgetsType.getBudgetsName().equals(inputUtils.nameInput.getText().toString())) {
@@ -109,7 +115,7 @@ public class BudgetDatabaseHelper {
                 return;
             }
         } else {
-            Log.d(TAG, "no data is inputted, an error should be displayed ");
+            Log.d(TAG, "no data is inputted for name, an error should be displayed ");
             inputUtils.nameInputField.setError(context.getString(R.string.budget_name_error_message));
             invalidInput = true;
         }
@@ -167,7 +173,7 @@ public class BudgetDatabaseHelper {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (inputUtils.nameInputField.isErrorEnabled()) {
+                if (inputUtils.valueInputField.isErrorEnabled()) {
                     inputUtils.valueInputField.setErrorEnabled(false);
                 }
             }
