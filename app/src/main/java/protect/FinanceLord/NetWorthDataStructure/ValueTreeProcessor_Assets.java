@@ -19,7 +19,7 @@ import protect.FinanceLord.R;
  * Methods for EDIT action : setAssetValue, setAllAssetsValues.
  * Methods for GROUP action : getAssetsChildrenNodeIDs.
  * Methods for DELETE action : clearAllAssetsValues.
- * Each node of the Assets Value Tree is an AssetsValue object containing information about the asset item including id, name, time.
+ * Each node of the AssetsValueTree is an AssetsValue object containing information about the asset item including id, name, time.
  * The structure of the AssetsValueTree is mapped from the AssetsTypeTree that was queried from the database entity AssetsType.
  * However, in this case, AssetsValueTree is dependent on AssetsTypeTree as Assets Type tree provides each node with
  * its relationship with the other nodes.
@@ -33,7 +33,7 @@ import protect.FinanceLord.R;
  * until the leaf node is reached. The value of the leaf nodes will be returned for the summation of their parent node and other nodes
  * on the same level. This algorithm allows each calculation method to be efficient and independent and thus reusable.
  *
- * @author Owner Kevin Zhijun Wang
+ * @author Owner  Kevin Zhijun Wang
  * @version 2020.0609
  * @see AssetsValue
  */
