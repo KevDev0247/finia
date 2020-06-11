@@ -1,7 +1,7 @@
 package protect.FinanceLord.NetWorthPastReportsList;
 
 /**
- * The class to store important information of each report item.
+ * The class to store important information associated with both assets and liabilities.
  * Report item refers to the item that displays the data and take the user to the report sheet.
  *
  * @author Owner  Kevin Zhijun Wang
