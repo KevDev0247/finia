@@ -128,7 +128,7 @@ public class Report_LiabilitiesFragment extends Fragment {
         });
     }
 
-    public void refreshView(View contentView, List<LiabilitiesValue> categoryLiabilities, List<LiabilitiesValue> previousCategoryLiabilities) {
+    private void refreshView(View contentView, List<LiabilitiesValue> categoryLiabilities, List<LiabilitiesValue> previousCategoryLiabilities) {
         LinearLayout shortTermLiabilitiesList = contentView.findViewById(R.id.short_term_liabilities_list);
         LinearLayout longTermLiabilitiesList = contentView.findViewById(R.id.long_term_liabilities_list);
 

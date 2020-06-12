@@ -98,7 +98,7 @@ public class Report_AssetsFragment extends Fragment {
         });
     }
 
-    public void populateDataModels(final AssetsValueDao assetsValueDao, final Date itemTime, final List<AssetsValue> categoryAssets, final List<AssetsValue> previousCategoryAssets) {
+    private void populateDataModels(final AssetsValueDao assetsValueDao, final Date itemTime, final List<AssetsValue> categoryAssets, final List<AssetsValue> previousCategoryAssets) {
         List<NodeContainer_Assets> liquidAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
         List<NodeContainer_Assets> personalAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
         List<NodeContainer_Assets> taxableAccountsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.taxable_accounts_name),3);

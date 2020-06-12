@@ -15,7 +15,7 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
 
     private String fragmentTag;
 
-    public ReportListAdapter(Context context, ArrayList<NetWorthItemsDataModel> dataSources, String fragmentName) {
+    ReportListAdapter(Context context, ArrayList<NetWorthItemsDataModel> dataSources, String fragmentName) {
         super(context, 0, dataSources);
         this.fragmentTag = fragmentName;
     }
