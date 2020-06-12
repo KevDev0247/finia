@@ -16,17 +16,34 @@ import java.util.Date;
 import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.R;
 
+/**
+ * The dialog that allows user to pick dates
+ * The CalendarDateBroadcast communicator is used to communicate the date with the other entity
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class CalendarDialog extends DialogFragment {
 
     private DatePicker datePicker;
     private CalendarDateBroadcast communicator;
     private TimeProcessor timeUtils = new TimeProcessor();
 
-
     public CalendarDialog(CalendarDateBroadcast communicator){
         this.communicator = communicator;
     }
 
+    /**
+     * Create the view of the dialog.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * Then the method will set up the confirm and cancel button.
+     * Lastly, the onClickListener was set to communicate the date once the date is confirmed.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
+     * @param container the container of the group of views.
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 

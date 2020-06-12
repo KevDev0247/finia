@@ -7,9 +7,24 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+/**
+ * A utility class to process time
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class TimeProcessor {
 
-    public Date setTime(int year, int month, int day){
+    /**
+     * The method is used to get rid of hours, minutes, and seconds
+     * in order for the database to better pinpoint a time of the net worth item.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param year the year of the time
+     * @param month the month of the time
+     * @param day the date of the time
+     */
+    Date setTime(int year, int month, int day){
         Calendar calendar = new GregorianCalendar();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
