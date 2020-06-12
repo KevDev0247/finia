@@ -25,6 +25,13 @@ import protect.FinanceLord.NetWorthDataStructure.NodeContainer_Liabilities;
 import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Liabilities;
 import protect.FinanceLord.R;
 
+/**
+ * The fragment for the Liabilities Fragment sheet.
+ * The fragment contains the list of all the liabilities items.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class Report_LiabilitiesFragment extends Fragment {
 
     private Date itemTime;
@@ -37,7 +44,16 @@ public class Report_LiabilitiesFragment extends Fragment {
         this.itemTime = itemTime;
     }
 
-    @Nullable
+    /**
+     * Create the view of the fragment.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * Then, the method calls the method to get data from the database.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
+     * @param container the container of the group of views.
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         contentView = inflater.inflate(R.layout.fragment_report_liabilities, null);
@@ -47,6 +63,15 @@ public class Report_LiabilitiesFragment extends Fragment {
         return contentView;
     }
 
+    /**
+     * Retrieve the data from database.
+     * The method will query the current item value and the previous value of the asset.
+     * The query will be performed in a separate thread to prevent locking the UI thread for a long period of time.
+     * Lastly, a method to populate the data models will be called to prepare the data source for ListViews
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param itemTime the time of the item.
+     */
     private void getDataFromDatabase(final Date itemTime) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -78,10 +103,23 @@ public class Report_LiabilitiesFragment extends Fragment {
         });
     }
 
-    public void populateDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime, final List<LiabilitiesValue> categoryLiabilities, final List<LiabilitiesValue> previousCategoryLiabilities) {
+    /**
+     * Populate the data models with data.
+     * The data are all related to items that are on the parent nodes.
+     * Once, the population of data is complete, the method to refresh the view will be called.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param liabilitiesValueDao the data access object to insert LiabilitiesValue object.
+     * @param itemTime the time of the item.
+     * @param categoryLiabilities the value items on the parent node.
+     * @param previousCategoryLiabilities the value of the previous items on the parent node.
+     */
+    private void populateDataModel(LiabilitiesValueDao liabilitiesValueDao, Date itemTime, final List<LiabilitiesValue> categoryLiabilities, final List<LiabilitiesValue> previousCategoryLiabilities) {
+        /* retrieve all values of leaf nodes and group them into lists */
         List<NodeContainer_Liabilities> shortTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.short_term_liabilities_name),2);
         List<NodeContainer_Liabilities> longTermLiabilitiesTypes = liabilitiesTypeProcessor.getSubGroup(getString(R.string.long_term_liabilities_name), 2);
 
+        /* Set up short term liabilities item */
         for (NodeContainer_Liabilities dataCarrier : shortTermLiabilitiesTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisLiabilityValue = getString(R.string.no_data_initialization);
@@ -101,6 +139,7 @@ public class Report_LiabilitiesFragment extends Fragment {
             }
         }
 
+        /* Set up long term liabilities item */
         for (NodeContainer_Liabilities dataCarrier : longTermLiabilitiesTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisLiabilityValue = getString(R.string.no_data_initialization);
@@ -128,13 +167,26 @@ public class Report_LiabilitiesFragment extends Fragment {
         });
     }
 
+    /**
+     * Refresh the list views.
+     * The method will load the data from the data models to the UI widgets and set up the difference blocks.
+     * The list adapters will be prepared for delivering the data to UI widgets.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param contentView the view of the fragment.
+     * @param categoryLiabilities the value items on the parent node.
+     * @param previousCategoryLiabilities the value of the previous items on the parent node.
+     */
     private void refreshView(View contentView, List<LiabilitiesValue> categoryLiabilities, List<LiabilitiesValue> previousCategoryLiabilities) {
+        /* Initialize all the layout of the lists */
         LinearLayout shortTermLiabilitiesList = contentView.findViewById(R.id.short_term_liabilities_list);
         LinearLayout longTermLiabilitiesList = contentView.findViewById(R.id.long_term_liabilities_list);
 
+        /* Initialize all the adapters for the views */
         ReportListAdapter shortTermLiabilitiesAdapter = new ReportListAdapter(getContext(), shortTermLiabilitiesDataSource, getString(R.string.report_liabilities_fragment_key));
         ReportListAdapter longTermLiabilitiesAdapter = new ReportListAdapter(getContext(), longTermLiabilitiesDataSource, getString(R.string.report_liabilities_fragment_key));
 
+        /* Initialize all UI widgets */
         TextView shortTermLiabilitiesValue = contentView.findViewById(R.id.report_short_term_liabilities_value);
         View shortTermLiabilitiesDifferenceBlock = contentView.findViewById(R.id.report_short_term_liabilities_difference_block);
         TextView shortTermLiabilitiesSymbol = contentView.findViewById(R.id.report_short_term_liabilities_symbol);
@@ -145,6 +197,7 @@ public class Report_LiabilitiesFragment extends Fragment {
         TextView longTermLiabilitiesSymbol = contentView.findViewById(R.id.report_long_term_liabilities_symbol);
         TextView longTermLiabilitiesDifference = contentView.findViewById(R.id.report_long_term_liabilities_difference);
 
+        /* Load data to the Short Term Liabilities to UI widgets */
         shortTermLiabilitiesValue.setText(String.valueOf(categoryLiabilities.get(0).getLiabilitiesValue()));
         if (previousCategoryLiabilities.get(0) == null) {
             shortTermLiabilitiesSymbol.setText("");
@@ -166,6 +219,7 @@ public class Report_LiabilitiesFragment extends Fragment {
             }
         }
 
+        /* Load data to the Long Term Liabilities to UI widgets */
         longTermLiabilitiesValue.setText(String.valueOf(categoryLiabilities.get(1).getLiabilitiesValue()));
         if (previousCategoryLiabilities.get(1) == null) {
             longTermLiabilitiesSymbol.setText("");

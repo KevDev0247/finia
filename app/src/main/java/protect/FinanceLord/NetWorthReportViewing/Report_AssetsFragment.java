@@ -26,6 +26,13 @@ import protect.FinanceLord.NetWorthDataStructure.NodeContainer_Assets;
 import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Assets;
 import protect.FinanceLord.R;
 
+/**
+ * The fragment for the Assets Fragment sheet.
+ * The fragment contains the list of all the assets items.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class Report_AssetsFragment extends Fragment {
 
     private Date itemTime;
@@ -41,6 +48,16 @@ public class Report_AssetsFragment extends Fragment {
         this.itemTime = itemTime;
     }
 
+    /**
+     * Create the view of the fragment.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * Then, the method calls the method to get data from the database.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
+     * @param container the container of the group of views.
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         contentView = inflater.inflate(R.layout.fragment_report_assets, null);
@@ -51,6 +68,15 @@ public class Report_AssetsFragment extends Fragment {
         return contentView;
     }
 
+    /**
+     * Retrieve the data from database.
+     * The method will query the current item value and the previous value of the asset.
+     * The query will be performed in a separate thread to prevent locking the UI thread for a long period of time.
+     * Lastly, a method to populate the data models will be called to prepare the data source for ListViews
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param itemTime the time of the item.
+     */
     private void getDataFromDatabase(final Date itemTime) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -98,13 +124,26 @@ public class Report_AssetsFragment extends Fragment {
         });
     }
 
+    /**
+     * Populate the data models with data.
+     * The data are all related to items that are on the parent nodes.
+     * Once, the population of data is complete, the method to refresh the view will be called.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param assetsValueDao the data access object to insert AssetsValue object.
+     * @param itemTime the time of the item.
+     * @param categoryAssets the value items on the parent node.
+     * @param previousCategoryAssets the value of the previous items on the parent node.
+     */
     private void populateDataModels(final AssetsValueDao assetsValueDao, final Date itemTime, final List<AssetsValue> categoryAssets, final List<AssetsValue> previousCategoryAssets) {
+        /* retrieve all values of leaf nodes and group them into lists */
         List<NodeContainer_Assets> liquidAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
         List<NodeContainer_Assets> personalAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
         List<NodeContainer_Assets> taxableAccountsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.taxable_accounts_name),3);
         List<NodeContainer_Assets> retirementAccountsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.retirement_accounts_name), 3);
         List<NodeContainer_Assets> ownershipInterestsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.ownership_interest_name), 3);
 
+        /* Set up liquid assets item */
         for (NodeContainer_Assets dataCarrier : liquidAssetsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
@@ -124,6 +163,7 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
+        /* Set up personal assets item */
         for (NodeContainer_Assets dataCarrier : personalAssetsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
@@ -143,6 +183,7 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
+        /* Set up taxable accounts item */
         for (NodeContainer_Assets dataCarrier : taxableAccountsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
@@ -162,6 +203,7 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
+        /* Set up retirement accounts item */
         for (NodeContainer_Assets dataCarrier : retirementAccountsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
@@ -181,6 +223,7 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
+        /* Set up ownership interests item */
         for (NodeContainer_Assets dataCarrier : ownershipInterestsTypes) {
             String difference = getString(R.string.no_data_initialization);
             String thisAssetValue = getString(R.string.no_data_initialization);
@@ -208,19 +251,32 @@ public class Report_AssetsFragment extends Fragment {
         });
     }
 
-    public void refreshView(View contentView, List<AssetsValue> categoryAssets, List<AssetsValue> previousCategoryAssets) {
+    /**
+     * Refresh the list views.
+     * The method will load the data from the data models to the UI widgets and set up the difference blocks.
+     * The list adapters will be prepared for delivering the data to UI widgets.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param contentView the view of the fragment.
+     * @param categoryAssets the value items on the parent node.
+     * @param previousCategoryAssets the value of the previous items on the parent node.
+     */
+    private void refreshView(View contentView, List<AssetsValue> categoryAssets, List<AssetsValue> previousCategoryAssets) {
+        /* Initialize all the layout of the lists */
         LinearLayout liquidAssetsList = contentView.findViewById(R.id.liquid_assets_list);
         LinearLayout personalAssetsList = contentView.findViewById(R.id.personal_assets_list);
         LinearLayout taxableAccountsList = contentView.findViewById(R.id.taxable_accounts_list);
         LinearLayout retirementAccountsList = contentView.findViewById(R.id.retirement_accounts_list);
         LinearLayout ownershipInterestsList = contentView.findViewById(R.id.ownership_interests_list);
 
+        /* Initialize all the adapters for the views */
         ReportListAdapter liquidAssetsAdapter = new ReportListAdapter(getContext(), liquidAssetsDataSource, getString(R.string.report_assets_fragment_key));
         ReportListAdapter personalAssetsAdapter = new ReportListAdapter(getContext(), personalAssetsDataSource, getString(R.string.report_assets_fragment_key));
         ReportListAdapter taxableAccountsAdapter = new ReportListAdapter(getContext(), taxableAccountsDataSource, getString(R.string.report_assets_fragment_key));
         ReportListAdapter retirementAccountsAdapter = new ReportListAdapter(getContext(), retirementAccountsDataSource, getString(R.string.report_assets_fragment_key));
         ReportListAdapter ownershipInterestsAdapter = new ReportListAdapter(getContext(), ownershipInterestsDataSource, getString(R.string.report_assets_fragment_key));
 
+        /* Initialize all UI widgets */
         TextView liquidAssetsValue = contentView.findViewById(R.id.report_liquid_assets_value);
         View liquidAssetsDifferenceBlock = contentView.findViewById(R.id.report_liquid_assets_difference_block);
         TextView liquidAssetsSymbol = contentView.findViewById(R.id.report_liquid_assets_symbol);
@@ -251,6 +307,7 @@ public class Report_AssetsFragment extends Fragment {
         TextView ownershipInterestsSymbol = contentView.findViewById(R.id.report_ownership_interests_symbol);
         TextView ownershipInterestsDifference = contentView.findViewById(R.id.report_ownership_interests_difference);
 
+        /* Load data to the Liquid Assets UI widgets */
         liquidAssetsValue.setText(String.valueOf(categoryAssets.get(0).getAssetsValue()));
         if (previousCategoryAssets.get(0) == null) {
             liquidAssetsSymbol.setText("");
@@ -272,6 +329,7 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
+        /* Load data to the Invested Assets UI widgets */
         investedAssetsValue.setText(String.valueOf(categoryAssets.get(1).getAssetsValue()));
         if (previousCategoryAssets.get(1) == null) {
             investedAssetsSymbol.setText("");
@@ -293,6 +351,7 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
+        /* Load data to the Personal Assets UI widgets */
         personalAssetsValue.setText(String.valueOf(categoryAssets.get(2).getAssetsValue()));
         if (previousCategoryAssets.get(2) == null) {
             personalAssetsSymbol.setText("");
@@ -314,6 +373,7 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
+        /* Load data to the Taxable Accounts UI widgets */
         taxableAccountsValue.setText(String.valueOf(categoryAssets.get(3).getAssetsValue()));
         if (previousCategoryAssets.get(3) == null) {
             taxableAccountsSymbol.setText("");
@@ -335,6 +395,7 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
+        /* Load data to the Retirement Accounts UI widgets */
         retirementAccountsValue.setText(String.valueOf(categoryAssets.get(4).getAssetsValue()));
         if (previousCategoryAssets.get(4) == null) {
             retirementAccountsSymbol.setText("");
@@ -356,6 +417,7 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
+        /* Load data to the Ownership Interests UI widgets */
         ownershipInterestsValue.setText(String.valueOf(categoryAssets.get(5).getAssetsValue()));
         if (previousCategoryAssets.get(5) == null) {
             ownershipInterestsSymbol.setText("");
@@ -377,6 +439,7 @@ public class Report_AssetsFragment extends Fragment {
             }
         }
 
+        /* Add the item view to the corresponding list */
         for (int i = 0; i < liquidAssetsAdapter.getCount(); i++) {
             View itemView = liquidAssetsAdapter.getView(i, null, liquidAssetsList);
             liquidAssetsList.addView(itemView);
