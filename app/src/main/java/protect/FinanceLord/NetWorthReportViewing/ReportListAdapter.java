@@ -57,7 +57,7 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
             assetValue.setText(dataSource.itemValue);
             assetDifference.setText(dataSource.difference);
 
-            if (dataSource.difference.equals(getContext().getString(R.string.no_data_initialization))) {
+            if (dataSource.difference.equals(getContext().getString(R.string.no_data_message))) {
                 assetDifferenceSymbol.setText("");
 
             } else if (Float.parseFloat(dataSource.difference) > 0) {
@@ -90,7 +90,7 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
             liabilityItemValue.setText(dataSource.itemValue);
             liabilityDifference.setText(String.valueOf(dataSource.difference));
 
-            if (dataSource.difference.equals(getContext().getString(R.string.no_data_initialization))) {
+            if (dataSource.difference.equals(getContext().getString(R.string.no_data_message))) {
                 liabilityDifferenceSymbol.setText("");
 
             } else if (Float.parseFloat(dataSource.difference) > 0) {

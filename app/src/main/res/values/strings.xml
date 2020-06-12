@@ -32,7 +32,7 @@
     <string name="value">Value</string>
     <string name="comments">Comments</string>
 
-    <string name="no_data_initialization">No Data</string>
+    <string name="no_data_message">No Data</string>
     <string name="positive_symbol">+</string>
     <string name="negative_symbol">-</string>
 

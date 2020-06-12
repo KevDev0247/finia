@@ -121,8 +121,8 @@ public class Report_LiabilitiesFragment extends Fragment {
 
         /* Set up short term liabilities item */
         for (NodeContainer_Liabilities dataCarrier : shortTermLiabilitiesTypes) {
-            String difference = getString(R.string.no_data_initialization);
-            String thisLiabilityValue = getString(R.string.no_data_initialization);
+            String difference = getString(R.string.no_data_message);
+            String thisLiabilityValue = getString(R.string.no_data_message);
             LiabilitiesValue shortTermLiabilityValue = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), dataCarrier.liabilitiesId);
             LiabilitiesValue previousLiabilityValue = liabilitiesValueDao.queryPreviousLiabilityBeforeTime(itemTime.getTime(), dataCarrier.liabilitiesId);
 
@@ -141,8 +141,8 @@ public class Report_LiabilitiesFragment extends Fragment {
 
         /* Set up long term liabilities item */
         for (NodeContainer_Liabilities dataCarrier : longTermLiabilitiesTypes) {
-            String difference = getString(R.string.no_data_initialization);
-            String thisLiabilityValue = getString(R.string.no_data_initialization);
+            String difference = getString(R.string.no_data_message);
+            String thisLiabilityValue = getString(R.string.no_data_message);
             LiabilitiesValue longTermLiabilityValue = liabilitiesValueDao.queryIndividualLiabilityByTime(itemTime.getTime(), dataCarrier.liabilitiesId);
             LiabilitiesValue previousLiabilityValue = liabilitiesValueDao.queryPreviousLiabilityBeforeTime(itemTime.getTime(), dataCarrier.liabilitiesId);
 
@@ -201,7 +201,7 @@ public class Report_LiabilitiesFragment extends Fragment {
         shortTermLiabilitiesValue.setText(String.valueOf(categoryLiabilities.get(0).getLiabilitiesValue()));
         if (previousCategoryLiabilities.get(0) == null) {
             shortTermLiabilitiesSymbol.setText("");
-            shortTermLiabilitiesDifference.setText(R.string.no_data_initialization);
+            shortTermLiabilitiesDifference.setText(R.string.no_data_message);
 
         } else {
             float difference = categoryLiabilities.get(0).getLiabilitiesValue() - previousCategoryLiabilities.get(0).getLiabilitiesValue();
@@ -223,7 +223,7 @@ public class Report_LiabilitiesFragment extends Fragment {
         longTermLiabilitiesValue.setText(String.valueOf(categoryLiabilities.get(1).getLiabilitiesValue()));
         if (previousCategoryLiabilities.get(1) == null) {
             longTermLiabilitiesSymbol.setText("");
-            longTermLiabilitiesDifference.setText(R.string.no_data_initialization);
+            longTermLiabilitiesDifference.setText(R.string.no_data_message);
 
         } else {
             float difference = categoryLiabilities.get(1).getLiabilitiesValue() - previousCategoryLiabilities.get(1).getLiabilitiesValue();

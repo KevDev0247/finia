@@ -1,6 +1,6 @@
-package protect.FinanceLord.Spending;
+package protect.FinanceLord.SpendingUtils;
 
-public class GroupedExpenses {
+public class GroupedSpending {
     public int categoryId;
     public float categoryTotal;
     public float month;

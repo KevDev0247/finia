@@ -145,8 +145,8 @@ public class Report_AssetsFragment extends Fragment {
 
         /* Set up liquid assets item */
         for (NodeContainer_Assets dataCarrier : liquidAssetsTypes) {
-            String difference = getString(R.string.no_data_initialization);
-            String thisAssetValue = getString(R.string.no_data_initialization);
+            String difference = getString(R.string.no_data_message);
+            String thisAssetValue = getString(R.string.no_data_message);
             AssetsValue liquidAssetValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
@@ -165,8 +165,8 @@ public class Report_AssetsFragment extends Fragment {
 
         /* Set up personal assets item */
         for (NodeContainer_Assets dataCarrier : personalAssetsTypes) {
-            String difference = getString(R.string.no_data_initialization);
-            String thisAssetValue = getString(R.string.no_data_initialization);
+            String difference = getString(R.string.no_data_message);
+            String thisAssetValue = getString(R.string.no_data_message);
             AssetsValue personalAssetValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
@@ -185,8 +185,8 @@ public class Report_AssetsFragment extends Fragment {
 
         /* Set up taxable accounts item */
         for (NodeContainer_Assets dataCarrier : taxableAccountsTypes) {
-            String difference = getString(R.string.no_data_initialization);
-            String thisAssetValue = getString(R.string.no_data_initialization);
+            String difference = getString(R.string.no_data_message);
+            String thisAssetValue = getString(R.string.no_data_message);
             AssetsValue taxableAccountValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
@@ -205,8 +205,8 @@ public class Report_AssetsFragment extends Fragment {
 
         /* Set up retirement accounts item */
         for (NodeContainer_Assets dataCarrier : retirementAccountsTypes) {
-            String difference = getString(R.string.no_data_initialization);
-            String thisAssetValue = getString(R.string.no_data_initialization);
+            String difference = getString(R.string.no_data_message);
+            String thisAssetValue = getString(R.string.no_data_message);
             AssetsValue retirementAccountValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
@@ -225,8 +225,8 @@ public class Report_AssetsFragment extends Fragment {
 
         /* Set up ownership interests item */
         for (NodeContainer_Assets dataCarrier : ownershipInterestsTypes) {
-            String difference = getString(R.string.no_data_initialization);
-            String thisAssetValue = getString(R.string.no_data_initialization);
+            String difference = getString(R.string.no_data_message);
+            String thisAssetValue = getString(R.string.no_data_message);
             AssetsValue ownershipInterestValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
             AssetsValue previousAssetValue = assetsValueDao.queryPreviousAssetBeforeTime(itemTime.getTime(), dataCarrier.assetsTypeId);
 
@@ -311,7 +311,7 @@ public class Report_AssetsFragment extends Fragment {
         liquidAssetsValue.setText(String.valueOf(categoryAssets.get(0).getAssetsValue()));
         if (previousCategoryAssets.get(0) == null) {
             liquidAssetsSymbol.setText("");
-            liquidAssetsDifference.setText(R.string.no_data_initialization);
+            liquidAssetsDifference.setText(R.string.no_data_message);
 
         } else {
             float difference = categoryAssets.get(0).getAssetsValue() - previousCategoryAssets.get(0).getAssetsValue();
@@ -333,7 +333,7 @@ public class Report_AssetsFragment extends Fragment {
         investedAssetsValue.setText(String.valueOf(categoryAssets.get(1).getAssetsValue()));
         if (previousCategoryAssets.get(1) == null) {
             investedAssetsSymbol.setText("");
-            investedAssetsDifference.setText(R.string.no_data_initialization);
+            investedAssetsDifference.setText(R.string.no_data_message);
 
         } else {
             float difference = categoryAssets.get(1).getAssetsValue() - previousCategoryAssets.get(1).getAssetsValue();
@@ -355,7 +355,7 @@ public class Report_AssetsFragment extends Fragment {
         personalAssetsValue.setText(String.valueOf(categoryAssets.get(2).getAssetsValue()));
         if (previousCategoryAssets.get(2) == null) {
             personalAssetsSymbol.setText("");
-            personalAssetsDifference.setText(R.string.no_data_initialization);
+            personalAssetsDifference.setText(R.string.no_data_message);
 
         } else {
             float difference = categoryAssets.get(2).getAssetsValue() - previousCategoryAssets.get(2).getAssetsValue();
@@ -377,7 +377,7 @@ public class Report_AssetsFragment extends Fragment {
         taxableAccountsValue.setText(String.valueOf(categoryAssets.get(3).getAssetsValue()));
         if (previousCategoryAssets.get(3) == null) {
             taxableAccountsSymbol.setText("");
-            taxableAccountsDifference.setText(R.string.no_data_initialization);
+            taxableAccountsDifference.setText(R.string.no_data_message);
 
         } else {
             float difference = categoryAssets.get(3).getAssetsValue() - (previousCategoryAssets.get(3).getAssetsValue());
@@ -399,7 +399,7 @@ public class Report_AssetsFragment extends Fragment {
         retirementAccountsValue.setText(String.valueOf(categoryAssets.get(4).getAssetsValue()));
         if (previousCategoryAssets.get(4) == null) {
             retirementAccountsSymbol.setText("");
-            retirementAccountsDifference.setText(R.string.no_data_initialization);
+            retirementAccountsDifference.setText(R.string.no_data_message);
 
         } else {
             float difference = categoryAssets.get(4).getAssetsValue() - previousCategoryAssets.get(4).getAssetsValue();
@@ -421,7 +421,7 @@ public class Report_AssetsFragment extends Fragment {
         ownershipInterestsValue.setText(String.valueOf(categoryAssets.get(5).getAssetsValue()));
         if (previousCategoryAssets.get(5) == null) {
             ownershipInterestsSymbol.setText("");
-            ownershipInterestsDifference.setText(R.string.no_data_initialization);
+            ownershipInterestsDifference.setText(R.string.no_data_message);
 
         } else {
             float difference = categoryAssets.get(5).getAssetsValue() - previousCategoryAssets.get(5).getAssetsValue();

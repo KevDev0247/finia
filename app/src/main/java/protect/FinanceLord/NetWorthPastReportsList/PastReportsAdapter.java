@@ -59,7 +59,7 @@ public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
         netWorthValue.setText(String.valueOf(dataSource.netWorthValue));
         netWorthDifference.setText(dataSource.difference);
 
-        if (dataSource.difference.equals(getContext().getString(R.string.no_data_initialization))){
+        if (dataSource.difference.equals(getContext().getString(R.string.no_data_message))){
             netWorthDifferenceSymbol.setText("");
 
         } else if (Float.parseFloat(dataSource.difference) > 0) {

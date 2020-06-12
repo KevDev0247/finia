@@ -201,9 +201,9 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         View reportLiabilitiesDifferenceBlock = findViewById(R.id.total_liabilities_difference_block);
 
         reportNetWorthValue.setText(netWorthValue);
-        if (netWorthDifference.equals(getString(R.string.no_data_initialization))){
+        if (netWorthDifference.equals(getString(R.string.no_data_message))){
             reportNetWorthSymbol.setText("");
-            reportNetWorthDifference.setText(getString(R.string.no_data_initialization));
+            reportNetWorthDifference.setText(getString(R.string.no_data_message));
 
         } else if (Float.parseFloat(netWorthDifference) == 0){
             reportNetWorthSymbol.setText("");
@@ -223,7 +223,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         reportTotalAssetsValue.setText(String.valueOf(totalAssetsValue));
         if (totalAssetsDifference == null){
             reportTotalAssetsSymbol.setText("");
-            reportTotalAssetsDifference.setText(getString(R.string.no_data_initialization));
+            reportTotalAssetsDifference.setText(getString(R.string.no_data_message));
 
         } else if (totalAssetsDifference == 0) {
             reportTotalAssetsSymbol.setText("");
@@ -243,7 +243,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         reportTotalLiabilitiesValue.setText(String.valueOf(totalLiabilitiesValue));
         if (totalLiabilitiesDifference == null){
             reportTotalLiabilitiesSymbol.setText("");
-            reportTotalLiabilitiesDifference.setText(getString(R.string.no_data_initialization));
+            reportTotalLiabilitiesDifference.setText(getString(R.string.no_data_message));
 
         }else if (totalLiabilitiesDifference == 0){
             reportTotalLiabilitiesSymbol.setText("");

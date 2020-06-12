@@ -125,7 +125,7 @@ public class NetWorthActivity extends AppCompatActivity {
 
                 List<ReportItemInfo> reportItemInfoList = reportItemInfoDao.queryReportItemsInfo();
                 for (ReportItemInfo reportItemInfo : reportItemInfoList){
-                    String difference = getString(R.string.no_data_initialization);
+                    String difference = getString(R.string.no_data_message);
                     if (reportItemInfoList.indexOf(reportItemInfo) + 1 <= reportItemInfoList.size() - 1){
                         ReportItemInfo previousReportItemInfo = reportItemInfoList.get(reportItemInfoList.indexOf(reportItemInfo) + 1);
                         difference = String.valueOf(reportItemInfo.netWorthValue - previousReportItemInfo.netWorthValue);

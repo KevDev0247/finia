@@ -8,8 +8,8 @@ import androidx.room.Update;
 import java.util.List;
 
 import protect.FinanceLord.Database.Transactions;
-import protect.FinanceLord.Spending.GroupedExpenses;
-import protect.FinanceLord.Spending.MonthlyTotalExpense;
+import protect.FinanceLord.SpendingUtils.GroupedSpending;
+import protect.FinanceLord.SpendingUtils.MonthlyTotalSpending;
 
 @Dao
 public interface TransactionsDao {
@@ -35,14 +35,14 @@ public interface TransactionsDao {
             "  strftime('%Y-%m',  datetime(Transactions.date/1000,'unixepoch', 'localtime')) AS month \n" +
             "FROM Transactions WHERE transactionValue < 0 \n" +
             "GROUP BY strftime('%Y-%m',  datetime(Transactions.date/1000,'unixepoch', 'localtime')), transactionCategoryId")
-    List<GroupedExpenses> queryGroupedExpenses();
+    List<GroupedSpending> queryGroupedExpenses();
 
     @Query("SELECT \n" +
             "  SUM(-transactionValue) AS categoryTotal, \n" +
             "  strftime('%Y-%m',  datetime(Transactions.date/1000,'unixepoch', 'localtime')) AS month \n" +
             "FROM Transactions WHERE transactionValue < 0 \n" +
             "GROUP BY strftime('%Y-%m',  datetime(Transactions.date/1000,'unixepoch', 'localtime'))")
-    List<MonthlyTotalExpense> queryMonthlyTotalExpenses();
+    List<MonthlyTotalSpending> queryMonthlyTotalExpenses();
 
     @Query("DELETE FROM Transactions WHERE transactionId = :transactionId")
     void deleteIndividualTransaction (int transactionId);
