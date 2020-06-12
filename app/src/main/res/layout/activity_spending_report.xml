@@ -1,9 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SpendingReportActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#4156BE"
+        app:layout_collapseMode="pin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="17dp">
+
+            <ImageButton
+                android:id="@+id/budget_edit_return_button"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="#0015314B"
+                android:src="@drawable/ic_back_icon_foreground"/>
+
+            <TextView
+                android:id="@+id/budget_page_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/page_title"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:textSize="25sp"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.anychart.AnyChartView
+        android:id="@+id/spending_chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.anychart.AnyChartView>
+
+</LinearLayout>
