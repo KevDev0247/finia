@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.concurrent.Executors;
 
+import protect.FinanceLord.DAOs.TransactionsDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 
 public class SpendingActivity extends AppCompatActivity {
@@ -32,7 +33,7 @@ public class SpendingActivity extends AppCompatActivity {
             @Override
             public void run() {
                 FinanceLordDatabase database = FinanceLordDatabase.getInstance(SpendingActivity.this);
-
+                TransactionsDao transactionsDao = database.transactionsDao();
             }
         });
     }
