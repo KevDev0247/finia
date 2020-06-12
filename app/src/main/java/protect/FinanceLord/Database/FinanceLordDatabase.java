@@ -16,6 +16,15 @@ import protect.FinanceLord.DAOs.LiabilitiesValueDao;
 import protect.FinanceLord.DAOs.ReportItemInfoDao;
 import protect.FinanceLord.DAOs.TransactionsDao;
 
+/**
+ * The abstract interface that defines the database.
+ * This interface defines all the entities in the database
+ * and all the Data Access Objects used to perform CRUD operations.
+ * The database is also created here.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 @Database(entities = {AssetsType.class, AssetsValue.class, LiabilitiesType.class, LiabilitiesValue.class, BudgetsType.class, BudgetsValue.class, Transactions.class}, version = 11)
 public abstract class FinanceLordDatabase extends RoomDatabase {
 

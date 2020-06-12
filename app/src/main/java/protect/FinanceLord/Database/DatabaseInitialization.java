@@ -15,6 +15,13 @@ import protect.FinanceLord.DAOs.LiabilitiesValueDao;
 import protect.FinanceLord.DAOs.TransactionsDao;
 import protect.FinanceLord.R;
 
+/**
+ * The class to initialize all the database entities.
+ * The initialization of database includes adding default categories into the database.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class DatabaseInitialization{
 
     private Context context;
