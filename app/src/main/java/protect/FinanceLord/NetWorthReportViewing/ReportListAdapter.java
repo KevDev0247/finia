@@ -11,15 +11,34 @@ import java.util.ArrayList;
 
 import protect.FinanceLord.R;
 
+/**
+ * The list adapter for the report sheets
+ * Notice this adapter is reusable. It is used by both Assets and Liabilities.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
 
     private String fragmentTag;
 
-    ReportListAdapter(Context context, ArrayList<NetWorthItemsDataModel> dataSources, String fragmentName) {
+    ReportListAdapter(Context context, ArrayList<NetWorthItemsDataModel> dataSources, String fragmentTag) {
         super(context, 0, dataSources);
-        this.fragmentTag = fragmentName;
+        this.fragmentTag = fragmentTag;
     }
 
+    /**
+     * Create the view of each item.
+     * The method will decide whether the item is an asset or a liability
+     * with the fragment tag that is inputted through the constructor.
+     * Then the adapter will load the data from the data source to the UI widgets.
+     * It will also prepare the rest of the UI for display by set the sign and the color of the difference block.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param position the position of the item
+     * @param convertView the view of the current item
+     * @param parent the group of views.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         NetWorthItemsDataModel dataSource = getItem(position);
