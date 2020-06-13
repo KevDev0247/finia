@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SpendingReportActivity"></activity>
+        <activity
+            android:name=".SpendingReportActivity"
+            android:theme="@style/AppTheme.InputSheet" />
         <activity
             android:name=".TransactionEditActivity"
             android:theme="@style/AppTheme.InputSheet" />
