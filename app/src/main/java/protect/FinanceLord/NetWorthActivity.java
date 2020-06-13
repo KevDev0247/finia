@@ -58,7 +58,6 @@ public class NetWorthActivity extends AppCompatActivity {
 
         ImageButton returnButton = findViewById(R.id.net_worth_return_button);
         returnButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 finish();

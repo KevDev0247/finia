@@ -30,7 +30,6 @@ public class SpendingActivity extends AppCompatActivity {
 
         ImageButton returnButton = findViewById(R.id.spending_return_button);
         returnButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 finish();

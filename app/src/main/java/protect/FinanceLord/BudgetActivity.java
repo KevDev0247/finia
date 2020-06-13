@@ -113,16 +113,16 @@ public class BudgetActivity extends AppCompatActivity {
         budgetsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BudgetInfo financialRecord = budgetInfoList.get(position);
+                BudgetInfo budgetInfo = budgetInfoList.get(position);
 
                 Intent intent = new Intent();
                 intent.putExtra(getString(R.string.budget_categories_key), allBudgetsTypes);
                 intent.putExtra(getString(R.string.budget_access_key), getString(R.string.edit_budget_access_key));
-                intent.putExtra(getString(R.string.budget_id_key), financialRecord.budgetId);
-                intent.putExtra(getString(R.string.budget_name_id_key), financialRecord.budgetCategoryId);
-                intent.putExtra(getString(R.string.budget_total_key), financialRecord.budgetTotal);
-                intent.putExtra(getString(R.string.budget_start_date_key), financialRecord.dateStart);
-                intent.putExtra(getString(R.string.budget_end_date_key), financialRecord.dateEnd);
+                intent.putExtra(getString(R.string.budget_id_key), budgetInfo.budgetId);
+                intent.putExtra(getString(R.string.budget_name_id_key), budgetInfo.budgetCategoryId);
+                intent.putExtra(getString(R.string.budget_total_key), budgetInfo.budgetTotal);
+                intent.putExtra(getString(R.string.budget_start_date_key), budgetInfo.dateStart);
+                intent.putExtra(getString(R.string.budget_end_date_key), budgetInfo.dateEnd);
                 intent.setClass(BudgetActivity.this, BudgetEditActivity.class);
                 startActivityForResult(intent, BUDGET_ACTIVITY_REQUEST_CODE);
             }
