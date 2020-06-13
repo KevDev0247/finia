@@ -6,5 +6,5 @@
     <item
         android:state_hovered="true"
         android:color="#E62626"/>
-    <item android:color="#B8CFDA"/>
+    <item android:color="#E6DDF6"/>
 </selector>
