@@ -121,6 +121,8 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
      * CalendarDialog will call message method to transfer the data to this activity.
      * Then, the time picked by the user will be displayed on the calendar button and sent to each fragment
      * through two other communicators.
+     *
+     * @author Owner  Kevin Zhijun Wang
      */
     CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override

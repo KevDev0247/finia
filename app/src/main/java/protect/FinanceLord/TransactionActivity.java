@@ -34,6 +34,15 @@ import protect.FinanceLord.TransactionViewing.View_TransactionsFragment;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 import protect.FinanceLord.ViewModels.TransactionsViewModel;
 
+/**
+ * The activity that displayed the list of transactions in two sections: expenses and revenues.
+ * The two sections will be showed in the form of tabs.
+ * The activity will allow the user to add or edit their transactions.
+ * The ViewModel in android framework is used to communicate between the activity and the fragments.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class TransactionActivity extends AppCompatActivity {
 
     private TransactionsViewModel transactionsViewModel;
@@ -45,6 +54,17 @@ public class TransactionActivity extends AppCompatActivity {
     private static final int TRANSACTION_ACTIVITY_REQUEST_CODE = 1000;
     private static String TAG = "TransactionActivity";
 
+    /**
+     * Create and initialize the activity.
+     * This method was called when the activity was created.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * Then, it will initialize return button and the ViewModel to enable Activity-to-Fragment communication.
+     * Lastly, the method will initialize the data access objects used in this activity
+     * and call the method to retrieve data from the database.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,12 +86,30 @@ public class TransactionActivity extends AppCompatActivity {
         retrieveDataFromDatabase(true, false);
     }
 
+    /**
+     * Call the methods to update the data immediately after the user returned to the page.
+     * This method is called first after the activity is created or whenever the user returns to this activity.
+     * When the user returned to the activity, the two methods will be called to
+     * refresh the data on past report list and the swipe dashboard cards.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     @Override
     protected void onResume() {
         super.onResume();
         retrieveDataFromDatabase(false, true);
     }
 
+    /**
+     * Retrieve transactions and budgetTypes from the database.
+     * The method will first query the transactions and budgetTypes from the database.
+     * Query is completed in a separate thread to avoid locking the UI thread for a long period of time.
+     * Then, the method will decides whether to set up the view or update the data.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param initialize the variable indicates whether the activity have to initialize the view.
+     * @param refresh the variable indicates whether the activity have to refresh the view.
+     */
     private void retrieveDataFromDatabase(final boolean initialize, final boolean refresh) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -89,7 +127,7 @@ public class TransactionActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (initialize){
-                            setUpCategoryViewList();
+                            setUpCategoryFilterList();
                             setUpTabsAndAddButton(transactions);
                         } else if (refresh){
                             transactionsViewModel.pushToTransactionGroup(transactions);
@@ -100,6 +138,15 @@ public class TransactionActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set up the adapter and pagers for the tabs as well as the onClickListener for the button.
+     * First, the method will initialize the tab layout and the view pager.
+     * Then, the method will set up the fragment with the transactions and the budgetTypes queried.
+     * Lastly, an onTabSelectedListener will be added to the tab layout to change the color of indicator and color of text when clicked.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param transactions all the transactions inputted
+     */
     private void setUpTabsAndAddButton(List<Transactions> transactions) {
         ImageButton addButton = findViewById(R.id.add_transaction_button);
         final TabLayout tabLayout = findViewById(R.id.transaction_tab_layout);
@@ -149,7 +196,14 @@ public class TransactionActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpCategoryViewList() {
+    /**
+     * Set up the adapter for the list of filters of category.
+     * First, a recycler view is set up to hold all the filters.
+     * Then, an adapter is created to deliver and prepare the view for each filter.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
+    private void setUpCategoryFilterList() {
         addLabelAll(budgetsTypes);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -159,12 +213,28 @@ public class TransactionActivity extends AppCompatActivity {
         categoryLabelsList.setAdapter(adapter);
     }
 
+    /**
+     * Add the all label to the filters list.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param budgetsTypes list of all the budget types stored in the database.
+     */
     private void addLabelAll(List<BudgetsType> budgetsTypes) {
         BudgetsType allBudgets = new BudgetsType();
         allBudgets.setBudgetsName(getString(R.string.all));
         budgetsTypes.add(0, allBudgets);
     }
 
+    /**
+     * Receive the data when the succeeding activity is finished.
+     * When the new data is received, the data source for the adapter is cleared and the new data is assigned to the list.
+     * Lastly, the new data list is pushed into the view model to communicate the new data list with the fragment.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param requestCode the request code for identifying the activity.
+     * @param resultCode the code to retrieve the results.
+     * @param data the intent from the succeeding activity.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -181,6 +251,17 @@ public class TransactionActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Communicator between this activity and the recycler view adapter.
+     * The communicator will transfer the message of filtering to the activity.
+     * Method message is implemented by the activity and the object is passed to CalendarDialog.
+     * The adapter will call message method to transfer the data to this activity.
+     * First, the method query all the budget types from the database.
+     * Then, once the for loop finds the match of categoryLabel, a query for the transactions
+     * that belong to a particular category will be done and push to the view model.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     private GroupByCategoryCommunicator fromAdapterCommunicator = new GroupByCategoryCommunicator() {
         @Override
         public void message(final String categoryLabel) {
