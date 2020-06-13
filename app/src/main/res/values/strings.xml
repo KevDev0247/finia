@@ -196,4 +196,8 @@
     <string name="budget_start_date_key">budgetStartDate</string>
     <string name="budget_end_date_key">budgetEndDate</string>
 
+    <string name="spending_monthly_list_key">monthlySpendingList</string>
+    <string name="spending_report_month_key">month</string>
+    <string name="spending_categories">spendingCategories</string>
+
 </resources>

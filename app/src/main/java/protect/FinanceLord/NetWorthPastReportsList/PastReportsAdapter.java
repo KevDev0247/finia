@@ -54,6 +54,7 @@ public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
         TextView netWorthValue = convertView.findViewById(R.id.net_worth_value);
         TextView netWorthDifferenceSymbol = convertView.findViewById(R.id.net_worth_difference_symbol);
         TextView netWorthDifference = convertView.findViewById(R.id.net_worth_difference);
+        View differenceBlockView = convertView.findViewById(R.id.past_report_item_difference_block);
 
         netWorthTime.setText(dataSource.time);
         netWorthValue.setText(String.valueOf(dataSource.netWorthValue));
@@ -61,19 +62,17 @@ public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
 
         if (dataSource.difference.equals(getContext().getString(R.string.no_data_message))){
             netWorthDifferenceSymbol.setText("");
+            differenceBlockView.setBackgroundResource(R.drawable.net_neutral);
 
         } else if (Float.parseFloat(dataSource.difference) > 0) {
-            View differenceBlockView = convertView.findViewById(R.id.past_report_item_difference_block);
             differenceBlockView.setBackgroundResource(R.drawable.net_increase);
             netWorthDifferenceSymbol.setText(R.string.positive_symbol);
 
         } else if (Float.parseFloat(dataSource.difference) < 0) {
-            View differenceBlockView = convertView.findViewById(R.id.past_report_item_difference_block);
             differenceBlockView.setBackgroundResource(R.drawable.net_decrease);
             netWorthDifferenceSymbol.setText(R.string.negative_symbol);
 
         } else if (Float.parseFloat(dataSource.difference) == 0) {
-            View differenceBlockView = convertView.findViewById(R.id.past_report_item_difference_block);
             netWorthDifferenceSymbol.setText("");
             differenceBlockView.setBackgroundResource(R.drawable.net_neutral);
         }
