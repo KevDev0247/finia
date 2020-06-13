@@ -64,6 +64,7 @@ public class SpendingReportActivity extends AppCompatActivity {
         }
 
         spendingChart.data(dataEntries);
+        spendingChart.legend().position("top");
         spendingChartView.setChart(spendingChart);
     }
 }

@@ -40,6 +40,20 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/spending_report"
+            android:textSize="20sp"/>
+
+    </RelativeLayout>
+
     <com.anychart.AnyChartView
         android:id="@+id/spending_chart"
         android:layout_width="match_parent"
