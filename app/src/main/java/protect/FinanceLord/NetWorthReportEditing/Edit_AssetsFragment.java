@@ -76,8 +76,10 @@ public class Edit_AssetsFragment extends Fragment {
      * First, the method will first set the view of the content by finding the corresponding layout file through id.
      * Then, the method will first set the view of the the expandable list view by finding the corresponding layout file through id.
      * Next, the assets types and values are retrieved from database and set up the expandable list view.
-     * Lastly, the method will set up the tree processor and commit logic of the commit button.
+     * Lastly, the method will set up the tree processor and commit and delete logic of the buttons.
      * The commit logic include how the data was retrieved from the input fields and transferred to the type and value tree processor to prepare for the insertion of the data.
+     * The delete logic include the action to delete the report of assets at a time that the user picked.
+     * Note that delete action only applies to the whole report. If the user merely want to change a number, then it is better to just use the edit mode.
      *
      * @author Owner  Kevin Zhijun Wang
      * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
@@ -89,36 +91,39 @@ public class Edit_AssetsFragment extends Fragment {
         View assetsFragmentView = inflater.inflate(R.layout.fragment_edit_assets, null);
         expandableListView = assetsFragmentView.findViewById(R.id.assets_list_view);
         RelativeLayout commitButton = assetsFragmentView.findViewById(R.id.assets_commit_button);
+        RelativeLayout deleteButton = assetsFragmentView.findViewById(R.id.assets_delete_button);
 
         initializeAssets();
 
-        setUpCommitButton(commitButton);
+        setUpCommitAndDeleteButton(commitButton, deleteButton);
 
         return assetsFragmentView;
     }
 
     /**
-     * Set up the commit button.
-     * First, the data source in the processor is retrieved and stored into a list.
+     * Set up the commit and delete button.
+     * For the commit logic, the data source in the processor is retrieved and stored into a list.
      * Then the list of data is traversed and inserted or updated into the database.
      * Next, the data is displayed onto the expandable list.
      * Lastly, the data in the processor is deleted.
      * The data source act as a cache for the expandable list.
      * After the data is inserted, the data in the data source is cleared.
      *
+     * For the delete logic, the whole report will be deleted.
+     *
      * @author Owner  Kevin Zhijun Wang
      * @param commitButton the instance of commit button.
      */
-    private void setUpCommitButton(RelativeLayout commitButton) {
+    private void setUpCommitAndDeleteButton(RelativeLayout commitButton, RelativeLayout deleteButton) {
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
+        final AssetsValueDao assetsValueDao = database.assetsValueDao();
+
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
-                        FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
-                        AssetsValueDao assetsValueDao = database.assetsValueDao();
-
                         for(AssetsValue assetsValueInProcessor: Edit_AssetsFragment.this.valueTreeProcessor.getAllAssetsValues()) {
                             assetsValueInProcessor.setDate(currentTime.getTime());
                             Log.d("Edit_AFragment", "the time of the assets are set to " + currentTime);
@@ -159,6 +164,19 @@ public class Edit_AssetsFragment extends Fragment {
                         valueTreeProcessor.clearAllAssetsValues();
 
                         Log.d("Edit_AFragment", "Assets committed!");
+                    }
+                });
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Executors.newSingleThreadExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        assetsValueDao.deleteAssetsAtDate(currentTime.getTime());
+                        getActivity().finish();
                     }
                 });
             }

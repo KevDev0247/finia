@@ -35,4 +35,7 @@ public interface AssetsValueDao {
 
     @Query("SELECT * FROM AssetsValue WHERE date < :date AND assetsId = :assetId ORDER BY date DESC LIMIT 1")
     AssetsValue queryPreviousAssetBeforeTime(Long date, int assetId);
+
+    @Query("DELETE FROM AssetsValue WHERE date = :date")
+    void deleteAssetsAtDate(Long date);
 }
