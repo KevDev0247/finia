@@ -74,10 +74,6 @@ public class NetWorthActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        refreshNetWorthCardsView();
-
-        refreshPastReportsListView();
     }
 
     /**
