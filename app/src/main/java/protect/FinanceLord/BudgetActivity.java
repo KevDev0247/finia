@@ -23,6 +23,13 @@ import protect.FinanceLord.DAOs.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.DAOs.BudgetInfoDao;
 
+/**
+ * The activity that displayed the list of budgets.
+ * The activity will allow the user to add or edit their budgets.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class BudgetActivity extends AppCompatActivity {
 
     private BudgetListAdapter budgetListAdapter;
@@ -32,6 +39,14 @@ public class BudgetActivity extends AppCompatActivity {
     private static final int BUDGET_ACTIVITY_REQUEST_CODE = 1000;
     private String TAG = "BudgetActivity";
 
+    /**
+     * Create and initialize the activity.
+     * This method was called when the activity was created.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * Then, it will initialize return button.
+     *
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +61,11 @@ public class BudgetActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Call the methods to update the data immediately after the user returned to the page.
+     * This method is called first after the activity is created or whenever the user returns to this activity.
+     * When the user returned to the activity or the activity is created, the method to retrieve data is called.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -53,6 +73,14 @@ public class BudgetActivity extends AppCompatActivity {
         initialize = false;
     }
 
+    /**
+     * Retrieve budgetTypes and budget information from the database.
+     * The method will first query the budget information and budgetTypes from the database.
+     * Query is completed in a separate thread to avoid locking the UI thread for a long period of time.
+     * Then, the method will decides whether to set up the view or update the data.
+     *
+     * @param initialize the variable indicates whether the activity have to initialize the view.
+     */
     private void retrieveDataFromDatabase(final boolean initialize) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -91,6 +119,10 @@ public class BudgetActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set up the add button's layout and onClickListener.
+     * The onClickListener will navigate the user to the add budget page.
+     */
     private void setUpAddButton() {
         ImageButton addButton = findViewById(R.id.add_budget_button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +137,14 @@ public class BudgetActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set up budgets list view's adapter and onItemClickListener.
+     * The budgetInfoList is passed into the adapter to deliver the data to the UI widgets.
+     * The onItemClickListener will navigate the user to the edit sheet.
+     * the data of the budget is stored in the intent and transferred to the edit activity.
+     *
+     * @param budgetInfoList the list of budget item information from the database.
+     */
     private void setUpBudgetsListView(final List<BudgetInfo> budgetInfoList) {
         ListView budgetsList = findViewById(R.id.budgets_list);
         budgetListAdapter = new BudgetListAdapter(this, budgetInfoList, allBudgetsTypes);
@@ -129,6 +169,15 @@ public class BudgetActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Receive the data when the succeeding activity is finished.
+     * When the new data is received, the data source for the adapter is cleared and the new data is assigned to the list.
+     * Lastly, notify the adapter to update the list.
+     *
+     * @param requestCode the request code for identifying the activity.
+     * @param resultCode the code to retrieve the results.
+     * @param data the intent from the succeeding activity.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
