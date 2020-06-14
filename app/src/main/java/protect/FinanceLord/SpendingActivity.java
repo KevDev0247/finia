@@ -21,8 +21,24 @@ import protect.FinanceLord.SpendingUtils.GroupedSpending;
 import protect.FinanceLord.SpendingUtils.MonthlyTotalSpending;
 import protect.FinanceLord.SpendingUtils.SpendingListAdapter;
 
+/**
+ * The activity that displayed the list of spending report to the user.
+ * Each report item will navigate the user to the report sheet.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class SpendingActivity extends AppCompatActivity {
 
+    /**
+     * Create and initialize the activity.
+     * This method was called when the activity was created.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * Then, it will initialize return button and the ViewModel to enable Activity-to-Fragment communication.
+     * Lastly, the method will call the method to retrieve data from the database.
+     *
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +55,14 @@ public class SpendingActivity extends AppCompatActivity {
         retrieveDataFromDatabase();
     }
 
+    /**
+     * Retrieve monthly spending, grouped spending, and budgetTypes from the database.
+     * The method will first query the date mentioned above from the database.
+     * Query is completed in a separate thread to avoid locking the UI thread for a long period of time.
+     * Then, the method will call the method to set up the spending list.
+     * MonthlyTotalSpending will store the data that will be displayed on the report item as a summary.
+     * GroupedSpending will store the more detailed data used to generate the report.
+     */
     private void retrieveDataFromDatabase() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -61,6 +85,15 @@ public class SpendingActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set up the spending list that display the spending report item.
+     * The monthlyTotalSpendingList is used as a data source for the spendingListAdapter.
+     * Lastly, onItemClickListener is set up for the monthlySpendingList to navigate the user to the report the user selected.
+     *
+     * @param allBudgetTypes all the budget types stored in the database.
+     * @param groupedSpendingList the class that store the more detailed data used to generate the report.
+     * @param monthlyTotalSpendingList the class that store the data that will be displayed on the report item as a summary.
+     */
     private void setUpSpendingList(final List<MonthlyTotalSpending> monthlyTotalSpendingList, final List<GroupedSpending> groupedSpendingList, final List<BudgetsType> allBudgetTypes) {
         ListView monthlySpendingList = findViewById(R.id.spending_list);
         SpendingListAdapter spendingListAdapter = new SpendingListAdapter(this, monthlyTotalSpendingList);
