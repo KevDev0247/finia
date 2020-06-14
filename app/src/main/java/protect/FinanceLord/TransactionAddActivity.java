@@ -27,6 +27,12 @@ import protect.FinanceLord.TransactionAdding.Add_TransactionsFragment;
 import protect.FinanceLord.TransactionAdding.EditPagerAdapter;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
+/**
+ * The activity that enables the user to add a transaction item into the database.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class TransactionAddActivity extends AppCompatActivity {
 
     Date currentTime;
@@ -35,6 +41,16 @@ public class TransactionAddActivity extends AppCompatActivity {
 
     private static final String TAG = "TransactionEditActivity";
 
+    /**
+     * Create and initialize the activity.
+     * This method was called when the activity was created.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * Then, it will initialize return button and the currentTime to the default current time.
+     * Lastly, the method will call the method to set up tabs and save button as well as set up the observer.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +77,14 @@ public class TransactionAddActivity extends AppCompatActivity {
         setUpBudgetTypesObserver();
     }
 
+    /**
+     * Set up the expenses tab and revenue tab as well as the save button.
+     * The SaveDataCommunicator is used to communicate with the fragments about saving data.
+     * The method will determine which fragment the message will be sent to based on the fragment the user is at.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param budgetsTypes the budget types stored in the database.
+     */
     private void setUpTabsAndSaveButton(List<BudgetsType> budgetsTypes){
         ImageButton saveButton = findViewById(R.id.transaction_add_save_button);
         final TabLayout tablayout = findViewById(R.id.add_transaction_tab_layout);
@@ -90,6 +114,14 @@ public class TransactionAddActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Receive and transfer the new type the user created to the TransactionActivity for display.
+     * The view model will detect the change of budget type list.
+     * Once the list has been updated, mostly in the database helper class,
+     * the updated class will be transferred to the preceding activity for display.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     private void setUpBudgetTypesObserver() {
         BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
         viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
