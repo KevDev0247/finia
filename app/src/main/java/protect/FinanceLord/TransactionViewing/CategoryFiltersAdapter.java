@@ -16,12 +16,12 @@ import protect.FinanceLord.Communicators.GroupByCategoryCommunicator;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.R;
 
-public class CategoryLabelsAdapter extends RecyclerView.Adapter<CategoryLabelsAdapter.LabelViewHolder> {
+public class CategoryFiltersAdapter extends RecyclerView.Adapter<CategoryFiltersAdapter.LabelViewHolder> {
 
     private List<BudgetsType> budgetsTypes;
     private GroupByCategoryCommunicator toTransactionActivityCommunicator;
 
-    public CategoryLabelsAdapter(List<BudgetsType> budgetsTypes, GroupByCategoryCommunicator fromAdapterCommunicator){
+    public CategoryFiltersAdapter(List<BudgetsType> budgetsTypes, GroupByCategoryCommunicator fromAdapterCommunicator){
         this.budgetsTypes = budgetsTypes;
         this.toTransactionActivityCommunicator = fromAdapterCommunicator;
     }

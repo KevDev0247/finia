@@ -28,7 +28,7 @@ import protect.FinanceLord.DAOs.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.DAOs.TransactionsDao;
-import protect.FinanceLord.TransactionViewing.CategoryLabelsAdapter;
+import protect.FinanceLord.TransactionViewing.CategoryFiltersAdapter;
 import protect.FinanceLord.TransactionViewing.ViewPagerAdapter;
 import protect.FinanceLord.TransactionViewing.View_TransactionsFragment;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
@@ -46,7 +46,7 @@ import protect.FinanceLord.ViewModels.TransactionsViewModel;
 public class TransactionActivity extends AppCompatActivity {
 
     private TransactionsViewModel transactionsViewModel;
-    private CategoryLabelsAdapter adapter;
+    private CategoryFiltersAdapter adapter;
     private List<BudgetsType> budgetsTypes;
     private TransactionsDao transactionsDao;
     private BudgetsTypeDao budgetsTypeDao;
@@ -127,7 +127,7 @@ public class TransactionActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (initialize){
-                            setUpCategoryFilterList();
+                            setUpCategoryFiltersList();
                             setUpTabsAndAddButton(transactions);
                         } else if (refresh){
                             transactionsViewModel.pushToTransactionGroup(transactions);
@@ -203,23 +203,23 @@ public class TransactionActivity extends AppCompatActivity {
      *
      * @author Owner  Kevin Zhijun Wang
      */
-    private void setUpCategoryFilterList() {
-        addLabelAll(budgetsTypes);
+    private void setUpCategoryFiltersList() {
+        addFilterAll(budgetsTypes);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView categoryLabelsList = findViewById(R.id.transaction_label_list);
-        categoryLabelsList.setLayoutManager(layoutManager);
-        adapter = new CategoryLabelsAdapter(budgetsTypes, fromAdapterCommunicator);
-        categoryLabelsList.setAdapter(adapter);
+        RecyclerView categoryFiltersList = findViewById(R.id.transaction_label_list);
+        categoryFiltersList.setLayoutManager(layoutManager);
+        adapter = new CategoryFiltersAdapter(budgetsTypes, fromAdapterCommunicator);
+        categoryFiltersList.setAdapter(adapter);
     }
 
     /**
-     * Add the all label to the filters list.
+     * Add the all filter to the filters list.
      *
      * @author Owner  Kevin Zhijun Wang
      * @param budgetsTypes list of all the budget types stored in the database.
      */
-    private void addLabelAll(List<BudgetsType> budgetsTypes) {
+    private void addFilterAll(List<BudgetsType> budgetsTypes) {
         BudgetsType allBudgets = new BudgetsType();
         allBudgets.setBudgetsName(getString(R.string.all));
         budgetsTypes.add(0, allBudgets);
@@ -243,7 +243,7 @@ public class TransactionActivity extends AppCompatActivity {
 
             budgetsTypes.clear();
             budgetsTypes.addAll(newBudgetTypes);
-            addLabelAll(budgetsTypes);
+            addFilterAll(budgetsTypes);
             adapter.notifyDataSetChanged();
 
             BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
