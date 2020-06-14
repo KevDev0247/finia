@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.concurrent.Executors;
 
 import protect.FinanceLord.Database.DatabaseInitialization;
+import protect.FinanceLord.R;
 
 /**
  * The starter activity of the whole application.

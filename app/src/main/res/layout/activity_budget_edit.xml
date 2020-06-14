@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@drawable/budgets_sheets_gradient"
-    tools:context=".BudgetEditActivity">
+    tools:context=".Activities.BudgetEditActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

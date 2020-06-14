@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,6 +29,7 @@ import protect.FinanceLord.Communicators.CalendarDateBroadcast;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.DAOs.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.R;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.TransactionUtils.TransactionDatabaseHelper;

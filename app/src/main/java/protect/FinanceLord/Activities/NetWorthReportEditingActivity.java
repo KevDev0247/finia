@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Activities;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +24,7 @@ import protect.FinanceLord.Communicators.DateCommunicator;
 import protect.FinanceLord.NetWorthReportEditing.EditPagerAdapter;
 import protect.FinanceLord.NetWorthReportEditing.Edit_AssetsFragment;
 import protect.FinanceLord.NetWorthReportEditing.Edit_LiabilitiesFragment;
+import protect.FinanceLord.R;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 

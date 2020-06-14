@@ -22,8 +22,8 @@ import java.util.List;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.R;
-import protect.FinanceLord.TransactionActivity;
-import protect.FinanceLord.TransactionEditActivity;
+import protect.FinanceLord.Activities.TransactionActivity;
+import protect.FinanceLord.Activities.TransactionEditActivity;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 import protect.FinanceLord.ViewModels.TransactionsViewModel;
 

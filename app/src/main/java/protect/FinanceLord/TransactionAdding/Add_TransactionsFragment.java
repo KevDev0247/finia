@@ -25,7 +25,7 @@ import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.R;
 import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
-import protect.FinanceLord.TransactionAddActivity;
+import protect.FinanceLord.Activities.TransactionAddActivity;
 import protect.FinanceLord.TransactionUtils.TransactionDatabaseHelper;
 import protect.FinanceLord.TransactionUtils.TransactionInputWidgets;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;

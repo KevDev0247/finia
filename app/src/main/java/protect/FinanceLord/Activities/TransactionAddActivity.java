@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,6 +23,7 @@ import java.util.List;
 
 import protect.FinanceLord.Communicators.SaveDataCommunicator;
 import protect.FinanceLord.Database.BudgetsType;
+import protect.FinanceLord.R;
 import protect.FinanceLord.TransactionAdding.Add_TransactionsFragment;
 import protect.FinanceLord.TransactionAdding.EditPagerAdapter;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;

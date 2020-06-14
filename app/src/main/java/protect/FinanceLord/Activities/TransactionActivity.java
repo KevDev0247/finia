@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,6 +28,7 @@ import protect.FinanceLord.DAOs.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.DAOs.TransactionsDao;
+import protect.FinanceLord.R;
 import protect.FinanceLord.TransactionViewing.CategoryFiltersAdapter;
 import protect.FinanceLord.TransactionViewing.ViewPagerAdapter;
 import protect.FinanceLord.TransactionViewing.View_TransactionsFragment;

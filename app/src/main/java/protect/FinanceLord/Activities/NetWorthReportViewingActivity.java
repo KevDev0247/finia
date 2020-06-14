@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,6 +28,7 @@ import protect.FinanceLord.DAOs.LiabilitiesValueDao;
 import protect.FinanceLord.NetWorthReportViewing.ReportPagerAdapter;
 import protect.FinanceLord.NetWorthReportViewing.Report_AssetsFragment;
 import protect.FinanceLord.NetWorthReportViewing.Report_LiabilitiesFragment;
+import protect.FinanceLord.R;
 
 /**
  * The activity to view the report the user wish to see.

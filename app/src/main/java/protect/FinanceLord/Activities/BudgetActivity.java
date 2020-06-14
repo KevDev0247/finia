@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,6 +22,7 @@ import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.DAOs.BudgetsTypeDao;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.DAOs.BudgetInfoDao;
+import protect.FinanceLord.R;
 
 /**
  * The activity that displayed the list of budgets.

@@ -10,41 +10,41 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SpendingReportActivity"
+            android:name=".Activities.SpendingReportActivity"
             android:theme="@style/AppTheme.InputSheet" />
         <activity
-            android:name=".TransactionEditActivity"
+            android:name=".Activities.TransactionEditActivity"
             android:theme="@style/AppTheme.InputSheet" />
         <activity
-            android:name=".TransactionAddActivity"
+            android:name=".Activities.TransactionAddActivity"
             android:theme="@style/AppTheme.InputSheet" />
         <activity
-            android:name=".BudgetEditActivity"
+            android:name=".Activities.BudgetEditActivity"
             android:theme="@style/AppTheme.InputSheet" />
         <activity
-            android:name=".NetWorthReportViewingActivity"
+            android:name=".Activities.NetWorthReportViewingActivity"
             android:label="@string/title_activity_net_worth_report_template"
             android:theme="@style/AppTheme.ReportSheet" />
         <activity
-            android:name=".NetWorthReportEditingActivity"
+            android:name=".Activities.NetWorthReportEditingActivity"
             android:label="@string/title_activity_net_worth_edit_reports"
-            android:parentActivityName=".NetWorthActivity"
+            android:parentActivityName=".Activities.NetWorthActivity"
             android:theme="@style/AppTheme.InputSheet"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".TransactionActivity"
+            android:name=".Activities.TransactionActivity"
             android:theme="@style/AppTheme.MajorActivities" />
         <activity
-            android:name=".BudgetActivity"
+            android:name=".Activities.BudgetActivity"
             android:theme="@style/AppTheme.MajorActivities" />
         <activity
-            android:name=".SpendingActivity"
+            android:name=".Activities.SpendingActivity"
             android:theme="@style/AppTheme.MajorActivities" />
         <activity
-            android:name=".NetWorthActivity"
+            android:name=".Activities.NetWorthActivity"
             android:theme="@style/AppTheme.MajorActivities" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:theme="@style/AppTheme.MajorActivities">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

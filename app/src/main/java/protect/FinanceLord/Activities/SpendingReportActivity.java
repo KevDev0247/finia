@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import protect.FinanceLord.Database.BudgetsType;
+import protect.FinanceLord.R;
 import protect.FinanceLord.SpendingUtils.GroupedSpending;
 
 /**

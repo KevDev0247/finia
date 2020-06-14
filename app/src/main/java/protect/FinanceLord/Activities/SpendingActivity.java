@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import protect.FinanceLord.DAOs.BudgetsTypeDao;
 import protect.FinanceLord.DAOs.TransactionsDao;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.FinanceLordDatabase;
+import protect.FinanceLord.R;
 import protect.FinanceLord.SpendingUtils.GroupedSpending;
 import protect.FinanceLord.SpendingUtils.MonthlyTotalSpending;
 import protect.FinanceLord.SpendingUtils.SpendingListAdapter;

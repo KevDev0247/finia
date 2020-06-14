@@ -1,4 +1,4 @@
-package protect.FinanceLord;
+package protect.FinanceLord.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +30,7 @@ import protect.FinanceLord.NetWorthPastReportsList.PastReportsAdapter;
 import protect.FinanceLord.NetWorthPastReportsList.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeDashboard.NetWorthCardsAdapter;
 import protect.FinanceLord.NetWorthSwipeDashboard.NetWorthCardsDataModel;
+import protect.FinanceLord.R;
 
 /**
  * The activity that provides a dashboard of the data of assets and liabilities as well as the list of reports.

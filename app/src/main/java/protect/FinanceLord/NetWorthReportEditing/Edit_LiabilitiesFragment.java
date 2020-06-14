@@ -29,7 +29,7 @@ import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Liabilities;
 import protect.FinanceLord.NetWorthDataStructure.ValueTreeProcessor_Liabilities;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragmentAdapter;
 import protect.FinanceLord.NetWorthReportEditing.FragmentUtils.LiabilitiesFragmentChildViewClickListener;
-import protect.FinanceLord.NetWorthReportEditingActivity;
+import protect.FinanceLord.Activities.NetWorthReportEditingActivity;
 import protect.FinanceLord.R;
 
 /**
