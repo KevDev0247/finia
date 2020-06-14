@@ -65,7 +65,6 @@ public class Add_TransactionsFragment extends Fragment {
      * In this method, the fragment will retrieve the instance of communicator in the activity
      * in order to communicate with the activity.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param context the context of this fragment
      */
     @Override
@@ -85,12 +84,12 @@ public class Add_TransactionsFragment extends Fragment {
      * The method will first determine whether to create a revenues fragment or a expenses fragment based on the fragment tag.
      * Then, the input widgets will be set up.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
      * @param container the container of the group of views.
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
      * @return the view of the fragment.
      */
+    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -119,7 +118,6 @@ public class Add_TransactionsFragment extends Fragment {
      * Then, the database helper and view model is set up to help insert the data and detect the change to budget types.
      * Lastly, the method to set up delete button and the date input is called.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param revenuesFragmentView the view of the revenues fragment.
      */
     private void setUpRevenuesInputWidgets(View revenuesFragmentView) {
@@ -151,7 +149,6 @@ public class Add_TransactionsFragment extends Fragment {
      * Then, the database helper and view model is set up to help insert the data and detect the change to budget types.
      * Lastly, the method to set up delete button and the date input is called.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param expensesFragmentView the view of the expenses fragment.
      */
     private void setUpExpensesInputWidgets(View expensesFragmentView) {
@@ -178,8 +175,6 @@ public class Add_TransactionsFragment extends Fragment {
 
     /**
      * Set up the delete logic as well as the calendarDialogCommunicator to transfer the date picked from calendar dialog.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private void setUpDeleteButtonAndDateInput() {
         inputWidgets.deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -203,8 +198,6 @@ public class Add_TransactionsFragment extends Fragment {
     /**
      * The communicator that receive the message to save data and notify the database helper to insert data.
      * Text listeners are also added to the input boxes to detect any changes.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private SaveDataCommunicator fromActivityCommunicator = new SaveDataCommunicator() {
         @Override
@@ -218,8 +211,6 @@ public class Add_TransactionsFragment extends Fragment {
     /**
      * The communicator that communicate the date from calendar dialog to the activity.
      * The date that the user picked will be displayed on the input box.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override

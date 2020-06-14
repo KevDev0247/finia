@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 import protect.FinanceLord.R;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
+ /**
+ * A FragmentPagerAdapter that returns a fragment corresponding to
+ * one of the tabs.
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 

@@ -27,6 +27,13 @@ import protect.FinanceLord.TransactionEditActivity;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 import protect.FinanceLord.ViewModels.TransactionsViewModel;
 
+/**
+ * The class for the fragment to display transactions.
+ * Note that this fragment is reusable. It is used for both expense and revenue sections.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class View_TransactionsFragment extends Fragment {
 
     private TransactionListAdapter revenuesAdapter;
@@ -47,6 +54,12 @@ public class View_TransactionsFragment extends Fragment {
         this.fragmentTag = fragmentTag;
     }
 
+    /**
+     * Attach the fragment to the activity it belongs to.
+     * In this method, the instance of the activity the fragment belongs to will be retrieved to set up the view model.
+     *
+     * @param context the context of this fragment
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -55,6 +68,16 @@ public class View_TransactionsFragment extends Fragment {
         }
     }
 
+    /**
+     * Create the view of the fragment.
+     * The method will first determine whether to create a revenues fragment or a expenses fragment based on the fragment tag.
+     * Then, the list of transactions and the view model will be set up.
+     *
+     * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
+     * @param container the container of the group of views.
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     * @return the view of the fragment.
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,6 +103,13 @@ public class View_TransactionsFragment extends Fragment {
         return null;
     }
 
+    /**
+     * Set up the list by retrieve the data and set up the adapter.
+     * An onItemClickListener is also added to each item to navigate the user to edit sheet when clicked.
+     * The data of the item will be stored in the intent and transferred to the edit activity
+     *
+     * @param revenuesFragmentView the view of the revenues fragment.
+     */
     private void setUpRevenuesListView(View revenuesFragmentView) {
         ListView revenuesListView = revenuesFragmentView.findViewById(R.id.transactions_list);
 
@@ -111,6 +141,13 @@ public class View_TransactionsFragment extends Fragment {
         });
     }
 
+    /**
+     * Set up the list by retrieve the data and set up the adapter.
+     * An onItemClickListener is also added to each item to navigate the user to edit sheet when clicked.
+     * The data of the item will be stored in the intent and transferred to the edit activity
+     *
+     * @param expensesFragmentView the view of the expenses fragment.
+     */
     private void setUpExpensesListView(View expensesFragmentView) {
         ListView expensesListView = expensesFragmentView.findViewById(R.id.transactions_list);
 
@@ -142,12 +179,20 @@ public class View_TransactionsFragment extends Fragment {
         });
     }
 
+    /**
+     * Set up the View Models for revenues fragment to detect and communicate the change in data source.
+     * The budgetTypesViewModel will monitor the change of categories when a new category is created
+     * The transactionsViewModel will monitor the change of transactions when a new transactions is inserted into the database
+     * These view models will notify the adapter when the list of data has changed when a change is observed.
+     *
+     * @see BudgetTypesViewModel
+     * @see TransactionsViewModel
+     */
     private void setUpRevenuesViewModels() {
         BudgetTypesViewModel budgetTypesViewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
         budgetTypesViewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
             @Override
             public void onChanged(List<BudgetsType> newBudgetsTypes) {
-                // budget types won't update when new categories where created when EDITING, not ADDING
                 Log.d(fragmentTag, " budget types data has changed");
                 budgetsTypes.clear();
                 budgetsTypes.addAll(newBudgetsTypes);
@@ -173,6 +218,15 @@ public class View_TransactionsFragment extends Fragment {
         });
     }
 
+    /**
+     * Set up the View Models for expenses fragment to detect and communicate the change in data source.
+     * The budgetTypesViewModel will monitor the change of categories when a new category is created
+     * The transactionsViewModel will monitor the change of transactions when a new transactions is inserted into the database
+     * These view models will notify the adapter when the list of data has changed when a change is observed.
+     *
+     * @see BudgetTypesViewModel
+     * @see TransactionsViewModel
+     */
     private void setUpExpensesViewModels() {
         BudgetTypesViewModel budgetTypesViewModel = ViewModelProviders.of(transactionActivity).get(BudgetTypesViewModel.class);
         budgetTypesViewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
