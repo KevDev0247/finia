@@ -37,6 +37,7 @@ import protect.FinanceLord.R;
  * The class includes the expandable list, input fields, and commit button.
  * The custom expandable list in the fragment is a part of UX design designed to improve user experiences to avoid
  * the scenario when user cannot find the right category and input fields.
+ * They group items into appropriate parent categories so that the input sheet can be more clean and organized
  *
  * @author Owner  Kevin Zhijun Wang
  * @version 2020.0609
@@ -76,8 +77,10 @@ public class Edit_LiabilitiesFragment extends Fragment {
      * First, the method will first set the view of the content by finding the corresponding layout file through id.
      * Then, the method will first set the view of the the expandable list view by finding the corresponding layout file through id.
      * Next, the liabilities types and values are retrieved from database and set up the expandable list view.
-     * Lastly, the method will set up the tree processor and commit logic of the commit button.
+     * Lastly, the method will set up the tree processor and commit and delete logic of the buttons.
      * The commit logic include how the data was retrieved from the input fields and transferred to the type and value tree processor to prepare for the insertion of the data.
+     * The delete logic include the action to delete the report of assets at a time that the user picked.
+     * Note that delete action only applies to the whole report. If the user merely want to change a number, then it is better to just use the edit mode.
      *
      * @author Owner  Kevin Zhijun Wang
      * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
@@ -89,10 +92,11 @@ public class Edit_LiabilitiesFragment extends Fragment {
         View liabilitiesFragmentView = inflater.inflate(R.layout.fragment_edit_liabilities, null);
         expandableListView = liabilitiesFragmentView.findViewById(R.id.liabilities_list_view);
         RelativeLayout commitButton = liabilitiesFragmentView.findViewById(R.id.liabilities_commit_button);
+        RelativeLayout deleteButton = liabilitiesFragmentView.findViewById(R.id.liabilities_delete_button);
 
         initializeLiabilities();
 
-        setUpCommitButton(commitButton);
+        setUpCommitButton(commitButton, deleteButton);
 
         return liabilitiesFragmentView;
     }
@@ -106,19 +110,21 @@ public class Edit_LiabilitiesFragment extends Fragment {
      * The data source act as a cache for the expandable list.
      * After the data is inserted, the data in the data source is cleared.
      *
+     * For the delete logic, the whole report will be deleted.
+     *
      * @author Owner  Kevin Zhijun Wang
      * @param commitButton the instance of commit button.
      */
-    private void setUpCommitButton(RelativeLayout commitButton) {
+    private void setUpCommitButton(RelativeLayout commitButton, RelativeLayout deleteButton) {
+        FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_LiabilitiesFragment.this.getContext());
+        final LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
+
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
-                        FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_LiabilitiesFragment.this.getContext());
-                        LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
-
                         for(LiabilitiesValue liabilitiesValueInProcessor: Edit_LiabilitiesFragment.this.valueTreeProcessor.getAllLiabilitiesValues()) {
 
                             liabilitiesValueInProcessor.setDate(currentTime.getTime());
@@ -160,6 +166,19 @@ public class Edit_LiabilitiesFragment extends Fragment {
                         valueTreeProcessor.clearAllLiabilitiesValues();
 
                         Log.d("Edit_LFragment", "Liabilities committed!");
+                    }
+                });
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Executors.newSingleThreadExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        liabilitiesValueDao.deleteLiabilitiesAtDate(currentTime.getTime());
+                        getActivity().finish();
                     }
                 });
             }

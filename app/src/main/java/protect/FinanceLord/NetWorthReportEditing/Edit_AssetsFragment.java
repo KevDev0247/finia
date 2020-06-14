@@ -37,6 +37,7 @@ import protect.FinanceLord.R;
  * The class includes the expandable list, input fields, and commit button.
  * The custom expandable list in the fragment is a part of UX design designed to improve user experiences to avoid
  * the scenario when user cannot find the right category and input fields.
+ * They group items into appropriate parent categories so that the input sheet can be more clean and organized.
  *
  * @author Owner  Kevin Zhijun Wang
  * @version 2020.0609
