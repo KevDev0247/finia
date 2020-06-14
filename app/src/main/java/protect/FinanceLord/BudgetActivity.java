@@ -25,7 +25,7 @@ import protect.FinanceLord.DAOs.BudgetInfoDao;
 
 /**
  * The activity that displayed the list of budgets.
- * The activity will allow the user to add or edit their budgets.
+ * The activity will allow the user to view their budgets.
  *
  * @author Owner  Kevin Zhijun Wang
  * @version 2020.0609

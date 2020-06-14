@@ -30,6 +30,13 @@ import protect.FinanceLord.TimeUtils.CalendarDialog;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
+/**
+ * The activity that displayed the list of budgets.
+ * The activity will allow the user to add or edit their budgets.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class BudgetEditActivity extends AppCompatActivity {
 
     private BudgetDatabaseHelper databaseUtils;
@@ -38,6 +45,15 @@ public class BudgetEditActivity extends AppCompatActivity {
 
     private String TAG = "BudgetEditActivity";
 
+    /**
+     * Create and initialize the activity.
+     * This method was called when the activity was created.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * First, the title will be set to the date of the budget item.
+     * Lastly, the methods to set up view models and the input widgets are called.
+     *
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +78,20 @@ public class BudgetEditActivity extends AppCompatActivity {
 
         setUpBudgetTypesViewModel();
 
-        setUpInputFields(typeNames, allBudgetTypes);
+        setUpInputWidgets(typeNames, allBudgetTypes);
     }
 
-    private void setUpInputFields(List<String> typeNames, List<BudgetsType> allBudgetTypes) {
+    /**
+     * Set up the input widgets including the input boxes, the drop down list, the delete button, and the database helper.
+     * First, all the input widgets are associated with the corresponding layout.
+     * Next, the adapter for the drop down list will be set up and added to the category input box.
+     * Then, the database helper is set up to help insert or update the data.
+     * Lastly, the end date input and start date input is set up by connecting the communicators with the calendar dialog.
+     *
+     * @param typeNames list of names of all the categories
+     * @param allBudgetTypes list of all the budgetType items.
+     */
+    private void setUpInputWidgets(List<String> typeNames, List<BudgetsType> allBudgetTypes) {
         inputUtils.nameInputField = findViewById(R.id.budget_name_field);
         inputUtils.valueInputField = findViewById(R.id.budget_value_field);
         inputUtils.startDateInputField = findViewById(R.id.budget_start_date_field);
@@ -108,6 +134,11 @@ public class BudgetEditActivity extends AppCompatActivity {
         setUpSaveAndDeleteButton();
     }
 
+    /**
+     * All the data user stored is loaded into the input boxes
+     *
+     * @param allBudgetTypes the budget types stored in the database.
+     */
     private void loadDataToInputBox(List<BudgetsType> allBudgetTypes) {
         DecimalFormat decimalFormat = new DecimalFormat();
         SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.CANADA);
@@ -122,6 +153,10 @@ public class BudgetEditActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Set up the logic to update and delete for the save and delete button.
+     * The update logic is mainly handled with the databaseHelper.
+     */
     private void setUpSaveAndDeleteButton() {
         ImageButton saveButton = findViewById(R.id.budget_save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +187,11 @@ public class BudgetEditActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set up the view model to detect any change of budget types when user update the data.
+     * Whenever the view model detects change in budget types,
+     * the updated list of budget types will be sent back to the preceding activity.
+     */
     private void setUpBudgetTypesViewModel() {
         viewModel = ViewModelProviders.of(BudgetEditActivity.this).get(BudgetTypesViewModel.class);
         viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
@@ -165,6 +205,10 @@ public class BudgetEditActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * The communicator that communicate the date from calendar dialog to the activity.
+     * The date that the user picked will be displayed on the input box.
+     */
     private CalendarDateBroadcast startTimeCommunicator = new CalendarDateBroadcast() {
         @Override
         public void message(Date date) {
@@ -174,6 +218,10 @@ public class BudgetEditActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * The communicator that communicate the date from calendar dialog to the activity.
+     * The date that the user picked will be displayed on the input box.
+     */
     private CalendarDateBroadcast endTimeCommunicator = new CalendarDateBroadcast() {
         @Override
         public void message(Date date) {

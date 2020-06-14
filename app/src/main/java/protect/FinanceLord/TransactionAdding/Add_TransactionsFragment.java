@@ -115,7 +115,7 @@ public class Add_TransactionsFragment extends Fragment {
      * Set up the revenues input widgets including the input boxes, the drop down list, the delete button, and the database helper.
      * First, all the input widgets are associated with the corresponding layout.
      * Next, the adapter for the drop down list will be set up and added to the category input box.
-     * Then, the database helper and view model is set up to help insert the data and detect the change to budget types.
+     * Then, the database helper and view model is set up to help insert the data and monitor the change to budget types.
      * Lastly, the method to set up delete button and the date input is called.
      *
      * @param revenuesFragmentView the view of the revenues fragment.
