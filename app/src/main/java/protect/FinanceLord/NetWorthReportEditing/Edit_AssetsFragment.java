@@ -60,7 +60,6 @@ public class Edit_AssetsFragment extends Fragment {
      * In this method, the fragment will retrieve the instance of communicator in the activity
      * in order to communicate with the activity
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param context the context of this fragment
      */
     @Override
@@ -82,7 +81,6 @@ public class Edit_AssetsFragment extends Fragment {
      * The delete logic include the action to delete the report of assets at a time that the user picked.
      * Note that delete action only applies to the whole report. If the user merely want to change a number, then it is better to just use the edit mode.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
      * @param container the container of the group of views.
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
@@ -110,10 +108,8 @@ public class Edit_AssetsFragment extends Fragment {
      * Lastly, the data in the processor is deleted.
      * The data source act as a cache for the expandable list.
      * After the data is inserted, the data in the data source is cleared.
-     *
      * For the delete logic, the whole report will be deleted.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param commitButton the instance of commit button.
      */
     private void setUpCommitAndDeleteButton(RelativeLayout commitButton, RelativeLayout deleteButton) {
@@ -191,8 +187,6 @@ public class Edit_AssetsFragment extends Fragment {
      * Then, with the assets values and types queried, the type tree processor and value tree processor.
      * The data queried is injected into processors as data source, or cache.
      * Lastly, the tree processors help to set up expandable list.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private void initializeAssets() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
@@ -229,8 +223,6 @@ public class Edit_AssetsFragment extends Fragment {
 
     /**
      * The communicator that communicate the date from calendar dialog to the fragment.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private DateCommunicator fromActivityCommunicator = new DateCommunicator() {
         @Override
@@ -244,7 +236,6 @@ public class Edit_AssetsFragment extends Fragment {
     /**
      * Specify the lower bound of the time period, start time.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return the altered date
      */
     private Date getQueryStartTime(){
@@ -261,7 +252,6 @@ public class Edit_AssetsFragment extends Fragment {
     /**
      * Specify the upper bound of the time period, end time.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return the altered date
      */
     private Date getQueryEndTime(){

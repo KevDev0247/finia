@@ -39,7 +39,6 @@ public class CalendarDialog extends DialogFragment {
      * Then the method will set up the confirm and cancel button.
      * Lastly, the onClickListener was set to communicate the date once the date is confirmed.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
      * @param container the container of the group of views.
      * @param savedInstanceState A mapping from String keys to various Parcelable values.

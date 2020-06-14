@@ -62,7 +62,6 @@ public class TransactionActivity extends AppCompatActivity {
      * Lastly, the method will initialize the data access objects used in this activity
      * and call the method to retrieve data from the database.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
      */
     @Override
@@ -91,8 +90,6 @@ public class TransactionActivity extends AppCompatActivity {
      * This method is called first after the activity is created or whenever the user returns to this activity.
      * When the user returned to the activity, the two methods will be called to
      * refresh the data on past report list and the swipe dashboard cards.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     @Override
     protected void onResume() {
@@ -106,7 +103,6 @@ public class TransactionActivity extends AppCompatActivity {
      * Query is completed in a separate thread to avoid locking the UI thread for a long period of time.
      * Then, the method will decides whether to set up the view or update the data.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param initialize the variable indicates whether the activity have to initialize the view.
      * @param refresh the variable indicates whether the activity have to refresh the view.
      */
@@ -144,7 +140,6 @@ public class TransactionActivity extends AppCompatActivity {
      * Then, the method will set up the fragment with the transactions and the budgetTypes queried.
      * Lastly, an onTabSelectedListener will be added to the tab layout to change the color of indicator and color of text when clicked.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param transactions all the transactions inputted
      */
     private void setUpTabsAndAddButton(List<Transactions> transactions) {
@@ -200,8 +195,6 @@ public class TransactionActivity extends AppCompatActivity {
      * Set up the adapter for the list of filters of category.
      * First, a recycler view is set up to hold all the filters.
      * Then, an adapter is created to deliver and prepare the view for each filter.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private void setUpCategoryFiltersList() {
         addFilterAll(budgetsTypes);
@@ -216,7 +209,6 @@ public class TransactionActivity extends AppCompatActivity {
     /**
      * Add the all filter to the filters list.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param budgetsTypes list of all the budget types stored in the database.
      */
     private void addFilterAll(List<BudgetsType> budgetsTypes) {
@@ -230,7 +222,6 @@ public class TransactionActivity extends AppCompatActivity {
      * When the new data is received, the data source for the adapter is cleared and the new data is assigned to the list.
      * Lastly, the new data list is pushed into the view model to communicate the new data list with the fragment.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param requestCode the request code for identifying the activity.
      * @param resultCode the code to retrieve the results.
      * @param data the intent from the succeeding activity.
@@ -259,8 +250,6 @@ public class TransactionActivity extends AppCompatActivity {
      * First, the method query all the budget types from the database.
      * Then, once the for loop finds the match of categoryLabel, a query for the transactions
      * that belong to a particular category will be done and push to the view model.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private GroupByCategoryCommunicator fromAdapterCommunicator = new GroupByCategoryCommunicator() {
         @Override

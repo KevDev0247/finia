@@ -54,7 +54,6 @@ public class ValueTreeProcessor_Assets {
     /**
      * Retrieve an AssetsValue object of an individual node.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param assetsId the id of the AssetsValue object
      * @return an AssetsValue object if the id inputted matched the id of AssetsValue object.
      *         null if no the id inputted doesn't match the id of any objects in the list.
@@ -71,7 +70,6 @@ public class ValueTreeProcessor_Assets {
     /**
      * Assign values to some parameters of the AssetsValue object and push the object into the list.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param assetId the id of the AssetsValue object
      * @param assetValue the value of an asset
      */
@@ -90,7 +88,6 @@ public class ValueTreeProcessor_Assets {
     /**
      * Retrieve all AssetsValue objects from the data resource list -- assetsValues.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return List of AssetsValue objects
      */
     public List<AssetsValue> getAllAssetsValues() {
@@ -102,7 +99,6 @@ public class ValueTreeProcessor_Assets {
      * Data resource list refers to the list of AssetsValue objects for DataProcessor to process.
      * Processing data in this class refers to calculation and retrieve certain groups of data.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param assetsValues the list of AssetsValue objects representing an updated data source list
      */
     public void setAllAssetsValues(List<AssetsValue> assetsValues) {
@@ -122,7 +118,6 @@ public class ValueTreeProcessor_Assets {
     /**
      * Retrieve the id of the node in the Type Tree data structure.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param assetsName the name of the asset category or item
      * @return an integer value represents the id of the node in the data structure.
      */
@@ -145,7 +140,6 @@ public class ValueTreeProcessor_Assets {
      * Retrieve the id of the parent node in the Tree data structure that stores the categories.
      * Then traverse the tree structure and add all the id's of the child nodes to a list and return the list.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param assetsName the name of the asset category or item
      * @return an integer value represents the id of the node in the data structure
      */
@@ -204,7 +198,6 @@ public class ValueTreeProcessor_Assets {
      * The methods to calculate the value of its children nodes are called.
      * Then, the value of the children is summed and returned.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return a float value represents the total assets value.
      */
     private float calculateTotalAssets() {
@@ -223,7 +216,6 @@ public class ValueTreeProcessor_Assets {
      * The methods traverse the items in current level as well as under liquid assets
      * and calculate the total value of all children nodes.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return a float value represents the total liquid assets value.
      */
     private float calculateTotalLiquidAssets() {
@@ -252,7 +244,6 @@ public class ValueTreeProcessor_Assets {
      * The methods traverse the items in current level as well as under personal assets
      * and calculate the total value of all children nodes.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return a float value represents the total personal assets value.
      */
     private float calculateTotalPersonalAssets() {
@@ -279,7 +270,6 @@ public class ValueTreeProcessor_Assets {
      * The methods to calculate the value of its children nodes are called.
      * Then, the value of the children is summed and returned.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return a float value represents the total assets value.
      */
     private float calculateTotalInvestedAssets() {
@@ -298,7 +288,6 @@ public class ValueTreeProcessor_Assets {
      * The methods traverse the items in current level as well as under ownership interests
      * and calculate the total ownership interests of all children nodes.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return a float value represents the total ownership interests value.
      */
     private float calculateTotalOwnershipInterests() {
@@ -327,7 +316,6 @@ public class ValueTreeProcessor_Assets {
      * The methods traverse the items in current level as well as under retirement accounts
      * and calculate the total retirement accounts of all children nodes.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return a float value represents the total retirement accounts value.
      */
     private float calculateTotalRetirementAccounts() {
@@ -356,7 +344,6 @@ public class ValueTreeProcessor_Assets {
      * The methods traverse the items in current level as well as under taxable accounts
      * and calculate the total taxable accounts of all children nodes.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return a float value represents the total taxable accounts value.
      */
     private float calculateTotalTaxableAccounts(){
@@ -384,7 +371,6 @@ public class ValueTreeProcessor_Assets {
      * Then, retrieve the object of each node and set the values to the parameters of AssetsValue.
      * Finally, insert or update the object AssetsValue.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param assetsValueDao the data access object to insert or update AssetsValue object
      */
     public void insertOrUpdateParentAssets(AssetsValueDao assetsValueDao) {

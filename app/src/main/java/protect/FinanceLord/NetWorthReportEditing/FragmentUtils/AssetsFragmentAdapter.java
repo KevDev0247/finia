@@ -54,7 +54,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     /**
      * Get the current asset item's name
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param position the instance of commit button.
      * @return name of the asset
      */
@@ -65,7 +64,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     /**
      * Get the count of the group of nodes.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return number of node containers in the group
      */
     @Override
@@ -76,7 +74,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     /**
      * Gets the number of children in a specified group.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return number of node containers in the group
      */
     @Override
@@ -87,7 +84,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     /**
      * Gets the data associated with the given group.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return the group selected
      */
     @Override
@@ -98,7 +94,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     /**
      * Gets the current child node container of a parent node.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return current child node container of a parent node.
      */
     @Override
@@ -111,7 +106,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     /**
      * Gets the the id of the group.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return Id of the group.
      */
     @Override
@@ -122,7 +116,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     /**
      * Gets the the id of the group.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return Id of the group.
      */
     @Override
@@ -133,7 +126,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     /**
      * Indicates whether the child and group IDs are stable across changes to the underlying data.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return Boolean.
      */
     @Override
@@ -150,7 +142,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
      * Then, a text listener will be set to retrieve the data from the input field and insert into the tree processor's data source
      * to prepare for calculation and insertion into the database.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param position the position of the current item.
      * @param b indicate whether the group is expanded.
      * @param convertView the view object of the item.
@@ -215,7 +206,6 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
      * First, the method will detect the change in the input box record the value.
      * Then, the method will reset the value the node in the tree, which is stored in processor data source.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param editText the input box for the current item.
      * @param nodeContainer the node container that contain the information of each node.
      */
@@ -252,12 +242,12 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
      * Get the child view of the group.
      * The method will set up the nested expandable list in a particular category item.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param groupPosition the position of the group.
      * @param childPosition the position of the child item.
      * @param isExpanded indicate whether the group is expanded.
      * @param convertView the view of the child item
      * @param parent group of parent items
+     * @return the view of the child
      */
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
@@ -303,9 +293,9 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     /**
      * Determine whether the child at the specified position is selectable
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param i groupPosition
      * @param i1 childPosition
+     * @return whether the child is selectable
      */
     @Override
     public boolean isChildSelectable(int i, int i1) {

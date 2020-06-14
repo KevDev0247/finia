@@ -11,6 +11,9 @@ import protect.FinanceLord.NetWorthDataStructure.TypeTreeProcessor_Assets;
 
 /**
  * A Listener class that will detect whether a parent of the items in an expandable list has been clicked
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
  */
 public class AssetsFragmentChildViewClickListener implements ExpandableListView.OnChildClickListener {
 

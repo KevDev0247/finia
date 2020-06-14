@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
      * as LinearLayout because the resources in this circumstance were more difficult to load to a Button class.
      * View.onclickListener was added to the button to enable user go to the corresponding section through a click.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
      */
     @Override
@@ -91,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
      * The initialization methods are called on separate threads to avoid locking the UI thread for a long period of time.
      * These methods will insert the default categories of each section into
      * the corresponding entity in the database.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private void initializeDatabase() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {

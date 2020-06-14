@@ -48,7 +48,6 @@ public class TransactionAddActivity extends AppCompatActivity {
      * Then, it will initialize return button and the currentTime to the default current time.
      * Lastly, the method will call the method to set up tabs and save button as well as set up the observer.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
      */
     @Override
@@ -82,7 +81,6 @@ public class TransactionAddActivity extends AppCompatActivity {
      * The SaveDataCommunicator is used to communicate with the fragments about saving data.
      * The method will determine which fragment the message will be sent to based on the fragment the user is at.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param budgetsTypes the budget types stored in the database.
      */
     private void setUpTabsAndSaveButton(List<BudgetsType> budgetsTypes){
@@ -119,8 +117,6 @@ public class TransactionAddActivity extends AppCompatActivity {
      * The view model will detect the change of budget type list.
      * Once the list has been updated, mostly in the database helper class,
      * the updated class will be transferred to the preceding activity for display.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private void setUpBudgetTypesObserver() {
         BudgetTypesViewModel viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);

@@ -51,7 +51,6 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
      * Then, it will initialize the date to the current time and set up the calendar picker button and the return button.
      * Lastly, it will call the methods to set up the two tabs for assets and liabilities input sheets.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
      */
     @Override
@@ -87,8 +86,6 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
      * First initialize the TabLayout, each fragment, as well the ViewPager for the the layout.
      * Then, set up ViewPager by adding an adapter sectionsPagerAdapter as well as TabLayout by adding the ViewPager
      * Lastly, set onClickListener for the calendar button to show the datePicker dialog when the button is clicked.
-     *
-     * @author Owner Kevin Zhijun Wang
      */
     private void setUpTabs() {
         TabLayout tabLayout = findViewById(R.id.edit_tab_layout);
@@ -121,8 +118,6 @@ public class NetWorthReportEditingActivity extends AppCompatActivity {
      * CalendarDialog will call message method to transfer the data to this activity.
      * Then, the time picked by the user will be displayed on the calendar button and sent to each fragment
      * through two other communicators.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override

@@ -34,7 +34,6 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
      * Then the adapter will load the data from the data source to the UI widgets.
      * It will also prepare the rest of the UI for display by set the sign and the color of the difference block.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param position the position of the item
      * @param convertView the view of the current item
      * @param parent the group of views.

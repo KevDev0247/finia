@@ -50,7 +50,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
      * Lastly, the setUpTabs method is called to set up the tabs for report sheets
      * and retrieveSummaryData method is called to retrieve the data of parent categories.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
      */
     @Override
@@ -83,8 +82,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
      * First initialize the TabLayout, each fragment, as well the ViewPager for the the layout.
      * Then, set up ViewPager by adding an adapter sectionsPagerAdapter as well as TabLayout by adding the ViewPager
      * Lastly, set onTabSelectedListener for the TabLayout to change the color of the tab text and indicator color.
-     *
-     * @author Owner Kevin Zhijun Wang
      */
     private void setUpTabs(String date) {
         final TabLayout tabLayout = findViewById(R.id.report_tab_layout);
@@ -128,7 +125,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
      * The current data and data of the previous report is retrieved to calculate the difference.
      * Lastly, refreshSummaryView is called to refresh the summary dashboard of total values.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param date the time of this report
      */
     private void retrieveSummaryData(final String date) {
@@ -178,7 +174,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
      * Then, populate the totalValue and difference textViews and determine the color of the difference block
      * for netWorth, totalAssets, and totalLiabilities.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param totalAssetsValue Total assets value
      * @param totalLiabilitiesValue Total liabilities value
      * @param totalAssetsDifference The difference of current total assets and previous total assets
@@ -264,7 +259,6 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
     /**
      * Convert the date-formatted string to Date object.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param itemTime the formatted string date of the item
      */
     private Date convertDate(String itemTime) {

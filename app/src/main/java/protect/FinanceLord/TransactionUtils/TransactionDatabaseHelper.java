@@ -71,7 +71,6 @@ public class TransactionDatabaseHelper {
      * Once, input of all the required input boxes are valid, the data will be inserted or updated.
      * The insertion and update is completed in a separate thread to avoid locking the UI thread for a long period of time.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param insert indicator of whether to insert
      * @param update indicator of whether to update
      * @param transactionId the id of the transaction to be updated.
@@ -170,7 +169,6 @@ public class TransactionDatabaseHelper {
      * Delete an existing transaction.
      * The deletion is completed in a separate thread to avoid locking the UI thread for a long period of time.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param transactionId the id of the transaction to be deleted.
      */
     public void deleteData(final int transactionId) {
@@ -186,8 +184,6 @@ public class TransactionDatabaseHelper {
     /**
      * Add text listeners to input boxes to monitor the input boxes.
      * Once, the empty input boxes are filled, the error message will disappear.
-     *
-     * @author Owner Kevin Zhijun Wang
      */
     public void addTextListener() {
         inputUtils.categoryInput.addTextChangedListener(new TextWatcher() {
@@ -241,8 +237,6 @@ public class TransactionDatabaseHelper {
      * After the new category is inserted, it will also be pushed to the view model to notify the activity to update the filters.
      * Then, the new category will be passed to the method to insert or update through a New Category Entry.
      * All insertions or updates are completed in a separate thread to avoid locking the UI thread for a long period of time.
-     *
-     * @author Owner Kevin Zhijun Wang
      */
     private void addNewCategoryToDatabase() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
@@ -279,7 +273,6 @@ public class TransactionDatabaseHelper {
     /**
      * Insert or update in the New Category Entry.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param budgetsCategoryId the id of the new category of the transaction to be inserted or updated.
      * @return whether the transaction has some input errors
      */

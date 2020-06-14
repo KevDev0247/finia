@@ -59,7 +59,6 @@ public class TransactionEditActivity extends AppCompatActivity {
      * Then, the edit sheet will be set up by determine whether the user picked a expense or revenue.
      * After the sheet is set up, the method to retrieve data will be called.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
      */
     @Override
@@ -99,7 +98,6 @@ public class TransactionEditActivity extends AppCompatActivity {
     /**
      * Retrieve all the budget types stored in database to set up drop down list.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param fragmentTag the name of type of transaction the user picked.
      */
     private void retrieveDataFromDatabase(final String fragmentTag) {
@@ -132,7 +130,6 @@ public class TransactionEditActivity extends AppCompatActivity {
      * and the data the user inputted previously is also loaded into the input boxes.
      * Lastly, the database helper is set up to help update the data.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param budgetsTypes the budget types stored in the database.
      */
     private void setUpRevenueSection(List<BudgetsType> budgetsTypes) {
@@ -166,7 +163,6 @@ public class TransactionEditActivity extends AppCompatActivity {
      * and the data the user inputted previously is also loaded into the input boxes.
      * Lastly, the database helper is set up to help update the data.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param budgetsTypes the budget types stored in the database.
      */
     private void setUpExpenseSection(List<BudgetsType> budgetsTypes) {
@@ -197,7 +193,6 @@ public class TransactionEditActivity extends AppCompatActivity {
      * The drop down list is added onto the category input box and the calendarDialogCommunicator is also deployed.
      * An ArrayAdapter is set up to help deliver the budgetTypes data to the drop down list.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param budgetsTypes the budget types stored in the database.
      */
     private void setUpCategoryAndDateInput(List<BudgetsType> budgetsTypes) {
@@ -223,7 +218,6 @@ public class TransactionEditActivity extends AppCompatActivity {
     /**
      * All the data user stored is loaded into the input boxes
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param budgetsTypes the budget types stored in the database.
      */
     private void loadDataToInputBoxes(List<BudgetsType> budgetsTypes) {
@@ -253,8 +247,6 @@ public class TransactionEditActivity extends AppCompatActivity {
     /**
      * Set up the logic to update and delete for the save and delete button.
      * The update logic is mainly handled with the databaseHelper.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private void setUpSaveAndDeleteButton() {
         ImageButton saveButton = findViewById(R.id.transaction_edit_save_button);
@@ -278,8 +270,6 @@ public class TransactionEditActivity extends AppCompatActivity {
      * Set up the view model to detect any change of budget types when user update the data.
      * Whenever the view model detects change in budget types,
      * the updated list of budget types will be sent back to the preceding activity.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private void setUpBudgetTypesViewModel() {
         viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
@@ -297,8 +287,6 @@ public class TransactionEditActivity extends AppCompatActivity {
     /**
      * The communicator that communicate the date from calendar dialog to the activity.
      * The date that the user picked will be displayed on the input box.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override

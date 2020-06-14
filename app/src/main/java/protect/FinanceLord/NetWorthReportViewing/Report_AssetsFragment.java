@@ -53,7 +53,6 @@ public class Report_AssetsFragment extends Fragment {
      * The method will first set the view of the content by finding the corresponding layout file through id.
      * Then, the method calls the method to get data from the database.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
      * @param container the container of the group of views.
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
@@ -75,7 +74,6 @@ public class Report_AssetsFragment extends Fragment {
      * The query will be performed in a separate thread to prevent locking the UI thread for a long period of time.
      * Lastly, a method to populate the data models will be called to prepare the data source for ListViews
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param itemTime the time of the item.
      */
     private void getDataFromDatabase(final Date itemTime) {
@@ -130,7 +128,6 @@ public class Report_AssetsFragment extends Fragment {
      * The data are all related to items that are on the parent nodes.
      * Once, the population of data is complete, the method to refresh the view will be called.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param assetsValueDao the data access object to insert AssetsValue object.
      * @param itemTime the time of the item.
      * @param categoryAssets the value items on the parent node.
@@ -257,7 +254,6 @@ public class Report_AssetsFragment extends Fragment {
      * The method will load the data from the data models to the UI widgets and set up the difference blocks.
      * The list adapters will be prepared for delivering the data to UI widgets.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param contentView the view of the fragment.
      * @param categoryAssets the value items on the parent node.
      * @param previousCategoryAssets the value of the previous items on the parent node.

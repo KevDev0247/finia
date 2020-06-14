@@ -36,7 +36,6 @@ public class CategoryFiltersAdapter extends RecyclerView.Adapter<CategoryFilters
      * Create the view holder of the filter item.
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param viewType the type of the view
      * @param parent the ViewGroup of this list
      * @return the view holder of this filter
@@ -52,7 +51,6 @@ public class CategoryFiltersAdapter extends RecyclerView.Adapter<CategoryFilters
     /**
      * Called by RecyclerView to display the data at the specified position.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param holder the view holder of the filter
      * @param position the position of the current item
      */

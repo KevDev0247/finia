@@ -48,7 +48,6 @@ public class NetWorthActivity extends AppCompatActivity {
      * Then, it will initialize return button and the entry button to edit report section.
      * Lastly, it will call the methods to create the past report list and the swiping dashboard.
      *
-     * @author Owner Kevin Zhijun Wang
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
      */
     @Override
@@ -81,8 +80,6 @@ public class NetWorthActivity extends AppCompatActivity {
      * This method is called first after the activity is created or whenever the user returns to this activity.
      * When the user returned to the activity, the two methods will be called to
      * refresh the data on past report list and the swipe dashboard cards.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     @Override
     protected void onResume() {
@@ -102,8 +99,6 @@ public class NetWorthActivity extends AppCompatActivity {
      * View.onclickListener is added to the each item in the list
      * to enable user go to the corresponding report through a click.
      * The information on the list item will be stored in intent and transferred to the report activity for query and display purposes.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     protected void refreshPastReportsListView() {
         ListView pastReportsListView = findViewById(R.id.past_report_list);
@@ -159,8 +154,6 @@ public class NetWorthActivity extends AppCompatActivity {
      * Create or update the data in the swiping dashboard.
      * First, a ViewPager for swiping and its adapter is created and setup.
      * Then, the most up-to-date data will be loaded to the cards.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     protected void refreshNetWorthCardsView() {
         NetWorthCardsAdapter adapter;
@@ -181,8 +174,6 @@ public class NetWorthActivity extends AppCompatActivity {
      * First, all the parent categories Total value are initialized.
      * Then, the latest data of assets and liabilities will be queried from the database.
      * Lastly, inject the name, image resource, and value to the data model for the adapter to format and display.
-     *
-     * @author Owner  Kevin Zhijun Wang
      * @param dataModels the data model to store the data and resources, preparing them for the adapter to display.
      * @param adapter the adapter to carry the data from the data model and delivers it to a layout.
      */

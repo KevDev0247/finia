@@ -19,7 +19,6 @@ public class TimeProcessor {
      * The method is used to get rid of hours, minutes, and seconds
      * in order for the database to better pinpoint a time of the net worth item.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param year the year of the time
      * @param month the month of the time
      * @param day the date of the time

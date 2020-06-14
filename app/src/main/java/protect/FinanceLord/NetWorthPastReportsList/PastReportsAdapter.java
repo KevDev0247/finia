@@ -37,7 +37,6 @@ public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
      * Lastly, the data is displayed on to the widgets.
      * The color of difference block is also determined here by whether the difference is positive.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param position the position of the current item in the list
      * @param convertView the view class of this item
      * @param parent the ViewGroup of this list
