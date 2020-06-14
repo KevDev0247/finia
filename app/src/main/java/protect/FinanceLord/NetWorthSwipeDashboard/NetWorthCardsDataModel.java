@@ -1,5 +1,12 @@
 package protect.FinanceLord.NetWorthSwipeDashboard;
 
+/**
+ * The data model that contains the information for each item in the net worth dashboard cards.
+ * This data model act as a source to provide data for each item.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class NetWorthCardsDataModel {
 
     private int imageId;
@@ -12,9 +19,9 @@ public class NetWorthCardsDataModel {
         this.details = details;
     }
 
-    public int getImageId()     { return imageId; }
+    int getImageId()     { return imageId; }
 
-    public String getTitle()    { return title; }
+    String getTitle()    { return title; }
 
-    public String getDetails()      { return details; }
+    String getDetails()      { return details; }
 }
