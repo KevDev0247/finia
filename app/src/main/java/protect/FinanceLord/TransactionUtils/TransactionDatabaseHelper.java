@@ -20,6 +20,21 @@ import protect.FinanceLord.R;
 import protect.FinanceLord.TimeUtils.TimeProcessor;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
+/**
+ * The helper class that helps to insert of update the data regarding transactions into the database.
+ * The helper class helps the program to carry out basic actions on a database entity.
+ * The basic actions that the helper class carries out includes:
+ * Insert: insert the new transaction into database.
+ * Update: update an existing transaction in the database.
+ * Delete: delete an existing transaction in the database.
+ * Two entries where designed to help insert of update: Normal Entry and New Category Entry.
+ * Normal Entry refers to the cases when the transaction's category is already stored in the database.
+ * New Category Entry refers to the cases when the transaction's category are created by user and not stored in the database.
+ * When the transaction is determined to be sent to the New Category Entry, a new category will also be created and inserted into the database.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class TransactionDatabaseHelper {
 
     private Context context;
@@ -49,6 +64,18 @@ public class TransactionDatabaseHelper {
         budgetsTypeDao = database.budgetsTypeDao();
     }
 
+    /**
+     * Insert new transaction or update an existing transaction.
+     * First, the data inputted into the input boxes will be retrieved.
+     * If the input of a required nonnull input box is empty, an error message will be displayed.
+     * Once, input of all the required input boxes are valid, the data will be inserted or updated.
+     * The insertion and update is completed in a separate thread to avoid locking the UI thread for a long period of time.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param insert indicator of whether to insert
+     * @param update indicator of whether to update
+     * @param transactionId the id of the transaction to be updated.
+     */
     public void insertOrUpdateData(final boolean insert, final boolean update, final Integer transactionId) {
         mInsert = insert;
         mUpdate = update;
@@ -139,6 +166,13 @@ public class TransactionDatabaseHelper {
         });
     }
 
+    /**
+     * Delete an existing transaction.
+     * The deletion is completed in a separate thread to avoid locking the UI thread for a long period of time.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param transactionId the id of the transaction to be deleted.
+     */
     public void deleteData(final int transactionId) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -149,6 +183,12 @@ public class TransactionDatabaseHelper {
         });
     }
 
+    /**
+     * Add text listeners to input boxes to monitor the input boxes.
+     * Once, the empty input boxes are filled, the error message will disappear.
+     *
+     * @author Owner Kevin Zhijun Wang
+     */
     public void addTextListener() {
         inputUtils.categoryInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -196,6 +236,14 @@ public class TransactionDatabaseHelper {
         });
     }
 
+    /**
+     * Add the new category that the user created into the database.
+     * After the new category is inserted, it will also be pushed to the view model to notify the activity to update the filters.
+     * Then, the new category will be passed to the method to insert or update through a New Category Entry.
+     * All insertions or updates are completed in a separate thread to avoid locking the UI thread for a long period of time.
+     *
+     * @author Owner Kevin Zhijun Wang
+     */
     private void addNewCategoryToDatabase() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -228,6 +276,12 @@ public class TransactionDatabaseHelper {
         });
     }
 
+    /**
+     * Insert or update in the New Category Entry.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param budgetsCategoryId the id of the new category of the transaction to be inserted or updated.
+     */
     private boolean insertOrUpdateWithNewCategory(int budgetsCategoryId) {
         transaction.setTransactionCategoryId(budgetsCategoryId);
         if (!invalidInput && mInsert) {

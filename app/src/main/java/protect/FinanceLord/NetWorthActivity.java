@@ -98,7 +98,7 @@ public class NetWorthActivity extends AppCompatActivity {
      * Create or update the data in the past report list.
      * First, a listView and its adapter PastReportsAdapter is created and set up.
      * Then, database is queried for the most up-to-date data for display.
-     * Query was completed in a separate thread to avoid locking the UI thread for a long period of time.
+     * Query is completed in a separate thread to avoid locking the UI thread for a long period of time.
      * View.onclickListener is added to the each item in the list
      * to enable user go to the corresponding report through a click.
      * The information on the list item will be stored in intent and transferred to the report activity for query and display purposes.
