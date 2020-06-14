@@ -38,6 +38,7 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
      * @param position the position of the item
      * @param convertView the view of the current item
      * @param parent the group of views.
+     * @return the view of the current net worth item.
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

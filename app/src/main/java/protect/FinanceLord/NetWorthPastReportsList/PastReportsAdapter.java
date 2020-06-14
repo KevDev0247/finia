@@ -41,6 +41,7 @@ public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
      * @param position the position of the current item in the list
      * @param convertView the view class of this item
      * @param parent the ViewGroup of this list
+     * @return the view of the report item in the past report list.
      */
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

@@ -89,6 +89,7 @@ public class Add_TransactionsFragment extends Fragment {
      * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
      * @param container the container of the group of views.
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     * @return the view of the fragment.
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

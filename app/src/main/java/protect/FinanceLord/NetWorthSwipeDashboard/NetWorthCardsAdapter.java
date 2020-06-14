@@ -33,6 +33,7 @@ public class NetWorthCardsAdapter extends PagerAdapter {
 
     /**
      * Get the number of items.
+     * @return the size of the list of data models.
      */
     @Override
     public int getCount() {
@@ -45,6 +46,7 @@ public class NetWorthCardsAdapter extends PagerAdapter {
      *
      * @param view view of the item.
      * @param object The same object that was returned by instantiateItem(View, int).
+     * @return whether the view is from the object
      */
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {

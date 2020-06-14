@@ -86,6 +86,7 @@ public class Edit_AssetsFragment extends Fragment {
      * @param inflater the Android System Services that is responsible for taking the XML files that define a layout, and converting them into View objects
      * @param container the container of the group of views.
      * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     * @return the view of the assets fragment
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -244,6 +245,7 @@ public class Edit_AssetsFragment extends Fragment {
      * Specify the lower bound of the time period, start time.
      *
      * @author Owner  Kevin Zhijun Wang
+     * @return the altered date
      */
     private Date getQueryStartTime(){
         Date date;
@@ -260,6 +262,7 @@ public class Edit_AssetsFragment extends Fragment {
      * Specify the upper bound of the time period, end time.
      *
      * @author Owner  Kevin Zhijun Wang
+     * @return the altered date
      */
     private Date getQueryEndTime(){
         Date date;

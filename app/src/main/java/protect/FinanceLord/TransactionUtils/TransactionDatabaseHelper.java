@@ -281,6 +281,7 @@ public class TransactionDatabaseHelper {
      *
      * @author Owner Kevin Zhijun Wang
      * @param budgetsCategoryId the id of the new category of the transaction to be inserted or updated.
+     * @return whether the transaction has some input errors
      */
     private boolean insertOrUpdateWithNewCategory(int budgetsCategoryId) {
         transaction.setTransactionCategoryId(budgetsCategoryId);

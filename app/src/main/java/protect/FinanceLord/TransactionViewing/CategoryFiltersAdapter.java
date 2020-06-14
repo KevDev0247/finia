@@ -39,6 +39,7 @@ public class CategoryFiltersAdapter extends RecyclerView.Adapter<CategoryFilters
      * @author Owner  Kevin Zhijun Wang
      * @param viewType the type of the view
      * @param parent the ViewGroup of this list
+     * @return the view holder of this filter
      */
     @NonNull
     @Override
@@ -72,7 +73,7 @@ public class CategoryFiltersAdapter extends RecyclerView.Adapter<CategoryFilters
     /**
      * Get the number of items.
      *
-     * @author Owner  Kevin Zhijun Wang
+     * @return the size of the list of budget types.
      */
     @Override
     public int getItemCount() {
@@ -81,8 +82,6 @@ public class CategoryFiltersAdapter extends RecyclerView.Adapter<CategoryFilters
 
     /**
      * The class of view holder for the filter of category types.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     static class FilterViewHolder extends RecyclerView.ViewHolder {
         TextView categoryName;

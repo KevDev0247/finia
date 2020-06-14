@@ -49,7 +49,8 @@ public class TransactionListAdapter extends ArrayAdapter<Transactions> {
      * @author Owner  Kevin Zhijun Wang
      * @param position the position of the current item in the list
      * @param convertView the view class of this item
-     * @param parent the ViewGroup of this list
+     * @param parent the ViewGroup of this list.
+     * @return the view of the current transaction item.
      */
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
