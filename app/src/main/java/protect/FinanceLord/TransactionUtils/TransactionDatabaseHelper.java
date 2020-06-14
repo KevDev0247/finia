@@ -68,7 +68,7 @@ public class TransactionDatabaseHelper {
      * Insert new transaction or update an existing transaction.
      * First, the data inputted into the input boxes will be retrieved.
      * If the input of a required nonnull input box is empty, an error message will be displayed.
-     * Once, input of all the required input boxes are valid, the data will be inserted or updated.
+     * Once input of all the required input boxes are valid, the data will be inserted or updated.
      * The insertion and update is completed in a separate thread to avoid locking the UI thread for a long period of time.
      *
      * @param insert indicator of whether to insert

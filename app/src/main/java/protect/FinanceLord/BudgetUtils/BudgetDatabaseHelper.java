@@ -21,6 +21,21 @@ import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.R;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
+/**
+ * The helper class that helps to insert of update the data regarding budgets into the database.
+ * The helper class helps the program to carry out basic actions on a database entity.
+ * The basic actions that the helper class carries out includes:
+ * Insert: insert the new budget into database.
+ * Update: update an existing budget in the database.
+ * Delete: delete an existing budget in the database.
+ * Two entries where designed to help insert of update: Normal Entry and New Category Entry.
+ * Normal Entry refers to the cases when the budget's category is already stored in the database.
+ * New Category Entry refers to the cases when the budget's category are created by user and not stored in the database.
+ * When the transaction is determined to be sent to the New Category Entry, a new category will also be created and inserted into the database.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class BudgetDatabaseHelper {
 
     private Context context;
@@ -48,6 +63,17 @@ public class BudgetDatabaseHelper {
         budgetsTypeDao = database.budgetsTypeDao();
     }
 
+    /**
+     * Insert new budget or update an existing budget.
+     * First, the data inputted into the input boxes will be retrieved.
+     * If the input of a required nonnull input box is empty, an error message will be displayed.
+     * Once input of all the required input boxes are valid, the data will be inserted or updated.
+     * The insertion and update is completed in a separate thread to avoid locking the UI thread for a long period of time.
+     *
+     * @param insert indicator of whether to insert
+     * @param update indicator of whether to update
+     * @param budgetId the id of the transaction to be updated.
+     */
     public void insertOrUpdateData(final boolean insert, final boolean update, final Integer budgetId) throws ParseException {
         mInsert = insert;
         mUpdate = update;
@@ -138,6 +164,12 @@ public class BudgetDatabaseHelper {
         });
     }
 
+    /**
+     * Delete an existing budget.
+     * The deletion is completed in a separate thread to avoid locking the UI thread for a long period of time.
+     *
+     * @param budgetId the id of the transaction to be deleted.
+     */
     public void deleteData(final int budgetId) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -148,6 +180,10 @@ public class BudgetDatabaseHelper {
         });
     }
 
+    /**
+     * Add text listeners to input boxes to monitor the input boxes.
+     * Once, the empty input boxes are filled, the error message will disappear.
+     */
     public void addTextListener() {
         inputUtils.nameInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -210,6 +246,12 @@ public class BudgetDatabaseHelper {
         });
     }
 
+    /**
+     * Add the new category that the user created into the database.
+     * After the new category is inserted, it will also be pushed to the view model to notify the activity to update the filters.
+     * Then, the new category will be passed to the method to insert or update through a New Category Entry.
+     * All insertions or updates are completed in a separate thread to avoid locking the UI thread for a long period of time.
+     */
     private void addNewCategoryToDatabase() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -242,6 +284,12 @@ public class BudgetDatabaseHelper {
         });
     }
 
+    /**
+     * Insert or update in the New Category Entry.
+     *
+     * @param budgetsCategoryId the id of the new category of the transaction to be inserted or updated.
+     * @return whether the transaction has some input errors
+     */
     private boolean insertOrUpdateWithNewCategory(int budgetsCategoryId) {
         budgetsValue.setBudgetsCategoryId(budgetsCategoryId);
         if (!invalidInput && mInsert) {
