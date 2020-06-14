@@ -35,16 +35,33 @@ import protect.FinanceLord.TransactionUtils.TransactionDatabaseHelper;
 import protect.FinanceLord.TransactionUtils.TransactionInputWidgets;
 import protect.FinanceLord.ViewModels.BudgetTypesViewModel;
 
+/**
+ * The activity that enables the user to edit an existing transaction.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class TransactionEditActivity extends AppCompatActivity {
 
     private Date currentTime;
-    private TransactionDatabaseHelper databaseUtils;
+    private TransactionDatabaseHelper databaseHelper;
     private BudgetTypesViewModel viewModel;
     private SimpleDateFormat dateFormat;
-    private TransactionInputWidgets inputUtils = new TransactionInputWidgets();
+    private TransactionInputWidgets inputWidgets = new TransactionInputWidgets();
 
     private static String TAG = "TransactionEditActivity";
 
+    /**
+     * Create and initialize the activity.
+     * This method was called when the activity was created.
+     * The method will first set the view of the content by finding the corresponding layout file through id.
+     * First, the information stored in the intent from the preceding activity is retrieved.
+     * Then, the edit sheet will be set up by determine whether the user picked a expense or revenue.
+     * After the sheet is set up, the method to retrieve data will be called.
+     *
+     * @author Owner Kevin Zhijun Wang
+     * @param savedInstanceState A mapping from String keys to various Parcelable values.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +96,12 @@ public class TransactionEditActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Retrieve all the budget types stored in database to set up drop down list.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param fragmentTag the name of type of transaction the user picked.
+     */
     private void retrieveDataFromDatabase(final String fragmentTag) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -102,20 +125,30 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set up the revenue edit sheet including the input fields, buttons, as well as observers.
+     * First, all the input widgets are associated with the corresponding layout.
+     * Next, the methods to set up some particular widgets were called
+     * and the data the user inputted previously is also loaded into the input boxes.
+     * Lastly, the database helper is set up to help update the data.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param budgetsTypes the budget types stored in the database.
+     */
     private void setUpRevenueSection(List<BudgetsType> budgetsTypes) {
-        inputUtils.nameInputField = findViewById(R.id.revenue_name_field);
-        inputUtils.valueInputField = findViewById(R.id.revenue_value_field);
-        inputUtils.categoryInputField = findViewById(R.id.revenue_category_field);
+        inputWidgets.nameInputField = findViewById(R.id.revenue_name_field);
+        inputWidgets.valueInputField = findViewById(R.id.revenue_value_field);
+        inputWidgets.categoryInputField = findViewById(R.id.revenue_category_field);
 
-        inputUtils.nameInput = findViewById(R.id.revenue_name_input);
-        inputUtils.valueInput = findViewById(R.id.revenue_value_input);
-        inputUtils.commentInput = findViewById(R.id.revenue_comments_input);
-        inputUtils.categoryInput = findViewById(R.id.revenue_category_input);
-        inputUtils.dateInput = findViewById(R.id.revenue_date_input);
+        inputWidgets.nameInput = findViewById(R.id.revenue_name_input);
+        inputWidgets.valueInput = findViewById(R.id.revenue_value_input);
+        inputWidgets.commentInput = findViewById(R.id.revenue_comments_input);
+        inputWidgets.categoryInput = findViewById(R.id.revenue_category_input);
+        inputWidgets.dateInput = findViewById(R.id.revenue_date_input);
 
-        inputUtils.deleteButton = findViewById(R.id.revenue_delete_button);
+        inputWidgets.deleteButton = findViewById(R.id.revenue_delete_button);
 
-        setUpBudgetTypesObserver();
+        setUpBudgetTypesViewModel();
 
         setUpCategoryAndDateInput(budgetsTypes);
 
@@ -123,23 +156,33 @@ public class TransactionEditActivity extends AppCompatActivity {
 
         setUpSaveAndDeleteButton();
 
-        databaseUtils = new TransactionDatabaseHelper(this, currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
+        databaseHelper = new TransactionDatabaseHelper(this, currentTime, inputWidgets, budgetsTypes, viewModel, getString(R.string.revenues_section_key));
     }
 
+    /**
+     * Set up the expense edit sheet including the input fields, buttons, as well as observers.
+     * First, all the input widgets are associated with the corresponding layout.
+     * Next, the methods to set up some particular widgets were called
+     * and the data the user inputted previously is also loaded into the input boxes.
+     * Lastly, the database helper is set up to help update the data.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param budgetsTypes the budget types stored in the database.
+     */
     private void setUpExpenseSection(List<BudgetsType> budgetsTypes) {
-        inputUtils.nameInputField = findViewById(R.id.expenses_name_field);
-        inputUtils.valueInputField = findViewById(R.id.expenses_value_field);
-        inputUtils.categoryInputField = findViewById(R.id.expenses_category_field);
+        inputWidgets.nameInputField = findViewById(R.id.expenses_name_field);
+        inputWidgets.valueInputField = findViewById(R.id.expenses_value_field);
+        inputWidgets.categoryInputField = findViewById(R.id.expenses_category_field);
 
-        inputUtils.nameInput = findViewById(R.id.expenses_name_input);
-        inputUtils.valueInput = findViewById(R.id.expenses_value_input);
-        inputUtils.commentInput = findViewById(R.id.expenses_comments_input);
-        inputUtils.categoryInput = findViewById(R.id.expenses_category_input);
-        inputUtils.dateInput = findViewById(R.id.expenses_date_input);
+        inputWidgets.nameInput = findViewById(R.id.expenses_name_input);
+        inputWidgets.valueInput = findViewById(R.id.expenses_value_input);
+        inputWidgets.commentInput = findViewById(R.id.expenses_comments_input);
+        inputWidgets.categoryInput = findViewById(R.id.expenses_category_input);
+        inputWidgets.dateInput = findViewById(R.id.expenses_date_input);
 
-        inputUtils.deleteButton = findViewById(R.id.expense_delete_button);
+        inputWidgets.deleteButton = findViewById(R.id.expense_delete_button);
 
-        setUpBudgetTypesObserver();
+        setUpBudgetTypesViewModel();
 
         setUpCategoryAndDateInput(budgetsTypes);
 
@@ -147,20 +190,27 @@ public class TransactionEditActivity extends AppCompatActivity {
 
         setUpSaveAndDeleteButton();
 
-        databaseUtils = new TransactionDatabaseHelper(this, currentTime, inputUtils, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
+        databaseHelper = new TransactionDatabaseHelper(this, currentTime, inputWidgets, budgetsTypes, viewModel, getString(R.string.expenses_section_key));
     }
 
-    private void setUpCategoryAndDateInput(List<BudgetsType> budgetsTypes){
+    /**
+     * The drop down list is added onto the category input box and the calendarDialogCommunicator is also deployed.
+     * An ArrayAdapter is set up to help deliver the budgetTypes data to the drop down list.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param budgetsTypes the budget types stored in the database.
+     */
+    private void setUpCategoryAndDateInput(List<BudgetsType> budgetsTypes) {
         List<String> typeNames = new ArrayList<>();
         for (BudgetsType budgetsType : budgetsTypes){
             typeNames.add(budgetsType.getBudgetsName());
         }
 
-        inputUtils.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.transactions_dropdown_background, null));
+        inputWidgets.categoryInput.setDropDownBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.transactions_dropdown_background, null));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.categories_dropdown, typeNames);
-        inputUtils.categoryInput.setAdapter(adapter);
+        inputWidgets.categoryInput.setAdapter(adapter);
 
-        inputUtils.dateInput.setOnClickListener(new View.OnClickListener() {
+        inputWidgets.dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CalendarDialog calendarDialog = new CalendarDialog(calendarDialogCommunicator);
@@ -170,12 +220,18 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * All the data user stored is loaded into the input boxes
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param budgetsTypes the budget types stored in the database.
+     */
     private void loadDataToInputBoxes(List<BudgetsType> budgetsTypes) {
         DecimalFormat decimalFormat = new DecimalFormat();
 
-        inputUtils.nameInput.setText(getIntent().getStringExtra(getString(R.string.transaction_name_key)));
-        inputUtils.valueInput.setText(decimalFormat.format(getIntent().getExtras().getFloat(getString(R.string.transaction_value_key))).replace("-",""));
-        inputUtils.dateInput.setText(dateFormat.format(getIntent().getExtras().getLong(getString(R.string.transaction_date_key))));
+        inputWidgets.nameInput.setText(getIntent().getStringExtra(getString(R.string.transaction_name_key)));
+        inputWidgets.valueInput.setText(decimalFormat.format(getIntent().getExtras().getFloat(getString(R.string.transaction_value_key))).replace("-",""));
+        inputWidgets.dateInput.setText(dateFormat.format(getIntent().getExtras().getLong(getString(R.string.transaction_date_key))));
 
         try {
             currentTime = TimeProcessor.parseDateString(dateFormat.format(getIntent().getExtras().getLong(getString(R.string.transaction_date_key))), getString(R.string.date_format));
@@ -183,36 +239,49 @@ public class TransactionEditActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if (getIntent().getStringExtra(getString(R.string.transaction_comments_key)) != null){
-            inputUtils.commentInput.setText(getIntent().getStringExtra(getString(R.string.transaction_comments_key)));
+        if (getIntent().getStringExtra(getString(R.string.transaction_comments_key)) != null) {
+            inputWidgets.commentInput.setText(getIntent().getStringExtra(getString(R.string.transaction_comments_key)));
         }
 
         for (BudgetsType budgetsType : budgetsTypes) {
             if (getIntent().getExtras().getInt(getString(R.string.transaction_category_key)) == budgetsType.getBudgetsCategoryId()) {
-                inputUtils.categoryInput.setText(budgetsType.getBudgetsName());
+                inputWidgets.categoryInput.setText(budgetsType.getBudgetsName());
             }
         }
     }
 
+    /**
+     * Set up the logic to update and delete for the save and delete button.
+     * The update logic is mainly handled with the databaseHelper.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     private void setUpSaveAndDeleteButton() {
         ImageButton saveButton = findViewById(R.id.transaction_edit_save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseUtils.insertOrUpdateData(false, true, getIntent().getExtras().getInt(getString(R.string.transaction_id_key)));
-                databaseUtils.addTextListener();
+                databaseHelper.insertOrUpdateData(false, true, getIntent().getExtras().getInt(getString(R.string.transaction_id_key)));
+                databaseHelper.addTextListener();
             }
         });
 
-        inputUtils.deleteButton.setOnClickListener(new View.OnClickListener() {
+        inputWidgets.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseUtils.deleteData(getIntent().getExtras().getInt(getString(R.string.transaction_id_key)));
+                databaseHelper.deleteData(getIntent().getExtras().getInt(getString(R.string.transaction_id_key)));
             }
         });
     }
 
-    private void setUpBudgetTypesObserver() {
+    /**
+     * Set up the view model to detect any change of budget types when user update the data.
+     * Whenever the view model detects change in budget types,
+     * the updated list of budget types will be sent back to the preceding activity.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
+    private void setUpBudgetTypesViewModel() {
         viewModel = ViewModelProviders.of(this).get(BudgetTypesViewModel.class);
         viewModel.getCategoryLabels().observe(this, new Observer<List<BudgetsType>>() {
             @Override
@@ -225,13 +294,19 @@ public class TransactionEditActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * The communicator that communicate the date from calendar dialog to the activity.
+     * The date that the user picked will be displayed on the input box.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     */
     private CalendarDateBroadcast calendarDialogCommunicator = new CalendarDateBroadcast() {
         @Override
         public void message(Date date) {
             currentTime = date;
             Log.d(TAG, "time is " + currentTime);
             String stringDate = TimeProcessor.getStringFromDate(currentTime, getString(R.string.date_format));
-            inputUtils.dateInput.setText(stringDate);
+            inputWidgets.dateInput.setText(stringDate);
         }
     };
 }
