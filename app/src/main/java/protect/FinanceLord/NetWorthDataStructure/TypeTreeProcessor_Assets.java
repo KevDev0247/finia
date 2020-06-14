@@ -26,7 +26,6 @@ public class TypeTreeProcessor_Assets {
     /**
      * Retrieve the sub group items of a parent node.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param parentNodeName the name of the parent node for the sub group to be searched
      * @param level current level of the node
      * @return the sub group of containers
@@ -82,7 +81,6 @@ public class TypeTreeProcessor_Assets {
      * The method first check if the current container already exists and the id is valid.
      * Then, the node container is added to the sub group
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param nodeContainer the node container to be added.
      * @param containersSubGroup the container sub group of a particular node.
      */

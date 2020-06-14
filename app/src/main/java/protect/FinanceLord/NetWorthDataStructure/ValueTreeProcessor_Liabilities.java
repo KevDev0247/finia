@@ -54,7 +54,6 @@ public class ValueTreeProcessor_Liabilities {
     /**
      * Retrieve a LiabilitiesValue object of an individual node.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param liabilitiesId the id of the LiabilitiesValue object
      * @return an LiabilitiesValue object if the id inputted matched the id of LiabilitiesValue object.
      *         null if no the id inputted doesn't match the id of any objects in the list.
@@ -71,7 +70,6 @@ public class ValueTreeProcessor_Liabilities {
     /**
      * Assign values to some parameters of the LiabilitiesValue object and push the object into the list.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param liabilityId the id of the LiabilitiesValue object
      * @param liabilityValue the value of an liability
      */
@@ -90,7 +88,6 @@ public class ValueTreeProcessor_Liabilities {
     /**
      * Retrieve all LiabilitiesValue objects  from the data resource list -- liabilitiesValues.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return List of LiabilitiesValue objects
      */
     public List<LiabilitiesValue> getAllLiabilitiesValues() {
@@ -102,7 +99,6 @@ public class ValueTreeProcessor_Liabilities {
      * Data resource list refers to the list of LiabilitiesValue objects for DataProcessor to process.
      * Processing data in this class refers to calculation and retrieve certain groups of data.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param liabilitiesValues the list of LiabilitiesValue objects an updated data source list
      */
     public void setAllLiabilitiesValues(List<LiabilitiesValue> liabilitiesValues) {
@@ -112,8 +108,6 @@ public class ValueTreeProcessor_Liabilities {
     /**
      * Clear the data resource list liabilitiesValues.
      * Similar to clear the cache.
-     *
-     * @author Owner  Kevin Zhijun Wang
      */
     public void clearAllLiabilitiesValues() {
         this.liabilitiesValues.clear();
@@ -122,7 +116,6 @@ public class ValueTreeProcessor_Liabilities {
     /**
      * Retrieve the id of the node in the Type Tree data structure.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param liabilitiesName the name of the asset category or item
      * @return an integer value represents the id of the node in the data structure.
      */
@@ -143,7 +136,6 @@ public class ValueTreeProcessor_Liabilities {
      * Retrieve the id of the parent node in the Tree data structure that stores the categories.
      * Then traverse the tree structure and add all the id's of the child nodes to a list and return the list.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param liabilitiesName the name of the liability category or item
      * @return an integer value represents the id of the node in the data structure
      */
@@ -179,7 +171,6 @@ public class ValueTreeProcessor_Liabilities {
      * The methods to calculate the value of its children nodes are called.
      * Then, the value of the children is summed and returned.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return a float value represents the total liabilities value.
      */
     private float calculateTotalLiability() {
@@ -197,7 +188,6 @@ public class ValueTreeProcessor_Liabilities {
      * The methods traverse the items in current level as well as under long term liabilities.
      * and calculate the total value of all children nodes.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return a float value represents the total long term liabilities value.
      */
     private float calculateTotalLongTermLiabilities() {
@@ -226,7 +216,6 @@ public class ValueTreeProcessor_Liabilities {
      * The methods traverse the items in current level as well as under short term liabilities.
      * and calculate the total value of all children nodes.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @return a float value represents the total short term liabilities value.
      */
     private float calculateTotalShortTermLiabilities() {
@@ -254,7 +243,6 @@ public class ValueTreeProcessor_Liabilities {
      * Then, retrieve the object of each node and set the values to the parameters of LiabilitiesValue.
      * Finally, insert or update the object LiabilitiesValue.
      *
-     * @author Owner  Kevin Zhijun Wang
      * @param liabilitiesValueDao the data access object to insert or update LiabilitiesValue object
      */
     public void insertOrUpdateParentLiabilities(LiabilitiesValueDao liabilitiesValueDao) {
