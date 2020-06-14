@@ -43,7 +43,7 @@ public class TransactionListAdapter extends ArrayAdapter<Transactions> {
      * The method also determine whether the current item is a expense or a revenue item.
      * Then the method set the content of the view if it is not initialized.
      * Next, all the widgets on the UI are initialized.
-     * Lastly, the data is displayed on to the widgets.
+     * Lastly, the data is loaded on to the widgets.
      * The color of difference block is also determined here by whether the difference is positive.
      *
      * @param position the position of the current item in the list
