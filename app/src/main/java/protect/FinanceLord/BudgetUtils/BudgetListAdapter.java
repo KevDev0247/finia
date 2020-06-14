@@ -21,6 +21,13 @@ import java.util.Locale;
 import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.R;
 
+/**
+ * The list adapter to deliver the data of each budget to the UI.
+ * The BudgetListAdapter are used by both expenses and revenues.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class BudgetListAdapter extends ArrayAdapter<BudgetInfo> {
 
     private Context context;
@@ -32,6 +39,18 @@ public class BudgetListAdapter extends ArrayAdapter<BudgetInfo> {
         this.budgetsTypes = budgetsTypes;
     }
 
+    /**
+     * Create and return the view for each item in the list.
+     * The method first retrieve the data source of the current item, which contains the information to be displayed.
+     * Then the method set the content of the view if it is not initialized.
+     * Next, all the widgets on the UI are initialized.
+     * Lastly, the data is displayed on to the widgets.
+     *
+     * @param position the position of the current item in the list
+     * @param convertView the view class of this item
+     * @param parent the ViewGroup of this list.
+     * @return the view of the current transaction item.
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -71,6 +90,9 @@ public class BudgetListAdapter extends ArrayAdapter<BudgetInfo> {
         return convertView;
     }
 
+    /**
+     * Refresh the budget types from the other entity.
+     */
     public void refreshBudgetTypes(List<BudgetsType> newBudgetsTypes) {
         this.budgetsTypes = newBudgetsTypes;
     }
