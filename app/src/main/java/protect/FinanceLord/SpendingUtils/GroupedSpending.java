@@ -3,6 +3,13 @@ package protect.FinanceLord.SpendingUtils;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * The class to store all the data of the spending in the current month.
+ * The GroupedSpending is parcelable in order to be able to transfer to the spending report activity.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class GroupedSpending implements Parcelable {
     public int categoryId;
     public float categoryTotal;
