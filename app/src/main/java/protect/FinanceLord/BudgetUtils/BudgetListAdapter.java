@@ -26,8 +26,6 @@ public class BudgetListAdapter extends ArrayAdapter<BudgetInfo> {
     private Context context;
     private List<BudgetsType> budgetsTypes;
 
-    private String TAG = "BudgetListAdapter";
-
     public BudgetListAdapter(@NonNull Context context, List<BudgetInfo> financialRecords, List<BudgetsType> budgetsTypes) {
         super(context, 0, financialRecords);
         this.context = context;

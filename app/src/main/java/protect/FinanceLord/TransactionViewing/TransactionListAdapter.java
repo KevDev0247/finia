@@ -19,6 +19,13 @@ import protect.FinanceLord.Database.BudgetsType;
 import protect.FinanceLord.Database.Transactions;
 import protect.FinanceLord.R;
 
+/**
+ * The list adapter to deliver the data of each transaction to the UI.
+ * The TransactionListAdapter are used by both expenses and revenues.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * @version 2020.0609
+ */
 public class TransactionListAdapter extends ArrayAdapter<Transactions> {
 
     private Context context;
@@ -30,6 +37,20 @@ public class TransactionListAdapter extends ArrayAdapter<Transactions> {
         this.budgetsTypes = budgetsTypes;
     }
 
+    /**
+     * Create and return the view for each item in the list.
+     * The method first retrieve the data source of the current item, which contains the information to be displayed.
+     * The method also determine whether the current item is a expense or a revenue item.
+     * Then the method set the content of the view if it is not initialized.
+     * Next, all the widgets on the UI are initialized.
+     * Lastly, the data is displayed on to the widgets.
+     * The color of difference block is also determined here by whether the difference is positive.
+     *
+     * @author Owner  Kevin Zhijun Wang
+     * @param position the position of the current item in the list
+     * @param convertView the view class of this item
+     * @param parent the ViewGroup of this list
+     */
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Transactions transaction = getItem(position);
@@ -86,6 +107,6 @@ public class TransactionListAdapter extends ArrayAdapter<Transactions> {
             }
         }
 
-        return null;
+        return super.getView(position, convertView, parent);
     }
 }

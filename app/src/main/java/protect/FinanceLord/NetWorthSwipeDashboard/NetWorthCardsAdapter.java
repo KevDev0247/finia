@@ -18,7 +18,6 @@ import protect.FinanceLord.R;
 public class NetWorthCardsAdapter extends PagerAdapter {
 
     private List<NetWorthCardsDataModel> dataModels;
-    private LayoutInflater layoutInflater;
     private Context context;
 
     public NetWorthCardsAdapter(List<NetWorthCardsDataModel> dataModels, Context context){
@@ -40,7 +39,7 @@ public class NetWorthCardsAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        layoutInflater = LayoutInflater.from(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.net_worth_cards, container, false);
 
         ImageView imageView;

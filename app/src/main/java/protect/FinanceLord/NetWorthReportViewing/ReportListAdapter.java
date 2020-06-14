@@ -110,6 +110,6 @@ public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
             return convertView;
         }
 
-        return null;
+        return super.getView(position, convertView, parent);
     }
 }
