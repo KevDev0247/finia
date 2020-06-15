@@ -15,12 +15,6 @@ public interface AssetsTypeDao {
     @Insert
     void insertAssetsTypes(List<AssetsType> assetsTypes);
 
-    @Query("SELECT * FROM AssetsType WHERE assetsId = :assetsId")
-    List<AssetsType> queryAssetsById (int assetsId);
-
-    @Query("SELECT * FROM AssetsType WHERE assetsParentType = :assetsParentType")
-    List<AssetsType> queryAssetsByParentType (String assetsParentType);
-
     @Query("SELECT \n" +
             "  assetsThirdLevelComposed.*, \n" +
             "  assetsFourthLevel.assetsId AS assetsFourthLevelId, \n" +

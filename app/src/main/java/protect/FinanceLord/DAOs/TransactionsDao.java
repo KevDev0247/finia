@@ -20,9 +20,6 @@ public interface TransactionsDao {
     @Update
     void updateTransaction (Transactions ... transaction);
 
-    @Query("SELECT * FROM Transactions WHERE transactionId = :transactionId")
-    List<Transactions> queryTransactionsById (int transactionId);
-
     @Query("SELECT * FROM Transactions WHERE transactionCategoryId = :transactionCategoryId")
     List<Transactions> queryTransactionByCategoryId (int transactionCategoryId);
 

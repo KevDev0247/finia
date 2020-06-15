@@ -15,12 +15,6 @@ public interface LiabilitiesTypeDao {
     @Insert
     void insertLiabilitiesTypes(List<LiabilitiesType> liabilitiesTypes);
 
-    @Query("SELECT * FROM LiabilitiesType WHERE liabilitiesId = :liabilitiesId")
-    List<LiabilitiesType> queryLiabilitiesById (int liabilitiesId);
-
-    @Query("SELECT * FROM LiabilitiesType WHERE liabilitiesParentType = :liabilitiesParentType")
-    List<LiabilitiesType> queryLiabilitiesByParentType (String liabilitiesParentType);
-
     @Query("SELECT \n" +
             "  liabilitiesSecondLevelComposed.liabilitiesFirstLevelId, \n" +
             "  liabilitiesSecondLevelComposed.liabilitiesFirstLevelName, \n" +
