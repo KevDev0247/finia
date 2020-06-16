@@ -18,7 +18,7 @@ import protect.FinanceLord.DAOs.TransactionsDao;
 
 /**
  * The abstract interface that defines the database.
- * This interface defines all the entities in the database
+ * This interface defines all the entities in the database.
  * and all the Data Access Objects used to perform CRUD operations.
  * The database is also created here.
  *
