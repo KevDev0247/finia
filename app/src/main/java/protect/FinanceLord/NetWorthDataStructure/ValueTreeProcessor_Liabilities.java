@@ -75,7 +75,7 @@ public class ValueTreeProcessor_Liabilities {
      */
     public void setLiabilityValue(int liabilityId, float liabilityValue) {
         LiabilitiesValue liabilitiesValue = this.getLiabilityValue(liabilityId);
-        if (liabilitiesValue != null){
+        if (liabilitiesValue != null) {
             liabilitiesValue.setLiabilitiesValue(liabilityValue);
         } else {
             liabilitiesValue = new LiabilitiesValue();
@@ -154,10 +154,10 @@ public class ValueTreeProcessor_Liabilities {
                 }
             }
         } else if (context.getString(R.string.long_term_liabilities_name).equals(liabilitiesName)) {
-            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typeTreeLeaves){
+            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typeTreeLeaves) {
                 if (liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null
                         && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName.equals(liabilitiesName)
-                        && liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName != null){
+                        && liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName != null) {
                     liabilitiesIDs.add(liabilitiesTypeTreeLeaf.liabilitiesThirdLevelId);
                 }
             }

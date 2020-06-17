@@ -13,11 +13,11 @@ import android.widget.ExpandableListView;
  * @version 2020.0609
  */
 public class NetWorthExpandableListView extends ExpandableListView {
-    public NetWorthExpandableListView(Context context){
+    public NetWorthExpandableListView(Context context) {
         super(context);
     }
 
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(999999, MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }

@@ -17,7 +17,7 @@ public class NodeContainer_Liabilities {
     public int liabilitiesId;
     public int level;
 
-    NodeContainer_Liabilities(String liabilitiesTypeName, int liabilitiesId, int level){
+    NodeContainer_Liabilities(String liabilitiesTypeName, int liabilitiesId, int level) {
         this.liabilitiesTypeName = liabilitiesTypeName;
         this.liabilitiesId = liabilitiesId;
         this.level = level;

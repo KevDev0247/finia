@@ -12,7 +12,7 @@ class NetWorthItemsDataModel {
     String itemValue;
     String difference;
 
-    NetWorthItemsDataModel(String itemName, String itemValue, String difference){
+    NetWorthItemsDataModel(String itemName, String itemValue, String difference) {
         this.itemName = itemName;
         this.itemValue = itemValue;
         this.difference = difference;

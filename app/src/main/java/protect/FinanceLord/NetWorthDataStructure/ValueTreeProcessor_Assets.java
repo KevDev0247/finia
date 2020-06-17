@@ -59,7 +59,7 @@ public class ValueTreeProcessor_Assets {
      *         null if no the id inputted doesn't match the id of any objects in the list.
      */
     public AssetsValue getAssetValue(int assetsId) {
-        for (AssetsValue assetsValue: assetsValues){
+        for (AssetsValue assetsValue: assetsValues) {
             if (assetsValue.getAssetsId() == assetsId){
                 return assetsValue;
             }

@@ -26,7 +26,7 @@ public class TypeTreeLeaf_Liabilities {
     public int liabilitiesThirdLevelId;
     public String liabilitiesThirdLevelName;
 
-    public String toString(){
+    public String toString() {
         return "liabilitiesFirstLevelId" + liabilitiesFirstLevelId + "\n" + "liabilitiesFirstLevelName" + liabilitiesFirstLevelName + "\n"
                 + "liabilitiesSecondLevelId" + liabilitiesSecondLevelId + "\n" + "liabilitiesSecondLevelName" + liabilitiesSecondLevelName + "\n"
                 + "liabilitiesThirdLevelId" + liabilitiesThirdLevelId + "\n" + "liabilitiesThirdLevelName" + liabilitiesThirdLevelName;
