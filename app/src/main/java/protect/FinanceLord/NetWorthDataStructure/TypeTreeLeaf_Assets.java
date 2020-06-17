@@ -6,7 +6,7 @@ import protect.FinanceLord.DAOs.AssetsTypeDao;
  * Leaf node of the AssetsTypeTree.
  * Each individual leaf is the fundamental element of the AssetsTypeTree expressed as a list.
  * Each leaf node contains the name of the leaf node, and the names of all parents that the leaf node belongs to.
- * The idea behind a list representation of the tree is to use each leaf node to store the directory of the leaf node in the tree
+ * The idea behind a list representation of the tree is to use each leaf node to store the address of the leaf node in the tree
  * by documenting the name of its parent and its parent's parent.
  * By representing the type tree as a list, the tree structure will be more flexible in an java environment in terms of read, edit, group, and delete.
  * A list representation of the tree is also the best way to store the outcome after deserialization.
