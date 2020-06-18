@@ -13,6 +13,7 @@ import android.widget.ExpandableListView;
  * @version 2020.0609
  */
 public class NetWorthExpandableListView extends ExpandableListView {
+
     public NetWorthExpandableListView(Context context) {
         super(context);
     }
