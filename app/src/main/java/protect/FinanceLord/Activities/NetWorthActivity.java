@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,18 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import protect.FinanceLord.Database.AssetsType;
 import protect.FinanceLord.DAOs.AssetsTypeDao;
-import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.DAOs.AssetsValueDao;
+import protect.FinanceLord.DAOs.LiabilitiesTypeDao;
+import protect.FinanceLord.DAOs.LiabilitiesValueDao;
+import protect.FinanceLord.DAOs.ReportItemInfoDao;
+import protect.FinanceLord.Database.AssetsType;
+import protect.FinanceLord.Database.AssetsValue;
 import protect.FinanceLord.Database.FinanceLordDatabase;
 import protect.FinanceLord.Database.LiabilitiesType;
-import protect.FinanceLord.DAOs.LiabilitiesTypeDao;
 import protect.FinanceLord.Database.LiabilitiesValue;
-import protect.FinanceLord.DAOs.LiabilitiesValueDao;
-import protect.FinanceLord.NetWorthPastReportsList.ReportItemInfo;
-import protect.FinanceLord.DAOs.ReportItemInfoDao;
 import protect.FinanceLord.NetWorthPastReportsList.PastReportsAdapter;
+import protect.FinanceLord.NetWorthPastReportsList.ReportItemInfo;
 import protect.FinanceLord.NetWorthPastReportsList.ReportItemsDataModel;
 import protect.FinanceLord.NetWorthSwipeDashboard.NetWorthCardsAdapter;
 import protect.FinanceLord.NetWorthSwipeDashboard.NetWorthCardsDataModel;
@@ -41,6 +42,13 @@ import protect.FinanceLord.R;
  * @version 2020.0609
  */
 public class NetWorthActivity extends AppCompatActivity {
+
+    private NetWorthCardsAdapter netWorthCardsAdapter;
+    private PastReportsAdapter pastReportsAdapter;
+    private LinearLayout initializationMessage;
+    private  boolean initialize = true;
+    private List<NetWorthCardsDataModel> netWorthCardsDataModels = new ArrayList<>();
+    private List<ReportItemsDataModel> reportItemsDataModels = new ArrayList<>();
 
     /**
      * Create and initialize the activity.
@@ -74,6 +82,8 @@ public class NetWorthActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        setUpNetWorthDashboardView();
     }
 
     /**
@@ -86,28 +96,21 @@ public class NetWorthActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        refreshPastReportsListView();
-        refreshNetWorthCardsView();
-
-        Log.d("NetWorthActivity", "Activity has been refreshed");
+        retrieveDataFromDatabase(initialize);
+        loadDataToDashboard();
+        initialize = false;
     }
 
     /**
-     * Create or update the data in the past report list.
-     * First, a listView and its adapter PastReportsAdapter is created and set up.
+     * Retrieve the data of the report items from the database.
      * Then, database is queried for the most up-to-date data for display.
+     * the raw data is processed and formatted into a data model that will be injected into the database.
+     * Additionally, the difference will be calculated and added to the data model.
      * Query is completed in a separate thread to avoid locking the UI thread for a long period of time.
-     * View.onclickListener is added to the each item in the list
-     * to enable user go to the corresponding report through a click.
-     * The information on the list item will be stored in intent and transferred to the report activity for query and display purposes.
+     *
+     * @param initialize indicator of whether to set up the list view of merely update the data
      */
-    protected void refreshPastReportsListView() {
-        ListView pastReportsListView = findViewById(R.id.past_report_list);
-        final List<ReportItemsDataModel> dataSources = new ArrayList<>();
-        final PastReportsAdapter adapter = new PastReportsAdapter(this, dataSources);
-
-        pastReportsListView.setAdapter(adapter);
-
+    private void retrieveDataFromDatabase(final boolean initialize) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -115,6 +118,7 @@ public class NetWorthActivity extends AppCompatActivity {
                 ReportItemInfoDao reportItemInfoDao = database.reportItemInfoDao();
 
                 List<ReportItemInfo> reportItemInfoList = reportItemInfoDao.queryReportItemsInfo();
+                reportItemsDataModels.clear();
                 for (ReportItemInfo reportItemInfo : reportItemInfoList){
                     String difference = getString(R.string.no_data_message);
                     if (reportItemInfoList.indexOf(reportItemInfo) + 1 <= reportItemInfoList.size() - 1){
@@ -123,22 +127,49 @@ public class NetWorthActivity extends AppCompatActivity {
                     }
                     Log.d("NetWorthActivity", " the time of current item is: " + reportItemInfo.totalAssetsDate + "  the difference of this item is: " + difference);
                     ReportItemsDataModel dataModel = new ReportItemsDataModel(reportItemInfo.totalAssetsDate, reportItemInfo.netWorthValue, difference);
-                    dataSources.add(dataModel);
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter.notifyDataSetChanged();
-                        }
-                    });
+                    reportItemsDataModels.add(dataModel);
                 }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (initialize) {
+                            setUpPastReportsListView();
+                        } else {
+                            pastReportsAdapter.notifyDataSetChanged();
+                            if (reportItemsDataModels.size() != 0) {
+                                initializationMessage.setVisibility(View.GONE);
+                                Log.d("NetWorthActivity", " no data in the database ");
+                            }
+                        }
+                    }
+                });
             }
         });
+    }
+
+    /**
+     * Set up the adapter of the past report list.
+     * First, a listView and its adapter PastReportsAdapter is created and set up.
+     * View.onclickListener is added to the each item in the list
+     * to enable user go to the corresponding report through a click.
+     * The information on the list item will be stored in intent and transferred to the report activity for query and display purposes.
+     */
+    protected void setUpPastReportsListView() {
+        ListView pastReportsListView = findViewById(R.id.past_report_list);
+        initializationMessage = findViewById(R.id.past_report_list_initialization_message);
+        pastReportsAdapter = new PastReportsAdapter(this, reportItemsDataModels);
+        pastReportsListView.setAdapter(pastReportsAdapter);
+
+        if (reportItemsDataModels.size() != 0) {
+            initializationMessage.setVisibility(View.GONE);
+            Log.d("NetWorthActivity", " no data in the database ");
+        }
 
         pastReportsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ReportItemsDataModel dataModel = dataSources.get(position);
+                ReportItemsDataModel dataModel = reportItemsDataModels.get(position);
                 Log.d("NetWorthActivity", "the user has select the report of time: " + dataModel.time);
 
                 Intent intent = new Intent();
@@ -152,21 +183,18 @@ public class NetWorthActivity extends AppCompatActivity {
     }
 
     /**
-     * Create or update the data in the swiping dashboard.
+     * Set up adapters and insert the data in the swiping dashboard.
      * First, a ViewPager for swiping and its adapter is created and setup.
      * Then, the most up-to-date data will be loaded to the cards.
      */
-    protected void refreshNetWorthCardsView() {
-        NetWorthCardsAdapter adapter;
-        ViewPager viewPager;
-        List<NetWorthCardsDataModel> dataModels = new ArrayList<>();
+    protected void setUpNetWorthDashboardView() {
+        netWorthCardsAdapter = new NetWorthCardsAdapter(netWorthCardsDataModels,this);
 
-        adapter = new NetWorthCardsAdapter(dataModels,this);
+        ViewPager viewPager = findViewById(R.id.assets_cards_view_pager);
+        viewPager.setAdapter(netWorthCardsAdapter);
+        viewPager.setPadding(80, 0, 80, 0);
 
-        viewPager = findViewById(R.id.assets_cards_view_pager);
-        viewPager.setAdapter(adapter);
-
-        loadDataToCards(dataModels, adapter);
+        loadDataToDashboard();
     }
 
     /**
@@ -174,10 +202,8 @@ public class NetWorthActivity extends AppCompatActivity {
      * First, all the parent categories Total value are initialized.
      * Then, the latest data of assets and liabilities will be queried from the database.
      * Lastly, inject the name, image resource, and value to the data model for the adapter to format and display.
-     * @param dataModels the data model to store the data and resources, preparing them for the adapter to display.
-     * @param adapter the adapter to carry the data from the data model and delivers it to a layout.
      */
-    protected void loadDataToCards(final List<NetWorthCardsDataModel> dataModels, final NetWorthCardsAdapter adapter) {
+    protected void loadDataToDashboard() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -224,6 +250,18 @@ public class NetWorthActivity extends AppCompatActivity {
                     } else {
                         Log.d("NetWorthActivity","some asset items are null");
                     }
+                } else {
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth), getString(R.string.no_data_message)));
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), getString(R.string.no_data_message)));
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), getString(R.string.no_data_message)));
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), getString(R.string.no_data_message)));
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets_name), getString(R.string.no_data_message)));
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), getString(R.string.no_data_message)));
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), getString(R.string.no_data_message)));
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest_name), getString(R.string.no_data_message)));
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name), getString(R.string.no_data_message)));
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name), getString(R.string.no_data_message)));
+                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), getString(R.string.no_data_message)));
                 }
 
                 if (!liabilitiesValues.isEmpty()){
@@ -256,24 +294,22 @@ public class NetWorthActivity extends AppCompatActivity {
 
                 final float finalNetWorthValue = finalTotalAssetsValue - finalTotalLiabilitiesValue;
 
-
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth), String.valueOf(finalNetWorthValue), getString(R.string.net_worth_details)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), String.valueOf(finalTotalAssetsValue), getString(R.string.total_assets_details)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), String.valueOf(finalLiquidAssetsValue), getString(R.string.liquid_assets_details)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), String.valueOf(finalInvestedAssetsValue), getString(R.string.invested_assets_details)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets_name), String.valueOf(finalPersonalAssetsValue), getString(R.string.personal_assets_details)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), String.valueOf(finalTaxableAccountsValue), getString(R.string.taxable_accounts_details)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), String.valueOf(finalRetirementAccountsValue), getString(R.string.retirement_accounts_details)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest_name), String.valueOf(finalOwnershipInterestsValue), getString(R.string.ownership_interests_details)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name),String.valueOf(finalTotalLiabilitiesValue), getString(R.string.total_liabilities_details)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name),String.valueOf(finalShortTermLiabilitiesValue), getString(R.string.short_term_liabilities_details)));
-                        dataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), String.valueOf(finalLongTermLiabilitiesValue), getString(R.string.long_term_liabilities_details)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth), String.valueOf(finalNetWorthValue)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), String.valueOf(finalTotalAssetsValue)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), String.valueOf(finalLiquidAssetsValue)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), String.valueOf(finalInvestedAssetsValue)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets_name), String.valueOf(finalPersonalAssetsValue)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), String.valueOf(finalTaxableAccountsValue)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), String.valueOf(finalRetirementAccountsValue)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest_name), String.valueOf(finalOwnershipInterestsValue)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name), String.valueOf(finalTotalLiabilitiesValue)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name), String.valueOf(finalShortTermLiabilitiesValue)));
+                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), String.valueOf(finalLongTermLiabilitiesValue)));
 
-                        adapter.notifyDataSetChanged();
+                        netWorthCardsAdapter.notifyDataSetChanged();
                     }
                 });
             }

@@ -8,10 +8,10 @@
     android:padding="10dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="10dp"
         android:background="@drawable/net_worth_cards_background">
 
         <ImageView
@@ -24,7 +24,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:padding="10dp"
             android:orientation="vertical">
 
@@ -38,17 +38,6 @@
                 android:textStyle="bold"
                 android:textSize="25sp"/>
 
-            <TextView
-                android:id="@+id/details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="@string/details"
-                android:textColor="#CCFFFFFF"
-                android:textSize="20sp"/>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,14 +49,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/value"
                     android:textColor="#CCFFFFFF"
-                    android:textSize="20sp"/>
+                    android:textSize="23sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dollar_sign"
                     android:textColor="#CCFFFFFF"
-                    android:textSize="20sp"/>
+                    android:textSize="23sp"/>
 
             </LinearLayout>
 
