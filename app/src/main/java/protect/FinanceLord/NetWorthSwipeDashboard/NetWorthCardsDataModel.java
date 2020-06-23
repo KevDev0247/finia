@@ -12,17 +12,11 @@ public class NetWorthCardsDataModel {
     private int imageId;
     private String title;
     private String value;
-    private String details;
 
-    public NetWorthCardsDataModel(int imageId, String title, String value, String details){
+    public NetWorthCardsDataModel(int imageId, String title, String value){
         this.imageId = imageId;
         this.title = title;
         this.value = value;
-        this.details = details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
     }
 
     public int getImageId() {
@@ -35,9 +29,5 @@ public class NetWorthCardsDataModel {
 
     public String getValue() {
         return value;
-    }
-
-    public String getDetails() {
-        return details;
     }
 }

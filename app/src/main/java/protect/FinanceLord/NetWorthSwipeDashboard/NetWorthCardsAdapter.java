@@ -68,13 +68,11 @@ public class NetWorthCardsAdapter extends PagerAdapter {
 
         ImageView imageView = view.findViewById(R.id.net_worth_card_graphics);
         TextView title = view.findViewById(R.id.cards_title);
-        TextView detail = view.findViewById(R.id.details);
         TextView value = view.findViewById(R.id.value);
 
         imageView.setImageResource(dataModels.get(position).getImageId());
         title.setText(dataModels.get(position).getTitle());
         value.setText(dataModels.get(position).getValue());
-        detail.setText(dataModels.get(position).getDetails());
 
         container.addView(view, 0);
 
