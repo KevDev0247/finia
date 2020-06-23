@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -35,6 +36,7 @@ public class BudgetActivity extends AppCompatActivity {
 
     private BudgetListAdapter budgetListAdapter;
     private ArrayList<BudgetsType> allBudgetsTypes;
+    private LinearLayout initializationMessageField;
 
     private boolean initialize = true;
     private static final int BUDGET_ACTIVITY_REQUEST_CODE = 1000;
@@ -112,6 +114,9 @@ public class BudgetActivity extends AppCompatActivity {
                                 budgetListAdapter.clear();
                                 budgetListAdapter.addAll(budgetInfoList);
                                 budgetListAdapter.notifyDataSetChanged();
+                                if (budgetInfoList.size() != 0) {
+                                    initializationMessageField.setVisibility(View.GONE);
+                                }
                             }
                         }
                     }
@@ -148,8 +153,13 @@ public class BudgetActivity extends AppCompatActivity {
      */
     private void setUpBudgetsListView(final List<BudgetInfo> budgetInfoList) {
         ListView budgetsList = findViewById(R.id.budgets_list);
+        initializationMessageField = findViewById(R.id.budget_initialization_message);
         budgetListAdapter = new BudgetListAdapter(this, budgetInfoList, allBudgetsTypes);
         budgetsList.setAdapter(budgetListAdapter);
+
+        if (budgetInfoList.size() != 0) {
+            initializationMessageField.setVisibility(View.GONE);
+        }
 
         budgetsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

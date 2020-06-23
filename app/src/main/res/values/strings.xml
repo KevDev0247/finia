@@ -207,5 +207,7 @@
 
     <!-- initialization message -->
     <string name="past_report_list_initialization">Your do not have any net worth reports recorded</string>
+    <string name="budget_initialization_1">Your have not set any budgets yet</string>
+    <string name="budget_initialization_2">Click + to add your first budget</string>
 
 </resources>

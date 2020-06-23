@@ -45,7 +45,7 @@ public class NetWorthActivity extends AppCompatActivity {
 
     private NetWorthCardsAdapter netWorthCardsAdapter;
     private PastReportsAdapter pastReportsAdapter;
-    private LinearLayout initializationMessage;
+    private LinearLayout initializationMessageField;
     private  boolean initialize = true;
     private List<NetWorthCardsDataModel> netWorthCardsDataModels = new ArrayList<>();
     private List<ReportItemsDataModel> reportItemsDataModels = new ArrayList<>();
@@ -138,8 +138,7 @@ public class NetWorthActivity extends AppCompatActivity {
                         } else {
                             pastReportsAdapter.notifyDataSetChanged();
                             if (reportItemsDataModels.size() != 0) {
-                                initializationMessage.setVisibility(View.GONE);
-                                Log.d("NetWorthActivity", " no data in the database ");
+                                initializationMessageField.setVisibility(View.GONE);
                             }
                         }
                     }
@@ -157,13 +156,12 @@ public class NetWorthActivity extends AppCompatActivity {
      */
     protected void setUpPastReportsListView() {
         ListView pastReportsListView = findViewById(R.id.past_report_list);
-        initializationMessage = findViewById(R.id.past_report_list_initialization_message);
+        initializationMessageField = findViewById(R.id.past_report_list_initialization_message);
         pastReportsAdapter = new PastReportsAdapter(this, reportItemsDataModels);
         pastReportsListView.setAdapter(pastReportsAdapter);
 
         if (reportItemsDataModels.size() != 0) {
-            initializationMessage.setVisibility(View.GONE);
-            Log.d("NetWorthActivity", " no data in the database ");
+            initializationMessageField.setVisibility(View.GONE);
         }
 
         pastReportsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
