@@ -66,28 +66,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#ffffff"
+        android:background="@drawable/net_worth_pager_background"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="260dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:src="@drawable/net_worth_direct_page1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2"
             android:orientation="vertical"
             android:layout_marginBottom="0dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/net_worth_pager_background">
+            android:layout_marginTop="10dp">
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/assets_cards_view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3">
 
         </LinearLayout>
 

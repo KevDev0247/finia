@@ -13,6 +13,8 @@
 
     <!--    general-->
 
+    <string name="details">Details</string>
+    <string name="title">Title</string>
     <string name="time">Time</string>
     <string name="name">Name</string>
     <string name="date">Date</string>
@@ -202,5 +204,21 @@
     <string name="spending_report_month_key">month</string>
     <string name="spending_categories">spendingCategories</string>
     <string name="spending_report">Spending Report</string>
+
+    <!-- net worth swiping dashboard details -->
+
+    <string name="net_worth_details">Your current net worth is : </string>
+
+    <string name="total_assets_details">Your current total assets value is : </string>
+    <string name="liquid_assets_details">Your current net worth is : </string>
+    <string name="invested_assets_details">Your current invested assets value is : </string>
+    <string name="personal_assets_details">Your current personal assets value is : </string>
+    <string name="taxable_accounts_details">Your current taxable accounts value is : </string>
+    <string name="retirement_accounts_details">Your current retirement accounts value is : </string>
+    <string name="ownership_interests_details">Your current ownership interests value is : </string>
+
+    <string name="total_liabilities_details">Your current total liabilities value is : </string>
+    <string name="short_term_liabilities_details">Your current short term liabilities value is : </string>
+    <string name="long_term_liabilities_details">Your current long term liabilities value is : </string>
 
 </resources>

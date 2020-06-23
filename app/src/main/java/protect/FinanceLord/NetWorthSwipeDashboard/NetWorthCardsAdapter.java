@@ -64,18 +64,17 @@ public class NetWorthCardsAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.net_worth_cards, container, false);
+        View view = layoutInflater.inflate(R.layout.net_worth_dashboard_cards, container, false);
 
-        ImageView imageView;
-        TextView title, details;
-
-        imageView = view.findViewById(R.id.net_worth_card_graphics);
-        title = view.findViewById(R.id.cards_title);
-        details = view.findViewById(R.id.details);
+        ImageView imageView = view.findViewById(R.id.net_worth_card_graphics);
+        TextView title = view.findViewById(R.id.cards_title);
+        TextView detail = view.findViewById(R.id.details);
+        TextView value = view.findViewById(R.id.value);
 
         imageView.setImageResource(dataModels.get(position).getImageId());
         title.setText(dataModels.get(position).getTitle());
-        details.setText(dataModels.get(position).getDetails());
+        value.setText(dataModels.get(position).getValue());
+        detail.setText(dataModels.get(position).getDetails());
 
         container.addView(view, 0);
 
