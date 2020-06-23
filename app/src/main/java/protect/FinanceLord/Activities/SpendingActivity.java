@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -97,8 +98,13 @@ public class SpendingActivity extends AppCompatActivity {
      */
     private void setUpSpendingList(final List<MonthlyTotalSpending> monthlyTotalSpendingList, final List<GroupedSpending> groupedSpendingList, final List<BudgetsType> allBudgetTypes) {
         ListView monthlySpendingList = findViewById(R.id.spending_list);
+        LinearLayout initializationMessage = findViewById(R.id.spending_initialization_message);
         SpendingListAdapter spendingListAdapter = new SpendingListAdapter(this, monthlyTotalSpendingList);
         monthlySpendingList.setAdapter(spendingListAdapter);
+
+        if (monthlyTotalSpendingList.size() != 0) {
+            initializationMessage.setVisibility(View.GONE);
+        }
 
         monthlySpendingList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -49,7 +49,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -64,6 +64,30 @@
 
         </ListView>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/spending_initialization_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/spending_initialization_1"
+                android:textSize="22sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/spending_initialization_2"
+                android:textSize="22sp"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>
