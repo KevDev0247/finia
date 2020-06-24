@@ -64,7 +64,7 @@
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2.3">
+                        android:layout_weight="2.6">
 
                         <LinearLayout
                             android:id="@+id/calendar_button"
@@ -77,7 +77,7 @@
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_time_icon_foreground"/>
+                                android:src="@drawable/ic_calendar_icon"/>
 
                             <TextView
                                 android:id="@+id/time_selected"
@@ -86,7 +86,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:text="@string/time"
                                 android:textColor="#ffffff"
-                                android:textSize="20sp"/>
+                                android:textSize="18sp"/>
 
                         </LinearLayout>
 
