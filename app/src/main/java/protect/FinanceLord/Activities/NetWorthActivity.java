@@ -191,8 +191,6 @@ public class NetWorthActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.assets_cards_view_pager);
         viewPager.setAdapter(netWorthCardsAdapter);
         viewPager.setPadding(80, 0, 80, 0);
-
-        loadDataToDashboard();
     }
 
     /**

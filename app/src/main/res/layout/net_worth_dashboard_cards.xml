@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:paddingVertical="25dp"
         android:background="@drawable/net_worth_cards_background">
 
         <ImageView
@@ -25,8 +25,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="10dp">
 
             <TextView
                 android:id="@+id/cards_title"
@@ -35,8 +36,8 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/title"
                 android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:textSize="25sp"/>
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -53,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/value"
                         android:textColor="#CCFFFFFF"
-                        android:textSize="23sp"/>
+                        android:textSize="23sp" />
 
                     <TextView
                         android:id="@+id/dollar_sign"
@@ -61,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/dollar_sign"
                         android:textColor="#CCFFFFFF"
-                        android:textSize="23sp"/>
+                        android:textSize="23sp" />
 
                 </LinearLayout>
 
@@ -72,7 +73,7 @@
                     android:layout_gravity="center"
                     android:text="@string/no_data_message"
                     android:textColor="#CCFFFFFF"
-                    android:textSize="23sp"/>
+                    android:textSize="23sp" />
 
             </FrameLayout>
 
