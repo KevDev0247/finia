@@ -8,194 +8,204 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/expense_sheet"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingVertical="20dp">
+            android:layout_height="0dp"
+            android:layout_weight="6">
 
-            <LinearLayout
+            <ScrollView
+                android:id="@+id/expense_sheet"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingVertical="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="15dp">
+                    android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/expenses_category_field"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/category"
-                        android:textColorHint="@color/expenses_input_text_color"
-                        app:boxStrokeColor="@color/expenses_input_box_stroke"
-                        app:hintTextColor="#ffffff"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                        android:padding="15dp">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/expenses_category_input"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/expenses_category_field"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#ffffff"
-                            android:textCursorDrawable="@drawable/input_cursor_white"
-                            android:completionThreshold="1"/>
+                            android:hint="@string/category"
+                            android:textColorHint="@color/expenses_input_text_color"
+                            app:boxStrokeColor="@color/expenses_input_box_stroke"
+                            app:hintTextColor="#ffffff"
+                            app:endIconTint="#ffffff"
+                            app:endIconMode="dropdown_menu"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <AutoCompleteTextView
+                                android:id="@+id/expenses_category_input"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#ffffff"
+                                android:textCursorDrawable="@drawable/input_cursor_white"
+                                android:completionThreshold="1"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/expenses_name_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/name"
+                            android:textColorHint="@color/expenses_input_text_color"
+                            app:boxStrokeColor="@color/expenses_input_box_stroke"
+                            app:hintTextColor="#ffffff"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/expenses_name_input"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#ffffff"
+                                android:textCursorDrawable="@drawable/input_cursor_white"
+                                android:inputType="text"
+                                android:singleLine="true"
+                                android:scrollbars="vertical"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/expenses_value_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/value"
+                            android:textColorHint="@color/expenses_input_text_color"
+                            app:boxStrokeColor="@color/expenses_input_box_stroke"
+                            app:hintTextColor="#ffffff"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/expenses_value_input"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#ffffff"
+                                android:textCursorDrawable="@drawable/input_cursor_white"
+                                android:inputType="numberDecimal"
+                                android:singleLine="true"
+                                android:scrollbars="vertical"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/expenses_comments_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/comments"
+                            android:textColorHint="@color/expenses_input_text_color"
+                            app:boxStrokeColor="@color/expenses_input_box_stroke"
+                            app:hintTextColor="#ffffff"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/expenses_comments_input"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#ffffff"
+                                android:textCursorDrawable="@drawable/input_cursor_white"
+                                android:inputType="text"
+                                android:singleLine="true"
+                                android:scrollbars="vertical"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/expenses_date_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/date"
+                            android:textColorHint="@color/expenses_input_text_color"
+                            app:boxStrokeColor="@color/expenses_input_box_stroke"
+                            app:hintTextColor="#ffffff"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/expenses_date_input"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"
+                                android:textColor="#ffffff"
+                                android:textCursorDrawable="@drawable/input_cursor_white"
+                                android:singleLine="true"
+                                android:focusable="false"
+                                android:scrollbars="vertical"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp">
+            </ScrollView>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/expenses_name_field"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/name"
-                        android:textColorHint="@color/expenses_input_text_color"
-                        app:boxStrokeColor="@color/expenses_input_box_stroke"
-                        app:hintTextColor="#ffffff"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/expenses_name_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="#ffffff"
-                            android:textCursorDrawable="@drawable/input_cursor_white"
-                            android:inputType="text"
-                            android:singleLine="true"
-                            android:scrollbars="vertical"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/expenses_value_field"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/value"
-                        android:textColorHint="@color/expenses_input_text_color"
-                        app:boxStrokeColor="@color/expenses_input_box_stroke"
-                        app:hintTextColor="#ffffff"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/expenses_value_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="#ffffff"
-                            android:textCursorDrawable="@drawable/input_cursor_white"
-                            android:inputType="numberDecimal"
-                            android:singleLine="true"
-                            android:scrollbars="vertical"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/expenses_comments_field"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/comments"
-                        android:textColorHint="@color/expenses_input_text_color"
-                        app:boxStrokeColor="@color/expenses_input_box_stroke"
-                        app:hintTextColor="#ffffff"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/expenses_comments_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="#ffffff"
-                            android:textCursorDrawable="@drawable/input_cursor_white"
-                            android:inputType="text"
-                            android:singleLine="true"
-                            android:scrollbars="vertical"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/expenses_date_field"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/date"
-                        android:textColorHint="@color/expenses_input_text_color"
-                        app:boxStrokeColor="@color/expenses_input_box_stroke"
-                        app:hintTextColor="#ffffff"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/expenses_date_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:textColor="#ffffff"
-                            android:textCursorDrawable="@drawable/input_cursor_white"
-                            android:singleLine="true"
-                            android:focusable="false"
-                            android:scrollbars="vertical"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </ScrollView>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:paddingVertical="30dp">
+        </LinearLayout>
 
         <RelativeLayout
-            android:id="@+id/expense_delete_button"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/delete_button">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:paddingVertical="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/delete"
-                android:textColor="#ffffff"
-                android:textSize="20sp"/>
+            <RelativeLayout
+                android:id="@+id/expense_delete_button"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/delete_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/delete"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"/>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>
