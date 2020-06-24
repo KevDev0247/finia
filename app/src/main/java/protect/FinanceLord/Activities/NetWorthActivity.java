@@ -260,6 +260,8 @@ public class NetWorthActivity extends AppCompatActivity {
                     netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name), getString(R.string.no_data_message)));
                     netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name), getString(R.string.no_data_message)));
                     netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), getString(R.string.no_data_message)));
+
+                    netWorthCardsAdapter.notifyDataSetChanged();
                 }
 
                 if (!liabilitiesValues.isEmpty()){

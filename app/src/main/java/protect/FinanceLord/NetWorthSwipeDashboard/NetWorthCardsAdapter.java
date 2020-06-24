@@ -1,7 +1,6 @@
 package protect.FinanceLord.NetWorthSwipeDashboard;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +36,6 @@ public class NetWorthCardsAdapter extends PagerAdapter {
      */
     @Override
     public int getCount() {
-        Log.d("NetWorthCardsAdapter", "getCount()" + dataModels.size());
         return dataModels.size();
     }
 
@@ -69,14 +67,22 @@ public class NetWorthCardsAdapter extends PagerAdapter {
         ImageView imageView = view.findViewById(R.id.net_worth_card_graphics);
         TextView title = view.findViewById(R.id.cards_title);
         TextView value = view.findViewById(R.id.value);
+        TextView dollarSign = view.findViewById(R.id.dollar_sign);
+        TextView initializationMessage = view.findViewById(R.id.dashboard_initialization_message);
 
         imageView.setImageResource(dataModels.get(position).getImageId());
         title.setText(dataModels.get(position).getTitle());
         value.setText(dataModels.get(position).getValue());
 
+        if (dataModels.get(position).getValue().equals(context.getString(R.string.no_data_message))) {
+            value.setVisibility(View.GONE);
+            dollarSign.setVisibility(View.GONE);
+        } else {
+            initializationMessage.setVisibility(View.GONE);
+        }
+
         container.addView(view, 0);
 
-        Log.d("NetWorthCardsAdapter", "getView: " + view);
         return view;
     }
 
