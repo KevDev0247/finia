@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -39,11 +40,12 @@ public class View_TransactionsFragment extends Fragment {
     private TransactionListAdapter revenuesAdapter;
     private TransactionListAdapter expensesAdapter;
     private TransactionActivity transactionActivity;
+    private LinearLayout initializationMessage;
 
     private List<Transactions> transactions;
     private List<BudgetsType> budgetsTypes;
-    private List<Transactions> adapterRevenuesList = new ArrayList<>();
-    private List<Transactions> adapterExpensesList = new ArrayList<>();
+    private List<Transactions> revenuesList = new ArrayList<>();
+    private List<Transactions> expensesList = new ArrayList<>();
 
     private static final int MAIN_ACTIVITY_REQUEST_CODE = 1000;
     private String fragmentTag;
@@ -112,20 +114,24 @@ public class View_TransactionsFragment extends Fragment {
      */
     private void setUpRevenuesListView(View revenuesFragmentView) {
         ListView revenuesListView = revenuesFragmentView.findViewById(R.id.transactions_list);
-
+        initializationMessage = revenuesFragmentView.findViewById(R.id.transaction_initialization_message);
         for (Transactions transaction : transactions) {
             if (transaction.getTransactionValue() > 0) {
                 Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
-                adapterRevenuesList.add(transaction);
+                revenuesList.add(transaction);
             }
         }
 
-        revenuesAdapter = new TransactionListAdapter(getContext(), adapterRevenuesList, budgetsTypes);
+        if (revenuesList.size() != 0) {
+            initializationMessage.setVisibility(View.GONE);
+        }
+
+        revenuesAdapter = new TransactionListAdapter(getContext(), revenuesList, budgetsTypes);
         revenuesListView.setAdapter(revenuesAdapter);
         revenuesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Transactions revenue = adapterRevenuesList.get(position);
+                Transactions revenue = revenuesList.get(position);
 
                 Intent intent = new Intent();
                 intent.putExtra(getString(R.string.transaction_id_key), revenue.getTransactionId());
@@ -150,20 +156,24 @@ public class View_TransactionsFragment extends Fragment {
      */
     private void setUpExpensesListView(View expensesFragmentView) {
         ListView expensesListView = expensesFragmentView.findViewById(R.id.transactions_list);
-
+        initializationMessage = expensesFragmentView.findViewById(R.id.transaction_initialization_message);
         for (Transactions transaction : transactions) {
             if (transaction.getTransactionValue() < 0) {
                 Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
-                adapterExpensesList.add(transaction);
+                expensesList.add(transaction);
             }
         }
 
-        expensesAdapter = new TransactionListAdapter(getContext(), adapterExpensesList, budgetsTypes);
+        if (expensesList.size() != 0) {
+            initializationMessage.setVisibility(View.GONE);
+        }
+
+        expensesAdapter = new TransactionListAdapter(getContext(), expensesList, budgetsTypes);
         expensesListView.setAdapter(expensesAdapter);
         expensesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Transactions expense = adapterExpensesList.get(position);
+                Transactions expense = expensesList.get(position);
 
                 Intent intent = new Intent();
                 intent.putExtra(getString(R.string.transaction_id_key), expense.getTransactionId());

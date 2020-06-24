@@ -211,5 +211,9 @@
     <string name="budget_initialization_2">Click + to add your first budget</string>
     <string name="spending_initialization_1">Your spending reports will be displayed here</string>
     <string name="spending_initialization_2">Navigate to Transactions section to record your transactions</string>
+    <string name="expenses_initialization_1">Your have not add any expense</string>
+    <string name="expenses_initialization_2">Click + to add your first expense</string>
+    <string name="revenues_initialization_1">Your have not add any revenue</string>
+    <string name="revenues_initialization_2">Click + to add your first revenue</string>
 
 </resources>
