@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The data processor to retrieve or insert any data or data collection from the LiabilitiesValueTree Structure.
+ * The data processor to retrieve any data or data collection from the LiabilitiesTypeTree Structure.
  * The LiabilitiesValueTree is designed to be a read-only structure as the business logic of Finance
  * defines a fixed number of categories for net worth items.
  * The type processor is mostly used by the adapter of the Expandable List to retrieve the sub group of net worth items
