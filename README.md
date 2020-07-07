@@ -70,20 +70,10 @@ DELETE	| Delete the node from the tree	| clearAllAssetsValues
 Each leaf node contains the name of the leaf node, and the address of the node.
 A simple example below demonstrates the structure of a leaf node.
 
-Leaf Node	| Third Level Parent	| Second Level Parent	| First Level Parent	| 
-------------- | ------------------------- | ------------- | ------------- |
-Name	| Address 
-Real Estate	| Ownership Interests	| Invested Assets | Total Assets
-
-Stage | Direct Products | ATP Yields
-----: | --------------: | ---------:
-Glycolysis | 2 ATP ||
-^^ | 2 NADH | 3--5 ATP |
-Pyruvaye oxidation | 2 NADH | 5 ATP |
-Citric acid cycle | 2 ATP ||
-^^ | 6 NADH | 15 ATP |
-^^ | 2 FADH2 | 3 ATP |
-**30--32** ATP |||
+Name	| Address section 1 	| Address section 2	| Address section 3
+------- | ----------- | ----------- | ----------- 
+Leaf Node	| Third Level Parent | Second Level Parent | First Level Parent 
+Real Estate	| Ownership Interests	| Invested Assets | Total Assets 
 
 #### Node Container
 
