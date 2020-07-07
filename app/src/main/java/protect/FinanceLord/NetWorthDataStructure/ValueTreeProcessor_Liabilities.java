@@ -41,13 +41,13 @@ public class ValueTreeProcessor_Liabilities {
 
     private Context context;
     private Date currentTime;
-    private List<TypeTreeLeaf_Liabilities> typeTreeLeaves;
+    private List<TypeTreeLeaf_Liabilities> liabilitiesTypeTree;
     private List<LiabilitiesValue> liabilitiesValues;
 
-    public ValueTreeProcessor_Liabilities(List<TypeTreeLeaf_Liabilities> typeTreeLeaves, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context) {
+    public ValueTreeProcessor_Liabilities(List<TypeTreeLeaf_Liabilities> liabilitiesTypeTree, List<LiabilitiesValue> liabilitiesValues, Date currentTime, Context context) {
         this.context = context;
         this.currentTime = currentTime;
-        this.typeTreeLeaves = typeTreeLeaves;
+        this.liabilitiesTypeTree = liabilitiesTypeTree;
         this.liabilitiesValues = liabilitiesValues;
     }
 
@@ -120,7 +120,7 @@ public class ValueTreeProcessor_Liabilities {
      * @return an integer value represents the id of the node in the data structure.
      */
     private int getLiabilitiesId(String liabilitiesName) {
-        for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typeTreeLeaves) {
+        for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : liabilitiesTypeTree) {
             if (liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName != null && liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName.equals(liabilitiesName)){
                 return liabilitiesTypeTreeLeaf.liabilitiesFirstLevelId;
             } else if (liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName.equals(liabilitiesName)){
@@ -146,7 +146,7 @@ public class ValueTreeProcessor_Liabilities {
 
         List liabilitiesIDs = new ArrayList();
         if (context.getString(R.string.short_term_liabilities_name).equals(liabilitiesName)) {
-            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typeTreeLeaves){
+            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : liabilitiesTypeTree){
                 if (liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null
                         && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName.equals(liabilitiesName)
                         && liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName != null) {
@@ -154,7 +154,7 @@ public class ValueTreeProcessor_Liabilities {
                 }
             }
         } else if (context.getString(R.string.long_term_liabilities_name).equals(liabilitiesName)) {
-            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typeTreeLeaves) {
+            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : liabilitiesTypeTree) {
                 if (liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null
                         && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName.equals(liabilitiesName)
                         && liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName != null) {
