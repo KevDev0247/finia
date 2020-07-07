@@ -73,8 +73,8 @@ A simple example below demonstrates the structure of a leaf node.
  Leaf Node (Name)  | Address (Third Level Parent) | Address (Second Level Parent) | Address (First Level Parent)
 ------------------ | ---------------------------- | ----------------------------- | ---------------------------- 
     Real Estate    |      Ownership Interests	  |         Invested Assets       |         Total Assets 
- Checking Accounts |              /               |          Liquid Assets        |         Total Assets 
-   Home Mortgage   |              /	              |     Short Term Liabilities    |       Total Liabilities
+ Checking Accounts |                              |          Liquid Assets        |         Total Assets 
+   Home Mortgage   |              	              |     Short Term Liabilities    |       Total Liabilities
 
 #### Node Container
 
