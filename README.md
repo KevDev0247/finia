@@ -78,6 +78,31 @@ A simple example below demonstrates the structure of a leaf node.
 
 #### Node Container
 
+A node container is essentially a data carrier that contains the essential data of a node as well as its level in the tree structure.
+It is mainly used in the Expandable Lists' adapters to access the name and the id more efficiently to create the content of the Multi-Expandable list.
+
+-Constructing the Expandable Lists:
+ When the data of a certain level is needed, the Type Tree Processor will prepare the node container by
+ putting each node of the particular level into a node container and recording its level. After the preparation is done, the group of node containers will be injected into 
+ the Expandable List Adapter. The mechanism in the adapter will assign the group to the corresponding level and retrieve the data in the node container and deliver them 
+ to the right widget on the UI.
+-Retrieve the data and inject into the Tree Processor:
+ Each node container will be "paired" with a Input box (EditText), and a TextListener will be added to the Input Box. Once change is detected, 
+ the value will be injected into an AssetsValue object and stored in the data source (list of AssetsValue objects) Value Tree Processor. 
+ The id from the node container will also be injected and used as an identifier of the node.
+
+The example below shows the structure of a node container and the group under Retirement Accounts that will be used to construct a nested expandable list:
+
+Level | Name (Essential Data) | ID (Essential Data) | 
+--- | ---- | ----
+3	| IRA | 9
+3	| Roth_IRA | 10
+3	| 401k | 11
+3	| SEP_IRA | 12
+3	| Pension | 13
+3	| Annuity | 14
+3	| Keogh or Other Plan | 15
+
 #### The DFS (Depth First Search) Algorithm
 
 
