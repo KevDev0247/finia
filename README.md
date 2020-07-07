@@ -72,7 +72,7 @@ A simple example below demonstrates the structure of a leaf node.
 
 Leaf Node	| Third Level Parent	| Second Level Parent	| First Level Parent	| 
 ------------- | ------------------------- | ------------- | ------------- |
-Name	| Address | 
+Name	| Address 
 Real Estate	| Ownership Interests	| Invested Assets | Total Assets
 
 #### Node Container
