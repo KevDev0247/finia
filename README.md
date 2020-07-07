@@ -50,11 +50,11 @@ The Value Tree Processor is used to manipulate the data stored in the Value tree
 The data stored in the Assets Value Processor is illustrated by the table below:
 
 Parameters	| Type	| Description	| 
-------------- | --------- | ------------- |
+------------- | ------------------------- | ------------- |
 context	| Context | The context which the processor is used
 currentTime	| Date	| The current time associated with the data source
-assetsTypeTree | List<TypeTreeLeaf_Assets> | The Type tree used to map the structure onto the Value tree
-assetsValues | List<AssetsValue> | The data source
+assetsValues/liabilitiesValues | List<AssetsValue>	| The data source
+assetsTypeTree/liabilitiesTypeTree | List<TypeTreeLeaf_Assets> | The Type tree used to map the structure onto the Value tree
 
 The following table shows the actions that can be performed on the Value tree structure:
 
