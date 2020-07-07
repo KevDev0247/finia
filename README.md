@@ -88,7 +88,7 @@ The node container is mainly used in the following two ways:
      putting each node of the particular level into a node container and recording its level. After the preparation is done, the group of node containers will be injected into 
      the Expandable List Adapter. The mechanism in the adapter will assign the group to the corresponding level and retrieve the data in the node container and deliver them 
      to the right widget on the UI.
-- Retrieve the data and inject into the Tree Processor:
+- Retrieve the data from the input box and inject into the Tree Processor:
 
      Each node container will be "paired" with a Input box (EditText), and a TextListener will be added to the Input Box. Once change is detected, 
      the value will be injected into an AssetsValue object and stored in the data source (list of AssetsValue objects) Value Tree Processor. 
