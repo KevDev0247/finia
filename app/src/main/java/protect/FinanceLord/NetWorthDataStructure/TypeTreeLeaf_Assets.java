@@ -9,7 +9,7 @@ import protect.FinanceLord.DAOs.AssetsTypeDao;
  * The idea behind a list representation of the tree is to use each leaf node to store the address of the leaf node in the tree
  * by documenting the name of its parent and its parent's parent.
  * By representing the type tree as a list, the tree structure will be more flexible in an java environment in terms of read, edit, group, and delete.
- * A list representation of the tree is also the best way to store the outcome after deserialization.
+ * A list representation of the tree is also the best way to store the results of deserialization.
  * The tree structure can be obtained through a deserialization of the database entity AssetsType.
  * The deserialization method is defined in AssetsTypeDao which is a series of sub queries in SQL.
  *
