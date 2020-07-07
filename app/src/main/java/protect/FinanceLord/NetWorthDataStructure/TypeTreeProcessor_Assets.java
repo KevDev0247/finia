@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * The data processor to retrieve any data or data collection from the AssetsTypeTree Structure.
- * The AssetsTypeTree is designed to be a read-only structure as the business logic of Finance
+ * The AssetsTypeTree is designed to be read-only as the business logic of Finance
  * defines a fixed number of categories for net worth items.
  * The type processor is mostly used by the adapter of the Expandable List to retrieve the sub group of net worth items
  * in order to format the data stored in AssetsTypeTree so that they are compatible with the Expandable List widgets.
