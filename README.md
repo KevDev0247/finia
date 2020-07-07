@@ -75,6 +75,11 @@ Leaf Node	| Third Level Parent	| Second Level Parent	| First Level Parent	|
 Name	| Address 
 Real Estate	| Ownership Interests	| Invested Assets | Total Assets
 
+Name	| Address	|||
+------- | :-----------: | ----------- | ----------- | 
+Leaf Node	| Third Level Parent | Second Level Parent | First Level Parent | 
+Real Estate	| Ownership Interests	| Invested Assets | Total Assets |
+
 #### Node Container
 
 #### The DFS (Depth First Search) Algorithm
