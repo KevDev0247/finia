@@ -21,6 +21,7 @@ Each individual leaf is the fundamental element of the AssetsTypeTree expressed 
 A tree structure that stored the item name and address.
 The Type Tree provide a reference for the Value Tree to construct itself.
 The tree structure can be obtained through a deserialization of the database entity AssetsType.
+a
 
 #### Net Worth Value Tree
 
