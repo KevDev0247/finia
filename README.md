@@ -17,8 +17,8 @@ Each individual leaf is the fundamental element of the AssetsTypeTree expressed 
 - The idea behind a list representation of the tree is to use each leaf node to store the address of the leaf node in the tree
   by documenting the name of its parent and its parent's parent.
 - Advantages of a list representation of the Tree structure
-1. A list representation of the tree is the best way to store the results of deserialization.
-2. A list is easier to manipulate in a java setting with the Tree processor objects.
+    1. A list representation of the tree is the best way to store the results of deserialization.
+    2. A list is easier to manipulate in a java setting with the Tree processor objects.
 
 ### Net Worth Type Tree
 
@@ -37,9 +37,9 @@ A tree structure that is mostly used to store the value of each net worth item.
 A data processor is designed to retrieve data of a particular node or a collection of nodes.
 - The Type Tree Processor is designed to be read-only as the business logic of Finance defines a fixed number of categories for net worth items.
 - Usage:
- 1. Used by the adapter of the Expandable List to retrieve the sub group of net worth items 
-    in order to format the data stored in AssetsTypeTree so that they are compatible with the Expandable List widgets.
- 2. Used in the Breadth-First Search algorithm to retrieve the child nodes of a particular node.
+     1. Used by the adapter of the Expandable List to retrieve the sub group of net worth items 
+        in order to format the data stored in AssetsTypeTree so that they are compatible with the Expandable List widgets.
+     2. Used in the Breadth-First Search algorithm to retrieve the child nodes of a particular node.
 
 ### Value Tree Processor
 
