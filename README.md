@@ -70,10 +70,10 @@ DELETE	| Delete the node from the tree	| clearAllAssetsValues
 Each leaf node contains the name of the leaf node, and the address of the node.
 A simple example below demonstrates the structure of a leaf node.
 
-|       Leaf Node      |  Third Level Parent | Second Level Parent | First Level Parent |
-| -------------------: | ------------------: | ------------------: | -----------------: |
-|         Name         |                             Address                           ||
-|      Real Estate     | Ownership Interests |   Invested Assets   |    Total Assets    |
+Leaf Node	| Third Level Parent	| Second Level Parent	| First Level Parent	| 
+------------- | ------------------------- | ------------- | ------------- |
+Name	| Address | 
+Real Estate	| Ownership Interests	| Invested Assets | Total Assets
 
 #### Node Container
 
