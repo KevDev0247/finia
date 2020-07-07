@@ -7,9 +7,12 @@ A modern Android app that helps users to manage their personal finance.
 - This is Kevin Zhijun Wang's original project. 
 - Many thanks to Shilei Mao who occasionally helps out with unprecedented issues in Android Studio.
 
+
+
 ## Finia's Net Worth Data Structure
 
 Modified tree structures are used to stored the categories and values of net worth items.
+
 
 #### An Innovative List Representation of the tree structure
 
@@ -19,6 +22,7 @@ Each individual leaf is the fundamental element of the AssetsTypeTree expressed 
 - Advantages of a list representation of the Tree structure
     1. A list representation of the tree is the best way to store the results of deserialization.
     2. A list is easier to manipulate in a java setting with the Tree processor objects.
+    
 
 #### Net Worth Type Tree
 
@@ -26,11 +30,13 @@ A tree structure that stored the item name and address.
 - The Type Tree provide a reference for the Value Tree to construct itself.
 - The tree structure can be obtained through a deserialization of the database entity AssetsType.
 
+
 #### Net Worth Value Tree
 
 A tree structure that is mostly used to store the value of each net worth item.
 - The relationship of the Value trees' nodes are mapped from the Type trees' nodes as it stored the relationship between nodes.
 - Each node is an AssetsValue object which contains the id, name, value, time.
+
 
 #### Type Tree Processor
 
@@ -40,6 +46,7 @@ A data processor is designed to retrieve data of a particular node or a collecti
      1. Used by the adapter of the Expandable List to retrieve the sub group of net worth items 
         in order to format the data stored in AssetsTypeTree so that they are compatible with the Expandable List widgets.
      2. Used in the Breadth-First Search algorithm to retrieve the child nodes of a particular node.
+     
 
 #### Value Tree Processor
 
@@ -65,6 +72,7 @@ EDIT	| Edit the data of a particular	| setAssetValue, setAllAssetsValues
 GROUP	| Group the nodes and then retrieve the data | getAssetsChildrenNodeIDs	
 DELETE	| Delete the node from the tree	| clearAllAssetsValues
 
+
 #### Leaf Node of Type Tree
 
 Each leaf node contains the name of the leaf node, and the address of the node.
@@ -75,6 +83,7 @@ A simple example below demonstrates the structure of a leaf node.
  Real Estate | Ownership Interests | Invested Assets | Total Assets 
  Checking Accounts | / | Liquid Assets | Total Assets 
  Home Mortgage | / | Short Term Liabilities | Total Liabilities
+ 
 
 #### Node Container
 
@@ -105,6 +114,7 @@ Level | Name (Essential Data) | ID (Essential Data) |
 3	| Pension | 13
 3	| Annuity | 14
 3	| Keogh or Other Plan | 15
+
 
 #### The DFS (Depth First Search) Algorithm
 
