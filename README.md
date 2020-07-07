@@ -47,14 +47,14 @@ The Value Tree Processor is used to manipulate the data stored in the Value tree
 - This processor contains methods to perform READ, EDIT, GROUP, DELETE on the data structure.
 - This data source of the processor also stores all the data including the values and the Type tree.
 
-The data stored in the processor is illustrated by the table below:
+The data stored in the Assets Value Processor is illustrated by the table below:
 
 Parameters	| Type	| Description	| 
 :-----------------: | :-----------------: | :-----------------: |
 context	| Context | The context which the processor is used
-currentTime	| Date	| The current time associated with the data source
-assetsTypeTree or liabilitiesTypeTree | List<TypeTreeLeaf_Assets> or List<TypeTreeLeaf_Liabilities> | The Type tree used to map the structure onto the Value tree
-assetsValues or liabilitiesValues | List<<AssetsValue>> or List<<LiabilitiesValue>> | The data source
+currentTime	| Date | The current time associated with the data source
+assetsValues | List<AssetsValue> | The data source
+assetsTypeTree | List<TypeTreeLeaf_Assets> | The Type tree used to map the structure onto the Value tree
 
 The following table shows the actions that can be performed on the Value tree structure:
 
