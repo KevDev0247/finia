@@ -118,6 +118,15 @@ Level | Name (Essential Data) | ID (Essential Data) |
 
 #### The DFS (Depth First Search) Algorithm
 
+When calculating the net worth as well as the value of a parent node, the processor will call the methods to calculate the value of its child nodes.
+During this process, the processor actually search for the group of leaf nodes and return the sum of them as the value of their parent. 
+Then, the values of the current level will be returned to the previous level. 
+
+The advantage DFS algorithm:
+  1. it allows the value of each sub parent node to be calculated individually and inserted to the database.
+  2. the value of each sub parent node will also be used to calculate the parent.
+
+
 
 
 
