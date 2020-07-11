@@ -206,14 +206,15 @@
     <string name="spending_report">Spending Report</string>
 
     <!-- initialization message -->
-    <string name="past_report_list_initialization">Your do not have any net worth reports recorded</string>
-    <string name="budget_initialization_1">Your have not set any budgets yet</string>
-    <string name="budget_initialization_2">Click + to add your first budget</string>
-    <string name="spending_initialization_1">Your spending reports will be displayed here</string>
-    <string name="spending_initialization_2">Navigate to Transactions section to record your transactions</string>
-    <string name="expenses_initialization_1">Your have not add any expense</string>
-    <string name="expenses_initialization_2">Click + to add your first expense</string>
-    <string name="revenues_initialization_1">Your have not add any revenue</string>
-    <string name="revenues_initialization_2">Click + to add your first revenue</string>
+    <string name="past_report_list_empty_message_1">Your do not have any net worth reports recorded</string>
+    <string name="past_report_list_empty_message_2">Please record both assets and liabilities to generate a full net worth report</string>
+    <string name="budget_empty_message_1">Your have not set any budgets yet</string>
+    <string name="budget_empty_message_2">Click + to add your first budget</string>
+    <string name="spending_empty_message_1">Your spending reports will be displayed here</string>
+    <string name="spending_empty_message_2">Navigate to Transactions section to record your transactions</string>
+    <string name="expenses_empty_message_1">Your have not add any expense</string>
+    <string name="expenses_empty_message_2">Click + to add your first expense</string>
+    <string name="revenues_empty_message_1">Your have not add any revenue</string>
+    <string name="revenues_empty_message_2">Click + to add your first revenue</string>
 
 </resources>
