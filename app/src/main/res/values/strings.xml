@@ -205,7 +205,7 @@
     <string name="spending_categories">spendingCategories</string>
     <string name="spending_report">Spending Report</string>
 
-    <!-- initialization message -->
+    <!-- empty message -->
     <string name="past_report_list_empty_message_1">Your do not have any net worth reports recorded</string>
     <string name="past_report_list_empty_message_2">Please record both assets and liabilities to generate a full net worth report</string>
     <string name="budget_empty_message_1">Your have not set any budgets yet</string>
@@ -216,5 +216,8 @@
     <string name="expenses_empty_message_2">Click + to add your first expense</string>
     <string name="revenues_empty_message_1">Your have not add any revenue</string>
     <string name="revenues_empty_message_2">Click + to add your first revenue</string>
+
+    <!-- net worth message -->
+    <string name="net_worth_note">The empty fields will be recorded as 0</string>
 
 </resources>
