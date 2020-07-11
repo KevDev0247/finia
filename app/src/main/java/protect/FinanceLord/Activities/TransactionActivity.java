@@ -51,7 +51,9 @@ public class TransactionActivity extends AppCompatActivity {
     private List<BudgetsType> budgetsTypes;
     private TransactionsDao transactionsDao;
     private BudgetsTypeDao budgetsTypeDao;
+    private View_TransactionsFragment revenuesFragment, expensesFragment;
 
+    private boolean initialize = true;
     private static final int TRANSACTION_ACTIVITY_REQUEST_CODE = 1000;
     private static String TAG = "TransactionActivity";
 
@@ -82,8 +84,6 @@ public class TransactionActivity extends AppCompatActivity {
         FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
         transactionsDao = database.transactionsDao();
         budgetsTypeDao = database.budgetsTypeDao();
-
-        retrieveDataFromDatabase(true, false);
     }
 
     /**
@@ -95,7 +95,8 @@ public class TransactionActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        retrieveDataFromDatabase(false, true);
+        retrieveDataFromDatabase(initialize);
+        initialize = false;
     }
 
     /**
@@ -105,9 +106,8 @@ public class TransactionActivity extends AppCompatActivity {
      * Then, the method will decides whether to set up the view or update the data.
      *
      * @param initialize the variable indicates whether the activity have to initialize the view.
-     * @param refresh the variable indicates whether the activity have to refresh the view.
      */
-    private void retrieveDataFromDatabase(final boolean initialize, final boolean refresh) {
+    private void retrieveDataFromDatabase(final boolean initialize) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -126,8 +126,10 @@ public class TransactionActivity extends AppCompatActivity {
                         if (initialize){
                             setUpCategoryFiltersList();
                             setUpTabsAndAddButton(transactions);
-                        } else if (refresh){
+                        } else {
                             transactionsViewModel.pushToTransactionGroup(transactions);
+                            expensesFragment.setUpExpensesInitializationMessage();
+                            revenuesFragment.setUpRevenuesInitializationMessage();
                         }
                     }
                 });
@@ -153,8 +155,8 @@ public class TransactionActivity extends AppCompatActivity {
         }
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        View_TransactionsFragment revenuesFragment = new View_TransactionsFragment(transactions, budgetsTypes, getString(R.string.revenues_fragment_key));
-        View_TransactionsFragment expensesFragment = new View_TransactionsFragment(transactions, budgetsTypes, getString(R.string.expenses_fragments_key));
+        revenuesFragment = new View_TransactionsFragment(transactions, budgetsTypes, getString(R.string.revenues_fragment_key));
+        expensesFragment = new View_TransactionsFragment(transactions, budgetsTypes, getString(R.string.expenses_fragments_key));
         fragments.add(revenuesFragment);
         fragments.add(expensesFragment);
 

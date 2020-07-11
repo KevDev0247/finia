@@ -122,9 +122,7 @@ public class View_TransactionsFragment extends Fragment {
             }
         }
 
-        if (revenuesList.size() != 0) {
-            initializationMessage.setVisibility(View.GONE);
-        }
+        setUpRevenuesInitializationMessage();
 
         revenuesAdapter = new TransactionListAdapter(getContext(), revenuesList, budgetsTypes);
         revenuesListView.setAdapter(revenuesAdapter);
@@ -164,9 +162,7 @@ public class View_TransactionsFragment extends Fragment {
             }
         }
 
-        if (expensesList.size() != 0) {
-            initializationMessage.setVisibility(View.GONE);
-        }
+        setUpExpensesInitializationMessage();
 
         expensesAdapter = new TransactionListAdapter(getContext(), expensesList, budgetsTypes);
         expensesListView.setAdapter(expensesAdapter);
@@ -265,5 +261,21 @@ public class View_TransactionsFragment extends Fragment {
                 expensesAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    public void setUpRevenuesInitializationMessage() {
+        if (revenuesList.size() != 0) {
+            initializationMessage.setVisibility(View.GONE);
+        } else {
+            initializationMessage.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setUpExpensesInitializationMessage() {
+        if (expensesList.size() != 0) {
+            initializationMessage.setVisibility(View.GONE);
+        } else {
+            initializationMessage.setVisibility(View.VISIBLE);
+        }
     }
 }
