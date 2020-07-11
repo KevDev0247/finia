@@ -188,6 +188,20 @@ public class NetWorthActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.assets_cards_view_pager);
         viewPager.setAdapter(netWorthCardsAdapter);
         viewPager.setPadding(80, 0, 80, 0);
+
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth), getString(R.string.no_data_message)));
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), getString(R.string.no_data_message)));
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), getString(R.string.no_data_message)));
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), getString(R.string.no_data_message)));
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets_name), getString(R.string.no_data_message)));
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), getString(R.string.no_data_message)));
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), getString(R.string.no_data_message)));
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest_name), getString(R.string.no_data_message)));
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name), getString(R.string.no_data_message)));
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name), getString(R.string.no_data_message)));
+        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), getString(R.string.no_data_message)));
+
+        netWorthCardsAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -256,20 +270,6 @@ public class NetWorthActivity extends AppCompatActivity {
                     } else {
                         Log.d("NetWorthActivity","some asset items are null");
                     }
-                } else {
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth), getString(R.string.no_data_message)));
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), getString(R.string.no_data_message)));
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), getString(R.string.no_data_message)));
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), getString(R.string.no_data_message)));
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets_name), getString(R.string.no_data_message)));
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), getString(R.string.no_data_message)));
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), getString(R.string.no_data_message)));
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership,getString(R.string.ownership_interest_name), getString(R.string.no_data_message)));
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name), getString(R.string.no_data_message)));
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name), getString(R.string.no_data_message)));
-                    netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), getString(R.string.no_data_message)));
-
-                    netWorthCardsAdapter.notifyDataSetChanged();
                 }
 
                 if (!liabilitiesValues.isEmpty()){
@@ -305,6 +305,8 @@ public class NetWorthActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        netWorthCardsDataModels.clear();
+
                         netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth), String.valueOf(finalNetWorthValue)));
                         netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), String.valueOf(finalTotalAssetsValue)));
                         netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), String.valueOf(finalLiquidAssetsValue)));
