@@ -13,6 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="0dp"
             android:paddingEnd="20dp"
             android:orientation="horizontal"
             android:background="@drawable/report_cards_item">
@@ -33,6 +34,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:paddingStart="0dp"
                     android:paddingEnd="10dp"
                     android:layout_weight="1.7">
 
@@ -41,8 +43,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="30dp"
-                        android:text="Items"
+                        android:layout_marginStart="30dp"
+                        android:text="@string/items"
                         android:textColor="#ffffff"
                         android:textSize="18sp"/>
 
@@ -58,6 +60,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:paddingStart="0dp"
                         android:paddingEnd="10dp">
 
                         <RelativeLayout
@@ -74,15 +77,15 @@
                                     android:id="@+id/asset_item_value"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="value"
+                                    android:text="@string/value"
                                     android:textColor="#ffffff"
                                     android:textSize="20sp"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text=" $"
-                                    android:textSize="20dp"
+                                    android:text="@string/dollar_sign"
+                                    android:textSize="20sp"
                                     android:textColor="#ffffff"/>
 
                             </LinearLayout>
@@ -114,23 +117,23 @@
                                     android:id="@+id/asset_symbol"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="+ - "
+                                    android:text="@string/algebra_sign"
                                     android:textColor="#ffffff"
-                                    android:textSize="20dp" />
+                                    android:textSize="20sp" />
 
                                 <TextView
                                     android:id="@+id/asset_difference"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="net"
+                                    android:text="@string/net"
                                     android:textColor="#ffffff"
-                                    android:textSize="20dp" />
+                                    android:textSize="20sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text=" $"
-                                    android:textSize="20dp"
+                                    android:text="@string/dollar_sign"
+                                    android:textSize="20sp"
                                     android:textColor="#ffffff"/>
 
                             </LinearLayout>

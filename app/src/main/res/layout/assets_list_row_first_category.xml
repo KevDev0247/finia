@@ -26,10 +26,10 @@
 
             <TextView
                 android:id="@+id/assetsRowParentText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="First Level"
+                android:text="@string/first_level"
                 android:textColor="#ffffff"
                 android:textSize="25sp"/>
 
