@@ -153,20 +153,45 @@
                         android:dividerHeight="10dp"/>
 
                     <LinearLayout
-                        android:id="@+id/past_report_list_initialization_message"
+                        android:id="@+id/past_report_list_empty_message_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:background="@drawable/report_items_blurred">
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:text="@string/past_report_list_initialization"
-                            android:textColor="#ffffff"
-                            android:textSize="25sp"/>
+                            android:padding="10dp"
+                            android:background="@drawable/report_items_blurred">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center_horizontal"
+                                android:text="@string/past_report_list_empty_message_1"
+                                android:textColor="#ffffff"
+                                android:textSize="25sp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/report_items_blurred">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:gravity="center"
+                                android:text="@string/past_report_list_empty_message_2"
+                                android:textColor="#ffffff"
+                                android:textSize="25sp"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

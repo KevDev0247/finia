@@ -155,7 +155,7 @@ public class NetWorthActivity extends AppCompatActivity {
      */
     protected void setUpPastReportsListView() {
         ListView pastReportsListView = findViewById(R.id.past_report_list);
-        emptyMessageField = findViewById(R.id.past_report_list_initialization_message);
+        emptyMessageField = findViewById(R.id.past_report_list_empty_message_field);
         pastReportsAdapter = new PastReportsAdapter(this, reportItemsDataModels);
         pastReportsListView.setAdapter(pastReportsAdapter);
 
