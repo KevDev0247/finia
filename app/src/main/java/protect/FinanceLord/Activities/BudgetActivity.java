@@ -36,7 +36,7 @@ public class BudgetActivity extends AppCompatActivity {
 
     private BudgetListAdapter budgetListAdapter;
     private ArrayList<BudgetsType> allBudgetsTypes;
-    private LinearLayout initializationMessageField;
+    private LinearLayout emptyMessageField;
 
     private boolean initialize = true;
     private static final int BUDGET_ACTIVITY_REQUEST_CODE = 1000;
@@ -114,9 +114,7 @@ public class BudgetActivity extends AppCompatActivity {
                                 budgetListAdapter.clear();
                                 budgetListAdapter.addAll(budgetInfoList);
                                 budgetListAdapter.notifyDataSetChanged();
-                                if (budgetInfoList.size() != 0) {
-                                    initializationMessageField.setVisibility(View.GONE);
-                                }
+                                setUpEmptyMessage(budgetInfoList);
                             }
                         }
                     }
@@ -153,13 +151,11 @@ public class BudgetActivity extends AppCompatActivity {
      */
     private void setUpBudgetsListView(final List<BudgetInfo> budgetInfoList) {
         ListView budgetsList = findViewById(R.id.budgets_list);
-        initializationMessageField = findViewById(R.id.budget_initialization_message);
+        emptyMessageField = findViewById(R.id.budget_initialization_message);
         budgetListAdapter = new BudgetListAdapter(this, budgetInfoList, allBudgetsTypes);
         budgetsList.setAdapter(budgetListAdapter);
 
-        if (budgetInfoList.size() != 0) {
-            initializationMessageField.setVisibility(View.GONE);
-        }
+        setUpEmptyMessage(budgetInfoList);
 
         budgetsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -178,6 +174,21 @@ public class BudgetActivity extends AppCompatActivity {
                 startActivityForResult(intent, BUDGET_ACTIVITY_REQUEST_CODE);
             }
         });
+    }
+
+    /**
+     * Set up the empty message based on the status of the budgetInfoList.
+     * If the budgetInfoList is empty, the empty message will be visible.
+     * If the budgetInfoList has items, the empty message will be invisible.
+     *
+     * @param budgetInfoList the list of budget item information from the database.
+     */
+    private void setUpEmptyMessage(List<BudgetInfo> budgetInfoList) {
+        if (budgetInfoList.size() != 0) {
+            emptyMessageField.setVisibility(View.GONE);
+        } else {
+            emptyMessageField.setVisibility(View.VISIBLE);
+        }
     }
 
     /**

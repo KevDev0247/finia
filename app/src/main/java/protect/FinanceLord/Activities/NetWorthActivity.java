@@ -45,7 +45,8 @@ public class NetWorthActivity extends AppCompatActivity {
 
     private NetWorthCardsAdapter netWorthCardsAdapter;
     private PastReportsAdapter pastReportsAdapter;
-    private LinearLayout initializationMessageField;
+    private LinearLayout emptyMessageField;
+
     private  boolean initialize = true;
     private List<NetWorthCardsDataModel> netWorthCardsDataModels = new ArrayList<>();
     private List<ReportItemsDataModel> reportItemsDataModels = new ArrayList<>();
@@ -137,9 +138,7 @@ public class NetWorthActivity extends AppCompatActivity {
                             setUpPastReportsListView();
                         } else {
                             pastReportsAdapter.notifyDataSetChanged();
-                            if (reportItemsDataModels.size() != 0) {
-                                initializationMessageField.setVisibility(View.GONE);
-                            }
+                            setUpEmptyMessage();
                         }
                     }
                 });
@@ -156,13 +155,11 @@ public class NetWorthActivity extends AppCompatActivity {
      */
     protected void setUpPastReportsListView() {
         ListView pastReportsListView = findViewById(R.id.past_report_list);
-        initializationMessageField = findViewById(R.id.past_report_list_initialization_message);
+        emptyMessageField = findViewById(R.id.past_report_list_initialization_message);
         pastReportsAdapter = new PastReportsAdapter(this, reportItemsDataModels);
         pastReportsListView.setAdapter(pastReportsAdapter);
 
-        if (reportItemsDataModels.size() != 0) {
-            initializationMessageField.setVisibility(View.GONE);
-        }
+        setUpEmptyMessage();
 
         pastReportsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -191,6 +188,19 @@ public class NetWorthActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.assets_cards_view_pager);
         viewPager.setAdapter(netWorthCardsAdapter);
         viewPager.setPadding(80, 0, 80, 0);
+    }
+
+    /**
+     * Set up the empty message based on the status of the reportItemsDataModels.
+     * If the reportItemsDataModels is empty, the empty message will be visible.
+     * If the reportItemsDataModels has items, the empty message will be invisible.
+     */
+    private void setUpEmptyMessage() {
+        if (reportItemsDataModels.size() != 0) {
+            emptyMessageField.setVisibility(View.GONE);
+        } else {
+            emptyMessageField.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
