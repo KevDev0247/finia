@@ -128,8 +128,8 @@ public class TransactionActivity extends AppCompatActivity {
                             setUpTabsAndAddButton(transactions);
                         } else {
                             transactionsViewModel.pushToTransactionGroup(transactions);
-                            expensesFragment.setUpExpensesInitializationMessage();
-                            revenuesFragment.setUpRevenuesInitializationMessage();
+                            expensesFragment.setUpExpensesEmptyMessage();
+                            revenuesFragment.setUpRevenuesEmptyMessage();
                         }
                     }
                 });

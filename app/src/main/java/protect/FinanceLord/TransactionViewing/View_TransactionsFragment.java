@@ -40,7 +40,7 @@ public class View_TransactionsFragment extends Fragment {
     private TransactionListAdapter revenuesAdapter;
     private TransactionListAdapter expensesAdapter;
     private TransactionActivity transactionActivity;
-    private LinearLayout initializationMessage;
+    private LinearLayout emptyMessageField;
 
     private List<Transactions> transactions;
     private List<BudgetsType> budgetsTypes;
@@ -114,7 +114,7 @@ public class View_TransactionsFragment extends Fragment {
      */
     private void setUpRevenuesListView(View revenuesFragmentView) {
         ListView revenuesListView = revenuesFragmentView.findViewById(R.id.transactions_list);
-        initializationMessage = revenuesFragmentView.findViewById(R.id.transaction_initialization_message);
+        emptyMessageField = revenuesFragmentView.findViewById(R.id.transaction_initialization_message);
         for (Transactions transaction : transactions) {
             if (transaction.getTransactionValue() > 0) {
                 Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
@@ -122,7 +122,7 @@ public class View_TransactionsFragment extends Fragment {
             }
         }
 
-        setUpRevenuesInitializationMessage();
+        setUpRevenuesEmptyMessage();
 
         revenuesAdapter = new TransactionListAdapter(getContext(), revenuesList, budgetsTypes);
         revenuesListView.setAdapter(revenuesAdapter);
@@ -154,7 +154,7 @@ public class View_TransactionsFragment extends Fragment {
      */
     private void setUpExpensesListView(View expensesFragmentView) {
         ListView expensesListView = expensesFragmentView.findViewById(R.id.transactions_list);
-        initializationMessage = expensesFragmentView.findViewById(R.id.transaction_initialization_message);
+        emptyMessageField = expensesFragmentView.findViewById(R.id.transaction_initialization_message);
         for (Transactions transaction : transactions) {
             if (transaction.getTransactionValue() < 0) {
                 Log.d(fragmentTag, "the item is " + transaction.getTransactionName() + " the value is " + transaction.getTransactionValue());
@@ -162,7 +162,7 @@ public class View_TransactionsFragment extends Fragment {
             }
         }
 
-        setUpExpensesInitializationMessage();
+        setUpExpensesEmptyMessage();
 
         expensesAdapter = new TransactionListAdapter(getContext(), expensesList, budgetsTypes);
         expensesListView.setAdapter(expensesAdapter);
@@ -263,19 +263,29 @@ public class View_TransactionsFragment extends Fragment {
         });
     }
 
-    public void setUpRevenuesInitializationMessage() {
+    /**
+     * Set up the empty message based on the status of the revenuesList.
+     * If the revenuesList is empty, the empty message will be visible.
+     * If the revenuesList has items, the empty message will be invisible.
+     */
+    public void setUpRevenuesEmptyMessage() {
         if (revenuesList.size() != 0) {
-            initializationMessage.setVisibility(View.GONE);
+            emptyMessageField.setVisibility(View.GONE);
         } else {
-            initializationMessage.setVisibility(View.VISIBLE);
+            emptyMessageField.setVisibility(View.VISIBLE);
         }
     }
 
-    public void setUpExpensesInitializationMessage() {
+    /**
+     * Set up the empty message based on the status of the expensesList.
+     * If the expensesList is empty, the empty message will be visible.
+     * If the expensesList has items, the empty message will be invisible.
+     */
+    public void setUpExpensesEmptyMessage() {
         if (expensesList.size() != 0) {
-            initializationMessage.setVisibility(View.GONE);
+            emptyMessageField.setVisibility(View.GONE);
         } else {
-            initializationMessage.setVisibility(View.VISIBLE);
+            emptyMessageField.setVisibility(View.VISIBLE);
         }
     }
 }
