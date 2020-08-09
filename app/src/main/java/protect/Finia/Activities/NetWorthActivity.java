@@ -23,7 +23,7 @@ import protect.Finia.DAOs.LiabilitiesValueDao;
 import protect.Finia.DAOs.ReportItemInfoDao;
 import protect.Finia.Database.AssetsType;
 import protect.Finia.Database.AssetsValue;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.Database.LiabilitiesType;
 import protect.Finia.Database.LiabilitiesValue;
 import protect.Finia.NetWorthPastReportsList.PastReportsAdapter;
@@ -115,7 +115,7 @@ public class NetWorthActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
+                FiniaDatabase database = FiniaDatabase.getInstance(NetWorthActivity.this);
                 ReportItemInfoDao reportItemInfoDao = database.reportItemInfoDao();
 
                 List<ReportItemInfo> reportItemInfoList = reportItemInfoDao.queryReportItemsInfo();
@@ -239,7 +239,7 @@ public class NetWorthActivity extends AppCompatActivity {
                 float shortTermLiabilitiesValue = 0;
                 float longTermLiabilitiesValue = 0;
 
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthActivity.this);
+                FiniaDatabase database = FiniaDatabase.getInstance(NetWorthActivity.this);
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();

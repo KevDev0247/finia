@@ -28,7 +28,7 @@ import java.util.concurrent.Executors;
 import protect.Finia.Communicators.CalendarDateBroadcast;
 import protect.Finia.Database.BudgetsType;
 import protect.Finia.DAOs.BudgetsTypeDao;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.R;
 import protect.Finia.TimeUtils.CalendarDialog;
 import protect.Finia.TimeUtils.TimeProcessor;
@@ -105,7 +105,7 @@ public class TransactionEditActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionEditActivity.this);
+                FiniaDatabase database = FiniaDatabase.getInstance(TransactionEditActivity.this);
                 BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
                 final List<BudgetsType> budgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
 

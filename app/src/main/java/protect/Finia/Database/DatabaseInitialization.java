@@ -31,7 +31,7 @@ public class DatabaseInitialization{
     }
 
     public void initAssetTypeDb() {
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        FiniaDatabase database = FiniaDatabase.getInstance(context);
         AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
 
         List<AssetsType> allAssetsTypes = assetsTypeDao.queryAllAssetsType();
@@ -218,7 +218,7 @@ public class DatabaseInitialization{
     }
 
     public void initAssetValueDb() {
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        FiniaDatabase database = FiniaDatabase.getInstance(context);
         AssetsValueDao assetsValueDao = database.assetsValueDao();
 
         List<AssetsValue> allAssetsValues = assetsValueDao.queryAllAssetsValue();
@@ -228,7 +228,7 @@ public class DatabaseInitialization{
     }
 
     public void initLiabilityTypeDb() {
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        FiniaDatabase database = FiniaDatabase.getInstance(context);
         LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
 
         List<LiabilitiesType> allLiabilitiesTypes = liabilitiesTypeDao.queryAllLiabilities();
@@ -312,7 +312,7 @@ public class DatabaseInitialization{
     }
 
     public void initLiabilityValueDb() {
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        FiniaDatabase database = FiniaDatabase.getInstance(context);
         LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
         List<LiabilitiesValue> allLiabilitiesValues = liabilitiesValueDao.queryAllLiabilities();
@@ -322,7 +322,7 @@ public class DatabaseInitialization{
     }
 
     public void initBudgetTypeDb() {
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        FiniaDatabase database = FiniaDatabase.getInstance(context);
         BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
 
         List<BudgetsType> allBudgetsTypes = budgetsTypeDao.queryAllBudgetsTypes();
@@ -387,7 +387,7 @@ public class DatabaseInitialization{
     }
 
     public void initBudgetValueDb() {
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        FiniaDatabase database = FiniaDatabase.getInstance(context);
         BudgetsValueDao budgetsDao = database.budgetsValueDao();
 
         List<BudgetsValue> allBudgetsValues = budgetsDao.queryAllBudgets();
@@ -397,7 +397,7 @@ public class DatabaseInitialization{
     }
 
     public void initTransactionDb() {
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        FiniaDatabase database = FiniaDatabase.getInstance(context);
         TransactionsDao transactionsDao = database.transactionsDao();
 
         List<Transactions> allTransactions = transactionsDao.queryAllTransaction();

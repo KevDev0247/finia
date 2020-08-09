@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 
 import protect.Finia.Database.AssetsValue;
 import protect.Finia.DAOs.AssetsValueDao;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.Database.LiabilitiesValue;
 import protect.Finia.DAOs.LiabilitiesValueDao;
 import protect.Finia.NetWorthReportViewing.ReportPagerAdapter;
@@ -133,7 +133,7 @@ public class NetWorthReportViewingActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(NetWorthReportViewingActivity.this);
+                FiniaDatabase database = FiniaDatabase.getInstance(NetWorthReportViewingActivity.this);
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 

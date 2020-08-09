@@ -23,7 +23,7 @@ import protect.Finia.Communicators.DateCommunicator;
 import protect.Finia.DAOs.AssetsTypeDao;
 import protect.Finia.DAOs.AssetsValueDao;
 import protect.Finia.Database.AssetsValue;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.NetWorthDataStructure.TypeTreeLeaf_Assets;
 import protect.Finia.NetWorthDataStructure.TypeTreeProcessor_Assets;
 import protect.Finia.NetWorthDataStructure.ValueTreeProcessor_Assets;
@@ -113,7 +113,7 @@ public class Edit_AssetsFragment extends Fragment {
      * @param commitButton the instance of commit button.
      */
     private void setUpCommitAndDeleteButton(RelativeLayout commitButton, RelativeLayout deleteButton) {
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
+        FiniaDatabase database = FiniaDatabase.getInstance(Edit_AssetsFragment.this.getContext());
         final AssetsValueDao assetsValueDao = database.assetsValueDao();
 
         commitButton.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +192,7 @@ public class Edit_AssetsFragment extends Fragment {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_AssetsFragment.this.getContext());
+                FiniaDatabase database = FiniaDatabase.getInstance(Edit_AssetsFragment.this.getContext());
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 

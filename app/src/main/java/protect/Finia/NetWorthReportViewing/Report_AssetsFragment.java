@@ -21,7 +21,7 @@ import protect.Finia.DAOs.AssetsTypeDao;
 import protect.Finia.NetWorthDataStructure.TypeTreeLeaf_Assets;
 import protect.Finia.DAOs.AssetsValueDao;
 import protect.Finia.Database.AssetsValue;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.NetWorthDataStructure.NodeContainer_Assets;
 import protect.Finia.NetWorthDataStructure.TypeTreeProcessor_Assets;
 import protect.Finia.R;
@@ -80,7 +80,7 @@ public class Report_AssetsFragment extends Fragment {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(Report_AssetsFragment.this.getContext());
+                FiniaDatabase database = FiniaDatabase.getInstance(Report_AssetsFragment.this.getContext());
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 

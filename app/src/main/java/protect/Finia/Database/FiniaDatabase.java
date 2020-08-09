@@ -26,7 +26,7 @@ import protect.Finia.DAOs.TransactionsDao;
  * @version 2020.0609
  */
 @Database(entities = {AssetsType.class, AssetsValue.class, LiabilitiesType.class, LiabilitiesValue.class, BudgetsType.class, BudgetsValue.class, Transactions.class}, version = 11)
-public abstract class FinanceLordDatabase extends RoomDatabase {
+public abstract class FiniaDatabase extends RoomDatabase {
 
     public abstract AssetsTypeDao assetsTypeDao();
     public abstract AssetsValueDao assetsValueDao();
@@ -38,11 +38,11 @@ public abstract class FinanceLordDatabase extends RoomDatabase {
     public abstract ReportItemInfoDao reportItemInfoDao();
     public abstract BudgetInfoDao financeRecordsDao();
 
-    private static FinanceLordDatabase database;
+    private static FiniaDatabase database;
 
-    public static synchronized FinanceLordDatabase getInstance(Context context) {
+    public static synchronized FiniaDatabase getInstance(Context context) {
         if (database == null) {
-            database = Room.databaseBuilder(context, FinanceLordDatabase.class, "FinanceLordDb").fallbackToDestructiveMigration().build();
+            database = Room.databaseBuilder(context, FiniaDatabase.class, "FinanceLordDb").fallbackToDestructiveMigration().build();
             return database;
         }
         return database;

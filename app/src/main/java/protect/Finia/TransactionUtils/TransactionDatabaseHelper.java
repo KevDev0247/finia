@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 
 import protect.Finia.Database.BudgetsType;
 import protect.Finia.DAOs.BudgetsTypeDao;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.Database.Transactions;
 import protect.Finia.DAOs.TransactionsDao;
 import protect.Finia.R;
@@ -59,7 +59,7 @@ public class TransactionDatabaseHelper {
         this.viewModel = viewModel;
         this.TAG = TAG;
 
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        FiniaDatabase database = FiniaDatabase.getInstance(context);
         transactionsDao = database.transactionsDao();
         budgetsTypeDao = database.budgetsTypeDao();
     }

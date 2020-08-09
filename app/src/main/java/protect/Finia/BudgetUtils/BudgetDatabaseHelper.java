@@ -17,7 +17,7 @@ import protect.Finia.Database.BudgetsType;
 import protect.Finia.DAOs.BudgetsTypeDao;
 import protect.Finia.Database.BudgetsValue;
 import protect.Finia.DAOs.BudgetsValueDao;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.R;
 import protect.Finia.ViewModels.BudgetTypesViewModel;
 
@@ -58,7 +58,7 @@ public class BudgetDatabaseHelper {
         this.viewModel = viewModel;
         this.budgetsTypes = budgetsTypes;
 
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(context);
+        FiniaDatabase database = FiniaDatabase.getInstance(context);
         budgetsValueDao = database.budgetsValueDao();
         budgetsTypeDao = database.budgetsTypeDao();
     }

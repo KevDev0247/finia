@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.DAOs.LiabilitiesTypeDao;
 import protect.Finia.NetWorthDataStructure.TypeTreeLeaf_Liabilities;
 import protect.Finia.Database.LiabilitiesValue;
@@ -75,7 +75,7 @@ public class Report_LiabilitiesFragment extends Fragment {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(Report_LiabilitiesFragment.this.getContext());
+                FiniaDatabase database = FiniaDatabase.getInstance(Report_LiabilitiesFragment.this.getContext());
                 LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 

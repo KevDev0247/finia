@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 import protect.Finia.Communicators.DateCommunicator;
 import protect.Finia.DAOs.LiabilitiesTypeDao;
 import protect.Finia.DAOs.LiabilitiesValueDao;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.Database.LiabilitiesValue;
 import protect.Finia.NetWorthDataStructure.TypeTreeLeaf_Liabilities;
 import protect.Finia.NetWorthDataStructure.TypeTreeProcessor_Liabilities;
@@ -113,7 +113,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
      * @param commitButton the instance of commit button.
      */
     private void setUpCommitButton(RelativeLayout commitButton, RelativeLayout deleteButton) {
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_LiabilitiesFragment.this.getContext());
+        FiniaDatabase database = FiniaDatabase.getInstance(Edit_LiabilitiesFragment.this.getContext());
         final LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
         commitButton.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +193,7 @@ public class Edit_LiabilitiesFragment extends Fragment {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(Edit_LiabilitiesFragment.this.getContext());
+                FiniaDatabase database = FiniaDatabase.getInstance(Edit_LiabilitiesFragment.this.getContext());
                 LiabilitiesTypeDao liabilitiesTypeDao = database.liabilitiesTypeDao();
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 

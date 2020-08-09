@@ -21,7 +21,7 @@ import protect.Finia.BudgetUtils.BudgetInfo;
 import protect.Finia.BudgetUtils.BudgetListAdapter;
 import protect.Finia.Database.BudgetsType;
 import protect.Finia.DAOs.BudgetsTypeDao;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.DAOs.BudgetInfoDao;
 import protect.Finia.R;
 
@@ -88,7 +88,7 @@ public class BudgetActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(BudgetActivity.this);
+                FiniaDatabase database = FiniaDatabase.getInstance(BudgetActivity.this);
                 BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
                 BudgetInfoDao budgetInfoDao = database.financeRecordsDao();
 

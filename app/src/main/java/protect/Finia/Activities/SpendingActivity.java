@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 import protect.Finia.DAOs.BudgetsTypeDao;
 import protect.Finia.DAOs.TransactionsDao;
 import protect.Finia.Database.BudgetsType;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.R;
 import protect.Finia.SpendingUtils.GroupedSpending;
 import protect.Finia.SpendingUtils.MonthlyTotalSpending;
@@ -69,7 +69,7 @@ public class SpendingActivity extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                FinanceLordDatabase database = FinanceLordDatabase.getInstance(SpendingActivity.this);
+                FiniaDatabase database = FiniaDatabase.getInstance(SpendingActivity.this);
                 TransactionsDao transactionsDao = database.transactionsDao();
                 BudgetsTypeDao budgetsTypeDao = database.budgetsTypeDao();
 

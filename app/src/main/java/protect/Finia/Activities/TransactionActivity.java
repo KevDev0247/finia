@@ -25,7 +25,7 @@ import java.util.concurrent.Executors;
 import protect.Finia.Communicators.GroupByCategoryCommunicator;
 import protect.Finia.Database.BudgetsType;
 import protect.Finia.DAOs.BudgetsTypeDao;
-import protect.Finia.Database.FinanceLordDatabase;
+import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.Database.Transactions;
 import protect.Finia.DAOs.TransactionsDao;
 import protect.Finia.R;
@@ -81,7 +81,7 @@ public class TransactionActivity extends AppCompatActivity {
             }
         });
 
-        FinanceLordDatabase database = FinanceLordDatabase.getInstance(TransactionActivity.this);
+        FiniaDatabase database = FiniaDatabase.getInstance(TransactionActivity.this);
         transactionsDao = database.transactionsDao();
         budgetsTypeDao = database.budgetsTypeDao();
     }
