@@ -1,4 +1,4 @@
-package protect.Finia.SpendingService;
+package protect.Finia.SpendingModule;
 
 import android.content.Context;
 import android.view.LayoutInflater;

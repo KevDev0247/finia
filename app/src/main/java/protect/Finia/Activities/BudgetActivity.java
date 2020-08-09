@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import protect.Finia.BudgetService.BudgetInfo;
-import protect.Finia.BudgetService.BudgetListAdapter;
+import protect.Finia.BudgetModule.BudgetInfo;
+import protect.Finia.BudgetModule.BudgetListAdapter;
 import protect.Finia.Database.BudgetsType;
 import protect.Finia.DAOs.BudgetsTypeDao;
 import protect.Finia.Database.FiniaDatabase;

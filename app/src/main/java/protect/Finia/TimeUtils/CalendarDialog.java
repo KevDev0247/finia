@@ -1,4 +1,4 @@
-package protect.Finia.TimeService;
+package protect.Finia.TimeUtils;
 
 import android.os.Bundle;
 import android.util.Log;

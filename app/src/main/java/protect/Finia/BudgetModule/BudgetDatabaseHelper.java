@@ -1,4 +1,4 @@
-package protect.Finia.BudgetService;
+package protect.Finia.BudgetModule;
 
 import android.app.Activity;
 import android.content.Context;

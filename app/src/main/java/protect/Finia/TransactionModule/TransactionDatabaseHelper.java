@@ -1,4 +1,4 @@
-package protect.Finia.TransactionService;
+package protect.Finia.TransactionModule;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,7 @@ import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.Database.Transactions;
 import protect.Finia.DAOs.TransactionsDao;
 import protect.Finia.R;
-import protect.Finia.TimeService.TimeProcessor;
+import protect.Finia.TimeUtils.TimeProcessor;
 import protect.Finia.ViewModels.BudgetTypesViewModel;
 
 /**

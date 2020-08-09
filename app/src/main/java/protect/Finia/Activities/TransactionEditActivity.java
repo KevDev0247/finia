@@ -30,10 +30,10 @@ import protect.Finia.Database.BudgetsType;
 import protect.Finia.DAOs.BudgetsTypeDao;
 import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.R;
-import protect.Finia.TimeService.CalendarDialog;
-import protect.Finia.TimeService.TimeProcessor;
-import protect.Finia.TransactionService.TransactionDatabaseHelper;
-import protect.Finia.TransactionService.TransactionInputWidgets;
+import protect.Finia.TimeUtils.CalendarDialog;
+import protect.Finia.TimeUtils.TimeProcessor;
+import protect.Finia.TransactionModule.TransactionDatabaseHelper;
+import protect.Finia.TransactionModule.TransactionInputWidgets;
 import protect.Finia.ViewModels.BudgetTypesViewModel;
 
 /**

@@ -25,8 +25,8 @@ import protect.Finia.NetWorthReportEditing.EditPagerAdapter;
 import protect.Finia.NetWorthReportEditing.Edit_AssetsFragment;
 import protect.Finia.NetWorthReportEditing.Edit_LiabilitiesFragment;
 import protect.Finia.R;
-import protect.Finia.TimeService.CalendarDialog;
-import protect.Finia.TimeService.TimeProcessor;
+import protect.Finia.TimeUtils.CalendarDialog;
+import protect.Finia.TimeUtils.TimeProcessor;
 
 /**
  * The activity to edit or add a new report of net worth.

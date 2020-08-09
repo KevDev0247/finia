@@ -1,4 +1,4 @@
-package protect.Finia.SpendingService;
+package protect.Finia.SpendingModule;
 
 import android.os.Parcel;
 import android.os.Parcelable;

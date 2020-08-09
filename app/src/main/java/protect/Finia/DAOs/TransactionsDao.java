@@ -8,8 +8,8 @@ import androidx.room.Update;
 import java.util.List;
 
 import protect.Finia.Database.Transactions;
-import protect.Finia.SpendingService.GroupedSpending;
-import protect.Finia.SpendingService.MonthlyTotalSpending;
+import protect.Finia.SpendingModule.GroupedSpending;
+import protect.Finia.SpendingModule.MonthlyTotalSpending;
 
 @Dao
 public interface TransactionsDao {

@@ -1,4 +1,4 @@
-package protect.Finia.TimeService;
+package protect.Finia.TimeUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
