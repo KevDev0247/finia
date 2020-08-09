@@ -65,4 +65,12 @@
         <item name="colorAccent">#ffffff</item>
     </style>
 
+    <style name="AppTitleCollapsedStyle">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="AppTitleExpandedStyle">
+        <item name="android:textSize">45sp</item>
+    </style>
+
 </resources>
