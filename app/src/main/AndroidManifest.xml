@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="protect.FinanceLord">
+    package="protect.Finia">
 
     <application
         android:allowBackup="true"
@@ -10,41 +10,41 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.SpendingReportActivity"
+            android:name="protect.Finia.Activities.SpendingReportActivity"
             android:theme="@style/AppTheme.InputSheet" />
         <activity
-            android:name=".Activities.TransactionEditActivity"
+            android:name="protect.Finia.Activities.TransactionEditActivity"
             android:theme="@style/AppTheme.InputSheet" />
         <activity
-            android:name=".Activities.TransactionAddActivity"
+            android:name="protect.Finia.Activities.TransactionAddActivity"
             android:theme="@style/AppTheme.InputSheet" />
         <activity
-            android:name=".Activities.BudgetEditActivity"
+            android:name="protect.Finia.Activities.BudgetEditActivity"
             android:theme="@style/AppTheme.InputSheet" />
         <activity
-            android:name=".Activities.NetWorthReportViewingActivity"
+            android:name="protect.Finia.Activities.NetWorthReportViewingActivity"
             android:label="@string/title_activity_net_worth_report_template"
             android:theme="@style/AppTheme.ReportSheet" />
         <activity
-            android:name=".Activities.NetWorthReportEditingActivity"
+            android:name="protect.Finia.Activities.NetWorthReportEditingActivity"
             android:label="@string/title_activity_net_worth_edit_reports"
-            android:parentActivityName=".Activities.NetWorthActivity"
+            android:parentActivityName="protect.Finia.Activities.NetWorthActivity"
             android:theme="@style/AppTheme.InputSheet"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activities.TransactionActivity"
+            android:name="protect.Finia.Activities.TransactionActivity"
             android:theme="@style/AppTheme.MajorActivities" />
         <activity
-            android:name=".Activities.BudgetActivity"
+            android:name="protect.Finia.Activities.BudgetActivity"
             android:theme="@style/AppTheme.MajorActivities" />
         <activity
-            android:name=".Activities.SpendingActivity"
+            android:name="protect.Finia.Activities.SpendingActivity"
             android:theme="@style/AppTheme.MajorActivities" />
         <activity
-            android:name=".Activities.NetWorthActivity"
+            android:name="protect.Finia.Activities.NetWorthActivity"
             android:theme="@style/AppTheme.MajorActivities" />
         <activity
-            android:name=".Activities.MainActivity"
+            android:name="protect.Finia.Activities.MainActivity"
             android:theme="@style/AppTheme.MajorActivities">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

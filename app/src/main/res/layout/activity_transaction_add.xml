@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Activities.TransactionAddActivity">
+    tools:context="protect.Finia.Activities.TransactionAddActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
