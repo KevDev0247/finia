@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context=".Activities.BudgetActivity">
+    tools:context="protect.Finia.Activities.BudgetActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -89,14 +89,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/revenues_initialization_1"
+                android:text="@string/revenues_empty_message_1"
                 android:textSize="22sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/revenues_initialization_2"
+                android:text="@string/revenues_empty_message_2"
                 android:textSize="22sp"/>
 
         </LinearLayout>
