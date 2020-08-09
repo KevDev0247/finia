@@ -1,4 +1,4 @@
-package protect.Finia.BudgetUtils;
+package protect.Finia.BudgetService;
 
 import android.widget.AutoCompleteTextView;
 import android.widget.RelativeLayout;

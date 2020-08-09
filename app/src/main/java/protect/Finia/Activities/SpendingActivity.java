@@ -19,9 +19,9 @@ import protect.Finia.DAOs.TransactionsDao;
 import protect.Finia.Database.BudgetsType;
 import protect.Finia.Database.FiniaDatabase;
 import protect.Finia.R;
-import protect.Finia.SpendingUtils.GroupedSpending;
-import protect.Finia.SpendingUtils.MonthlyTotalSpending;
-import protect.Finia.SpendingUtils.SpendingListAdapter;
+import protect.Finia.SpendingService.GroupedSpending;
+import protect.Finia.SpendingService.MonthlyTotalSpending;
+import protect.Finia.SpendingService.SpendingListAdapter;
 
 /**
  * The activity that displayed the list of spending report to the user.

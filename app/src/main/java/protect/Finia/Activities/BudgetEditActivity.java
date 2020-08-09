@@ -22,13 +22,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import protect.Finia.BudgetUtils.BudgetDatabaseHelper;
-import protect.Finia.BudgetUtils.BudgetInputWidgets;
+import protect.Finia.BudgetService.BudgetDatabaseHelper;
+import protect.Finia.BudgetService.BudgetInputWidgets;
 import protect.Finia.Communicators.CalendarDateBroadcast;
 import protect.Finia.Database.BudgetsType;
 import protect.Finia.R;
-import protect.Finia.TimeUtils.CalendarDialog;
-import protect.Finia.TimeUtils.TimeProcessor;
+import protect.Finia.TimeService.CalendarDialog;
+import protect.Finia.TimeService.TimeProcessor;
 import protect.Finia.ViewModels.BudgetTypesViewModel;
 
 /**

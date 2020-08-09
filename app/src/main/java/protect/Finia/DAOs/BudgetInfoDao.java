@@ -5,7 +5,7 @@ import androidx.room.Query;
 
 import java.util.List;
 
-import protect.Finia.BudgetUtils.BudgetInfo;
+import protect.Finia.BudgetService.BudgetInfo;
 
 @Dao
 public interface BudgetInfoDao {

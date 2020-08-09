@@ -1,4 +1,4 @@
-package protect.Finia.SpendingUtils;
+package protect.Finia.SpendingService;
 
 /**
  * The class to store the total spending and month for the report item in the spending report list.

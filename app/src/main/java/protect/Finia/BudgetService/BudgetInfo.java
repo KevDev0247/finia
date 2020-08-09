@@ -1,4 +1,4 @@
-package protect.Finia.BudgetUtils;
+package protect.Finia.BudgetService;
 
 /**
  * The class to store the data of the budget queried from the database.

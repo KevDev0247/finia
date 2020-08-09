@@ -18,7 +18,7 @@ import java.util.List;
 
 import protect.Finia.Database.BudgetsType;
 import protect.Finia.R;
-import protect.Finia.SpendingUtils.GroupedSpending;
+import protect.Finia.SpendingService.GroupedSpending;
 
 /**
  * The activity that allow the user to view the spending report.
