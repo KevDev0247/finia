@@ -30,7 +30,7 @@ import protect.Finia.R;
  * The activity will allow the user to view their budgets.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/02/29
  */
 public class BudgetActivity extends AppCompatActivity {
 

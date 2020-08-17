@@ -28,7 +28,7 @@ import protect.Finia.SpendingModule.SpendingListAdapter;
  * Each report item will navigate the user to the report sheet.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/02/29
  */
 public class SpendingActivity extends AppCompatActivity {
 

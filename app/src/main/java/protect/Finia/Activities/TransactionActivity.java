@@ -42,7 +42,7 @@ import protect.Finia.ViewModels.TransactionsViewModel;
  * The ViewModel in android framework is used to communicate between the activity and the fragments.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/02/29
  */
 public class TransactionActivity extends AppCompatActivity {
 

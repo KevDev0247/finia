@@ -19,7 +19,7 @@ import protect.Finia.R;
  * Transaction, Budget, Spending, and Net Worth.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/02/29
  */
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = "FinanceLord";

@@ -39,7 +39,7 @@ import protect.Finia.R;
  * The report list in the bottom sheet provide entries to each report that is saved.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/02/29
  */
 public class NetWorthActivity extends AppCompatActivity {
 
