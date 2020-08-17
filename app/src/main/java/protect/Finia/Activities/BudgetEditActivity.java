@@ -36,7 +36,7 @@ import protect.Finia.ViewModels.BudgetTypesViewModel;
  * The activity will allow the user to add or edit their budgets.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/05/19
  */
 public class BudgetEditActivity extends AppCompatActivity {
 

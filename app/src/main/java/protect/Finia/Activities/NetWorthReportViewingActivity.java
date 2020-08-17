@@ -36,7 +36,7 @@ import protect.Finia.R;
  * Information contained includes the value, net change, and name of all items and parent items
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/19
  */
 public class NetWorthReportViewingActivity extends AppCompatActivity {
 

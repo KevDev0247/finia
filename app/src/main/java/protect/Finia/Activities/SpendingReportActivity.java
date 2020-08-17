@@ -27,7 +27,7 @@ import protect.Finia.SpendingModule.GroupedSpending;
  * The activity use a AnyChart library to implement the pie chart.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/06/12
  */
 public class SpendingReportActivity extends AppCompatActivity {
 

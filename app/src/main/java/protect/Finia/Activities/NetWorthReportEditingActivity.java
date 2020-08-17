@@ -35,7 +35,7 @@ import protect.Finia.TimeUtils.TimeProcessor;
  * The data of assets and liabilities are saved separately in different entities in the database.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/02/29
  */
 public class NetWorthReportEditingActivity extends AppCompatActivity {
 

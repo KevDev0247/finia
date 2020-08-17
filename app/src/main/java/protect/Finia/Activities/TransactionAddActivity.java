@@ -32,7 +32,7 @@ import protect.Finia.ViewModels.BudgetTypesViewModel;
  * The activity that enables the user to add a transaction item into the database.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/05/26
  */
 public class TransactionAddActivity extends AppCompatActivity {
 
