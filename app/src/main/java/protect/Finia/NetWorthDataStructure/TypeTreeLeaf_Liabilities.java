@@ -14,8 +14,8 @@ import protect.Finia.DAOs.LiabilitiesTypeDao;
  * The deserialization method is defined in AssetsTypeDao which is a series of sub queries in SQL.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
  * @see LiabilitiesTypeDao#queryLiabilitiesTypeTreeAsList()
+ * created on 2020/04/16
  */
 public class TypeTreeLeaf_Liabilities {
 

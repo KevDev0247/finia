@@ -34,8 +34,8 @@ import protect.Finia.R;
  * on the same level. This algorithm allows each calculation method to be efficient and independent and thus reusable.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
  * @see LiabilitiesValue
+ * created on 2020/04/13
  */
 public class ValueTreeProcessor_Liabilities {
 

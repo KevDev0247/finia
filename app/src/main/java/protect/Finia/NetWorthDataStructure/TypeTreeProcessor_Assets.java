@@ -14,8 +14,8 @@ import protect.Finia.Database.LiabilitiesType;
  * The node container is used so that the information is stored and the current level can be tracked.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
  * @see LiabilitiesType
+ * created on 2020/05/09
  */
 public class TypeTreeProcessor_Assets {
 
