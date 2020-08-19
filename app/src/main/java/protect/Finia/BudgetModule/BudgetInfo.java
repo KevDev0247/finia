@@ -4,7 +4,7 @@ package protect.Finia.BudgetModule;
  * The class to store the data of the budget queried from the database.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/06/05
  */
 public class BudgetInfo {
     public int budgetId;

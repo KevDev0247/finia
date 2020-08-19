@@ -34,7 +34,7 @@ import protect.Finia.ViewModels.BudgetTypesViewModel;
  * When the transaction is determined to be sent to the New Category Entry, a new category will also be created and inserted into the database.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/06/03
  */
 public class BudgetDatabaseHelper {
 

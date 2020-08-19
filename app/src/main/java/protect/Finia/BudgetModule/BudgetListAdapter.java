@@ -26,7 +26,7 @@ import protect.Finia.R;
  * The BudgetListAdapter are used by both expenses and revenues.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/06/05
  */
 public class BudgetListAdapter extends ArrayAdapter<BudgetInfo> {
 
