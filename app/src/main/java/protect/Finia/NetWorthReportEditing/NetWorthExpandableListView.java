@@ -10,7 +10,7 @@ import android.widget.ExpandableListView;
  * The length of the expandable list will be subject to the items to be displayed
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/03/21
  */
 public class NetWorthExpandableListView extends ExpandableListView {
 
