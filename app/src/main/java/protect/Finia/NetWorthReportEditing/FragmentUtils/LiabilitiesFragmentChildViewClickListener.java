@@ -13,7 +13,7 @@ import protect.Finia.NetWorthDataStructure.TypeTreeProcessor_Liabilities;
  * A Listener class that will detect whether a parent of the items in an expandable list has been clicked
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/13
  */
 public class LiabilitiesFragmentChildViewClickListener implements ExpandableListView.OnChildClickListener {
 

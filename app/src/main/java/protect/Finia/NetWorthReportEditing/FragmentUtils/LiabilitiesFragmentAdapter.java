@@ -33,7 +33,7 @@ import protect.Finia.R;
  * to the right parent and under the right level.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/13
  */
 public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
