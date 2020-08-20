@@ -21,7 +21,7 @@ import protect.Finia.R;
  * and the difference of net worth compare to the last period.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/24
  */
 public class PastReportsAdapter extends ArrayAdapter<ReportItemsDataModel> {
 

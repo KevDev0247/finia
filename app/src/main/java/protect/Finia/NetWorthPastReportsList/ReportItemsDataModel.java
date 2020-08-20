@@ -6,7 +6,7 @@ package protect.Finia.NetWorthPastReportsList;
  * that displays the data and take the user to the report sheet.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/24
  */
 public class ReportItemsDataModel {
     public String time;
