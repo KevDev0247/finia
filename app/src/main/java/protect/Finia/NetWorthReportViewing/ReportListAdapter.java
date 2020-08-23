@@ -16,7 +16,7 @@ import protect.Finia.R;
  * Notice this adapter is reusable. It is used by both Assets and Liabilities.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/23
  */
 public class ReportListAdapter extends ArrayAdapter<NetWorthItemsDataModel> {
 

@@ -5,7 +5,7 @@ package protect.Finia.NetWorthReportViewing;
  * This data model act as a source to provide data for list view.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/23
  */
 class NetWorthItemsDataModel {
     String itemName;

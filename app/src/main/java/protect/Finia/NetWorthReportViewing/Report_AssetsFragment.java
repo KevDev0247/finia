@@ -31,7 +31,7 @@ import protect.Finia.R;
  * The fragment contains the list of all the assets items.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/23
  */
 public class Report_AssetsFragment extends Fragment {
 

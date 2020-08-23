@@ -15,6 +15,9 @@ import protect.Finia.R;
 /**
  * A FragmentPagerAdapter that returns a fragment corresponding to
  * one of the tabs.
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * created on 2020/02/29
  */
 public class ReportPagerAdapter extends FragmentPagerAdapter {
 
