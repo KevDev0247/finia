@@ -5,7 +5,7 @@ package protect.Finia.NetWorthSwipeDashboard;
  * This data model act as a source to provide data for each item.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/10
  */
 public class NetWorthCardsDataModel {
 

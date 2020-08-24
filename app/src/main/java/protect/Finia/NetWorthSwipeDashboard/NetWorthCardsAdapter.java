@@ -18,7 +18,7 @@ import protect.Finia.R;
  * The pager adapter to deliver the data of net worth item to the UI dashboard cards.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/04
  */
 public class NetWorthCardsAdapter extends PagerAdapter {
 
