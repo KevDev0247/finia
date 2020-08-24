@@ -8,7 +8,7 @@ import android.os.Parcelable;
  * The GroupedSpending is parcelable in order to be able to transfer to the spending report activity.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/06/12
  */
 public class GroupedSpending implements Parcelable {
     public int categoryId;

@@ -19,7 +19,7 @@ import protect.Finia.R;
  * The list adapter to deliver the data of spending of each month to the UI.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/06/12
  */
 public class SpendingListAdapter extends ArrayAdapter<MonthlyTotalSpending> {
 
