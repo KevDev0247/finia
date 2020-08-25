@@ -21,7 +21,7 @@ import protect.Finia.R;
  * The CalendarDateBroadcast communicator is used to communicate the date with the other entity
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/24
  */
 public class CalendarDialog extends DialogFragment {
 

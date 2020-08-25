@@ -11,7 +11,7 @@ import java.util.Locale;
  * A utility class to process time
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/04
  */
 public class TimeProcessor {
 
