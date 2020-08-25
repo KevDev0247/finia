@@ -24,7 +24,7 @@ import protect.Finia.R;
  * The TransactionListAdapter are used by both expenses and revenues.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/05/24
  */
 public class TransactionListAdapter extends ArrayAdapter<Transactions> {
 

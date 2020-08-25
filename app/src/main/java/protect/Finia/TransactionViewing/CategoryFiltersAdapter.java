@@ -20,7 +20,7 @@ import protect.Finia.R;
  * The recycler view adapter to deliver the data of each budget type name to the filter UI widget.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/05/18
  */
 public class CategoryFiltersAdapter extends RecyclerView.Adapter<CategoryFiltersAdapter.FilterViewHolder> {
 
