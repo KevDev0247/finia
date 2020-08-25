@@ -7,7 +7,7 @@ package protect.Finia.Communicators;
  * belongs to this activity.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/05/29
  */
 public interface GroupByCategoryCommunicator {
     void message(String categoryLabel);

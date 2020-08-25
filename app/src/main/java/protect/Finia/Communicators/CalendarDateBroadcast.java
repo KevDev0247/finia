@@ -9,7 +9,7 @@ import java.util.Date;
  * belongs to this activity.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/04/28
  */
 public interface CalendarDateBroadcast {
     void message(Date date);
