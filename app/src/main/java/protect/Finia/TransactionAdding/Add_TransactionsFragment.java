@@ -36,7 +36,7 @@ import protect.Finia.ViewModels.BudgetTypesViewModel;
  * Note that this fragment is reusable. It is used for both expense and revenue sections.
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/05/30
  */
 public class Add_TransactionsFragment extends Fragment {
 
