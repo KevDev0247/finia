@@ -13,7 +13,7 @@ import protect.Finia.Database.BudgetsType;
  * The data will be stored in Mutable Live Data, a data holder class that can be observed within a given lifecycle
  *
  * @author Owner  Kevin Zhijun Wang
- * @version 2020.0609
+ * created on 2020/05/30
  */
 public class BudgetTypesViewModel extends ViewModel {
     private MutableLiveData<List<BudgetsType>> categoryLabels = new MutableLiveData<>();
