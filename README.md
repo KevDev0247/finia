@@ -2,6 +2,17 @@
 
 A modern Android app that helps users to manage their personal finance.
 
+![Screenshot_1594840453](https://user-images.githubusercontent.com/58012125/91332049-98ee7b80-e799-11ea-8c4a-fdf99c927f60.png)
+![Screenshot_1594840634](https://user-images.githubusercontent.com/58012125/91332620-7dd03b80-e79a-11ea-8c17-9720c45c017f.png)
+![Screenshot_1594840642](https://user-images.githubusercontent.com/58012125/91332669-888ad080-e79a-11ea-886c-b8f76eea4945.png)
+![Screenshot_1594840649](https://user-images.githubusercontent.com/58012125/91332729-9fc9be00-e79a-11ea-96b5-33b8b064c8d1.png)
+![Screenshot_1594840652](https://user-images.githubusercontent.com/58012125/91332767-ac4e1680-e79a-11ea-87fc-4f6d8e00fab9.png)
+![Screenshot_1594840660](https://user-images.githubusercontent.com/58012125/91332792-b53ee800-e79a-11ea-8da8-84da67712762.png)
+![Screenshot_1597880556](https://user-images.githubusercontent.com/58012125/91332812-bc65f600-e79a-11ea-95c4-9c5335fa428a.png)
+![Screenshot_1597880661](https://user-images.githubusercontent.com/58012125/91332850-c556c780-e79a-11ea-93a0-e12ec7d8f8ae.png)
+![Screenshot_1597881018](https://user-images.githubusercontent.com/58012125/91332896-d30c4d00-e79a-11ea-88a9-311921024ea1.png)
+![Screenshot_1597880996](https://user-images.githubusercontent.com/58012125/91332876-cd166c00-e79a-11ea-9040-f4799cdbd3ca.png)
+
 ## Contributions:
 - Database & Business Logic Design: Kevin Zhijun Wang
 - Development: Kevin Zhijun Wang
