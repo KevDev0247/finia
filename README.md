@@ -2,7 +2,7 @@
 
 A modern Android app that helps users to manage their personal finance.
 
-![Screenshot_1594840453](https://user-images.githubusercontent.com/58012125/91332049-98ee7b80-e799-11ea-8c4a-fdf99c927f60.png)
+![Screenshot_1594840453](https://user-images.githubusercontent.com/58012125/91332049-98ee7b80-e799-11ea-8c4a-fdf99c927f60.png =10x20)
 ![Screenshot_1594840634](https://user-images.githubusercontent.com/58012125/91332620-7dd03b80-e79a-11ea-8c17-9720c45c017f.png)
 ![Screenshot_1594840642](https://user-images.githubusercontent.com/58012125/91332669-888ad080-e79a-11ea-886c-b8f76eea4945.png)
 ![Screenshot_1594840649](https://user-images.githubusercontent.com/58012125/91332729-9fc9be00-e79a-11ea-96b5-33b8b064c8d1.png)
