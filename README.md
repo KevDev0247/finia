@@ -2,7 +2,7 @@
 
 A modern Android app that helps users to manage their personal finance.
 
-![Finia_UI_1](https://user-images.githubusercontent.com/58012125/91339433-757cfe00-e7a4-11ea-80e6-5d3e26e968e1.png)
+![Finia_UI_1](https://user-images.githubusercontent.com/58012125/91349481-58036080-e7b3-11ea-8c3c-bf3bb3b05f5c.png)
 
 ## Contributions:
 - Database & Business Logic Design: Kevin Zhijun Wang
