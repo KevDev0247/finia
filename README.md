@@ -14,7 +14,7 @@ A modern Android app that helps users to manage their personal finance.
 
 #### Expandable List
 
-<img src="drawable/finia_networth_list.gif" width="250" height="250"/>
+<img src="https://user-images.githubusercontent.com/58012125/91359658-fa771000-e7c2-11ea-8041-2b6b641cd803.gif">
 
 #### 
 
