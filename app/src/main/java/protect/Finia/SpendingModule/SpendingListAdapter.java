@@ -71,10 +71,10 @@ public class SpendingListAdapter extends ArrayAdapter<MonthlyTotalSpending> {
             spendingDifferenceSymbol.setText("");
             differenceBlockView.setBackgroundResource(R.drawable.net_neutral);
         } else if (difference > 0) {
-            spendingDifferenceSymbol.setText("");
+            spendingDifferenceSymbol.setText(R.string.positive_symbol);
             differenceBlockView.setBackgroundResource(R.drawable.net_decrease);
         } else if (difference < 0) {
-            spendingDifferenceSymbol.setText("");
+            spendingDifferenceSymbol.setText(R.string.negative_symbol);
             differenceBlockView.setBackgroundResource(R.drawable.net_increase);
         }
 
