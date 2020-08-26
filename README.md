@@ -10,6 +10,14 @@ A modern Android app that helps users to manage their personal finance.
 - UX & UI Design: Kevin Zhijun Wang
 - QA and Testing: Shilei Mao
 
+## Finia's UI 
+
+#### Expandable List
+
+![finia_networth_list](https://user-images.githubusercontent.com/58012125/91359658-fa771000-e7c2-11ea-8041-2b6b641cd803.gif)
+
+#### 
+
 ## Finia's Net Worth Data Structure
 
 Modified tree structures are used to stored the categories and values of net worth items.
