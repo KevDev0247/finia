@@ -2,13 +2,15 @@
 
 A modern Android app that helps users to manage their personal finance.
 
-![Finia](https://user-images.githubusercontent.com/58012125/91352493-ee398580-e7b7-11ea-9487-d8a1446d6940.png)
-
 ## Contributions:
 - Database & Business Logic Design: Kevin Zhijun Wang
 - Development: Kevin Zhijun Wang
 - UX & UI Design: Kevin Zhijun Wang
 - QA and Testing: Shilei Mao
+
+## Gallery
+
+![Finia](https://user-images.githubusercontent.com/58012125/91352493-ee398580-e7b7-11ea-9487-d8a1446d6940.png)
 
 ## Table of Contents
 
@@ -16,11 +18,11 @@ A modern Android app that helps users to manage their personal finance.
 
 #### Expandable List
 
-<p float="left">
-  <img src="https://user-images.githubusercontent.com/58012125/91371141-310e5400-e7de-11ea-889d-99c269dcd8a2.png" height="400" align="center">
+<div float="left">
   <img src="https://user-images.githubusercontent.com/58012125/91368977-7a5ba500-e7d8-11ea-8a18-58745ea024c7.gif" height="400" align="center">
   <img src="https://user-images.githubusercontent.com/58012125/91369131-ef2edf00-e7d8-11ea-916a-df1d458edb6c.gif" height="400" align="center">
-</p>
+  <div>Hi, this is some introduction</div>
+</div>
 
 #### Collapsing Toolbar
 
