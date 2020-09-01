@@ -5,6 +5,13 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+/**
+ * The model for the database entity Transactions
+ * Transactions is used to store the necessary information of each transaction the user recorded
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * created on 2020/03/16
+ */
 @Entity(tableName = "Transactions")
 public class Transactions {
 
