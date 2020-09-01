@@ -5,8 +5,16 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+/**
+ * The model for the database entity AssetsType
+ * AssetsType is used to store the value of each asset and the date they are recorded
+ *
+ * @author Owner  Kevin Zhijun Wang
+ * created on 2020/02/29
+ */
 @Entity(tableName = "AssetsValue")
 public class AssetsValue {
+
     @PrimaryKey(autoGenerate = true)
     private int assetsPrimaryId;
 
