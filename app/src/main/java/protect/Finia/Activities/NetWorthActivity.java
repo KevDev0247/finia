@@ -288,40 +288,43 @@ public class NetWorthActivity extends AppCompatActivity {
                     }
                 }
 
-                final float finalTotalAssetsValue = totalAssetsValue;
-                final float finalLiquidAssetsValue = liquidAssetsValue;
-                final float finalInvestedAssetsValue = investedAssetsValue;
-                final float finalPersonalAssetsValue = personalAssetsValue;
-                final float finalTaxableAccountsValue = taxableAccountsValue;
-                final float finalRetirementAccountsValue = retirementAccountsValue;
-                final float finalOwnershipInterestsValue = ownershipInterestsValue;
+                if (totalAssetsValue != 0 || liquidAssetsValue != 0 || investedAssetsValue != 0 || personalAssetsValue != 0 || taxableAccountsValue != 0 || retirementAccountsValue != 0 || ownershipInterestsValue != 0 ||
+                        totalLiabilitiesValue != 0 || shortTermLiabilitiesValue != 0 || longTermLiabilitiesValue != 0) {
+                    final float finalTotalAssetsValue = totalAssetsValue;
+                    final float finalLiquidAssetsValue = liquidAssetsValue;
+                    final float finalInvestedAssetsValue = investedAssetsValue;
+                    final float finalPersonalAssetsValue = personalAssetsValue;
+                    final float finalTaxableAccountsValue = taxableAccountsValue;
+                    final float finalRetirementAccountsValue = retirementAccountsValue;
+                    final float finalOwnershipInterestsValue = ownershipInterestsValue;
 
-                final float finalTotalLiabilitiesValue = totalLiabilitiesValue;
-                final float finalShortTermLiabilitiesValue = shortTermLiabilitiesValue;
-                final float finalLongTermLiabilitiesValue = longTermLiabilitiesValue;
+                    final float finalTotalLiabilitiesValue = totalLiabilitiesValue;
+                    final float finalShortTermLiabilitiesValue = shortTermLiabilitiesValue;
+                    final float finalLongTermLiabilitiesValue = longTermLiabilitiesValue;
 
-                final float finalNetWorthValue = finalTotalAssetsValue - finalTotalLiabilitiesValue;
+                    final float netWorthValue = finalTotalAssetsValue - finalTotalLiabilitiesValue;
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        netWorthCardsDataModels.clear();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            netWorthCardsDataModels.clear();
 
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth), String.valueOf(finalNetWorthValue)));
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), String.valueOf(finalTotalAssetsValue)));
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), String.valueOf(finalLiquidAssetsValue)));
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), String.valueOf(finalInvestedAssetsValue)));
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets_name), String.valueOf(finalPersonalAssetsValue)));
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), String.valueOf(finalTaxableAccountsValue)));
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), String.valueOf(finalRetirementAccountsValue)));
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership, getString(R.string.ownership_interest_name), String.valueOf(finalOwnershipInterestsValue)));
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name), String.valueOf(finalTotalLiabilitiesValue)));
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name), String.valueOf(finalShortTermLiabilitiesValue)));
-                        netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), String.valueOf(finalLongTermLiabilitiesValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.net_worth, getString(R.string.net_worth), String.valueOf(netWorthValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_total, getString(R.string.total_assets_name), String.valueOf(finalTotalAssetsValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_liquid, getString(R.string.liquid_assets_name), String.valueOf(finalLiquidAssetsValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_invested, getString(R.string.invested_assets_name), String.valueOf(finalInvestedAssetsValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.assets_personal, getString(R.string.personal_assets_name), String.valueOf(finalPersonalAssetsValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_taxable_accounts, getString(R.string.taxable_accounts_name), String.valueOf(finalTaxableAccountsValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_retirement, getString(R.string.retirement_accounts_name), String.valueOf(finalRetirementAccountsValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.invested_ownership, getString(R.string.ownership_interest_name), String.valueOf(finalOwnershipInterestsValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_total, getString(R.string.total_liabilities_name), String.valueOf(finalTotalLiabilitiesValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_short_term, getString(R.string.short_term_liabilities_name), String.valueOf(finalShortTermLiabilitiesValue)));
+                            netWorthCardsDataModels.add(new NetWorthCardsDataModel(R.drawable.liabilities_long_term, getString(R.string.long_term_liabilities_name), String.valueOf(finalLongTermLiabilitiesValue)));
 
-                        netWorthCardsAdapter.notifyDataSetChanged();
-                    }
-                });
+                            netWorthCardsAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
             }
         });
     }
