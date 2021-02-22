@@ -143,12 +143,12 @@ public class ValueTreeProcessor_Assets {
      * @param assetsName the name of the asset category or item
      * @return an integer value represents the id of the node in the data structure
      */
-    private List getAssetsChildrenNodeIDs(String assetsName) {
+    private List<Integer> getAssetsChildrenNodeIDs(String assetsName) {
         if (TextUtils.isEmpty(assetsName)) {
-            return new ArrayList<>();
+            return new ArrayList<Integer>();
         }
 
-        List assetsIDs = new ArrayList();
+        List<Integer> assetsIDs = new ArrayList<Integer>();
         if (context.getString(R.string.ownership_interest_name).equals(assetsName)) {
             for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTree) {
                 if (assetsTypeTreeLeaf.assetsThirdLevelName != null
@@ -204,9 +204,8 @@ public class ValueTreeProcessor_Assets {
         float totalInvestedAssets = calculateTotalInvestedAssets();
         float totalLiquidAssets = calculateTotalLiquidAssets();
         float totalPersonalAssets = calculateTotalPersonalAssets();
-        float totalAssets = totalInvestedAssets + totalLiquidAssets + totalPersonalAssets;
 
-        return totalAssets;
+        return totalInvestedAssets + totalLiquidAssets + totalPersonalAssets;
     }
 
     /**
@@ -276,9 +275,8 @@ public class ValueTreeProcessor_Assets {
         float totalOwnershipInterests = calculateTotalOwnershipInterests();
         float totalRetirementAccounts = calculateTotalRetirementAccounts();
         float totalTaxableAccounts = calculateTotalTaxableAccounts();
-        float totalInvestedAssets = totalOwnershipInterests + totalRetirementAccounts + totalTaxableAccounts;
 
-        return totalInvestedAssets;
+        return totalOwnershipInterests + totalRetirementAccounts + totalTaxableAccounts;
     }
 
     /**

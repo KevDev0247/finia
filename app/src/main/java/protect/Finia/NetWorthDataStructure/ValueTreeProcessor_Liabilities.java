@@ -139,12 +139,12 @@ public class ValueTreeProcessor_Liabilities {
      * @param liabilitiesName the name of the liability category or item
      * @return an integer value represents the id of the node in the data structure
      */
-    private List getLiabilitiesChildNodeIDs(String liabilitiesName) {
+    private List<Integer> getLiabilitiesChildNodeIDs(String liabilitiesName) {
         if (TextUtils.isEmpty(liabilitiesName)) {
-            return new ArrayList<>();
+            return new ArrayList<Integer>();
         }
 
-        List liabilitiesIDs = new ArrayList();
+        List<Integer> liabilitiesIDs = new ArrayList<>();
         if (context.getString(R.string.short_term_liabilities_name).equals(liabilitiesName)) {
             for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : liabilitiesTypeTree){
                 if (liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null
@@ -176,9 +176,8 @@ public class ValueTreeProcessor_Liabilities {
     private float calculateTotalLiability() {
         float totalLongTermLiabilities = calculateTotalLongTermLiabilities();
         float totalShortTermLiabilities = calculateTotalShortTermLiabilities();
-        float totalLiabilities = totalShortTermLiabilities + totalLongTermLiabilities;
 
-        return totalLiabilities;
+        return totalShortTermLiabilities + totalLongTermLiabilities;
     }
 
     /**

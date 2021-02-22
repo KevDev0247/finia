@@ -50,7 +50,7 @@ public class BudgetDatabaseHelper {
     private boolean mInsert;
     private boolean mUpdate;
 
-    private String TAG = "BudgetDatabaseUtils";
+    private final String TAG = "BudgetDatabaseUtils";
 
     public BudgetDatabaseHelper(Context context, BudgetInputWidgets inputUtils, BudgetTypesViewModel viewModel, List<BudgetsType> budgetsTypes) {
         this.context = context;
