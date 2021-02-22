@@ -2,7 +2,6 @@ package protect.Finia.NetWorthReportEditing;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import protect.Finia.Activities.NetWorthReportEditingActivity;
 import protect.Finia.Communicators.DateCommunicator;
 import protect.Finia.DAOs.AssetsTypeDao;
 import protect.Finia.DAOs.AssetsValueDao;
@@ -29,7 +29,6 @@ import protect.Finia.NetWorthDataStructure.TypeTreeProcessor_Assets;
 import protect.Finia.NetWorthDataStructure.ValueTreeProcessor_Assets;
 import protect.Finia.NetWorthReportEditing.FragmentUtils.AssetsFragmentAdapter;
 import protect.Finia.NetWorthReportEditing.FragmentUtils.AssetsFragmentChildViewClickListener;
-import protect.Finia.Activities.NetWorthReportEditingActivity;
 import protect.Finia.R;
 
 /**
@@ -124,33 +123,18 @@ public class Edit_AssetsFragment extends Fragment {
                     public void run() {
                         for(AssetsValue assetsValueInProcessor: Edit_AssetsFragment.this.valueTreeProcessor.getAllAssetsValues()) {
                             assetsValueInProcessor.setDate(currentTime.getTime());
-                            Log.d("Edit_AFragment", "the time of the assets are set to " + currentTime);
-
                             if(assetsValueInProcessor.getAssetsPrimaryId() != 0) {
                                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetById(assetsValueInProcessor.getAssetsPrimaryId());
-                                Log.d("Edit_AFragment", " Print assetsValues status " + assetsValues.isEmpty() +
-                                        ", assets value is " + assetsValueInProcessor.getAssetsValue() +
-                                        ", time stored in processor is " + new Date(assetsValueInProcessor.getDate()));
                                 if(!assetsValues.isEmpty()) {
                                     assetsValueDao.updateAssetValue(assetsValueInProcessor);
-                                    Log.d("Edit_AFragment", "update time is " + new Date(assetsValueInProcessor.getDate()));
-                                } else {
-                                    Log.w("Edit_AFragment", "The assets not exists in the database? check if there is anything went wrong!!");
                                 }
                             } else {
                                 assetsValueDao.insertAssetValue(assetsValueInProcessor);
-                                Log.d("Edit_AFragment", "insert time is " + new Date(assetsValueInProcessor.getDate()));
                             }
                         }
 
-                        Log.d("Edit_AFragment", "Query [Refreshing] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
-                        Log.d("Edit_AFragment", "current date: " + currentTime);
-
                         List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                         Edit_AssetsFragment.this.valueTreeProcessor.setAllAssetsValues(assetsValues);
-
-                        Log.d("Edit_AFragment", "Query assets values, " + assetsValues);
-
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -160,8 +144,6 @@ public class Edit_AssetsFragment extends Fragment {
 
                         valueTreeProcessor.insertOrUpdateParentAssets(assetsValueDao);
                         valueTreeProcessor.clearAllAssetsValues();
-
-                        Log.d("Edit_AFragment", "Assets committed!");
                     }
                 });
             }
@@ -199,12 +181,6 @@ public class Edit_AssetsFragment extends Fragment {
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
                 List<TypeTreeLeaf_Assets> assetsTypesTree = assetsTypeDao.queryAssetsTypeTreeAsList();
 
-                Log.d("Edit_AFragment", "Query [Initialization] time interval is " + getQueryStartTime() + " and " + getQueryEndTime());
-                for (AssetsValue assetsValue : assetsValues){
-                    Log.d("Edit_AFragment", "Query assets values, " + assetsValue.getAssetsId() + ", " + assetsValue.getAssetsValue() + ", " + new Date(assetsValue.getDate()));
-                }
-                Log.d("Edit_AFragment", "current date: " + currentTime);
-
                 Edit_AssetsFragment.this.valueTreeProcessor = new ValueTreeProcessor_Assets(assetsTypesTree, assetsValues, currentTime, getContext());
                 Edit_AssetsFragment.this.typeTreeProcessor = new TypeTreeProcessor_Assets(assetsTypesTree);
                 adapter = new AssetsFragmentAdapter(getContext(), valueTreeProcessor, typeTreeProcessor,1, getString(R.string.total_assets_name));
@@ -228,7 +204,6 @@ public class Edit_AssetsFragment extends Fragment {
         @Override
         public void message(Date date) {
             currentTime = date;
-            Log.d("Edit_AFragment","the user has selected date: " + currentTime);
             initializeAssets();
         }
     };
