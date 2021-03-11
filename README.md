@@ -12,40 +12,6 @@ A modern Android app that helps users to manage their personal finance.
 
 ![Finia](https://user-images.githubusercontent.com/58012125/91352493-ee398580-e7b7-11ea-9487-d8a1446d6940.png)
 
-## Table of Contents
-
-## Philosophies of Finia's UI and UX Design
-
-#### Expandable List
-
-<div float="left">
-  <img src="https://user-images.githubusercontent.com/58012125/91368977-7a5ba500-e7d8-11ea-8a18-58745ea024c7.gif" height="400" align="center">
-  <img src="https://user-images.githubusercontent.com/58012125/91369131-ef2edf00-e7d8-11ea-916a-df1d458edb6c.gif" height="400" align="center">
-</div>
-
-#### Collapsing Toolbar
-
-<div float="left">
-  <img src="https://user-images.githubusercontent.com/58012125/91367895-a0cc1100-e7d5-11ea-8e10-062859abee15.gif" height="400" align="center">
-  <img src="https://user-images.githubusercontent.com/58012125/91367979-e25cbc00-e7d5-11ea-883c-5d6d644d8854.gif" height="400" align="center">
-</div>
-
-#### Tabs and Swiping Cards
-
-<div float="left">
-  <img src="https://user-images.githubusercontent.com/58012125/91369649-50a37d80-e7da-11ea-8f98-016aee58429a.gif" height="400" align="center">
-  <img src="https://user-images.githubusercontent.com/58012125/91369267-5e0c3800-e7d9-11ea-9269-96892d5a37be.gif" height="400" align="center">
-  <img src="https://user-images.githubusercontent.com/58012125/91370003-3322e380-e7db-11ea-94dd-ad58d012db11.gif" height="400" align="center">
-</div>
-
-#### Bottom Sheets
-
-<img src="https://user-images.githubusercontent.com/58012125/91370124-8432d780-e7db-11ea-9044-2b472b5ba7c8.gif" height="400" align="center">
-
-#### Filter
-
-<img src="https://user-images.githubusercontent.com/58012125/91370262-dc69d980-e7db-11ea-8d90-a13f7c5d6589.gif" height="400" align="center">
-
 ## Finia's Net Worth Data Structure
 
 Modified tree structures are used to stored the categories and values of net worth items.
