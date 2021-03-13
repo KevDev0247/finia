@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="protect.Finia.Activities.NetWorthActivity">
+    tools:context="protect.Finia.activities.NetWorthActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"

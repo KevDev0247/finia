@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@drawable/budgets_sheets_gradient"
-    tools:context="protect.Finia.Activities.BudgetEditActivity">
+    tools:context="protect.Finia.activities.BudgetEditActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

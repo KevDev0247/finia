@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="protect.Finia.Activities.SpendingActivity">
+    tools:context="protect.Finia.activities.SpendingActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
