@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import protect.Finia.dao.AssetsTypeDao;
-import protect.Finia.datastructure.TypeTreeLeaf_Assets;
+import protect.Finia.datastructure.AssetsTypeTreeLeaf;
 import protect.Finia.dao.AssetsValueDao;
 import protect.Finia.models.AssetsValue;
 import protect.Finia.database.FiniaDatabase;
-import protect.Finia.datastructure.NodeContainer_Assets;
-import protect.Finia.datastructure.TypeTreeProcessor_Assets;
+import protect.Finia.datastructure.AssetsNodeContainer;
+import protect.Finia.datastructure.AssetsTypeTreeProcessor;
 import protect.Finia.R;
 
 /**
@@ -37,7 +37,7 @@ public class Report_AssetsFragment extends Fragment {
 
     private Date itemTime;
     private View contentView;
-    private TypeTreeProcessor_Assets assetsTypeProcessor;
+    private AssetsTypeTreeProcessor assetsTypeProcessor;
     private ArrayList<NetWorthItemsDataModel> liquidAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> personalAssetsDataSource = new ArrayList<>();
     private ArrayList<NetWorthItemsDataModel> taxableAccountsDataSource = new ArrayList<>();
@@ -84,8 +84,8 @@ public class Report_AssetsFragment extends Fragment {
                 AssetsTypeDao assetsTypeDao = database.assetsTypeDao();
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 
-                List<TypeTreeLeaf_Assets> assetsTypes = assetsTypeDao.queryAssetsTypeTreeAsList();
-                Report_AssetsFragment.this.assetsTypeProcessor = new TypeTreeProcessor_Assets(assetsTypes);
+                List<AssetsTypeTreeLeaf> assetsTypes = assetsTypeDao.queryAssetsTypeTreeAsList();
+                Report_AssetsFragment.this.assetsTypeProcessor = new AssetsTypeTreeProcessor(assetsTypes);
 
                 List<AssetsValue> categoryAssets = new ArrayList<>();
                 List<AssetsValue> previousCategoryAssets = new ArrayList<>();
@@ -135,14 +135,14 @@ public class Report_AssetsFragment extends Fragment {
      */
     private void populateDataModels(final AssetsValueDao assetsValueDao, final Date itemTime, final List<AssetsValue> categoryAssets, final List<AssetsValue> previousCategoryAssets) {
         /* retrieve all values of leaf nodes and group them into lists */
-        List<NodeContainer_Assets> liquidAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
-        List<NodeContainer_Assets> personalAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
-        List<NodeContainer_Assets> taxableAccountsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.taxable_accounts_name),3);
-        List<NodeContainer_Assets> retirementAccountsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.retirement_accounts_name), 3);
-        List<NodeContainer_Assets> ownershipInterestsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.ownership_interest_name), 3);
+        List<AssetsNodeContainer> liquidAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.liquid_assets_name),2);
+        List<AssetsNodeContainer> personalAssetsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.personal_assets_name), 2);
+        List<AssetsNodeContainer> taxableAccountsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.taxable_accounts_name),3);
+        List<AssetsNodeContainer> retirementAccountsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.retirement_accounts_name), 3);
+        List<AssetsNodeContainer> ownershipInterestsTypes = assetsTypeProcessor.getSubGroup(getString(R.string.ownership_interest_name), 3);
 
         /* Set up liquid assets item */
-        for (NodeContainer_Assets dataCarrier : liquidAssetsTypes) {
+        for (AssetsNodeContainer dataCarrier : liquidAssetsTypes) {
             String difference = getString(R.string.no_data_message);
             String thisAssetValue = getString(R.string.no_data_message);
             AssetsValue liquidAssetValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
@@ -162,7 +162,7 @@ public class Report_AssetsFragment extends Fragment {
         }
 
         /* Set up personal assets item */
-        for (NodeContainer_Assets dataCarrier : personalAssetsTypes) {
+        for (AssetsNodeContainer dataCarrier : personalAssetsTypes) {
             String difference = getString(R.string.no_data_message);
             String thisAssetValue = getString(R.string.no_data_message);
             AssetsValue personalAssetValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
@@ -182,7 +182,7 @@ public class Report_AssetsFragment extends Fragment {
         }
 
         /* Set up taxable accounts item */
-        for (NodeContainer_Assets dataCarrier : taxableAccountsTypes) {
+        for (AssetsNodeContainer dataCarrier : taxableAccountsTypes) {
             String difference = getString(R.string.no_data_message);
             String thisAssetValue = getString(R.string.no_data_message);
             AssetsValue taxableAccountValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
@@ -202,7 +202,7 @@ public class Report_AssetsFragment extends Fragment {
         }
 
         /* Set up retirement accounts item */
-        for (NodeContainer_Assets dataCarrier : retirementAccountsTypes) {
+        for (AssetsNodeContainer dataCarrier : retirementAccountsTypes) {
             String difference = getString(R.string.no_data_message);
             String thisAssetValue = getString(R.string.no_data_message);
             AssetsValue retirementAccountValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);
@@ -222,7 +222,7 @@ public class Report_AssetsFragment extends Fragment {
         }
 
         /* Set up ownership interests item */
-        for (NodeContainer_Assets dataCarrier : ownershipInterestsTypes) {
+        for (AssetsNodeContainer dataCarrier : ownershipInterestsTypes) {
             String difference = getString(R.string.no_data_message);
             String thisAssetValue = getString(R.string.no_data_message);
             AssetsValue ownershipInterestValue = assetsValueDao.queryIndividualAssetByTime(itemTime.getTime(), dataCarrier.assetsTypeId);

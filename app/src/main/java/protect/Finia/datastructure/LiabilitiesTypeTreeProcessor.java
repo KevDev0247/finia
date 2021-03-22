@@ -17,11 +17,11 @@ import protect.Finia.models.LiabilitiesType;
  * @see LiabilitiesType
  * created on 2020/05/09
  */
-public class TypeTreeProcessor_Liabilities {
+public class LiabilitiesTypeTreeProcessor {
 
-    private List<TypeTreeLeaf_Liabilities> typesTree;
+    private List<LiabilitiesTypeTreeLeaf> typesTree;
 
-    public TypeTreeProcessor_Liabilities(List<TypeTreeLeaf_Liabilities> typesTree) {
+    public LiabilitiesTypeTreeProcessor(List<LiabilitiesTypeTreeLeaf> typesTree) {
         this.typesTree = typesTree;
     }
 
@@ -32,34 +32,34 @@ public class TypeTreeProcessor_Liabilities {
      * @param level current level of the node
      * @return the sub group of containers
      */
-    public List<NodeContainer_Liabilities> getSubGroup(String parentNodeName, int level) {
-        List<NodeContainer_Liabilities> containersSubGroup = new ArrayList<>();
+    public List<LiabilitiesNodeContainer> getSubGroup(String parentNodeName, int level) {
+        List<LiabilitiesNodeContainer> containersSubGroup = new ArrayList<>();
 
         if (level == 0) {
-            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typesTree) {
+            for (LiabilitiesTypeTreeLeaf liabilitiesTypeTreeLeaf : typesTree) {
                 if (liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName != null) {
 
-                    NodeContainer_Liabilities nodeContainer = new NodeContainer_Liabilities(liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName, liabilitiesTypeTreeLeaf.liabilitiesFirstLevelId, 0);
+                    LiabilitiesNodeContainer nodeContainer = new LiabilitiesNodeContainer(liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName, liabilitiesTypeTreeLeaf.liabilitiesFirstLevelId, 0);
                     addTypeToSubGroup(nodeContainer, containersSubGroup);
                 }
             }
         } else if (level == 1) {
-            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typesTree) {
+            for (LiabilitiesTypeTreeLeaf liabilitiesTypeTreeLeaf : typesTree) {
                 if (liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName != null
                         && liabilitiesTypeTreeLeaf.liabilitiesFirstLevelName.equals(parentNodeName)
                         && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null) {
 
-                    NodeContainer_Liabilities nodeContainer = new NodeContainer_Liabilities(liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName, liabilitiesTypeTreeLeaf.liabilitiesSecondLevelId, 1);
+                    LiabilitiesNodeContainer nodeContainer = new LiabilitiesNodeContainer(liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName, liabilitiesTypeTreeLeaf.liabilitiesSecondLevelId, 1);
                     addTypeToSubGroup(nodeContainer, containersSubGroup);
                 }
             }
         } else if (level == 2) {
-            for (TypeTreeLeaf_Liabilities liabilitiesTypeTreeLeaf : typesTree) {
+            for (LiabilitiesTypeTreeLeaf liabilitiesTypeTreeLeaf : typesTree) {
                 if (liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName != null
                         && liabilitiesTypeTreeLeaf.liabilitiesSecondLevelName.equals(parentNodeName)
                         && liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName != null) {
 
-                    NodeContainer_Liabilities nodeContainer = new NodeContainer_Liabilities(liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName, liabilitiesTypeTreeLeaf.liabilitiesThirdLevelId, 2);
+                    LiabilitiesNodeContainer nodeContainer = new LiabilitiesNodeContainer(liabilitiesTypeTreeLeaf.liabilitiesThirdLevelName, liabilitiesTypeTreeLeaf.liabilitiesThirdLevelId, 2);
                     addTypeToSubGroup(nodeContainer, containersSubGroup);
                 }
             }
@@ -76,8 +76,8 @@ public class TypeTreeProcessor_Liabilities {
      * @param nodeContainer the node container to be added.
      * @param containersSubGroup the container sub group of a particular node.
      */
-    private void addTypeToSubGroup(NodeContainer_Liabilities nodeContainer, List<NodeContainer_Liabilities> containersSubGroup) {
-        for (NodeContainer_Liabilities dataCarrier: containersSubGroup) {
+    private void addTypeToSubGroup(LiabilitiesNodeContainer nodeContainer, List<LiabilitiesNodeContainer> containersSubGroup) {
+        for (LiabilitiesNodeContainer dataCarrier: containersSubGroup) {
             if (dataCarrier.liabilitiesId == nodeContainer.liabilitiesId && dataCarrier.liabilitiesId != 0) {
                 return;
             }

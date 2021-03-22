@@ -6,8 +6,8 @@ import android.widget.ExpandableListView;
 
 import java.util.List;
 
-import protect.Finia.datastructure.NodeContainer_Liabilities;
-import protect.Finia.datastructure.TypeTreeProcessor_Liabilities;
+import protect.Finia.datastructure.LiabilitiesNodeContainer;
+import protect.Finia.datastructure.LiabilitiesTypeTreeProcessor;
 
 /**
  * A Listener class that will detect whether a parent of the items in an expandable list has been clicked
@@ -17,11 +17,11 @@ import protect.Finia.datastructure.TypeTreeProcessor_Liabilities;
  */
 public class LiabilitiesFragmentChildViewClickListener implements ExpandableListView.OnChildClickListener {
 
-    private TypeTreeProcessor_Liabilities typeProcessor;
-    private List<NodeContainer_Liabilities> sectionDataSet;
+    private LiabilitiesTypeTreeProcessor typeProcessor;
+    private List<LiabilitiesNodeContainer> sectionDataSet;
     private int level;
 
-    public LiabilitiesFragmentChildViewClickListener(List<NodeContainer_Liabilities> sectionDataSet, TypeTreeProcessor_Liabilities typeProcessor, int level){
+    public LiabilitiesFragmentChildViewClickListener(List<LiabilitiesNodeContainer> sectionDataSet, LiabilitiesTypeTreeProcessor typeProcessor, int level){
         this.sectionDataSet = sectionDataSet;
         this.typeProcessor = typeProcessor;
         this.level = level;
@@ -29,8 +29,8 @@ public class LiabilitiesFragmentChildViewClickListener implements ExpandableList
 
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-        NodeContainer_Liabilities sectionItem = sectionDataSet.get(i);
-        List<NodeContainer_Liabilities> childSection = typeProcessor.getSubGroup(sectionItem.liabilitiesTypeName, level + 1);
+        LiabilitiesNodeContainer sectionItem = sectionDataSet.get(i);
+        List<LiabilitiesNodeContainer> childSection = typeProcessor.getSubGroup(sectionItem.liabilitiesTypeName, level + 1);
 
         Log.d("Edit_LFragment", "child clicked: " + childSection.get(i1).liabilitiesTypeName + ", id in DB" + childSection.get(i1).liabilitiesId);
         return false;

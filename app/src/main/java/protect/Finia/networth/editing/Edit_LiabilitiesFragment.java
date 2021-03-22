@@ -24,9 +24,9 @@ import protect.Finia.dao.LiabilitiesTypeDao;
 import protect.Finia.dao.LiabilitiesValueDao;
 import protect.Finia.database.FiniaDatabase;
 import protect.Finia.models.LiabilitiesValue;
-import protect.Finia.datastructure.TypeTreeLeaf_Liabilities;
-import protect.Finia.datastructure.TypeTreeProcessor_Liabilities;
-import protect.Finia.datastructure.ValueTreeProcessor_Liabilities;
+import protect.Finia.datastructure.LiabilitiesTypeTreeLeaf;
+import protect.Finia.datastructure.LiabilitiesTypeTreeProcessor;
+import protect.Finia.datastructure.LiabilitiesValueTreeProcessor;
 import protect.Finia.networth.editing.utils.LiabilitiesFragmentAdapter;
 import protect.Finia.networth.editing.utils.LiabilitiesFragmentChildViewClickListener;
 import protect.Finia.R;
@@ -47,8 +47,8 @@ public class Edit_LiabilitiesFragment extends Fragment {
     private ExpandableListView expandableListView;
 
     private LiabilitiesFragmentAdapter adapter;
-    private ValueTreeProcessor_Liabilities valueTreeProcessor;
-    private TypeTreeProcessor_Liabilities typeTreeProcessor;
+    private LiabilitiesValueTreeProcessor valueTreeProcessor;
+    private LiabilitiesTypeTreeProcessor typeTreeProcessor;
 
     public Edit_LiabilitiesFragment(Date currentTime) {
         this.currentTime = currentTime;
@@ -179,10 +179,10 @@ public class Edit_LiabilitiesFragment extends Fragment {
                 LiabilitiesValueDao liabilitiesValueDao = database.liabilitiesValueDao();
 
                 List<LiabilitiesValue> liabilitiesValues = liabilitiesValueDao.queryLiabilitiesByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                List<TypeTreeLeaf_Liabilities> liabilitiesTypesTree = liabilitiesTypeDao.queryLiabilitiesTypeTreeAsList();
+                List<LiabilitiesTypeTreeLeaf> liabilitiesTypesTree = liabilitiesTypeDao.queryLiabilitiesTypeTreeAsList();
 
-                Edit_LiabilitiesFragment.this.valueTreeProcessor = new ValueTreeProcessor_Liabilities(liabilitiesTypesTree, liabilitiesValues, currentTime, getContext());
-                Edit_LiabilitiesFragment.this.typeTreeProcessor = new TypeTreeProcessor_Liabilities(liabilitiesTypesTree);
+                Edit_LiabilitiesFragment.this.valueTreeProcessor = new LiabilitiesValueTreeProcessor(liabilitiesTypesTree, liabilitiesValues, currentTime, getContext());
+                Edit_LiabilitiesFragment.this.typeTreeProcessor = new LiabilitiesTypeTreeProcessor(liabilitiesTypesTree);
                 adapter = new LiabilitiesFragmentAdapter(getContext(), valueTreeProcessor, typeTreeProcessor,1, getString(R.string.total_liabilities_name));
                 final LiabilitiesFragmentChildViewClickListener listener = new LiabilitiesFragmentChildViewClickListener(typeTreeProcessor.getSubGroup(null, 0), typeTreeProcessor,0);
                 Edit_LiabilitiesFragment.this.getActivity().runOnUiThread(new Runnable() {

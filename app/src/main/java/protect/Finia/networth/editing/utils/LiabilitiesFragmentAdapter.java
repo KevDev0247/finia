@@ -17,9 +17,9 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import protect.Finia.models.LiabilitiesValue;
-import protect.Finia.datastructure.ValueTreeProcessor_Liabilities;
-import protect.Finia.datastructure.NodeContainer_Liabilities;
-import protect.Finia.datastructure.TypeTreeProcessor_Liabilities;
+import protect.Finia.datastructure.LiabilitiesValueTreeProcessor;
+import protect.Finia.datastructure.LiabilitiesNodeContainer;
+import protect.Finia.datastructure.LiabilitiesTypeTreeProcessor;
 import protect.Finia.networth.editing.NetWorthExpandableListView;
 import protect.Finia.R;
 
@@ -37,13 +37,13 @@ import protect.Finia.R;
  */
 public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
 
-    private ValueTreeProcessor_Liabilities valueTreeProcessor;
-    private TypeTreeProcessor_Liabilities typeTreeProcessor;
-    private List<NodeContainer_Liabilities> currentLevelNodeContainers;
+    private LiabilitiesValueTreeProcessor valueTreeProcessor;
+    private LiabilitiesTypeTreeProcessor typeTreeProcessor;
+    private List<LiabilitiesNodeContainer> currentLevelNodeContainers;
     private Context context;
     private int level;
 
-    public LiabilitiesFragmentAdapter(Context context, ValueTreeProcessor_Liabilities valueTreeProcessor, TypeTreeProcessor_Liabilities typeTreeProcessor, int level, String parentNodeName) {
+    public LiabilitiesFragmentAdapter(Context context, LiabilitiesValueTreeProcessor valueTreeProcessor, LiabilitiesTypeTreeProcessor typeTreeProcessor, int level, String parentNodeName) {
         this.context = context;
         this.valueTreeProcessor = valueTreeProcessor;
         this.typeTreeProcessor = typeTreeProcessor;
@@ -99,7 +99,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int i, int i1) {
         String liabilitiesTypeName = getLiabilitiesName(i);
-        List<NodeContainer_Liabilities> carriers = typeTreeProcessor.getSubGroup(liabilitiesTypeName, level + 1);
+        List<LiabilitiesNodeContainer> carriers = typeTreeProcessor.getSubGroup(liabilitiesTypeName, level + 1);
         return carriers.get(i1);
     }
 
@@ -161,7 +161,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.liabilitiesRowThirdText);
             textView.setText(currentLevelNodeContainers.get(position).liabilitiesTypeName);
 
-            NodeContainer_Liabilities nodeContainer = this.currentLevelNodeContainers.get(position);
+            LiabilitiesNodeContainer nodeContainer = this.currentLevelNodeContainers.get(position);
             EditText editText = convertView.findViewById(R.id.liabilitiesValueInput);
 
             LiabilitiesValue liabilitiesValue = valueTreeProcessor.getLiabilityValue(nodeContainer.liabilitiesId);
@@ -184,7 +184,7 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
      * @param editText the input box for the current item.
      * @param nodeContainer the node container that contain the information of each node.
      */
-    private void addTextListener(EditText editText, final NodeContainer_Liabilities nodeContainer){
+    private void addTextListener(EditText editText, final LiabilitiesNodeContainer nodeContainer){
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -226,8 +226,8 @@ public class LiabilitiesFragmentAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public View getChildView(final int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        final NodeContainer_Liabilities sectionData = currentLevelNodeContainers.get(groupPosition);
-        List<NodeContainer_Liabilities> children = typeTreeProcessor.getSubGroup(sectionData.liabilitiesTypeName, level + 1);
+        final LiabilitiesNodeContainer sectionData = currentLevelNodeContainers.get(groupPosition);
+        List<LiabilitiesNodeContainer> children = typeTreeProcessor.getSubGroup(sectionData.liabilitiesTypeName, level + 1);
 
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

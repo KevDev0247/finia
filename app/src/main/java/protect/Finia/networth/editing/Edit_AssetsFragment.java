@@ -22,11 +22,11 @@ import protect.Finia.activities.NetWorthReportEditingActivity;
 import protect.Finia.communicators.DateCommunicator;
 import protect.Finia.dao.AssetsTypeDao;
 import protect.Finia.dao.AssetsValueDao;
+import protect.Finia.datastructure.AssetsTypeTreeLeaf;
 import protect.Finia.models.AssetsValue;
 import protect.Finia.database.FiniaDatabase;
-import protect.Finia.datastructure.TypeTreeLeaf_Assets;
-import protect.Finia.datastructure.TypeTreeProcessor_Assets;
-import protect.Finia.datastructure.ValueTreeProcessor_Assets;
+import protect.Finia.datastructure.AssetsTypeTreeProcessor;
+import protect.Finia.datastructure.AssetsValueTreeProcessor;
 import protect.Finia.networth.editing.utils.AssetsFragmentAdapter;
 import protect.Finia.networth.editing.utils.AssetsFragmentChildViewClickListener;
 import protect.Finia.R;
@@ -47,8 +47,8 @@ public class Edit_AssetsFragment extends Fragment {
     private ExpandableListView expandableListView;
 
     private AssetsFragmentAdapter adapter;
-    private ValueTreeProcessor_Assets valueTreeProcessor;
-    private TypeTreeProcessor_Assets typeTreeProcessor;
+    private AssetsValueTreeProcessor valueTreeProcessor;
+    private AssetsTypeTreeProcessor typeTreeProcessor;
 
     public Edit_AssetsFragment(Date currentTime) {
         this.currentTime = currentTime;
@@ -179,10 +179,10 @@ public class Edit_AssetsFragment extends Fragment {
                 AssetsValueDao assetsValueDao = database.assetsValueDao();
 
                 List<AssetsValue> assetsValues = assetsValueDao.queryAssetsByTimePeriod(getQueryStartTime().getTime(), getQueryEndTime().getTime());
-                List<TypeTreeLeaf_Assets> assetsTypesTree = assetsTypeDao.queryAssetsTypeTreeAsList();
+                List<AssetsTypeTreeLeaf> assetsTypesTree = assetsTypeDao.queryAssetsTypeTreeAsList();
 
-                Edit_AssetsFragment.this.valueTreeProcessor = new ValueTreeProcessor_Assets(assetsTypesTree, assetsValues, currentTime, getContext());
-                Edit_AssetsFragment.this.typeTreeProcessor = new TypeTreeProcessor_Assets(assetsTypesTree);
+                Edit_AssetsFragment.this.valueTreeProcessor = new AssetsValueTreeProcessor(assetsTypesTree, assetsValues, currentTime, getContext());
+                Edit_AssetsFragment.this.typeTreeProcessor = new AssetsTypeTreeProcessor(assetsTypesTree);
                 adapter = new AssetsFragmentAdapter(getContext(), valueTreeProcessor, typeTreeProcessor,1, getString(R.string.total_assets_name));
                 final AssetsFragmentChildViewClickListener listener = new AssetsFragmentChildViewClickListener(typeTreeProcessor.getSubGroup(null, 0), typeTreeProcessor, 0);
                 Edit_AssetsFragment.this.getActivity().runOnUiThread(new Runnable() {

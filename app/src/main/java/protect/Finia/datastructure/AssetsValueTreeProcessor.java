@@ -37,14 +37,14 @@ import protect.Finia.R;
  * @see AssetsValue
  * created on 2020/03/25
  */
-public class ValueTreeProcessor_Assets {
+public class AssetsValueTreeProcessor {
 
     private Context context;
     private Date currentTime;
-    private List<TypeTreeLeaf_Assets> assetsTypeTree;
+    private List<AssetsTypeTreeLeaf> assetsTypeTree;
     private List<AssetsValue> assetsValues;
 
-    public ValueTreeProcessor_Assets(List<TypeTreeLeaf_Assets> assetsTypeTree, List<AssetsValue> assetsValues, Date currentTime, Context context) {
+    public AssetsValueTreeProcessor(List<AssetsTypeTreeLeaf> assetsTypeTree, List<AssetsValue> assetsValues, Date currentTime, Context context) {
         this.context = context;
         this.assetsTypeTree = assetsTypeTree;
         this.assetsValues = assetsValues;
@@ -122,7 +122,7 @@ public class ValueTreeProcessor_Assets {
      * @return an integer value represents the id of the node in the data structure.
      */
     private int getAssetsId(String assetsName) {
-        for(TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTree) {
+        for(AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
             if (assetsTypeTreeLeaf.assetsFirstLevelName != null && assetsTypeTreeLeaf.assetsFirstLevelName.equals(assetsName)) {
                 return assetsTypeTreeLeaf.assetsFirstLevelId;
             } else if (assetsTypeTreeLeaf.assetsSecondLevelName != null && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)) {
@@ -150,7 +150,7 @@ public class ValueTreeProcessor_Assets {
 
         List<Integer> assetsIDs = new ArrayList<Integer>();
         if (context.getString(R.string.ownership_interest_name).equals(assetsName)) {
-            for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTree) {
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
                 if (assetsTypeTreeLeaf.assetsThirdLevelName != null
                         && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
@@ -158,7 +158,7 @@ public class ValueTreeProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.retirement_accounts_name).equals(assetsName)) {
-            for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTree) {
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
                 if (assetsTypeTreeLeaf.assetsThirdLevelName != null
                         && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
@@ -166,7 +166,7 @@ public class ValueTreeProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.taxable_accounts_name).equals(assetsName)) {
-            for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTree) {
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
                 if (assetsTypeTreeLeaf.assetsThirdLevelName != null
                         && assetsTypeTreeLeaf.assetsThirdLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
@@ -174,7 +174,7 @@ public class ValueTreeProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.liquid_assets_name).equals(assetsName)) {
-            for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTree) {
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
                 if (assetsTypeTreeLeaf.assetsSecondLevelName != null
                         && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsThirdLevelName != null) {
@@ -182,7 +182,7 @@ public class ValueTreeProcessor_Assets {
                 }
             }
         } else if (context.getString(R.string.personal_assets_name).equals(assetsName)) {
-            for (TypeTreeLeaf_Assets assetsTypeTreeLeaf : assetsTypeTree) {
+            for (AssetsTypeTreeLeaf assetsTypeTreeLeaf : assetsTypeTree) {
                 if (assetsTypeTreeLeaf.assetsSecondLevelName != null
                         && assetsTypeTreeLeaf.assetsSecondLevelName.equals(assetsName)
                         && assetsTypeTreeLeaf.assetsThirdLevelName != null) {

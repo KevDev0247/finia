@@ -17,11 +17,11 @@ import protect.Finia.models.LiabilitiesType;
  * @see LiabilitiesType
  * created on 2020/05/09
  */
-public class TypeTreeProcessor_Assets {
+public class AssetsTypeTreeProcessor {
 
-    private List<TypeTreeLeaf_Assets> typesTree;
+    private List<AssetsTypeTreeLeaf> typesTree;
 
-    public TypeTreeProcessor_Assets(List<TypeTreeLeaf_Assets> typesTree) {
+    public AssetsTypeTreeProcessor(List<AssetsTypeTreeLeaf> typesTree) {
         this.typesTree = typesTree;
     }
 
@@ -32,44 +32,44 @@ public class TypeTreeProcessor_Assets {
      * @param level current level of the node
      * @return the sub group of containers
      */
-    public List<NodeContainer_Assets> getSubGroup(String parentNodeName, int level) {
-        List<NodeContainer_Assets> containersSubGroup = new ArrayList<>();
+    public List<AssetsNodeContainer> getSubGroup(String parentNodeName, int level) {
+        List<AssetsNodeContainer> containersSubGroup = new ArrayList<>();
 
         if (level == 0) {
-            for(TypeTreeLeaf_Assets assetsTypeTreeLeaf : typesTree) {
+            for(AssetsTypeTreeLeaf assetsTypeTreeLeaf : typesTree) {
                 if (assetsTypeTreeLeaf.assetsFirstLevelName != null) {
 
-                    NodeContainer_Assets nodeContainer = new NodeContainer_Assets(assetsTypeTreeLeaf.assetsFirstLevelName, assetsTypeTreeLeaf.assetsFirstLevelId, 0);
+                    AssetsNodeContainer nodeContainer = new AssetsNodeContainer(assetsTypeTreeLeaf.assetsFirstLevelName, assetsTypeTreeLeaf.assetsFirstLevelId, 0);
                     addTypeToSubGroup(nodeContainer, containersSubGroup);
                 }
             }
         } else if(level == 1) {
-            for(TypeTreeLeaf_Assets assetsTypeTreeLeaf : typesTree) {
+            for(AssetsTypeTreeLeaf assetsTypeTreeLeaf : typesTree) {
                 if (assetsTypeTreeLeaf.assetsFirstLevelName != null
                         && assetsTypeTreeLeaf.assetsFirstLevelName.equals(parentNodeName)
                         && assetsTypeTreeLeaf.assetsSecondLevelName != null) {
 
-                    NodeContainer_Assets nodeContainer = new NodeContainer_Assets(assetsTypeTreeLeaf.assetsSecondLevelName, assetsTypeTreeLeaf.assetsSecondLevelId, 1);
+                    AssetsNodeContainer nodeContainer = new AssetsNodeContainer(assetsTypeTreeLeaf.assetsSecondLevelName, assetsTypeTreeLeaf.assetsSecondLevelId, 1);
                     addTypeToSubGroup(nodeContainer, containersSubGroup);
                 }
             }
         } else if(level == 2) {
-            for(TypeTreeLeaf_Assets assetsTypeTreeLeaf : typesTree) {
+            for(AssetsTypeTreeLeaf assetsTypeTreeLeaf : typesTree) {
                 if (assetsTypeTreeLeaf.assetsSecondLevelName != null
                         && assetsTypeTreeLeaf.assetsSecondLevelName.equals(parentNodeName)
                         && assetsTypeTreeLeaf.assetsThirdLevelName != null) {
 
-                    NodeContainer_Assets nodeContainer = new NodeContainer_Assets(assetsTypeTreeLeaf.assetsThirdLevelName, assetsTypeTreeLeaf.assetsThirdLevelId, 2);
+                    AssetsNodeContainer nodeContainer = new AssetsNodeContainer(assetsTypeTreeLeaf.assetsThirdLevelName, assetsTypeTreeLeaf.assetsThirdLevelId, 2);
                     addTypeToSubGroup(nodeContainer, containersSubGroup);
                 }
             }
         } else if(level == 3) {
-            for(TypeTreeLeaf_Assets assetsTypeTreeLeaf : typesTree) {
+            for(AssetsTypeTreeLeaf assetsTypeTreeLeaf : typesTree) {
                 if(assetsTypeTreeLeaf.assetsThirdLevelName != null
                         && assetsTypeTreeLeaf.assetsThirdLevelName.equals(parentNodeName)
                         && assetsTypeTreeLeaf.assetsFourthLevelName != null) {
 
-                    NodeContainer_Assets nodeContainer = new NodeContainer_Assets(assetsTypeTreeLeaf.assetsFourthLevelName, assetsTypeTreeLeaf.assetsFourthLevelId, 3);
+                    AssetsNodeContainer nodeContainer = new AssetsNodeContainer(assetsTypeTreeLeaf.assetsFourthLevelName, assetsTypeTreeLeaf.assetsFourthLevelId, 3);
                     addTypeToSubGroup(nodeContainer, containersSubGroup);
                 }
             }
@@ -86,8 +86,8 @@ public class TypeTreeProcessor_Assets {
      * @param nodeContainer the node container to be added.
      * @param containersSubGroup the container sub group of a particular node.
      */
-    private void addTypeToSubGroup(NodeContainer_Assets nodeContainer, List<NodeContainer_Assets> containersSubGroup) {
-        for(NodeContainer_Assets currentNodeContainer : containersSubGroup) {
+    private void addTypeToSubGroup(AssetsNodeContainer nodeContainer, List<AssetsNodeContainer> containersSubGroup) {
+        for(AssetsNodeContainer currentNodeContainer : containersSubGroup) {
             if(currentNodeContainer.assetsTypeId == nodeContainer.assetsTypeId && currentNodeContainer.assetsTypeId != 0) {
                 return;
             }

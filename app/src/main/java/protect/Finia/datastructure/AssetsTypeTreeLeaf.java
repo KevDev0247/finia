@@ -17,7 +17,7 @@ import protect.Finia.dao.AssetsTypeDao;
  * @see AssetsTypeDao#queryAssetsTypeTreeAsList()
  * created on 2020/03/22
  */
-public class TypeTreeLeaf_Assets {
+public class AssetsTypeTreeLeaf {
 
     public int assetsFirstLevelId;
     public String assetsFirstLevelName;

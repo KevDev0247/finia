@@ -16,10 +16,10 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import protect.Finia.datastructure.NodeContainer_Assets;
-import protect.Finia.datastructure.ValueTreeProcessor_Assets;
+import protect.Finia.datastructure.AssetsNodeContainer;
+import protect.Finia.datastructure.AssetsValueTreeProcessor;
 import protect.Finia.models.AssetsValue;
-import protect.Finia.datastructure.TypeTreeProcessor_Assets;
+import protect.Finia.datastructure.AssetsTypeTreeProcessor;
 import protect.Finia.networth.editing.NetWorthExpandableListView;
 import protect.Finia.R;
 
@@ -37,13 +37,13 @@ import protect.Finia.R;
  */
 public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
 
-    private ValueTreeProcessor_Assets valueTreeProcessor;
-    private TypeTreeProcessor_Assets typeTreeProcessor;
-    private List<NodeContainer_Assets> currentLevelNodesContainers;
+    private AssetsValueTreeProcessor valueTreeProcessor;
+    private AssetsTypeTreeProcessor typeTreeProcessor;
+    private List<AssetsNodeContainer> currentLevelNodesContainers;
     private Context context;
     private int level;
 
-    public AssetsFragmentAdapter(Context context, ValueTreeProcessor_Assets valueTreeProcessor, TypeTreeProcessor_Assets typeTreeProcessor, int level, String parentNodeName) {
+    public AssetsFragmentAdapter(Context context, AssetsValueTreeProcessor valueTreeProcessor, AssetsTypeTreeProcessor typeTreeProcessor, int level, String parentNodeName) {
         this.context = context;
         this.valueTreeProcessor = valueTreeProcessor;
         this.typeTreeProcessor = typeTreeProcessor;
@@ -99,7 +99,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int i, int i1) {
         String assetsTypeName = getAssetsName(i);
-        List<NodeContainer_Assets> carriers = typeTreeProcessor.getSubGroup(assetsTypeName, level + 1);
+        List<AssetsNodeContainer> carriers = typeTreeProcessor.getSubGroup(assetsTypeName, level + 1);
         return carriers.get(i1);
     }
 
@@ -163,7 +163,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.assetsRowThirdText);
             textView.setText(this.currentLevelNodesContainers.get(position).assetsTypeName);
 
-            NodeContainer_Assets nodeContainer = this.currentLevelNodesContainers.get(position);
+            AssetsNodeContainer nodeContainer = this.currentLevelNodesContainers.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
             AssetsValue assetsValue = valueTreeProcessor.getAssetValue(nodeContainer.assetsTypeId);
@@ -186,7 +186,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
             TextView textView = convertView.findViewById(R.id.assetsRowThirdText);
             textView.setText(this.currentLevelNodesContainers.get(position).assetsTypeName);
 
-            NodeContainer_Assets nodeContainer = this.currentLevelNodesContainers.get(position);
+            AssetsNodeContainer nodeContainer = this.currentLevelNodesContainers.get(position);
             EditText editText = convertView.findViewById(R.id.assetsValueInput);
 
             AssetsValue assetsValue = valueTreeProcessor.getAssetValue(nodeContainer.assetsTypeId);
@@ -209,7 +209,7 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
      * @param editText the input box for the current item.
      * @param nodeContainer the node container that contain the information of each node.
      */
-    private void addTextListener(EditText editText, final NodeContainer_Assets nodeContainer) {
+    private void addTextListener(EditText editText, final AssetsNodeContainer nodeContainer) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -251,8 +251,8 @@ public class AssetsFragmentAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        final NodeContainer_Assets sectionData = currentLevelNodesContainers.get(groupPosition);
-        List<NodeContainer_Assets> children = typeTreeProcessor.getSubGroup(sectionData.assetsTypeName, level + 1);
+        final AssetsNodeContainer sectionData = currentLevelNodesContainers.get(groupPosition);
+        List<AssetsNodeContainer> children = typeTreeProcessor.getSubGroup(sectionData.assetsTypeName, level + 1);
 
         if (children.size() == 0) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

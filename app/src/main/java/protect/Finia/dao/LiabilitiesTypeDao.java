@@ -7,7 +7,7 @@ import androidx.room.Query;
 import java.util.List;
 
 import protect.Finia.models.LiabilitiesType;
-import protect.Finia.datastructure.TypeTreeLeaf_Liabilities;
+import protect.Finia.datastructure.LiabilitiesTypeTreeLeaf;
 
 @Dao
 public interface LiabilitiesTypeDao {
@@ -34,7 +34,7 @@ public interface LiabilitiesTypeDao {
             "  AND liabilitiesFirstLevel.liabilitiesName = liabilitiesSecondLevel.liabilitiesParentType)" +
             "AS liabilitiesSecondLevelComposed LEFT JOIN LiabilitiesType AS liabilitiesThirdLevel \n" +
             "ON liabilitiesSecondLevelComposed.liabilitiesSecondLevelName = liabilitiesThirdLevel.liabilitiesParentType")
-    List<TypeTreeLeaf_Liabilities> queryLiabilitiesTypeTreeAsList();
+    List<LiabilitiesTypeTreeLeaf> queryLiabilitiesTypeTreeAsList();
 
     @Query("SELECT * FROM LiabilitiesType")
     List<LiabilitiesType> queryAllLiabilities();

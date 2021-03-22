@@ -7,7 +7,7 @@ import androidx.room.Query;
 import java.util.List;
 
 import protect.Finia.models.AssetsType;
-import protect.Finia.datastructure.TypeTreeLeaf_Assets;
+import protect.Finia.datastructure.AssetsTypeTreeLeaf;
 
 @Dao
 public interface AssetsTypeDao {
@@ -41,7 +41,7 @@ public interface AssetsTypeDao {
             "  LEFT JOIN AssetsType AS assetsThirdLevel ON assetsSecondLevelComposed.assetsSecondLevelName = assetsThirdLevel.assetsParentType) \n" +
             "AS assetsThirdLevelComposed LEFT JOIN AssetsType AS assetsFourthLevel \n" +
             "ON assetsThirdLevelComposed.assetsThirdLevelName = assetsFourthLevel.assetsParentType")
-    List<TypeTreeLeaf_Assets> queryAssetsTypeTreeAsList();
+    List<AssetsTypeTreeLeaf> queryAssetsTypeTreeAsList();
 
     @Query("SELECT * FROM AssetsType")
     List<AssetsType> queryAllAssetsType();

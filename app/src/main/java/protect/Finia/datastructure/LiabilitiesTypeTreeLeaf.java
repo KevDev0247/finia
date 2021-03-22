@@ -17,7 +17,7 @@ import protect.Finia.dao.LiabilitiesTypeDao;
  * @see LiabilitiesTypeDao#queryLiabilitiesTypeTreeAsList()
  * created on 2020/04/16
  */
-public class TypeTreeLeaf_Liabilities {
+public class LiabilitiesTypeTreeLeaf {
 
     public int liabilitiesFirstLevelId;
     public String liabilitiesFirstLevelName;
