@@ -1,6 +1,6 @@
 # Finia
 
-A modern Android app that helps users to manage their personal finance.
+A modern personal finance app that helps users to record transactions, manage budgets, view spending, and calculate net worth.
 
 ## Contributions:
 - Database & Business Logic Design: Kevin Zhijun Wang
