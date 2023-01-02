@@ -2,12 +2,6 @@
 
 A modern personal finance app that helps users to record transactions, manage budgets, view spending, and calculate net worth.
 
-## Contributions:
-- Database & Business Logic Design: Kevin Zhijun Wang
-- Development: Kevin Zhijun Wang
-- UX & UI Design: Kevin Zhijun Wang
-- QA and Testing: Shilei Mao
-
 ## Gallery
 
 ![Finia](https://user-images.githubusercontent.com/58012125/91352493-ee398580-e7b7-11ea-9487-d8a1446d6940.png)
@@ -110,16 +104,6 @@ Level | Name (Essential Data) | ID (Essential Data) |
 3	| Pension | 13
 3	| Annuity | 14
 3	| Keogh or Other Plan | 15
-
-#### The DFS (Depth First Search) Algorithm
-
-When calculating the net worth as well as the value of a parent node, the processor will call the methods to calculate the value of its child nodes.
-During this process, the processor actually search for the group of leaf nodes and return the sum of them as the value of their parent. 
-Then, the values of the current level will be returned to the previous level. 
-
-The advantage DFS algorithm:
-  1. it allows the value of each sub parent node to be calculated individually and inserted to the database.
-  2. the value of each sub parent node will also be used to calculate the parent.
 
 
 
